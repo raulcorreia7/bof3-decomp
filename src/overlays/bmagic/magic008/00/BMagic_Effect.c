@@ -218,14 +218,16 @@ MATCH void Effect_StartPlaying7(void) {
     BATTLE_RAISE_EFFECT_PLAYING();
 }
 
-MATCH void func_801EFD30(void) {
+/* func_801EFD30 */
+MATCH void BMagic_SkillStrikeUpdate(void) {
     Magic008SecondSteps handlers;
 
-    handlers = D_801EEC4C;
+    handlers = g_BMagicSkillStrikeModes;
     SYS_DISPATCH_TASK(handlers.steps, 1, g_Task);
 }
 
-MATCH void func_801EFD90(void) {
+/* func_801EFD90 */
+MATCH void BMagic_SkillStrikeInit(void) {
     BattleEffect* slot;
     PartyMember*  work;
     u32           index;
@@ -241,13 +243,13 @@ MATCH void func_801EFD90(void) {
     work->pos.x.fixed               = actor->pos.x.fixed;
     work->pos.y.fixed               = actor->pos.y.fixed;
     work->pos.z.fixed               = actor->pos.z.fixed;
-    TASK(PartyMember)->unk_04       = func_801F0230();
+    TASK(PartyMember)->unk_04       = BMagic_SkillStrikeFollowUp();
     TASK(PartyMember)->param.unk_0B = 0;
     TASK(PartyMember)->header.mode += 1;
     Battle_SelectActiveBattlerScript(0xC, 2);
     BMAGIC_ALLOC_BATTLER_EFFECT();
     work                                            = TASK(PartyMember);
-    g_BattleEffects[index & BYTE_MASK].header.mode  = 2;
+    g_BattleEffects[index & BYTE_MASK].header.mode  = BMAGIC_SKILL_STRIKE_EFFECT_STRIKE;
     g_BattleEffects[index & BYTE_MASK].unk_06       = 1;
     g_BattleEffects[index & BYTE_MASK].header.step  = 0;
     g_BattleEffects[index & BYTE_MASK].step_index   = 31;
@@ -270,7 +272,7 @@ MATCH void func_801F0018(void) {
     if (TASK(PartyMember)->param.unk_0B != 0) {
         return;
     }
-    if (TASK(PartyMember)->unk_04 != 0xFF) {
+    if (TASK(PartyMember)->unk_04 != BMAGIC_SKILL_STRIKE_FOLLOW_UP_NONE) {
         actor                          = g_Battle.selected_actor;
         TASK(PartyMember)->pos.x.fixed = actor->pos.x.fixed;
         TASK(PartyMember)->pos.y.fixed = actor->pos.y.fixed;
@@ -293,14 +295,15 @@ MATCH void func_801F0018(void) {
         }
     }
     Battle_SelectActiveBattlerScript(4, 0);
-    g_BattleEffectBattler->header.flags &= 0xBF;
+    g_BattleEffectBattler->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
     TASK(PartyMember)->header.mode++;
 }
 
 #include "overlays/bmagic/shared/Effect_StartOnZeroTick.h"
 
-MATCH u32 func_801F0230(void) {
-    return LOHU(g_Battle.action_id) == 7 ? 7 : 0xFF;
+/* func_801F0230 */
+MATCH u32 BMagic_SkillStrikeFollowUp(void) {
+    return LOHU(g_Battle.action_id) == ABILITY_MIND_FLAY ? BMAGIC_SKILL_STRIKE_FOLLOW_UP_MIND_FLAY : BMAGIC_SKILL_STRIKE_FOLLOW_UP_NONE;
 }
 
 /* func_801F0250 */
@@ -470,25 +473,28 @@ MATCH void func_801F08C4(void) {
     }
 }
 
-MATCH void func_801F0964(void) {
+/* func_801F0964 */
+MATCH void BMagic_SkillStrikeEffectUpdate(void) {
     Magic008FirstSteps handlers;
 
-    handlers = D_801EEC84;
+    handlers = g_BMagicSkillStrikeSteps;
     SYS_DISPATCH_TASK(handlers.steps, 2, g_Task);
 }
 
-MATCH void func_801F09D0(void) {
+/* func_801F09D0 */
+MATCH void BMagic_SkillStrikeEffectStart(void) {
     TASK(PartyMember)->unk_09      = func_800AFF98();
     TASK(PartyMember)->header.step = TASK(PartyMember)->header.step + 1;
     Area_AddGridActor();
 }
 
-MATCH void func_801F0A20(void) {
-    u8 value;
+/* func_801F0A20 */
+MATCH void BMagic_SkillStrikeEffectSwing(void) {
+    u8 timer;
 
-    value                     = TASK(PartyMember)->unk_09 - 1;
-    TASK(PartyMember)->unk_09 = value;
-    if (!(value & BYTE_MASK)) {
+    timer                     = TASK(PartyMember)->unk_09 - 1;
+    TASK(PartyMember)->unk_09 = timer;
+    if (!(timer & BYTE_MASK)) {
         Script_AnimStepOnce();
         Battle_PlayActiveBattlerSE(2, 4);
         TASK(PartyMember)->header.step += 1;
@@ -500,7 +506,8 @@ MATCH void func_801F0A20(void) {
     Area_AddGridActor();
 }
 
-MATCH void func_801F0AC8(void) {
+/* func_801F0AC8 */
+MATCH void BMagic_SkillStrikeEffectHit(void) {
     if (Script_AnimStepOnce() & BYTE_MASK) {
         Battle_MarkDamaged(g_Battle.target_selector);
         BATTLE_ACTIVE_WORK->param.unk_0B -= 1;
@@ -509,9 +516,10 @@ MATCH void func_801F0AC8(void) {
     Area_AddGridActor();
 }
 
-MATCH void func_801F0B44(void) {
+/* func_801F0B44 */
+MATCH void BMagic_SkillStrikeEffectEnd(void) {
     if (TASK(PartyMember)->unk_09 < 0xCU) {
-        if (g_Battle.action_id != 0xA4) {
+        if (g_Battle.action_id != ABILITY_FEIGN_SWING) {
             Effect_DrawScreenFade();
         }
         TASK(PartyMember)->unk_09 += 4;
