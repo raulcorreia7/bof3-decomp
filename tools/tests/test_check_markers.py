@@ -143,7 +143,9 @@ def test_the_diff_gate_fails_an_unmarked_definition_in_any_file(
 def test_the_diff_gate_passes_a_marked_definition_in_any_file(
     monkeypatch, tmp_path, capsys
 ) -> None:
-    assert _land(monkeypatch, tmp_path, ATTEMPT, capsys, "MATCH void g(void) {\n}\n") == 0
+    assert (
+        _land(monkeypatch, tmp_path, ATTEMPT, capsys, "MATCH void g(void) {\n}\n") == 0
+    )
 
 
 def test_a_draft_without_an_attempts_object_fails(

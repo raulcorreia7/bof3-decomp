@@ -382,7 +382,10 @@ def main(argv: list[str]) -> int:
                 )
                 bad = 1
         if bad:
-            print(f"check-markers: markers or drafts fail against {argv[1]}", file=sys.stderr)
+            print(
+                f"check-markers: markers or drafts fail against {argv[1]}",
+                file=sys.stderr,
+            )
             return 1
         print(
             f"check-markers: every definition carries one marker; every draft landed "
@@ -396,6 +399,7 @@ def main(argv: list[str]) -> int:
         return 1
     print(f"check-markers: {len(paths)} files, every definition carries one marker")
     return 0
+
 
 if __name__ == "__main__":
     sys.exit(main(sys.argv[1:]))
