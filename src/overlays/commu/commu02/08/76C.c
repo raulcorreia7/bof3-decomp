@@ -2621,7 +2621,10 @@ NON_MATCHING void func_801D9B80(s32 x, s32 y, s32 width, s32 height) {
     s32   rows;
     u8    edge;
 
-    setRECT(&window, 112, 152, 8, 8);
+    /* not setRECT: retail stores h before w */
+    window.x = 112;
+    window.y = 152;
+    window.w = window.h = 8;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256), &window);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
     sprite = (SPRT*)g_GfxPrimCursor;
@@ -2634,7 +2637,9 @@ NON_MATCHING void func_801D9B80(s32 x, s32 y, s32 width, s32 height) {
     setRGB0(sprite, 0x80, 0x80, 0x80);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));
 
-    setRECT(&window, 152, 160, edge, edge);
+    window.x = 152;
+    window.y = 160;
+    window.w = window.h = edge;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256), &window);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
     sprite = (SPRT*)g_GfxPrimCursor;
@@ -2647,7 +2652,9 @@ NON_MATCHING void func_801D9B80(s32 x, s32 y, s32 width, s32 height) {
     setRGB0(sprite, 0x80, 0x80, 0x80);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));
 
-    setRECT(&window, 176, 152, edge, edge);
+    window.x = 176;
+    window.y = 152;
+    window.w = window.h = edge;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256), &window);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
     sprite = (SPRT*)g_GfxPrimCursor;
@@ -2660,7 +2667,9 @@ NON_MATCHING void func_801D9B80(s32 x, s32 y, s32 width, s32 height) {
     setRGB0(sprite, 0x80, 0x80, 0x80);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));
 
-    setRECT(&window, 176, 160, edge, edge);
+    window.x = 176;
+    window.y = 160;
+    window.w = window.h = edge;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256), &window);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
     sprite = (SPRT*)g_GfxPrimCursor;
@@ -2673,7 +2682,9 @@ NON_MATCHING void func_801D9B80(s32 x, s32 y, s32 width, s32 height) {
     setRGB0(sprite, 0x80, 0x80, 0x80);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));
 
-    setRECT(&window, 112, 160, edge, edge);
+    window.x = 112;
+    window.y = 160;
+    window.w = window.h = edge;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256), &window);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
     sprite = (SPRT*)g_GfxPrimCursor;
@@ -2685,7 +2696,8 @@ NON_MATCHING void func_801D9B80(s32 x, s32 y, s32 width, s32 height) {
     setRGB0(sprite, 0x80, 0x80, 0x80);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));
 
-    setRECT(&window, 0, 0, 256, 256);
+    window.x = window.y = 0;
+    window.w = window.h = 256;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256), &window);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
 
