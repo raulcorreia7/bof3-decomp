@@ -16,15 +16,13 @@ MATCH void func_801DD9A0(void) {
     LINE_F2* line;
 
     if (g_AreaCameraMoving == 0) {
-        if (((PADRup & g_PadStates[0].held) || (g_AreaScrollTargetY == TO_COORD(21))) && (g_SpawnedActors[3].header.mode == 0)) {
-            g_AreaCameraSpeed             = 0x40;
-            g_AreaScrollTargetY           = TO_COORD(60);
-            TASK(FishingState)->sub_index = 1;
+        if (((PADRup & g_PadStates[0].held) || (g_AreaScrollTargetCoordY.fixed == TO_COORD(21))) && (g_SpawnedActors[3].header.mode == 0)) {
+            g_AreaCameraSpeed              = 0x40;
+            g_AreaScrollTargetCoordY.fixed = TO_COORD(60);
+            TASK(FishingState)->sub_index  = 1;
         } else {
-            u32* work = &g_AreaScrollTargetY;
-
             g_AreaCameraSpeed = 0x20;
-            *work -= 0x8000;
+            g_AreaScrollTargetCoordY.fixed -= COORD_HALF;
         }
     }
     i = 1;

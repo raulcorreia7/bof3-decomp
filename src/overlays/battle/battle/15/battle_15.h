@@ -45,7 +45,6 @@
 #define BATTLE_HIT_THRESHOLD_MAX       100
 #define BATTLE_HIT_RATE_BASE           125
 #define BATTLE_HIT_RATE_MIN            50
-#define g_AreaScrollTargetY            (*(u32*)&g_AreaScrollTargetY)
 
 /* Pick the battler's step rule entry from the flagged, player and enemy tables.
  * Kept: as an inline the enemy table pointer loads into $a0 before the branch
