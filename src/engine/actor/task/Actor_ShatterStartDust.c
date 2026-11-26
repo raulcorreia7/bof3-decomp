@@ -1,6 +1,8 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH void func_8019D9C0(void) {
+/* func_8019D9C0 */
+/* Starts the eight dust puffs at the actor with random velocities. */
+MATCH void Actor_ShatterStartDust(void) {
     Actor* work;
     s32*   dst;
     s32    count;

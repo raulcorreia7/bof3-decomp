@@ -1,6 +1,8 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH void func_8019CCB8(void) {
+/* func_8019CCB8 */
+/* Waits for Garr's push; slides one step ahead, or shatters when the way ahead is blocked. */
+MATCH void Actor_BlockWait(void) {
     /* FAKE: retail frame is 0x28; the 8 bytes below the saved registers are
      * unexplained by this draft's locals. */
     FAKE_STACK_PADS(u8, 8);
@@ -13,7 +15,7 @@ MATCH void func_8019CCB8(void) {
 
     if (g_SysThreads[0].tail.game_entry.state != GAME_MODE_AREA_LOAD) {
         if (g_SysThreads[0].tail.game_entry.request == GAME_REQUEST_AREA_CHANGE) {
-            func_8019D4BC();
+            Actor_BlockReleaseCells();
             goto block_9;
         }
         if (TASK(Actor)->param.unk_0B != 0) {
@@ -26,8 +28,8 @@ MATCH void func_8019CCB8(void) {
             move_y                 = TASK(Actor)->pos.y.fixed;
             move_x += TASK(Actor)->vx * step;
             move_y += TASK(Actor)->vy * step;
-            func_8019D4BC();
-            if (func_8019D054(move_x, move_y) & BYTE_MASK) {
+            Actor_BlockReleaseCells();
+            if (Actor_BlockIsPathBlocked(move_x, move_y) & BYTE_MASK) {
                 copy_dst   = (u8*)BATTLE_SCRIPT_TABLE;
                 copy_count = *TASK(Actor)->range_54.table * 0x28;
                 copy_index = 0;
@@ -40,13 +42,13 @@ MATCH void func_8019CCB8(void) {
                     } while (copy_index < copy_count);
                 }
                 TASK(Actor)->script = (u8*)BATTLE_SCRIPT_TABLE; /* the same buffer */
-                func_8019D648();
-                func_8019D9C0();
+                Actor_ShatterBuildShards();
+                Actor_ShatterStartDust();
                 SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 14));
-                TASK(Actor)->header.mode = 3;
+                TASK(Actor)->header.mode = ACTOR_BLOCK_MODE_SHATTER;
                 goto block_9;
             }
-            func_8019CEDC();
+            Actor_BlockSlide();
             TASK(Actor)->header.mode += 1;
             return;
         }

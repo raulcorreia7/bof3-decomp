@@ -1,6 +1,8 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH void func_8019D270(void) {
+/* func_8019D270 */
+/* Saves the codes of the cells under the block and marks them 0x11. */
+MATCH void Actor_BlockClaimCells(void) {
     Area_HeightSet((s32)COORD_INT(TASK(Actor)->pos.x), (s32)COORD_INT(TASK(Actor)->pos.y), 0x10U);
     TASK(Actor)->vz = (s32)(Area_CellGetCode(COORD_INT(TASK(Actor)->pos.x), COORD_INT(TASK(Actor)->pos.y)) & BYTE_MASK);
     Area_CellSetCode(COORD_INT(TASK(Actor)->pos.x), COORD_INT(TASK(Actor)->pos.y), 0x11);

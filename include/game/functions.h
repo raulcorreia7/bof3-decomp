@@ -56,9 +56,9 @@ void func_80199440(void);
 /* func_8019ABB0 */
 void Scene_StartToggleLock(s32 frames);
 /* func_8019F75C */
-void func_8019F75C(void);
+void Actor_ShatterStart(void);
 /* func_8019F818 */
-void func_8019F818(Actor* actor);
+void Actor_ShatterRun(Actor* actor);
 /* Area_RequestLinkAtCell */
 /* func_801A0048 */
 bool Area_RequestLinkAtCell(s32 cell_x, s32 cell_y);

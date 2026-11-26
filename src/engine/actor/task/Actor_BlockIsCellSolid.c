@@ -1,6 +1,8 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH s32 func_8019D20C(s16 map_x, s16 map_y) {
+/* func_8019D20C */
+/* Returns whether one map cell code stops the block. */
+MATCH s32 Actor_BlockIsCellSolid(s16 map_x, s16 map_y) {
     s32 value                   = Area_CellGetCode(map_x, map_y);
     s32 low                     = value & BYTE_MASK;
     /* FAKE: result pinned to v0; retail keeps the return value live. */

@@ -1,6 +1,8 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH void func_8019CFCC(void) {
+/* func_8019CFCC */
+/* Spins the shards and puffs of a broken block until the timer ends, then clears the actor. */
+MATCH void Actor_BlockShatter(void) {
     u8 value;
 
     ACTOR_COUNT_DOWN(TASK(Actor), value, timer);
@@ -11,7 +13,7 @@ MATCH void func_8019CFCC(void) {
         Actor_Clear();
         return;
     }
-    func_8019D800();
-    func_8019DC6C();
+    Actor_ShatterSpinShards();
+    Actor_ShatterRunDust();
     Actor_ProjectForDraw();
 }

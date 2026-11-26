@@ -122,7 +122,24 @@ Actor_TossLaunch = { addr = 0x8019AF1C, type = "func", source = "Mode 1 of the t
 Actor_TossFall = { addr = 0x8019B024, type = "func", source = "Mode 2 of the toss modes: moves up by vz under gravity; past 0x80 above the ground or below it, plays a sound and advances." }
 Actor_ClearSelf = { addr = 0x8019B0EC, type = "func", source = "Frees the current actor: the last mode of the toss and prop tables." }
 Area_GetVx = { addr = 0x8019C344, type = "func", source = "the body returns g_Task->vx" }
+Actor_BlockRun = { addr = 0x8019CB94, type = "func", source = "Runs the mode handler of the current block actor (type 0x30, the block Garr pushes) by header.mode through g_ActorBlockModes." }
+Actor_BlockStart = { addr = 0x8019CBD8, type = "func", source = "Block mode 0: faces up, sets the tint deltas to -0x80, claims the cells under the block, clears the push request and enters mode 1." }
+Actor_BlockWait = { addr = 0x8019CCB8, type = "func", source = "Block mode 1: on a push request (param, set by Garr's field task) takes Garr's facing and a 16-frame move; enters the slide mode when Actor_BlockIsPathBlocked is false, else builds the shards and enters the shatter mode." }
+Actor_BlockSlide = { addr = 0x8019CEDC, type = "func", source = "Block mode 2: adds the velocity for the 16 frames of the timer, sets scene flag 54 in the Angel Tower lower area when it rests on cell (17, 74) and clears it elsewhere, claims the cells and returns to mode 1." }
+Actor_BlockShatter = { addr = 0x8019CFCC, type = "func", source = "Block mode 3: counts the timer down, runs the shards and dust, and at zero sets scene flag 68 in the Container Yard and clears the actor." }
+Actor_BlockIsPathBlocked = { addr = 0x8019D054, type = "func", source = "Flags the field actor in range as pending interaction; returns true for a solid cell among the four around the point or when their ground heights differ." }
+Actor_BlockIsCellSolid = { addr = 0x8019D20C, type = "func", source = "Nonzero for a cell code other than 0, 0xC0, 0x20 and the 0x8x and 0xAx rows." }
+Actor_BlockClaimCells = { addr = 0x8019D270, type = "func", source = "Saves the code of each of the up to four cells under the block in its vz (a byte each), sets each cell code to 0x11 and its height-map value to 0x10." }
+Actor_BlockReleaseCells = { addr = 0x8019D4BC, type = "func", source = "Restores each cell code that Actor_BlockClaimCells saved and clears its height-map value." }
+Actor_ShatterBuildShards = { addr = 0x8019D648, type = "func", source = "For each of 24 quads of the actor's model, sets the shard centre as the mean of its four corners, the corner offsets from that centre and a direction away from the model origin." }
+Actor_ShatterSpinShards = { addr = 0x8019D800, type = "func", source = "Per frame moves each of the 24 shards by its velocity and rewrites its quad through Actor_ShatterWriteShard." }
+Actor_ShatterWriteShard = { addr = 0x8019D8C0, type = "func", source = "Sets a random rotation, rotates the four corner offsets and writes centre plus offset as the four vertices at out." }
+Actor_ShatterStartDust = { addr = 0x8019D9C0, type = "func", source = "Places eight puffs at the actor, each with a random velocity, and sets the shared puff brightness 0x40 and size 0." }
+Actor_ShatterDrawPuff = { addr = 0x8019DAA0, type = "func", source = "Draws a semi-transparent 32 by 32 texel quad centred on the projected puff." }
+Actor_ShatterRunDust = { addr = 0x8019DC6C, type = "func", source = "Draws each of the eight puffs and moves it by twice its velocity while the timer is 12 or more and the quad grows, then by its velocity while the brightness falls by 5 a frame." }
 Actor_DrawValueDigits = { addr = 0x8019F5B8, type = "func", source = "Draws the actor's unk_06 value as 8x8 digit sprites starting at (x, y) in the actor's draw layer; three field effects call it with a party member's screen position." }
+Actor_ShatterStart = { addr = 0x8019F75C, type = "func", source = "Copies the model quads to the work buffer, builds the shards, starts the dust and sets the timer to 16." }
+Actor_ShatterRun = { addr = 0x8019F818, type = "func", source = "Runs Actor_ShatterSpinShards and Actor_ShatterRunDust; the argument is unused." }
 Game_RequestAreaChange = { addr = 0x8019FA28, type = "func", source = "Requests an area change: stores the area id and entry position in g_GameEntryAreaId, g_GameEntryPosX and g_GameEntryPosY and sets g_GameStateIndex to 5." }
 Game_EnterArea = { addr = 0x8019FAA0, type = "func", source = "Enters an area: keeps the last position, starts its music, loads it when it changed, then sets up the view, party and entry walk; the one user passes the entry cell and facing." }
 Area_RequestLinkAtCell = { addr = 0x801A0048, type = "func", source = "Finds the area link at a map cell, or the first choice whose scene flag is set, and makes its destination the pending area change; returns true when no link is there." }
@@ -420,7 +437,7 @@ D_801C810C = { addr = 0x801C810C, alias = true, source = "s_ActorTossArcs +0x4, 
 D_801C8120 = { addr = 0x801C8120, size = 0xC, source = "The three mode handlers func_8019B150, func_8019B1E8 and Actor_ClearSelf that func_8019B10C runs by g_Task->header.mode." }
 D_801C812C = { addr = 0x801C812C, size = 0x18, source = "The six mode handlers func_8019B3A8, func_8019B4A0, func_8019B704, func_8019BBA4, func_8019BE28 and func_8019BEFC that func_8019B364 runs by g_Task->header.mode." }
 D_801C8144 = { addr = 0x801C8144, size = 0x10, source = "The four mode handlers func_8019C664, func_8019C794, func_8019C910 and func_8019C954 that func_8019C620 runs by g_Task->header.mode." }
-D_801C8154 = { addr = 0x801C8154, size = 0x10, source = "The four mode handlers func_8019CBD8, func_8019CCB8, func_8019CEDC and func_8019CFCC that func_8019CB94 runs by g_Task->header.mode." }
+g_ActorBlockModes = { addr = 0x801C8154, source = "The four block mode handlers (start, wait, slide, shatter) that Actor_BlockRun runs by header.mode." }
 D_801C8164 = { addr = 0x801C8164, size = 0x18, source = "The six mode handlers func_8019DE10, func_8019E264, func_8019E424, func_8019E780, func_8019E918 and func_8019EAD4 that func_8019DDCC runs by g_Task->header.mode." }
 D_801C817C = { addr = 0x801C817C, size = 0x10, source = "The four step handlers func_8019DE54, func_8019DF8C, func_8019DFB4 and func_8019E1A0 that func_8019DE10 runs by g_Task->header.step." }
 s_AreaSeIds = { addr = 0x801C818C, size = 0xC, source = "Sound SE id per world id; func_8019DFB4 scans it from index 8 for the current world id." }

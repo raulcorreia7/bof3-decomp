@@ -1,6 +1,8 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH bool func_8019D054(s32 point_x, s32 point_y) {
+/* func_8019D054 */
+/* Returns whether the cells at a point stop the block: a solid cell or uneven ground; flags an actor there. */
+MATCH bool Actor_BlockIsPathBlocked(s32 point_x, s32 point_y) {
     s16 dist[4];
     s16 xi;
     s16 yi;
@@ -22,22 +24,22 @@ MATCH bool func_8019D054(s32 point_x, s32 point_y) {
     y &= 0xFFFF0000;
     xi = (s16)(x >> 16);
     yi = (y >> 16);
-    if (func_8019D20C(xi, yi) & BYTE_MASK) {
+    if (Actor_BlockIsCellSolid(xi, yi) & BYTE_MASK) {
         return true;
     }
     dist[0] = Area_HeightSample(x, y);
     xp      = (xi + 1);
-    if (func_8019D20C(xp, yi) & BYTE_MASK) {
+    if (Actor_BlockIsCellSolid(xp, yi) & BYTE_MASK) {
         return true;
     }
     dist[1] = Area_HeightSample(x + TO_COORD(1), y);
     yp      = (yi + 1);
-    if (func_8019D20C(xi, yp) & BYTE_MASK) {
+    if (Actor_BlockIsCellSolid(xi, yp) & BYTE_MASK) {
         return true;
     }
     y2      = y + TO_COORD(1);
     dist[2] = Area_HeightSample(x, y2);
-    if (func_8019D20C(xp, yp) & BYTE_MASK) {
+    if (Actor_BlockIsCellSolid(xp, yp) & BYTE_MASK) {
         return true;
     }
     dist[3] = Area_HeightSample(x + TO_COORD(1), y2);

@@ -1,6 +1,8 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH void func_8019CBD8(void) {
+/* func_8019CBD8 */
+/* Starts a block: claims its cells and waits for a push. */
+MATCH void Actor_BlockStart(void) {
     Actor* other;
     Actor* record;
     Actor* work;
@@ -17,7 +19,7 @@ MATCH void func_8019CBD8(void) {
     work                            = TASK(Actor);
     setVector(work, 0, 0, 0);
     work->timer = 0;
-    func_8019D270();
+    Actor_BlockClaimCells();
     TASK(Actor)->param.unk_0B = 0U;
     counter                   = TASK(Actor);
     counter->header.mode      = (counter->header.mode + 1);

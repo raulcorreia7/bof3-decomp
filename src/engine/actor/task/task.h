@@ -98,4 +98,47 @@ void Actor_SpawnAttachedFixedFlags(u8* script);
 /* func_801ADCF4 */
 void Actor_SpawnToss(u8 source_slot);
 
+/* One of the 24 shards of a broken model, at 0x800E4800 + n * 0x38: a centre, a random rotation and four corner offsets that
+ * Actor_ShatterWriteShard rotates and writes out as vertices. */
+typedef struct ShatterShard {
+    Pos3s   pos;
+    u8      unk_06[0x0A];
+    SVECTOR rotation; /* 0x10 */
+    SVECTOR corners[4];
+} ShatterShard;
+
+ASSERT_OFFSET(ShatterShard, rotation, 0x10);
+ASSERT_OFFSET(ShatterShard, corners, 0x18);
+ASSERT_SIZE(ShatterShard, 0x38);
+
+/* func_8019CB94 */
+void Actor_BlockRun(void);
+/* func_8019CBD8 */
+void Actor_BlockStart(void);
+/* func_8019CCB8 */
+void Actor_BlockWait(void);
+/* func_8019CEDC */
+void Actor_BlockSlide(void);
+/* func_8019CFCC */
+void Actor_BlockShatter(void);
+/* func_8019D054 */
+bool Actor_BlockIsPathBlocked(s32 point_x, s32 point_y);
+/* func_8019D20C */
+s32  Actor_BlockIsCellSolid(s16 map_x, s16 map_y);
+/* func_8019D270 */
+void Actor_BlockClaimCells(void);
+/* func_8019D4BC */
+void Actor_BlockReleaseCells(void);
+/* func_8019D648 */
+void Actor_ShatterBuildShards(void);
+/* func_8019D800 */
+void Actor_ShatterSpinShards(void);
+/* func_8019D8C0 */
+void Actor_ShatterWriteShard(ShatterShard* quad, s16* out);
+/* func_8019D9C0 */
+void Actor_ShatterStartDust(void);
+/* func_8019DAA0 */
+s32  Actor_ShatterDrawPuff(s32* puff, s16 quad_size, u8 brightness);
+/* func_8019DC6C */
+void Actor_ShatterRunDust(void);
 #endif

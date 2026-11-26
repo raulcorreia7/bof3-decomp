@@ -217,11 +217,22 @@ typedef struct ActorToss {
     s32 gravity;
 } ActorToss;
 
-extern ActorToss          s_ActorTossArcs[3];
-extern Callback           D_801C8120[3];
-extern Callback           D_801C812C[6];
-extern Callback           D_801C8144[4];
-extern Callback           D_801C8154[4];
+extern ActorToss s_ActorTossArcs[3];
+extern Callback  D_801C8120[3];
+extern Callback  D_801C812C[6];
+extern Callback  D_801C8144[4];
+
+/* The modes of a block actor (ACTOR_TYPE_BLOCK), selected by header.mode. */
+typedef enum ActorBlockMode {
+    ACTOR_BLOCK_MODE_START,   /* claims its cells */
+    ACTOR_BLOCK_MODE_WAIT,    /* waits for a push */
+    ACTOR_BLOCK_MODE_SLIDE,   /* moves on by one push */
+    ACTOR_BLOCK_MODE_SHATTER, /* breaks into shards and dust */
+    ACTOR_BLOCK_MODE_COUNT
+} ActorBlockMode;
+
+extern Callback           g_ActorBlockModes[ACTOR_BLOCK_MODE_COUNT];
+/* D_801C8154 */
 extern Callback           D_801C8164[6];
 extern Callback           D_801C817C[4];
 /* D_801C818C */

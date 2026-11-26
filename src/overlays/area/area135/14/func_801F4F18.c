@@ -19,7 +19,7 @@ MATCH void func_801F4F18(void) {
     next->pos.y.fixed = work->pos.y.fixed;
     next->pos.z.fixed = work->pos.z.fixed;
     TASK_SET(work);
-    func_8019F75C();
+    Actor_ShatterStart();
     TASK(Actor)->unk_0A = TASK(Actor)->timer;
     TASK(Actor)->timer  = 0;
     TASK(Actor)->unk_04++;

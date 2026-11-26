@@ -1,6 +1,8 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH void func_8019D8C0(SpinQuad* quad, s16* out) {
+/* func_8019D8C0 */
+/* Writes one shard's four corners rotated by a random tumble at its centre. */
+MATCH void Actor_ShatterWriteShard(ShatterShard* quad, s16* out) {
     MATRIX rot;
     VECTOR vtx;
     long   flag;
