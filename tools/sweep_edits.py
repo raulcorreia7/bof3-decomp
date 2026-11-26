@@ -863,7 +863,7 @@ def symbol_name(ref: str) -> str | None:
         parts = line.split()
         if len(parts) == 2 and parts[1].startswith("0x") and int(parts[1], 16) == want:
             return parts[0]
-    return None
+    return f"func_{want:08X}"
 
 
 def sweep(ref: str, name: str, source: Path, pairs: bool, judge=measure, workdir=None):
