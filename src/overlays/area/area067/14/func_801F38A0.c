@@ -1,7 +1,7 @@
 #include "area067_14.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F38A0(s16* row) {
+/* Draws the grey two-pixel bar at row[0] from row[1] - row[2] to row[1] + row[2], clamped to row[4]..row[5]. */
+MATCH void func_801F38A0(s16* row) {
     POLY_F4* prim;
     s16      top;
     s16      bottom;
@@ -20,12 +20,8 @@ NON_MATCHING void func_801F38A0(s16* row) {
         prim->y2 = prim->y3 = row[5];
     }
     prim->x0 = prim->x2 = (u16)row[0];
-    prim->x1 = prim->x3 = (u16)row[0] + 2;
+    /* Halfword stores, not members: the cell loads stay behind them. */
+    LOH(prim->x1) = LOH(prim->x3) = (u16)row[0] + 2;
     setRGB0(prim, 0x80, 0x80, 0x80);
-    /* FAKE: the barrier keeps the depth constant out of the branch delay slot, as retail leaves it. */
-    FAKE_BARRIER();
     Area_CellAddPrim(D_801F53A0, D_801F53A4, 4, sizeof(POLY_F4));
 }
-#else
-INCLUDE_ASM(func_801F38A0);
-#endif
