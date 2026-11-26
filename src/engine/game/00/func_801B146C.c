@@ -38,8 +38,8 @@ MATCH void func_801B146C(void) {
     }
     Party_TickConfusion();
     func_801C2BEC();
-    if (!(func_801C3790(0) & BYTE_MASK) && !(func_801C37DC(0) & BYTE_MASK) && !(func_801C2AAC() & BYTE_MASK)) {
-        if (func_801C2B4C() & BYTE_MASK) {
+    if (!(func_801C3790(0) & BYTE_MASK) && !(func_801C37DC(0) & BYTE_MASK) && !(Party_StartCellWalk() & BYTE_MASK)) {
+        if (Party_StartFallThrough() & BYTE_MASK) {
             work_b = TASK(Actor);
             Area_CellSetPalette(COORD_INT(work_b->pos.x), COORD_INT(work_b->pos.y));
             return;

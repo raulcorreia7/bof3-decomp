@@ -237,6 +237,37 @@ typedef enum FieldTaskMode {
     FIELD_TASK_MODE_PERSONAL_ACTION = 0x0A,
 } FieldTaskMode;
 
+/* The steps of mode 2 of the leader and follower (header.step), the rows of g_PartyMoveSteps. */
+typedef enum PartyMoveStep {
+    PARTY_MOVE_STEP_SCRIPT_WALK    = 0,
+    PARTY_MOVE_STEP_ATTACH         = 1,
+    PARTY_MOVE_STEP_FADE_IN        = 2,
+    PARTY_MOVE_STEP_JUMP           = 3,
+    PARTY_MOVE_STEP_LADDER_TRANSIT = 4,
+    PARTY_MOVE_STEP_WALK_TRANSIT   = 5,
+    PARTY_MOVE_STEP_CELL_WALK      = 6,
+    PARTY_MOVE_STEP_FALL_THROUGH   = 7,
+    PARTY_MOVE_STEP_FLOOR_DAMAGE   = 8,
+    PARTY_MOVE_STEP_COUNT
+} PartyMoveStep;
+
+/* The sub-steps of the jump step (unk_03), the rows of g_PartyJumpSteps. */
+typedef enum PartyJumpStep {
+    PARTY_JUMP_STEP_START,
+    PARTY_JUMP_STEP_LAUNCH,
+    PARTY_JUMP_STEP_TRAVEL,
+    PARTY_JUMP_STEP_FALL,
+    PARTY_JUMP_STEP_LAND,
+    PARTY_JUMP_STEP_COUNT
+} PartyJumpStep;
+
+/* The ladder transit of the ladder step (unk_03), the rows of g_PartyLadderTransits: up when the actor faces up or left. */
+typedef enum PartyLadderTransit {
+    PARTY_LADDER_TRANSIT_UP,
+    PARTY_LADDER_TRANSIT_DOWN,
+    PARTY_LADDER_TRANSIT_COUNT
+} PartyLadderTransit;
+
 /* The colours of g_PartyDamageColors that Party_FlashDamage floods the party member's palette row with. */
 typedef enum PartyDamageColor {
     PARTY_DAMAGE_COLOR_RED    = 0,

@@ -180,8 +180,8 @@ ASSERT_SIZE(ActorRole, 1);
 
 typedef struct Actor {
     TaskHeader      header;            /* 0x00 */
-    u8              unk_03;            /* 0x03 */
-    u8              unk_04;            /* 0x04 */
+    u8              unk_03;            /* 0x03 - the sub-step table row a party move step runs */
+    u8              unk_04;            /* 0x04 - the sub-step table row of a ladder transit */
     u8              unk_05;            /* 0x05 - region/scene index; commu00 calls it the
                                 *        source row the task came from; the script copy
                                 *        scales its staging offset by it; cleared at scene init */
@@ -190,13 +190,13 @@ typedef struct Actor {
     u8              option_flags;      /* 0x07 - ActorOptionFlags */
     u8              direction;         /* 0x08 - the 1-based direction the actor faces; walk and draw scripts index by it */
     u8              timer;             /* 0x09 - counted up or down by the area step handlers */
-    u8              unk_0A;            /* 0x0A */
+    u8              unk_0A;            /* 0x0A - party move steps count frames or steps left in it */
     ActorRole       param;             /* 0x0B */
     s32             vx;                /* 0x0C added to x each step */
     s32             vy;                /* 0x10 added to y each step */
     s32             vz;                /* 0x14 signed vertical speed */
-    s32             unk_18;            /* 0x18 - commu00 calls it variant_arg_0 */
-    s32             unk_1C;            /* 0x1C - commu00 calls it variant_arg_1 */
+    s32             unk_18;            /* 0x18 - commu00 calls it variant_arg_0; the attach step: the party actor to sit on */
+    s32             unk_1C;            /* 0x1C - commu00 calls it variant_arg_1; the attach step: the offset row from the area table */
     s32             gravity;           /* 0x20 added to vz each step */
     u8              active_flags;      /* 0x24 - ActorActiveFlags; bit 0x40 marks a usable row */
     u8              sheet_page;        /* 0x25 - sprite: texture page of the sheet (Party_MemberLoadSprite) */

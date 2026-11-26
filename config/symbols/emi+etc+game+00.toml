@@ -273,6 +273,60 @@ Game_RewardZenny = { addr = 0x801B5E58, type = "func", source = "Plays common SE
 Game_RequestPersonalAction = { addr = 0x801B5EBC, type = "func", source = "Starts the lead character's personal action when FIELD_INPUT_PERSONAL_ACTION is pressed outside the world map, except for Garr, Rei, Ryu in pajamas and Whelp: sets FIELD_TASK_MODE_PERSONAL_ACTION, whose handler is picked from g_PersonalActions" }
 Game_RequestRockKick = { addr = 0x801B5F68, type = "func", source = "Starts the Teepo or Peco personal action when the leader runs (walk speed index 4) into a rock actor (a type 0x17 actor) on the facing cell: records its actor slot in the work byte +0x0B and sets FIELD_TASK_MODE_PERSONAL_ACTION at step 1 (Teepo Kick, Peco Bump)" }
 Game_RequestGarrPush = { addr = 0x801B6044, type = "func", source = "Starts Garr's personal action when the leader is Garr and has walked 16 frames against an object facing a cardinal direction: counts the frames in the work byte +0x0B, then sets FIELD_TASK_MODE_PERSONAL_ACTION at step 0 (Garr Push)" }
+Party_RunMoveStep = { addr = 0x801B69C0, type = "func", source = "Runs the g_PartyMoveSteps handler the actor's step selects: mode 2 of the leader and follower tables." }
+Party_ScriptWalkRun = { addr = 0x801B6A04, type = "func", source = "Step 0 of g_PartyMoveSteps: runs the g_PartyScriptWalkSteps sub-step the actor's unk_03 selects, then advances its animation." }
+Party_ScriptWalkAlign = { addr = 0x801B6AB0, type = "func", source = "Script walk sub-step 0: snaps the actor onto the half-cell grid, then starts reading its script." }
+Party_ScriptWalkRead = { addr = 0x801B6BC8, type = "func", source = "Script walk sub-step 1: waits out the record's delay, runs the next script record and picks the sub-step it asks for (move, message, fade, end)." }
+Party_ScriptWalkMove = { addr = 0x801B6F1C, type = "func", source = "Script walk sub-step 2: moves the actor for its remaining step frames, then reads the next script record." }
+Party_ScriptWalkWaitMessage = { addr = 0x801B6FDC, type = "func", source = "Script walk sub-step 3: waits until no message is requested, then clears the wait flag and restarts the walk." }
+Party_ScriptWalkFadeOut = { addr = 0x801B7024, type = "func", source = "Script walk sub-step 4: steps the actor's tint to the faded-out value, then clears the fade-out flag." }
+Party_ScriptWalkFadeIn = { addr = 0x801B707C, type = "func", source = "Script walk sub-step 5: fades the actor back in and restores its palette, then clears the fade-in flag." }
+Party_AttachRun = { addr = 0x801B70D4, type = "func", source = "Step 1 of g_PartyMoveSteps: on the first frame places the actor on the party actor unk_18 plus the offset row unk_1C, then runs the script walk." }
+Party_FadeInRun = { addr = 0x801B726C, type = "func", source = "Step 2 of g_PartyMoveSteps: runs the g_PartyFadeInSteps sub-step the actor's unk_03 selects." }
+Party_FadeInStart = { addr = 0x801B72B0, type = "func", source = "Fade-in sub-step 0: unhides the actor at the faded-out tint and starts the fade in." }
+Party_FadeInWait = { addr = 0x801B7344, type = "func", source = "Fade-in sub-step 1: waits for the fade in to end, then returns the actor to mode 1." }
+Party_JumpRun = { addr = 0x801B73B0, type = "func", source = "Step 3 of g_PartyMoveSteps: runs the g_PartyJumpSteps sub-step the actor's unk_03 selects." }
+Party_JumpStart = { addr = 0x801B73F4, type = "func", source = "Jump sub-step 0: requests the take-off animation for the actor's facing and sets the walk speed index." }
+Party_JumpLaunch = { addr = 0x801B744C, type = "func", source = "Jump sub-step 1: when the take-off animation ends, sets the jump velocity and gravity from the walk speed and plays the jump sound." }
+Party_JumpTravel = { addr = 0x801B7658, type = "func", source = "Jump sub-step 2: moves the actor with gravity for its remaining travel frames, then stops the horizontal motion." }
+Party_JumpFall = { addr = 0x801B76F4, type = "func", source = "Jump sub-step 3: applies gravity until the actor reaches the ground height, then starts the landing animation." }
+Party_JumpLand = { addr = 0x801B781C, type = "func", source = "Jump sub-step 4: waits for the landing animation to end and for the cell walk not to start, then returns the actor to mode 1." }
+Party_LadderTransitRun = { addr = 0x801B78B4, type = "func", source = "Step 4 of g_PartyMoveSteps: runs the g_PartyLadderTransits entry the actor's unk_03 selects (up or down)." }
+Party_LadderUpRun = { addr = 0x801B790C, type = "func", source = "Ladder up entry: runs the g_PartyLadderUpSteps sub-step the actor's unk_04 selects." }
+Party_LadderUpGrab = { addr = 0x801B7950, type = "func", source = "Ladder up sub-step 0: starts grabbing the ladder and advances to the climb out." }
+Party_LadderUpLeave = { addr = 0x801B7988, type = "func", source = "Ladder up sub-step 1: raises the actor until it is 0x200 above the ground, then requests the area change." }
+Party_LadderUpEnter = { addr = 0x801B79F8, type = "func", source = "Ladder up sub-step 2: places the actor 0x200 below the ground, a step back from the ladder, and starts the climb animation." }
+Party_LadderUpClimb = { addr = 0x801B7B54, type = "func", source = "Ladder up sub-step 4: raises the actor until it reaches the ladder top height, then begins the dismount." }
+Party_LadderUpDismount = { addr = 0x801B7C10, type = "func", source = "Ladder up sub-step 5: runs the dismount rise until it finishes." }
+Party_LadderUpExitBegin = { addr = 0x801B7C58, type = "func", source = "Ladder up sub-step 6: begins stepping off the ladder until it finishes." }
+Party_LadderUpExit = { addr = 0x801B7CA0, type = "func", source = "Ladder up sub-step 7: steps off the ladder, then clears the area entry flag." }
+Party_LadderDownRun = { addr = 0x801B7D00, type = "func", source = "Ladder down entry: runs the g_PartyLadderDownSteps sub-step the actor's unk_04 selects." }
+Party_LadderDownApproachBegin = { addr = 0x801B7D44, type = "func", source = "Ladder down sub-step 0: starts the approach to the ladder top and marks the area entry active." }
+Party_LadderDownApproach = { addr = 0x801B7D84, type = "func", source = "Ladder down sub-step 1: walks the actor to the ladder top until the approach ends." }
+Party_LadderDownTurn = { addr = 0x801B7DC0, type = "func", source = "Ladder down sub-step 2: turns the actor to face the ladder until the turn ends." }
+Party_LadderDownTurnWait = { addr = 0x801B7DFC, type = "func", source = "Ladder down sub-step 3: waits after the turn until it ends." }
+Party_LadderDownLower = { addr = 0x801B7E38, type = "func", source = "Ladder down sub-step 4: lowers the actor onto the ladder until it ends." }
+Party_LadderDownLeave = { addr = 0x801B7E74, type = "func", source = "Ladder down sub-step 5: lowers the actor until it is 0x200 below the ground, then requests the area change." }
+Party_LadderDownEnter = { addr = 0x801B7EF0, type = "func", source = "Ladder down sub-step 6: places the actor 0x200 above the ground and starts the climb animation." }
+Party_LadderDownDescend = { addr = 0x801B7FE0, type = "func", source = "Ladder down sub-step 8: lowers the actor until it reaches the ground, then starts the dismount frames." }
+Party_LadderDownDismount = { addr = 0x801B80B4, type = "func", source = "Ladder down sub-step 9: steps the four dismount frames, then clears the entry flag and returns the actor to mode 1." }
+Party_LadderWaitFadeIn = { addr = 0x801B81EC, type = "func", source = "Ladder sub-step shared by both directions: waits for the fade in to end, then advances the sub-step." }
+Party_WalkTransitRun = { addr = 0x801B8234, type = "func", source = "Step 5 of g_PartyMoveSteps: runs the g_PartyWalkTransitSteps sub-step the actor's unk_03 selects." }
+Party_WalkExitBegin = { addr = 0x801B828C, type = "func", source = "Walk transit sub-step 0: marks the area entry active and starts the walking animation." }
+Party_WalkExit = { addr = 0x801B830C, type = "func", source = "Walk transit sub-step 1: walks the actor forward and requests the area change on the third step." }
+Party_WalkEnterBegin = { addr = 0x801B8394, type = "func", source = "Walk transit sub-step 2: places the actor back from its spot along its facing and starts the walking animation." }
+Party_WalkEnterFadeWait = { addr = 0x801B8578, type = "func", source = "Walk transit sub-step 3: waits for the fade in to end, then advances the sub-step." }
+Party_WalkEnter = { addr = 0x801B85C0, type = "func", source = "Walk transit sub-step 4: walks the actor in to its spot, then clears the entry flag and returns it to mode 1." }
+Party_CellWalkRun = { addr = 0x801B870C, type = "func", source = "Step 6 of g_PartyMoveSteps: runs the g_PartyCellWalkSteps sub-step the actor's unk_03 selects, then advances the animation." }
+Party_CellWalkStart = { addr = 0x801B876C, type = "func", source = "Cell walk sub-step 0: stores the actor's facing as its walk direction and sets the run speed index." }
+Party_CellWalkMove = { addr = 0x801B87B8, type = "func", source = "Cell walk sub-step 1: walks the actor by the pad direction until its footprint is clear of the arming cell code, or hands over to the jump step." }
+Party_CellWalkEnd = { addr = 0x801B8A0C, type = "func", source = "Ends the cell walk: faces the actor along its stored walk direction and returns it to mode 1." }
+Party_FallThroughRun = { addr = 0x801B9048, type = "func", source = "Step 7 of g_PartyMoveSteps: runs the g_PartyFallThroughSteps sub-step the actor's unk_03 selects." }
+Party_FallThroughStart = { addr = 0x801B90A0, type = "func", source = "Fall sub-step 0: plays the fall sound and requests the area link of the cell the actor stands on." }
+Party_FallThroughSpin = { addr = 0x801B9100, type = "func", source = "Fall sub-step 1: turns the actor each frame while it sinks, then requests the area change 257 units below the ground." }
+Party_FloorDamageRun = { addr = 0x801B91CC, type = "func", source = "Step 8 of g_PartyMoveSteps: runs the g_PartyFloorDamageSteps sub-step the actor's unk_03 selects." }
+Party_FloorDamageStart = { addr = 0x801B9210, type = "func", source = "Floor damage sub-step 0: applies the cell effect row in the actor's param, knocks the actor back a step and starts the blink." }
+Party_FloorDamageBlink = { addr = 0x801B9478, type = "func", source = "Floor damage sub-step 1: finishes the knock back and blinks the actor for eight frames, then returns it to mode 1." }
 Area_IsStepTooHigh = { addr = 0x801BB86C, type = "func", source = "probes the step height at the midpoint of two edges and returns true above 64 units, the blocking step its callers turn away from" }
 Actor_SnapFacing = { addr = 0x801BB8E8, type = "func", source = "Turns the actor to a cardinal facing, choosing the opposite when neither source facing matches." }
 Area_WalkTurnFromHighStep = { addr = 0x801BB9B4, type = "func", source = "Probes the step height along the walking actor's tile on each axis with Area_IsStepTooHigh and turns the facing away from a step that is too high." }
@@ -312,9 +366,12 @@ Actor_SetSemiTransparent = { addr = 0x801C2438, type = "func", source = "Sets th
 Area_RunWalk = { addr = 0x801C24D0, type = "func", source = "Runs one frame of the field walk: the walk velocity and, unless the walk is held, the scroll update." }
 Area_SetWalkVelocity = { addr = 0x801C2538, type = "func", source = "Sets the task's walk timer and velocity from the route type and the shared speed scale, with the step heights along the way." }
 Area_ScrollUpdateWalk = { addr = 0x801C2710, type = "func", source = "Moves the area scroll with the walking actor: the camera step from the walk mode and speed scale, the scroll target from the actor's position and velocity." }
+Party_StartCellWalk = { addr = 0x801C2AAC, type = "func", source = "Switches the actor to mode 2 step 6 when it stands on a cell of code 0xD0; returns whether it did." }
+Party_StartFallThrough = { addr = 0x801C2B4C, type = "func", source = "Switches the actor to mode 2 step 7 when it stands on a cell of code 0xA4; returns whether it did." }
 Char_SetCharacterId = { addr = 0x801C2E34, type = "func", source = "the body stores into g_Game.current->chr.character_id" }
 Party_FlashDamage = { addr = 0x801C308C, type = "func", source = "Fills the field actor's palette row with one of the four damage colours of g_PartyDamageColors, plays the common sound effect 8 and sets bit 3 of the member's field flags; called for the caterpillar sting, poison steps and damage cells." }
 Party_TickConfusion = { addr = 0x801C3598, type = "func", source = "Counts down the confusion of the active character and clears the status at zero." }
+Party_StartFloorDamage = { addr = 0x801C364C, type = "func", source = "Switches the actor to mode 2 step 8 with the given effect row when a cell under it has the wanted code; returns whether it did." }
 Char_CountEquipped = { addr = 0x801C38F4, type = "func", source = "Counts how many of a character's equipment slots hold an item id: the weapon (mode 1), shield, helmet and armor (mode 2) or the accessories (mode 3)." }
 Game_TestMapCells = { addr = 0x801C39D8, type = "func", source = "Tests whether the map cells at a position carry a wanted code." }
 Game_TestPlacement = { addr = 0x801C3E40, type = "func", source = "Tests whether a position is free for placement at a given height." }
@@ -467,17 +524,17 @@ s_AreaScenePositions = { addr = 0x801CD29C, size = 0x8, source = "Map id and x, 
 D_801CD29D = { addr = 0x801CD29D, size = 0x1, alias = true, source = "View of a record member; the row names the address the link reads, not a second object." }
 D_801CD29E = { addr = 0x801CD29E, size = 0x1, alias = true, source = "View of a record member; the row names the address the link reads, not a second object." }
 s_AreaCellTypes = { addr = 0x801CD2A4, size = 0xC, source = "0xFF-terminated list of map types that func_801B6610 compares with the type from Area_CellGetCode." }
-D_801CD2B0 = { addr = 0x801CD2B0, size = 0x24, source = "The nine step handlers func_801B69C0 runs by g_Task->header.step." }
-D_801CD2D4 = { addr = 0x801CD2D4, size = 0x18, source = "The six handlers func_801B6A04 runs by g_Task->unk_03." }
-D_801CD2EC = { addr = 0x801CD2EC, size = 0x8, source = "The two handlers func_801B726C runs by g_Task->unk_03." }
-D_801CD2F4 = { addr = 0x801CD2F4, size = 0x14, source = "The five handlers func_801B73B0 runs by g_Task->unk_03." }
-D_801CD308 = { addr = 0x801CD308, size = 0x8, source = "The two handlers func_801B78B4 runs by g_Task->unk_03." }
-D_801CD310 = { addr = 0x801CD310, size = 0x20, source = "The eight handlers func_801B790C runs by g_Task->unk_04." }
-D_801CD330 = { addr = 0x801CD330, size = 0x28, source = "The ten handlers func_801B7D00 runs by g_Task->unk_04." }
-D_801CD358 = { addr = 0x801CD358, size = 0x14, source = "The five handlers func_801B8234 runs by g_Task->unk_03." }
-D_801CD36C = { addr = 0x801CD36C, size = 0x8, source = "The two handlers func_801B870C runs by g_Task->unk_03." }
-D_801CD374 = { addr = 0x801CD374, size = 0x8, source = "The two handlers func_801B9048 runs by g_Task->unk_03." }
-D_801CD37C = { addr = 0x801CD37C, size = 0x8, source = "The two handlers func_801B91CC runs by g_Task->unk_03." }
+g_PartyMoveSteps = { addr = 0x801CD2B0, source = "Step handlers of mode 2 of the leader and follower, indexed by PartyMoveStep by Party_RunMoveStep." }
+g_PartyScriptWalkSteps = { addr = 0x801CD2D4, source = "Sub-steps of the script walk step, indexed by the actor's unk_03 by Party_ScriptWalkRun." }
+g_PartyFadeInSteps = { addr = 0x801CD2EC, source = "Sub-steps of the fade-in step, indexed by the actor's unk_03 by Party_FadeInRun." }
+g_PartyJumpSteps = { addr = 0x801CD2F4, source = "Sub-steps of the jump step, indexed by the actor's unk_03 by Party_JumpRun." }
+g_PartyLadderTransits = { addr = 0x801CD308, source = "Up and down ladder transit of the ladder step, indexed by the actor's unk_03 by Party_LadderTransitRun." }
+g_PartyLadderUpSteps = { addr = 0x801CD310, source = "Sub-steps of the up ladder transit, indexed by the actor's unk_04 by Party_LadderUpRun." }
+g_PartyLadderDownSteps = { addr = 0x801CD330, source = "Sub-steps of the down ladder transit, indexed by the actor's unk_04 by Party_LadderDownRun." }
+g_PartyWalkTransitSteps = { addr = 0x801CD358, source = "Sub-steps of the walk transit step, indexed by the actor's unk_03 by Party_WalkTransitRun." }
+g_PartyCellWalkSteps = { addr = 0x801CD36C, source = "Sub-steps of the cell walk step, indexed by the actor's unk_03 by Party_CellWalkRun." }
+g_PartyFallThroughSteps = { addr = 0x801CD374, source = "Sub-steps of the fall step, indexed by the actor's unk_03 by Party_FallThroughRun." }
+g_PartyFloorDamageSteps = { addr = 0x801CD37C, source = "Sub-steps of the floor damage step, indexed by the actor's unk_03 by Party_FloorDamageRun." }
 D_801CD384 = { addr = 0x801CD384, size = 0x80, source = "The 128-byte route step table at 0x801CD384; no matched code reads it." }
 g_PartyFollowerModes = { addr = 0x801CD404, source = "The 15 field task mode handlers of a follower; Party_RunFollower runs the one header.mode selects." }
 D_801CD440 = { addr = 0x801CD440, size = 0x8, source = "The two step handlers func_801BBFB4 runs by g_Task->header.step." }

@@ -7,7 +7,7 @@ MATCH void Area_UpdateIdleActor(void) {
     Party_TickConfusion();
     func_801C329C();
     func_801C2BEC();
-    if (!(func_801C3790(0) & BYTE_MASK) && !(func_801C37DC(0) & BYTE_MASK) && !(func_801C2AAC() & BYTE_MASK)) {
+    if (!(func_801C3790(0) & BYTE_MASK) && !(func_801C37DC(0) & BYTE_MASK) && !(Party_StartCellWalk() & BYTE_MASK)) {
         Actor_ClearVelocity();
         g_Game.current->u.field.counter.value = 3;
         func_801BC000();

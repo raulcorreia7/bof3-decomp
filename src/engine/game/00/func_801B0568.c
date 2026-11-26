@@ -121,13 +121,13 @@ MATCH void func_801B0568(void) {
             g_Game.current->u.field.counter.unsigned_value = 3U;
             Script_Request(TASK(Actor)->direction);
             TASK(Actor)->header.mode = 2;
-            TASK(Actor)->header.step = 4;
+            TASK(Actor)->header.step = PARTY_MOVE_STEP_LADDER_TRANSIT;
             tmp7                     = TASK(Actor);
             tmp2                     = tmp7->direction;
             if ((tmp2 == FACING_UP) || (tmp2 == FACING_LEFT)) {
-                tmp7->unk_03 = 0;
+                tmp7->unk_03 = PARTY_LADDER_TRANSIT_UP;
             } else {
-                tmp7->unk_03 = 1;
+                tmp7->unk_03 = PARTY_LADDER_TRANSIT_DOWN;
             }
             g_Game.current->u.field.mode.value                = 3;
             g_Game.current->status.field.flags.unsigned_value = (g_Game.current->status.field.flags.unsigned_value | 0x2);
@@ -138,7 +138,7 @@ MATCH void func_801B0568(void) {
             g_Game.current->u.field.counter.unsigned_value = 2U;
             Script_Request(TASK(Actor)->direction);
             TASK(Actor)->header.mode                          = 2;
-            TASK(Actor)->header.step                          = 5;
+            TASK(Actor)->header.step                          = PARTY_MOVE_STEP_WALK_TRANSIT;
             g_Game.current->u.field.mode.value                = 2;
             g_Game.current->status.field.flags.unsigned_value = (g_Game.current->status.field.flags.unsigned_value | 0x2);
             g_Game.walk_flags |= 0x100;
@@ -149,7 +149,7 @@ MATCH void func_801B0568(void) {
             Script_Request(TASK(Actor)->direction);
             g_Game.current->u.field.mode.value = 4;
             TASK(Actor)->header.mode           = 2;
-            TASK(Actor)->header.step           = 3;
+            TASK(Actor)->header.step           = PARTY_MOVE_STEP_JUMP;
             return;
         case_6:
             val0                                           = 3;

@@ -12,5 +12,5 @@ MATCH void func_8015C1A8(s32 slot, u8 field_1c, u8 field_18) {
     g_Game.members[index].unk_1C      = field_1c;
     g_Game.walk_flags                 = flags | AREA_WALK_MAP_LOADING;
     g_Game.members[index].header.mode = 2;
-    g_Game.members[index].header.step = 1;
+    g_Game.members[index].header.step = PARTY_MOVE_STEP_ATTACH;
 }

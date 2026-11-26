@@ -2172,7 +2172,7 @@ s8 s_EntityPlacementOffsets[32] = {
     0x00, 0xFD, 0xFD, 0x00, 0x02, 0xFE, 0xFF, 0xFC, 0x03, 0x00, 0x00, 0xFD, 0x02, 0x02, 0x04, 0xFF,
 };
 
-Callback g_PartyLeaderModes[15] = {func_801B016C, func_801B0320, func_801B69C0, Game_LeaderSwitchRun, func_801B29BC, func_801B2A70, func_801B2C38, func_801B2D90,
+Callback g_PartyLeaderModes[15] = {func_801B016C, func_801B0320, Party_RunMoveStep, Game_LeaderSwitchRun, func_801B29BC, func_801B2A70, func_801B2C38, func_801B2D90,
                            Area_Climb,    func_801D9B14, func_801B3690, func_801B371C,        func_801B3BFC, func_801F4D9C, func_801C22D8};
 
 Callback D_801CD0E8[3] = {func_801B036C, func_801B0568, func_801B0DA0};
@@ -2225,27 +2225,57 @@ u8 s_AreaScenePositions[8] = {
 
 u8 s_AreaCellTypes[12] = {0xC0, 0xA0, 0xA1, 0xAE, 0xAF, 0x91, 0x26, 0x27, 0x28, 0x29, 0x2C, 0xFF};
 
-Callback D_801CD2B0[9] = {func_801B6A04, func_801B70D4, func_801B726C, func_801B73B0, func_801B78B4, func_801B8234, func_801B870C, func_801B9048, func_801B91CC};
+/* Mode 2 steps of the leader and follower by PartyMoveStep, run by Party_RunMoveStep (0x801B69C0); 9 rows. */
+Callback g_PartyMoveSteps[PARTY_MOVE_STEP_COUNT] = {
+    [PARTY_MOVE_STEP_SCRIPT_WALK]    = Party_ScriptWalkRun,
+    [PARTY_MOVE_STEP_ATTACH]         = Party_AttachRun,
+    [PARTY_MOVE_STEP_FADE_IN]        = Party_FadeInRun,
+    [PARTY_MOVE_STEP_JUMP]           = Party_JumpRun,
+    [PARTY_MOVE_STEP_LADDER_TRANSIT] = Party_LadderTransitRun,
+    [PARTY_MOVE_STEP_WALK_TRANSIT]   = Party_WalkTransitRun,
+    [PARTY_MOVE_STEP_CELL_WALK]      = Party_CellWalkRun,
+    [PARTY_MOVE_STEP_FALL_THROUGH]   = Party_FallThroughRun,
+    [PARTY_MOVE_STEP_FLOOR_DAMAGE]   = Party_FloorDamageRun,
+};
 
-Callback D_801CD2D4[6] = {func_801B6AB0, func_801B6BC8, func_801B6F1C, func_801B6FDC, func_801B7024, func_801B707C};
+/* Script walk sub-steps by unk_03, run by Party_ScriptWalkRun (0x801B6A04); 6 rows. */
+Callback g_PartyScriptWalkSteps[6] = {Party_ScriptWalkAlign, Party_ScriptWalkRead, Party_ScriptWalkMove, Party_ScriptWalkWaitMessage, Party_ScriptWalkFadeOut, Party_ScriptWalkFadeIn};
 
-Callback D_801CD2EC[2] = {func_801B72B0, func_801B7344};
+/* Fade-in sub-steps by unk_03, run by Party_FadeInRun (0x801B726C); 2 rows. */
+Callback g_PartyFadeInSteps[2] = {Party_FadeInStart, Party_FadeInWait};
 
-Callback D_801CD2F4[5] = {func_801B73F4, func_801B744C, func_801B7658, func_801B76F4, func_801B781C};
+/* Jump sub-steps by PartyJumpStep, run by Party_JumpRun (0x801B73B0). */
+Callback g_PartyJumpSteps[PARTY_JUMP_STEP_COUNT] = {
+    [PARTY_JUMP_STEP_START]  = Party_JumpStart,
+    [PARTY_JUMP_STEP_LAUNCH] = Party_JumpLaunch,
+    [PARTY_JUMP_STEP_TRAVEL] = Party_JumpTravel,
+    [PARTY_JUMP_STEP_FALL]   = Party_JumpFall,
+    [PARTY_JUMP_STEP_LAND]   = Party_JumpLand,
+};
 
-Callback D_801CD308[2] = {func_801B790C, func_801B7D00};
+/* Ladder transits by PartyLadderTransit, run by Party_LadderTransitRun (0x801B78B4). */
+Callback g_PartyLadderTransits[PARTY_LADDER_TRANSIT_COUNT] = {
+    [PARTY_LADDER_TRANSIT_UP]   = Party_LadderUpRun,
+    [PARTY_LADDER_TRANSIT_DOWN] = Party_LadderDownRun,
+};
 
-Callback D_801CD310[8] = {func_801B7950, func_801B7988, func_801B79F8, func_801B81EC, func_801B7B54, func_801B7C10, func_801B7C58, func_801B7CA0};
+/* Up ladder sub-steps by unk_04, run by Party_LadderUpRun (0x801B790C); 8 rows. */
+Callback g_PartyLadderUpSteps[8] = {Party_LadderUpGrab, Party_LadderUpLeave, Party_LadderUpEnter, Party_LadderWaitFadeIn, Party_LadderUpClimb, Party_LadderUpDismount, Party_LadderUpExitBegin, Party_LadderUpExit};
 
-Callback D_801CD330[10] = {func_801B7D44, func_801B7D84, func_801B7DC0, func_801B7DFC, func_801B7E38, func_801B7E74, func_801B7EF0, func_801B81EC, func_801B7FE0, func_801B80B4};
+/* Down ladder sub-steps by unk_04, run by Party_LadderDownRun (0x801B7D00); 10 rows. */
+Callback g_PartyLadderDownSteps[10] = {Party_LadderDownApproachBegin, Party_LadderDownApproach, Party_LadderDownTurn, Party_LadderDownTurnWait, Party_LadderDownLower, Party_LadderDownLeave, Party_LadderDownEnter, Party_LadderWaitFadeIn, Party_LadderDownDescend, Party_LadderDownDismount};
 
-Callback D_801CD358[5] = {func_801B828C, func_801B830C, func_801B8394, func_801B8578, func_801B85C0};
+/* Walk transit sub-steps by unk_03, run by Party_WalkTransitRun (0x801B8234); 5 rows. */
+Callback g_PartyWalkTransitSteps[5] = {Party_WalkExitBegin, Party_WalkExit, Party_WalkEnterBegin, Party_WalkEnterFadeWait, Party_WalkEnter};
 
-Callback D_801CD36C[2] = {func_801B876C, func_801B87B8};
+/* Cell walk sub-steps by unk_03, run by Party_CellWalkRun (0x801B870C); 2 rows. */
+Callback g_PartyCellWalkSteps[2] = {Party_CellWalkStart, Party_CellWalkMove};
 
-Callback D_801CD374[2] = {func_801B90A0, func_801B9100};
+/* Fall sub-steps by unk_03, run by Party_FallThroughRun (0x801B9048); 2 rows. */
+Callback g_PartyFallThroughSteps[2] = {Party_FallThroughStart, Party_FallThroughSpin};
 
-Callback D_801CD37C[2] = {func_801B9210, func_801B9478};
+/* Floor damage sub-steps by unk_03, run by Party_FloorDamageRun (0x801B91CC); 2 rows. */
+Callback g_PartyFloorDamageSteps[2] = {Party_FloorDamageStart, Party_FloorDamageBlink};
 
 u8 D_801CD384[128] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0x00, 0x00, 0x02, 0x00,
                       0x00, 0x00, 0xFE, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFE, 0xFF, 0x00, 0x00, 0xFF, 0xFF,
@@ -2256,7 +2286,7 @@ u8 D_801CD384[128] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00
                       0x00, 0x00, 0xFE, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0x00, 0x00, 0xFE, 0xFF,
                       0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFE, 0xFF, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0xFF, 0xFF};
 
-Callback g_PartyFollowerModes[15] = {func_801BBE98, func_801BBFB4, func_801B69C0, func_801BD32C, func_801BD35C, func_801BD38C, func_801BD394, func_801BD5A4,
+Callback g_PartyFollowerModes[15] = {func_801BBE98, func_801BBFB4, Party_RunMoveStep, func_801BD32C, func_801BD35C, func_801BD38C, func_801BD394, func_801BD5A4,
                            Area_ClimbFollower, (Callback)0,   (Callback)0,   (Callback)0,   (Callback)0,   (Callback)0,   func_801C22D8};
 
 Callback D_801CD440[2] = {func_801BC000, Area_SceneStepTimer};
