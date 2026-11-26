@@ -50,11 +50,6 @@ void Party_MemberSwap(u32 slot_a, u32 slot_b, u32 skip_state);
 void Party_BattlersSwapRows(s32 slot_a, s32 slot_b, s32 skip_state);
 /* func_801B00F8 */
 void Party_RunLeader(void);
-/* func_801BBE48 */
-void Party_RunFollower(void);
-/* func_801C308C */
-void Party_FlashDamage(s32 color_index);
-
 /* func_801B69C0 */
 void Party_RunMoveStep(void);
 /* func_801B6A04 */
@@ -101,8 +96,6 @@ void Party_LadderUpGrab(void);
 void Party_LadderUpLeave(void);
 /* func_801B79F8 */
 void Party_LadderUpEnter(void);
-/* func_801B81EC */
-void Party_LadderWaitFadeIn(void);
 /* func_801B7B54 */
 void Party_LadderUpClimb(void);
 /* func_801B7C10 */
@@ -131,6 +124,8 @@ void Party_LadderDownEnter(void);
 void Party_LadderDownDescend(void);
 /* func_801B80B4 */
 void Party_LadderDownDismount(void);
+/* func_801B81EC */
+void Party_LadderWaitFadeIn(void);
 /* func_801B8234 */
 void Party_WalkTransitRun(void);
 /* func_801B828C */
@@ -163,10 +158,14 @@ void Party_FloorDamageRun(void);
 void Party_FloorDamageStart(void);
 /* func_801B9478 */
 void Party_FloorDamageBlink(void);
+/* func_801BBE48 */
+void Party_RunFollower(void);
 /* func_801C2AAC */
 s32  Party_StartCellWalk(void);
 /* func_801C2B4C */
 s32  Party_StartFallThrough(void);
+/* func_801C308C */
+void Party_FlashDamage(s32 color_index);
 /* func_801C364C */
 s32  Party_StartFloorDamage(s32 wanted_code, s32 effect_row, s32 find_facing);
 #endif

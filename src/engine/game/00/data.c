@@ -2225,7 +2225,7 @@ u8 s_AreaScenePositions[8] = {
 
 u8 s_AreaCellTypes[12] = {0xC0, 0xA0, 0xA1, 0xAE, 0xAF, 0x91, 0x26, 0x27, 0x28, 0x29, 0x2C, 0xFF};
 
-/* Mode 2 steps of the leader and follower by PartyMoveStep, run by Party_RunMoveStep (0x801B69C0); 9 rows. */
+/* Mode 2 steps of the leader and follower by PartyMoveStep, run by Party_RunMoveStep; 9 rows. */
 Callback g_PartyMoveSteps[PARTY_MOVE_STEP_COUNT] = {
     [PARTY_MOVE_STEP_SCRIPT_WALK]    = Party_ScriptWalkRun,
     [PARTY_MOVE_STEP_ATTACH]         = Party_AttachRun,
@@ -2238,13 +2238,13 @@ Callback g_PartyMoveSteps[PARTY_MOVE_STEP_COUNT] = {
     [PARTY_MOVE_STEP_FLOOR_DAMAGE]   = Party_FloorDamageRun,
 };
 
-/* Script walk sub-steps by unk_03, run by Party_ScriptWalkRun (0x801B6A04); 6 rows. */
+/* Script walk sub-steps by unk_03, run by Party_ScriptWalkRun; 6 rows. */
 Callback g_PartyScriptWalkSteps[6] = {Party_ScriptWalkAlign, Party_ScriptWalkRead, Party_ScriptWalkMove, Party_ScriptWalkWaitMessage, Party_ScriptWalkFadeOut, Party_ScriptWalkFadeIn};
 
-/* Fade-in sub-steps by unk_03, run by Party_FadeInRun (0x801B726C); 2 rows. */
+/* Fade-in sub-steps by unk_03, run by Party_FadeInRun; 2 rows. */
 Callback g_PartyFadeInSteps[2] = {Party_FadeInStart, Party_FadeInWait};
 
-/* Jump sub-steps by PartyJumpStep, run by Party_JumpRun (0x801B73B0). */
+/* Jump sub-steps by PartyJumpStep, run by Party_JumpRun. */
 Callback g_PartyJumpSteps[PARTY_JUMP_STEP_COUNT] = {
     [PARTY_JUMP_STEP_START]  = Party_JumpStart,
     [PARTY_JUMP_STEP_LAUNCH] = Party_JumpLaunch,
@@ -2253,28 +2253,28 @@ Callback g_PartyJumpSteps[PARTY_JUMP_STEP_COUNT] = {
     [PARTY_JUMP_STEP_LAND]   = Party_JumpLand,
 };
 
-/* Ladder transits by PartyLadderTransit, run by Party_LadderTransitRun (0x801B78B4). */
+/* Ladder transits by PartyLadderTransit, run by Party_LadderTransitRun. */
 Callback g_PartyLadderTransits[PARTY_LADDER_TRANSIT_COUNT] = {
     [PARTY_LADDER_TRANSIT_UP]   = Party_LadderUpRun,
     [PARTY_LADDER_TRANSIT_DOWN] = Party_LadderDownRun,
 };
 
-/* Up ladder sub-steps by unk_04, run by Party_LadderUpRun (0x801B790C); 8 rows. */
+/* Up ladder sub-steps by unk_04, run by Party_LadderUpRun; 8 rows. */
 Callback g_PartyLadderUpSteps[8] = {Party_LadderUpGrab, Party_LadderUpLeave, Party_LadderUpEnter, Party_LadderWaitFadeIn, Party_LadderUpClimb, Party_LadderUpDismount, Party_LadderUpExitBegin, Party_LadderUpExit};
 
-/* Down ladder sub-steps by unk_04, run by Party_LadderDownRun (0x801B7D00); 10 rows. */
+/* Down ladder sub-steps by unk_04, run by Party_LadderDownRun; 10 rows. */
 Callback g_PartyLadderDownSteps[10] = {Party_LadderDownApproachBegin, Party_LadderDownApproach, Party_LadderDownTurn, Party_LadderDownTurnWait, Party_LadderDownLower, Party_LadderDownLeave, Party_LadderDownEnter, Party_LadderWaitFadeIn, Party_LadderDownDescend, Party_LadderDownDismount};
 
-/* Walk transit sub-steps by unk_03, run by Party_WalkTransitRun (0x801B8234); 5 rows. */
+/* Walk transit sub-steps by unk_03, run by Party_WalkTransitRun; 5 rows. */
 Callback g_PartyWalkTransitSteps[5] = {Party_WalkExitBegin, Party_WalkExit, Party_WalkEnterBegin, Party_WalkEnterFadeWait, Party_WalkEnter};
 
-/* Cell walk sub-steps by unk_03, run by Party_CellWalkRun (0x801B870C); 2 rows. */
+/* Cell walk sub-steps by unk_03, run by Party_CellWalkRun; 2 rows. */
 Callback g_PartyCellWalkSteps[2] = {Party_CellWalkStart, Party_CellWalkMove};
 
-/* Fall sub-steps by unk_03, run by Party_FallThroughRun (0x801B9048); 2 rows. */
+/* Fall sub-steps by unk_03, run by Party_FallThroughRun; 2 rows. */
 Callback g_PartyFallThroughSteps[2] = {Party_FallThroughStart, Party_FallThroughSpin};
 
-/* Floor damage sub-steps by unk_03, run by Party_FloorDamageRun (0x801B91CC); 2 rows. */
+/* Floor damage sub-steps by unk_03, run by Party_FloorDamageRun; 2 rows. */
 Callback g_PartyFloorDamageSteps[2] = {Party_FloorDamageStart, Party_FloorDamageBlink};
 
 u8 D_801CD384[128] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0x00, 0x00, 0x02, 0x00,
