@@ -2,13 +2,13 @@
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F3274(void) {
-    POLY_FT4*     prim;
-    Coord         x;
-    Coord         y;
-    long          depth;
-    long          flag;
-    s32           part;
-    s32           corner;
+    POLY_FT4* prim;
+    Coord     x;
+    Coord     y;
+    long      depth;
+    long      flag;
+    s32       part;
+    s32       corner;
 
     for (part = D_801F4250[TASK(Actor)->pos.x.part.integer][0]; part < D_801F4250[TASK(Actor)->pos.x.part.integer][1]; part++) {
         prim = (POLY_FT4*)g_GfxPrimCursor;
