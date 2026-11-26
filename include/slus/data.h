@@ -5,6 +5,7 @@
 #include "types.h"
 #include "common/util.h"
 #include "area/area.h"
+#include "scenario/flags.h"
 #include "scenario/party.h"
 
 /* Set: the battle end does not stop the BGM or the sound sequences. */
@@ -29,7 +30,7 @@ extern u16         g_SaveAreaId;
 extern u8          g_SaveEntryFacing;
 extern u32         g_SaveEntryX;
 extern u32         g_SaveEntryY;
-extern u8          g_SceneFlagWords[]; /* 0x80144E88 */
+extern u8          g_SceneFlagRows[SCENARIO_COUNT][SCENE_FLAG_ROW_BYTES]; /* 0x80144E88 */
 /* D_80144950 */
 extern s8          g_MessageSpeed;
 /* D_80144953 */
@@ -72,9 +73,7 @@ extern u8 g_GfxPalettePending; /* 0x80145988 */
 extern u8                  D_80145E91[];
 extern u8                  D_80145E92[];
 extern u8                  D_80145E93[];
-extern s16                 D_80145EC6;
 extern s32                 D_80145EC8;
-extern s16                 D_80145ECA;
 /* Player battle-record copies (stride 0x140), selected by g_Battle.active_battler. */
 extern u8                  D_80145F04[];
 extern u8                  D_80145F10[];

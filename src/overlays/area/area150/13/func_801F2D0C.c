@@ -32,7 +32,7 @@ MATCH void func_801F2D0C(void) {
             break;
         case 20:
             if (g_GameStateIndex == GAME_REQUEST_IDLE) {
-                if (SYS_TestFlag(&g_SaveData.scene_flag_words[14 * 8], 3)) {
+                if (SYS_TestFlag(g_SaveData.scene_flag_rows[SCENARIO_DESERT_OF_DEATH], 3)) {
                     UI_MessageStartArea(MSG_AREA150_037);
                 } else {
                     UI_MessageStartArea(MSG_AREA150_032);
@@ -54,7 +54,7 @@ MATCH void func_801F2D0C(void) {
                 SND_BGMStart(0x95, 100, 0x10);
                 UI_ModeSet(UI_MODE_FADE_IN);
                 g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
-                SYS_ClearFlag(&g_SaveData.scene_flag_words[14 * 8], 3);
+                SYS_ClearFlag(g_SaveData.scene_flag_rows[SCENARIO_DESERT_OF_DEATH], 3);
                 SYS_ClearFlag(g_SaveData.scene_event_flags, 0x8A);
                 g_SceneEventState.mode = 0;
                 g_SceneEventState.step = 0;

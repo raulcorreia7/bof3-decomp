@@ -38,7 +38,7 @@ MATCH void SAVE_RunLoadRestore(void) {
             src = (u8*)&g_SaveData;
             dst = &g_ScenarioState;
             memcpy(dst, src, 0x10);
-            g_SceneFlags = (*dst * 8) + ((u8*)&g_SaveData + 0x5B0);
+            g_SceneFlags = (u32*)g_SaveData.scene_flag_rows[*dst];
         }
         g_ScriptVars[0] = g_SavedScriptVars[0];
         g_ScriptVars[1] = g_SavedScriptVars[1];

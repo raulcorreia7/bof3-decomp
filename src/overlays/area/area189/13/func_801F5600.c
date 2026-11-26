@@ -56,7 +56,7 @@ MATCH void func_801F5600(void) {
         }
     }
     if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-        if (SYS_TestFlag(&g_SceneFlagWords[14 * 8], 4) == 0 && (u32)((TASK(Actor)->pos.x.part.integer >> 8) - 0x16) < 2 && (TASK(Actor)->pos.y.part.integer >> 8) < 0x11) {
+        if (SYS_TestFlag(g_SceneFlagRows[SCENARIO_DESERT_OF_DEATH], 4) == 0 && (u32)((TASK(Actor)->pos.x.part.integer >> 8) - 0x16) < 2 && (TASK(Actor)->pos.y.part.integer >> 8) < 0x11) {
             func_801F8850();
         } else if (func_801A79A4(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed) == 0) {
             if ((TASK(Actor)->pos.x.part.integer >> 8) < 10) {

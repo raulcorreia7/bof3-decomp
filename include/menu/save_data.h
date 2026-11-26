@@ -8,6 +8,7 @@
 #include "menu/clock.h"
 #include "menu/inventory.h"
 #include "scenario/party.h"
+#include "scenario/flags.h"
 #include "scenario/state.h"
 
 /* The persistent block: 4,272 bytes. */
@@ -50,7 +51,7 @@ typedef struct SaveData {
     /* 0x07A */ u8               window_style; /* the last argument of UI_WindowDraw */
     /* 0x07B */ u8               unk_7B[0x15];
     /* 0x090 */ Character        characters[CHAR_INDEX_COUNT];
-    /* 0x5B0 */ u8               scene_flag_words[160]; /* eight bytes per scenario */
+    /* 0x5B0 */ u8               scene_flag_rows[SCENARIO_COUNT][SCENE_FLAG_ROW_BYTES]; /* the flag bits of each scenario */
     /* 0x650 */ u8               scene_event_flags[40];
     /* 0x678 */ u32              zenny;
     /* 0x67C */ DesertCrossing   desert;
@@ -91,7 +92,7 @@ ASSERT_OFFSET(SaveData, entry_y, 0x02C);
 ASSERT_OFFSET(SaveData, checksum, 0x070);
 ASSERT_OFFSET(SaveData, window_style, 0x07A);
 ASSERT_OFFSET(SaveData, characters, 0x090);
-ASSERT_OFFSET(SaveData, scene_flag_words, 0x5B0);
+ASSERT_OFFSET(SaveData, scene_flag_rows, 0x5B0);
 ASSERT_OFFSET(SaveData, scene_event_flags, 0x650);
 ASSERT_OFFSET(SaveData, zenny, 0x678);
 ASSERT_OFFSET(SaveData, desert, 0x67C);

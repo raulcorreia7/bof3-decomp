@@ -18,7 +18,7 @@ MATCH s32 Area_GetActorFacingStepX(void) {
     work   = TASK(Actor);
     found  = 0;
     step_x = g_FacingSteps[work->direction].x;
-    step_y = g_FacingStepY[work->direction * 2];
+    step_y = g_FacingSteps[work->direction].y;
     pos_x  = work->pos.x.fixed + step_x;
     pos_y  = work->pos.y.fixed + step_y;
     if (g_Game.flags & 0x1000) {

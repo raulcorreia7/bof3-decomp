@@ -18,16 +18,16 @@ MATCH void UI_MessageShrinkPanel(void) {
         switch (task->mode) {
             case 0:
                 if (task->flags & 0x2) {
-                    task->pos.x = ((g_UiPanelOrigins[16 + D_801490CE * 2] + (task->unk_0A >> 1)) << 4);
+                    task->pos.x = ((g_UiPanelOrigins[1][g_UiPanelPlacement].x + (task->unk_0A >> 1)) << 4);
                 } else {
-                    task->pos.x = ((g_UiPanelOrigins[D_801490CE * 2] + (task->unk_0A >> 1)) << 4);
+                    task->pos.x = ((g_UiPanelOrigins[0][g_UiPanelPlacement].x + (task->unk_0A >> 1)) << 4);
                 }
                 break;
             case 1:
                 task->pos.x = ((D_8017F930[g_UiMessageWindow.panel_index * 4] + (task->unk_0A >> 1)) << 4);
                 break;
             default:
-                g_UiPanelCurrent->pos.x = ((D_8017F944[D_801490CE][0] + (g_UiPanelCurrent->unk_0A >> 1)) << 4);
+                g_UiPanelCurrent->pos.x = ((D_8017F944[g_UiPanelPlacement][0] + (g_UiPanelCurrent->unk_0A >> 1)) << 4);
                 break;
         }
         count++;
@@ -40,16 +40,16 @@ MATCH void UI_MessageShrinkPanel(void) {
         switch (task->mode) {
             case 0:
                 if (task->flags & 0x2) {
-                    task->pos.y = ((g_UiPanelOrigins[17 + D_801490CE * 2] + (task->unk_0B >> 1)) << 4);
+                    task->pos.y = ((g_UiPanelOrigins[1][g_UiPanelPlacement].y + (task->unk_0B >> 1)) << 4);
                 } else {
-                    task->pos.y = ((g_UiPanelOrigins[1 + D_801490CE * 2] + (task->unk_0B >> 1)) << 4);
+                    task->pos.y = ((g_UiPanelOrigins[0][g_UiPanelPlacement].y + (task->unk_0B >> 1)) << 4);
                 }
                 break;
             case 1:
                 task->pos.y = ((D_8017F930[1 + g_UiMessageWindow.panel_index * 4] + (task->unk_0B >> 1)) << 4);
                 break;
             default:
-                g_UiPanelCurrent->pos.y = ((D_8017F944[D_801490CE][1] + (g_UiPanelCurrent->unk_0B >> 1)) << 4);
+                g_UiPanelCurrent->pos.y = ((D_8017F944[g_UiPanelPlacement][1] + (g_UiPanelCurrent->unk_0B >> 1)) << 4);
                 break;
         }
         count++;

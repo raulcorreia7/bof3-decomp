@@ -162,14 +162,14 @@ MATCH void func_801F9834(void) {
                 break;
             }
             UI_ModeSet(0);
-            SND_StartDecrescendo(g_SelectionSepSlots[g_SndBGMId * 4], g_SelectionSequences[g_SndBGMId * 4], 0x64, 0x20);
+            SND_StartDecrescendo(g_BGMTracks[g_SndBGMId].sep_slot, g_BGMTracks[g_SndBGMId].sequence, 0x64, 0x20);
             g_ScenarioState.step = 0x13;
             break;
         case 19:
             if (WINDOW_EFFECT_BUSY()) {
                 break;
             }
-            SND_SeqStop(g_SelectionSepSlots[g_SndBGMId * 4], g_SelectionSequences[g_SndBGMId * 4]);
+            SND_SeqStop(g_BGMTracks[g_SndBGMId].sep_slot, g_BGMTracks[g_SndBGMId].sequence);
             g_AreaDrawFlags = 0;
             SCENARIO_MESSAGE_WAIT(MSG_SCENA14_048, 0x14);
             break;

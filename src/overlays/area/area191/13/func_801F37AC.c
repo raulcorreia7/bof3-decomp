@@ -22,7 +22,7 @@ MATCH u16 func_801F37AC(u8 character_id) {
     }
     slot    = g_CharSlot[character_id];
     fatigue = g_Characters[slot].fatigue;
-    if (SYS_TestFlag(&g_SaveData.scene_flag_words[14 * 8], 0xA) != 0) {
+    if (SYS_TestFlag(g_SaveData.scene_flag_rows[SCENARIO_DESERT_OF_DEATH], 0xA) != 0) {
         return func_801F3924(row, character_id, area, fatigue);
     }
     if (fatigue < 8) {

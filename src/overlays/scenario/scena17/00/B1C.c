@@ -470,7 +470,7 @@ MATCH void func_801F8664(void) {
     s8* state;
 
     if ((g_PadStates[0].pressed & PADRdown) || D_801F9DD8 != 0) {
-        SND_StartDecrescendo(g_SelectionSepSlots[g_SndBGMId * 4], g_SelectionSequences[g_SndBGMId * 4], 100, 16);
+        SND_StartDecrescendo(g_BGMTracks[g_SndBGMId].sep_slot, g_BGMTracks[g_SndBGMId].sequence, 100, 16);
         UI_ModeSet(UI_MODE_LONG_FADE_OUT);
         state = &g_ScenarioState.state_04;
         (*state)++;
@@ -485,7 +485,7 @@ MATCH void func_801F8710(void) {
 
     if (g_SysThreads[2].state == 0) {
         bgm = &g_SndBGMId;
-        SND_SeqStop(g_SelectionSepSlots[*bgm * 4], g_SelectionSequences[*bgm * 4]);
+        SND_SeqStop(g_BGMTracks[*bgm].sep_slot, g_BGMTracks[*bgm].sequence);
         *bgm = GAME_NONE;
         SND_SetBankLayout(0);
         g_AreaDrawFlags = 0;

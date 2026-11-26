@@ -11,7 +11,7 @@ MATCH void func_801F5038(void) {
     g_ScratchPadVectors[0].vz = -COORD_INT(TASK(Actor)->pos.z) / 2;
     RotTransPers(&g_ScratchPadVectors[0], (long*)D_1F800034, &depth, &flag);
 
-    flags                 = &g_SceneFlagWords[14 * 8];
+    flags                 = g_SceneFlagRows[SCENARIO_DESERT_OF_DEATH];
     TASK(Actor)->screen_y = D_1F800034[1];
     TASK(Actor)->vz       = 0;
     if (SYS_TestFlag(flags, 9) != 0 && SYS_TestFlag(flags, 10) == 0) {

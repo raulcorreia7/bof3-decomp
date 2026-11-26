@@ -3,7 +3,7 @@
 MATCH void func_801CE448(void) {
     s32 direction;
 
-    if (SYS_TestFlag(&g_SceneFlagWords[8], 0x16)) {
+    if (SYS_TestFlag(g_SceneFlagRows[1], 0x16)) {
         if (Party_CountOrder(PARTY_ORDER_FIELD) == 1 && !(g_GameRequestFlags & AREA_LOAD_FLAG_SHOP)) {
             TASK(Actor)->unk_04 = 0x50;
         } else {
