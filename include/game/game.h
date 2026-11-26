@@ -232,8 +232,8 @@ typedef enum ActorRockMode {
     ACTOR_ROCK_MODE_COUNT
 } ActorRockMode;
 
-extern Callback           g_ActorRockModes[ACTOR_ROCK_MODE_COUNT];
-extern Callback           D_801C8144[4];
+extern Callback g_ActorRockModes[ACTOR_ROCK_MODE_COUNT];
+extern Callback D_801C8144[4];
 
 /* D_801C8154 */
 /* The modes of a block actor (ACTOR_TYPE_BLOCK), selected by header.mode. */

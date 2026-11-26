@@ -126,6 +126,7 @@ s32  Actor_RockIsBlockedAtEdge(void);
 s32  Actor_RockIsPointBlocked(s32 x, s32 y);
 /* func_8019C4F0 */
 s32  Actor_RockIsCellBlocked();
+
 /* One of the 24 shards of a broken model, at 0x800E4800 + n * 0x38: a centre, a random rotation and four corner offsets that
  * Actor_ShatterWriteShard rotates and writes out as vertices. */
 typedef struct ShatterShard {
