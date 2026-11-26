@@ -44,7 +44,7 @@ NON_MATCHING u8 func_801B0E44(void) {
             func_801B13BC();
             if (((u8*)pos2)[-8] != 0) {
                 if ((s16)result >= 0x41) {
-                    if (!(func_801A0048(SP_REF(s16, 0x4), SP_REF(s16, 0x6)) & BYTE_MASK) && (g_Task == (void*)g_Game.members)) {
+                    if (!(Area_RequestLinkAtCell(SP_REF(s16, 0x4), SP_REF(s16, 0x6)) & BYTE_MASK) && (g_Task == (void*)g_Game.members)) {
                         if (Area_CellSetPalette(g_Game.members[0].pos.x.part.integer, g_Game.members[0].pos.y.part.integer) & BYTE_MASK) {
                             SND_SEPlay(D_801CD0F4[((u8*)pos2)[-7]]);
                             Script_Request((TASK(Actor)->direction >> 1) + 0x10);
@@ -62,7 +62,7 @@ NON_MATCHING u8 func_801B0E44(void) {
                 diff = COORD_INT(TASK(Actor)->pos.z) - (s16)result;
                 diff = ABS(diff);
                 if (diff >= 0x81) {
-                    if (!(func_801A0048(SP_REF(s16, 0x4), SP_REF(s16, 0x6)) & BYTE_MASK)) {
+                    if (!(Area_RequestLinkAtCell(SP_REF(s16, 0x4), SP_REF(s16, 0x6)) & BYTE_MASK)) {
                         g_GameStateIndex = GAME_REQUEST_AREA_CHANGE;
                     }
                     g_AreaCameraSpeed = 0;
@@ -71,7 +71,7 @@ NON_MATCHING u8 func_801B0E44(void) {
                 x = SP_REF(s16, 0x4);
                 y = SP_REF(s16, 0x6);
             }
-            if (func_801A0048(x, y) & BYTE_MASK) {
+            if (Area_RequestLinkAtCell(x, y) & BYTE_MASK) {
                 return 0;
             }
             g_GameStateIndex = GAME_REQUEST_AREA_CHANGE;
@@ -92,14 +92,14 @@ NON_MATCHING u8 func_801B0E44(void) {
             return 0;
         case 4:
             func_801B13BC();
-            if (!(func_801A0048(SP_REF(s16, 0x4), SP_REF(s16, 0x6)) & BYTE_MASK)) {
+            if (!(Area_RequestLinkAtCell(SP_REF(s16, 0x4), SP_REF(s16, 0x6)) & BYTE_MASK)) {
                 g_AreaWalkFlags |= 0x80 | AREA_WALK_ENTRY_PENDING;
                 return 2;
             }
             return 1;
         case 5:
             func_801B13BC();
-            if (!(func_801A0048(SP_REF(s16, 0x4), SP_REF(s16, 0x6)) & BYTE_MASK)) {
+            if (!(Area_RequestLinkAtCell(SP_REF(s16, 0x4), SP_REF(s16, 0x6)) & BYTE_MASK)) {
                 g_AreaWalkFlags |= 0x100 | AREA_WALK_ENTRY_PENDING;
                 return 3;
             }

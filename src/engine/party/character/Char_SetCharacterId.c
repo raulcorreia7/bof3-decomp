@@ -27,7 +27,7 @@ MATCH void Char_SetCharacterId(u8 index) {
     flags         = entry[2];
     record_index2 = g_GameState->character_index;
     g_Characters[record_index2].status |= flags;
-    if ((u8)func_801C38F4(g_GameState->character_index, 3, 8) != 0) {
+    if ((u8)Char_CountEquipped(g_GameState->character_index, EQUIP_GROUP_ACCESSORY, 8) != 0) {
         record_index3 = g_GameState->character_index;
         g_Characters[record_index3].status &= ~STATUS_CONFUSED;
         g_GameState->u.field.countdown = 0;

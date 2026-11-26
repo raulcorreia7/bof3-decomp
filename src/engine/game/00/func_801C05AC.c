@@ -19,9 +19,9 @@ MATCH void func_801C05AC(void) {
                 g_GameState = member;
                 TASK_SET(member);
                 if (g_Game.members[i].slot == 0) {
-                    func_801B00F8();
+                    Party_RunLeader();
                 } else {
-                    func_801BBE48();
+                    Party_RunFollower();
                 }
             }
         }

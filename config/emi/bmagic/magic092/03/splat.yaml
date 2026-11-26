@@ -17,5 +17,5 @@ segments:
     align: 4
     subsegments:
       - [0x1BBC, bin, g_BMagicEffectModes]
-      - [0x1BF8, bin, D_801F07F8]
+      - [0x1BF8, bin, g_BMagicFireblastEffects]
   - [0x3278]

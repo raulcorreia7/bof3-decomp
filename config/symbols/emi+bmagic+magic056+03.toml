@@ -13,34 +13,34 @@ g_BattleEnemies = { addr = 0x801EB2E8, alias = true, source = "The enemy battler
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 g_BattleEnemyBattlers = { addr = 0x801EB630, type = "EnemyBattler", size = 0x8C0, source = "Battle enemy battlers, one per enemy slot." }
 g_BattleEffects = { addr = 0x801EC330, alias = true, source = "Battle effect work records (stride 0x78); Battle_AllocEffect claims a free one by setting bit 0 of header.flags." }
-g_BMagicSacrificeCasterSteps = { addr = 0x801EEC10, source = "The nine steps of the caster clone: start, hide, show, cast, hold, vanish, return, end." }
+g_BMagicSacrificeCloneSteps = { addr = 0x801EEC10, source = "The nine steps of the clone: start, prime the tint, hide, show, cast, hold, vanish, return, end." }
 BMagic_DispatchMode = { addr = 0x801EEC34, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the module head's three callbacks in magic056 (Sacrifice)." }
-BMagic_SacrificeInit = { addr = 0x801EEC94, type = "func", source = "Centres the camera, starts the caster's clone effect on a copy of the active battler, sets STP on its palette row, copies the battler's cell palette values and marks the battler busy." }
-BMagic_SacrificeEnd = { addr = 0x801EEF3C, type = "func", source = "Once the effect ticker is zero releases the battler, marks the target damaged and knocks the caster out (mode 6, 0 HP, KO)." }
+BMagic_SacrificeInit = { addr = 0x801EEC94, type = "func", source = "Centres the camera, starts the clone effect on a copy of the active battler, sets STP on its palette row, copies the battler's cell palette values and marks the battler busy." }
+BMagic_SacrificeEnd = { addr = 0x801EEF3C, type = "func", source = "Once the live-effect count (byte 0x0B) is zero releases the battler, marks the target damaged and knocks the caster out (mode 6, 0 HP, KO)." }
 Effect_StartPlaying = { addr = 0x801EF17C, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic056 (Sacrifice)." }
 BMagic_DispatchEffectMode = { addr = 0x801EF1B0, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic056." }
 BMagic_SacrificeDomeUpdate = { addr = 0x801EF1F4, type = "func", source = "Runs the dome's step and draws the dome." }
 Effect_CopyBattlerCoords = { addr = 0x801EF27C, type = "func", source = "Copies the position of g_BattleEffectBattler into the effect, clears the effect timer (byte 0x09) and counter (byte 0x0A) and advances header.step (byte 0x02) in magic056 (Sacrifice)." }
 BMagic_SacrificeDomeExpand = { addr = 0x801EF2DC, type = "func", source = "Expands the dome over 12 frames and applies the target's damage flags on the fifth." }
-BMagic_SacrificeDomeEnd = { addr = 0x801EF37C, type = "func", source = "Widens the dome for 40 frames, then lowers the effect battler's ticker and resets the effect." }
+BMagic_SacrificeDomeEnd = { addr = 0x801EF37C, type = "func", source = "Widens the dome for 28 frames (its counter runs from 12 to 40), then lowers the effect battler's live-effect count and resets the effect." }
 Effect_SetActorMatrix = { addr = 0x801EF410, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic056 (Sacrifice)." }
-BMagic_SacrificeDrawDome = { addr = 0x801EF4C0, type = "func", source = "Draws the textured dome as eight bands of 32 additive quads, each band shaded by how far the effect timer has passed it." }
+BMagic_SacrificeDrawDome = { addr = 0x801EF4C0, type = "func", source = "Draws the textured dome as eight bands of 32 additive quads, each band shaded by how far the counter (byte 0x09) has passed it." }
 BMagic_SacrificeShadowUpdate = { addr = 0x801EFA50, type = "func", source = "Runs the shadow's step and draws the shadow disc." }
 Effect_CopyBattlerCoords2 = { addr = 0x801EFAD8, type = "func", source = "Copies the position of g_BattleEffectBattler into the effect, clears the effect timer (byte 0x09) and counter (byte 0x0A) and advances header.step (byte 0x02) in magic056 (Sacrifice)." }
 BMagic_SacrificeShadowGrow = { addr = 0x801EFB38, type = "func", source = "Counts the shadow's timer up by 2 and its radius counter by 1 until 12." }
 Effect_CountUpAndStepAt30 = { addr = 0x801EFBA4, type = "func", source = "Counts the effect timer (byte 0x09) up and advances header.step (byte 0x02) at 30 in magic056 (Sacrifice)." }
 Effect_CountDownTimerCapped = { addr = 0x801EFBF4, type = "func", source = "Raises the effect timer (byte 0x09) up to 0x2E, counts the effect counter (byte 0x0A) down and at zero lowers the active battler's ticker (byte 0x0B) and clears the effect in magic056 (Sacrifice)." }
-BMagic_SacrificeDrawShadow = { addr = 0x801EFC74, type = "func", source = "Draws the shadow as a disc of sixteen subtractive triangles round the effect point; the radius follows byte 0x09 and the centre colour the effect timer." }
-BMagic_SacrificeCasterUpdate = { addr = 0x801EFF28, type = "func", source = "Runs the caster clone's step and draws its actor once it has started." }
-BMagic_SacrificeCasterStart = { addr = 0x801EFFE8, type = "func", source = "Takes the clone's palette row from the active battler and steps." }
+BMagic_SacrificeDrawShadow = { addr = 0x801EFC74, type = "func", source = "Draws the shadow as a disc of sixteen subtractive triangles round the effect point; the radius follows the counter (byte 0x09) and the centre colour the timer (byte 0x0A)." }
+BMagic_SacrificeCloneUpdate = { addr = 0x801EFF28, type = "func", source = "Runs the clone's step and draws its actor once it has started." }
+BMagic_SacrificeCloneStart = { addr = 0x801EFFE8, type = "func", source = "Takes the clone's palette row from the active battler and steps." }
 Effect_PrimeTintOnScriptReady = { addr = 0x801F0024, type = "func", source = "Once the script stream reports ready (Script_AnimStepOnce) makes the actor semi-transparent, starts its tint at zero and advances header.step (byte 0x02) in magic056 (Sacrifice)." }
-BMagic_SacrificeCasterHide = { addr = 0x801F00C8, type = "func", source = "Darkens the clone's tint until it is black, then moves it onto the active battler." }
-BMagic_SacrificeCasterShow = { addr = 0x801F0178, type = "func", source = "Brightens the clone's tint back to zero, ends its semi-transparency and loads the 8-frame delay." }
-BMagic_SacrificeCasterCast = { addr = 0x801F023C, type = "func", source = "When the delay ends starts the dome and the shadow effects, plays the sound and the cast script, and loads the 30-frame hold." }
-BMagic_SacrificeCasterHold = { addr = 0x801F042C, type = "func", source = "Loops the clone's animation for 30 frames, then makes it semi-transparent with a zero tint." }
-BMagic_SacrificeCasterVanish = { addr = 0x801F04EC, type = "func", source = "Loops the animation while darkening the clone's tint; when black moves it onto the active actor and requests the script that follows the cast." }
-BMagic_SacrificeCasterReturn = { addr = 0x801F0658, type = "func", source = "Once the effect battler's ticker is one brightens the clone's tint to zero, lowers the ticker and steps." }
-BMagic_SacrificeCasterEnd = { addr = 0x801F0724, type = "func", source = "Resets the clone effect." }
+BMagic_SacrificeCloneHide = { addr = 0x801F00C8, type = "func", source = "Darkens the clone's tint until it is black, then moves it onto the active battler." }
+BMagic_SacrificeCloneShow = { addr = 0x801F0178, type = "func", source = "Brightens the clone's tint back to zero, ends its semi-transparency and loads the 8-frame delay." }
+BMagic_SacrificeCloneCast = { addr = 0x801F023C, type = "func", source = "When the delay ends starts the dome and the shadow effects, plays the sound and the cast script, and loads the 30-frame hold." }
+BMagic_SacrificeCloneHold = { addr = 0x801F042C, type = "func", source = "Loops the clone's animation for 30 frames, then makes it semi-transparent with a zero tint." }
+BMagic_SacrificeCloneVanish = { addr = 0x801F04EC, type = "func", source = "Loops the animation while darkening the clone's tint; when black moves it onto the active actor and requests the script that follows the cast." }
+BMagic_SacrificeCloneReturn = { addr = 0x801F0658, type = "func", source = "Once the effect battler's live-effect count (byte 0x0B) is one brightens the clone's tint to zero, lowers the count and steps." }
+BMagic_SacrificeCloneEnd = { addr = 0x801F0724, type = "func", source = "Resets the clone effect." }
 g_BMagicEffectModes = { addr = 0x801F0744, source = "Handlers of magic056 (Sacrifice), run by header.mode (byte 0x01)." }
 g_BMagicSacrificeDomeSteps = { addr = 0x801F0754, source = "The steps of the dome effect: place it, expand it, widen it to the end." }
 g_BMagicSacrificeShadowSteps = { addr = 0x801F0760, source = "The steps of the shadow effect." }

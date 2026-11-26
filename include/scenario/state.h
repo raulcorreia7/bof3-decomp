@@ -14,7 +14,7 @@
 typedef enum ScenarioStateFlags {
     SCENARIO_STATE_CAMERA_MOVING   = 1 << 5, /* set when a camera move starts, cleared when it ends (func_8019A904, func_8019AAFC) */
     SCENARIO_STATE_SCRIPT_ACTIVE   = 1 << 6, /* set with GAME_FLAG_SCRIPT_ACTIVE by Game_SetScriptActive */
-    SCENARIO_STATE_CHAPTER_ADVANCE = 1 << 7, /* set by Scene_RequestChapterAdvance; func_8019FAA0 steps the scenario */
+    SCENARIO_STATE_CHAPTER_ADVANCE = 1 << 7, /* set by Scene_RequestChapterAdvance; Game_EnterArea steps the scenario */
 } ScenarioStateFlags;
 
 /* The scene event the overlays step through: mode selects the g_SceneEvents handler, step advances inside it and

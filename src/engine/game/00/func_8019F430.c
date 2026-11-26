@@ -19,6 +19,6 @@ MATCH void func_8019F430(void) {
     }
     slot         = TASK(Actor);
     heightOffset = slot->param.party_index * BATTLE_PARTY_STRIDE;
-    func_8019F5B8(*(s16*)((u8*)((u8*)&g_Game.members[0].screen_x) + heightOffset), (s16)(*(u16*)((u8*)((u8*)&g_Game.members[0].screen_y) + heightOffset) + (u16)COORD_INT(slot->pos.y)), slot->unk_06,
-                  slot->clut_select);
+    Actor_DrawValueDigits(*(s16*)((u8*)((u8*)&g_Game.members[0].screen_x) + heightOffset), (s16)(*(u16*)((u8*)((u8*)&g_Game.members[0].screen_y) + heightOffset) + (u16)COORD_INT(slot->pos.y)),
+                          slot->unk_06, slot->clut_select);
 }

@@ -53,15 +53,15 @@ u8 s_MenuLine1FlagRun[12] = {0x00, 0x00, 0x0B, 0x01, 0x00, 0x2D, 0x02, 0x00, 0x0
 
 u8 s_MenuLine2FlagRun[12] = {0x0F, 0x00, 0x09, 0x11, 0x00, 0x0A, 0x12, 0x00, 0x2E, 0x00, 0x00, 0xFF};
 
-Callback g_UiPanelModes[5] = {func_801995A4, UI_CursorDrawPanel, func_801996A8, func_8019977C, func_8019986C};
+Callback g_UiPanelModes[5] = {UI_PanelRunMenu, UI_CursorDrawPanel, UI_PanelRunOption, UI_PanelRunAction, UI_PanelRunTask};
 
-Callback g_UiPanelSteps[3] = {func_8019959C, func_801995F8, func_80199638};
+Callback g_UiPanelSteps[3] = {UI_PanelStepIdle, UI_PanelSlideOutMenu, UI_PanelSlideInMenu};
 
-Callback g_MenuOptionSteps[3] = {func_8019959C, func_801996FC, UI_PanelSlideLeft};
+Callback g_MenuOptionSteps[3] = {UI_PanelStepIdle, UI_PanelSlideOutOption, UI_PanelSlideLeft};
 
-Callback g_MenuActionSteps[3] = {func_8019959C, func_801997EC, UI_PanelSetPosX};
+Callback g_MenuActionSteps[3] = {UI_PanelStepIdle, UI_PanelSlideOutAction, UI_PanelSetPosX};
 
-Callback g_UiPanelTaskSteps[4] = {func_8019959C, func_80199938, func_80199978, func_801999B8};
+Callback g_UiPanelTaskSteps[4] = {UI_PanelStepIdle, UI_PanelSlideOutTask, UI_PanelSlideInTaskTop, UI_PanelSlideInTaskLow};
 
 char g_ItemCategoryLabels[5][8] = {"ITEM" T_END T_END T_END T_END, "WEAPON" T_END T_END, "ARMOR" T_END3,
                                    "OPTION" T_END T_END, "VITAL" T_END3};
@@ -2165,21 +2165,21 @@ u8 s_RouteStepScratch[32] = {0x04, 0x00, 0x03, 0x00, 0x02, 0x00, 0x01, 0x00, 0x0
                              0x01, 0x02, 0x01, 0x03, 0x01, 0x09, 0x00, 0x08, 0x00, 0x07, 0x00,
                              0x06, 0x00, 0x05, 0x00, 0x06, 0x01, 0x07, 0x01, 0x08, 0x01};
 
-/* Read as s8 [index] by func_801B1E24 and as an s32 at [index * 4] by func_801B21E8: eight 4-byte rows.
+/* Read as s8 [index] by Game_LeaderSwitchGather and as an s32 at [index * 4] by func_801B21E8: eight 4-byte rows.
  * needs: type, the row width (s8 or s32). */
 s8 s_EntityPlacementOffsets[32] = {
     0x00, 0x03, 0x03, 0x00, 0xFE, 0x02, 0x01, 0x04, 0xFD, 0x00, 0x00, 0x03, 0xFE, 0xFE, 0xFC, 0x01,
     0x00, 0xFD, 0xFD, 0x00, 0x02, 0xFE, 0xFF, 0xFC, 0x03, 0x00, 0x00, 0xFD, 0x02, 0x02, 0x04, 0xFF,
 };
 
-Callback D_801CD0AC[15] = {func_801B016C, func_801B0320, func_801B69C0, Game_LeaderSwitchRun, func_801B29BC, func_801B2A70, func_801B2C38, func_801B2D90,
+Callback g_PartyLeaderModes[15] = {func_801B016C, func_801B0320, func_801B69C0, Game_LeaderSwitchRun, func_801B29BC, func_801B2A70, func_801B2C38, func_801B2D90,
                            Area_Climb,    func_801D9B14, func_801B3690, func_801B371C,        func_801B3BFC, func_801F4D9C, func_801C22D8};
 
 Callback D_801CD0E8[3] = {func_801B036C, func_801B0568, func_801B0DA0};
 
 u16 D_801CD0F4[4] = {0x0103, 0x0109, 0x010A, 0x0000};
 
-Callback D_801CD0FC[5] = {func_801B1E24, func_801B207C, func_801B21E8, func_801B26E0, Game_LeaderSwitchEnd};
+Callback g_GameLeaderSwitchSteps[5] = {Game_LeaderSwitchGather, Game_LeaderSwitchSpinDarken, func_801B21E8, Game_LeaderSwitchSpinRestore, Game_LeaderSwitchEnd};
 
 Callback D_801CD110[2] = {Game_MenuRequest, Game_MenuWaitClose};
 
@@ -2256,7 +2256,7 @@ u8 D_801CD384[128] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00
                       0x00, 0x00, 0xFE, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0x00, 0x00, 0xFE, 0xFF,
                       0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFE, 0xFF, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0xFF, 0xFF};
 
-Callback D_801CD404[15] = {func_801BBE98, func_801BBFB4, func_801B69C0, func_801BD32C, func_801BD35C, func_801BD38C, func_801BD394, func_801BD5A4,
+Callback g_PartyFollowerModes[15] = {func_801BBE98, func_801BBFB4, func_801B69C0, func_801BD32C, func_801BD35C, func_801BD38C, func_801BD394, func_801BD5A4,
                            Area_ClimbFollower, (Callback)0,   (Callback)0,   (Callback)0,   (Callback)0,   (Callback)0,   func_801C22D8};
 
 Callback D_801CD440[2] = {func_801BC000, Area_SceneStepTimer};

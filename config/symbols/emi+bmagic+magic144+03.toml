@@ -6,21 +6,32 @@ Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free 
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 g_BattleEffects = { addr = 0x801EC330, alias = true, source = "Battle effect work records (stride 0x78); Battle_AllocEffect claims a free one by setting bit 0 of header.flags." }
+BMagic_WallOfFireInit = { addr = 0x801EED04, type = "func", source = "Starts one target effect at the selected battler, sets STP on colours 1 to 15 of the battle overlay palette row and steps." }
 Effect_StartOnZeroTick = { addr = 0x801EEE50, type = "func", source = "When the effect ticker (byte 0x0B) is zero raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic144 (Wall of Fire)." }
 BMagic_DispatchEffectMode = { addr = 0x801EEE9C, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic144." }
+BMagic_WallOfFireTargetSpawn = { addr = 0x801EEF68, type = "func", source = "Spawns the flame and two glow effects, plays the first sound and steps." }
+BMagic_WallOfFireTargetHit = { addr = 0x801EF078, type = "func", source = "Raises the timer by 2 per frame; at 16 starts the selected battler's palette fade to dark, marks the targets damaged and steps." }
 Effect_StepOnOwnTickFlag = { addr = 0x801EF11C, type = "func", source = "Advances header.step (byte 0x02) while bit 0x80 of the effect ticker (byte 0x0B) is set in magic144 (Wall of Fire)." }
+BMagic_WallOfFireTargetEnd = { addr = 0x801EF154, type = "func", source = "Counts the timer down; once every effect it spawned has ended and the 0x80 mark is set on the task's live-effect count (byte 0x0B), frees the battler's palette fade, fades it if poisoned, lowers the active battler's live-effect count and resets the effect." }
 Effect_SetActorMatrix = { addr = 0x801EF1E4, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic144 (Wall of Fire)." }
+BMagic_WallOfFireDrawShadow = { addr = 0x801EF294, type = "func", source = "Draws the shadow as a disc of eight subtractive triangles of radius 0x180 whose centre colour follows the timer up to 0x80." }
+BMagic_WallOfFireSlotUpdate = { addr = 0x801EF510, type = "func", source = "Runs the handler header.mode selects for an effect of the record table." }
+BMagic_WallOfFireFlameUpdate = { addr = 0x801EF554, type = "func", source = "Runs the flame's step and draws the flame column once it has started." }
 Effect_StartAtTarget = { addr = 0x801EF5D4, type = "func", source = "Copies the position of battler g_BattleEffectBattler into the effect, unhides it, sets the effect timer (byte 0x09) and counter (byte 0x0A) to 1 and advances header.step (byte 0x02) in magic144 (Wall of Fire)." }
+BMagic_WallOfFireFlameGrow = { addr = 0x801EF654, type = "func", source = "Raises the flame's timer by 4 per frame; at 17 steps." }
 Effect_CountUpAndMarkBattler = { addr = 0x801EF6A4, type = "func", source = "Counts the effect timer (byte 0x09) and counter (byte 0x0A) up; at 0x19 sets bit 0x80 of the active battler's ticker (byte 0x0B) and advances header.step (byte 0x02) in magic144 (Wall of Fire)." }
 Effect_CountDownByTwoFinishAtOne = { addr = 0x801EF738, type = "func", source = "Counts the effect timer (byte 0x09) down by two and the counter (byte 0x0A) up on odd frames; when the timer reaches 1 lowers the active battler's ticker (byte 0x0B) and clears the effect in magic144 (Wall of Fire)." }
 Effect_DrawFlameColumn = { addr = 0x801EF818, type = "func", source = "Draws the flame column of magic144 (Wall of Fire): 28 rows of four textured quads whose half widths follow a sine of the row, the outer pair fading to black, on page (832, 256) with clut 506." }
+BMagic_WallOfFireGlowUpdate = { addr = 0x801EFF74, type = "func", source = "Runs the glow's step; once started moves its screen point 16 to the side its param picks and 12 up each frame and draws the glow." }
 Effect_AppearAtTarget = { addr = 0x801F0034, type = "func", source = "Copies the position of battler g_BattleEffectBattler into the effect, unhides it, clears the effect timer (byte 0x09) and advances header.step (byte 0x02) in magic144 (Wall of Fire)." }
+BMagic_WallOfFireGlowGrow = { addr = 0x801F00A0, type = "func", source = "Raises the glow's timer by 2 per frame; at 16 steps." }
 Effect_StepOnTickFlag = { addr = 0x801F00F0, type = "func", source = "Advances header.step (byte 0x02) while bit 0x80 of the ticker (byte 0x0B) of battler g_BattleEffectBattler is set in magic144 (Wall of Fire)." }
 Effect_TickCounter = { addr = 0x801F0134, type = "func", source = "Counts the effect timer (byte 0x09) down; at zero lowers the active battler's ticker (byte 0x0B) and clears the effect in magic144 (Wall of Fire)." }
+BMagic_WallOfFireDrawGlow = { addr = 0x801F01D0, type = "func", source = "Draws the glow as a fan of eight additive triangles around the effect's screen point, radius 64 to 79 picked once per draw, red at the centre with a fifth of it in green and blue." }
 BMagic_AllocEffect = { addr = 0x801F046C, type = "func", source = "Claims the first free slot of the 48-entry effect table (bit 0 of header.flags) and returns its index, or 0xFF when every slot is in use in magic144 (Wall of Fire)." }
 g_BMagicEffectModes = { addr = 0x801F04D0, source = "Handlers of magic144 (Wall of Fire), run by header.mode (byte 0x01)." }
-D_801F04D4 = { addr = 0x801F04D4, source = "Step handlers of the bmagic/magic144/03 effect, run by header.step from func_801EEEE0." }
-D_801F04E4 = { addr = 0x801F04E4, source = "Mode handlers of the bmagic/magic144/03 effect, run by header.mode from func_801EF510." }
-D_801F04EC = { addr = 0x801F04EC, source = "Step handlers of the bmagic/magic144/03 effect, run by header.step from func_801EF554." }
-D_801F04FC = { addr = 0x801F04FC, source = "Step handlers of magic144, run by header.step (byte 0x02) from func_801EFF74." }
-D_801F050C = { addr = 0x801F050C, source = "Effect slot table of the magic144 effect, scanned by BMagic_AllocEffect." }
+g_BMagicWallOfFireTargetSteps = { addr = 0x801F04D4, source = "The steps of the target effect: spawn, hit, wait for the 0x80 mark, end." }
+g_BMagicWallOfFireSlotModes = { addr = 0x801F04E4, source = "The handlers of the effect records, run by header.mode: flame and glow." }
+g_BMagicWallOfFireFlameSteps = { addr = 0x801F04EC, source = "The steps of the flame: place, grow, hold, fade." }
+g_BMagicWallOfFireGlowSteps = { addr = 0x801F04FC, source = "The steps of a glow: place, grow, wait for the 0x80 mark, count down." }
+g_BMagicWallOfFireEffects = { addr = 0x801F050C, source = "The effect records of the overlay (BATTLE_EFFECT_COUNT rows) that BMagic_AllocEffect claims and the module entry runs while in use." }
