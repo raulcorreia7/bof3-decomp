@@ -1052,7 +1052,8 @@ typedef struct BattleState {
     /* 0x84 */ u8                unk_84[16];
     /* 0x94 */ u8                active_battler;
     /* 0x95 */ u8                action_type;
-    /* 0x96 */ u8                unk_96[10];
+    /* 0x96 */ u8                unk_96[6];
+    /* 0x9C */ PartyMember*      active_actor; /* the active battler's record: a party member or an enemy row */
     /* 0xA0 */ BattleAction*     action;
     /* 0xA4 */ u8                target_selector;
     /* 0xA5 */ u8                unk_A5[7];
@@ -1095,6 +1096,7 @@ ASSERT_OFFSET(BattleState, turn_order, 0x2C);
 ASSERT_OFFSET(BattleState, turn_cursor, 0x42);
 ASSERT_OFFSET(BattleState, outcome, 0x44);
 ASSERT_OFFSET(BattleState, active_battler, 0x94);
+ASSERT_OFFSET(BattleState, active_actor, 0x9C);
 ASSERT_OFFSET(BattleState, action, 0xA0);
 ASSERT_OFFSET(BattleState, target_selector, 0xA4);
 ASSERT_OFFSET(BattleState, selected_actor, 0xAC);

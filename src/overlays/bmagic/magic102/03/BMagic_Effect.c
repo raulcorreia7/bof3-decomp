@@ -23,15 +23,15 @@ MATCH void func_801EEC80(void) {
 
     if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
         if (BATTLER_IS_PLAYER(g_Battle.active_battler)) {
-            D_801F0CBC = D_8014637C->facing ^ 2;
+            D_801F0CBC = g_BattleActiveActor->facing ^ 2;
         } else {
-            D_801F0CBC = D_8014637C->facing;
+            D_801F0CBC = g_BattleActiveActor->facing;
         }
     } else {
         if (BATTLER_IS_PLAYER(g_Battle.active_battler)) {
-            D_801F0CBC = D_8014637C->facing;
+            D_801F0CBC = g_BattleActiveActor->facing;
         } else {
-            D_801F0CBC = D_8014637C->facing ^ 2;
+            D_801F0CBC = g_BattleActiveActor->facing ^ 2;
         }
     }
     offset                          = D_801F0CBC * 2;

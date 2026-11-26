@@ -152,7 +152,7 @@ MATCH void BMagic_SuperComboStartAttack(void) {
 /* func_801EF1FC */
 MATCH void BMagic_SuperComboEndAttack(void) {
     if (TASK(PartyMember)->param.unk_0B == 0) {
-        D_8014637C->header.flags &= ~ACTOR_FLAG_HIDDEN;
+        g_BattleActiveActor->header.flags &= ~ACTOR_FLAG_HIDDEN;
         Battle_SelectActiveBattlerScript(4, 0);
         TASK(PartyMember)->header.mode += 1;
     }

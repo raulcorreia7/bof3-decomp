@@ -18,7 +18,7 @@ MATCH void func_801EEC5C(void) {
     Battle_CenterCamera();
     offset                                  = (Battle_AllocEffect(1, 25) & BYTE_MASK) * BATTLE_EFFECT_STRIDE;
     FIELD(PartyMember*, D_801EC3A4, offset) = TASK(PartyMember);
-    FIELD(u8, D_801EC338, offset)           = D_8014637C->facing;
+    FIELD(u8, D_801EC338, offset)           = g_BattleActiveActor->facing;
     scroll_x                                = g_AreaScrollTargetX;
     work                                    = TASK(PartyMember);
     FIELD(s32, D_801EC364, offset)          = scroll_x;

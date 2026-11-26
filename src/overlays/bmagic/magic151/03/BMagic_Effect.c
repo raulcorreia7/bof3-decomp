@@ -6,7 +6,8 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/shared/BMagic_DispatchMode.h"
 
-MATCH void func_801EECB0(void) {
+/* func_801EECB0 */
+MATCH void BMagic_AccessionInit(void) {
     u8* text;
 
     func_800A68A4();
@@ -17,7 +18,7 @@ MATCH void func_801EECB0(void) {
     if (g_Battle.dragon_form == 3 || g_Battle.dragon_form == DRAGON_FORM_TIAMAT || g_Battle.dragon_form == DRAGON_FORM_MAMMOTH) {
         TASK(PartyMember)->header.step += 1;
     }
-    if (g_Game.members[g_Battle.target_selector].chr.character_id == 0) {
+    if (g_Game.members[g_Battle.target_selector].chr.character_id == CHAR_ID_RYU_YOUNG) {
         TASK(PartyMember)->unk_09 = 3;
     } else {
         TASK(PartyMember)->unk_09 = 30;
@@ -25,7 +26,8 @@ MATCH void func_801EECB0(void) {
     TASK(PartyMember)->header.mode += 1;
 }
 
-MATCH void func_801EEDE0(void) {
+/* func_801EEDE0 */
+MATCH void BMagic_AccessionTransformUpdate(void) {
     Callback handlers[2] = {func_801EEE38, func_801EF318};
 
     SYS_DISPATCH_TASK(handlers, 2, g_Task);
@@ -34,11 +36,12 @@ MATCH void func_801EEDE0(void) {
 MATCH void func_801EEE38(void) {
     Magic151Steps handlers;
 
-    handlers = D_801EEC10;
+    handlers = g_BMagicAccessionSoloSteps;
     SYS_DISPATCH_TASK(handlers.steps, 3, g_Task);
 }
 
-MATCH void func_801EEEA8(void) {
+/* func_801EEEA8 */
+MATCH void BMagic_AccessionCastStart(void) {
     PartyMember* saved_work;
     PartyMember* battler;
 
@@ -50,7 +53,8 @@ MATCH void func_801EEEA8(void) {
     saved_work->unk_03 += 1;
 }
 
-MATCH void func_801EEF24(void) {
+/* func_801EEF24 */
+MATCH void BMagic_AccessionCastWait(void) {
     PartyMember* saved;
     PartyMember* work;
     u8           count;
@@ -77,14 +81,15 @@ MATCH void func_801EEF24(void) {
     TASK(PartyMember)->param.unk_0B    = 0;
     slot                               = Battle_AllocEffect(1, 68) & BYTE_MASK;
     work                               = TASK(PartyMember);
-    g_BattleEffects[slot].header.mode  = 4;
+    g_BattleEffects[slot].header.mode  = BMAGIC_ACCESSION_EFFECT_SEQUENCE;
     g_BattleEffects[slot].target.party = work;
     TASK(PartyMember)->unk_03 += 1;
 }
 
 /* Loads the character archive the active battler's facing selects from the dragon-form row when the effect
  * ticker is one, then advances byte 0x03. */
-MATCH void func_801EF070(void) {
+/* func_801EF070 */
+MATCH void BMagic_AccessionSoloLoad(void) {
     s32 archive_id;
 
     if (TASK(PartyMember)->param.unk_0B == 1) {
@@ -100,7 +105,8 @@ MATCH void func_801EF070(void) {
 
 /* Installs the active party member as the work record, releases its fades, copies its template byte, loads its
  * action-block palette and status, requests its facing script, then restores the previous record. */
-MATCH void func_801EF138(void) {
+/* func_801EF138 */
+MATCH void BMagic_AccessionSoloShow(void) {
     PartyMember* saved;
 
     if (EMI_IsReady()) {
@@ -122,7 +128,8 @@ MATCH void func_801EF138(void) {
     }
 }
 
-MATCH void func_801EF2A0(void) {
+/* func_801EF2A0 */
+MATCH void BMagic_AccessionTransformEnd(void) {
     PartyMember* saved_work;
     PartyMember* battler;
 
@@ -139,13 +146,14 @@ MATCH void func_801EF2A0(void) {
 MATCH void func_801EF318(void) {
     Magic151Steps handlers;
 
-    handlers = D_801EEC24;
+    handlers = g_BMagicAccessionMergeSteps;
     SYS_DISPATCH_TASK(handlers.steps, 3, g_Task);
 }
 
 /* When the effect ticker is one, marks every party member's handler busy and loads the dragon-form archive
  * the battler's facing selects. */
-MATCH void func_801EF388(void) {
+/* func_801EF388 */
+MATCH void BMagic_AccessionMergeLoad(void) {
     s32 archive_id;
     u8  i;
 
@@ -165,7 +173,8 @@ MATCH void func_801EF388(void) {
 
 /* Sets the battle up for the loaded party: frees each active member's fade palette and resets its battler template,
  * rebuilds member zero at the encounter origin, and opens the member panels. */
-MATCH void func_801EF484(void) {
+/* func_801EF484 */
+MATCH void BMagic_AccessionMerge(void) {
     PartyMember* task;
     u8           i;
     s32          index;
@@ -234,7 +243,8 @@ MATCH void func_801EF484(void) {
     task->unk_03 += 1;
 }
 
-MATCH void func_801EF938(void) {
+/* func_801EF938 */
+MATCH void BMagic_AccessionEnd(void) {
     if (TASK(PartyMember)->param.unk_0B == 2) {
         g_Battle.flags |= BATTLE_STATE_EFFECT_PLAYING;
         g_Game.members[g_Battle.active_battler].u.turn.action_flags.value |= BATTLER_ACTION_UNK_5;
@@ -246,13 +256,15 @@ MATCH void func_801EF938(void) {
 /* func_801EF9F0 */
 #include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
-MATCH void func_801EFA34(void) {
+/* func_801EFA34 */
+MATCH void BMagic_AccessionSequenceUpdate(void) {
     BMagicEffectSteps handlers;
 
-    BMAGIC_DISPATCH_STEP_HANDLERS(D_801EEC38, header.step);
+    BMAGIC_DISPATCH_STEP_HANDLERS(g_BMagicAccessionSequenceSteps, header.step);
 }
 
-MATCH void func_801EFAAC(void) {
+/* func_801EFAAC */
+MATCH void BMagic_AccessionSequenceBands(void) {
     PartyMember* work;
     s32          y;
     u32          slot;
@@ -267,14 +279,15 @@ MATCH void func_801EFAAC(void) {
     TASK(PartyMember)->header.step += 1;
     slot                               = Battle_AllocEffect(1, 68) & BYTE_MASK;
     work                               = TASK(PartyMember);
-    g_BattleEffects[slot].header.mode  = 2;
+    g_BattleEffects[slot].header.mode  = BMAGIC_ACCESSION_EFFECT_BAND;
     g_BattleEffects[slot].arg.unk_09   = 1;
     g_BattleEffects[slot].target.party = work;
     TASK(PartyMember)->param.unk_0B += 1;
     SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0x02));
 }
 
-MATCH void func_801EFBAC(void) {
+/* func_801EFBAC */
+MATCH void BMagic_AccessionSequenceGlow(void) {
     u8           count;
     u32          slot;
     PartyMember* work;
@@ -284,7 +297,7 @@ MATCH void func_801EFBAC(void) {
     if (count == 0) {
         slot                               = Battle_AllocEffect(1, 68) & BYTE_MASK;
         work                               = TASK(PartyMember);
-        g_BattleEffects[slot].header.mode  = 3;
+        g_BattleEffects[slot].header.mode  = BMAGIC_ACCESSION_EFFECT_GLOW;
         g_BattleEffects[slot].target.party = work;
         TASK(PartyMember)->param.unk_0B += 1;
         TASK(PartyMember)->unk_09 = 4;
@@ -292,7 +305,8 @@ MATCH void func_801EFBAC(void) {
     }
 }
 
-MATCH void func_801EFC68(void) {
+/* func_801EFC68 */
+MATCH void BMagic_AccessionSequenceDome(void) {
     PartyMember* work;
     PartyMember* task;
     u32          slot;
@@ -300,17 +314,18 @@ MATCH void func_801EFC68(void) {
     if (--TASK(PartyMember)->unk_09 == 0) {
         slot                               = Battle_AllocEffect(1, 68) & BYTE_MASK;
         work                               = TASK(PartyMember);
-        g_BattleEffects[slot].header.mode  = 0;
+        g_BattleEffects[slot].header.mode  = BMAGIC_ACCESSION_EFFECT_DOME;
         task                               = TASK(PartyMember);
         g_BattleEffects[slot].target.party = work;
         task->param.unk_0B += 1;
-        SND_SEQueueSelection(0x103);
+        SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0x03));
         TASK(PartyMember)->unk_09 = 20;
         TASK(PartyMember)->header.step += 1;
     }
 }
 
-MATCH void func_801EFD24(void) {
+/* func_801EFD24 */
+MATCH void BMagic_AccessionSequenceWait(void) {
     u8 count;
 
     count                     = TASK(PartyMember)->unk_09 - 1;
@@ -332,24 +347,27 @@ MATCH void func_801EFD80(void) {
     }
 }
 
-MATCH void func_801EFDC0(void) {
+/* func_801EFDC0 */
+MATCH void BMagic_AccessionSequenceEnd(void) {
     if (TASK(PartyMember)->param.unk_0B == 0) {
         g_BattleEffectBattler->param.unk_0B = 2;
         Effect_Reset();
     }
 }
 
-MATCH void func_801EFE00(void) {
-    SYS_DISPATCH_BYTE(D_801F24B8, TASK(PartyMember)->header.step);
+/* func_801EFE00 */
+MATCH void BMagic_AccessionDomeUpdate(void) {
+    SYS_DISPATCH_BYTE(g_BMagicAccessionDomeSteps, TASK(PartyMember)->header.step);
     if (TASK(PartyMember)->header.flags != 0 && TASK(PartyMember)->header.step != 0) {
         Effect_SetActorMatrix();
-        func_801F026C();
-        func_801F0648();
+        BMagic_AccessionDrawDome();
+        BMagic_AccessionDrawFlare();
         PopMatrix();
     }
 }
 
-MATCH void func_801EFE90(void) {
+/* func_801EFE90 */
+MATCH void BMagic_AccessionDomeStart(void) {
     PartyMember* work  = TASK(PartyMember);
     PartyMember* actor = g_BattleEffectBattler;
     s32          z;
@@ -374,14 +392,15 @@ MATCH void func_801EFF44(void) {
     BMAGIC_STEP_TIMER(unk_09, 2, 32);
 }
 
-MATCH void func_801EFF94(void) {
+/* func_801EFF94 */
+MATCH void BMagic_AccessionDomeRays(void) {
     u32          slot;
     PartyMember* work;
 
     if ((g_FrameCount & 0x3) == 0) {
         slot                               = Battle_AllocEffect(1, 68) & BYTE_MASK;
         work                               = TASK(PartyMember);
-        g_BattleEffects[slot].header.mode  = 1;
+        g_BattleEffects[slot].header.mode  = BMAGIC_ACCESSION_EFFECT_RAY;
         g_BattleEffects[slot].target.party = work;
         g_BattleEffects[slot].unk_04       = TASK(PartyMember)->unk_04 & 0xF;
         TASK(PartyMember)->param.unk_0B += 1;
@@ -396,7 +415,8 @@ MATCH void func_801EFF94(void) {
 
 #include "overlays/bmagic/shared/Effect_StepOnZeroTick.h"
 
-MATCH void func_801F00E8(void) {
+/* func_801F00E8 */
+MATCH void BMagic_AccessionDomeDim(void) {
     u8 count;
 
     count                     = TASK(PartyMember)->unk_5D - 1;
@@ -406,7 +426,8 @@ MATCH void func_801F00E8(void) {
     }
 }
 
-MATCH void func_801F013C(void) {
+/* func_801F013C */
+MATCH void BMagic_AccessionDomeEnd(void) {
     s8 count;
     u8 count_next;
 
@@ -424,7 +445,8 @@ MATCH void func_801F013C(void) {
 
 #include "overlays/bmagic/shared/Effect_SetActorMatrix.h"
 
-MATCH void func_801F026C(void) {
+/* func_801F026C */
+MATCH void BMagic_AccessionDrawDome(void) {
     POLY_F4* prim;
     long     depth;
     long     flag;
@@ -477,7 +499,8 @@ MATCH void func_801F026C(void) {
     }
 }
 
-MATCH void func_801F0648(void) {
+/* func_801F0648 */
+MATCH void BMagic_AccessionDrawFlare(void) {
     POLY_G4* prim;
     long     depth;
     long     flag;
@@ -532,22 +555,24 @@ MATCH void func_801F0648(void) {
 }
 
 /* Draws the glow ring step header.step selects: sets the actor matrix, advances the effect timers and
- * passes the slot's draw row to func_801F0D0C while the step is running. */
-MATCH void func_801F0AC8(void) {
+ * passes the slot's draw row to BMagic_AccessionDrawRay while the step is running. */
+/* func_801F0AC8 */
+MATCH void BMagic_AccessionRayUpdate(void) {
     PartyMember* work;
 
-    SYS_DISPATCH_BYTE(D_801F24F0, TASK(PartyMember)->header.step);
+    SYS_DISPATCH_BYTE(g_BMagicAccessionRaySteps, TASK(PartyMember)->header.step);
     if (TASK(PartyMember)->header.flags != 0 && TASK(PartyMember)->header.step != 0) {
         Effect_SetActorMatrix();
         work = TASK(PartyMember);
         work->unk_09 += 2;
         work->unk_0C += 1;
-        func_801F0D0C(D_801F24D0[TASK(PartyMember)->unk_04][0] + TASK(PartyMember)->unk_09, D_801F24D0[TASK(PartyMember)->unk_04][1]);
+        BMagic_AccessionDrawRay(g_BMagicAccessionRayAngles[TASK(PartyMember)->unk_04][0] + TASK(PartyMember)->unk_09, g_BMagicAccessionRayAngles[TASK(PartyMember)->unk_04][1]);
         PopMatrix();
     }
 }
 
-MATCH void func_801F0BA8(void) {
+/* func_801F0BA8 */
+MATCH void BMagic_AccessionRayStart(void) {
     PartyMember* work;
     s32          value;
 
@@ -564,7 +589,8 @@ MATCH void func_801F0BA8(void) {
     TASK(PartyMember)->header.step += 1;
 }
 
-MATCH void func_801F0C50(void) {
+/* func_801F0C50 */
+MATCH void BMagic_AccessionRayGrow(void) {
     u8 timer_next;
 
     timer_next               = TASK(PartyMember)->timer + 4;
@@ -575,7 +601,8 @@ MATCH void func_801F0C50(void) {
     }
 }
 
-MATCH void func_801F0CB0(void) {
+/* func_801F0CB0 */
+MATCH void BMagic_AccessionRayFade(void) {
     PartyMember* work;
     s8           timer;
 
@@ -589,7 +616,8 @@ MATCH void func_801F0CB0(void) {
     }
 }
 
-MATCH void func_801F0D0C(u8 angle0, u8 angle1) {
+/* func_801F0D0C */
+MATCH void BMagic_AccessionDrawRay(u8 angle0, u8 angle1) {
     LINE_F2* prim;
     long     depth;
     long     flag;
@@ -632,22 +660,24 @@ MATCH void func_801F0D0C(u8 angle0, u8 angle1) {
 
 /* Runs the step's handler, projects the battle range and, once the effect is live, sets the rolled actor
  * matrix and draws its three bands. */
-MATCH void func_801F10E8(void) {
-    SYS_DISPATCH_BYTE(D_801F24FC, TASK(PartyMember)->header.step);
+/* func_801F10E8 */
+MATCH void BMagic_AccessionBandUpdate(void) {
+    SYS_DISPATCH_BYTE(g_BMagicAccessionBandSteps, TASK(PartyMember)->header.step);
     Battle_ProjectRange();
     if (TASK(PartyMember)->header.step != 0 && TASK(PartyMember)->header.flags != 0) {
         Effect_SetActorMatrixQuarterRoll();
-        func_801F14D0(32, 32, 0x7);
+        BMagic_AccessionDrawBand(32, 32, 0x7);
         TASK(PartyMember)->param.unk_0B += 4;
-        func_801F14D0(16, 64, 0xF);
+        BMagic_AccessionDrawBand(16, 64, 0xF);
         TASK(PartyMember)->param.unk_0B += 4;
-        func_801F14D0(16, 96, 0x1F);
+        BMagic_AccessionDrawBand(16, 96, 0x1F);
         TASK(PartyMember)->param.unk_0B -= 8;
         PopMatrix();
     }
 }
 
-MATCH void func_801F11E0(void) {
+/* func_801F11E0 */
+MATCH void BMagic_AccessionBandStart(void) {
     u8 count;
 
     count                     = TASK(PartyMember)->unk_09 - 1;
@@ -663,7 +693,8 @@ MATCH void func_801F11E0(void) {
     }
 }
 
-MATCH void func_801F129C(void) {
+/* func_801F129C */
+MATCH void BMagic_AccessionBandGrow(void) {
     TASK(PartyMember)->param.unk_0B += 1;
     TASK(PartyMember)->timer += 4;
     if (TASK(PartyMember)->timer == 16) {
@@ -679,7 +710,8 @@ MATCH void func_801F129C(void) {
 #include "overlays/bmagic/shared/Effect_SetActorMatrixQuarterRoll.h"
 
 /* Draws seventeen steps of four quads: the ring sways with the effect counter and its radius jitters by jitter_mask. */
-MATCH void func_801F14D0(s16 band_height, s16 radius, u16 jitter_mask) {
+/* func_801F14D0 */
+MATCH void BMagic_AccessionDrawBand(s16 band_height, s16 radius, u16 jitter_mask) {
     POLY_G4* prim;
     long     p;
     long     flag;
@@ -788,17 +820,19 @@ MATCH void func_801F14D0(s16 band_height, s16 radius, u16 jitter_mask) {
     }
 }
 
-MATCH void func_801F1C3C(void) {
-    SYS_DISPATCH_BYTE(D_801F250C, TASK(PartyMember)->header.step);
+/* func_801F1C3C */
+MATCH void BMagic_AccessionGlowUpdate(void) {
+    SYS_DISPATCH_BYTE(g_BMagicAccessionGlowSteps, TASK(PartyMember)->header.step);
     if (TASK(PartyMember)->header.flags != 0 && TASK(PartyMember)->header.step != 0) {
-        func_801F1DC0();
+        Effect_SetActorMatrix5();
         BMagic_DrawGlowRingInner();
         BMagic_DrawGlowRingOuter();
         PopMatrix();
     }
 }
 
-MATCH void func_801F1CCC(void) {
+/* func_801F1CCC */
+MATCH void BMagic_AccessionGlowStart(void) {
     PartyMember* work  = TASK(PartyMember);
     PartyMember* actor = g_BattleEffectBattler;
     s32          z;
@@ -812,7 +846,8 @@ MATCH void func_801F1CCC(void) {
     TASK(PartyMember)->header.step += 1;
 }
 
-MATCH void func_801F1D28(void) {
+/* func_801F1D28 */
+MATCH void BMagic_AccessionGlowGrow(void) {
     PartyMember* work;
     s32          value;
 
