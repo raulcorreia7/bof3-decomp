@@ -6,10 +6,9 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#ifdef NON_MATCHING
 /* The price row: the three digit cells, the row cursor, and the confirm and cancel steps.
  * The split row starts after the bin that holds the function's head. */
-NON_MATCHING void func_801D0F88(void) {
+MATCH void func_801D0F88(void) {
     u16 input;
     s32 price;
     s32 clamped;
@@ -63,7 +62,7 @@ confirm:
             D_801DB0C4 = 4;
             SND_SEPlay(0x104);
             g_SaveData.zenny -= D_801DB07C;
-            D_801F294E += 1;
+            D_801F294E++;
             goto draw;
         }
     } else if ((g_PadStates[0].pressed & g_InputMasks[INPUT_SLOT_CANCEL]) == 0) {
@@ -81,6 +80,3 @@ draw:
         func_801D2E60(0xB4 - (s8)D_801DB0B4 * 8, 0x99);
     }
 }
-#else
-INCLUDE_ASM(func_801D0F88);
-#endif

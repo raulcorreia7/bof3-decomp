@@ -6,7 +6,7 @@
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_801A1ED8(s32 x, s32 y, s32 route, s32 unused) {
     u8  sum;
-    s32 column;
+    u16 column;
 
     switch (route & BYTE_MASK) {
         case FACING_UP: {
