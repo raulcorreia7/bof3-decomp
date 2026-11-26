@@ -1,24 +1,24 @@
 #include "game_00.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_8019625C(void) {
-    PaletteFade*  fade;
-    s32           i;
-    s32           j;
-    s32           count;
-    u8            divisor;
-    u8            scale;
-    u8            src_bank;
-    u8            src_cell;
-    u8            dst_bank;
-    u8            dst_cell;
-    volatile u16* src;
-    u16*          dst;
-    u16           color;
-    u8            high;
-    s8            r;
-    s8            g;
-    s8            b;
+/* Steps each active palette fade: copies its cells into the work palette with the fade offset, each channel clamped. */
+MATCH void func_8019625C(void) {
+    PaletteFade* fade;
+    s32          i;
+    s32          j;
+    u16          count;
+    u8           divisor;
+    u8           scale;
+    u8           src_bank;
+    u8           src_cell;
+    u8           dst_bank;
+    u8           dst_cell;
+    u16*         src;
+    u16*         dst;
+    u16          color;
+    u8           high;
+    s8           r;
+    s8           g;
+    s8           b;
 
     for (i = 0; i < PALETTE_FADE_COUNT; i++) {
         fade = &g_PaletteFades[i];
@@ -66,6 +66,3 @@ NON_MATCHING void func_8019625C(void) {
         }
     }
 }
-#else
-INCLUDE_ASM(func_8019625C);
-#endif

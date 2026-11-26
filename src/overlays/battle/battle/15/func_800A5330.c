@@ -14,8 +14,7 @@
 
 /* The Accession gene picker: moves the cursor over the gene grid, adds or removes up to GENE_PICK_MAX genes and
  * confirms when the party member has the AP. */
-#ifdef NON_MATCHING
-NON_MATCHING void func_800A5330(void) {
+MATCH void func_800A5330(void) {
     u8  row;
     u8  col;
     u8  gene_row;
@@ -93,7 +92,7 @@ NON_MATCHING void func_800A5330(void) {
         col      = g_Battle.cursor.gene.column;
         if (D_800B7070[gene_row][col] != 0) {
             text_id = gene_row * GENE_GRID_COLUMNS + GENE_HELP_TEXT;
-            text_id += col;
+            text_id += (s16)col;
         } else {
             text_id = BLANK_TEXT;
         }
@@ -120,6 +119,3 @@ NON_MATCHING void func_800A5330(void) {
         }
     }
 }
-#else
-INCLUDE_ASM(func_800A5330);
-#endif
