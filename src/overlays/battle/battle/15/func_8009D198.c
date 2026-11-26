@@ -1,11 +1,9 @@
 #include "battle_15.h"
 
 /* Applies the queued hit's HP and AP changes to the target and runs the hit's effect handler. */
-#ifdef NON_MATCHING
-NON_MATCHING void func_8009D198(void) {
+MATCH void func_8009D198(void) {
     u8  effect;
     u16 action_word;
-    s16 change;
 
     if (BATTLER_IS_PLAYER(g_Battle.target)) {
         g_Game.members[g_Battle.target].u.turn.target_flags |= BATTLE_HIT_HP | BATTLE_HIT_HP_LANDED | BATTLE_HIT_AP_LANDED;
@@ -57,14 +55,13 @@ NON_MATCHING void func_8009D198(void) {
     if (g_Battle.target_record->hp_change < -9999) {
         g_Battle.target_record->hp_change = -9999;
     }
-    change = g_Battle.target_record->hp_change;
-    if (change != 0) {
+        if (g_Battle.target_record->hp_change != 0) {
         if (BATTLER_IS_PLAYER(g_Battle.target)) {
-            if (change > 0) {
-                if (change < g_Game.members[g_Battle.target].chr.hp) {
-                    g_Game.members[g_Battle.target].chr.hp -= change;
+            if (g_Battle.target_record->hp_change > 0) {
+                if (g_Battle.target_record->hp_change < g_Game.members[g_Battle.target].chr.hp) {
+                    g_Game.members[g_Battle.target].chr.hp -= g_Battle.target_record->hp_change;
                 } else {
-                    if (change - g_Game.members[g_Battle.target].chr.hp < g_Game.members[g_Battle.target].chr.willpower) {
+                    if (g_Battle.target_record->hp_change - g_Game.members[g_Battle.target].chr.hp < g_Game.members[g_Battle.target].chr.willpower) {
                         if (!(g_Game.members[g_Battle.target].u.turn.action_flags.value & BATTLER_ACTION_DRAGON_FORM_QUEUED) &&
                             !(g_Game.members[g_Battle.target].u.turn.action_flags.value & BATTLER_ACTION_DRAGON_FORM)) {
                             g_Game.members[g_Battle.target].u.turn.damage_flags.value |= BATTLER_DAMAGE_WILLPOWER_SURVIVED;
@@ -72,22 +69,22 @@ NON_MATCHING void func_8009D198(void) {
                     }
                     g_Game.members[g_Battle.target].chr.hp = 0;
                 }
-            } else if (g_Game.members[g_Battle.target].chr.hp - change < g_Game.members[g_Battle.target].chr.stats.max_hp) {
-                g_Game.members[g_Battle.target].chr.hp -= change;
+            } else if (g_Game.members[g_Battle.target].chr.hp - g_Battle.target_record->hp_change < g_Game.members[g_Battle.target].chr.stats.max_hp) {
+                g_Game.members[g_Battle.target].chr.hp -= g_Battle.target_record->hp_change;
             } else {
                 g_Game.members[g_Battle.target].chr.hp = g_Game.members[g_Battle.target].chr.stats.max_hp;
                 g_Game.members[g_Battle.target].u.turn.target_flags |= BATTLE_HIT_HP | BATTLE_HIT_HP_MAX;
                 g_Game.members[g_Battle.target].u.turn.target_flags &= ~BATTLE_HIT_HP_LANDED;
             }
         } else if (ENEMY_COMBATANT(g_Battle.target).hp != 0xFFFF) {
-            if (change > 0) {
-                if (change < ENEMY_COMBATANT(g_Battle.target).hp) {
-                    ENEMY_COMBATANT(g_Battle.target).hp -= change;
+            if (g_Battle.target_record->hp_change > 0) {
+                if (g_Battle.target_record->hp_change < ENEMY_COMBATANT(g_Battle.target).hp) {
+                    ENEMY_COMBATANT(g_Battle.target).hp -= g_Battle.target_record->hp_change;
                 } else {
                     ENEMY_COMBATANT(g_Battle.target).hp = 0;
                 }
-            } else if (ENEMY_COMBATANT(g_Battle.target).hp - change < ENEMY_COMBATANT(g_Battle.target).stats.max_hp) {
-                ENEMY_COMBATANT(g_Battle.target).hp -= change;
+            } else if (ENEMY_COMBATANT(g_Battle.target).hp - g_Battle.target_record->hp_change < ENEMY_COMBATANT(g_Battle.target).stats.max_hp) {
+                ENEMY_COMBATANT(g_Battle.target).hp -= g_Battle.target_record->hp_change;
             } else {
                 ENEMY_COMBATANT(g_Battle.target).hp = ENEMY_COMBATANT(g_Battle.target).stats.max_hp;
                 ENEMY_COMBATANT(g_Battle.target).turn.target_flags |= BATTLE_HIT_HP | BATTLE_HIT_HP_MAX;
@@ -102,32 +99,31 @@ NON_MATCHING void func_8009D198(void) {
     if (g_Battle.target_record->ap_change < -9999) {
         g_Battle.target_record->ap_change = -9999;
     }
-    change = g_Battle.target_record->ap_change;
-    if (change != 0) {
+        if (g_Battle.target_record->ap_change != 0) {
         if (BATTLER_IS_PLAYER(g_Battle.target)) {
-            if (change > 0) {
-                if (change < g_Game.members[g_Battle.target].chr.ap) {
-                    g_Game.members[g_Battle.target].chr.ap -= change;
+            if (g_Battle.target_record->ap_change > 0) {
+                if (g_Battle.target_record->ap_change < g_Game.members[g_Battle.target].chr.ap) {
+                    g_Game.members[g_Battle.target].chr.ap -= g_Battle.target_record->ap_change;
                 } else {
                     g_Game.members[g_Battle.target].chr.ap = 0;
                 }
-            } else if (g_Game.members[g_Battle.target].chr.ap - change < g_Game.members[g_Battle.target].chr.stats.max_ap) {
-                g_Game.members[g_Battle.target].chr.ap -= change;
+            } else if (g_Game.members[g_Battle.target].chr.ap - g_Battle.target_record->ap_change < g_Game.members[g_Battle.target].chr.stats.max_ap) {
+                g_Game.members[g_Battle.target].chr.ap -= g_Battle.target_record->ap_change;
             } else {
                 g_Game.members[g_Battle.target].chr.ap = g_Game.members[g_Battle.target].chr.stats.max_ap;
                 g_Game.members[g_Battle.target].u.turn.target_flags |= BATTLE_HIT_AP | BATTLE_HIT_AP_MAX;
                 g_Game.members[g_Battle.target].u.turn.target_flags &= ~BATTLE_HIT_AP_LANDED;
             }
         } else if (ENEMY_COMBATANT(g_Battle.target).ap != 0xFFFF) {
-            if (change > 0) {
-                if (change < ENEMY_COMBATANT(g_Battle.target).ap) {
-                    ENEMY_COMBATANT(g_Battle.target).ap -= change;
+            if (g_Battle.target_record->ap_change > 0) {
+                if (g_Battle.target_record->ap_change < ENEMY_COMBATANT(g_Battle.target).ap) {
+                    ENEMY_COMBATANT(g_Battle.target).ap -= g_Battle.target_record->ap_change;
                 } else {
                     ENEMY_COMBATANT(g_Battle.target).ap = 0;
                 }
-            } else if (ENEMY_COMBATANT(g_Battle.target).ap - change < ENEMY_COMBATANT(g_Battle.target).stats.max_hp) {
+            } else if (ENEMY_COMBATANT(g_Battle.target).ap - g_Battle.target_record->ap_change < ENEMY_COMBATANT(g_Battle.target).stats.max_hp) {
                 /* Retail compares the AP overflow against max_hp, not max_ap. */
-                ENEMY_COMBATANT(g_Battle.target).ap -= change;
+                ENEMY_COMBATANT(g_Battle.target).ap -= g_Battle.target_record->ap_change;
             } else {
                 ENEMY_COMBATANT(g_Battle.target).ap = ENEMY_COMBATANT(g_Battle.target).stats.max_ap;
                 ENEMY_COMBATANT(g_Battle.target).turn.target_flags |= BATTLE_HIT_AP | BATTLE_HIT_AP_MAX;
@@ -136,6 +132,3 @@ NON_MATCHING void func_8009D198(void) {
         }
     }
 }
-#else
-INCLUDE_ASM(func_8009D198);
-#endif
