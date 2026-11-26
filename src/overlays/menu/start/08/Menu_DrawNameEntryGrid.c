@@ -16,7 +16,7 @@ MATCH void Menu_DrawNameEntryGrid(u8 page, s16 grid_x, s32 grid_y) {
     memcpy(&labels, &D_801D0F00, sizeof(labels));
     base_y = grid_y;
     UI_WindowDraw(grid_x & HALF_MASK, base_y, 272, 123, 0, g_WindowStyle);
-    cell = D_801ECDBC + (page & BYTE_MASK) * 0x60;
+    cell = D_801ECDBC[page & BYTE_MASK][0];
     y    = base_y + 6;
     for (row = 0; row < 8; row++) {
         x = grid_x + 4;
