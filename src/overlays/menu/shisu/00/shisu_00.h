@@ -192,7 +192,7 @@ extern s32              D_801DA038;
 extern s32              D_801DA03C;
 extern s32              D_801DA040;
 extern s32              D_801DA044;
-extern u8               g_ShisuBase[3];
+extern s8               g_ShisuBase[3];
 extern u8               g_ShisuBaseR;
 extern u8               g_ShisuBaseG;
 extern u8               g_ShisuBaseB;
@@ -206,7 +206,7 @@ extern s32              D_801DA0FC;
 extern u32              g_ShisuToppingScale;
 /* kept: func_801D2ADC reads the tint bytes as three globals; one array shares their base register
    and leaves it eight bytes short. */
-extern u8               g_ShisuTopping[3];
+extern s8               g_ShisuTopping[3];
 extern u8               g_ShisuToppingR;
 extern u8               g_ShisuToppingG;
 extern u8               g_ShisuToppingB;
