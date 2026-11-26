@@ -21,7 +21,7 @@ MATCH void func_801D0CC8(void) {
     u8  space = STRING_SPACE;
 
     i   = 9;
-    dst = &D_801DB080[9];
+    dst = &D_801DB080.bytes[9];
     while (i >= 0) {
         *dst-- = space;
         i--;
