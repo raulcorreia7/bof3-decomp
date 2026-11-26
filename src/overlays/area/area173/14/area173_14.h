@@ -49,13 +49,6 @@ extern s16 D_1F800034[2];
 /* The part rows: the cell pair, four vertex cells and the part word, 20 bytes each. */
 extern AreaPart D_801F4F14[];
 
-/* The part-row bytes the draw addresses by offset: the base y, the four corner triples and the part word. */
-extern u8 D_801F4F15[];
-extern u8 D_801F4F16[];
-extern u8 D_801F4F17[];
-extern u8 D_801F4F18[];
-extern u8 D_801F4F24[];
-
 /* Each sweep frame's first and last cell row. */
 extern u8 D_801F52E8[][2];
 extern u8 D_801F52E9[][2];
