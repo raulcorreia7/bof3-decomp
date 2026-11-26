@@ -213,7 +213,7 @@ MATCH void func_801F7E34(void) {
     Actor* work;
 
     SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 9));
-    work = SPAD(0u)->task;
+    work = SPAD(0u)->self;
     work->header.mode += 1;
 }
 

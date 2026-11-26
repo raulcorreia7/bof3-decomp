@@ -91,6 +91,26 @@ def test_a_define_passes_when_its_users_use_one_of_the_same_value() -> None:
     assert compare(before, inlined, {"PARTY_RECORD_COUNT"}) == []
 
 
+def test_a_define_renamed_by_a_commit_line_passes_when_its_definition_follows() -> None:
+    before = snapshot(
+        Entities(defines={"TASK": "(type)((type*)g_Task)"}), {"a.c": {"TASK", "g_Task"}}
+    )
+    same = snapshot(
+        Entities(defines={"SELF": "(type)((type*)g_Self)"}),
+        {"a.c": {"SELF", "g_Self"}},
+        defines={"SELF": "(type)((type*)g_Self)"},
+    )
+    other = snapshot(
+        Entities(defines={"SELF": "(type)((type*)g_Other)"}),
+        {"a.c": {"SELF"}},
+        defines={"SELF": "(type)((type*)g_Other)"},
+    )
+    renamed = {"TASK": "SELF", "g_Task": "g_Self"}
+    assert compare(before, same, set(), renamed) == []
+    assert compare(before, same, set()) == ["#define TASK is gone"]
+    assert compare(before, other, set(), renamed) == ["#define TASK is gone"]
+
+
 def test_enumerator_values_never_change() -> None:
     before = snapshot(
         Entities(enums={"STATE_IDLE": ("State", 0)}), {"a.h": {"STATE_IDLE"}}

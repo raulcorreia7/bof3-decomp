@@ -21,7 +21,7 @@ MATCH s32 func_801FC1D0(s32 member_index) {
     }
 
     actor          = &g_Actors[actor_index];
-    SPAD(0u)->task = actor;
+    SPAD(0u)->self = actor;
     g_CurrentActor = actor;
     Actor_ResetMotion();
     Area_SceneSelectRecord(0x67);

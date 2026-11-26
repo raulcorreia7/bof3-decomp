@@ -52,12 +52,11 @@ local_locals() {
 base=${1:-}
 if [ -n "$base" ]; then
 	bad=0
-	# An added line that a removed line matches once the called names are dropped is a renamed call, not new
-	# (the byte view's rename from TASK_BYTES to SELF_BYTES is the one name change it also absorbs).
+	# An added line that a removed line matches once the called names are dropped is a renamed call, not new.
 	words_file=$(mktemp)
 	git diff -w -U0 "$base...HEAD" -- src include >"$words_file"
 	added=$(awk '
-		function key(s) { gsub(/[A-Za-z_][A-Za-z0-9_]*\(/, "(", s); gsub(/TASK_BYTES/, "SELF_BYTES", s); gsub(/[ \t]+/, "", s); return s }
+		function key(s) { gsub(/[A-Za-z_][A-Za-z0-9_]*\(/, "(", s); gsub(/[ \t]+/, "", s); return s }
 		NR == FNR { if ($0 ~ /^-[^-]/) pool[key(substr($0, 2))]++; next }
 		$0 ~ /^\+[^+]/ { k = key(substr($0, 2)); if (pool[k] > 0) pool[k]--; else print }
 	' "$words_file" "$words_file" || true)
@@ -76,7 +75,8 @@ if [ -n "$base" ]; then
 	rm -f "$diff_file"
 	rule() {
 		case $2 in "raw address") src=$fresh ;; *) src=$added ;; esac
-		printf '%s\n' "$src" | grep -nE "$1" | head -n 5 | while IFS= read -r l; do
+		# The byte view's own definition is the one place its name may be added.
+		printf '%s\n' "$src" | grep -nE "$1" | grep -vE '#[[:space:]]*define[[:space:]]+SELF_BYTES\b' | head -n 5 | while IFS= read -r l; do
 			echo "check-tree: $2: $l"
 		done
 	}

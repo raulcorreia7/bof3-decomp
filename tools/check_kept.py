@@ -23,6 +23,9 @@ A deliberate removal passes with a commit message line between the merge base an
 
     Kept-Removed: <name> <reason>
 
+A rename passes with a line `Renamed: <old> -> <new>` per name: the new name must be in use, and a
+`#define` must keep its definition once every renamed name in the old one is replaced.
+
 Usage: python3 tools/check_kept.py REF [HEAD]
 """
 
@@ -66,6 +69,7 @@ WEAK_WORDS = frozenset(
     "u8 s8 u16 s16 u32 s32 u64 s64 int char short long unsigned signed void const volatile".split()
 )
 KEPT_REMOVED = re.compile(r"^Kept-Removed:\s*(\S+)", re.M)
+RENAMED = re.compile(r"^Renamed:\s*(\w+)\s*->\s*(\w+)", re.M)
 DEFINE = re.compile(r"^[ \t]*#[ \t]*define[ \t]+(\w+)(\([^)]*\))?(.*)$")
 INCLUDE = re.compile(r'^\s*#\s*include\s+"([^"]+)"', re.M)
 IDENT = re.compile(r"[A-Za-z_]\w*")
@@ -496,12 +500,35 @@ def layout_signature(layouts: list[list[Member]]) -> set[tuple]:
     return {tuple((m.offset, m.path.count(".")) for m in layout) for layout in layouts}
 
 
-def compare(before: Snapshot, after: Snapshot, removed: set[str]) -> list[str]:
+def renamed_to(
+    name: str, old: Entities, new: Entities, renamed: dict[str, str]
+) -> bool:
+    """Whether a `Renamed:` line moved NAME to a name in use that keeps its definition."""
+    target = renamed.get(name)
+    if target is None:
+        return False
+    if name not in old.defines:
+        return True
+    value = old.defines[name]
+    for was, now in renamed.items():
+        value = re.sub(rf"\b{was}\b", now, value)
+    return new.defines.get(target) == value
+
+
+def compare(
+    before: Snapshot,
+    after: Snapshot,
+    removed: set[str],
+    renamed: dict[str, str] | None = None,
+) -> list[str]:
     """Every loss or degradation from BEFORE to AFTER, one line each."""
     problems: list[str] = []
     old, new = before.entities, after.entities
+    renamed = {was: now for was, now in (renamed or {}).items() if now in after.tokens}
 
     def gone(name: str) -> bool:
+        if renamed_to(name, old, new, renamed):
+            return False
         # A name built by token pasting (a static assertion) never appears in the text.
         return (
             not is_default(name)
@@ -586,6 +613,12 @@ def removals(base: str, head: str) -> set[str]:
     )
 
 
+def renames(base: str, head: str) -> dict[str, str]:
+    return dict(
+        RENAMED.findall(git("log", "--format=%B", f"{base}..{head}", root=ROOT))
+    )
+
+
 def record_files(tree: Path, names: set[str]) -> set[str]:
     """Files at one revision that define one of the named records."""
     if not names:
@@ -647,7 +680,7 @@ def main(argv: list[str]) -> int:
             before_entities, *read_tree(trees["before"]), *addresses(base)
         )
         after = Snapshot(after_entities, after_uses, after_defines, *addresses(head))
-    problems = compare(before, after, removals(base, head))
+    problems = compare(before, after, removals(base, head), renames(base, head))
     for problem in problems:
         print(problem)
     if problems:

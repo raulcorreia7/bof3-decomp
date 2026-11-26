@@ -207,3 +207,13 @@ def test_new_task_use_fails(tmp_path: Path) -> None:
         result.returncode == 1
         and "task read by offset" in result.stdout + result.stderr
     )
+
+
+def test_the_byte_view_definition_passes_and_a_new_use_fails(tmp_path: Path) -> None:
+    define = "#define SELF_BYTES ((u8*)g_Self)\n"
+    result = run_tree(
+        tmp_path,
+        {"include/psx/mem.h": "#define A 1\n"},
+        {"include/psx/mem.h": "#define A 1\n" + define},
+    )
+    assert result.returncode == 0, result.stdout + result.stderr
