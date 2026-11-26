@@ -57,9 +57,9 @@
  * handler (Actor_DispatchAll, Party_RunFrame, Battle_UpdateEffects); code that runs another record's handler
  * saves it first and restores it after. Its type follows the mode (Actor on the field, PartyMember for a
  * battler, the effect's own record in a spell effect, FishingState while fishing), so `struct Task` is
- * incomplete. Read TASK(Type)->member; set TASK_SET(record); save through a typed local or TASK(void);
- * untyped bytes are TASK_BYTES[n]. A unit that must re-read the cell after every store defines
- * FAKE_DECL_TASK_VOLATILE before its first include. */
+ * incomplete. Read TASK(Type)->member; set TASK_SET(record); save through a typed local or TASK(void); a
+ * record with no type reads its bytes through the byte view below. A unit that must re-read the cell after
+ * every store defines FAKE_DECL_TASK_VOLATILE before its first include. */
 #ifdef FAKE_DECL_TASK_VOLATILE
 /* D_1F800044 */
 extern struct Task* volatile g_Task;

@@ -313,8 +313,9 @@ macro, not a second `extern`. A cast macro that names the object itself keeps th
   mode (`Actor` on the field, `PartyMember` for a battler, the effect's own record in a spell effect,
   `FishingState` while fishing), so `struct Task` in `include/psx/mem.h` is incomplete and no member is
   reachable without a view. Read `TASK(Type)->member`; set `TASK_SET(record)`; save and restore through a
-  typed local or `TASK(void)`; read the bytes of an untyped record through `TASK_BYTES[n]`. An image
-  that reads it as `volatile` defines `FAKE_DECL_TASK_VOLATILE` before the first include.
+  typed local or `TASK(void)`; read the bytes of a record with no type through `TASK_BYTES[n]`, which
+  `check-tree` rejects in new lines: a new record gets a type. An image that reads it as `volatile`
+  defines `FAKE_DECL_TASK_VOLATILE` before the first include.
 - Task header: every record the cell points at starts with the same three bytes: `flags` (0x00),
   `mode` (0x01) and `step` (0x02). A type with a `u8` there uses these names, not `unk_01` or
   `state_02`. Per-object scratch (fishing, a boss) is a union at the record's tail, one view per
