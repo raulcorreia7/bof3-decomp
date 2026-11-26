@@ -1,12 +1,12 @@
 #include "area125_13.h"
 
 MATCH void func_801F2FC4(void* sprite) {
-    DVECTOR               screen;
-    u16                   size[2];
-    s16                   buf[8];
-    AreaQuadSprite*       work;
-    s32*                  object;
-    POLY_FT4*             primitive;
+    DVECTOR         screen;
+    u16             size[2];
+    s16             buf[8];
+    AreaQuadSprite* work;
+    s32*            object;
+    POLY_FT4*       primitive;
 
     work      = sprite;
     object    = &work->origin.x;

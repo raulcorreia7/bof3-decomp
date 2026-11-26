@@ -2,19 +2,19 @@
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F3994(void) {
-    u8*         bundle;
-    u8*         cell_base;
-    u32*        cell;
-    u8          hidden;
-    s32         row;
-    s32         col;
-    s32         k;
-    u8          sum;
-    s32         index;
-    u8          wrapped;
-    s32         cell_index;
-    s32         cell_id;
-    s32         width;
+    u8*  bundle;
+    u8*  cell_base;
+    u32* cell;
+    u8   hidden;
+    s32  row;
+    s32  col;
+    s32  k;
+    u8   sum;
+    s32  index;
+    u8   wrapped;
+    s32  cell_index;
+    s32  cell_id;
+    s32  width;
 
     hidden = SYS_TestFlag(g_SceneEventFlags, 0x7E) == 0;
     row    = 0;

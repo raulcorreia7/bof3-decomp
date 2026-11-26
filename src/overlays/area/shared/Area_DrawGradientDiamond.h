@@ -23,7 +23,8 @@ MATCH void Area_DrawGradientDiamond(s16 x, s16 y) {
     setVector(&g_ScratchPadVectors[3], 10, 0, 0);
 
     SetPolyG4(prim);
-    RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
+    RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth,
+                  &flag);
     setRGB0(prim, 0xFF, 0, 0);
     setRGB1(prim, 0x80, 0, 0x80);
     setRGB2(prim, 0x80, 0, 0x80);
