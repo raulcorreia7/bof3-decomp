@@ -6,3 +6,31 @@ g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running e
 s_BattleBattlerTemplates = { addr = 0x801EBF20, alias = true }
 g_BattleEffects = { addr = 0x801EC330, alias = true, source = "Battle effect work records (stride 0x78); Battle_AllocEffect claims a free one by setting bit 0 of header.flags." }
 BMagic_DispatchMode = { addr = 0x801EEC50, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the module head's three callbacks in magic057 (Bone Dance)." }
+BMagic_BoneDanceInit = { addr = 0x801EECB0, type = "func", source = "Places the task at the active battler, copies palette 26 and advances the task mode." }
+BMagic_BoneDanceTaskUpdate = { addr = 0x801EED2C, type = "func", source = "Runs the task step that header.step (byte 0x02) selects from g_BMagicBoneDanceTaskSteps." }
+BMagic_BoneDanceStart = { addr = 0x801EED98, type = "func", source = "Task step 0: queues the two sounds, selects script 3 for the actor of the effect the task runs on and spawns the shake effect." }
+BMagic_BoneDanceWaitShake = { addr = 0x801EEE50, type = "func", source = "Task step 1: plays the actor's script and zeroes the bone counts each frame until the shake effect advances the step." }
+BMagic_BoneDanceSpawnBones = { addr = 0x801EEEB0, type = "func", source = "Task step 2: on odd frames spawns a bone effect at the effect battler, up to 32, then advances the step." }
+BMagic_BoneDanceWaitBones = { addr = 0x801EEFA4, type = "func", source = "Task step 3: once every bone has ended (the ended count in byte 0x0A equals the spawned count in byte 0x09), advances the task mode." }
+BMagic_BoneDanceEnd = { addr = 0x801EEFEC, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING, marks the selected battlers damaged and clears the effect." }
+BMagic_BoneDanceEffectUpdate = { addr = 0x801EF02C, type = "func", source = "Runs the effect routine that header.mode (byte 0x01) selects from g_BMagicBoneDanceEffectModes." }
+BMagic_BoneDanceBoneUpdate = { addr = 0x801EF08C, type = "func", source = "Runs the bone step that header.step selects with the battle script table set, and draws the bone while its effect is in use." }
+BMagic_BoneDanceBoneStart = { addr = 0x801EF134, type = "func", source = "Bone step 0: places the bone at a random offset on the battler's facing side, lifts it and starts its arc." }
+BMagic_BoneDanceBoneBounce = { addr = 0x801EF3C4, type = "func", source = "Bone step 1: moves the bone along its arc; each time it reaches the ground it jumps to a new random offset, and after 3 bounces it advances the step." }
+BMagic_BoneDanceBoneEnd = { addr = 0x801EF528, type = "func", source = "Bone step 2: counts the bone as ended on the task (byte 0x0A) and clears the effect." }
+BMagic_BoneDanceShakeUpdate = { addr = 0x801EF55C, type = "func", source = "Runs the shake step that header.step selects from g_BMagicBoneDanceShakeSteps." }
+BMagic_BoneDanceShakeStart = { addr = 0x801EF5BC, type = "func", source = "Shake step 0: loads the length of the first shake and queues its sound." }
+BMagic_BoneDanceShakeRun = { addr = 0x801EF620, type = "func", source = "Shake step 1: runs the shake phase, moves the camera by its offset, and at the end of each of 3 shakes queues the sound again; after the third it advances the task." }
+BMagic_BoneDanceShakeDown = { addr = 0x801EF7A0, type = "func", source = "Shake phase 0: lowers the camera offset to -3, then switches to the rise phase." }
+BMagic_BoneDanceShakeUp = { addr = 0x801EF7E0, type = "func", source = "Shake phase 1: raises the camera offset back to 0, then switches to the drop phase." }
+BMagic_BoneDanceShakeEnd = { addr = 0x801EF81C, type = "func", source = "Shake step 2: clears the effect." }
+BMagic_BoneDanceGroundUpdate = { addr = 0x801EF83C, type = "func", source = "Runs the ground step that header.step selects with the battle script table set, and draws it until the first bone has ended (the task's byte 0x0A is 0)." }
+BMagic_BoneDanceGroundStart = { addr = 0x801EF900, type = "func", source = "Ground step 0: places the actor on the ground height at the effect battler and starts script 0 dark." }
+BMagic_BoneDanceGroundFollow = { addr = 0x801EFA38, type = "func", source = "Ground step 1: keeps the actor on the ground height at the effect battler until that effect ends." }
+BMagic_BoneDanceGroundEnd = { addr = 0x801EFABC, type = "func", source = "Ground step 2: clears the effect." }
+g_BMagicBoneDanceShakeFrames = { addr = 0x801EFADC, source = "The frames each of the three shakes lasts." }
+g_BMagicBoneDanceTaskSteps = { addr = 0x801EEC10, type = "Magic057Steps", source = "The task's step routines, run by header.step (byte 0x02)." }
+g_BMagicBoneDanceEffectModes = { addr = 0x801EEC20, type = "Magic057SecondSteps", source = "The effect routines of Bone Dance (ability 0x39), run by header.mode (byte 0x01): bone, shake, ground." }
+g_BMagicBoneDanceBoneSteps = { addr = 0x801EEC2C, type = "Magic057SecondSteps", source = "The step routines of a bone." }
+g_BMagicBoneDanceShakeSteps = { addr = 0x801EEC38, type = "Magic057SecondSteps", source = "The step routines of the shake." }
+g_BMagicBoneDanceGroundSteps = { addr = 0x801EEC44, type = "Magic057SecondSteps", source = "The step routines of the ground actor." }
