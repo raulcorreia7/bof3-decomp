@@ -166,16 +166,16 @@ DiscLba g_EmiSlotLbas[EMI_SLOT_COUNT + 1] = {
 
 char g_EmiHeaderTag[12] = "MATH_TBL";
 
-u32 g_XAStreamSlots[XA_STREAM_COUNT] = {
+u32 g_SndXAStreamSlots[SND_XA_STREAM_COUNT] = {
     0x000002A9,
     0x000001B2,
     0x000002AA,
 };
 
-u32 g_XACues[XA_STREAM_COUNT] = {
-    (u32)g_XACueStream0,
-    (u32)g_XACueStream1,
-    (u32)g_XACueStream2,
+u32 g_SndXACues[SND_XA_STREAM_COUNT] = {
+    (u32)g_SndXACueStream0,
+    (u32)g_SndXACueStream1,
+    (u32)g_SndXACueStream2,
 };
 
 u32 g_EmiEntryTypes[11] = {
@@ -185,7 +185,7 @@ u32 g_EmiEntryTypes[11] = {
 };
 
 /* The handler of each XA state, in XAState order. */
-void (*g_XAStates[SND_XA_STATE_COUNT])(void) = {
+void (*g_SndXAStates[SND_XA_STATE_COUNT])(void) = {
     SND_XAStateIdle,
     SND_XAStateSeek,
     SND_XAStateSeekResult,
@@ -198,13 +198,13 @@ void (*g_XAStates[SND_XA_STATE_COUNT])(void) = {
 };
 
 /* Cue sector offsets of XA stream 2; a value with bit 15 set ends a group. */
-u16 g_XACueStream2[22] = {
+u16 g_SndXACueStream2[22] = {
     0x8000, 0x0047, 0x8000, 0x003F, 0x8000, 0x003D, 0x8000, 0x003C, 0x8000, 0x002A, 0x0000, 0x0000,
     0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
 };
 
 /* Cue sector offsets of XA stream 1. */
-u16 g_XACueStream1[896] = {
+u16 g_SndXACueStream1[896] = {
     0x0000, 0x0017, 0x002C, 0x0043, 0x0059, 0x0070, 0x0085, 0x009F, 0x00B7, 0x00CD, 0x00E3, 0x00F8,
     0x010E, 0x0125, 0x013A, 0x0151, 0x0163, 0x0179, 0x0190, 0x01A5, 0x01B9, 0x01CE, 0x01E4, 0x01FB,
     0x0212, 0x0225, 0x023D, 0x0252, 0x0269, 0x027C, 0x0290, 0x02A5, 0x02BB, 0x02CE, 0x02E2, 0x02F8,
@@ -283,7 +283,7 @@ u16 g_XACueStream1[896] = {
 };
 
 /* Cue sector offsets of XA stream 0. */
-u16 g_XACueStream0[20] = {
+u16 g_SndXACueStream0[20] = {
     0x0000, 0x007E, 0x0120, 0x0168, 0x01B3, 0x0233, 0x0282, 0x82CE, 0x0307, 0x8000, 0x13B5, 0x8000,
     0x005A, 0x8000, 0x13BC, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
 };

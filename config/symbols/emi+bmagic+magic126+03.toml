@@ -9,17 +9,47 @@ Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free 
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body.", alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 g_BattleEffects = { addr = 0x801EC330, alias = true, source = "Battle effect work records (stride 0x78); Battle_AllocEffect claims a free one by setting bit 0 of header.flags." }
+BMagic_ShadowBreathUpdate = { addr = 0x801EEC04, type = "func", source = "Runs the task's current mode, then steps every mote in use." }
+BMagic_ShadowBreathInit = { addr = 0x801EECE4, type = "func", source = "Clears the motes, centres the camera, starts the eight orbs with growing delays and brightens the effect palette." }
 Effect_MarkDamagedOnZeroTick = { addr = 0x801EEE70, type = "func", source = "When the effect ticker (byte 0x0B) is zero marks the battlers of the target selector damaged, raises BATTLE_STATE_EFFECT_PLAYING and resets the effect in magic126 (ShadowBreath)." }
 BMagic_DispatchEffectMode = { addr = 0x801EEED0, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic126." }
+BMagic_ShadowBreathGlowUpdate = { addr = 0x801EEF14, type = "func", source = "Runs the glow's step and draws its dark disc and two glow rings once it has started." }
 Effect_CopyBattlerCoords = { addr = 0x801EEFAC, type = "func", source = "Copies the position of g_BattleEffectBattler into the effect, clears the effect timer (byte 0x09) and counter (byte 0x0A) and advances header.step (byte 0x02) in magic126 (ShadowBreath)." }
+BMagic_ShadowBreathGlowGrow = { addr = 0x801EF00C, type = "func", source = "Brightens and widens the glow until the timer reaches its limit." }
 Effect_StepWhileTickUnderTwo = { addr = 0x801EF078, type = "func", source = "Advances header.step (byte 0x02) while the ticker (byte 0x0B) of g_BattleEffectBattler is under 2 in magic126 (ShadowBreath)." }
 Effect_TickOnTimerZero = { addr = 0x801EF0BC, type = "func", source = "Counts the effect timer (byte 0x09) down by 1 per frame; at zero lowers the ticker (byte 0x0B) of g_BattleEffectBattler and clears the effect in magic126 (ShadowBreath)." }
 Effect_SetActorMatrix = { addr = 0x801EF118, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic126 (ShadowBreath)." }
+BMagic_ShadowBreathDrawShadow = { addr = 0x801EF1C8, type = "func", source = "Draws the glow's dark disc as 32 subtractive triangles around the target." }
 BMagic_DrawGlowRingOuter = { addr = 0x801EF438, type = "func", source = "draws 16 additive POLY_G4 quads from twice the effect timer (byte 0x0A) to three times it plus rand() & 3, coloured from byte 0x09 at the inner edge, in magic126 (ShadowBreath)" }
 BMagic_DrawGlowRingInner = { addr = 0x801EF7A4, type = "func", source = "draws 16 additive POLY_G4 quads from the effect timer (byte 0x0A) to twice it, coloured from byte 0x09 at the outer edge, in magic126 (ShadowBreath)" }
+BMagic_ShadowBreathPillarUpdate = { addr = 0x801EFAF4, type = "func", source = "Runs the pillar's step and draws it once it has started." }
+BMagic_ShadowBreathPillarStart = { addr = 0x801EFB74, type = "func", source = "Places the pillar at the battler after the delay and plays its sound." }
 Effect_CountUpTimersAndStep = { addr = 0x801EFC28, type = "func", source = "Counts the effect timer (byte 0x09) and counter (byte 0x0A) up and advances header.step (byte 0x02) when the counter reaches 16 in magic126 (ShadowBreath)." }
-Effect_CountDownTimer = { addr = 0x801EFCE4, type = "func", source = "Raises the effect timer (byte 0x09) by 1, counts the effect counter (byte 0x0A) down and at zero lowers the active battler's ticker (byte 0x0B) and clears the effect in magic126 (ShadowBreath)." }
+BMagic_ShadowBreathPillarRise = { addr = 0x801EFC94, type = "func", source = "Raises the pillar until it reaches its full height." }
+BMagic_ShadowBreathPillarEnd = { addr = 0x801EFCE4, type = "func", source = "Raises the effect timer (byte 0x09) by 1, counts the effect counter (byte 0x0A) down and at zero lowers the active battler's ticker (byte 0x0B) and clears the effect in magic126 (ShadowBreath)." }
+BMagic_ShadowBreathDrawPillar = { addr = 0x801EFD5C, type = "func", source = "Draws the pillar as two additive textured quads standing on the target." }
+BMagic_ShadowBreathOrbUpdate = { addr = 0x801F01C0, type = "func", source = "Runs the orb's step and draws its disc once it has started." }
+BMagic_ShadowBreathOrbStart = { addr = 0x801F0240, type = "func", source = "Places the orb at the selected party member after its delay and aims it at the effect's battler." }
+BMagic_ShadowBreathOrbSeek = { addr = 0x801F037C, type = "func", source = "Brightens the orb and moves it toward the effect's battler until it arrives or passes it." }
+BMagic_ShadowBreathOrbBurst = { addr = 0x801F0494, type = "func", source = "Once every orb has arrived starts the glow, the pillar and 64 motes and applies the damage flags." }
 Effect_TickOnTimerNegative = { addr = 0x801F0650, type = "func", source = "Counts the effect timer (byte 0x09) down by two; once negative lowers the ticker (byte 0x0B) of g_BattleEffectBattler and clears the effect in magic126 (ShadowBreath)." }
+BMagic_ShadowBreathDrawOrb = { addr = 0x801F06AC, type = "func", source = "Draws the orb as a disc of 16 additive triangles tinted by its index." }
+BMagic_ShadowBreathMoteDispatch = { addr = 0x801F091C, type = "func", source = "Runs the mote handler its mode selects." }
+BMagic_ShadowBreathMoteUpdate = { addr = 0x801F0960, type = "func", source = "Runs the mote's step and draws its streak once it has started." }
+BMagic_ShadowBreathMoteStart = { addr = 0x801F09E0, type = "func", source = "Places the mote on its ring around the battler after its delay." }
+BMagic_ShadowBreathMoteRise = { addr = 0x801F0B34, type = "func", source = "Widens the mote's ring and raises it for 16 frames." }
+BMagic_ShadowBreathMoteAccelerate = { addr = 0x801F0C7C, type = "func", source = "Widens the mote's ring and speeds up its rise until it is fast enough." }
+BMagic_ShadowBreathMoteEnd = { addr = 0x801F0DA4, type = "func", source = "Keeps the mote rising for 16 frames, then ends it." }
 BMagic_DrawMote = { addr = 0x801F0ED0, type = "func", source = "Draws the mote as one semi-transparent textured quad at its projected point, sized by byte 0x05, shaded by byte 0x06, from the 832,256 page and clut 506 in magic126 (ShadowBreath)." }
 BMagic_AllocEffect = { addr = 0x801F1110, type = "func", source = "Claims the first free slot of the effect table (bit 0 of header.flags) and returns its index, or 0xFF when all 128 slots are in use in magic126 (ShadowBreath)." }
+BMagic_ShadowBreathMoteFree = { addr = 0x801F116C, type = "func", source = "Clears the current mote." }
+BMagic_ShadowBreathMoteProject = { addr = 0x801F11AC, type = "func", source = "Projects the current mote to the screen." }
 g_BMagicEffectModes = { addr = 0x801F125C, source = "Handlers of magic126 (ShadowBreath), run by header.mode (byte 0x01)." }
+g_BMagicShadowBreathGlowSteps = { addr = 0x801F1268, source = "The step routines of the glow." }
+g_BMagicShadowBreathPillarSteps = { addr = 0x801F1278, source = "The step routines of the pillar." }
+g_BMagicShadowBreathOrbSteps = { addr = 0x801F1288, source = "The step routines of the orb." }
+g_BMagicShadowBreathOrbTints = { addr = 0x801F1298, source = "The red and blue weight of each orb's disc, by orb index." }
+g_BMagicShadowBreathMoteModes = { addr = 0x801F12A8, source = "The handler of the mote mode." }
+g_BMagicShadowBreathMoteSteps = { addr = 0x801F12AC, source = "The step routines of the mote." }
+g_BMagicShadowBreathMotes = { addr = 0x801F12BC, source = "The pool of 128 motes." }
+g_BMagicShadowBreathMote = { addr = 0x801F22BC, source = "The mote being stepped." }

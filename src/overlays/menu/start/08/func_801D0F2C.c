@@ -3,51 +3,54 @@
 /* Seeds the save image from one starting point of the D_801EBA44 table. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D0F2C(u8 start) {
-    u8* stage;
-    u8* src;
-    u8* cell;
-    u8  member;
-    u16 item;
-    u8  vital;
-    s32 i;
-    s32 j;
-    s32 idx;
-    u8* row;
+    u8*       stage;
+    u8*       cell;
+    u8*       src;
+    u8        member;
+    u16       item;
+    u8        kind;
+    u8        id;
+    u8        vital;
+    s32       i;
+    s32       j;
+    s32       idx;
+    SaveData* save;
+    u8*       row;
 
-    g_SaveAreaId      = D_801EBA44[start].area;
-    g_SaveEntryX      = D_801EBA44[start].entry_x;
-    stage             = SP(0);
-    g_SaveEntryY      = D_801EBA44[start].entry_y;
-    g_SaveEntryFacing = D_801EBA44[start].facing;
-    src               = D_801EBA44[start].party;
+    g_SaveData.area_id      = D_801EBA44[start].area;
+    g_SaveData.entry_x      = D_801EBA44[start].entry_x;
+    stage                   = g_PartyStage;
+    g_SaveData.entry_y      = D_801EBA44[start].entry_y;
+    g_SaveData.entry_facing = D_801EBA44[start].facing;
+    src                     = D_801EBA44[start].party;
     for (i = 0; i < 3; i++) {
-        member = *src++;
+        member = src[i];
         if (member != 0xFF) {
-            *stage = member & 0x7F;
+            stage[i] = member & 0x7F;
         } else {
-            *stage = 0xFF;
+            stage[i] = 0xFF;
         }
-        stage++;
     }
     if (start >= 9) {
-        g_Characters[D_80181B17].character_id         = 7;
-        g_Characters[D_80181B17].base.surprise_chance = 0x37;
-        g_Characters[D_80181B17].base.evasion         = 8;
-        g_Characters[D_80181B17].base.accuracy        = 0x64;
-        g_Characters[D_80181B18].character_id         = 8;
-        g_Characters[D_80181B18].base.evasion         = 0xC;
+        g_Characters[g_CharSlotView[7]].character_id         = 7;
+        g_Characters[g_CharSlotView[7]].base.surprise_chance = 0x37;
+        g_Characters[g_CharSlotView[7]].base.evasion         = 8;
+        g_Characters[g_CharSlotView[7]].base.accuracy        = 0x64;
+        g_Characters[D_80181B18].character_id                = 8;
+        g_Characters[D_80181B18].base.evasion                = 0xC;
     }
     EMI_PartyLoadArchives(SP_REF(u8, 0), SP_REF(u8, 1), SP_REF(u8, 2), 0);
     g_PartySize = 0;
     src         = D_801EBA44[start].party;
     for (i = 0; i < 3; i++) {
-        member = *src++;
+        member = *src;
         if (member != 0xFF && (member & 0x80) == 0) {
             Party_MemberJoin(member);
         } else {
             g_PartyFieldOrder[i]  = 0xFF;
             g_PartyBattleOrder[i] = 0xFF;
         }
+        src++;
     }
     for (i = 0; i < 7; i++) {
         g_Characters[i].party_flags |= D_801EBA44[start].party_flags[i];
@@ -60,8 +63,10 @@ NON_MATCHING void func_801D0F2C(u8 start) {
     g_Zenny = D_801EBA44[start].zenny;
     for (i = 0; i < 8; i++) {
         item = D_801EBA44[start].items[i];
-        if ((item & 0xFF) != 0xFF) {
-            Item_Add(item >> 8, item & 0xFF, 1, 0);
+        kind = item >> 8;
+        id   = item & 0xFF;
+        if (id != 0xFF) {
+            Item_Add(kind, id, 1, 0);
         }
     }
     for (i = 0; i < 16; i++) {
@@ -71,29 +76,30 @@ NON_MATCHING void func_801D0F2C(u8 start) {
         }
     }
     for (i = 0; i < 0x10; i++) {
-        g_SceneEventFlags[i] = D_801EC214[start * 0x10 + i];
+        g_SaveData.scene_event_flags[i] = D_801EC214[start][i];
     }
+    save = &g_SaveData;
     for (i = 0; i < 0x14; i++) {
         idx = i * 8;
+        row = g_SaveData.scene_flag_words + idx;
         if (i < start) {
-            g_SceneFlagWords[idx + 0] = D_801EC174[idx + 0];
-            g_SceneFlagWords[idx + 1] = D_801EC174[idx + 1];
-            g_SceneFlagWords[idx + 2] = D_801EC174[idx + 2];
-            g_SceneFlagWords[idx + 3] = D_801EC174[idx + 3];
-            g_SceneFlagWords[idx + 4] = D_801EC174[idx + 4];
-            g_SceneFlagWords[idx + 5] = D_801EC174[idx + 5];
-            g_SceneFlagWords[idx + 6] = D_801EC174[idx + 6];
-            g_SceneFlagWords[idx + 7] = D_801EC174[idx + 7];
+            row[0]                               = D_801EC174[idx + 0];
+            g_SaveData.scene_flag_words[idx + 1] = D_801EC174[idx + 1];
+            g_SaveData.scene_flag_words[idx + 2] = D_801EC174[idx + 2];
+            g_SaveData.scene_flag_words[idx + 3] = D_801EC174[idx + 3];
+            g_SaveData.scene_flag_words[idx + 4] = D_801EC174[idx + 4];
+            g_SaveData.scene_flag_words[idx + 5] = D_801EC174[idx + 5];
+            g_SaveData.scene_flag_words[idx + 6] = D_801EC174[idx + 6];
+            g_SaveData.scene_flag_words[idx + 7] = D_801EC174[idx + 7];
         } else {
-            row    = g_SceneFlagWords + idx;
-            row[0] = 0;
-            row[1] = 0;
-            row[2] = 0;
-            row[3] = 0;
-            row[4] = 0;
-            row[5] = 0;
-            row[6] = 0;
-            row[7] = 0;
+            save->scene_flag_words[idx + 7] = 0;
+            save->scene_flag_words[idx + 6] = 0;
+            save->scene_flag_words[idx + 5] = 0;
+            save->scene_flag_words[idx + 4] = 0;
+            save->scene_flag_words[idx + 3] = 0;
+            save->scene_flag_words[idx + 2] = 0;
+            save->scene_flag_words[idx + 1] = 0;
+            row[0]                          = 0;
         }
     }
     for (i = 0; i < 6; i++) {
@@ -116,7 +122,7 @@ NON_MATCHING void func_801D0F2C(u8 start) {
         D_801454F4[i][2] = 0;
     }
     cell = &D_801454FF;
-    for (i = 0; i < 3; i++) {
+    for (j = 0; j < 3; j++) {
         *cell-- = 0;
     }
 }

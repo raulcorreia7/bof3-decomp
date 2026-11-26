@@ -5,12 +5,9 @@
  * pointer.
  */
 /* func_801D1228 */
-#ifdef NON_MATCHING
-NON_MATCHING void Battle_Reset(void) {
+MATCH void Battle_Reset(void) {
     u8*  living_count;
     u8*  count_ptr;
-    u8*  src;
-    u8*  dest;
     u16* mirror;
     u16* stage;
     u8   slot;
@@ -29,8 +26,8 @@ NON_MATCHING void Battle_Reset(void) {
             slot += 1;
         } while ((u32)(slot & BYTE_MASK) < (u8)g_Battle.party_count);
     }
-    g_Battle.panel_widths[0]      = 8;
     g_BattleMessageSlot           = (u8*)g_Game.members;
+    g_Battle.panel_widths[0]      = 8;
     g_Battle.selection            = 0;
     g_Battle.cursor.panel_entry   = 0;
     D_801462E7                    = 0;
@@ -53,16 +50,12 @@ NON_MATCHING void Battle_Reset(void) {
     g_Battle.selection_latch      = 0;
     g_Battle.dragon_form          = 0;
     g_AreaCameraHeightDelta       = 0;
-    slot                          = 0;
     func_800ABBA4();
     func_801E5A38();
     func_801DDB7C();
     for (slot = 0; slot < 3; slot++) {
-        src = (u8*)&g_Game.members[slot].chr.stats;
         if (ACTOR_IN_USE(g_Game.members[slot])) {
-            dest                    = (u8*)&g_Game.members[slot].chr.base;
-            *(Cpy16u*)(dest)        = *(Cpy16u*)(src);
-            *(Cpy16u*)(dest + 0x10) = *(Cpy16u*)(src + 0x10);
+            g_Game.members[slot].chr.base = g_Game.members[slot].chr.stats;
             if (g_Game.members[slot].chr.hp < (u32)(g_Game.members[slot].chr.stats.max_hp >> 2)) {
                 g_Game.members[slot].chr.status = g_Game.members[slot].chr.status | 0x2000;
             } else {
@@ -83,16 +76,13 @@ NON_MATCHING void Battle_Reset(void) {
     }
     Battle_ApplyFormationStats();
     for (slot = 0; slot < 3; slot++) {
-        dest = (u8*)&g_Game.members[slot].chr.stats;
         if (ACTOR_IN_USE(g_Game.members[slot])) {
-            src                     = (u8*)&g_Game.members[slot].chr.base;
-            *(Cpy16u*)(dest)        = *(Cpy16u*)(src);
-            *(Cpy16u*)(dest + 0x10) = *(Cpy16u*)(src + 0x10);
+            g_Game.members[slot].chr.stats = g_Game.members[slot].chr.base;
         }
     }
-    mirror = GAME_PALETTE_MIRROR_U16;
-    stage  = (u16*)GAME_PALETTE_STAGE;
     for (slot = 0; slot < 0x10; slot++) {
+        mirror              = GAME_PALETTE_MIRROR_U16;
+        stage               = (u16*)GAME_PALETTE_STAGE;
         mirror[0xF0 + slot] = stage[0xF0 + slot];
     }
     GFX_PaletteCopy(0x1A);
@@ -121,6 +111,3 @@ NON_MATCHING void Battle_Reset(void) {
     }
     g_Battle.phase.step += 1;
 }
-#else
-INCLUDE_ASM(Battle_Reset);
-#endif

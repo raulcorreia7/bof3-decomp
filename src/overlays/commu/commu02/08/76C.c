@@ -12,20 +12,26 @@ void func_801D2908(s16 x, s16 y, u8 mode);
 void Menu_DrawPanelIcon(u16 x, u16 y, s32 u, s32 v, u16 clut, u8 color);
 
 #ifdef NON_MATCHING
-NON_MATCHING void func_801D1394(void) {
-    s8 value;
+NON_MATCHING void func_801D136C(void) {
+    s32 x_step;
+    s32 y_step;
+    s8  value;
 
     value      = D_801DB0C4 - 1;
     D_801DB0C4 = value;
-    func_801D3184(0x26 - ((value & BYTE_MASK) * -0x12), 0x10 - ((value & BYTE_MASK) * -0xE));
-    func_801D32A0(0xA8 - ((u8)D_801DB0C4 * 0xE), 0x10 - ((u8)D_801DB0C4 * -0x19), 0);
+    x_step     = -0x12;
+    y_step     = -0xE;
+    func_801D3184(0x26 - ((value & BYTE_MASK) * x_step), 0x10 - ((value & BYTE_MASK) * y_step));
+    x_step = 0xE;
+    y_step = -0x19;
+    func_801D32A0(0xA8 - ((u8)D_801DB0C4 * x_step), 0x10 - ((u8)D_801DB0C4 * y_step), 0);
     if ((u8)D_801DB0C4 == 0) {
         D_801F294E = 0;
         D_801F294D += 1;
     }
 }
 #else
-INCLUDE_ASM(func_801D1394);
+INCLUDE_ASM(func_801D136C);
 #endif
 
 MATCH void func_801D143C(void) {
@@ -2733,7 +2739,7 @@ NON_MATCHING s8 func_801DA114(void) {
             if ((s8)D_801DB0D8 < 0) {
                 D_801DB0D8 = 7;
             }
-        } while (page[(s8)D_801DB0D8 * 12 + col] == 0);
+        } while ((page + (s8)D_801DB0D8 * 12)[col] == 0);
     } else if (pressed & PADLdown) {
         SND_SEPlay(0x100);
         page = D_801DAAAC + D_801DAAA8 * 96;
@@ -2743,7 +2749,7 @@ NON_MATCHING s8 func_801DA114(void) {
             if ((s8)D_801DB0D8 >= 8) {
                 D_801DB0D8 = 0;
             }
-        } while (page[(s8)D_801DB0D8 * 12 + col] == 0);
+        } while ((page + (s8)D_801DB0D8 * 12)[col] == 0);
     } else if (pressed & PADLleft) {
         SND_SEPlay(0x100);
         if (*cell != 0 && *cell < 6) {

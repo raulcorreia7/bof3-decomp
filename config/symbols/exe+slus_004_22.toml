@@ -259,8 +259,20 @@ g_EmiBank6SeRecords = { addr = 0x801467FC, alias = true, type = "u8*", source = 
 g_EmiBank6SequenceBuffer = { addr = 0x80146800, alias = true, type = "s32", source = "The sequence buffer address of sound bank 6's record in g_EmiBanks." }
 g_EmiBank6VabId = { addr = 0x80146804, alias = true, type = "u16", source = "The VAB id of sound bank 6's record in g_EmiBanks." }
 g_EmiSectorCursor = { addr = 0x80146808, source = "Current sector of the EMI stream." }
+g_SndXAStartSector = { addr = 0x8014680C, type = "s32", source = "The disc sector where the current XA stream starts." }
+g_SndXAEndSector = { addr = 0x80146810, type = "s32", source = "The disc sector where the current XA stream ends; the stream pauses once it is reached." }
+g_SndXACurrentSector = { addr = 0x80146814, type = "s32", source = "The disc sector the XA stream last reported reading." }
+g_SndXAStreamId = { addr = 0x8014681A, type = "u16", source = "The id SND_XAStartStream was given for the XA stream being played, which SND_XAResolveStream turns into sectors; 0xFFFF when none (EMI_Init sets that value; nothing in the tree reads it)." }
+g_SndXAWaitFrames = { addr = 0x8014681C, type = "u16", source = "The frames the XA state machine has waited on the drive; the stream retries after 0xB5." }
+g_SndXAStateFrame = { addr = 0x8014681E, type = "u16", source = "The frames since the XA state machine entered its read states." }
+g_SndXARetryCount = { addr = 0x80146820, type = "u16", source = "The retries of a failed XA drive command; the stream gives up after six." }
+g_SndXACdResult = { addr = 0x80146824, source = "The result bytes of the last XA drive command; the first is the drive status." }
+g_SndXAStopRequested = { addr = 0x8014682C, type = "s8", source = "When nonzero SND_XAUpdate pauses the drive. SND_XAStartStream stores 0; no code in the tree stores a nonzero value." }
 g_EmiServiceState = { addr = 0x8014682D, type = "u8", source = "func_801638B0 sets 1/8 in the read loop and func_80163EA0 returns == 0 func_80163AF0/80163C58/80163D20 set 4/6/7" }
+g_SndXASyncResult = { addr = 0x8014682E, type = "s8", source = "The outcome of the last XA drive command: 1 when it completed, -1 when it failed." }
 g_SndCDVolume = { addr = 0x80146830, type = "u8", source = "SND_SetCDVolume latches the level; SND_FadeCDVolume steps it toward the requested level" }
+g_SndXAFilterFile = { addr = 0x80146834, type = "u8", source = "The `file` byte of the CdlFILTER SND_XAResolveStream builds for the stream (set to 1)." }
+g_SndXAFilterChannel = { addr = 0x80146835, type = "u8", source = "The `chan` byte of the CdlFILTER SND_XAResolveStream builds: the channel of the stream within its file." }
 g_SndCDMix = { addr = 0x8014683C, type = "CdlATV", size = 4, source = "Api:CdMix SND_SetCDVolume fills the four attenuator bytes." }
 g_EmiStreamMode = { addr = 0x80146840, source = "EMI_Update runs EMI_UpdateStream for 1 and SND_XAUpdate for 2" }
 g_EmiUploadRect = { addr = 0x8014684C, type = "RECT", size = 0x8, source = "The LoadImage rectangle EMI_SectorUploadImage builds for the current stream slot: the entry's texture page offsets x and y, then 32 by 32." }
@@ -321,6 +333,9 @@ g_SndVabIds = { addr = 0x80148FB0, type = "s8", size = 0x7, source = "SND_Init s
 g_SelectionEffectVoices = { addr = 0x80148FC0, type = "s8", source = "Voices of the selection sound effects." }
 g_SndVoiceVolume = { addr = 0x80148FC8, type = "s8", size = 0x18, source = "SND_StartVolumeSweep passes [voice] to SsUtAutoVol as the start level and stores the target back" }
 g_SndVoiceTargetVolume = { addr = 0x80148FF8, type = "u8", size = 0x18, source = "SND_StartVolumeSweep passes [voice] as the end level; SND_VoiceDecreaseTargetVolume lowers it clamped at zero" }
+g_SndVoicePan = { addr = 0x80149010, source = "The pan each voice currently has; a pan sweep starts from it." }
+g_SndVoiceTargetPan = { addr = 0x80149040, source = "The pan each voice sweeps to, derived from its pan position." }
+g_SndVoicePanPosition = { addr = 0x80149070, source = "The value SND_VoicePanRaise and SND_VoicePanLower move for each voice; its target pan follows from it." }
 g_UiMessageState = { addr = 0x801490A0, source = "State of the message window." }
 g_UiMessageStep = { addr = 0x801490A1, type = "u8", source = "Step of the window script." }
 g_UiMessageChoiceMode = { addr = 0x801490A2, source = "Mode of the message choice." }
@@ -423,6 +438,8 @@ SYS_ThreadWait = { addr = 0x8014B87C, type = "func", source = "Arms the current 
 SYS_ThreadExit = { addr = 0x8014B8B0, type = "func", source = "Empties the current thread, closes it, switches away." }
 SYS_ThreadClose = { addr = 0x8014B900, type = "func", source = "Empties one thread and closes it." }
 SYS_ThreadReplace = { addr = 0x8014B954, type = "func", source = "Replaces the running callback." }
+SYS_ThreadSuspend = { addr = 0x8014B9AC, type = "func", source = "Sets SYS_THREAD_SUSPENDED in the state of thread thread_index; SYS_ThreadRun switches on exact state values, so the thread is skipped until it is cleared." }
+SYS_ThreadResume = { addr = 0x8014B9D8, type = "func", source = "Clears SYS_THREAD_SUSPENDED in the state of thread thread_index." }
 SYS_ClearCurrentThread = { addr = 0x8014BA04, type = "func", source = "Clears the current thread work area at offsets 0x60 through 0x7F." }
 Area_SceneDraw = { addr = 0x8014BA54, type = "func", source = "Draws the area scene." }
 Area_SwapGridActors = { addr = 0x8014BAB8, type = "func", source = "Swaps two objects of the draw list." }
@@ -495,6 +512,7 @@ GFX_FadeRunWhite = { addr = 0x8014F5F0, type = "func", source = "Fades the scree
 GFX_FadeUpdateScreen = { addr = 0x8014F704, type = "func", source = "Draws one step of a screen fade." }
 UI_TextDraw = { addr = 0x8014F800, type = "func", source = "Draws a text record." }
 UI_TextDrawGlyphs = { addr = 0x8014F84C, type = "func", source = "Draws a text record's control bytes and glyphs through the shared sprite cursor." }
+UI_TextQueueGlyph = { addr = 0x8014FB80, type = "func", source = "Queues the sprite UI_TextDrawString prepared at the primitive cursor: neutral colour, clut, position (x, y + shade), semi-transparent, on the UI layer." }
 UI_TextAddDrawMode = { addr = 0x8014FC00, type = "func", source = "Adds the draw mode used by the text and glyph renderers." }
 UI_TextDrawString = { addr = 0x8014FC90, type = "func", source = "Draws a glyph string." }
 UI_TextDrawAscii = { addr = 0x8014FF0C, type = "func", source = "Draws an ASCII string." }
@@ -509,13 +527,30 @@ UI_MessageDrawScript = { addr = 0x80150470, type = "func", source = "Draws a mes
 UI_MessageDispatchState = { addr = 0x801507BC, type = "func", source = "Runs the handler of the message window state." }
 UI_MessageRunScript = { addr = 0x8015083C, type = "func", source = "Runs the message script at the cursor until an opcode ends the step, and sets the next message state." }
 UI_MessageTickChoiceTimer = { addr = 0x80150E14, type = "func", source = "Counts the message state timer down and clears the state at zero." }
+UI_MessageRunEnd = { addr = 0x80150E48, type = "func", source = "State 2 of g_UiMessageStateSteps, entered by the end opcode: runs the end step g_UiMessageStep selects, UI_MessageWaitEndInput then UI_MessageConfirmWhenClosed." }
+UI_MessageWaitEndInput = { addr = 0x80150E98, type = "func", source = "Step 0 of the message end state: on a pad press or an advance or latch request, moves the message panel on to closing and sets FRONTEND_FLAG_SELECTION." }
+UI_MessageConfirmWhenClosed = { addr = 0x80150F08, type = "func", source = "Last step of the message end and box end states: once the message panel is closed (state 4), sets FRONTEND_FLAG_CONFIRM." }
+UI_MessageRunPage = { addr = 0x80150F3C, type = "func", source = "State 3 of g_UiMessageStateSteps, entered by the page opcode: runs UI_MessageWaitInput, then the phase ticker." }
+UI_MessageWaitInput = { addr = 0x80150F8C, type = "func", source = "Step 0 of the page state and of the choice state: draws the wait marker and steps on at a pad press or an advance request." }
+UI_MessageRunChoice = { addr = 0x801510DC, type = "func", source = "State 4 of g_UiMessageStateSteps: runs the step of g_UiMessageChoiceStateSteps that g_UiMessageStep selects, from the wait marker through the pick to the close." }
+UI_MessageOpenChoice = { addr = 0x8015115C, type = "func", source = "Step 1 of the choice state: opens the choice panel task, starts the message panel closing and steps on." }
+UI_MessageWaitChoiceReady = { addr = 0x801511C8, type = "func", source = "Step 2 of the choice state: steps on once the choice panel is open (state 2) and the message panel is closed (state 4)." }
 UI_MessageUpdateChoiceInput = { addr = 0x80151210, type = "func", source = "Handles the choice input and moves the choice cursor." }
 UI_MessageDispatchAnswerStep = { addr = 0x8015136C, type = "func", source = "Runs the current answer step of the message." }
-UI_MessageRestartRequest = { addr = 0x8015142C, type = "func", source = "Entry 6 of the message state table D_80149A7C, after UI_MessageDispatchAnswerStep: when the first menu panel task is in state 2, sets g_UiMessageStateTimer to 0x10, restarts the request with UI_MessageStartRequest and toggles FRONTEND_FLAG_SELECTION in g_UiWindowChannel." }
+UI_MessageRestartRequest = { addr = 0x8015142C, type = "func", source = "Entry 6 of the message state table g_UiMessageChoiceStateSteps, after UI_MessageDispatchAnswerStep: when the first menu panel task is in state 2, sets g_UiMessageStateTimer to 0x10, restarts the request with UI_MessageStartRequest and toggles FRONTEND_FLAG_SELECTION in g_UiWindowChannel." }
+UI_MessageEndAfterChoice = { addr = 0x80151480, type = "func", source = "Last step of the choice state: once the choice panel is closed (state 4), closes the message panel, sets the end state at its confirm step and sets FRONTEND_FLAG_MODE_LATCH." }
 UI_MessageStartRequest = { addr = 0x801514D0, type = "func", source = "Starts the requested message." }
+UI_MessageRunScrollChoice = { addr = 0x80151538, type = "func", source = "State 5 of g_UiMessageStateSteps: runs the step of g_UiMessageScrollStateSteps that g_UiMessageStep selects, around UI_MessageScrollChoice." }
 UI_MessageClosePanel = { addr = 0x801515A8, type = "func", source = "Clears the panel index - arms panel 1 mode 0 and advances the front-end step." }
+UI_MessageWaitChoiceOpen = { addr = 0x801515F4, type = "func", source = "Step 1 of the scrolling choice state: steps on once the choice panel is open (state 2)." }
 UI_MessageScrollChoice = { addr = 0x80151628, type = "func", source = "Moves the choice cursor." }
+UI_MessageRunStepCloseChoice = { addr = 0x80151710, type = "func", source = "Step 3 of the scrolling choice state: runs the step handler of g_UiMessageWindow.step_id (the area table below 0x80, else UI_MessageDispatchStep) and starts the choice panel closing." }
+UI_MessageWaitChoiceClosed = { addr = 0x801517AC, type = "func", source = "Step 4 of the scrolling choice state: once the choice panel is closed (state 4), ends the message when no request is pending, else steps on." }
+UI_MessageResumeScript = { addr = 0x80151820, type = "func", source = "State 6 of g_UiMessageStateSteps: returns the message state to script running once the message panel is open (state 2)." }
+UI_MessageRunBoxEnd = { addr = 0x80151844, type = "func", source = "State 7 of g_UiMessageStateSteps, entered by the box end opcode: runs UI_MessageTickBoxEnd, then UI_MessageConfirmWhenClosed." }
+UI_MessageTickBoxEnd = { addr = 0x80151894, type = "func", source = "Step 0 of the box end state: counts g_UiMessageStateTimer down, then moves the message panel on to closing and sets FRONTEND_FLAG_SELECTION." }
 UI_MessageDispatchChoiceMode = { addr = 0x801518F4, type = "func", source = "Runs the handler of the message choice mode." }
+UI_MessageChoiceIdle = { addr = 0x80151964, type = "func", source = "Entry 0 of g_UiMessageChoiceModes: the empty body of the mode with no choice effect." }
 UI_MessageUpdateChoice = { addr = 0x8015196C, type = "func", source = "Runs the current message choice step." }
 UI_MessageNextChoice = { addr = 0x801519F8, type = "func", source = "Moves the message choice list one entry on: advances g_UiMessageChoiceStep when the scroll countdown reaches -2, else steps the countdown by -2. Called by UI_MessageUpdateChoice." }
 UI_MessagePrevChoice = { addr = 0x80151A48, type = "func", source = "Moves the message choice list one entry back: lowers g_UiMessageChoiceStep when the scroll countdown reaches 2, else steps the countdown by 2. Called by UI_MessageUpdateChoice." }
@@ -671,8 +706,8 @@ SND_Start = { addr = 0x8015CE70, type = "func", source = "Starts the sound syste
 SND_Exit = { addr = 0x8015CEBC, type = "func", source = "Shuts down the sound system." }
 SND_VoiceUpdateStatus = { addr = 0x8015D044, type = "func", source = "Updates the status of the sound voices." }
 SND_VoiceDecreaseTargetVolume = { addr = 0x8015D104, type = "func", source = "Subtracts from a voice target volume and clamps it at zero." }
-SND_VoiceLowerLevel = { addr = 0x8015D148, type = "func", source = "Lowers a voice level." }
-SND_VoiceRaiseLevel = { addr = 0x8015D1BC, type = "func", source = "Raises a voice level." }
+SND_VoicePanLower = { addr = 0x8015D148, type = "func", source = "Lowers a voice level." }
+SND_VoicePanRaise = { addr = 0x8015D1BC, type = "func", source = "Raises a voice level." }
 SND_StartVolumeSweep = { addr = 0x8015D228, type = "func", source = "starts a volume sweep from g_SndVoiceVolume to g_SndVoiceTargetVolume on the voice" }
 SND_StartPanSweep = { addr = 0x8015D290, type = "func", source = "Starts a pan sweep on a voice." }
 SND_SeqPlay = { addr = 0x8015D300, type = "func", source = "Starts the BGM's effect voice through SsSepPlay after the volume/duck setup." }
@@ -1371,10 +1406,10 @@ g_SndBankHeaderSize = { addr = 0x8018239C, source = "Header size of each sound b
 g_SndBankSequenceSize = { addr = 0x801823F0, source = "Sequence size of each sound bank." }
 g_EmiSlotLbas = { addr = 0x80182444, source = "EMI_ArchiveGetSector returns its entry for a slot id" }
 g_EmiHeaderTag = { addr = 0x80183224, source = "Tag of the EMI header." }
-g_XAStreamSlots = { addr = 0x80183230, source = "Slot ids of the XA streams." }
-g_XACues = { addr = 0x8018323C, source = "Cue tables of the XA stream groups." }
+g_SndXAStreamSlots = { addr = 0x80183230, source = "Slot ids of the XA streams." }
+g_SndXACues = { addr = 0x8018323C, source = "Cue tables of the XA stream groups." }
 g_EmiEntryTypes = { addr = 0x80183248, source = "Handlers of the EMI entry types." }
-g_XAStates = { addr = 0x80183274, source = "Handlers of the XA audio states." }
+g_SndXAStates = { addr = 0x80183274, source = "Handlers of the XA audio states." }
 _spu_RXX = { addr = 0x80183AB0, source = "LIBSPU spu.o _spu_RXX, 24 bytes equal retail, the pointer to SPU_V0_VOL_L the sound code drives" }
 _spu_tsa = { addr = 0x80183AC8, alias = true, source = "PsyQ 3.7 LIBSPU data symbol kept so the split accounts for the library data the game never names." }
 _spu_transMode = { addr = 0x80183ACC, alias = true, source = "PsyQ 3.7 LIBSPU data symbol kept so the split accounts for the library data the game never names." }
@@ -1430,16 +1465,54 @@ jtbl_8018B2EC = { addr = 0x8018B2EC, type = "Callback", source = "The switch tab
 jtbl_8018B2F4 = { addr = 0x8018B2F4, type = "Callback", source = "The switch table of EnablePAD: the jump targets of its jr dispatch." }
 jtbl_8018B2F8 = { addr = 0x8018B2F8, type = "Callback", source = "The switch table of DesablePAD: the jump targets of its jr dispatch." }
 g_SysHardwareInitialized = { addr = 0x8018B300, source = "SYS_Main clears it and SYS_InitHardware sets it after initialization" }
+g_SndSeLayer0Program = { addr = 0x8018B308, type = "s16", source = "The VAB program SND_SEPlay passes to SsUtKeyOnV as `prog` for the first layer of the SE." }
+g_SndSeVabId = { addr = 0x8018B30C, type = "s16", source = "The VAB id SND_SEPlay passes to SsUtKeyOnV as `vabId` for every layer of the SE: the bank the SE record belongs to, or its alias bank." }
+g_SndSeLayer0Tone = { addr = 0x8018B310, type = "s16", source = "The tone SND_SEPlay passes to SsUtKeyOnV as `tone` for the first layer of the SE." }
+g_SndSeLayer0Note = { addr = 0x8018B314, type = "s16", source = "The lowest key of the tone, passed to SsUtKeyOnV as `note` for the first layer of the SE." }
+g_SndSeLayer0SpuVoice = { addr = 0x8018B318, type = "s16", source = "The SPU voice SND_SEPlay passes to SsUtKeyOnV as `voice` for the first layer of the SE; each later layer takes the next voice, wrapping at 24." }
+g_SndSeLayer0KeyedVoice = { addr = 0x8018B31C, type = "s16", source = "The voice SsUtKeyOnV returned for the first layer of the SE; SND_SEPlay passes it to SsUtSetDetVVol when the record sets EMI_SE_USE_VOLUME_FLAG." }
+g_SndSeLayer0Fine = { addr = 0x8018B320, type = "s16", source = "The fine pitch of the tone, passed to SsUtKeyOnV as `fine` for the first layer of the SE." }
+g_SndSeLayer0VolumeL = { addr = 0x8018B324, type = "s16", source = "The left volume of the tone, passed to SsUtKeyOnV as `voll` for the first layer of the SE; SND_SEPlay first scales it by the pan when the record sets EMI_SE_USE_VOLUME_FLAG." }
+g_SndSeLayer0VolumeR = { addr = 0x8018B328, type = "s16", source = "The right volume of the tone, passed to SsUtKeyOnV as `volr` for the first layer of the SE; SND_SEPlay first scales it by the pan when the record sets EMI_SE_USE_VOLUME_FLAG." }
+g_SndSeLayer0Pan = { addr = 0x8018B32C, type = "s16", source = "The pan of the tone for the first layer of the SE; SND_SEPlay splits the volumes with it as left x (0x80 - pan) / 0x80 and right x pan / 0x80 when the record sets EMI_SE_USE_VOLUME_FLAG." }
+g_SndSeLayer1Program = { addr = 0x8018B330, type = "s16", source = "The VAB program SND_SEPlay passes to SsUtKeyOnV as `prog` for the second layer of the SE." }
+g_SndSeLayer1Tone = { addr = 0x8018B338, type = "s16", source = "The tone SND_SEPlay passes to SsUtKeyOnV as `tone` for the second layer of the SE." }
+g_SndSeLayer1Note = { addr = 0x8018B33C, type = "s16", source = "The lowest key of the tone, passed to SsUtKeyOnV as `note` for the second layer of the SE." }
+g_SndSeLayer1SpuVoice = { addr = 0x8018B340, type = "s16", source = "The SPU voice SND_SEPlay passes to SsUtKeyOnV as `voice` for the second layer of the SE; each later layer takes the next voice, wrapping at 24." }
+g_SndSeLayer1KeyedVoice = { addr = 0x8018B344, type = "s16", source = "The voice SsUtKeyOnV returned for the second layer of the SE; SND_SEPlay passes it to SsUtSetDetVVol when the record sets EMI_SE_USE_VOLUME_FLAG." }
+g_SndSeLayer1Fine = { addr = 0x8018B348, type = "s16", source = "The fine pitch of the tone, passed to SsUtKeyOnV as `fine` for the second layer of the SE." }
+g_SndSeLayer1VolumeL = { addr = 0x8018B34C, type = "s16", source = "The left volume of the tone, passed to SsUtKeyOnV as `voll` for the second layer of the SE; SND_SEPlay first scales it by the pan when the record sets EMI_SE_USE_VOLUME_FLAG." }
+g_SndSeLayer1VolumeR = { addr = 0x8018B350, type = "s16", source = "The right volume of the tone, passed to SsUtKeyOnV as `volr` for the second layer of the SE; SND_SEPlay first scales it by the pan when the record sets EMI_SE_USE_VOLUME_FLAG." }
+g_SndSeLayer1Pan = { addr = 0x8018B354, type = "s16", source = "The pan of the tone for the second layer of the SE; SND_SEPlay splits the volumes with it as left x (0x80 - pan) / 0x80 and right x pan / 0x80 when the record sets EMI_SE_USE_VOLUME_FLAG." }
+g_SndSeLayer2Program = { addr = 0x8018B358, type = "s16", source = "The VAB program SND_SEPlay passes to SsUtKeyOnV as `prog` for the third layer of the SE." }
+g_SndSeLayer2Tone = { addr = 0x8018B360, type = "s16", source = "The tone SND_SEPlay passes to SsUtKeyOnV as `tone` for the third layer of the SE." }
+g_SndSeLayer2Note = { addr = 0x8018B364, type = "s16", source = "The lowest key of the tone, passed to SsUtKeyOnV as `note` for the third layer of the SE." }
+g_SndSeLayer2SpuVoice = { addr = 0x8018B368, type = "s16", source = "The SPU voice SND_SEPlay passes to SsUtKeyOnV as `voice` for the third layer of the SE; each later layer takes the next voice, wrapping at 24." }
+g_SndSeLayer2KeyedVoice = { addr = 0x8018B36C, type = "s16", source = "The voice SsUtKeyOnV returned for the third layer of the SE; SND_SEPlay passes it to SsUtSetDetVVol when the record sets EMI_SE_USE_VOLUME_FLAG." }
+g_SndSeLayer2Fine = { addr = 0x8018B370, type = "s16", source = "The fine pitch of the tone, passed to SsUtKeyOnV as `fine` for the third layer of the SE." }
+g_SndSeLayer2VolumeL = { addr = 0x8018B374, type = "s16", source = "The left volume of the tone, passed to SsUtKeyOnV as `voll` for the third layer of the SE; SND_SEPlay first scales it by the pan when the record sets EMI_SE_USE_VOLUME_FLAG." }
+g_SndSeLayer2VolumeR = { addr = 0x8018B378, type = "s16", source = "The right volume of the tone, passed to SsUtKeyOnV as `volr` for the third layer of the SE; SND_SEPlay first scales it by the pan when the record sets EMI_SE_USE_VOLUME_FLAG." }
+g_SndSeLayer2Pan = { addr = 0x8018B37C, type = "s16", source = "The pan of the tone for the third layer of the SE; SND_SEPlay splits the volumes with it as left x (0x80 - pan) / 0x80 and right x pan / 0x80 when the record sets EMI_SE_USE_VOLUME_FLAG." }
+g_SndSeLayer3Program = { addr = 0x8018B380, type = "s16", source = "The VAB program SND_SEPlay passes to SsUtKeyOnV as `prog` for the fourth layer of the SE." }
+g_SndSeLayer3Tone = { addr = 0x8018B388, type = "s16", source = "The tone SND_SEPlay passes to SsUtKeyOnV as `tone` for the fourth layer of the SE." }
+g_SndSeLayer3Note = { addr = 0x8018B38C, type = "s16", source = "The lowest key of the tone, passed to SsUtKeyOnV as `note` for the fourth layer of the SE." }
+g_SndSeLayer3SpuVoice = { addr = 0x8018B390, type = "s16", source = "The SPU voice SND_SEPlay passes to SsUtKeyOnV as `voice` for the fourth layer of the SE; each later layer takes the next voice, wrapping at 24." }
+g_SndSeLayer3KeyedVoice = { addr = 0x8018B394, type = "s16", source = "The voice SsUtKeyOnV returned for the fourth layer of the SE; SND_SEPlay passes it to SsUtSetDetVVol when the record sets EMI_SE_USE_VOLUME_FLAG." }
+g_SndSeLayer3Fine = { addr = 0x8018B398, type = "s16", source = "The fine pitch of the tone, passed to SsUtKeyOnV as `fine` for the fourth layer of the SE." }
+g_SndSeLayer3VolumeL = { addr = 0x8018B39C, type = "s16", source = "The left volume of the tone, passed to SsUtKeyOnV as `voll` for the fourth layer of the SE; SND_SEPlay first scales it by the pan when the record sets EMI_SE_USE_VOLUME_FLAG." }
+g_SndSeLayer3VolumeR = { addr = 0x8018B3A0, type = "s16", source = "The right volume of the tone, passed to SsUtKeyOnV as `volr` for the fourth layer of the SE; SND_SEPlay first scales it by the pan when the record sets EMI_SE_USE_VOLUME_FLAG." }
+g_SndSeLayer3Pan = { addr = 0x8018B3A4, type = "s16", source = "The pan of the tone for the fourth layer of the SE; SND_SEPlay splits the volumes with it as left x (0x80 - pan) / 0x80 and right x pan / 0x80 when the record sets EMI_SE_USE_VOLUME_FLAG." }
 g_SndSeVolumeL = { addr = 0x8018B3D8, type = "s16", source = "The left volume the SE dispatcher passes to SsUtSetDetVVol when the SE record sets EMI_SE_USE_VOLUME_FLAG." }
 g_SndSeVolumeR = { addr = 0x8018B3DC, type = "s16", source = "The right volume the SE dispatcher passes to SsUtSetDetVVol when the SE record sets EMI_SE_USE_VOLUME_FLAG." }
 g_SndSeAliasBank = { addr = 0x8018B3E0, type = "s16", source = "The alias bank byte of the current SE record: nonzero selects the bank whose VAB supplies the tone and voice." }
-g_SndSeLayers = { addr = 0x8018B3E4, type = "s16", source = "The layer count from the SE voice byte (bits 6-5): SND_SEPlay keys that many voices and the bank readers fill that many extra slots." }
+g_SndSeLayers = { addr = 0x8018B3E4, type = "s16", source = "The number of layers after the first (0 to 3), from bits 6-5 of the SE record's voice byte: SND_SEPlay keys layer 0 up to that layer and the bank readers fill them." }
 g_SndSeRetrigger = { addr = 0x8018B3E8, type = "s16", source = "The retrigger nibble of the SE voice byte (bits 3-0)." }
 g_SndSeLastRetrigger = { addr = 0x8018B3EC, type = "s16", source = "The previous SE's retrigger nibble, compared with g_SndSeRetrigger when the same voices are reused." }
 g_SndSeLastVoice = { addr = 0x8018B3F0, type = "s16", source = "The first voice the last SE keyed; the active-SE path indexes g_SndVoiceStatus with it." }
 g_SndSeUseVolume = { addr = 0x8018B3F4, type = "s16", source = "The EMI_SE_USE_VOLUME_FLAG bit of the SE program byte, 0 or 0x80: SND_SEPlay sets the detailed volume only when it is set." }
 g_SndSeRecord = { addr = 0x8018B404, type = "u16", source = "The record index of the SE being played, written by SND_SEPlay and multiplied by 4 by the bank readers." }
 g_SndSeBank = { addr = 0x8018B408, type = "u16", source = "The bank of the SE being played, written by SND_SEPlay before it calls g_SndSeReaders." }
+g_SndReservedVoiceAttr = { addr = 0x8018B450, type = "SpuVoiceAttr", source = "The attributes SND_Init sets on SPU voices 16 to 23 (SPU_16CH to SPU_23CH), set right after SND_Init calls SsSetReservedVoice(0x10); the PsyQ headers in the tree do not say what that call reserves." }
 g_EmiSectorPosition = { addr = 0x8018B490, type = "CdlLOC", source = "The position of the sector CD_OnReady just read, compared with the sector the loader expects." }
 g_EmiVramType = { addr = 0x8018B4A0, type = "u8", source = "The base kind of the graphics strip EMI_LoadToVram unpacks from g_EmiLoadArg: added to the step in the top byte of each ring slot's entry." }
 g_EmiVramRow = { addr = 0x8018B4A4, type = "u8", source = "The row of the graphics strip EMI_LoadToVram unpacks from g_EmiLoadArg; it advances when the step wraps at g_EmiVramEntryCount." }

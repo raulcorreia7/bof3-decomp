@@ -7,23 +7,23 @@ MATCH void SND_XAStateReadResult(void) {
     u16  count;
     u16* counter;
 
-    counter  = &D_8014681E;
+    counter  = &g_SndXAStateFrame;
     count    = *counter + 1;
     *counter = count;
     if (count & 0x1) {
-        if (D_8014682E <= 0) {
-            D_8014682E = 0;
+        if (g_SndXASyncResult <= 0) {
+            g_SndXASyncResult = 0;
             CdControlF(CdlGetlocL, 0);
             return;
         }
-        D_8014682E = 0;
-        D_8014681C = 0;
+        g_SndXASyncResult = 0;
+        g_SndXAWaitFrames = 0;
         if (CdLastCom() == CdlGetlocL) {
-            value      = CdPosToInt((CdlLOC*)((u8*)counter + 6));
-            D_80146814 = value;
-            if (value >= D_80146810) {
+            value                = CdPosToInt((CdlLOC*)((u8*)counter + 6));
+            g_SndXACurrentSector = value;
+            if (value >= g_SndXAEndSector) {
                 g_EmiServiceState = SND_XA_STATE_PAUSE;
-                D_8014682E        = 0;
+                g_SndXASyncResult = 0;
             }
         }
     }

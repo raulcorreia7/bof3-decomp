@@ -6,14 +6,70 @@ Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free 
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 g_BattleEffects = { addr = 0x801EC330, alias = true, source = "Battle effect work records (stride 0x78); Battle_AllocEffect claims a free one by setting bit 0 of header.flags." }
+g_BMagicKaiserBreathModes = { addr = 0x801EEC04, source = "The mode routines of the effect, run by header.mode." }
+BMagic_KaiserBreathUpdate = { addr = 0x801EEC24, type = "func", source = "Runs the current mode, then steps every orb and spark in use under the additive draw modes." }
+BMagic_KaiserBreathInit = { addr = 0x801EEDEC, type = "func", source = "Clears the particles, centres the camera, starts the flash and brightens the effect palette." }
+BMagic_KaiserBreathLoadDragon = { addr = 0x801EEF64, type = "func", source = "Loads the Kaizar archive of the current dragon form once the delay ends." }
+BMagic_KaiserBreathStartDragon = { addr = 0x801EF000, type = "func", source = "Hides the party and starts the dragon once its archive is loaded." }
+BMagic_KaiserBreathWaitDragon = { addr = 0x801EF110, type = "func", source = "Starts the flash once the dragon and its effects have ended." }
+BMagic_KaiserBreathLoadCharacter = { addr = 0x801EF1C0, type = "func", source = "Loads the sprite archive of the loaded character, Rei's dragon-form archives when Rei has queued the form." }
+BMagic_KaiserBreathLoadCharacterForm = { addr = 0x801EF3D0, type = "func", source = "Loads the character archive of the current dragon form once the last archive is ready." }
+BMagic_KaiserBreathShowParty = { addr = 0x801EF488, type = "func", source = "Shows the party again with the pose script their status selects, once the archive is ready." }
 Effect_StartOnZeroTick = { addr = 0x801EF61C, type = "func", source = "When the effect ticker (byte 0x0B) is zero raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic131 (KaiserBreath)." }
 BMagic_DispatchEffectMode = { addr = 0x801EF668, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic131." }
+BMagic_KaiserBreathRunDragon = { addr = 0x801EF6AC, type = "func", source = "Runs the dragon's step with the character sprites installed, then cycles its palette every fourth frame." }
+BMagic_KaiserBreathDragonStart = { addr = 0x801EF7FC, type = "func", source = "Places the dragon at the screen edge the battle scrolls from and starts its animation after the delay." }
+BMagic_KaiserBreathDragonFlyIn = { addr = 0x801EFA68, type = "func", source = "Moves the dragon in, then reverses its velocity." }
+BMagic_KaiserBreathDragonSettle = { addr = 0x801EFB64, type = "func", source = "Slows the dragon until the delay ends." }
+BMagic_KaiserBreathDragonHover = { addr = 0x801EFBF8, type = "func", source = "Loops the dragon's animation, then starts its breath script." }
+BMagic_KaiserBreathDragonBreathe = { addr = 0x801EFC74, type = "func", source = "Plays the breath script; at its end applies the damage flags and starts the rings, beam, orbs and sparks." }
+BMagic_KaiserBreathDragonBreatheEnd = { addr = 0x801EFEF0, type = "func", source = "Waits for the breath script to end." }
+BMagic_KaiserBreathDragonLeave = { addr = 0x801EFF48, type = "func", source = "Marks the targets damaged and sends the dragon away." }
+BMagic_KaiserBreathDragonEnd = { addr = 0x801F0034, type = "func", source = "Moves the dragon away and ends it when the timer runs out." }
+BMagic_KaiserBreathRunFlash = { addr = 0x801F0100, type = "func", source = "Runs the flash's step and draws it once it has started." }
 Effect_ClearTimerNextStep = { addr = 0x801F0178, type = "func", source = "Clears the effect timer (byte 0x09) and advances header.step (byte 0x02) in magic131 (KaiserBreath)." }
 Effect_CountUpByTwoAndStep = { addr = 0x801F01A8, type = "func", source = "Counts the effect timer (byte 0x09) up by two and advances header.step (byte 0x02) at 16 in magic131 (KaiserBreath)." }
+BMagic_KaiserBreathFlashHold = { addr = 0x801F01F8, type = "func", source = "Holds the flash until the loaded archive is ready." }
 Effect_CountDownAndStep = { addr = 0x801F0264, type = "func", source = "Counts the effect counter (byte 0x0A) down and advances header.step (byte 0x02) at zero in magic131 (KaiserBreath)." }
 Effect_TickOnTimerZero = { addr = 0x801F02B0, type = "func", source = "Counts the effect timer (byte 0x09) down by 1 per frame; at zero lowers the ticker (byte 0x0B) of battler g_BattleEffectBattler and clears the effect in magic131 (KaiserBreath)." }
+BMagic_KaiserBreathDrawFlash = { addr = 0x801F030C, type = "func", source = "Draws the screen-sized additive quad whose shade follows the timer." }
+BMagic_KaiserBreathRunRings = { addr = 0x801F0438, type = "func", source = "Runs the rings' step and draws them once they have started." }
+BMagic_KaiserBreathRingsStart = { addr = 0x801F04C0, type = "func", source = "Places the rings on the area scroll target." }
+BMagic_KaiserBreathRingsGrow = { addr = 0x801F053C, type = "func", source = "Widens the rings until the timer reaches its limit." }
+BMagic_KaiserBreathRingsEnd = { addr = 0x801F058C, type = "func", source = "Fades the rings out and ends them." }
 Effect_SetActorMatrix = { addr = 0x801F0604, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic131 (KaiserBreath)." }
-Effect_CountDownAndStep2 = { addr = 0x801F0C98, type = "func", source = "Counts the effect counter (byte 0x0A) down and advances header.step (byte 0x02) at zero in magic131 (KaiserBreath)." }
-Effect_SetActorMatrix4 = { addr = 0x801F0D44, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic131 (KaiserBreath)." }
+BMagic_KaiserBreathDrawRings = { addr = 0x801F06B4, type = "func", source = "Draws 8 rings of 16 textured quads around the party member." }
+BMagic_KaiserBreathRunBeam = { addr = 0x801F0B44, type = "func", source = "Runs the beam's step and draws it in its own matrix once it has started." }
+BMagic_KaiserBreathBeamStart = { addr = 0x801F0BCC, type = "func", source = "Places the beam on the area scroll target." }
+BMagic_KaiserBreathBeamGrow = { addr = 0x801F0C4C, type = "func", source = "Widens the beam until it reaches its full radius." }
+BMagic_KaiserBreathBeamHold = { addr = 0x801F0C98, type = "func", source = "Counts the effect counter (byte 0x0A) down and advances header.step (byte 0x02) at zero in magic131 (KaiserBreath)." }
+BMagic_KaiserBreathBeamEnd = { addr = 0x801F0CE4, type = "func", source = "Widens the beam while it fades and ends it." }
+BMagic_KaiserBreathBeamSetMatrix = { addr = 0x801F0D44, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic131 (KaiserBreath)." }
+BMagic_KaiserBreathDrawBeam = { addr = 0x801F0DF4, type = "func", source = "Draws the beam as a ring of 16 textured quads along the view depth." }
+BMagic_KaiserBreathRunParticle = { addr = 0x801F10F4, type = "func", source = "Runs the orb or spark handler the particle's mode selects." }
+BMagic_KaiserBreathRunOrb = { addr = 0x801F1138, type = "func", source = "Runs the orb's step and draws its glow once it has started." }
+BMagic_KaiserBreathOrbStart = { addr = 0x801F11B8, type = "func", source = "Places the orb on its orbit around the area scroll target." }
+BMagic_KaiserBreathOrbGrow = { addr = 0x801F12A0, type = "func", source = "Widens the orb's orbit until it reaches its full radius." }
+BMagic_KaiserBreathOrbEnd = { addr = 0x801F13A4, type = "func", source = "Widens the orb's orbit while it fades and ends it." }
+BMagic_KaiserBreathRunSpark = { addr = 0x801F14A0, type = "func", source = "Waits out the spark's delay, then runs its step and draws its glow." }
+BMagic_KaiserBreathSparkStart = { addr = 0x801F153C, type = "func", source = "Places the spark on its orbit around the area scroll target." }
+BMagic_KaiserBreathSparkGrow = { addr = 0x801F1644, type = "func", source = "Widens the spark's orbit until it reaches its full radius." }
+BMagic_KaiserBreathSparkEnd = { addr = 0x801F1748, type = "func", source = "Widens the spark's orbit while it fades and ends it." }
+BMagic_KaiserBreathDrawGlow = { addr = 0x801F1844, type = "func", source = "Draws the glow of the current particle as a fan of 8 triangles." }
+BMagic_KaiserBreathAllocParticle = { addr = 0x801F1A58, type = "func", source = "Claims a free particle and returns its index, or GAME_NONE." }
+BMagic_KaiserBreathFreeParticle = { addr = 0x801F1AC4, type = "func", source = "Clears the current particle." }
+BMagic_KaiserBreathProjectParticle = { addr = 0x801F1B14, type = "func", source = "Projects the current particle to the screen." }
 g_BMagicEffectModes = { addr = 0x801F1BC4, source = "Handlers of magic131 (KaiserBreath), run by header.mode (byte 0x01)." }
-g_BMagicRingUvRows = { addr = 0x801F1C08, type = "u8", source = "The u and v row bytes func_801F06B4 reads from the first words of the callback table D_801F1C08: one row per ring (v at +0xB, the next v at +0x13).", alias = true }
+g_BMagicKaiserBreathDragonSteps = { addr = 0x801F1BD4, source = "The step routines of the dragon." }
+g_BMagicKaiserBreathFlashSteps = { addr = 0x801F1BF4, source = "The step routines of the flash." }
+g_BMagicRingUvRows = { addr = 0x801F1C08, type = "u8", source = "The u and v row bytes BMagic_KaiserBreathDrawRings reads from the first words of the callback table g_BMagicKaiserBreathRingsSteps: one row per ring (v at +0xB, the next v at +0x13).", alias = true }
+g_BMagicKaiserBreathRingsSteps = { addr = 0x801F1C08, source = "The step routines of the rings." }
+g_BMagicKaiserBreathBeamSteps = { addr = 0x801F1C24, source = "The step routines of the beam." }
+g_BMagicKaiserBreathParticleModes = { addr = 0x801F1C30, source = "The handlers of the particle modes, orb and spark." }
+g_BMagicKaiserBreathOrbPhases = { addr = 0x801F1C38, source = "The orbit phase of each orb, by orb index." }
+g_BMagicKaiserBreathOrbSteps = { addr = 0x801F1C48, source = "The step routines of the orb." }
+g_BMagicKaiserBreathSparkPhases = { addr = 0x801F1C54, source = "The orbit phase of each spark, by spark index." }
+g_BMagicKaiserBreathSparkDepths = { addr = 0x801F1C74, source = "The depth offset of each spark, by spark index." }
+g_BMagicKaiserBreathSparkSteps = { addr = 0x801F1C94, source = "The step routines of the spark." }
+g_BMagicKaiserBreathParticles = { addr = 0x801F1CA0, source = "The pool of 48 orbs and sparks." }
+g_BMagicKaiserBreathParticle = { addr = 0x801F24E0, source = "The particle being stepped." }
