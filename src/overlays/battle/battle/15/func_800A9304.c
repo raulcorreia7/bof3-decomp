@@ -22,7 +22,7 @@
  *           flag set, the slot unblocked and not the current selection, an
  *           enemy slot is checked through its action row and action id. The
  *           result byte g_Battle.target_selector receives the slot, the current selection, or
- *           a 0x40/0x80/0xC0 action code.
+ *           the side mask of an all-target ability.
  */
 MATCH u8 func_800A9304(u8 slot) {
     s32 index;
@@ -49,12 +49,12 @@ MATCH u8 func_800A9304(u8 slot) {
             if (action & ABILITY_TARGET_FLAG_ALL) {
                 if (!(action & ABILITY_TARGET_FLAG_BOTH_SIDES)) {
                     if (g_Battle.unk_EA[1] >= BATTLE_PARTY_CHARACTERS_COUNT) {
-                        g_Battle.target_selector = 0x80;
+                        g_Battle.target_selector = BATTLE_TARGET_PARTY_SIDE;
                     } else {
-                        g_Battle.target_selector = 0x40;
+                        g_Battle.target_selector = BATTLE_TARGET_ENEMY_SIDE;
                     }
                 } else {
-                    g_Battle.target_selector = 0xC0;
+                    g_Battle.target_selector = BATTLE_TARGET_BOTH_SIDES;
                 }
                 return true;
             }

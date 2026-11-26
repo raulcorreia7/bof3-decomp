@@ -4,6 +4,7 @@
 /* Settings screen: draws the option rows and rebinds a pressed button to its input slot. */
 NON_MATCHING void func_801E206C(void) {
     u8* cursor;
+    u8* row;
     s32 cue;
     u16 buttons; /* the pressed actions, reduced to the first one */
     u16 scan;    /* the pressed actions, scanned for the first one */
@@ -56,20 +57,20 @@ NON_MATCHING void func_801E206C(void) {
     }
     keys = INPUT_REPEATED(g_PadStates[0].pressed, INPUT_DIRECTIONAL);
     if (keys & PADLup) {
-        cursor = &D_80148655;
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
-        *cursor = *cursor - 1;
-        if ((s8)*cursor < 8) {
+        row  = &D_80148655;
+        *row = *row - 1;
+        if ((s8)*row < 8) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
-            *cursor = 0xD;
+            *row = 0xD;
         }
     } else if (keys & PADLdown) {
-        cursor = &D_80148655;
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
-        *cursor = *cursor + 1;
-        if ((s8)*cursor >= 0xE) {
+        row  = &D_80148655;
+        *row = *row + 1;
+        if ((s8)*row >= 0xE) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
-            *cursor = 8;
+            *row = 8;
         }
     } else if (g_PadStates[0].pressed & (PADLright | PADLleft)) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));

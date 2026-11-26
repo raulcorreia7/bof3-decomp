@@ -1,7 +1,7 @@
 #include "battle_15.h"
 
 /* Averages the x, y and vertical span of the living battlers (the enemies in
- * the 0x40 mode, otherwise the three party slots) into the camera work
+ * the enemy-side mask, otherwise the three party slots) into the camera work
  * record. */
 /* func_800AFD9C */
 MATCH void Battle_CenterCamera(void) {
@@ -18,8 +18,8 @@ MATCH void Battle_CenterCamera(void) {
     sum_y    = 0;
     sum_x    = 0;
     flags    = g_Battle.target_selector;
-    if ((flags & 0xC0) != 0xC0) {
-        if (flags & 0x40) {
+    if ((flags & BATTLE_TARGET_BOTH_SIDES) != BATTLE_TARGET_BOTH_SIDES) {
+        if (flags & BATTLE_TARGET_ENEMY_SIDE) {
             for (i = 0; i < ENCOUNTER_ENEMY_COUNT; i++) {
                 if (Battle_SlotIsBlocked((i + BATTLE_PARTY_CHARACTERS_COUNT) & BYTE_MASK) == 0) {
                     count++;
