@@ -20,22 +20,22 @@ NON_MATCHING s32 func_801BA678(void) {
     if (COORD_FRAC(TASK(Actor)->pos.x) == 0 && COORD_FRAC(TASK(Actor)->pos.y) == 0) {
         return 1;
     }
-    dx = D_80181B00[TASK(Actor)->direction * 2];
+    dx = D_80181B00[TASK(Actor)->direction][0];
     if (dx == 1) {
         dx = 2;
     }
-    dy = D_80181B01[TASK(Actor)->direction * 2];
+    dy = D_80181B00[TASK(Actor)->direction][1];
     if (dy == 1) {
         dy = 2;
     }
     near_x  = COORD_INT(TASK(Actor)->pos.x);
     ahead_x = COORD_INT(TASK(Actor)->pos.x) + dx;
     ahead_y = COORD_INT(TASK(Actor)->pos.y) + dy;
-    if (D_80181B00[TASK(Actor)->direction * 2] == 1) {
+    if (D_80181B00[TASK(Actor)->direction][0] == 1) {
         near_x += 1;
     }
     near_y = COORD_INT(TASK(Actor)->pos.y);
-    if (D_80181B01[TASK(Actor)->direction * 2] == 1) {
+    if (D_80181B00[TASK(Actor)->direction][1] == 1) {
         near_y += 1;
     }
     func_801BBCCC(ahead_x, ahead_y, near_x, near_y);

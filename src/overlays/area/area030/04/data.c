@@ -4,7 +4,7 @@
  * Each pointer table and byte table is its own object; row tables use their
  * record types with direct brace initializers. A few retail rows start at an
  * offset the 4-byte object alignment cannot express (D_801E1F16, the
- * D_801E1FE8 group, D_801E2025, D_801E21D9 and D_801E2331), so each run
+ * D_801E1FE8 group, D_801E2025 and D_801E21D9), so each run
  * is one packed row container whose fields keep the retail names.
  * Address-named views of a row (D_801E207D, D_801E2ACA, D_801E2720, ...)
  * stay names of their own: the linker pins every D_<ADDR> name to its
@@ -58,11 +58,6 @@ struct FishingBannerRows {
 struct FishingMenuLabels {
     u8 unk_00[5]; /* D_801E21D4 */
     u8 unk_05[7]; /* D_801E21D9 */
-} __attribute__((packed));
-
-struct FishingPanelRows {
-    u8 unk_00[1];  /* D_801E2330 */
-    u8 unk_01[15]; /* D_801E2331 */
 } __attribute__((packed));
 
 Callback D_801E1CD4[5] = {
@@ -316,25 +311,8 @@ void (*g_FishingFishSteps[7])(void) = {
     (void (*)(void))Fishing_FishAppear, (void (*)(void))Fishing_FishSwim, (void (*)(void))func_801DEBC4, (void (*)(void))func_801DECDC,
     (void (*)(void))func_801DF334,      (void (*)(void))func_801DFFA8,    (void (*)(void))func_801E00E0,
 };
-static struct FishingPanelRows sPanelRows = {
-    {0x04},
-    {
-        0x00,
-        0x03,
-        0x00,
-        0x02,
-        0x00,
-        0x01,
-        0x00,
-        0x00,
-        0x00,
-        0x01,
-        0x01,
-        0x02,
-        0x01,
-        0x03,
-        0x01,
-    },
+u8 D_801E2330[8][2] = {
+    {0x04, 0x00}, {0x03, 0x00}, {0x02, 0x00}, {0x01, 0x00}, {0x00, 0x00}, {0x01, 0x01}, {0x02, 0x01}, {0x03, 0x01},
 };
 Callback D_801E2340[2] = {
     (Callback)func_801DFFEC,

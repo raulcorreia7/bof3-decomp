@@ -10,8 +10,8 @@ MATCH u8 func_801B44DC(u8 wanted_code) {
     if (COORD_FRAC(TASK(Actor)->pos.x) != 0 && COORD_FRAC(TASK(Actor)->pos.y) != 0)
         return false;
     dir = TASK(Actor)->direction;
-    x   = COORD_INT(TASK(Actor)->pos.x) + D_80181B00[dir << 1];
-    y   = COORD_INT(TASK(Actor)->pos.y) + D_80181B01[dir << 1];
+    x   = COORD_INT(TASK(Actor)->pos.x) + D_80181B00[dir][0];
+    y   = COORD_INT(TASK(Actor)->pos.y) + D_80181B00[dir][1];
     if (COORD_FRAC(TASK(Actor)->pos.x) == 0 && COORD_FRAC(TASK(Actor)->pos.y) == 0) {
         g_ScratchPad.cells.halves[0] = COORD_INT(TASK(Actor)->pos.x);
         g_ScratchPad.cells.halves[1] = y;
@@ -39,12 +39,12 @@ MATCH u8 func_801B44DC(u8 wanted_code) {
             }
         } else if (TASK(Actor)->direction & 1) {
             i                            = (TASK(Actor)->direction + 2) & 7;
-            g_ScratchPad.cells.halves[0] = COORD_INT(TASK(Actor)->pos.x) + D_80181B00[i << 1];
-            g_ScratchPad.cells.halves[1] = COORD_INT(TASK(Actor)->pos.y) + D_80181B01[i << 1];
+            g_ScratchPad.cells.halves[0] = COORD_INT(TASK(Actor)->pos.x) + D_80181B00[i][0];
+            g_ScratchPad.cells.halves[1] = COORD_INT(TASK(Actor)->pos.y) + D_80181B00[i][1];
             if ((Area_CellGetCode(g_ScratchPad.cells.halves[0], g_ScratchPad.cells.halves[1]) & BYTE_MASK) != wanted_code) {
                 i                            = (TASK(Actor)->direction - 2) & 7;
-                g_ScratchPad.cells.halves[0] = COORD_INT(TASK(Actor)->pos.x) + D_80181B00[i << 1];
-                g_ScratchPad.cells.halves[1] = COORD_INT(TASK(Actor)->pos.y) + D_80181B01[i << 1];
+                g_ScratchPad.cells.halves[0] = COORD_INT(TASK(Actor)->pos.x) + D_80181B00[i][0];
+                g_ScratchPad.cells.halves[1] = COORD_INT(TASK(Actor)->pos.y) + D_80181B00[i][1];
                 if ((Area_CellGetCode(g_ScratchPad.cells.halves[0], g_ScratchPad.cells.halves[1]) & BYTE_MASK) != wanted_code)
                     return false;
             }
