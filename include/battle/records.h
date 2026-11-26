@@ -244,6 +244,7 @@ typedef enum BMagicEffectType {
     BMAGIC_EFFECT_FIREBLAST          = 40,
     BMAGIC_EFFECT_SIMOON             = 45,
     BMAGIC_EFFECT_WALL_OF_FIRE       = 54,
+    BMAGIC_EFFECT_INFLUENCE          = 57,
     BMAGIC_EFFECT_BURST              = 62,
     BMAGIC_EFFECT_ACCESSION          = 68,
     BMAGIC_EFFECT_SHADOW_BREATH      = 78,
