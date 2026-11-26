@@ -3,20 +3,17 @@
 /* Draws the four edges and the cut corners of the rectangle at (x, y) in the colour row of the window
  * style; the high nibble of the flag byte cuts the corners. */
 #ifdef NON_MATCHING
-NON_MATCHING void UI_WindowDrawOutline(s16 x, s16 y, s16 width, s32 height, s32 flags) {
+NON_MATCHING void UI_WindowDrawOutline(s32 x, s32 y, s32 width, s32 height, s32 flags) {
     u16 corner[4];
+    s16 left;
     u16 color;
-    s32 left;
-    s32 top;
-    s32 x_end;
-    s16 y_end;
-    s16 edge;
+    s32 bottom;
+    s32 right;
     s32 mode_flag;
-    s32 mode_arg;
     u8  r;
     u8  g;
     u8  b;
-    u8  mode_a;
+    s32 mode_a;
     u8  mode_b;
     s32 i;
     s32 bit;
@@ -24,9 +21,10 @@ NON_MATCHING void UI_WindowDrawOutline(s16 x, s16 y, s16 width, s32 height, s32 
 
     mode_a    = 2;
     left      = x;
-    top       = y;
-    x_end     = width;
     color     = *(u16*)((u8*)D_80033A08 + ((GAME_WINDOW_STYLE << 6) | 0x20));
+    r         = PSX_COLOR_R(color) << 3;
+    g         = PSX_COLOR_G(color) << 3;
+    b         = PSX_COLOR_B(color) << 3;
     mode_flag = flags & 1;
     if (mode_flag == 0) {
         mode_a = 1;
@@ -39,7 +37,7 @@ NON_MATCHING void UI_WindowDrawOutline(s16 x, s16 y, s16 width, s32 height, s32 
     i   = 0;
     do {
         index = i & BYTE_MASK;
-        if (bit & ((flags & BYTE_MASK) >> 4)) {
+        if (bit & ((u8)flags >> 4)) {
             corner[index] = 3;
         } else {
             corner[index] = 0;
@@ -47,31 +45,23 @@ NON_MATCHING void UI_WindowDrawOutline(s16 x, s16 y, s16 width, s32 height, s32 
         i++;
         bit *= 2;
     } while ((i & BYTE_MASK) < 4U);
-    r        = PSX_COLOR_R(color) << 3;
-    g        = PSX_COLOR_G(color) << 3;
-    b        = PSX_COLOR_B(color) << 3;
-    mode_arg = mode_a;
-    y_end    = top + height;
-
-    GFX_DrawLine(left, top + corner[0], left, y_end - (corner[2] + 1), r, g, b, mode_arg);
+    bottom = y + height;
+    GFX_DrawLine(left, y + corner[0], left, bottom - (corner[2] + 1), r, g, b, mode_a);
     if ((s16)corner[0] != 0) {
-        GFX_DrawLine(left, y_end - (corner[2] + 1), left + corner[2], y_end, r, g, b, mode_b);
+        GFX_DrawLine(left, bottom - (corner[2] + 1), x + corner[2], bottom, r, g, b, mode_b);
     }
-    edge = y_end;
-    x_end += left;
-    GFX_DrawLine(left + corner[2], edge, x_end - (corner[3] + 1), edge, r, g, b, mode_b);
+    right = x + width;
+    GFX_DrawLine(x + corner[2], bottom, right - (corner[3] + 1), bottom, r, g, b, mode_b);
     if ((s16)corner[1] != 0) {
-        GFX_DrawLine(x_end - (corner[3] + 1), edge, x_end, y_end - corner[3], r, g, b, mode_b);
+        GFX_DrawLine(right - (corner[3] + 1), bottom, right, bottom - corner[3], r, g, b, mode_b);
     }
-    edge = x_end;
-    GFX_DrawLine(edge, y_end - corner[3], edge, top + corner[1] + 1, r, g, b, mode_b);
+    GFX_DrawLine(right, bottom - corner[3], right, y + (corner[1] + 1), r, g, b, mode_b);
     if ((s16)corner[2] != 0) {
-        GFX_DrawLine(edge, top + corner[1] + 1, x_end - corner[1], top, r, g, b, mode_arg);
+        GFX_DrawLine(right, y + (corner[1] + 1), right - corner[1], y, r, g, b, mode_a);
     }
-    edge = top;
-    GFX_DrawLine(x_end - corner[1], edge, left + corner[0] + 1, edge, r, g, b, mode_arg);
+    GFX_DrawLine(right - corner[1], y, x + (corner[0] + 1), y, r, g, b, mode_a);
     if ((s16)corner[3] != 0) {
-        GFX_DrawLine(left + corner[0] + 1, edge, left, top + corner[0], r, g, b, mode_arg);
+        GFX_DrawLine(x + (corner[0] + 1), y, left, y + corner[0], r, g, b, mode_a);
     }
 }
 #else
