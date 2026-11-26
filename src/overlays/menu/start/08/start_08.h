@@ -475,7 +475,7 @@ extern s8              D_801ED648;
 /* The start overlay's slot rows (three bytes per slot) and its byte table;
  * every reader indexes or walks them as bytes. */
 /* D_801ED680 */
-extern u8              g_FormationCells[];
+extern u8              g_FormationCells[][3]; /* the 3x3 formation grid: column 0 a member present, 1 and 2 a usable cell */
 /* D_801ED68C */
 extern u8              g_MenuPartyCommand;
 extern u8              D_801ED690[];
