@@ -14,9 +14,8 @@
 /* The game mode the trigger records of this payload match. */
 /* The payload includes per-state handler tables. */
 extern u8 D_801F4A68[];
-/* The effect rows' screen x and threshold bytes, two entries each. */
-extern u8 D_801F4AC4[];
-extern u8 D_801F4AC5[];
+/* The effect's restart y and bottom y for each side. */
+extern u8 D_801F4AC4[][2];
 /* Trigger records at the tail of the payload: two match bytes, a mode nibble and a flag bit. */
 extern u8 D_801F68B4[];
 
