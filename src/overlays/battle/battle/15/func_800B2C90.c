@@ -23,7 +23,7 @@ NON_MATCHING void func_800B2C90(MenuPanelTask* task) {
     void*    name_table;
 
     UI_WindowDraw((task->pos.x + 3) & HALF_MASK, (task->pos.y + 3) & HALF_MASK, 153, 130, 0, (s32)g_WindowStyle);
-    selection = func_801AFD10(&task->u.battle.cursor, &scroll_y, &count, &task->u.battle.row_base);
+    selection = UI_ScrollList(&task->u.battle.cursor, &scroll_y, &count, &task->u.battle.row_base);
     selection &= BYTE_MASK;
     types  = Party_GetAbilities((u32)task->unk_0A, (u32)task->unk_0B, 1U) + selection;
     line_y = task->pos.y + (s8)scroll_y;

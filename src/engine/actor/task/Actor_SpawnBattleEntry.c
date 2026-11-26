@@ -1,6 +1,8 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH void func_801A623C(u8* script) {
+/* func_801A623C */
+/* Spawns a map actor from a type 7 setup record; its last byte is the entry id Battle_FindActorEntry matches. */
+MATCH void Actor_SpawnBattleEntry(u8* script) {
     s16*   counter = (s16*)&g_ScratchPad;
     s16    slot;
     Actor* work;
@@ -54,7 +56,7 @@ MATCH void func_801A623C(u8* script) {
     TASK(Actor)->tint.bytes.rgb.g = 0;
     TASK(Actor)->tint.bytes.flags = 2;
 
-    func_801A4914();
+    Actor_StartFacingScript();
 
     (FAKE_VOLATILE(u16, g_ScratchPad)) = (FAKE_VOLATILE(u16, g_ScratchPad)) + 1;
 }

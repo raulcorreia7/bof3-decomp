@@ -67,7 +67,7 @@ MATCH void func_801A57F0(u8* script) {
     TASK(Actor)->tint.bytes.rgb.g = 0;
     TASK(Actor)->tint.bytes.flags = script[3] & 0xF;
 
-    func_801A4914();
+    Actor_StartFacingScript();
 
     (FAKE_VOLATILE(u16, g_ScratchPad)) = (FAKE_VOLATILE(u16, g_ScratchPad)) + 1;
 }

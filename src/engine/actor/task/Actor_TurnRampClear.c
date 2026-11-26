@@ -1,6 +1,8 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH void func_801A4B80(s32 index) {
+/* func_801A4B80 */
+/* Clears the turn ramp of one party slot. */
+MATCH void Actor_TurnRampClear(s32 index) {
     s32 slot;
 
     slot                             = index & BYTE_MASK;

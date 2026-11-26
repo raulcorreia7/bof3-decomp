@@ -1,23 +1,26 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH u8* func_801A46E8(u8* cursor) {
+/* func_801A4640 */
+/* Runs the records of one if-chain branch up to its end code and returns the cursor after it. */
+MATCH u8* Area_RunSetupChainBody(u8* cursor) {
     u8 keep_going;
     u8 value;
 
     keep_going = 1;
     while (keep_going) {
         value = *cursor;
-        if (value >= 0xF0) {
+        if (value >= AREA_SETUP_CONTROL_IF) {
             switch (value - 0xF0) {
                 case 0x0:
                 case 0x1:
                 case 0x4:
                 case 0x9:
                 case 0xA:
-                    cursor = Area_SkipSetupBranch(cursor);
+                    cursor = Area_RunSetupBranch(cursor);
                     break;
                 case 0x6:
-                    return cursor;
+                    cursor += 2;
+                    break;
                 case 0x8:
                     keep_going = 0;
                     cursor += 1;
@@ -27,7 +30,7 @@ MATCH u8* func_801A46E8(u8* cursor) {
                     break;
             }
         } else {
-            cursor += s_ScriptOpcodeLengths[value >> 4];
+            cursor = Area_RunSetupRecord(cursor);
         }
     }
     return cursor;

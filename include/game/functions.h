@@ -70,11 +70,13 @@ void func_801A18C8(Actor* record);
 bool func_801A1AE4(Actor* arg);
 /* func_801A3A08 */
 void func_801A3A08(void);
+/* Actor_TurnRampStep */
 /* func_801A3D1C */
-void func_801A3D1C(void* unused);
+void Actor_TurnRampStep(void* unused);
 void func_801A6C98(u8* record);
+/* Actor_SpawnSearchSpot */
 /* func_801A7330 */
-void func_801A7330(const volatile u8* data);
+void Actor_SpawnSearchSpot(const volatile u8* data);
 u8   func_801ABD68(s32 pos_x, s32 pos_y, s32 step_count, void* deltas);
 /* func_801AC1DC */
 void func_801AC1DC(s32* out, u8 selector);
@@ -84,8 +86,9 @@ void UI_CursorDrawName(s32 line_x, s32 line_y, s32 line_length, s32 line_mode);
 s32  func_801AF390(s16 x, s16 y, u8* table, s32 flags);
 /* func_801AF5B0 */
 u8   func_801AF5B0(s32 item_category, s32 character_index, s32 ability_type);
+/* UI_ScrollList */
 /* func_801AFD10 */
-s32  func_801AFD10(u8* first_row, u8* scroll_y, u8* extra_rows, u8* scroll);
+s32  UI_ScrollList(u8* first_row, u8* scroll_y, u8* extra_rows, u8* scroll);
 /* func_801AFF90 */
 s16  func_801AFF90(Pos2* origin, Pos2* first_point, Pos2* second_point);
 /* func_801B0E44 */

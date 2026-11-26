@@ -38,7 +38,7 @@ MATCH void func_801A6C98(u8* record) {
     TASK(Actor)->direction = script[0] & 0xF;
 
     Actor_ResetMotion();
-    func_801A4B80(script[0xB]);
+    Actor_TurnRampClear(script[0xB]);
     SYS_InitScratchpad(src);
 
     x    = script[2] << 16;

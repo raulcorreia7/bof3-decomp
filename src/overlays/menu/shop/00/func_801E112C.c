@@ -17,7 +17,7 @@ MATCH void func_801E112C(MenuPanelTask* task) {
 
     UI_WindowDraw((task->pos.x + 3) & HALF_MASK, (task->pos.y + 3) & HALF_MASK, MENU_INVENTORY_WINDOW_WIDTH, MENU_INVENTORY_WINDOW_HEIGHT, 0, CHARACTER_BLOCK->window_style);
     /* The ability stock begins 0xB1A bytes past the window style the panel block opens with. */
-    types = MEM_PTR(u8, CHARACTER_BLOCK) + 0xB1A + (func_801AFD10(&task->unk_0A, &row_offset, &count, MEM_PTR(u8, &task->flags)) & BYTE_MASK);
+    types = MEM_PTR(u8, CHARACTER_BLOCK) + 0xB1A + (UI_ScrollList(&task->unk_0A, &row_offset, &count, MEM_PTR(u8, &task->flags)) & BYTE_MASK);
     y     = task->pos.y + (s8)row_offset;
     for (i = 0; i < count + 9; i++) {
         if (*types != 0) {

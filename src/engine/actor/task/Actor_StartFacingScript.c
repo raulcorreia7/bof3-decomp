@@ -1,6 +1,8 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH void func_801A4914(void) {
+/* func_801A4914 */
+/* Selects the animation script for the current actor's facing, mirrored by its option flags when route-locked. */
+MATCH void Actor_StartFacingScript(void) {
     Actor* work;
     u8     flags;
 

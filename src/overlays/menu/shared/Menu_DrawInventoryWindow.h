@@ -24,7 +24,7 @@ MATCH void Menu_DrawInventoryWindow(MenuPanelTask* task) {
     u8   scroll_shift;
 
     UI_WindowDraw(task->pos.x + 3, task->pos.y + 3, MENU_INVENTORY_WINDOW_WIDTH, MENU_INVENTORY_WINDOW_HEIGHT, task->unk_09, CHARACTER_BLOCK->window_style);
-    first  = func_801AFD10(&task->unk_0B, &scroll_y, &scroll_rows, (u8*)&task->u.list.scroll);
+    first  = UI_ScrollList(&task->unk_0B, &scroll_y, &scroll_rows, (u8*)&task->u.list.scroll);
     y      = task->pos.y + (s8)scroll_y;
     ids    = g_ItemCategoryIds[task->unk_0A] + first;
     counts = g_ItemCategoryCounts[task->unk_0A] + first;

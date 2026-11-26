@@ -1,8 +1,10 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
 /* Entity spawn counter in scratchpad (signed 16-bit slot index). */
 
-MATCH void func_801A7330(const volatile u8* data) {
+/* func_801A7330 */
+/* Spawns a searchable object from a type 9 setup record; its flag bit says whether it was already searched. */
+MATCH void Actor_SpawnSearchSpot(const volatile u8* data) {
     s16*   counter = (s16*)&g_ScratchPad;
     s16    dist;
     s16    slot;

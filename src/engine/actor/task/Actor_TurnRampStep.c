@@ -1,6 +1,8 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH void func_801A3D1C(void* unused) {
+/* func_801A3D1C */
+/* Adds one frame of the current party actor's turn ramp to its angles. */
+MATCH void Actor_TurnRampStep(void* unused) {
     Actor* work;
     s32    slot;
     s32    index;

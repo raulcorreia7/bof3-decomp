@@ -13,7 +13,7 @@ MATCH void func_801F4F18(void) {
     }
     func_801F5F28();
     work = TASK(Actor);
-    func_801A7330(D_801F6B74[g_SceneEventState.selection]);
+    Actor_SpawnSearchSpot(D_801F6B74[g_SceneEventState.selection]);
     next              = TASK(Actor);
     next->pos.x.fixed = work->pos.x.fixed;
     next->pos.y.fixed = work->pos.y.fixed;

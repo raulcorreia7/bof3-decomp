@@ -115,23 +115,33 @@ Game_FadeDispatchWhite = { addr = 0x801A3594, type = "func", source = "calls the
 Game_FadeStartWhite = { addr = 0x801A35D8, type = "func", source = "Step 0 of the D_801C8434 table, followed by func_801A3648: starts a white palette fade (GFX_PaletteAllocFade 0x1F, 0x1F, 0x1F) on the running task and clears ACTOR_FLAG_HIDDEN." }
 Game_FadeDispatchBlack = { addr = 0x801A37D4, type = "func", source = "calls the fade-to-black step selected by the step byte" }
 Game_FadeStartBlack = { addr = 0x801A3818, type = "func", source = "Step 0 of the D_801C843C table, followed by func_801A386C: starts a black palette fade (GFX_PaletteAllocFade 0, 0, 0) on the running task." }
+Actor_TurnRampStep = { addr = 0x801A3D1C, type = "func", source = "Applies one frame of the current party actor's turn ramp to its angles." }
 Area_RunSetupStream = { addr = 0x801A3E50, type = "func", source = "Runs the area setup stream of an AreaLoad handler: clears the four g_PartyActors rows, runs Area_RunSetupRecords over the stream and clears the unused g_Actors entries." }
 Area_RunSetupRecords = { addr = 0x801A3F3C, type = "func", source = "the body stores into g_ScenarioState.scenario_id" }
 Area_RunSetupIf = { addr = 0x801A3FC0, type = "func", source = "Setup stream 0xF0: runs the records up to 0xFE when the area test holds, else its other branch." }
 Area_RunSetupIfNot = { addr = 0x801A4158, type = "func", source = "Setup stream 0xF1: runs the records up to 0xFE when the area test fails, else its other branch." }
+Area_RunSetupBlockStep = { addr = 0x801A42F0, type = "func", source = "Setup stream: runs the next control code or record of an if block." }
+Area_SkipSetupBlockStep = { addr = 0x801A4374, type = "func", source = "Setup stream: steps over the next control code or record of an if block without running it." }
 Area_RunSetupBranch = { addr = 0x801A4400, type = "func", source = "Runs one setup stream control record 0xF0 to 0xFA: conditional blocks and the scenario id store." }
 Area_SkipSetupBranch = { addr = 0x801A44A4, type = "func", source = "Steps over a setup stream control record without running it." }
 Area_RunSetupIfChain = { addr = 0x801A4518, type = "func", source = "Setup stream 0xF4: runs the branch of the first area test that holds; 0xF6 starts the next test, 0xF7 the default, 0xF5 ends." }
+Area_RunSetupChainBody = { addr = 0x801A4640, type = "func", source = "Setup stream: runs the records of one if-chain branch up to its 0xF8 end code." }
+Area_SkipSetupChainBody = { addr = 0x801A46E8, type = "func", source = "Setup stream: steps over the records of one if-chain branch." }
 Area_SkipSetupIf = { addr = 0x801A4798, type = "func", source = "Steps over a 0xF0 or 0xF1 setup block." }
 Area_SkipSetupIfChain = { addr = 0x801A4844, type = "func", source = "Steps over a 0xF4 setup chain." }
+Actor_StartFacingScript = { addr = 0x801A4914, type = "func", source = "Starts the animation script for the facing direction of a newly spawned map actor." }
 Actor_SetOptionFlags = { addr = 0x801A4990, type = "func", source = "the body stores into g_Task->option_flags" }
 Actor_ResetMotion = { addr = 0x801A4AA8, type = "func", source = "Clears a spawned actor's scale, roll and animation callback state." }
+Actor_TurnRampClear = { addr = 0x801A4B80, type = "func", source = "Clears the turn ramp of one party slot." }
 Area_CellSetCode = { addr = 0x801A4BC0, type = "func", source = "Writes the g_AreaCellCodes byte of the cell at (column, row); Area_CellGetCode reads the same index." }
 Area_RunSetupRecord = { addr = 0x801A4BF8, type = "func", source = "Runs one setup stream record of type 0x0 to 0xE and returns the next record." }
 Actor_SpawnFromRecord = { addr = 0x801A4D54, type = "func", source = "Spawns an actor in the next free slot from a 17-byte scene script record (scene record, position, mode, step)." }
+Actor_SpawnVoiced = { addr = 0x801A5B78, type = "func", source = "Spawns a map actor from a type 3 setup record, with its voice flags." }
+Actor_SpawnBattleEntry = { addr = 0x801A623C, type = "func", source = "Spawns a battle entry actor from a type 7 setup record; the entry id is the one Battle_FindActorEntry looks up." }
 Actor_SpawnPartyFromRecord = { addr = 0x801A65A0, type = "func", source = "Spawns a party member actor from a 16-byte scene script record; loads the member sprite." }
 Area_ScrollInitRoute = { addr = 0x801A72B0, type = "func", source = "Setup stream type 0xC: starts the scroll route its byte 1 selects." }
 Area_SetEntityCallback = { addr = 0x801A72E8, type = "func", source = "Setup stream type 0xD: sets the current entity's callback index, or its word 0x7C when byte 1 is zero." }
+Actor_SpawnSearchSpot = { addr = 0x801A7330, type = "func", source = "Spawns a searchable object from a type 9 setup record: removed or opened when its searched flag is set." }
 Scene_Start = { addr = 0x801A7704, type = "func", source = "Scenario start: loads the overlay of g_ScenarioState.scenario_id, waits for its SCENA payload, then dispatches the scenario entry." }
 Scene_LoadOverlay = { addr = 0x801A7804, type = "func", source = "Streams the overlay slot 661 + scenario id and waits for the loader; Scene_Start calls it before the scenario handler runs." }
 Game_ScenarioUpdate = { addr = 0x801A782C, type = "func", source = "Calls entry_00 of the g_ScenarioHandlers handler table of the active scenario, then Game_UpdateScene." }
@@ -193,6 +203,7 @@ Item_PassesTest = { addr = 0x801AF494, type = "func", source = "Tells whether an
 UI_ListDrawItemRow = { addr = 0x801AF800, type = "func", source = "Draws an item row: icon, name from the item record, and a count when it is two or more." }
 UI_ListDrawAbilityRow = { addr = 0x801AF930, type = "func", source = "Draws one row of an ability list: the element icon, the ability name from its text command stream and the cost as a two-digit number at the right, in the given text shade." }
 UI_ListDrawScrollbar = { addr = 0x801AFA1C, type = "func", source = "Draws a list scrollbar: a red mark per flagged row on the track and the thumb; menu list windows call it." }
+UI_ScrollList = { addr = 0x801AFD10, type = "func", source = "Advances a list window's row scroll by one frame and returns the first row to draw." }
 Camera_SetMatrix = { addr = 0x801AFE18, type = "func", source = "Sets the GTE rotation and translation from the camera angle, height and offsets, and returns out_matrix unchanged." }
 Camera_ProjectPoint = { addr = 0x801AFF04, type = "func", source = "Projects the 16.16 position pos through RotTransPers and writes the result to screen_xy." }
 MATH_SetIdentity = { addr = 0x801AFF64, type = "func", source = "Writes 4096 to the three diagonal cells of a 3x3 s16 matrix and 0 to the other six." }
@@ -364,7 +375,7 @@ g_ActorFacingAngles = { addr = 0x801C8424, size = 0x10, source = "The eight faci
 D_801C842A = { addr = 0x801C842A, size = 0x1, alias = true, source = "The second half of the facing-angle table g_ActorFacingAngles from its fourth u16, used as an array by func_801A3080." }
 D_801C8434 = { addr = 0x801C8434, size = 0x8, source = "The two fade handlers Game_FadeStartWhite and func_801A3648 that func_801A3594 runs by g_Task->unk_04." }
 D_801C843C = { addr = 0x801C843C, size = 0x8, source = "The two fade handlers Game_FadeStartBlack and func_801A386C that func_801A37D4 runs by g_Task->unk_04." }
-s_ScriptOpcodeLengths = { addr = 0x801C8444, size = 0x10, source = "Length in bytes of each script opcode; the script walkers (func_801A4374, func_801A46E8, func_801A4798, func_801A4844, func_801A4BF8) advance the cursor by it." }
+s_ScriptOpcodeLengths = { addr = 0x801C8444, size = 0x10, source = "Length in bytes of each script opcode; the script walkers (Area_SkipSetupBlockStep, Area_SkipSetupChainBody, func_801A4798, func_801A4844, func_801A4BF8) advance the cursor by it." }
 g_ScenarioHandlers = { addr = 0x801C8454, size = 0x50, source = "Step tables of the scenarios, indexed by g_ScenarioState.scenario_id by Game_ScenarioUpdate." }
 g_SceneSteps = { addr = 0x801C84A4, size = 0x8, source = "Scene update callbacks, indexed by the scene state byte D_801448EA by Game_UpdateScene." }
 s_EventFlagsReset = { addr = 0x801C84AC, size = 0x10, source = "Scene_ResetEventState copies these 16 mode bytes to g_SceneEventFlags" }

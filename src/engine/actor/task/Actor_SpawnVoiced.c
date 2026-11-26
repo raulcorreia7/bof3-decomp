@@ -1,8 +1,10 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
 /* Entity spawn counter in scratchpad (signed 16-bit slot index). */
 
-MATCH void func_801A5B78(u8* script) {
+/* func_801A5B78 */
+/* Spawns a map actor from a type 3 setup record: the entity record plus its voice flags. */
+MATCH void Actor_SpawnVoiced(u8* script) {
     s16*   counter = (s16*)&g_ScratchPad;
     s16    slot;
     Actor* work;
@@ -62,7 +64,7 @@ MATCH void func_801A5B78(u8* script) {
     TASK(Actor)->tint.bytes.rgb.g = 0;
     TASK(Actor)->tint.bytes.flags = script[3] & 0xF;
 
-    func_801A4914();
+    Actor_StartFacingScript();
 
     (FAKE_VOLATILE(u16, g_ScratchPad)) = (FAKE_VOLATILE(u16, g_ScratchPad)) + 1;
 }

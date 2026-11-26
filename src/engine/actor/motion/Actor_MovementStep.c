@@ -44,6 +44,6 @@ MATCH s8 Actor_MovementStep(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_
             TASK(Actor)->unk_04 = 3;
         }
     }
-    func_801A3D1C((void*)entry);
+    Actor_TurnRampStep((void*)entry);
     return 1;
 }

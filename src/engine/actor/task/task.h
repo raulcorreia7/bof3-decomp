@@ -63,5 +63,13 @@ u8   Actor_TurnRandom(void* record);
 void Actor_SetOptionFlags(u8* script);
 void Actor_SpawnSceneActor(s8 actor_slot);
 void Actor_ReadValue(void);
+/* func_801A4914 */
+void Actor_StartFacingScript(void);
+/* func_801A4B80 */
+void Actor_TurnRampClear(s32 index);
+/* func_801A5B78 */
+void Actor_SpawnVoiced(u8* script);
+/* func_801A623C */
+void Actor_SpawnBattleEntry(u8* script);
 
 #endif

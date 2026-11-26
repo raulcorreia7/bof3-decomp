@@ -27,7 +27,7 @@ MATCH void func_801A68C0(u8* script) {
     TASK(Actor)->direction = script[0] & 0xF;
     Actor_ResetMotion();
     SYS_InitScratchpad((u8*)tile);
-    func_801A4B80(4);
+    Actor_TurnRampClear(4);
 
     work = TASK(Actor);
     x    = script[2] << 16;

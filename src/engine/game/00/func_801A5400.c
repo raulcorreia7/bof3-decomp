@@ -1,5 +1,6 @@
 #include "game_00.h"
 
+/* func_801A5400 */
 MATCH void func_801A5400(u8* script) {
     Actor* coord_record;
     Actor* cell_record_a;

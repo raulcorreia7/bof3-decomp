@@ -56,7 +56,7 @@ MATCH void Menu_DrawEquipChoiceWindow(MenuPanelTask* task) {
     task->flags = g_MenuEquipChoiceIds[task->unk_0B];
 
     UI_WindowDraw(task->pos.x + 3, task->pos.y + 3, 153, 130, 0, CHARACTER_BLOCK->window_style);
-    first  = func_801AFD10(&task->unk_0A, &scroll_y, &scroll_rows, (u8*)&task->u.addr.unk_10);
+    first  = UI_ScrollList(&task->unk_0A, &scroll_y, &scroll_rows, (u8*)&task->u.addr.unk_10);
     ids    = &g_MenuEquipChoiceIds[first];
     counts = &g_MenuEquipChoiceCounts[first];
     y      = task->pos.y + (s8)scroll_y;

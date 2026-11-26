@@ -14,9 +14,9 @@ MATCH void Area_RunSetupIf(u8* cursor) {
         if ((count & BYTE_MASK) != 0 || cursor[0] != 0xFE) {
         loop_forward:
             if (flag == 0) {
-                cursor = func_801A42F0(cursor, (s8*)&flag, &count);
+                cursor = Area_RunSetupBlockStep(cursor, (s8*)&flag, &count);
             } else {
-                cursor = func_801A4374(cursor, (s8*)&flag, &count);
+                cursor = Area_SkipSetupBlockStep(cursor, (s8*)&flag, &count);
             }
             if (count != 0) {
                 goto loop_forward;
@@ -31,9 +31,9 @@ MATCH void Area_RunSetupIf(u8* cursor) {
         if ((count & BYTE_MASK) != 0 || cursor[0] != 0xFE) {
         loop_backward:
             if (flag != 0) {
-                cursor = func_801A42F0(cursor, (s8*)&flag, &count);
+                cursor = Area_RunSetupBlockStep(cursor, (s8*)&flag, &count);
             } else {
-                cursor = func_801A4374(cursor, (s8*)&flag, &count);
+                cursor = Area_SkipSetupBlockStep(cursor, (s8*)&flag, &count);
             }
             if (count != 0) {
                 goto loop_backward;

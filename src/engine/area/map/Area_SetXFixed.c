@@ -39,7 +39,7 @@ MATCH void Area_SetXFixed(Actor* entity) {
             }
         }
     }
-    func_801A3D1C(&entity->interaction_flags);
+    Actor_TurnRampStep(&entity->interaction_flags);
     if (g_SysThreads[0].tail.game_entry.request != GAME_REQUEST_MESSAGE) {
         if (TASK(Actor)->timer <= TASK(Actor)->unk_0A) {
             flags = entity->interaction_flags | ACTOR_INTERACTION_SCRIPT_REQUEST;

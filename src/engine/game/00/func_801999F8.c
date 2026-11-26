@@ -20,7 +20,7 @@ MATCH void func_801999F8(MenuPanelTask* task) {
     s32  offset;
 
     UI_WindowDraw((u16)(task->pos.x + 3), (u16)(task->pos.y + 3), 153, 154, task->unk_09, g_WindowStyle);
-    value = func_801AFD10(&task->unk_0B, &row, &count, (u8*)&task->u.list.scroll) & BYTE_MASK;
+    value = UI_ScrollList(&task->unk_0B, &row, &count, (u8*)&task->u.list.scroll) & BYTE_MASK;
     y     = task->pos.y + (s8)row;
     src   = g_ItemCategoryIds[task->unk_0A] + value;
     dst   = g_ItemCategoryCounts[task->unk_0A] + value;

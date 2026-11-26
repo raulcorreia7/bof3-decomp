@@ -1,6 +1,8 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH s32 func_801AFD10(u8* first_row, u8* scroll_y, u8* extra_rows, u8* scroll) {
+/* func_801AFD10 */
+/* Steps a list window's scroll state and returns the first row to draw. */
+MATCH s32 UI_ScrollList(u8* first_row, u8* scroll_y, u8* extra_rows, u8* scroll) {
     u8 state;
     u8 hi;
     u8 lo;
