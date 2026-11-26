@@ -10,7 +10,7 @@
 extern s32 D_1F80000C;
 
 /* Column views of g_BattleEffects: func_801EEC5C stores through them because
- * member stores let the D_8014637C load move above the target store. */
+ * member stores let the g_BattleActiveActor load move above the target store. */
 extern u8 D_801EC338[];
 extern u8 D_801EC364[];
 extern u8 D_801EC368[];

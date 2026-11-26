@@ -300,7 +300,7 @@ MATCH void func_801EFEE8(void) {
     timer                     = TASK(PartyMember)->unk_09 - 1;
     TASK(PartyMember)->unk_09 = timer;
     if (!(timer & BYTE_MASK)) {
-        caster                    = D_8014637C;
+        caster                    = g_BattleActiveActor;
         TASK(PartyMember)->facing = caster->facing;
         TASK(PartyMember)->unk_0C = 0x10000;
         TASK(PartyMember)->unk_10 = 0;

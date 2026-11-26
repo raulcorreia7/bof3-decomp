@@ -3,10 +3,15 @@
 #include "area077_14.h"
 #undef func_801F31EC
 
-#ifdef NON_MATCHING
 /* Draws the village panel at (x, y): the two blended fills, the raised and lowered edge rows, the
  * eight-pixel grid with the bright centre row, and the tinted marks; then the actor tint steps down. */
-NON_MATCHING void func_801F31EC(s32 x, s32 y) {
+/* An old-style definition: retail takes int arguments and reads them back as s16. */
+// clang-format off
+MATCH void func_801F31EC(x, y)
+s16 x;
+s16 y;
+// clang-format on
+{
     s16 left;
     s16 top;
     s16 right;
@@ -79,6 +84,3 @@ NON_MATCHING void func_801F31EC(s32 x, s32 y) {
         TASK(Actor)->tint.bytes.rgb.r -= 0x10;
     }
 }
-#else
-INCLUDE_ASM(func_801F31EC);
-#endif

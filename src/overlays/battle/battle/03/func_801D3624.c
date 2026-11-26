@@ -24,8 +24,8 @@ MATCH void func_801D3624(void) {
     }
 
     *setup_flags &= ~0x20;
-    D_8014637C->header.mode = 7;
-    D_8014637C->header.step = 0;
+    g_BattleActiveActor->header.mode = 7;
+    g_BattleActiveActor->header.step = 0;
     Battle_SetSlotPending(g_Battle.active_battler);
     mode               = g_Battle.action_id;
     g_Battle.unk_EA[3] = mode;

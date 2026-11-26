@@ -24,7 +24,7 @@ MATCH void func_801EEC88(void) {
     for (i = 0, dst = g_AreaPaletteCopy->rows[AREA_PALETTE_BATL_OVR_ROW].colors, src = g_AreaPaletteArena->rows[AREA_PALETTE_BATL_OVR_ROW].colors; i < AREA_PALETTE_COLORS; i++) {
         *dst++ = *src++ | PSX_COLOR_STP_BIT;
     }
-    selected            = &D_8014637C;
+    selected            = &g_BattleActiveActor;
     g_GfxPalettePending = 1;
     GFX_PaletteFreeFadeTarget(*selected);
     TASK(PartyMember)->timer = GFX_PaletteAllocFade(*selected, 0, 0, 0, 1);
@@ -39,7 +39,7 @@ MATCH void func_801EEDD0(void) {
     g_PaletteFades[TASK(PartyMember)->timer].offset.g++;
     g_PaletteFades[TASK(PartyMember)->timer].offset.b++;
     if (++TASK(PartyMember)->unk_09 == 16) {
-        D_8014637C->unk_29 = 2;
+        g_BattleActiveActor->unk_29 = 2;
         TASK(PartyMember)->header.mode++;
     }
 }
@@ -49,7 +49,7 @@ MATCH void func_801EEEF4(void) {
     g_PaletteFades[TASK(PartyMember)->timer].offset.g--;
     g_PaletteFades[TASK(PartyMember)->timer].offset.b--;
     if (--TASK(PartyMember)->unk_09 == 0) {
-        GFX_PaletteFreeFadeTarget(D_8014637C);
+        GFX_PaletteFreeFadeTarget(g_BattleActiveActor);
         Battle_FadePoisonedBattler(g_Battle.active_battler);
         TASK(PartyMember)->unk_09 = 16;
         TASK(PartyMember)->header.mode++;
@@ -60,7 +60,7 @@ MATCH void func_801EEEF4(void) {
 
 MATCH void func_801EF0A4(void) {
     if (TASK(PartyMember)->param.unk_0B == 0xFF) {
-        D_8014637C->unk_29 = 4;
+        g_BattleActiveActor->unk_29 = 4;
         Battle_MarkDamaged(g_Battle.target_selector);
         g_Battle.flags |= BATTLE_STATE_EFFECT_PLAYING;
         Effect_Reset();

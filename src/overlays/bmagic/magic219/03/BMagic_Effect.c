@@ -98,7 +98,7 @@ MATCH void func_801EF118(void) {
     timer                     = TASK(PartyMember)->unk_09 - 1;
     TASK(PartyMember)->unk_09 = timer;
     if (timer == 0) {
-        cell                      = D_8014637C;
+        cell                      = g_BattleActiveActor;
         TASK(PartyMember)->facing = cell->facing;
         TASK(PartyMember)->unk_0C = 0x20000;
         TASK(PartyMember)->unk_10 = 0;
