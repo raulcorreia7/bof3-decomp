@@ -20,34 +20,28 @@ MATCH void Actor_SpawnBlocker(u8* script) {
     counter       = (s16*)&g_ScratchPad;
     counter_words = (u16*)&g_ScratchPad;
     data          = script;
-    if (*counter < 30) {
-        slot_record = &g_Actors[*counter];
+    if (g_ScratchPad.cells.halves[0] < 30) {
+        slot_record = &g_Actors[g_ScratchPad.cells.halves[0]];
         SELF_SET(slot_record);
         g_CurrentActor   = slot_record;
         counter_words[1] = data[0x2] | (data[0x1] << 8);
         Actor_ResetMotion();
         Area_SceneSelectRecord(counter_words[1]);
-        SELF(Actor)->header.flags      = ACTOR_FLAG_IN_USE;
-        coord_record                   = SELF(Actor);
-        g_Actors[*counter].walk_dest_x = coord_record->pos.x.fixed = (data[0x5] << 0x10) | (data[0x4] != 0 ? 0x8000 : 0);
-        /* FAKE: forces the counter re-read before the next shadow store. */
-        FAKE_BARRIER();
-        g_Actors[*counter].walk_dest_y = coord_record->pos.y.fixed = (data[0x7] << 0x10) | (data[0x6] != 0 ? 0x8000 : 0);
-        /* FAKE: forces the counter re-read before the next shadow store. */
-        FAKE_BARRIER();
-        g_Actors[*counter].unk_88     = 0;
-        dist                          = Area_HeightSample(coord_record->pos.x.fixed, coord_record->pos.y.fixed);
-        dist_record                   = SELF(Actor);
-        COORD_INT(dist_record->pos.z) = dist;
-        dist_record->header.mode      = data[0x8];
-        SELF(Actor)->header.step      = data[0xA];
-        SELF(Actor)->direction        = data[0] & 0xF;
-        SELF(Actor)->unk_06           = data[0] >> 4;
-        g_Actors[*counter].unk_7C     = 0xFFFF;
-        /* FAKE: forces the counter re-read before the next shadow store. */
-        FAKE_BARRIER();
-        g_Actors[*counter].unk_78 = data[0x9];
-        g_Actors[*counter].unk_94 = 0x7F;
+        SELF(Actor)->header.flags                          = ACTOR_FLAG_IN_USE;
+        coord_record                                       = SELF(Actor);
+        g_Actors[g_ScratchPad.cells.halves[0]].walk_dest_x = coord_record->pos.x.fixed = (data[0x5] << 0x10) | (data[0x4] != 0 ? 0x8000 : 0);
+        g_Actors[g_ScratchPad.cells.halves[0]].walk_dest_y = coord_record->pos.y.fixed = (data[0x7] << 0x10) | (data[0x6] != 0 ? 0x8000 : 0);
+        g_Actors[g_ScratchPad.cells.halves[0]].unk_88                                  = 0;
+        dist                                                                           = Area_HeightSample(coord_record->pos.x.fixed, coord_record->pos.y.fixed);
+        dist_record                                                                    = SELF(Actor);
+        COORD_INT(dist_record->pos.z)                                                  = dist;
+        dist_record->header.mode                                                       = data[0x8];
+        SELF(Actor)->header.step                                                       = data[0xA];
+        SELF(Actor)->direction                                                         = data[0] & 0xF;
+        SELF(Actor)->unk_06                                                            = data[0] >> 4;
+        g_Actors[g_ScratchPad.cells.halves[0]].unk_7C                                  = 0xFFFF;
+        g_Actors[g_ScratchPad.cells.halves[0]].unk_78                                  = data[0x9];
+        g_Actors[g_ScratchPad.cells.halves[0]].unk_94                                  = 0x7F;
         Actor_SetOptionFlags(data + 0xB);
         if (data[0x3] & 0x80) {
             flags_record = SELF(Actor);
@@ -73,6 +67,6 @@ MATCH void Actor_SpawnBlocker(u8* script) {
         if ((COORD_FRAC(cell_record_c->pos.x) != 0) && (COORD_FRAC(cell_record_c->pos.y) != 0)) {
             Area_CellSetCode((s16)((u16)COORD_INT(cell_record_c->pos.x) + 1), (s16)((u16)COORD_INT(cell_record_c->pos.y) + 1), 0x10);
         }
-        FAKE_VOLATILE(u16, g_ScratchPad) += 1;
+        g_ScratchPad.cells.halves[0]++;
     }
 }

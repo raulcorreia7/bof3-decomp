@@ -5,7 +5,6 @@
 /* func_801A7330 */
 /* Spawns a searchable object from a type 9 setup record; its flag bit says whether it was already searched. */
 MATCH void Actor_SpawnSearchSpot(const volatile u8* data) {
-    s16*   counter = (s16*)&g_ScratchPad;
     s16    dist;
     s16    slot;
     u8     mode;
@@ -13,7 +12,7 @@ MATCH void Actor_SpawnSearchSpot(const volatile u8* data) {
     Actor* w2;
     Actor* rec;
 
-    slot = *counter;
+    slot = g_ScratchPad.cells.halves[0];
     if (slot >= ENTITY_MAX) {
         return;
     }
@@ -28,16 +27,14 @@ MATCH void Actor_SpawnSearchSpot(const volatile u8* data) {
 
     SELF(Actor)->header.flags = ACTOR_FLAG_IN_USE;
 
-    work                           = SELF(Actor);
-    g_Actors[*counter].walk_dest_x = (work->pos.x.fixed = (data[5] << 16) | ((data[4] != 0) ? 0x8000 : 0));
+    work                                               = SELF(Actor);
+    g_Actors[g_ScratchPad.cells.halves[0]].walk_dest_x = (work->pos.x.fixed = (data[5] << 16) | ((data[4] != 0) ? 0x8000 : 0));
     /* FAKE: barrier pins the counter re-read before the shadow store. */
     FAKE_BARRIER();
 
-    g_Actors[*counter].walk_dest_y = (work->pos.y.fixed = (data[7] << 16) | ((data[6] != 0) ? 0x8000 : 0));
-    /* FAKE: barrier pins the counter re-read against merging. */
-    FAKE_BARRIER();
+    g_Actors[g_ScratchPad.cells.halves[0]].walk_dest_y = (work->pos.y.fixed = (data[7] << 16) | ((data[6] != 0) ? 0x8000 : 0));
 
-    g_Actors[*counter].unk_88 = 0;
+    g_Actors[g_ScratchPad.cells.halves[0]].unk_88 = 0;
 
     dist = Area_HeightSample(work->pos.x.fixed, work->pos.y.fixed);
 
@@ -51,8 +48,8 @@ MATCH void Actor_SpawnSearchSpot(const volatile u8* data) {
     SELF(Actor)->direction = data[0] & 0xF;
     SELF(Actor)->unk_06    = data[0] >> 4;
 
-    g_Actors[*counter].unk_78 = 0;
-    g_Actors[*counter].unk_94 = 0x7F;
+    g_Actors[g_ScratchPad.cells.halves[0]].unk_78 = 0;
+    g_Actors[g_ScratchPad.cells.halves[0]].unk_94 = 0x7F;
 
     Actor_SetOptionFlags((u8*)(data + 0xB));
 
@@ -66,8 +63,8 @@ MATCH void Actor_SpawnSearchSpot(const volatile u8* data) {
     SELF(Actor)->tint.bytes.flags = data[3] & 0xF;
     SELF(Actor)->draw_layer       = 6;
 
-    rec                       = SELF(Actor);
-    g_Actors[*counter].unk_7C = 0;
+    rec                                           = SELF(Actor);
+    g_Actors[g_ScratchPad.cells.halves[0]].unk_7C = 0;
     /* FAKE: lock keeps the packed store ahead of the record stores. */
     FAKE_ORDER_LOCK(rec->unk_18 = (data[9] << 8) | ((const u8*)data)[0xA]);
     SELF(Actor)->unk_05       = data[8];
@@ -89,5 +86,5 @@ MATCH void Actor_SpawnSearchSpot(const volatile u8* data) {
         Script_Select(0);
     }
 
-    (FAKE_VOLATILE(u16, g_ScratchPad)) = (FAKE_VOLATILE(u16, g_ScratchPad)) + 1;
+    g_ScratchPad.cells.halves[0]++;
 }

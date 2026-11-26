@@ -120,8 +120,8 @@
     Script_Request((SELF(Actor)->direction >> 1) + 0x42); \
     SELF(Actor)->header.step++
 
-void PlChar_SpawnActor(s32 spawn_type, s32 vx, s32 spawn_y);
-void PlChar_SpawnLinkedActor(s32 spawn_type, s32 vx, s32 spawn_y, s32 code);
+void PlChar_SpawnActor(u8 type, s32 x, s32 y);
+void PlChar_SpawnLinkedActor(u8 type, s32 x, s32 y, s32 cell_code);
 
 #define CHAR_CELL_CODE_BLOCKS_CHARACTER(cell) ((u8)((cell) + 0x10) < 2 || ((cell) & BYTE_MASK) == 0xF4 || (u8)((cell) + 0xA) < 2)
 

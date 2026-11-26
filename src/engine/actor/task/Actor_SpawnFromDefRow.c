@@ -80,5 +80,5 @@ MATCH void Actor_SpawnFromDefRow(u8* script) {
         }
     }
 
-    (FAKE_VOLATILE(u16, g_ScratchPad)) = (FAKE_VOLATILE(u16, g_ScratchPad)) + 1;
+    g_ScratchPad.cells.halves[0]++;
 }

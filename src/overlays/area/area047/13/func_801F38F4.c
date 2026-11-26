@@ -1,8 +1,7 @@
 #include "area047_13.h"
 
 MATCH void func_801F38F4(void) {
-    SELF(Actor)->pos.x.fixed = TO_COORD(18);
-    FAKE_ORDER_FENCE(); /* FAKE: the order fence keeps the actor store ahead of the target store. */
+    SELF(Actor)->pos.x.fixed    = TO_COORD(18);
     g_AreaCamera.scroll_x.fixed = TO_COORD(18);
     SELF(Actor)->pos.y.fixed    = TO_COORD(36);
     g_AreaCamera.scroll_y.fixed = TO_COORD(36);
