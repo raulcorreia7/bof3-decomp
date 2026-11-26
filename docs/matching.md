@@ -251,7 +251,10 @@ Instructions missing from the candidate. Keep the store order of a slot write; o
 
 Instruction shape differs. Read load width and signedness off the retail bytes; check the declared
 global width; keep retail's left-to-right grouping. `lwl/lwr` and `swl/swr` are one aggregate
-access, not a byte loop. Check constant division/modulo and multiply-high operand order. COP2 uses
+access, not a byte loop; when retail keeps the source and destination of such a copy in two
+registers, write one struct assignment (`chr.base = chr.stats`), not `Cpy16u` halves on one base.
+A constant table pointer that retail loads in the loop preheader with the offset left in the
+displacement is a pointer local assigned inside the loop body. Check constant division/modulo and multiply-high operand order. COP2 uses
 the PsyQ `gte_*` macros, never scalar code. A plausible instruction can be data: confirm the range
 is code.
 

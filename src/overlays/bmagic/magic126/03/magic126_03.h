@@ -1,26 +1,27 @@
 #ifndef OVERLAY_BMAGIC_MAGIC126_03_H
 #define OVERLAY_BMAGIC_MAGIC126_03_H
 
-/* The bmagic/magic126/03 overlay. Only this image includes the file. */
+/* The bmagic/magic126/03 overlay (ShadowBreath, ability 0x7E). Only this image includes the file. */
 
 #include "overlays/bmagic/bmagic.h"
 
 extern s16 D_1F800004;
 extern s16 g_ScratchPadHalves;
 
-extern Callback D_801F1268[];
+/* The effects the task spawns: header.mode picks the routine g_BMagicEffectModes runs. */
+typedef enum BMagicShadowBreathEffectMode {
+    BMAGIC_SHADOW_BREATH_EFFECT_GLOW,
+    BMAGIC_SHADOW_BREATH_EFFECT_PILLAR,
+    BMAGIC_SHADOW_BREATH_EFFECT_ORB
+} BMagicShadowBreathEffectMode;
 
-extern Callback D_801F1278[];
-
-extern Callback D_801F1288[];
-
-extern BMagicTint D_801F1298[];
-
-extern Callback D_801F12AC[];
+/* The orbs the task starts, and the motes the burst starts. */
+#define BMAGIC_SHADOW_BREATH_ORB_COUNT   8
+#define BMAGIC_SHADOW_BREATH_BURST_MOTES 64
 
 /* One of the 128 records BMagic_AllocEffect claims: a task header, the spawn index and the battler it acts on;
- * func_801EEC04 runs each claimed record through func_801F091C as D_801F22BC with that battler swapped in. */
-typedef struct Magic126Mote {
+ * the update runs each claimed record through the mote dispatch as the current mote with that battler swapped in. */
+typedef struct ShadowBreathMote {
     TaskHeader   header; /* 0x00 */
     u8           unk_03;
     u8           unk_04; /* +0x04 spawn index; the angle is its low four bits */
@@ -34,35 +35,55 @@ typedef struct Magic126Mote {
     s32          unk_14;
     u8           pad_18[4];
     PartyMember* battler; /* +0x1C */
-} Magic126Mote;
+} ShadowBreathMote;
 
-ASSERT_OFFSET(Magic126Mote, unk_04, 0x04);
-ASSERT_OFFSET(Magic126Mote, unk_08, 0x08);
-ASSERT_OFFSET(Magic126Mote, unk_0C, 0x0C);
-ASSERT_OFFSET(Magic126Mote, unk_0E, 0x0E);
-ASSERT_OFFSET(Magic126Mote, unk_10, 0x10);
-ASSERT_OFFSET(Magic126Mote, unk_14, 0x14);
-ASSERT_OFFSET(Magic126Mote, battler, 0x1C);
-ASSERT_SIZE(Magic126Mote, 0x20);
+ASSERT_OFFSET(ShadowBreathMote, unk_04, 0x04);
+ASSERT_OFFSET(ShadowBreathMote, unk_08, 0x08);
+ASSERT_OFFSET(ShadowBreathMote, unk_0C, 0x0C);
+ASSERT_OFFSET(ShadowBreathMote, unk_0E, 0x0E);
+ASSERT_OFFSET(ShadowBreathMote, unk_10, 0x10);
+ASSERT_OFFSET(ShadowBreathMote, unk_14, 0x14);
+ASSERT_OFFSET(ShadowBreathMote, battler, 0x1C);
+ASSERT_SIZE(ShadowBreathMote, 0x20);
 
-#define BMAGIC_EFFECT_SLOTS D_801F12BC
+#define BMAGIC_EFFECT_SLOTS g_BMagicShadowBreathMotes
 #define BMAGIC_EFFECT_COUNT 128
 
-extern Magic126Mote D_801F12BC[];
-void                func_801EFD5C(void);
-void                func_801F06AC(void);
-void                func_801F091C(void);
-
-void                BMagic_DrawMote(void);
-void                func_801F116C(void);
-void                func_801F11AC(void);
-extern PartyMember* D_801F22BC;
-/* The current record as a mote: D_801F22BC points into D_801F12BC. */
-#define MAGIC126_MOTE ((Magic126Mote*)D_801F22BC)
-
-void BMagic_DrawGlowRingInner(void);
-
-void func_801EF1C8(void);
+/* func_801EECE4 */
+void BMagic_ShadowBreathInit(void);
+/* func_801EF1C8 */
+void BMagic_ShadowBreathDrawShadow(void);
 void BMagic_DrawGlowRingOuter(void);
+void BMagic_DrawGlowRingInner(void);
+/* func_801EFD5C */
+void BMagic_ShadowBreathDrawPillar(void);
+/* func_801F06AC */
+void BMagic_ShadowBreathDrawOrb(void);
+/* func_801F091C */
+void BMagic_ShadowBreathMoteDispatch(void);
+void BMagic_DrawMote(void);
+/* func_801F116C */
+void BMagic_ShadowBreathMoteFree(void);
+/* func_801F11AC */
+void BMagic_ShadowBreathMoteProject(void);
+
+/* D_801F1268 */
+extern Callback         g_BMagicShadowBreathGlowSteps[];
+/* D_801F1278 */
+extern Callback         g_BMagicShadowBreathPillarSteps[];
+/* D_801F1288 */
+extern Callback         g_BMagicShadowBreathOrbSteps[];
+/* D_801F1298 */
+extern BMagicTint       g_BMagicShadowBreathOrbTints[];
+/* D_801F12A8 */
+extern Callback         g_BMagicShadowBreathMoteModes[];
+/* D_801F12AC */
+extern Callback         g_BMagicShadowBreathMoteSteps[];
+/* D_801F12BC */
+extern ShadowBreathMote g_BMagicShadowBreathMotes[];
+/* D_801F22BC */
+extern PartyMember*     g_BMagicShadowBreathMote;
+/* The current record as a mote: g_BMagicShadowBreathMote points into g_BMagicShadowBreathMotes. */
+#define MAGIC126_MOTE ((ShadowBreathMote*)g_BMagicShadowBreathMote)
 
 #endif

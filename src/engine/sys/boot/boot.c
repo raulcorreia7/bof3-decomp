@@ -20,6 +20,6 @@
 #include "SYS_ThreadExit.c"
 #include "SYS_ThreadClose.c"
 #include "SYS_ThreadReplace.c"
-#include "engine/slus/func_8014B9AC.c"
-#include "engine/slus/func_8014B9D8.c"
+#include "engine/sys/boot/SYS_ThreadSuspend.c"
+#include "engine/sys/boot/SYS_ThreadResume.c"
 #include "SYS_ClearCurrentThread.c"

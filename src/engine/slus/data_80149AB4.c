@@ -1,7 +1,7 @@
 #include "slus.h"
 
 const MessageChoiceSteps g_UiMessageChoiceModes = {{
-    func_80151964,
+    UI_MessageChoiceIdle,
     UI_MessageUpdateChoice,
     func_80151A98,
     func_80151A98,

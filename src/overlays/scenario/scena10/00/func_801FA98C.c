@@ -4,10 +4,9 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801FA98C(void) {
+/* Scene 10's step script: one case per g_ScenarioState.step. */
+MATCH void func_801FA98C(void) {
     u8 slot;
-    u8 next;
 
     switch (g_ScenarioState.step) {
         case 0:
@@ -118,6 +117,7 @@ NON_MATCHING void func_801FA98C(void) {
             g_AreaScrollTargetY = 0x80000;
             g_PartyY            = 0x80000;
             Area_InitMapRenderer();
+            g_PartyPos.z.part.integer = -0x560;
             Area_ScrollAdvance(-0x560);
             g_ScenarioState.step = 0xC;
             break;
@@ -125,8 +125,9 @@ NON_MATCHING void func_801FA98C(void) {
             if (WINDOW_EFFECT_BUSY()) {
                 break;
             }
-            next = 0xD;
-            goto advance_low;
+            g_ScenarioState.step = 0xD;
+            g_ScriptVars[0]++;
+            break;
             break;
         case 13:
             if (g_ScriptVars[0] != 0xD) {
@@ -153,6 +154,7 @@ NON_MATCHING void func_801FA98C(void) {
                 g_SpawnedActors[D_801FE9D8].type         = 0x18;
                 g_SpawnedActors[D_801FE9D8].header.mode  = 0x63;
             }
+            g_PartyPos.z.part.integer = -0x9C0;
             Area_ScrollAdvance(-0x9C0);
             g_ScenarioState.step = 0xF;
             break;
@@ -160,8 +162,9 @@ NON_MATCHING void func_801FA98C(void) {
             if (WINDOW_EFFECT_BUSY()) {
                 break;
             }
-            next = 0x10;
-            goto advance_low;
+            g_ScenarioState.step = 0x10;
+            g_ScriptVars[0]++;
+            break;
             break;
         case 16:
             if (g_ScriptVars[0] != 0x13) {
@@ -215,6 +218,7 @@ NON_MATCHING void func_801FA98C(void) {
             g_ScriptVars[0] = 0;
             SYS_SetFlag(g_SceneFlags, 0x14);
             g_ScenarioState.step = 0x14;
+            break;
         case 20:
             if (g_GameCellType == 0) {
                 D_801FE9DC = 0;
@@ -253,17 +257,17 @@ NON_MATCHING void func_801FA98C(void) {
             g_AreaScrollTargetY = 0x2E0000;
             g_PartyY            = 0x2E0000;
             Area_InitMapRenderer();
-            (void)Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY);
-            g_ScenarioState.timer_06 = 4;
-            g_ScenarioState.step     = 0x18;
+            g_PartyPos.z.part.integer = Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY);
+            g_ScenarioState.timer_06  = 4;
+            g_ScenarioState.step      = 0x18;
             break;
         case 24:
             if (--g_ScenarioState.timer_06 != 0) {
                 break;
             }
-            g_AreaDrawFlags = 0x1F;
-            next            = 0x19;
-            goto advance;
+            g_AreaDrawFlags      = 0x1F;
+            g_ScenarioState.step = 0x19;
+            g_ScriptVars[0]++;
             break;
         case 25:
             if (g_ScriptVars[0] != 6) {
@@ -276,17 +280,17 @@ NON_MATCHING void func_801FA98C(void) {
             g_AreaScrollTargetY = 0x460000;
             g_PartyY            = 0x460000;
             Area_InitMapRenderer();
-            (void)Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY);
-            g_ScenarioState.timer_06 = 4;
-            g_ScenarioState.step     = 0x1A;
+            g_PartyPos.z.part.integer = Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY);
+            g_ScenarioState.timer_06  = 4;
+            g_ScenarioState.step      = 0x1A;
             break;
         case 26:
             if (--g_ScenarioState.timer_06 != 0) {
                 break;
             }
-            g_AreaDrawFlags = 0x1F;
-            next            = 0x1B;
-            goto advance;
+            g_AreaDrawFlags      = 0x1F;
+            g_ScenarioState.step = 0x1B;
+            g_ScriptVars[0]++;
             break;
         case 27:
             if (g_ScriptVars[0] != 8) {
@@ -299,17 +303,17 @@ NON_MATCHING void func_801FA98C(void) {
             g_AreaScrollTargetY = 0x2E0000;
             g_PartyY            = 0x2E0000;
             Area_InitMapRenderer();
-            (void)Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY);
-            g_ScenarioState.timer_06 = 4;
-            g_ScenarioState.step     = 0x1C;
+            g_PartyPos.z.part.integer = Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY);
+            g_ScenarioState.timer_06  = 4;
+            g_ScenarioState.step      = 0x1C;
             break;
         case 28:
             if (--g_ScenarioState.timer_06 != 0) {
                 break;
             }
-            g_AreaDrawFlags = 0x1F;
-            next            = 0x1D;
-            goto advance;
+            g_AreaDrawFlags      = 0x1F;
+            g_ScenarioState.step = 0x1D;
+            g_ScriptVars[0]++;
             break;
         case 29:
             if (g_ScriptVars[0] != 0xB) {
@@ -322,8 +326,8 @@ NON_MATCHING void func_801FA98C(void) {
             }
             g_SpawnedActors[D_801FE9D8].header.flags   = 1;
             g_SpawnedActors[D_801FE9D8].type           = 0x13;
-            g_SpawnedActors[D_801FE9D8].camera_angle.y = g_AreaCameraAngle.vy;
             g_SpawnedActors[D_801FE9D8].camera_angle.x = g_AreaCameraAngle.vx;
+            g_SpawnedActors[D_801FE9D8].camera_angle.y = g_AreaCameraAngle.vy;
             g_SpawnedActors[D_801FE9D8].camera_angle.z = 0x10E;
             g_SpawnedActors[D_801FE9D8].layer          = 0x40;
             g_ScenarioState.step                       = 0x1E;
@@ -346,17 +350,17 @@ NON_MATCHING void func_801FA98C(void) {
             g_AreaScrollTargetY = 0x460000;
             g_PartyY            = 0x460000;
             Area_InitMapRenderer();
-            (void)Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY);
-            g_ScenarioState.timer_06 = 4;
-            g_ScenarioState.step     = 0x20;
+            g_PartyPos.z.part.integer = Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY);
+            g_ScenarioState.timer_06  = 4;
+            g_ScenarioState.step      = 0x20;
             break;
         case 32:
             if (--g_ScenarioState.timer_06 != 0) {
                 break;
             }
-            g_AreaDrawFlags = 0x1F;
-            next            = 0x21;
-            goto advance;
+            g_AreaDrawFlags      = 0x1F;
+            g_ScenarioState.step = 0x21;
+            g_ScriptVars[0]++;
             break;
         case 33:
             if (g_ScriptVars[0] != 0xF) {
@@ -369,6 +373,7 @@ NON_MATCHING void func_801FA98C(void) {
             g_AreaScrollTargetY = 0x110000;
             g_PartyY            = 0x110000;
             Area_InitMapRenderer();
+            g_PartyPos.z.part.integer = 0x320;
             Area_ScrollAdvance(0x320);
             g_AreaCameraAngle.vx     = -0x32E;
             g_AreaCameraAngle.vz     = 0x74;
@@ -413,7 +418,6 @@ NON_MATCHING void func_801FA98C(void) {
                 break;
             }
             g_ScenarioState.step = 0x25;
-            break;
         case 37:
             slot       = func_8019601C();
             D_801FE9D8 = slot;
@@ -433,7 +437,6 @@ NON_MATCHING void func_801FA98C(void) {
                 break;
             }
             g_ScenarioState.step = 0x27;
-            break;
         case 39:
             slot       = func_8019601C();
             D_801FE9D8 = slot;
@@ -444,8 +447,8 @@ NON_MATCHING void func_801FA98C(void) {
             g_SpawnedActors[D_801FE9D8].type           = 0x31;
             g_SpawnedActors[D_801FE9D8].camera_angle.x = -0x3F4;
             g_SpawnedActors[D_801FE9D8].camera_angle.y = g_AreaCameraAngle.vy;
-            g_SpawnedActors[D_801FE9D8].vx             = 0x100;
             g_SpawnedActors[D_801FE9D8].camera_angle.z = 0x2B0;
+            g_SpawnedActors[D_801FE9D8].vx             = 0x100;
             g_SpawnedActors[D_801FE9D8].layer          = 0xFF;
             g_ScenarioState.timer_06                   = 0x50;
             g_ScenarioState.step                       = 0x28;
@@ -481,13 +484,13 @@ NON_MATCHING void func_801FA98C(void) {
                 g_SpawnedActors[D_801FE9D8].camera_angle.y = g_AreaCameraAngle.vy;
                 g_SpawnedActors[D_801FE9D8].camera_angle.z = 0x334;
                 g_SpawnedActors[D_801FE9D8].layer          = 0x40;
+                g_ScenarioState.step                       = 0x2A;
             }
             g_ScriptVars[0]++;
             SND_SeqPlay(0, 0, 0, 0);
             SND_SeqFadeIn(0, 0, 0x64, 8);
             SND_SEPlay(0x201);
             SND_SEPlay(0x204);
-            g_ScenarioState.step = 0x2A;
             break;
         case 42:
             g_AreaSceneMode = 0x23;
@@ -515,9 +518,9 @@ NON_MATCHING void func_801FA98C(void) {
             if (--g_ScenarioState.timer_06 != 0) {
                 break;
             }
-            g_AreaDrawFlags = 0x1F;
-            next            = 0x2D;
-            goto advance;
+            g_AreaDrawFlags      = 0x1F;
+            g_ScenarioState.step = 0x2D;
+            g_ScriptVars[0]++;
             break;
         case 45:
             if (g_ScriptVars[0] != 0x17) {
@@ -580,25 +583,11 @@ NON_MATCHING void func_801FA98C(void) {
                 break;
             }
             Game_ClearScriptActive();
+            g_ScriptVars[0] = 0;
             SYS_SetFlag(g_SceneFlags, 0x17);
-            g_ScriptVars[0]          = 0;
             g_ScenarioState.state_04 = 0;
             g_ScenarioState.step     = 0;
             break;
     }
-    goto epilogue;
-
-advance_low:
-    g_ScenarioState.step = next;
-    g_ScriptVars[0]++;
-    goto epilogue;
-
-advance:
-    g_ScenarioState.step = next;
-    g_ScriptVars[0]++;
-epilogue:
     func_801FC220();
 }
-#else
-INCLUDE_ASM(func_801FA98C);
-#endif
