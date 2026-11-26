@@ -1,4 +1,5 @@
 #include "area187_13.h"
+#include "menu/save_data.h"
 
 MATCH void func_801F2CDC(void) {
     s8* state;
@@ -20,9 +21,9 @@ MATCH void func_801F2CDC(void) {
         case 2:
             if (g_GameStateIndex != *state) {
                 Scene_ClearEventState();
-                D_8014504A = 0;
+                g_SaveData.return_point.pending = 0;
                 SYS_ClearFlag(state + 0x63C, 119);
-                func_8019FA28(D_80145048, D_80145040, D_80145044, 4);
+                func_8019FA28(g_SaveData.return_point.area_id, g_SaveData.return_point.x, g_SaveData.return_point.y, 4);
             }
             break;
     }

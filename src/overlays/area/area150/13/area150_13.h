@@ -9,20 +9,8 @@
 /* FAKE: the call passes the count as s32, the width the real prototype (u8) lacks. */
 #define Item_Add ((bool (*)(s32, s32, s32, s32))Item_Add)
 
-/* The scenario flag bytes the step tests, sets and clears. */
-extern u16 D_80144F54;
-extern u8  D_80144F56;
-extern u8  D_80144F57;
-extern u8  D_8014504B;
-
-/* The scenario state byte the hit path sets. */
-
-/* The game-overlay state byte the request writes. */
-
 /* The request value tables indexed by the selection byte. */
 extern u16 D_801F3804[];
 extern u16 D_801F3808[];
-/* The shop and save start the field scene. */
-/* func_801C16B8 */
 
 #endif

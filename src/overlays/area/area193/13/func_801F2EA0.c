@@ -1,4 +1,5 @@
 #include "area193_13.h"
+#include "menu/save_data.h"
 
 MATCH void func_801F2EA0(void) {
     switch (g_SceneEventState.step) {
@@ -15,16 +16,16 @@ MATCH void func_801F2EA0(void) {
                 SYS_ClearFlag(g_SceneEventFlags, 0x77);
                 Game_ClearScriptActive();
                 Game_RequestAreaChange(AREA_ID_DESERT_OF_DEATH_MAP, TO_COORD(0x1200), TO_COORD(0x17FF), FACING_UP_RIGHT);
-                D_8014504B = 2;
-                D_80144F57 = 0xF0;
+                g_SaveData.return_point.facing = 2;
+                g_SaveData.desert.reserve      = 0xF0;
                 g_AreaWalkFlags |= AREA_WALK_ENTRY_PENDING;
-                D_80144F54             = 0;
-                D_80144F56             = 0;
-                D_80146880             = 0;
-                D_80146881             = 0;
-                g_SceneEventState.mode = SCENE_EVENT_NONE;
-                g_SceneEventState.step = 0;
-                flag                   = &g_ScenarioState.flags_01;
+                g_SaveData.desert.clock = 0;
+                g_SaveData.desert.days  = 0;
+                D_80146880              = 0;
+                D_80146881              = 0;
+                g_SceneEventState.mode  = SCENE_EVENT_NONE;
+                g_SceneEventState.step  = 0;
+                flag                    = &g_ScenarioState.flags_01;
                 *flag |= 1;
             }
             break;

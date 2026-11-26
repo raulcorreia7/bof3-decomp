@@ -28,7 +28,6 @@ extern s8       D_801448EA[1];
 /* The game state the overlay tests. */
 extern u32      D_80145034; /* 0x80145034 */
 extern u32      D_80145038;
-extern u8       D_8014504A;
 extern u8       D_8014554C[]; /* 0x8014554C */
 extern u8       D_8014554F[];
 extern u8       D_801455C3;

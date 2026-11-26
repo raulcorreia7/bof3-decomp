@@ -13,6 +13,22 @@
 /* The persistent block: 4,272 bytes. */
 #define SAVE_BLOCK_SIZE 0x10B0u
 
+/* The Desert of Death crossing: area150 resets it on the way in, area189 runs it on every step. */
+typedef struct DesertCrossing {
+    /* 0x0 */ u16 clock;   /* walk ticks into the day: dusk at 480, the next day at 960 */
+    /* 0x2 */ u8  days;    /* days the crossing has taken */
+    /* 0x3 */ u8  reserve; /* 0xF0 on the way in; each step spends 3 by day and 1 by night */
+} DesertCrossing;
+
+/* The world-map spot a field trip returns to: the start menu, the fairy entry and the desert keep it. */
+typedef struct ReturnPoint {
+    /* 0x0 */ u32 x; /* 16.16 */
+    /* 0x4 */ u32 y;
+    /* 0x8 */ u16 area_id;
+    /* 0xA */ u8  pending; /* nonzero while the trip is away from the spot */
+    /* 0xB */ u8  facing;
+} ReturnPoint;
+
 /* The persistent game state: SYS_StartFrontend clears it, SAVE_BuildSlotImage copies it to the memory card file
  * payload (file offset 0x200, so the frame-relative offsets of menu/save.h are these plus 0x200) and
  * SAVE_RunLoadRestore copies it back. */
@@ -37,7 +53,7 @@ typedef struct SaveData {
     /* 0x5B0 */ u8               scene_flag_words[160]; /* eight bytes per scenario */
     /* 0x650 */ u8               scene_event_flags[40];
     /* 0x678 */ u32              zenny;
-    /* 0x67C */ u8               unk_67C[4];
+    /* 0x67C */ DesertCrossing   desert;
     /* 0x680 */ PartyOrders      party;
     /* 0x688 */ u8               unk_688[0x60];
     /* 0x6E8 */ GameClock        play_clock;
@@ -50,7 +66,8 @@ typedef struct SaveData {
     /* 0x751 */ u8               snd_bgm_id;
     /* 0x752 */ u8               unk_752[2];
     /* 0x754 */ u32              battle_count;
-    /* 0x758 */ u8               unk_758[0x1C];
+    /* 0x758 */ u8               unk_758[0x10];
+    /* 0x768 */ ReturnPoint      return_point;
     /* 0x774 */ u8               inventory_ids[4][INV_SLOTS_PER_CATEGORY];
     /* 0x974 */ u8               inventory_counts[4][INV_SLOTS_PER_CATEGORY];
     /* 0xB74 */ u8               vital_item_ids[INV_VITAL_ITEM_SLOTS];
@@ -77,6 +94,7 @@ ASSERT_OFFSET(SaveData, characters, 0x090);
 ASSERT_OFFSET(SaveData, scene_flag_words, 0x5B0);
 ASSERT_OFFSET(SaveData, scene_event_flags, 0x650);
 ASSERT_OFFSET(SaveData, zenny, 0x678);
+ASSERT_OFFSET(SaveData, desert, 0x67C);
 ASSERT_OFFSET(SaveData, party, 0x680);
 ASSERT_OFFSET(SaveData, play_clock, 0x6E8);
 ASSERT_OFFSET(SaveData, fish_best_catch, 0x70C);
@@ -84,6 +102,7 @@ ASSERT_OFFSET(SaveData, emi_loaded_character_index, 0x74C);
 ASSERT_OFFSET(SaveData, fishing_equipment, 0x74E);
 ASSERT_OFFSET(SaveData, snd_bgm_id, 0x751);
 ASSERT_OFFSET(SaveData, battle_count, 0x754);
+ASSERT_OFFSET(SaveData, return_point, 0x768);
 ASSERT_OFFSET(SaveData, inventory_ids, 0x774);
 ASSERT_OFFSET(SaveData, inventory_counts, 0x974);
 ASSERT_OFFSET(SaveData, vital_item_ids, 0xB74);

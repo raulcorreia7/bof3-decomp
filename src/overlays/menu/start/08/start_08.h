@@ -211,7 +211,6 @@ typedef struct NameEntryLabels {
     u8 start[5];
 } NameEntryLabels;
 
-extern u8  D_80144F57;
 extern u16 D_80145594[];
 
 extern u8              D_80148480;
