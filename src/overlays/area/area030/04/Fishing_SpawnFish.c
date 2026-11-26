@@ -25,7 +25,6 @@ NON_MATCHING void Fishing_SpawnFish(void) {
     s32    row_index;
     s32    count;
     s32    row_offset;
-    s32    steps;
     s32    walk;
     u32    roll;
     u32    masked;
@@ -46,36 +45,29 @@ next_column:
         *(u8*)g_CurrentActor = 0x21;
         TASK(Actor)->unk_05  = row_index;
         TASK(Actor)->unk_06  = column;
-        roll                 = RANDOM_MASK(BYTE_MASK);
+        FISHING_ROW->roll_90 = RANDOM_MASK(BYTE_MASK);
         fish                 = FISHING_ROW;
         task                 = TASK(Actor);
     retry:
-        fish->roll_90 = roll;
-        roll          = fish->roll_90;
-        limit         = LIMIT_TABLE[task->unk_06 * FISHING_TYPE_STRIDE];
-        masked        = roll & 0xFFFF;
+        roll   = fish->roll_90;
+        limit  = LIMIT_TABLE[task->unk_06 * FISHING_TYPE_STRIDE];
+        masked = roll & 0xFFFF;
         if (limit < masked) {
-            roll -= limit >> 1;
+            fish->roll_90 = roll - (limit >> 1);
             goto retry;
         }
-        if (masked < (limit >> 1)) {
-            roll = limit >> 1;
-        }
-        ROW_ROLL   = roll;
-        ROW_VALUE  = FISH_TYPES[TASK(Actor)->unk_06 * FISHING_TYPE_STRIDE] * (ROW_ROLL * 10 / LIMIT_TABLE[TASK(Actor)->unk_06 * FISHING_TYPE_STRIDE]) / 10;
-        ROW_VALUE2 = ROW_VALUE;
-        type       = TASK(Actor)->unk_06;
+        masked        = (masked < (limit >> 1)) ? (limit >> 1) : roll;
+        fish->roll_90 = masked;
+        ROW_VALUE     = FISH_TYPES[TASK(Actor)->unk_06 * FISHING_TYPE_STRIDE] * (ROW_ROLL * 10 / LIMIT_TABLE[TASK(Actor)->unk_06 * FISHING_TYPE_STRIDE]) / 10;
+        ROW_VALUE2    = ROW_VALUE;
+        type          = TASK(Actor)->unk_06;
         if (type != 0x15 && ROW_ROLL == LIMIT_TABLE[type * FISHING_TYPE_STRIDE]) {
-            steps = (u8)(LIMIT_TABLE[type * FISHING_TYPE_STRIDE] / 10);
-            walk  = 0;
-            if (steps >= 0) {
-                while (RANDOM_MASK(1)) {
-                    ROW_ROLL++;
-                    walk++;
-                    if (steps < walk) {
-                        break;
-                    }
+            limit = LIMIT_TABLE[type * FISHING_TYPE_STRIDE];
+            for (walk = 0; walk <= (u8)(limit / 10); walk++) {
+                if (!RANDOM_MASK(1)) {
+                    break;
                 }
+                ROW_ROLL++;
             }
         }
         TASK(Actor)->header.mode = 0;
