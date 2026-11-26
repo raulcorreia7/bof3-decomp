@@ -1,8 +1,7 @@
 #include "engine/slus/slus.h"
 
-/* when the pad word is nonzero or bit 6 of the selection counter is set, clears D_801490B8 and steps the handler index
- * g_UiMessageStep; always queues the sprite at (D_801490C0 + D_8014833A / 2 - 0xE, D_801490C8 + D_801490BE + 0xC). */
-MATCH void func_80150F8C(void) {
+/* Draws the wait marker and steps on at a pad press or an advance request. */
+MATCH void UI_MessageWaitInput(void) {
     if (g_PadStates[0].pressed != 0 || (g_UiWindowChannel & FRONTEND_FLAG_ADVANCE_REQUEST) != 0) {
         D_801490B8[0] = 0;
         g_UiMessageStep++;

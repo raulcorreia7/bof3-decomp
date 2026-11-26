@@ -4,7 +4,7 @@
 /* Settings screen: draws the option rows and rebinds a pressed button to its input slot. */
 NON_MATCHING void func_801E206C(void) {
     u8* cursor;
-    u16 cue;
+    s32 cue;
     u16 buttons; /* the pressed actions, reduced to the first one */
     u16 scan;    /* the pressed actions, scanned for the first one */
     s32 i;
@@ -15,12 +15,14 @@ NON_MATCHING void func_801E206C(void) {
     func_801E26A8(0x1C, 0x40);
     cursor = &D_80148655;
     func_801E2668(*cursor, 0x70, 0x26);
-    if ((s8)*cursor != 9) {
-        cue = (s8)*cursor + 0xBC;
-    } else if (g_AutoRun != 0) {
-        cue = 0xCA;
-    } else {
+    cue = (s8)*cursor;
+    if (cue != 9) {
+        cue += 0xBC;
+        cue = (u16)cue;
+    } else if (g_AutoRun == 0) {
         cue = 0xC5;
+    } else {
+        cue = 0xCA;
     }
     WinDrawCueText(28, 19, cue);
     func_801E2D84(0xA8, 0x62);

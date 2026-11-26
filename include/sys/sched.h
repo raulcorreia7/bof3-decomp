@@ -23,11 +23,12 @@
  * returns, OPEN when SYS_ThreadRegister arms a slot, SWITCH for the forced switch, and
  * IDLE when the scheduler parks. */
 typedef enum ThreadState {
-    SYS_THREAD_EMPTY  = 0,
-    SYS_THREAD_YIELD  = 1,
-    SYS_THREAD_OPEN   = 2,
-    SYS_THREAD_SWITCH = 4,
-    SYS_THREAD_IDLE   = 0x7f,
+    SYS_THREAD_EMPTY     = 0,
+    SYS_THREAD_YIELD     = 1,
+    SYS_THREAD_OPEN      = 2,
+    SYS_THREAD_SWITCH    = 4,
+    SYS_THREAD_SUSPENDED = 0x40,
+    SYS_THREAD_IDLE      = 0x7f,
 } ThreadState;
 
 /* The bytes SYS_ClearCurrentThread clears before a registered entry runs: eight halfwords ending at

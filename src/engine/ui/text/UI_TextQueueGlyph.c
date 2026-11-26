@@ -1,6 +1,7 @@
 #include "engine/slus/slus.h"
 
-MATCH void func_8014FB80(s16 x, s16 y, u16 clut, u8 shade) {
+/* Queues the glyph sprite UI_TextDrawString prepared: neutral colour, clut, position (x, y + shade), semi-transparent, on the UI layer. */
+MATCH void UI_TextQueueGlyph(s16 x, s16 y, u16 clut, u8 shade) {
     SPRT* sprite;
     SPRT* position;
 

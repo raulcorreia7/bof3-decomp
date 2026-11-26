@@ -10,11 +10,46 @@ Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer,
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 g_BattleEnemyBattlers = { addr = 0x801EB630, alias = true }
 g_BattleEffects = { addr = 0x801EC330, alias = true }
-D_801EEC34 = { addr = 0x801EEC34, type = "Magic015SecondSteps", source = "Step handlers of magic015 (Flying Kick, Charge), run by header.step (byte 0x02) from func_801EFA28; the eight Callback slots are copied to a local table first." }
+g_BMagicChargeTaskModes = { addr = 0x801EEC04, source = "The task modes of Charge (g_BattleSelections row 4): init, end, start playing, play once." }
+g_BMagicFlyingKickTaskModes = { addr = 0x801EEC24, source = "The task modes of Flying Kick (g_BattleSelections row 55): init, end, start playing, play once." }
+g_BMagicChargeLeadSteps = { addr = 0x801EEC34, type = "Magic015SecondSteps", source = "The steps of the lead image of Charge, run by header.step (byte 0x02) from BMagic_ChargeLeadUpdate; the eight Callback slots are copied to a local table first." }
+g_BMagicChargeTrailSteps = { addr = 0x801EEC54, source = "The steps of a trailing image of Charge, run by header.step from BMagic_ChargeTrailUpdate." }
+g_BMagicFlyingKickImageSteps = { addr = 0x801EEC84, source = "The steps of the kicker image of Flying Kick, run by header.step from BMagic_FlyingKickImageUpdate." }
+BMagic_ChargeUpdate = { addr = 0x801EECA0, type = "func", source = "Runs the task mode of Charge, the callback of g_BattleSelections row 4." }
+BMagic_ChargeInit = { addr = 0x801EED0C, type = "func", source = "Starts the lead image and the four trailing images at the active battler and waits." }
+BMagic_ChargeEnd = { addr = 0x801EF150, type = "func", source = "Restores the palette and releases the active battler." }
 Effect_StartPlaying = { addr = 0x801EF1CC, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic015 (Flying Kick, Charge)." }
 Effect_PlayOnce = { addr = 0x801EF200, type = "func", source = "Plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic015 (Flying Kick, Charge)." }
 Effect_StartPlaying2 = { addr = 0x801EF610, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic015 (Flying Kick, Charge)." }
+BMagic_FlyingKickUpdate = { addr = 0x801EF644, type = "func", source = "Runs the task mode of Flying Kick, the callback of g_BattleSelections row 55." }
+BMagic_FlyingKickInit = { addr = 0x801EF6B0, type = "func", source = "Starts the kicker image at the active battler and waits." }
+BMagic_FlyingKickEnd = { addr = 0x801EF93C, type = "func", source = "Ends once every image has finished." }
 Effect_StartPlaying4 = { addr = 0x801EF9B0, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic015 (Flying Kick, Charge)." }
 BMagic_DispatchEffectMode = { addr = 0x801EF9E4, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic015." }
+BMagic_ChargeLeadUpdate = { addr = 0x801EFA28, type = "func", source = "Runs the lead image's step and adds it to the grid." }
+BMagic_ChargeLeadStart = { addr = 0x801EFAE4, type = "func", source = "Takes the battler's place and palette; an enemy skips the animation wait." }
+BMagic_ChargeLeadWaitAnim = { addr = 0x801EFB90, type = "func", source = "Waits for the battler's animation step." }
+BMagic_ChargeLeadStrike = { addr = 0x801EFBD8, type = "func", source = "Closes on the target and, in range, plays the hit and marks it damaged." }
+BMagic_ChargeLeadReturn = { addr = 0x801EFCC4, type = "func", source = "Arcs back toward the battler for a fixed time." }
+BMagic_ChargeLeadWaitTrail = { addr = 0x801EFD7C, type = "func", source = "Waits until every trailing image has finished." }
+BMagic_ChargeLeadStretch = { addr = 0x801EFDE8, type = "func", source = "Stretches the image tall and moves it onto the battler." }
+BMagic_ChargeLeadRestore = { addr = 0x801EFE84, type = "func", source = "Restores the image's scale and counts it as finished." }
+BMagic_ChargeLeadEnd = { addr = 0x801EFEFC, type = "func", source = "Clears the image." }
+BMagic_ChargeTrailUpdate = { addr = 0x801EFF1C, type = "func", source = "Runs a trailing image's step and adds it to the grid." }
+BMagic_ChargeTrailStart = { addr = 0x801EFFC0, type = "func", source = "Takes the battler's place after its delay and tints the image by its index." }
+BMagic_ChargeTrailWaitAnim = { addr = 0x801F014C, type = "func", source = "Waits for the battler's animation step." }
+BMagic_ChargeTrailApproach = { addr = 0x801F0194, type = "func", source = "Closes on the target and, in range, turns back toward the battler." }
+BMagic_ChargeTrailReturn = { addr = 0x801F0248, type = "func", source = "Arcs back toward the battler for a fixed time." }
 Effect_TickDownAndClear = { addr = 0x801F0300, type = "func", source = "Lowers the active battler's ticker (byte 0x0B) and clears the effect in magic015 (Flying Kick, Charge)." }
+BMagic_FlyingKickImageUpdate = { addr = 0x801F0C30, type = "func", source = "Runs the kicker image's step, adds it to the grid and draws its shadow." }
+BMagic_FlyingKickImageStart = { addr = 0x801F0D48, type = "func", source = "Starts the jump." }
+BMagic_FlyingKickImageRise = { addr = 0x801F0DB4, type = "func", source = "Rises toward the target for a fixed time." }
+BMagic_FlyingKickImageStrike = { addr = 0x801F0E54, type = "func", source = "In range of the target, plays the hit, marks it damaged and starts the fall." }
+BMagic_FlyingKickImageFall = { addr = 0x801F0F2C, type = "func", source = "Falls until it reaches the target's height, then turns semi-transparent." }
+BMagic_FlyingKickImageRejoin = { addr = 0x801F1088, type = "func", source = "Fades onto the battler once the last other image has finished." }
+BMagic_FlyingKickImageFade = { addr = 0x801F1180, type = "func", source = "Raises the tint and counts the image as finished." }
+BMagic_FlyingKickImageEnd = { addr = 0x801F1230, type = "func", source = "Clears the image." }
+BMagic_PushGroundMatrix = { addr = 0x801F1250, type = "func", source = "Pushes the model matrix at the effect's position on the ground." }
+BMagic_PushTargetMatrix = { addr = 0x801F131C, type = "func", source = "Pushes the model matrix at the selected actor." }
+BMagic_DrawShadow = { addr = 0x801F13D4, type = "func", source = "Draws the shadow as a disc of eight subtractive triangles." }
 g_BMagicEffectModes = { addr = 0x801F1630, source = "Handlers of magic015 (Flying Kick, Charge), run by header.mode (byte 0x01)." }
