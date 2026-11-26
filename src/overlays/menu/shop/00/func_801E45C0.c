@@ -11,9 +11,9 @@ NON_MATCHING void func_801E45C0(MenuPanelTask* task) {
     u8  packed;
     u8  first;
     u8  current;
-    u8  shade;
+    s32 shade;
     s32 start;
-    s32 row_y;
+    s16 row_y;
     s32 title_x;
     s32 enabled;
 
@@ -29,8 +29,7 @@ NON_MATCHING void func_801E45C0(MenuPanelTask* task) {
             if (task->unk_0C == packed) {
                 current = packed;
             }
-            entries[packed] = i + 1;
-            packed++;
+            entries[packed++] = i + 1;
         }
     }
     for (i = packed; i < 0x11; i++) {
@@ -44,7 +43,7 @@ NON_MATCHING void func_801E45C0(MenuPanelTask* task) {
 
     start = UI_ScrollList(&task->unk_0A, &row_offset, &count, &task->unk_08);
     row_y = (s8)row_offset + (task->pos.y + 0x1A);
-    for (i = start; (u8)i < (u8)start + count + 9; i++) {
+    for (i = start; (u8)i < (u8)start + (count + 9); i++) {
         if (entries[i] != 0) {
             enabled = func_801E4C2C((entries[i] - 1) & BYTE_MASK);
             if (first == i) {
@@ -56,8 +55,7 @@ NON_MATCHING void func_801E45C0(MenuPanelTask* task) {
                 }
                 row_y -= 2;
             }
-            shade = (current == i) * 2;
-            UI_TextDraw((s16)(task->pos.x + 0x13), (s16)row_y, shade, TEXT_LENGTH_MAX, UI_MessageGetText(entries[i] + 0x110));
+            UI_TextDraw((s16)(task->pos.x + 0x13), (s16)row_y, shade = (current == i) * 2, TEXT_LENGTH_MAX, UI_MessageGetText(entries[i] + 0x110));
             if ((enabled & BYTE_MASK) == 0) {
                 UI_IconDraw((task->pos.x + 8) & HALF_MASK, (row_y + 2) & HALF_MASK, 6, 0);
             } else {

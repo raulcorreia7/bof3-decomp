@@ -59,7 +59,10 @@ NON_MATCHING void Game_SetCurrentActor(s32 tint) {
             SetPolyGT4(back);
             SetShadeTex(back, 0);
             SetSemiTrans(back, 1);
-            setXY4(back, quad->x0, quad->y0, quad->x1, quad->y1, quad->x2, quad->y2, quad->x3, quad->y3);
+            *(u32*)&back->x0 = *(u32*)&quad->x0;
+            *(u32*)&back->x1 = *(u32*)&quad->x1;
+            *(u32*)&back->x2 = *(u32*)&quad->x2;
+            *(u32*)&back->x3 = *(u32*)&quad->x3;
             setUVWH(back, 0xB0, 0x20, 0x1F, 0x1F);
             back->tpage = (GetGraphType() == 1 || GetGraphType() == 2) ? 0x2A5 : 0xB5;
             back->clut  = getClut(0, 484);
@@ -78,7 +81,7 @@ NON_MATCHING void Game_SetCurrentActor(s32 tint) {
             g_ScratchPadVectors[2].vz = -(D_801F412C[0x38] << 5);
             RotTransPers(&g_ScratchPadVectors[2], (long*)&cell[6], &p, &flag);
             phase  = (g_FrameCount + row / 2) & 7;
-            size   = ABS(3 - phase) + 0x10;
+            size   = abs(3 - phase) + 0x10;
             size   = size * 0x1194 / (g_AreaCameraOffsetZ + 0x1194) + (side << 3);
             sprite = (POLY_FT4*)g_GfxPrimCursor;
             SetPolyFT4(sprite);

@@ -209,7 +209,8 @@ STATIC_ASSERT(FishingState_slot_3A, DECOMP_OFFSETOF(FishingState, y_38.slot.slot
  * not modelled. */
 typedef struct FishingSceneCue {
     u16 scene_id;
-    u8  pad_02[8];
+    u16 hook_scene_id; /* the scene func_801DF334 selects when the fish bites */
+    u8  pad_04[6];
     u8  count;
     u8  pad_0B[0x19];
 } FishingSceneCue;
@@ -485,11 +486,11 @@ extern u8                    D_801E2AB8[];
 extern u8                    g_FishingSpecies[];
 extern u8                    D_801E2ACA[];
 /* D_801E2ACC */
-extern u8                    D_801E2ACC[];
+extern u8                    D_801E2ACC[][sizeof(FishingSceneCue)];
 extern u8                    D_801E2AD2[];
 extern u8                    D_801E2AD3[];
 /* D_801E2AD4 */
-extern u8                    D_801E2AD4[];
+extern u8                    D_801E2AD4[][sizeof(FishingSceneCue)];
 extern u8                    D_801E2AD5[];
 extern u8                    D_801E2AD7[];
 /* D_801E2AD8 */

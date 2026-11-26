@@ -720,57 +720,42 @@ INCLUDE_ASM(func_801D2308);
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D27BC(void) {
-    s32** record_cell;
     s32*  scroll_x;
     s32*  scroll_y;
-    s32*  record;
-    s32*  next_record;
-    s32   x;
-    s32   y;
-    s32   height;
-    s32   bias;
-    s8    initial;
+    s32** record_cell;
 
-    record_cell            = &D_801F501C;
-    D_801DA09C             = *record_cell;
     scroll_x               = &g_AreaScrollTargetX;
     scroll_y               = &g_AreaScrollTargetY;
-    bias                   = 0x1000;
-    record                 = D_801DA09C;
+    record_cell            = &D_801F501C;
+    D_801DA09C             = *record_cell;
     D_801DA048.header.mode = 0;
     D_801DA090             = 0;
-    g_ShisuBaseScale       = bias;
+    g_ShisuBaseScale       = 0x1000;
     D_801DA0AC             = 0;
     D_801DA0B0             = 0;
     g_ShisuBaseAngle       = 0;
-    initial                = -0x80;
-    g_ShisuBase[0]         = initial;
-    g_ShisuBase[1]         = initial;
-    g_ShisuBase[2]         = initial;
+    g_ShisuBase[0]         = -0x80;
+    g_ShisuBase[1]         = -0x80;
+    g_ShisuBase[2]         = -0x80;
     D_801DA07C             = *scroll_x;
     D_801DA080             = *scroll_y;
-    D_801DA098             = record[1];
-    height                 = Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY);
-    D_801DA084             = (height << 16) - SHISU_HEIGHT_BIAS;
+    D_801DA098             = D_801DA09C[1];
+    D_801DA084             = (Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY) << 16) - SHISU_HEIGHT_BIAS;
 
     D_801DA114             = *record_cell + 2;
-    next_record            = D_801DA114;
     D_801DA0C0.header.mode = 0;
     D_801DA108             = 0;
-    g_ShisuToppingScale    = bias;
+    g_ShisuToppingScale    = 0x1000;
     D_801DA124             = 0;
     D_801DA128             = 0;
     g_ShisuToppingAngle    = 0;
-    x                      = *scroll_x;
-    y                      = *scroll_y;
-    g_ShisuTopping[0]      = initial;
-    g_ShisuTopping[1]      = initial;
-    g_ShisuTopping[2]      = initial;
-    D_801DA0F4             = x;
-    D_801DA0F8             = y;
-    D_801DA110             = next_record[1];
-    height                 = Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY);
-    D_801DA0FC             = (height << 16) + SHISU_HEIGHT_BIAS;
+    g_ShisuTopping[0]      = -0x80;
+    g_ShisuTopping[1]      = -0x80;
+    g_ShisuTopping[2]      = -0x80;
+    D_801DA0F4             = *scroll_x;
+    D_801DA0F8             = *scroll_y;
+    D_801DA110             = D_801DA114[1];
+    D_801DA0FC             = (Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY) << 16) + SHISU_HEIGHT_BIAS;
 }
 #else
 INCLUDE_ASM(func_801D27BC);

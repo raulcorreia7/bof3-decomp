@@ -1,15 +1,14 @@
 #include "area108_14.h"
+#include "menu/save_data.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F50F0(void) {
+MATCH void func_801F50F0(void) {
     SceneSampleTrack* track;
     u8                i;
     u8                index;
-    s8                weight2;
 
     switch (g_SceneEventStep) {
         case 0:
-            if (--LOHU(D_801448EE) == 0) {
+            if (--g_SaveData.scene_event_timer == 0) {
                 g_AreaScrollTargetX = g_PartyActors[1].pos.x.fixed;
                 g_AreaScrollTargetY = g_PartyActors[1].pos.y.fixed;
                 g_AreaCameraSpeed   = g_RouteSpeedScale[3] * 8;
@@ -59,45 +58,41 @@ NON_MATCHING void func_801F50F0(void) {
                     slot->pos.y.fixed  = 0x2F8000;
                     slot->pos.z.fixed  = Area_HeightSample(slot->pos.x.fixed, slot->pos.y.fixed);
                 }
-                D_801448EE       = 0x1E;
-                g_SceneEventStep = 5;
-                {
-                    u8* flag = &D_801F629B;
-                    *flag    = (*flag & 0xF0) | 0x41;
-                }
+                g_SaveData.scene_event_timer = 0x1E;
+                g_SceneEventStep             = 5;
+                D_801F6298.flags             = (D_801F6298.flags & 0xF0) | 0x41;
             }
             break;
         case 5: {
             u16* timer;
 
-            timer = &LOHU(D_801448EE);
+            timer = &g_SaveData.scene_event_timer;
             if (--*timer != 0) {
                 i     = 0;
-                track = D_801F629C;
-                if (D_801F6298 > 0) {
+                track = D_801F6298.tracks;
+                if (D_801F6298.count > 0) {
                     do {
-                        weight2 = (s8)(track->weight[2] >> 8);
-                        track->sample[0] += (s8)(track->weight[0] >> 8);
-                        track->sample[1] += (s8)(track->weight[1] >> 8);
-                        track->sample[2] += weight2;
-                        track->sample[3] += (s8)(track->weight[0] >> 8);
-                        track->sample[4] += (s8)(track->weight[1] >> 8);
-                        track->sample[5] += weight2;
-                        track->sample[6] += (s8)(track->weight[0] >> 8);
-                        track->sample[7] += (s8)(track->weight[1] >> 8);
-                        track->sample[8] += weight2;
-                        track->sample[9] += (s8)(track->weight[0] >> 8);
-                        track->sample[10] += (s8)(track->weight[1] >> 8);
-                        track->sample[11] += weight2;
+                        track->sample[0] += track->weight[0] >> 8;
+                        track->sample[1] += track->weight[1] >> 8;
+                        track->sample[2] += track->weight[2] >> 8;
+                        track->sample[3] += track->weight[0] >> 8;
+                        track->sample[4] += track->weight[1] >> 8;
+                        track->sample[5] += track->weight[2] >> 8;
+                        track->sample[6] += track->weight[0] >> 8;
+                        track->sample[7] += track->weight[1] >> 8;
+                        track->sample[8] += track->weight[2] >> 8;
+                        track->sample[9] += track->weight[0] >> 8;
+                        track->sample[10] += track->weight[1] >> 8;
+                        track->sample[11] += track->weight[2] >> 8;
                         i++;
                         track++;
-                    } while (i < D_801F6298);
+                    } while (i < D_801F6298.count);
                 }
                 g_PartyActors[0].tint.bytes.rgb.r -= 4;
                 g_PartyActors[0].tint.bytes.rgb.b -= 4;
                 g_PartyActors[0].tint.bytes.rgb.g -= 4;
             } else {
-                SYS_SetFlag(g_SceneEventFlags, 0x1D);
+                SYS_SetFlag(g_SaveData.scene_event_flags, 0x1D);
                 Area_CellSetPalette(0x20, 0x2F);
                 g_PartyActors[0].header.flags = 0;
                 *timer                        = 0x1E;
@@ -105,7 +100,7 @@ NON_MATCHING void func_801F50F0(void) {
             }
         } break;
         case 9:
-            if (--LOHU(D_801448EE) == 0) {
+            if (--g_SaveData.scene_event_timer == 0) {
                 g_SceneEventStep         = 0;
                 g_SceneEventState.mode   = SCENE_EVENT_NONE;
                 g_ScenarioState.state_04 = 3;
@@ -114,6 +109,3 @@ NON_MATCHING void func_801F50F0(void) {
             break;
     }
 }
-#else
-INCLUDE_ASM(func_801F50F0);
-#endif

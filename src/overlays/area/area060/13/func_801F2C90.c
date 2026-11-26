@@ -12,11 +12,9 @@ NON_MATCHING void func_801F2C90(void) {
     s32       x_offset;
     s32       band_offset;
     s32       x;
-    s32       row;
     s32       col;
     s32       high;
     s32       low;
-    s32       value;
     s32       fill;
 
     rect = (RECT*)g_GfxPrimCursor;
@@ -58,20 +56,15 @@ NON_MATCHING void func_801F2C90(void) {
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, (GetGraphType() == 1 || GetGraphType() == 2) ? 0x225 : 0x95, rect);
     GFX_AddPrim(GFX_LAYER_BACKDROP, sizeof(DR_MODE));
 
-    x_offset = -0x100;
-    for (i = 0; i < 3; i++) {
+    for (i = 0, x_offset = -0x100; i < 3; i++) {
         poly = (POLY_FT4*)g_GfxPrimCursor;
         SetPolyFT4(poly);
         SetShadeTex(poly, 1);
         phase       = g_FrameCount >> 3;
         x           = phase + x_offset;
-        poly->x0    = x;
         poly->y0    = 0;
-        poly->x1    = x + 0x100;
         poly->y1    = 0;
-        poly->x2    = x;
         poly->y2    = 0x40;
-        poly->x3    = x + 0x100;
         poly->y3    = 0x40;
         poly->u0    = 0;
         poly->v0    = 0;
@@ -81,6 +74,10 @@ NON_MATCHING void func_801F2C90(void) {
         poly->v2    = 0x40;
         poly->u3    = 0xFF;
         poly->v3    = 0x40;
+        poly->x0    = x;
+        poly->x1    = x + 0x100;
+        poly->x2    = x;
+        poly->x3    = x + 0x100;
         poly->tpage = (GetGraphType() == 1 || GetGraphType() == 2) ? 0x229 : 0x99;
         poly->clut  = 0x7980;
         func_801F3288(sizeof(POLY_FT4));
@@ -125,22 +122,20 @@ NON_MATCHING void func_801F2C90(void) {
     func_801F3288(sizeof(DR_MODE));
 
     fill = (0x20 << 24) | (0x20 << 16) | (0x20 << 8) | 0x20;
-    for (row = 0; row < 10; row++) {
-        high  = ((row + 1) / 2) + 0x20;
-        low   = (row / 2) + 0x20;
-        value = (high << 24) | (high << 16) | (low << 8) | low;
+    for (i = 0; i < 10; i++) {
+        high = ((i + 1) / 2) + 0x20;
+        low  = (i / 2) + 0x20;
         for (col = 0x2D; col < 0x31; col++) {
-            D_80104030[col + (g_AreaTargetCellY + 3) * g_AreaMapBundle.width]       = fill;
-            D_80104030[col + (g_AreaTargetCellY + row + 4) * g_AreaMapBundle.width] = value;
+            D_80104030[col + (g_AreaTargetCellY + 3) * g_AreaMapBundle.width]     = fill;
+            D_80104030[col + (g_AreaTargetCellY + i + 4) * g_AreaMapBundle.width] = (high << 24) | (high << 16) | (low << 8) | low;
         }
     }
-    for (row = 0; row < 14; row++) {
-        high  = (row / 2) + 0x20;
-        low   = ((row + 1) / 2) + 0x20;
-        value = (high << 24) | (high << 16) | (low << 8) | low;
+    for (i = 0; i < 14; i++) {
+        high = (i / 2) + 0x20;
+        low  = ((i + 1) / 2) + 0x20;
         for (col = 0x2D; col < 0x31; col++) {
-            D_80104030[col + (g_AreaTargetCellY - 3) * g_AreaMapBundle.width]       = fill;
-            D_80104030[col + (g_AreaTargetCellY - row - 4) * g_AreaMapBundle.width] = value;
+            D_80104030[col + (g_AreaTargetCellY - 3) * g_AreaMapBundle.width]     = fill;
+            D_80104030[col + (g_AreaTargetCellY - i - 4) * g_AreaMapBundle.width] = (high << 24) | (high << 16) | (low << 8) | low;
         }
     }
 }

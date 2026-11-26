@@ -10,14 +10,13 @@ NON_MATCHING void func_801F2DE0(void) {
     u8*       base;
     u8*       next;
     s8*       rec;
-    u8        level;
+    u32       level;
     u32       address;
     u32       row_offset;
     u32       column_offset;
     u32       slot_offset;
     u32       offset;
     s32       row;
-    s32       column;
     s32       col;
     s32       angle;
     s32       orientation;
@@ -33,23 +32,24 @@ NON_MATCHING void func_801F2DE0(void) {
     u16       slot;
     POLY_FT4* prim;
 
+    row                   = 0;
     base                  = (u8*)&D_80142CC0;
-    g_AreaCellPacketCount = 0;
     level                 = g_GfxBufferIndex;
     row_offset            = 0;
-    row                   = 0;
+    g_AreaCellPacketCount = 0;
     do {
-        column        = 0;
+        col           = 0;
+        offset        = row_offset;
         column_offset = level;
         do {
             address = column_offset << 3;
-            column++;
-            slot_offset                       = address + row_offset;
+            col++;
+            slot_offset                       = address + offset;
             address                           = address + base;
-            *(u32*)(D_80142CC4 + slot_offset) = row_offset + address;
+            *(u32*)(D_80142CC4 + slot_offset) = offset + address;
             *(u32*)(D_80142CC0 + slot_offset) = 0;
             column_offset += 2;
-        } while (column < 2);
+        } while (col < 2);
         row++;
         row_offset += 0x30;
     } while (row < AREA_CELL_GRID_ROWS);

@@ -90,20 +90,28 @@ extern AreaPosEntry D_801F63A0[];
 typedef struct SceneSampleTrack {
     u8  unk_00[2];
     u16 sample[12];
-    u16 weight[3];
+    s16 weight[3];
     u8  unk_20[8];
 } SceneSampleTrack;
 
 ASSERT_OFFSET(SceneSampleTrack, sample, 0x02);
 ASSERT_OFFSET(SceneSampleTrack, weight, 0x1A);
-ASSERT_SIZE(SceneSampleTrack, 0x28); /* the same 0x28 row as scena00's SceneSample, whose weights are s16 */
+ASSERT_SIZE(SceneSampleTrack, 0x28); /* the same 0x28 row as scena00's SceneSample */
 
 /* The staged actor rows: the event scrolls to row 1 and tints row 0. */
 
-/* The track's row count, the event flag byte beside it and the track the samples walk. */
-extern s8                D_801F6298;
-extern u8                D_801F629B;
-extern SceneSampleTrack* D_801F629C;
+/* The sample rows the event fades: the row count, the event flag byte and the rows. */
+typedef struct SceneSampleSet {
+    s8                count;
+    u8                unk_01[2];
+    u8                flags;
+    SceneSampleTrack* tracks;
+} SceneSampleSet;
+
+ASSERT_OFFSET(SceneSampleSet, flags, 0x03);
+ASSERT_OFFSET(SceneSampleSet, tracks, 0x04);
+
+extern SceneSampleSet D_801F6298;
 
 /* The four trigger cells the stage event matches: the cell, the facing and the scene flag to toggle. */
 typedef struct Area108Trigger {

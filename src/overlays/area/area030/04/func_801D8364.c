@@ -2,118 +2,122 @@
 
 /* Draws the area-030 accessory rows: the accessory icons of every
  * slot with their count text and the frame behind them. */
-/* RESIDUAL: 47.01%; retail frame 0x78, current frame 0x70, and the
- * call sequence differ. TASK(FishingState)->y_38.slot.slot is the typed s16 at
- * offset 0x3A. resume: reproduce the retail control-flow and frame shape. */
+/* RESIDUAL: same size as retail; the loop pass moves panel_x + 104 out of the row loop, where
+ * retail rebuilds it at each count text. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D8364(s16 panel_x, s16 panel_y) {
-    s16 bar_x;
+    s16 x;
+    s16 base_y;
     s16 bar_y;
-    s16 text_x;
-    s16 text_y;
-    s16 row_y;
-    s16 offset_y;
+    s16 row_offset;
+    s32 shadow_y;
     s32 slot;
     s32 row;
     s32 index;
-    s32 count;
+    s32 height;
+    u8  offset_y;
+    u8  y_offset;
     u8  max_count;
     u8  max_rows;
     u8  accessory;
     u8* cursor;
     u8* text;
 
-    UI_WindowDraw(panel_x, (panel_y + 1) & HALF_MASK, 139, 158, UI_WINDOW_OPEN_TOP_LEFT, (s32)g_WindowStyle);
+    UI_WindowDraw(panel_x, panel_y + 1, 139, 158, UI_WINDOW_OPEN_TOP_LEFT, g_WindowStyle);
     if (TASK(FishingState)->step_index != 0) {
-        TASK(FishingState)->step_index = (u8)(TASK(FishingState)->step_index - 1);
-        max_count                      = 0xA;
-        max_rows                       = (u8)(TASK(FishingState)->y_38.pos_y - 1);
+        TASK(FishingState)->step_index--;
         if (TASK(FishingState)->counter_08 != 0) {
-            offset_y = (s16)(25 - (TASK(FishingState)->step_index * 4));
+            max_rows = TASK(FishingState)->y_38.slot.low.unk_38;
         } else {
-            offset_y = (s16)(25 - ((3 - TASK(FishingState)->step_index) * 4));
+            max_rows = TASK(FishingState)->y_38.slot.low.unk_38 - 1;
+        }
+        max_count = 10;
+        if (TASK(FishingState)->counter_08 != 0) {
+            offset_y = 25 - TASK(FishingState)->step_index * 4;
+        } else {
+            offset_y = 25 - (3 - TASK(FishingState)->step_index) * 4;
         }
     } else {
+        max_rows  = TASK(FishingState)->y_38.slot.low.unk_38;
         max_count = 9;
-        max_rows  = TASK(FishingState)->y_38.pos_y;
         offset_y  = 25;
     }
-    slot   = 0;
-    row    = 0;
-    index  = 0;
-    text   = g_UiTextFormatBuffer;
-    cursor = g_InventoryIds[3];
-    bar_x  = (s16)(panel_x + 5);
-    text_y = 0;
-    row_y  = -2;
+    slot       = 0;
+    row        = 0;
+    index      = 0;
+    text       = g_UiTextFormatBuffer;
+    cursor     = g_InventoryIds[3];
+    x          = panel_x + 5;
+    row_offset = 0;
+    base_y     = panel_y + offset_y;
+    bar_y      = base_y;
+    shadow_y   = -2;
     do {
         accessory = *cursor;
         if (g_Accessories[accessory].type == ITEM_TYPE_FISHING_LURE) {
-            if ((row >= (s32)max_rows) && (index < (s32)max_count)) {
-                if (*D_80145E94 == 2) {
-                    if (TASK(FishingState)->counter_07 & 1) {
-                        if (TASK(FishingState)->bounce_speed == index) {
-                            UI_TextDraw(bar_x, bar_y, UI_TEXT_DIM, ITEM_NAME_LENGTH, (&g_Accessories[accessory]));
-                            UI_TextDraw(bar_x, (s16)(text_y + row_y), 0, ITEM_NAME_LENGTH, (&g_Accessories[*cursor]));
-                            if (g_InventoryCounts[3][slot] >= 2U) {
-                                TEXT_Format(text, D_801D0C14, g_InventoryCounts[3][slot]);
-                                text_x = (s16)(panel_x + 104);
-                                UI_TextDrawGlyphString(text_x, (s16)(text_y + (row_y + 4)), UI_TEXT_DIM, text);
-                                goto drawn; /* joins the shared count-text draw */
-                            }
-                        }
+            if (row >= max_rows && index < max_count) {
+                if (*D_80145E94 == 2 && (TASK(FishingState)->counter_07 & 1) && TASK(FishingState)->cursor_10 == index) {
+                    UI_TextDraw(x, bar_y, UI_TEXT_DIM, ITEM_NAME_LENGTH, (u8*)&g_Accessories[accessory]);
+                    UI_TextDraw(x, base_y + shadow_y, 0, ITEM_NAME_LENGTH, (u8*)&g_Accessories[*cursor]);
+                    if (g_InventoryCounts[3][slot] >= 2) {
+                        TEXT_Format(text, D_801D0C14, g_InventoryCounts[3][slot]);
+                        UI_TextDrawGlyphString(panel_x + 104, base_y + (row_offset + 4), UI_TEXT_DIM, text);
+                        UI_TextDrawGlyphString(panel_x + 104, base_y + (row_offset + 2), 0, text);
+                    }
+                } else {
+                    UI_TextDraw(x, bar_y, 0, ITEM_NAME_LENGTH, (u8*)&g_Accessories[*cursor]);
+                    if (g_InventoryCounts[3][slot] >= 2) {
+                        TEXT_Format(text, D_801D0C14, g_InventoryCounts[3][slot]);
+                        UI_TextDrawGlyphString(panel_x + 104, base_y + (row_offset + 4), 0, text);
                     }
                 }
-                UI_TextDraw(bar_x, bar_y, 0, ITEM_NAME_LENGTH, (&g_Accessories[*cursor]));
-                if (g_InventoryCounts[3][slot] >= 2U) {
-                    TEXT_Format(text, D_801D0C14, g_InventoryCounts[3][slot]);
-                    text_x = (s16)(panel_x + 104);
-                    UI_TextDrawGlyphString(text_x, (s16)(text_y + (row_y + 2)), 0U, text);
-                }
-            drawn: /* the count text is drawn once, from either path */
-                if (TASK(FishingState)->bounce_speed == index) {
-                    TASK(FishingState)->y_38.slot.slot = (s16)slot;
+                if (TASK(FishingState)->cursor_10 == index) {
+                    TASK(FishingState)->y_38.slot.slot = slot;
                 }
                 bar_y += 13;
-                row_y += 13;
-                index += 1;
+                row_offset += 13;
+                shadow_y += 13;
+                index++;
             }
-            row += 1;
+            row++;
         }
-        slot += 1;
-        cursor += 1;
+        slot++;
+        cursor++;
     } while (slot < 128);
     TASK(FishingState)->unk_1C = row - 1;
-    if (TASK(FishingState)->bounce_speed >= index) {
-        if ((row - 1 != 0) && (index != 0)) {
-            TASK(FishingState)->bounce_speed = index - 1;
+    if (TASK(FishingState)->cursor_10 >= index) {
+        if (row - 1 != 0 && index != 0) {
+            TASK(FishingState)->cursor_10 = index - 1;
         } else {
-            TASK(FishingState)->bounce_speed = 0;
+            TASK(FishingState)->cursor_10 = 0;
         }
     }
-    func_801D90FC((s32)panel_x, panel_y);
-    count = 0;
+    func_801D90FC(panel_x, panel_y);
+    slot  = 0;
+    index = 0;
     do {
-        if (g_Accessories[g_InventoryIds[3][count]].type == ITEM_TYPE_FISHING_LURE) {
-            index += 1;
+        if (g_Accessories[g_InventoryIds[3][slot]].type == ITEM_TYPE_FISHING_LURE) {
+            index++;
         }
-        count += 1;
-    } while (count < 128);
+        slot++;
+    } while (slot < 128);
     if (index < 10) {
-        text_y = 28;
+        height   = 114;
+        y_offset = 28;
     } else {
         index -= 9;
-        text_y = (s16)(114 - (index * 6));
+        height   = 114 - index * 6;
+        y_offset = TASK(FishingState)->y_38.slot.low.pos_low * 6 + 28;
         if (TASK(FishingState)->step_index != 0) {
             if (TASK(FishingState)->counter_08 != 0) {
-                text_y = (s16)(text_y + (TASK(FishingState)->step_index * 2));
+                y_offset += TASK(FishingState)->step_index * 2;
             } else {
-                text_y = (s16)(text_y - (TASK(FishingState)->step_index * 2));
+                y_offset -= TASK(FishingState)->step_index * 2;
             }
         }
     }
-    func_801D8248((s16)(panel_x + 128), (s16)(panel_y + (text_y & BYTE_MASK)), 114 & 0xFE);
-    UI_TextDraw((s16)(panel_x + 55), (s16)(panel_y + 7), 0, 4U, (&D_801E21D0));
+    func_801D8248(panel_x + 128, panel_y + y_offset, height & 0xFE);
+    UI_TextDraw(panel_x + 55, panel_y + 7, 0, 4, (u8*)&D_801E21D0);
 }
 #else
 INCLUDE_ASM(func_801D8364);
