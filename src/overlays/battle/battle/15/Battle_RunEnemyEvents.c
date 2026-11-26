@@ -1,7 +1,7 @@
 #include "battle_15.h"
 
 #define BATTLE_UPDATE_ENEMY_EVENT(condition)                    \
-    do {                                                        \
+    {                                                           \
         if (condition) {                                        \
             if (Battle_EnemyEventTriggered(enemy, i) == 0) {    \
                 Battle_ApplyEnemyEvent(enemy, packet);          \
@@ -10,11 +10,10 @@
         } else if (Battle_EnemyEventTriggered(enemy, i) != 0) { \
             Battle_SetEnemyEventTriggered(enemy, i, 0);         \
         }                                                       \
-    } while (0)
+    }
 
-/* func_8009BFC4 */
-#ifdef NON_MATCHING
-NON_MATCHING void Battle_RunEnemyEvents(void) {
+/* Fires or clears the event packets of each enemy slot by their conditions. */
+MATCH void Battle_RunEnemyEvents(void) {
     BattleEventPacket* packet;
     EnemyBattler*      enemy;
     u8                 enemy_slot;
@@ -38,7 +37,7 @@ NON_MATCHING void Battle_RunEnemyEvents(void) {
                     BATTLE_UPDATE_ENEMY_EVENT(enemy->hp <= enemy->stats.max_hp / 2);
                     break;
                 case 13:
-                    BATTLE_UPDATE_ENEMY_EVENT(enemy->ap <= enemy->stats.max_ap / 10);
+                    BATTLE_UPDATE_ENEMY_EVENT(enemy->ap <= enemy->stats.max_ap / 5);
                     break;
                 case 14:
                     count = 0;
@@ -50,7 +49,7 @@ NON_MATCHING void Battle_RunEnemyEvents(void) {
                     BATTLE_UPDATE_ENEMY_EVENT(count != 0);
                     break;
                 case 15:
-                    BATTLE_UPDATE_ENEMY_EVENT(g_Battle.living_enemy_count < g_Battle.enemy_count);
+                    BATTLE_UPDATE_ENEMY_EVENT(g_Battle.enemy_count > g_Battle.living_enemy_count);
                     break;
                 case 16:
                     BATTLE_UPDATE_ENEMY_EVENT(g_Battle.living_enemy_count == 1);
@@ -62,25 +61,25 @@ NON_MATCHING void Battle_RunEnemyEvents(void) {
                     BATTLE_UPDATE_ENEMY_EVENT(enemy->ap > enemy->stats.max_ap / 2);
                     break;
                 case 19:
-                    BATTLE_UPDATE_ENEMY_EVENT(*(u32*)&g_Battle.unk_EF[1] == 2);
+                    BATTLE_UPDATE_ENEMY_EVENT(g_Battle.unk_F0 == 2);
                     break;
                 case 20:
-                    BATTLE_UPDATE_ENEMY_EVENT(*(u32*)&g_Battle.unk_EF[1] == 10);
+                    BATTLE_UPDATE_ENEMY_EVENT(g_Battle.unk_F0 == 10);
                     break;
                 case 21:
                     BATTLE_UPDATE_ENEMY_EVENT((s32)g_Game.members[0].chr.level - enemy->level >= 6);
                     break;
                 case 25:
-                    BATTLE_UPDATE_ENEMY_EVENT((*(u32*)&g_Battle.unk_EF[1] & 1) == 0);
+                    BATTLE_UPDATE_ENEMY_EVENT((g_Battle.unk_F0 & 1) == 0);
                     break;
                 case 26:
-                    BATTLE_UPDATE_ENEMY_EVENT((*(u32*)&g_Battle.unk_EF[1] & 1) != 0);
+                    BATTLE_UPDATE_ENEMY_EVENT((g_Battle.unk_F0 & 1) != 0);
                     break;
                 case 27:
-                    BATTLE_UPDATE_ENEMY_EVENT(*(u32*)&g_Battle.unk_EF[1] % 3 == 0);
+                    BATTLE_UPDATE_ENEMY_EVENT(g_Battle.unk_F0 % 3 == 0);
                     break;
                 case 28:
-                    BATTLE_UPDATE_ENEMY_EVENT(*(u32*)&g_Battle.unk_EF[1] % 3 != 0);
+                    BATTLE_UPDATE_ENEMY_EVENT(g_Battle.unk_F0 % 3 != 0);
                     break;
                 case 29:
                     BATTLE_UPDATE_ENEMY_EVENT(g_Battle.living_party_count == 1);
@@ -98,15 +97,12 @@ NON_MATCHING void Battle_RunEnemyEvents(void) {
                     BATTLE_UPDATE_ENEMY_EVENT(func_8009C794(i, enemy_slot));
                     break;
                 case 39:
-                    BATTLE_UPDATE_ENEMY_EVENT(g_Battle.unk_EF[8] == 1);
+                    BATTLE_UPDATE_ENEMY_EVENT(g_Battle.unk_F4[3] == 1);
                     break;
             }
         }
     }
     Battle_MergeEnemyPanels();
 }
-#else
-INCLUDE_ASM(Battle_RunEnemyEvents);
-#endif
 
 #undef BATTLE_UPDATE_ENEMY_EVENT

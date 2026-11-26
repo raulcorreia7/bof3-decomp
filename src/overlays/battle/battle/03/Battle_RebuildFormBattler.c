@@ -15,7 +15,7 @@ MATCH void Battle_RebuildFormBattler(void) {
     GFX_PaletteFreeFadeTarget(&g_Game.members[g_BattleEffectBattler->slot]);
     if (g_Battle.flags & BATTLE_STATE_RELOAD_PARTY) {
         g_Battle.living_party_count = 0;
-        g_Battle.party_count        = g_Battle.unk_EF[0];
+        g_Battle.party_count        = g_Battle.unk_EF;
         for (i = 0; i < g_Battle.party_count; i++) {
             if (!(s_BattleBattlerTemplates[i].chr.status & 0x4000)) {
                 g_Battle.living_party_count++;
@@ -77,11 +77,11 @@ MATCH void Battle_RebuildFormBattler(void) {
     func_801DDAB4(g_Game.members[TASK(PartyMember)->slot].chr.status);
     GFX_PaletteUploadRows();
     if (g_Battle.flags & BATTLE_STATE_RELOAD_PARTY) {
-        D_801454F5[0] = g_Battle.unk_EF[5];
-        D_801454F6[0] = g_Battle.unk_EF[6];
+        D_801454F5[0] = g_Battle.unk_F4[0];
+        D_801454F6[0] = g_Battle.unk_F4[1];
     } else {
-        D_801454F5[TASK(PartyMember)->slot * 3] = g_Battle.unk_EF[5];
-        D_801454F6[TASK(PartyMember)->slot * 3] = g_Battle.unk_EF[6];
+        D_801454F5[TASK(PartyMember)->slot * 3] = g_Battle.unk_F4[0];
+        D_801454F6[TASK(PartyMember)->slot * 3] = g_Battle.unk_F4[1];
     }
     g_Task = saved;
     g_Battle.flags &= ~BATTLE_STATE_RELOAD_PARTY;

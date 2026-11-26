@@ -445,14 +445,13 @@ MATCH void func_801D1CA4(void) {
 NON_MATCHING void func_801D1D1C(void) {
     MenuPanelTask* panel;
 
-    g_UiPanelTasks[1].pos.x      = 0x14;
     g_UiPanelTasks[2].pos.x      = 0x70;
+    g_UiPanelTasks[1].pos.x      = 0x14;
     LOH(g_UiPanelTasks[1].pos.y) = -0x64;
     LOH(g_UiPanelTasks[2].pos.y) = -0x64;
-    g_UiPanelTasks[2].unk_0A     = 8;
     g_UiPanelTasks[3].mode       = 3;
+    g_UiPanelTasks[2].unk_0A     = 8;
     LOH(g_UiPanelTasks[3].pos.x) = -0x78;
-    g_UiPanelTasks[3].pos.y      = 0x3F;
     panel                        = &g_UiPanelTasks[0];
     panel->active                = 0;
     panel->panel                 = 1;
@@ -466,11 +465,12 @@ NON_MATCHING void func_801D1D1C(void) {
     panel->mode   = 1;
     panel->state  = 2;
     panel++;
-    panel->active = 1;
-    panel->panel  = 1;
-    panel->mode   = 2;
-    panel->state  = 2;
-    panel->unk_0B = 0xFF;
+    panel->active           = 1;
+    panel->panel            = 1;
+    panel->mode             = 2;
+    panel->state            = 2;
+    panel->unk_0B           = 0xFF;
+    g_UiPanelTasks[3].pos.y = 0x3F;
     panel++;
     panel->active     = 1;
     panel->panel      = 1;

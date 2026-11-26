@@ -2206,8 +2206,8 @@ NON_MATCHING void func_801D8058(s32 left, s32 top) {
     x      = left;
     y      = top;
     base_x = x;
-    i      = 0;
     UI_WindowDraw(base_x, y, 172, 26, UI_WINDOW_OPEN_TOP_LEFT, g_WindowStyle);
+    i      = 0;
     grid_x = x << 16;
     func_801D7EF0(grid_x >> 16, y);
     count = Fairy_CountFairies() & BYTE_MASK;
@@ -2287,8 +2287,8 @@ NON_MATCHING void func_801D851C(s16 x, s16 y, s32 width, u8 index) {
     SetPolyG4(prim);
     prim->x0 = x;
     prim->x1 = x + width;
-    prim->y0 = y;
     prim->y1 = y;
+    prim->y0 = y;
     prim->y2 = y + 2;
     prim->y3 = y + 2;
     prim->x2 = prim->x0;
@@ -2502,14 +2502,14 @@ MATCH void func_801D9348(u16 x, u16 y, s32 color, s32 frame_mode) {
     GFX_AddPrim(GFX_LAYER_UI, sizeof(LINE_F4));
 }
 
-#ifdef NON_MATCHING
+/* Draws one page of the name-entry letter grid in a window at (left, top) and its cursor. */
 // clang-format off
-NON_MATCHING void func_801D94D0(page, left, top, cursor_col_arg, cursor_row_arg)
+MATCH void func_801D94D0(page, left, top, cursor_col, cursor_row)
 u8 page;
-s32 left;
-s32 top;
-s32 cursor_col_arg;
-s32 cursor_row_arg;
+s16 left;
+u16 top;
+u8 cursor_col;
+u8 cursor_row;
 // clang-format on
 {
     u8  tags[20];
@@ -2518,17 +2518,11 @@ s32 cursor_row_arg;
     u16 y;
     u16 row;
     u16 col;
-    u16 base_y;
-    u8  cursor_col;
-    u8  cursor_row;
 
-    base_y     = top;
-    cursor_col = cursor_col_arg;
-    cursor_row = cursor_row_arg;
     memcpy(tags, D_801D0C3C, 20);
-    UI_WindowDraw(left, base_y, 0x110, 123, 0, g_WindowStyle);
+    UI_WindowDraw(left, top, 0x110, 123, 0, g_WindowStyle);
     cell = D_801DAAAC[page][0];
-    y    = base_y + 6;
+    y    = top + 6;
     for (row = 0; row < 8; row++) {
         x = left + 4;
         for (col = 0; col < 12; col++) {
@@ -2560,7 +2554,7 @@ s32 cursor_row_arg;
         y += 14;
     }
     x = left + 6 + cursor_col * 20;
-    y = base_y + 8;
+    y = top + 8;
     y += cursor_row * 14;
     if (cursor_col >= 5) {
         x += 8;
@@ -2573,9 +2567,6 @@ s32 cursor_row_arg;
     }
     UI_CursorDraw(x, y, 0);
 }
-#else
-INCLUDE_ASM(func_801D94D0);
-#endif
 
 /* Draws the stat legend panel at (x, y): five labels, their dot leaders, the four stat icons and the two arrows. */
 MATCH void func_801D97C8(s32 unused, s32 x, s32 y) {
@@ -2630,7 +2621,10 @@ NON_MATCHING void func_801D9B80(s32 x, s32 y, s32 width, s32 height) {
     s32   rows;
     u8    edge;
 
-    setRECT(&window, 112, 152, 8, 8);
+    /* not setRECT: retail stores h before w */
+    window.x = 112;
+    window.y = 152;
+    window.w = window.h = 8;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256), &window);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
     sprite = (SPRT*)g_GfxPrimCursor;
@@ -2643,7 +2637,9 @@ NON_MATCHING void func_801D9B80(s32 x, s32 y, s32 width, s32 height) {
     setRGB0(sprite, 0x80, 0x80, 0x80);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));
 
-    setRECT(&window, 152, 160, edge, edge);
+    window.x = 152;
+    window.y = 160;
+    window.w = window.h = edge;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256), &window);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
     sprite = (SPRT*)g_GfxPrimCursor;
@@ -2656,7 +2652,9 @@ NON_MATCHING void func_801D9B80(s32 x, s32 y, s32 width, s32 height) {
     setRGB0(sprite, 0x80, 0x80, 0x80);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));
 
-    setRECT(&window, 176, 152, edge, edge);
+    window.x = 176;
+    window.y = 152;
+    window.w = window.h = edge;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256), &window);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
     sprite = (SPRT*)g_GfxPrimCursor;
@@ -2669,7 +2667,9 @@ NON_MATCHING void func_801D9B80(s32 x, s32 y, s32 width, s32 height) {
     setRGB0(sprite, 0x80, 0x80, 0x80);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));
 
-    setRECT(&window, 176, 160, edge, edge);
+    window.x = 176;
+    window.y = 160;
+    window.w = window.h = edge;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256), &window);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
     sprite = (SPRT*)g_GfxPrimCursor;
@@ -2682,7 +2682,9 @@ NON_MATCHING void func_801D9B80(s32 x, s32 y, s32 width, s32 height) {
     setRGB0(sprite, 0x80, 0x80, 0x80);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));
 
-    setRECT(&window, 112, 160, edge, edge);
+    window.x = 112;
+    window.y = 160;
+    window.w = window.h = edge;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256), &window);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
     sprite = (SPRT*)g_GfxPrimCursor;
@@ -2694,7 +2696,8 @@ NON_MATCHING void func_801D9B80(s32 x, s32 y, s32 width, s32 height) {
     setRGB0(sprite, 0x80, 0x80, 0x80);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));
 
-    setRECT(&window, 0, 0, 256, 256);
+    window.x = window.y = 0;
+    window.w = window.h = 256;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256), &window);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
 
