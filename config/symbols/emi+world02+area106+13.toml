@@ -1,2 +1,4 @@
 ["emi/world02/area106/13"]
 jtbl_801F2C04 = { addr = 0x801F2C04, type = "Callback", size = 0x44, source = "The switch table of func_801F3B4C: 17 jump targets of its jr dispatch." }
+D_1F800034_S16 = { addr = 0x1F800034, type = "s16", alias = true, source = "ScratchPad.unk_34 x as a halfword: func_801F33D4 keeps the ring centre x there." }
+D_1F800036_S16 = { addr = 0x1F800036, type = "s16", alias = true, source = "ScratchPad.unk_34 y as a halfword: func_801F33D4 keeps the ring centre y there." }

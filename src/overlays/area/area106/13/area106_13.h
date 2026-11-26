@@ -37,4 +37,8 @@ extern u8 D_801F3F36[];
 
 void func_801F31DC(s32 depth, s32 height);
 
+/* The ring centre x and y func_801F33D4 keeps on the scratchpad, read back as unsigned halfwords. */
+extern s16 D_1F800034_S16;
+extern s16 D_1F800036_S16;
+
 #endif
