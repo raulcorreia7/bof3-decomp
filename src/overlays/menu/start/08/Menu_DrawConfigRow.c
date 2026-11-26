@@ -26,14 +26,10 @@ typedef union {
 } ConfigRow;
 
 /* Draws one config-menu row: its window, the chosen setting's text, the cursor and a line. */
-// clang-format off
-MATCH void Menu_DrawConfigRow(x, y, option_index, select_step)
-s16 x;
-s16 y;
-u8 option_index;
-s32 select_step;
-// clang-format on
-{
+MATCH void Menu_DrawConfigRow(s32 raw_x, s32 raw_y, s32 raw_option_index, s32 select_step) {
+    s16       x            = raw_x;
+    s16       y            = raw_y;
+    u8        option_index = raw_option_index;
     ConfigRow work;
     s16       line_x;
     LINE_F2*  line;
