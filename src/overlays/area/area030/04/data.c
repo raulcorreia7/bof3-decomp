@@ -60,6 +60,11 @@ struct FishingMenuLabels {
     u8 unk_05[7]; /* D_801E21D9 */
 } __attribute__((packed));
 
+/* The script and swim state of each swim heading. */
+struct FishingPanelRows {
+    u8 heading[8][2]; /* D_801E2330 */
+};
+
 Callback D_801E1CD4[5] = {
     (Callback)func_801D0CDC, (Callback)func_801D0C90, (Callback)func_801D0DDC, (Callback)func_801D0E40, (Callback)func_801D0E9C,
 };
@@ -311,8 +316,8 @@ void (*g_FishingFishSteps[7])(void) = {
     (void (*)(void))Fishing_FishAppear, (void (*)(void))Fishing_FishSwim, (void (*)(void))func_801DEBC4, (void (*)(void))func_801DECDC,
     (void (*)(void))func_801DF334,      (void (*)(void))func_801DFFA8,    (void (*)(void))func_801E00E0,
 };
-u8 D_801E2330[8][2] = {
-    {0x04, 0x00}, {0x03, 0x00}, {0x02, 0x00}, {0x01, 0x00}, {0x00, 0x00}, {0x01, 0x01}, {0x02, 0x01}, {0x03, 0x01},
+static struct FishingPanelRows sPanelRows = {
+    {{0x04, 0x00}, {0x03, 0x00}, {0x02, 0x00}, {0x01, 0x00}, {0x00, 0x00}, {0x01, 0x01}, {0x02, 0x01}, {0x03, 0x01}},
 };
 Callback D_801E2340[2] = {
     (Callback)func_801DFFEC,
