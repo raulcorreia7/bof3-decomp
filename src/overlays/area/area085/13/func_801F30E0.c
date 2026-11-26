@@ -1,7 +1,7 @@
 #include "area085_13.h"
 
 /* Spawns two actors from D_801F3D4C and starts the script D_801F3D70 picks for the party's selector. */
-void func_801F30E0(void) {
+MATCH void func_801F30E0(void) {
     Actor* work;
     u8     selector;
     u8     index;

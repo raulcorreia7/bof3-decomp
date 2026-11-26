@@ -1,7 +1,7 @@
 #include "area075_13.h"
 
 /* Draws the two counter panels, D_801F58CA and D_801F58CC as two-digit pairs, blinking while bit 2 of D_801F58C6 is set and skipped while bit 0 is. */
-void func_801F4874(void) {
+MATCH void func_801F4874(void) {
     u8  shown;
     u8  blink;
     u8* buffer;

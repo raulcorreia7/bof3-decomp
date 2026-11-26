@@ -1,7 +1,7 @@
 #include "commu00_00.h"
 
 /* Runs the village upkeep for one row count: Fairy_JoinVillage per 10 battles or func_801F01F4 per 20 since the D_801455AC and D_801455B0 stamps. */
-void func_801EEEF0(u32 row) {
+MATCH void func_801EEEF0(u32 row) {
     s8*  fairy_count;
     s32  slots;
     s32  fairies;

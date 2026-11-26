@@ -1,7 +1,7 @@
 #include "area075_13.h"
 
 /* On a hit in the D_801F58A0 timing row: plays the sound, lowers the opponent gauge by 4 or 5 and steps its two actors. */
-void func_801F45A8(void) {
+MATCH void func_801F45A8(void) {
     Actor* actor;
 
     if (D_801F58A0[D_801F58C9][D_801F58C4 % 15] != 0) {
