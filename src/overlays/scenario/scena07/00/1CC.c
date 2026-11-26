@@ -1038,7 +1038,7 @@ MATCH void func_801FA6B4(void) {
             Area_InitMapRenderer();
             func_801BE1B0(0);
             bgm = &g_SndBGMId;
-            SND_StartDecrescendo(g_SelectionSepSlots[*bgm * 4], g_SelectionSequences[*bgm * 4], 100, 0x20);
+            SND_StartDecrescendo(g_BGMTracks[*bgm].sep_slot, g_BGMTracks[*bgm].sequence, 100, 0x20);
             *bgm = 1;
         }
     } else if (!SYS_TestFlag(g_SceneFlags, 4)) {

@@ -3,10 +3,10 @@
 MATCH void func_801F2CC4(void) {
     u32* p;
 
-    if (SYS_TestFlag(&g_SceneFlagWords[14 * 8], 19) == 0) {
+    if (SYS_TestFlag(g_SceneFlagRows[SCENARIO_DESERT_OF_DEATH], 19) == 0) {
         return;
     }
-    if (SYS_TestFlag(&g_SceneFlagWords[14 * 8], 20) != 0) {
+    if (SYS_TestFlag(g_SceneFlagRows[SCENARIO_DESERT_OF_DEATH], 20) != 0) {
         return;
     }
     p = (u32*)(MAP_BUNDLE_BASE + (((AreaMapBundle*)MAP_BUNDLE_BASE)->record_list_offset << 2));

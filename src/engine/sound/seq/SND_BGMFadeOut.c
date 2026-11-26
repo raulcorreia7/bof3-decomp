@@ -6,6 +6,6 @@
  */
 MATCH void SND_BGMFadeOut(u8 selection_id, s32 cue_level, s32 cue_shape) {
     if (selection_id != GAME_NONE) {
-        SND_SeqFadeOut(g_SelectionSepSlots[selection_id * 4], g_SelectionSequences[selection_id * 4], cue_level & BYTE_MASK, cue_shape & BYTE_MASK);
+        SND_SeqFadeOut(g_BGMTracks[selection_id].sep_slot, g_BGMTracks[selection_id].sequence, cue_level & BYTE_MASK, cue_shape & BYTE_MASK);
     }
 }

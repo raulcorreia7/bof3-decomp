@@ -12,7 +12,7 @@ MATCH void func_801FBCA4(void) {
 
     switch (g_ScenarioState.step) {
         case 0:
-            SND_StartDecrescendo(g_SelectionSepSlots[g_SndBGMId * 4], g_SelectionSequences[g_SndBGMId * 4], 100, 0x20);
+            SND_StartDecrescendo(g_BGMTracks[g_SndBGMId].sep_slot, g_BGMTracks[g_SndBGMId].sequence, 100, 0x20);
             g_ScenarioState.timer_06 = 0x20;
             g_ScenarioState.step     = 1;
             break;
