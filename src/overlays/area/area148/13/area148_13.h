@@ -31,7 +31,7 @@ extern Callback D_801F5024[];
  * factors of each direction, and the texture word of each mode. */
 extern u8                  D_801F5034[];
 extern u8                  D_801F5038[];
-extern u32                 D_801F5080[];
+extern u32                 D_801F5080[][3];
 /* The three colour bytes func_801F4DF0 reads for each task row. */
 extern u8                  D_801F6138[];
 extern u8                  D_801F6139[];

@@ -14,11 +14,10 @@ NON_MATCHING void func_801EFCE8(s32 x, s32 y) {
     s32       i;
 
     selector = g_Battle.target_selector - 3;
-    uv_right = (u16*)(D_801F0B8C + 14);
-    uv_left  = uv_right - 1;
-    i        = 0;
-    do {
-        prim = GFX_CURSOR(POLY_FT4);
+    for (i = 0; i < 6; i++) {
+        uv_left  = &((u16*)(D_801F0B8C + 12))[i * 2];
+        uv_right = &((u16*)(D_801F0B8C + 12))[i * 2 + 1];
+        prim     = GFX_CURSOR(POLY_FT4);
         SetPolyFT4(prim);
         setXYWH(prim, x, y, 12, 12);
         g_ScratchPad.cells.words[1] = 0x30;
@@ -58,12 +57,9 @@ NON_MATCHING void func_801EFCE8(s32 x, s32 y) {
         prim->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x3C0, 0x100);
         prim->clut  = GetClut(0, 0x1E0);
         setUV4(prim, *uv_left, *uv_right, *uv_left + 12, *uv_right, *uv_left, *uv_right + 12, *uv_left + 12, *uv_right + 12);
-        GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
+        GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_FT4));
         x += 20;
-        uv_left += 2;
-        uv_right += 2;
-        i++;
-    } while (i < 6);
+    }
 }
 #else
 INCLUDE_ASM(func_801EFCE8);
