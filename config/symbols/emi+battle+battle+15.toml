@@ -87,6 +87,7 @@ Battle_Heal40Hp = { addr = 0x8009DE64, type = "func", source = "Sets the action 
 Battle_Heal100Hp = { addr = 0x8009DE78, type = "func", source = "Sets the action target's hp change to -100, a heal of 100." }
 Battle_HealFullHp = { addr = 0x8009DE8C, type = "func", source = "Sets the action target's hp change to its negated max HP." }
 Battle_CureStatusChance = { addr = 0x8009DF70, type = "func", source = "The Croc Tear and Vinegar effect: heals 5 and on a roll under 0x27 cures the blind, confused and sleeping mask; the retail description reads Chance of restoring status." }
+Battle_CurePoison_8009DFBC = { addr = 0x8009DFBC, type = "func", source = "same body as emi/battle/battle/15@0x8009DD20 Battle_CurePoison" }
 Battle_CureBlindness = { addr = 0x8009DFEC, type = "func", source = "Cures STATUS_BLIND on the action target and marks the damage applied." }
 Battle_CurePetrification = { addr = 0x8009E01C, type = "func", source = "THE MOCHI effect: cures status 0x100; the retail description reads Cures petrification." }
 Battle_CureAilments = { addr = 0x8009E04C, type = "func", source = "Cures the ailment status mask on the action target and marks the damage applied." }

@@ -166,7 +166,7 @@ segments:
       - [0x7678, c, Battle_Heal100Hp]
       - [0x768C, c, Battle_HealFullHp]
       - [0x7770, c, Battle_CureStatusChance]
-      - [0x77BC, c, func_8009DFBC]
+      - [0x77BC, c, Battle_CurePoison_8009DFBC]
       - [0x77EC, c, Battle_CureBlindness]
       - [0x781C, c, Battle_CurePetrification]
       - [0x784C, c, Battle_CureAilments]

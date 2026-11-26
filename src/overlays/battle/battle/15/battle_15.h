@@ -671,7 +671,8 @@ void        Battle_Heal100Hp(void);
 void        Battle_HealFullHp(void);
 /* func_8009DF70 */
 void        Battle_CureStatusChance(void);
-void        func_8009DFBC(void);
+/* func_8009DFBC */
+void        Battle_CurePoison_8009DFBC(void);
 /* func_8009DFEC */
 void        Battle_CureBlindness(void);
 /* func_8009E01C */
