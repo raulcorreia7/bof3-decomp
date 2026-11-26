@@ -25,8 +25,8 @@ MATCH void Battle_SelectItem(void) {
     g_Game.members[slot].u.turn.damage_flags.volatile_value &= 0xBFFFu;
     if (*phase == 0u) {
         D_801485DC = 1u;
-        D_801485E0 = (g_UiPanelTasks[16].pos.x + 7);
-        D_801485E2 = (g_UiPanelTasks[16].pos.y + ((g_UiPanelTasks[16].unk_0C - g_UiPanelTasks[16].unk_0B) * 0xD + 0x1A));
+        D_801485E0 = (g_UiPanelTasks[16].pos.vx + 7);
+        D_801485E2 = (g_UiPanelTasks[16].pos.vy + ((g_UiPanelTasks[16].unk_0C - g_UiPanelTasks[16].unk_0B) * 0xD + 0x1A));
     }
     panel   = (MenuChoicePanel*)g_BattleChoicePanel;
     trigger = INPUT_REPEATED(g_PadStates[0].pressed, (INPUT_DIRECTIONAL | PADL1 | PADR1));
@@ -98,8 +98,8 @@ MATCH void Battle_SelectItem(void) {
         g_Battle.ui_step = 6u;
         D_8014862E       = 0u;
         D_801483C0       = 0u;
-        D_80148628       = (g_UiPanelTasks[16].pos.x + 0x20);
-        D_8014862A       = (g_UiPanelTasks[16].pos.y - 0x16);
+        D_80148628       = (g_UiPanelTasks[16].pos.vx + 0x20);
+        D_8014862A       = (g_UiPanelTasks[16].pos.vy - 0x16);
         return;
     }
     if ((g_PadStates[0].pressed & g_InputMasks[BATTLE_INPUT_CANCEL]) != 0u) {

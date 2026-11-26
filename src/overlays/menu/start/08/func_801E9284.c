@@ -4,9 +4,9 @@ MATCH void func_801E9284(void) {
     MenuPanelTask* task;
 
     task = g_UiPanelCurrent;
-    task->pos.x -= MENU_PANEL_STEP_X;
-    if ((s16)task->pos.x < -0x64) {
-        LOH(task->pos.x) = -0x64;
-        task->state      = 0;
+    task->pos.vx -= MENU_PANEL_STEP_X;
+    if (task->pos.vx < -0x64) {
+        task->pos.vx = -0x64;
+        task->state  = 0;
     }
 }

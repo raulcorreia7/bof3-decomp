@@ -44,38 +44,39 @@ MATCH void func_801E3284(MenuPanelTask* task) {
     price = Shop_ApplyPercent(Item_GetPrice(group, key) & HALF_MASK, task->unk_0A);
     icon  = Item_GetRecord(group, key);
 
-    UI_WindowDraw((task->pos.x + SHOP_COUNTS_SHADOW_OFFSET) & HALF_MASK, (task->pos.y + SHOP_COUNTS_SHADOW_OFFSET) & HALF_MASK, SHOP_COUNTS_WINDOW_WIDTH, SHOP_COUNTS_WINDOW_HEIGHT, 0, g_WindowStyle);
-    UI_IconDraw((task->pos.x + SHOP_COUNTS_ICON_X) & HALF_MASK, (task->pos.y + SHOP_COUNTS_ICON_Y) & HALF_MASK, D_801E5E1C[Item_GetIcon(group, key) & BYTE_MASK], 0);
-    UI_TextDraw((task->pos.x + SHOP_COUNTS_NAME_X), (task->pos.y + SHOP_COUNTS_NAME_Y), 0, Game_ReadCommand(icon) & BYTE_MASK, icon);
+    UI_WindowDraw((task->pos.vx + SHOP_COUNTS_SHADOW_OFFSET) & HALF_MASK, (task->pos.vy + SHOP_COUNTS_SHADOW_OFFSET) & HALF_MASK, SHOP_COUNTS_WINDOW_WIDTH, SHOP_COUNTS_WINDOW_HEIGHT, 0,
+                  g_WindowStyle);
+    UI_IconDraw(((u16)task->pos.vx + SHOP_COUNTS_ICON_X) & HALF_MASK, ((u16)task->pos.vy + SHOP_COUNTS_ICON_Y) & HALF_MASK, D_801E5E1C[Item_GetIcon(group, key) & BYTE_MASK], 0);
+    UI_TextDraw((task->pos.vx + SHOP_COUNTS_NAME_X), (task->pos.vy + SHOP_COUNTS_NAME_Y), 0, Game_ReadCommand(icon) & BYTE_MASK, icon);
 
     text = g_UiTextFormatBuffer;
     TEXT_Format(text, D_801D0E90, price * task->unk_0C);
-    UI_TextDrawGlyphString((task->pos.x + SHOP_COUNTS_TOTAL_X), (task->pos.y + SHOP_COUNTS_TOTAL_Y), 0U, text);
+    UI_TextDrawGlyphString((task->pos.vx + SHOP_COUNTS_TOTAL_X), (task->pos.vy + SHOP_COUNTS_TOTAL_Y), 0U, text);
 
     TEXT_Format(text, D_801D0E98, task->unk_0C);
-    UI_TextDrawGlyphString((task->pos.x + SHOP_COUNTS_NUMBER_X), (task->pos.y + SHOP_COUNTS_QUANTITY_Y), 0U, text);
-    UI_TextDraw((task->pos.x + SHOP_COUNTS_NAME_X), (task->pos.y + SHOP_COUNTS_HELD_LABEL_Y), 0, TEXT_LENGTH_MAX, UI_MessageGetText(SHOP_TEXT_HELD_LABEL));
+    UI_TextDrawGlyphString((task->pos.vx + SHOP_COUNTS_NUMBER_X), (task->pos.vy + SHOP_COUNTS_QUANTITY_Y), 0U, text);
+    UI_TextDraw((task->pos.vx + SHOP_COUNTS_NAME_X), (task->pos.vy + SHOP_COUNTS_HELD_LABEL_Y), 0, TEXT_LENGTH_MAX, UI_MessageGetText(SHOP_TEXT_HELD_LABEL));
 
     TEXT_Format(text, D_801D0E98, Item_Count(group, key, ITEM_COUNT_MODE_HELD) & HALF_MASK);
-    UI_TextDrawGlyphString((task->pos.x + SHOP_COUNTS_NUMBER_X), (task->pos.y + SHOP_COUNTS_HELD_Y), 0U, text);
-    UI_TextDraw((task->pos.x + SHOP_COUNTS_NAME_X), (task->pos.y + SHOP_COUNTS_EQUIPPED_LABEL_Y), 0, TEXT_LENGTH_MAX, UI_MessageGetText(SHOP_TEXT_EQUIPPED_LABEL));
+    UI_TextDrawGlyphString((task->pos.vx + SHOP_COUNTS_NUMBER_X), (task->pos.vy + SHOP_COUNTS_HELD_Y), 0U, text);
+    UI_TextDraw((task->pos.vx + SHOP_COUNTS_NAME_X), (task->pos.vy + SHOP_COUNTS_EQUIPPED_LABEL_Y), 0, TEXT_LENGTH_MAX, UI_MessageGetText(SHOP_TEXT_EQUIPPED_LABEL));
 
     TEXT_Format(text, D_801D0E98, Item_Count(group, key, ITEM_COUNT_MODE_EQUIPPED) & HALF_MASK);
-    UI_TextDrawGlyphString((task->pos.x + SHOP_COUNTS_NUMBER_X), (task->pos.y + SHOP_COUNTS_EQUIPPED_Y), 0U, text);
+    UI_TextDrawGlyphString((task->pos.vx + SHOP_COUNTS_NUMBER_X), (task->pos.vy + SHOP_COUNTS_EQUIPPED_Y), 0U, text);
 
     GFX_AddDrawMode(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 896, 256) & HALF_MASK);
 
     for (index = 0; index < SHOP_COUNTS_FRAME_COLUMNS; index++) {
-        UI_SpriteDraw((task->pos.x + (index + 1) * SHOP_COUNTS_FRAME_CELL), task->pos.y, MENU_FRAME_SPRITE_TOP, 0);
-        UI_SpriteDraw((task->pos.x + (index + 1) * SHOP_COUNTS_FRAME_CELL), (task->pos.y + SHOP_COUNTS_FRAME_BOTTOM_Y), MENU_FRAME_SPRITE_FLAT_BOTTOM, 0);
+        UI_SpriteDraw((task->pos.vx + (index + 1) * SHOP_COUNTS_FRAME_CELL), task->pos.vy, MENU_FRAME_SPRITE_TOP, 0);
+        UI_SpriteDraw((task->pos.vx + (index + 1) * SHOP_COUNTS_FRAME_CELL), (task->pos.vy + SHOP_COUNTS_FRAME_BOTTOM_Y), MENU_FRAME_SPRITE_FLAT_BOTTOM, 0);
     }
     for (index = 0; index < SHOP_COUNTS_FRAME_ROWS; index++) {
-        UI_SpriteDraw(task->pos.x, (task->pos.y + (index + 1) * SHOP_COUNTS_FRAME_CELL), MENU_FRAME_SPRITE_LEFT, 0);
-        UI_SpriteDraw((task->pos.x + SHOP_COUNTS_FRAME_RIGHT_X), (task->pos.y + (index + 1) * SHOP_COUNTS_FRAME_CELL), MENU_FRAME_SPRITE_RIGHT, 0);
+        UI_SpriteDraw(task->pos.vx, (task->pos.vy + (index + 1) * SHOP_COUNTS_FRAME_CELL), MENU_FRAME_SPRITE_LEFT, 0);
+        UI_SpriteDraw((task->pos.vx + SHOP_COUNTS_FRAME_RIGHT_X), (task->pos.vy + (index + 1) * SHOP_COUNTS_FRAME_CELL), MENU_FRAME_SPRITE_RIGHT, 0);
     }
 
-    UI_SpriteDraw(task->pos.x, task->pos.y, MENU_FRAME_SPRITE_TOP_LEFT, 0);
-    UI_SpriteDraw((task->pos.x + SHOP_COUNTS_FRAME_RIGHT_X), task->pos.y, MENU_FRAME_SPRITE_TOP_RIGHT, 0);
-    UI_SpriteDraw(task->pos.x, (task->pos.y + SHOP_COUNTS_FRAME_BOTTOM_Y), MENU_FRAME_SPRITE_FLAT_BOTTOM_LEFT, 0);
-    UI_SpriteDraw((task->pos.x + SHOP_COUNTS_FRAME_RIGHT_X), (task->pos.y + SHOP_COUNTS_FRAME_BOTTOM_Y), MENU_FRAME_SPRITE_FLAT_BOTTOM_RIGHT, 0);
+    UI_SpriteDraw(task->pos.vx, task->pos.vy, MENU_FRAME_SPRITE_TOP_LEFT, 0);
+    UI_SpriteDraw((task->pos.vx + SHOP_COUNTS_FRAME_RIGHT_X), task->pos.vy, MENU_FRAME_SPRITE_TOP_RIGHT, 0);
+    UI_SpriteDraw(task->pos.vx, (task->pos.vy + SHOP_COUNTS_FRAME_BOTTOM_Y), MENU_FRAME_SPRITE_FLAT_BOTTOM_LEFT, 0);
+    UI_SpriteDraw((task->pos.vx + SHOP_COUNTS_FRAME_RIGHT_X), (task->pos.vy + SHOP_COUNTS_FRAME_BOTTOM_Y), MENU_FRAME_SPRITE_FLAT_BOTTOM_RIGHT, 0);
 }

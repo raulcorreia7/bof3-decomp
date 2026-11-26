@@ -14,8 +14,8 @@ MATCH void func_801D5A28(void) {
     group = &g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0A;
     Menu_DrawClutStrip(g_WindowClut);
     task->active = 1;
-    task->pos.x  = g_UiPanelTasks[MENU_START_PANEL_ITEMS].pos.x + 6;
-    task->pos.y  = g_UiPanelTasks[MENU_START_PANEL_ITEMS].pos.y + (*group * 0xD + 0x57);
+    task->pos.vx = g_UiPanelTasks[MENU_START_PANEL_ITEMS].pos.vx + 6;
+    task->pos.vy = (u16)(g_UiPanelTasks[MENU_START_PANEL_ITEMS].pos.vy + (*group * 0xD + 0x57));
     buttons      = INPUT_REPEATED(g_PadStates[0].pressed, INPUT_DIRECTIONAL);
     task         = &g_UiPanelTasks[MENU_START_PANEL_ITEMS];
     task->flags  = 1;

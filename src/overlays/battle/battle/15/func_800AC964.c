@@ -79,9 +79,9 @@ NON_MATCHING void func_800AC964(void) {
                     g_UiPanelTasks[panel].mode          = 4;
                     g_UiPanelTasks[panel].state         = 0;
                     g_UiPanelTasks[panel].u.addr.unk_10 = x;
-                    g_UiPanelTasks[panel].pos.x         = x;
+                    g_UiPanelTasks[panel].pos.vx        = x;
                     g_UiPanelTasks[panel].u.addr.unk_12 = y;
-                    g_UiPanelTasks[panel].pos.y         = y;
+                    g_UiPanelTasks[panel].pos.vy        = y;
                     y                                   = y + 8;
                     g_UiPanelTasks[panel].unk_0A        = j + 3;
                     g_UiPanelTasks[panel].unk_08        = 0;
@@ -118,9 +118,9 @@ NON_MATCHING void func_800AC964(void) {
                     g_UiPanelTasks[panel].mode          = 4;
                     g_UiPanelTasks[panel].state         = 0;
                     g_UiPanelTasks[panel].u.addr.unk_10 = x;
-                    g_UiPanelTasks[panel].pos.x         = x;
+                    g_UiPanelTasks[panel].pos.vx        = x;
                     g_UiPanelTasks[panel].u.addr.unk_12 = y;
-                    g_UiPanelTasks[panel].pos.y         = y;
+                    g_UiPanelTasks[panel].pos.vy        = y;
                     y                                   = y + 8;
                     g_UiPanelTasks[panel].unk_0A        = j + 3;
                     g_UiPanelTasks[panel].unk_08        = 0;

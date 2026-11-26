@@ -5,5 +5,5 @@
 
 MATCH void func_801E9AF0(void) {
     g_MenuStartPanel8Steps[g_UiPanelCurrent->state]();
-    func_801DC150(g_UiPanelCurrent->pos.x, g_UiPanelCurrent->pos.y, g_CharSlot[g_PartyFieldOrder[g_UiPanelCurrent->unk_0A]], 1);
+    func_801DC150(g_UiPanelCurrent->pos.vx, g_UiPanelCurrent->pos.vy, g_CharSlot[g_PartyFieldOrder[g_UiPanelCurrent->unk_0A]], 1);
 }

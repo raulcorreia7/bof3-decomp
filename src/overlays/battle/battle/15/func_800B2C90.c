@@ -19,11 +19,11 @@ MATCH void func_800B2C90(MenuPanelTask* task) {
     char*    text_table;
     u8       flags;
 
-    UI_WindowDraw((task->pos.x + 3) & HALF_MASK, (task->pos.y + 3) & HALF_MASK, 153, 130, 0, (s32)g_WindowStyle);
+    UI_WindowDraw((task->pos.vx + 3) & HALF_MASK, (task->pos.vy + 3) & HALF_MASK, 153, 130, 0, (s32)g_WindowStyle);
     index     = 0;
     selection = UI_ScrollList(&task->u.battle.cursor, &scroll_y, &count, &task->u.battle.row_base);
     types     = Party_GetAbilities((u32)task->unk_0A, (u32)task->unk_0B, 1U) + (u8)selection;
-    line_y    = task->pos.y + (s8)scroll_y;
+    line_y    = task->pos.vy + (s8)scroll_y;
     if ((count + 7) != 0) {
         do {
             if (*types != 0) {
@@ -38,11 +38,11 @@ MATCH void func_800B2C90(MenuPanelTask* task) {
                 icon_x       = (s16)task->u.battle.cursor + index;
                 if ((icon_x == task->flags) || (icon_x == task->unk_0C)) {
                     if (icon != 7) {
-                        UI_ListDrawAbilityRow((s16)(task->pos.x + 7), (s16)(line_y + 0x1A), UI_TEXT_DIM, ability_id & BYTE_MASK, ability_obj, ability_type & BYTE_MASK, 1);
+                        UI_ListDrawAbilityRow((s16)(task->pos.vx + 7), (s16)(line_y + 0x1A), UI_TEXT_DIM, ability_id & BYTE_MASK, ability_obj, ability_type & BYTE_MASK, 1);
                     }
-                    UI_ListDrawAbilityRow((s16)(task->pos.x + 7), (s16)(line_y + 0x18), icon, ability_id & BYTE_MASK, ability_obj, ability_type & BYTE_MASK, has_icon);
+                    UI_ListDrawAbilityRow((s16)(task->pos.vx + 7), (s16)(line_y + 0x18), icon, ability_id & BYTE_MASK, ability_obj, ability_type & BYTE_MASK, has_icon);
                 } else {
-                    UI_ListDrawAbilityRow((s16)(task->pos.x + 7), (s16)(line_y + 0x1A), icon, ability_id & BYTE_MASK, ability_obj, ability_type & BYTE_MASK, has_icon);
+                    UI_ListDrawAbilityRow((s16)(task->pos.vx + 7), (s16)(line_y + 0x1A), icon, ability_id & BYTE_MASK, ability_obj, ability_type & BYTE_MASK, has_icon);
                 }
             }
             index += 1;
@@ -50,15 +50,15 @@ MATCH void func_800B2C90(MenuPanelTask* task) {
             line_y += 0xD;
         } while (index < count + 7);
     }
-    UI_WindowDraw((task->pos.x + 3) & HALF_MASK, (task->pos.y + 3) & HALF_MASK, 153, 20, 0, (s32)g_WindowStyle);
+    UI_WindowDraw((task->pos.vx + 3) & HALF_MASK, (task->pos.vy + 3) & HALF_MASK, 153, 20, 0, (s32)g_WindowStyle);
     if ((s16)task->u.addr.unk_14 != 0) {
         text_table = D_800B6ED4;
     } else {
         text_table = D_800B6EC4[task->unk_0B];
     }
-    UI_TextDraw((s16)(task->pos.x + 0x4E - strlen(text_table) * 4), (s16)(task->pos.y + 7), 0, MENU_LABEL_LENGTH, text_table);
-    UI_SpriteDrawRun((s16)task->pos.x, (s16)task->pos.y, (task->unk_09 & 2) ? &s_BattleAbilityLine1FlagRun : &s_BattleAbilityLine1Run, UI_SPRITE_ALT_PAGE);
-    UI_SpriteDrawRun((s16)task->pos.x, (s16)task->pos.y, (task->unk_09 & 1) ? &s_BattleAbilityLine2FlagRun : &s_BattleAbilityLine2Run, UI_SPRITE_ALT_PAGE);
+    UI_TextDraw((s16)((u16)task->pos.vx + 0x4E - strlen(text_table) * 4), (s16)(task->pos.vy + 7), 0, MENU_LABEL_LENGTH, text_table);
+    UI_SpriteDrawRun(task->pos.vx, task->pos.vy, (task->unk_09 & 2) ? &s_BattleAbilityLine1FlagRun : &s_BattleAbilityLine1Run, UI_SPRITE_ALT_PAGE);
+    UI_SpriteDrawRun(task->pos.vx, task->pos.vy, (task->unk_09 & 1) ? &s_BattleAbilityLine2FlagRun : &s_BattleAbilityLine2Run, UI_SPRITE_ALT_PAGE);
     flags = task->unk_09;
     if (!(flags & 0xF0)) {
         task->unk_09 = 0;
@@ -67,30 +67,30 @@ MATCH void func_800B2C90(MenuPanelTask* task) {
     }
     index = 0;
     do {
-        UI_SpriteDraw((s16)(task->pos.x + ((index + 5) * 8)), (s16)task->pos.y, 1, UI_SPRITE_ALT_PAGE);
+        UI_SpriteDraw((s16)(task->pos.vx + ((index + 5) * 8)), task->pos.vy, 1, UI_SPRITE_ALT_PAGE);
         index++;
     } while (index < 10);
     index = 0;
     do {
-        UI_SpriteDraw((s16)task->pos.x, (s16)(task->pos.y + ((index + 3) * 8)), 4, UI_SPRITE_ALT_PAGE);
+        UI_SpriteDraw(task->pos.vx, (s16)(task->pos.vy + ((index + 3) * 8)), 4, UI_SPRITE_ALT_PAGE);
         index++;
     } while (index < 12);
-    UI_SpriteDraw((s16)(task->pos.x + 144), (s16)(task->pos.y + 24), 0x16, UI_SPRITE_ALT_PAGE);
+    UI_SpriteDraw((s16)(task->pos.vx + 144), (s16)(task->pos.vy + 24), 0x16, UI_SPRITE_ALT_PAGE);
     index = 0;
     do {
-        UI_SpriteDraw((s16)(task->pos.x + 144), (s16)(task->pos.y + ((index + 5) * 8)), 0x17, UI_SPRITE_ALT_PAGE);
+        UI_SpriteDraw((s16)(task->pos.vx + 144), (s16)(task->pos.vy + ((index + 5) * 8)), 0x17, UI_SPRITE_ALT_PAGE);
         index++;
     } while (index < 9);
-    UI_SpriteDraw((s16)(task->pos.x + 144), (s16)(task->pos.y + 112), 0x18, UI_SPRITE_ALT_PAGE);
+    UI_SpriteDraw((s16)(task->pos.vx + 144), (s16)(task->pos.vy + 112), 0x18, UI_SPRITE_ALT_PAGE);
     index = 0;
-    UI_SpriteDraw((s16)task->pos.x, (s16)(task->pos.y + 120), 0x19, UI_SPRITE_ALT_PAGE);
+    UI_SpriteDraw(task->pos.vx, (s16)(task->pos.vy + 120), 0x19, UI_SPRITE_ALT_PAGE);
     do {
-        UI_SpriteDraw((s16)(task->pos.x + ((index + 1) * 8)), (s16)(task->pos.y + 120), 0x1A, UI_SPRITE_ALT_PAGE);
+        UI_SpriteDraw((s16)(task->pos.vx + ((index + 1) * 8)), (s16)(task->pos.vy + 120), 0x1A, UI_SPRITE_ALT_PAGE);
         index++;
     } while (index < 17);
     if ((s16)task->u.addr.unk_14 != 0) {
-        UI_SpriteDraw((s16)(task->pos.x + 8), (s16)task->pos.y, 0x32, UI_SPRITE_ALT_PAGE);
-        UI_SpriteDraw((s16)(task->pos.x + 144), (s16)task->pos.y, 0x33, UI_SPRITE_ALT_PAGE);
+        UI_SpriteDraw((s16)(task->pos.vx + 8), task->pos.vy, 0x32, UI_SPRITE_ALT_PAGE);
+        UI_SpriteDraw((s16)(task->pos.vx + 144), task->pos.vy, 0x33, UI_SPRITE_ALT_PAGE);
     }
-    UI_ListDrawScrollbar(Party_GetAbilities((u32)task->unk_0A, (u32)task->unk_0B, 1U), (u8)task->u.battle.cursor, (s16)(task->pos.x + 0x90), (s16)(task->pos.y + 0x18), 7, 0xA, 0x5C);
+    UI_ListDrawScrollbar(Party_GetAbilities((u32)task->unk_0A, (u32)task->unk_0B, 1U), (u8)task->u.battle.cursor, (s16)(task->pos.vx + 0x90), (s16)(task->pos.vy + 0x18), 7, 0xA, 0x5C);
 }

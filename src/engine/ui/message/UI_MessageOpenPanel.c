@@ -28,16 +28,16 @@ MATCH void UI_MessageOpenPanel(void) {
         g_UiPanelCurrent->unk_0A = 0x78;
         g_UiPanelCurrent->unk_0B = 0x36;
         task                     = g_UiPanelCurrent;
-        task->pos.x              = (((u8*)&D_8017F91C)[*flags * 2] + 60) * 16;
+        task->pos.vx             = (((u8*)&D_8017F91C)[*flags * 2] + 60) * 16;
         next_y                   = ((u8*)&D_8017F91D)[*flags * 2] + 0x1B;
     } else {
         g_UiPanelCurrent->unk_0A = 0xC8;
         g_UiPanelCurrent->unk_0B = 0x36;
         task                     = g_UiPanelCurrent;
-        task->pos.x              = (((u8*)&g_UiPanelOrigins)[*flags * 2] + 100) * 16;
+        task->pos.vx             = (((u8*)&g_UiPanelOrigins)[*flags * 2] + 100) * 16;
         next_y                   = ((u8*)&D_8017F90D)[*flags * 2] + 0x1B;
     }
-    task->pos.y = next_y * 16;
+    task->pos.vy = next_y * 16;
 
     task           = g_UiPanelCurrent;
     task->u.grow.w = 0;

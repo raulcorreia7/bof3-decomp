@@ -4,9 +4,9 @@ MATCH void func_800B22EC(void) {
     MenuPanelTask* panel;
 
     panel = g_UiPanelCurrent;
-    panel->pos.x -= 32;
-    if ((s16)panel->pos.x < 83) {
-        panel->pos.x = 83;
-        panel->state = 0;
+    panel->pos.vx -= 32;
+    if (panel->pos.vx < 83) {
+        panel->pos.vx = 83;
+        panel->state  = 0;
     }
 }

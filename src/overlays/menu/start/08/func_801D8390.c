@@ -16,8 +16,8 @@ MATCH void func_801D8390(void) {
     frame->active                                        = 1;
     g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0B = 1;
     g_UiPanelTasks[MENU_START_PANEL_CURSOR].active       = 1;
-    frame->pos.x                                         = g_UiPanelTasks[4].pos.x;
-    frame->pos.y                                         = g_UiPanelTasks[4].pos.y + g_UiPanelTasks[16].unk_0A * 0x36;
+    frame->pos.vx                                        = g_UiPanelTasks[4].pos.vx;
+    frame->pos.vy                                        = g_UiPanelTasks[4].pos.vy + g_UiPanelTasks[16].unk_0A * 0x36;
     D_80148628                                           = D_80148574 + 0x2A;
     D_8014862A                                           = D_80148576 + 7;
     list                                                 = &g_UiPanelTasks[16];
@@ -62,8 +62,8 @@ MATCH void func_801D8390(void) {
         /* Stepping the pointer keeps panel 18 relative to panel 19 (sb -36). */
         frame -= 1;
         frame->active             = 1;
-        g_UiPanelTasks[18].pos.x  = 0x28;
-        g_UiPanelTasks[18].pos.y  = 0x3C;
+        g_UiPanelTasks[18].pos.vx = 0x28;
+        g_UiPanelTasks[18].pos.vy = 0x3C;
         g_BattleEquipSlot         = (g_UiPanelTasks[16].unk_0B == 3) ? 6 : 5;
         g_UiPanelTasks[18].unk_0B = 0;
         D_80148652++;

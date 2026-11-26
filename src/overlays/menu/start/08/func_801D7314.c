@@ -11,8 +11,8 @@ MATCH void func_801D7314(void) {
     g_UiPanelTasks[16].unk_08                                 = 0;
     g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = (&D_801EC488)[(s8)D_801ED648];
     g_UiPanelTasks[MENU_START_PANEL_CURSOR].active            = 1;
-    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.x             = g_UiPanelTasks[MENU_START_PANEL_COMMANDS].pos.x + (s8)D_801ED648 * 0x30;
-    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.y             = g_UiPanelTasks[MENU_START_PANEL_COMMANDS].pos.y + 4;
+    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.vx            = g_UiPanelTasks[MENU_START_PANEL_COMMANDS].pos.vx + (s8)D_801ED648 * 0x30;
+    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.vy            = g_UiPanelTasks[MENU_START_PANEL_COMMANDS].pos.vy + 4;
     g_UiPanelTasks[MENU_START_PANEL_COMMANDS].unk_0B          = 0xFF;
     buttons                                                   = INPUT_GetRepeatedButtons(g_PadStates[0].pressed & (PADLright | PADLleft));
     old                                                       = D_801ED648;

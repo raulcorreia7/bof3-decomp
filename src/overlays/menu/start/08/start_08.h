@@ -55,18 +55,18 @@
 /* Step the master panel right and clamp it at the given x. Kept: as an inline
  * the limit is an argument used after the branch and the store moves (tested;
  * bytes differ in the member). */
-#define MENU_CLAMP_PANEL(limit)                          \
-    do {                                                 \
-        MenuPanelTask* panel;                            \
-        u16            next;                             \
-                                                         \
-        panel        = g_UiPanelCurrent;                 \
-        next         = panel->pos.x + MENU_PANEL_STEP_X; \
-        panel->pos.x = next;                             \
-        if ((s16)next >= 17) {                           \
-            panel->pos.x = (limit);                      \
-            panel->state = 0;                            \
-        }                                                \
+#define MENU_CLAMP_PANEL(limit)                            \
+    do {                                                   \
+        MenuPanelTask* panel;                              \
+        u16            next;                               \
+                                                           \
+        panel         = g_UiPanelCurrent;                  \
+        next          = panel->pos.vx + MENU_PANEL_STEP_X; \
+        panel->pos.vx = next;                              \
+        if ((s16)next >= 17) {                             \
+            panel->pos.vx = (limit);                       \
+            panel->state  = 0;                             \
+        }                                                  \
     } while (0)
 
 /* The start menu's skill order screen, which runs in the battle selection
@@ -785,10 +785,10 @@ static inline void Menu_SlidePanelIn(void) {
     MenuPanelTask* task;
 
     task = g_UiPanelCurrent;
-    task->pos.x += MENU_PANEL_STEP_X;
-    if ((s16)task->pos.x >= 321) {
-        task->pos.x = 320;
-        task->state = 0;
+    task->pos.vx += MENU_PANEL_STEP_X;
+    if (task->pos.vx >= 321) {
+        task->pos.vx = 320;
+        task->state  = 0;
     }
 }
 
@@ -797,10 +797,10 @@ static inline void MenuRetreatPanelXToMinus200(void) {
     MenuPanelTask* task;
 
     task = g_UiPanelCurrent;
-    task->pos.x -= MENU_PANEL_STEP_X;
-    if ((s16)task->pos.x < -200) {
-        LOH(task->pos.x) = -200;
-        task->state      = 0;
+    task->pos.vx -= MENU_PANEL_STEP_X;
+    if (task->pos.vx < -200) {
+        task->pos.vx = -200;
+        task->state  = 0;
     }
 }
 
@@ -810,13 +810,13 @@ static inline void MenuAdvancePanelYField6(void) {
     u8*            bytes;
     u16            next;
 
-    panel        = g_UiPanelCurrent;
-    bytes        = (u8*)panel;
-    next         = panel->pos.y + MENU_PANEL_STEP_Y;
-    panel->pos.y = next;
+    panel         = g_UiPanelCurrent;
+    bytes         = (u8*)panel;
+    next          = panel->pos.vy + MENU_PANEL_STEP_Y;
+    panel->pos.vy = next;
     if ((s16)next >= bytes[10] * 0x36 + 0x3E) {
-        panel->pos.y = bytes[10] * 54 + 62;
-        panel->state = 0;
+        panel->pos.vy = bytes[10] * 54 + 62;
+        panel->state  = 0;
     }
 }
 
@@ -955,30 +955,30 @@ void Menu_DrawBackdrop(void);
 void func_801E7720(s16 tile_x, s8 tile_type);
 
 /* Step the master panel up 16 pixels and stop it at y 62. The member declares task. */
-#define MENU_STEP_PANEL_UP()          \
-    task = g_UiPanelCurrent;          \
-    task->pos.y -= MENU_PANEL_STEP_Y; \
-    if ((s16)task->pos.y < 63) {      \
-        task->pos.y = 62;             \
-        task->state = 0;              \
+#define MENU_STEP_PANEL_UP()           \
+    task = g_UiPanelCurrent;           \
+    task->pos.vy -= MENU_PANEL_STEP_Y; \
+    if (task->pos.vy < 63) {           \
+        task->pos.vy = 62;             \
+        task->state  = 0;              \
     }
 
 /* Step the master panel right 32 pixels and stop it at x 45. The member declares task. */
-#define MENU_STEP_PANEL_RIGHT()       \
-    task = g_UiPanelCurrent;          \
-    task->pos.x += MENU_PANEL_STEP_X; \
-    if ((s16)task->pos.x >= 46) {     \
-        task->pos.x = 45;             \
-        task->state = 0;              \
+#define MENU_STEP_PANEL_RIGHT()        \
+    task = g_UiPanelCurrent;           \
+    task->pos.vx += MENU_PANEL_STEP_X; \
+    if (task->pos.vx >= 46) {          \
+        task->pos.vx = 45;             \
+        task->state  = 0;              \
     }
 
 /* Return the master panel left to x 150. The member declares task. */
-#define MENU_STEP_PANEL_LEFT()        \
-    task = g_UiPanelCurrent;          \
-    task->pos.x -= MENU_PANEL_STEP_X; \
-    if ((s16)task->pos.x < 150) {     \
-        task->pos.x = 150;            \
-        task->state = 0;              \
+#define MENU_STEP_PANEL_LEFT()         \
+    task = g_UiPanelCurrent;           \
+    task->pos.vx -= MENU_PANEL_STEP_X; \
+    if (task->pos.vx < 150) {          \
+        task->pos.vx = 150;            \
+        task->state  = 0;              \
     }
 
 #endif

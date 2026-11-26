@@ -17,8 +17,8 @@ MATCH void func_801D8188(void) {
     g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0x31;
     toggle                                                    = &D_8014865B;
     sel                                                       = 1 - *toggle;
-    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.x             = bar + (sel << 5) + 0xDE;
-    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.y             = g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.y + 5;
+    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.vx            = bar + (sel << 5) + 0xDE;
+    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.vy            = g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.vy + 5;
     key                                                       = &g_PadStates[0].pressed;
     slot -= 180;
     if (*key & (PADLright | PADLleft)) {

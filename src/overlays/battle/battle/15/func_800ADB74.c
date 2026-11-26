@@ -16,8 +16,8 @@ MATCH void func_800ADB74(void) {
         return;
     }
     work                 = TASK(PartyMember);
-    work->screen_x.value = g_UiPanelTasks[18].pos.x + (work->timer * 0x16 + 0x44);
-    work->screen_y.value = g_UiPanelTasks[18].pos.y + (work->unk_09 * 0x20 + 0x22);
+    work->screen_x.value = g_UiPanelTasks[18].pos.vx + (work->timer * 0x16 + 0x44);
+    work->screen_y.value = g_UiPanelTasks[18].pos.vy + (work->unk_09 * 0x20 + 0x22);
     entries              = g_BattleTargetRows;
     entry                = &entries[(s16)g_UiPanelTasks[18].u.battle.row_base + work->unk_09];
     slot                 = (&entry->slot_00)[work->timer];

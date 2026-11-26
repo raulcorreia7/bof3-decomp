@@ -151,17 +151,17 @@ MATCH void func_801D2FE0(void) {
 }
 
 MATCH void UI_CursorDrawPanel(void) {
-    UI_CursorDraw(g_UiPanelCurrent->pos.x, g_UiPanelCurrent->pos.y, 0);
+    UI_CursorDraw(g_UiPanelCurrent->pos.vx, g_UiPanelCurrent->pos.vy, 0);
 }
 
 MATCH void func_801D3018(void) {
     s16 id;
 
     g_ShisuTask1Steps[g_UiPanelCurrent->state]();
-    Menu_DrawHeaderBar(g_UiPanelCurrent->pos.x, g_UiPanelCurrent->pos.y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
+    Menu_DrawHeaderBar((u16)g_UiPanelCurrent->pos.vx, (u16)g_UiPanelCurrent->pos.vy, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
     id = (s16)g_UiPanelCurrent->u.message.id;
     if (id != 0) {
-        UI_TextDraw((s16)(g_UiPanelCurrent->pos.x + 7), (s16)(g_UiPanelCurrent->pos.y + 3), 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, id));
+        UI_TextDraw((s16)(g_UiPanelCurrent->pos.vx + 7), (s16)(g_UiPanelCurrent->pos.vy + 3), 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, id));
     }
 }
 
@@ -174,18 +174,18 @@ MATCH void UI_PanelSlideOutTask_801D30E4(void) {
 MATCH void UI_PanelSlideInTaskTop_801D3124(void) {
     u16 next_pos;
 
-    next_pos                = g_UiPanelCurrent->pos.y + 0x10;
-    g_UiPanelCurrent->pos.y = next_pos;
+    next_pos                 = g_UiPanelCurrent->pos.vy + 0x10;
+    g_UiPanelCurrent->pos.vy = next_pos;
     if ((s16)next_pos >= 0x11) {
-        g_UiPanelCurrent->pos.y = 16U;
-        g_UiPanelCurrent->state = 0;
+        g_UiPanelCurrent->pos.vy = 16U;
+        g_UiPanelCurrent->state  = 0;
     }
 }
 
 /* func_801D3164 */
 MATCH void Shisu_UpdateCommandPanel(void) {
     g_ShisuTask2Steps[g_UiPanelCurrent->state]();
-    Menu_DrawCommandRow(g_UiPanelCurrent->pos.x, g_UiPanelCurrent->pos.y, g_UiPanelCurrent->unk_0A, g_UiPanelCurrent->unk_0B, 0);
+    Menu_DrawCommandRow(g_UiPanelCurrent->pos.vx, g_UiPanelCurrent->pos.vy, g_UiPanelCurrent->unk_0A, g_UiPanelCurrent->unk_0B, 0);
 }
 
 /* func_801D31CC */
@@ -197,11 +197,11 @@ MATCH void UI_PanelSlideOutTask_801D31CC(void) {
 MATCH void Menu_AdvancePanelY(void) {
     u16 next_pos;
 
-    next_pos                = g_UiPanelCurrent->pos.y + 0x10;
-    g_UiPanelCurrent->pos.y = next_pos;
+    next_pos                 = g_UiPanelCurrent->pos.vy + 0x10;
+    g_UiPanelCurrent->pos.vy = next_pos;
     if ((s16)next_pos >= 0x27) {
-        g_UiPanelCurrent->pos.y = 38U;
-        g_UiPanelCurrent->state = 0;
+        g_UiPanelCurrent->pos.vy = 38U;
+        g_UiPanelCurrent->state  = 0;
     }
 }
 
@@ -213,11 +213,11 @@ MATCH void func_801D324C(void) {
 MATCH void func_801D32A0(void) {
     u16 x;
 
-    x                       = g_UiPanelCurrent->pos.x - 0x20;
-    g_UiPanelCurrent->pos.x = x;
+    x                        = g_UiPanelCurrent->pos.vx - 0x20;
+    g_UiPanelCurrent->pos.vx = x;
     if ((s16)x < -200) {
-        LOH(g_UiPanelCurrent->pos.x) = -0xC8;
-        g_UiPanelCurrent->state      = 0;
+        g_UiPanelCurrent->pos.vx = -0xC8;
+        g_UiPanelCurrent->state  = 0;
     }
 }
 
@@ -225,18 +225,18 @@ MATCH void func_801D32A0(void) {
 MATCH void UI_PanelSetPosX_801D32E0(void) {
     u16 next_pos;
 
-    next_pos                = g_UiPanelCurrent->pos.x + 0x20;
-    g_UiPanelCurrent->pos.x = next_pos;
+    next_pos                 = g_UiPanelCurrent->pos.vx + 0x20;
+    g_UiPanelCurrent->pos.vx = next_pos;
     if ((s16)next_pos >= 0x12) {
-        g_UiPanelCurrent->pos.x = 17U;
-        g_UiPanelCurrent->state = 0;
+        g_UiPanelCurrent->pos.vx = 17U;
+        g_UiPanelCurrent->state  = 0;
     }
 }
 
 MATCH void func_801D3320(MenuPanelTask* task) {
     u8 i;
 
-    UI_WindowDraw((u16)(task->pos.x + 3), (u16)(task->pos.y + 3), 0x95, 0xA0, 0, g_WindowStyle);
+    UI_WindowDraw((u16)(task->pos.vx + 3), (u16)(task->pos.vy + 3), 0x95, 0xA0, 0, g_WindowStyle);
     i = 0;
     do {
         u8 shade;
@@ -250,41 +250,41 @@ MATCH void func_801D3320(MenuPanelTask* task) {
             flag  = 1;
         }
         if (i != task->unk_0A) {
-            UI_ListDrawItemRow((s16)(task->pos.x + 7), (s16)((u32)task->pos.y + (i * 13 + 0x1A)), shade, 0, D_801D9798[i], MEM_PTR(u8, task->item_table)[i], flag);
+            UI_ListDrawItemRow((s16)(task->pos.vx + 7), (s16)((u32)task->pos.vy + (i * 13 + 0x1A)), shade, 0, D_801D9798[i], MEM_PTR(u8, task->item_table)[i], flag);
         } else {
             if (MEM_PTR(u8, task->item_table)[i] != 0) {
-                UI_ListDrawItemRow((s16)(task->pos.x + 7), (s16)((u32)task->pos.y + (i * 13 + 0x1A)), 7, 0, D_801D9798[i], MEM_PTR(u8, task->item_table)[i], 1);
+                UI_ListDrawItemRow((s16)(task->pos.vx + 7), (s16)((u32)task->pos.vy + (i * 13 + 0x1A)), 7, 0, D_801D9798[i], MEM_PTR(u8, task->item_table)[i], 1);
             }
-            UI_ListDrawItemRow((s16)(task->pos.x + 7), (s16)(task->pos.y + i * 13 + 0x18), shade, 0, D_801D9798[i], MEM_PTR(u8, task->item_table)[i], flag);
+            UI_ListDrawItemRow((s16)(task->pos.vx + 7), (s16)(task->pos.vy + i * 13 + 0x18), shade, 0, D_801D9798[i], MEM_PTR(u8, task->item_table)[i], flag);
         }
         i++;
     } while (i < 4);
-    UI_TextDraw((s16)(task->pos.x + 0x4E - strlen((char*)D_801D979C) * 4), (s16)(task->pos.y + 7), 0, MENU_LABEL_LENGTH, D_801D979C);
-    UI_SpriteDrawRun((s16)task->pos.x, (s16)task->pos.y, D_801D9780, UI_SPRITE_ALT_PAGE);
-    UI_SpriteDrawRun((s16)task->pos.x, (s16)task->pos.y, D_801D978C, UI_SPRITE_ALT_PAGE);
+    UI_TextDraw((s16)((u16)task->pos.vx + 0x4E - strlen((char*)D_801D979C) * 4), (s16)(task->pos.vy + 7), 0, MENU_LABEL_LENGTH, D_801D979C);
+    UI_SpriteDrawRun(task->pos.vx, task->pos.vy, D_801D9780, UI_SPRITE_ALT_PAGE);
+    UI_SpriteDrawRun(task->pos.vx, task->pos.vy, D_801D978C, UI_SPRITE_ALT_PAGE);
     i = 0;
     do {
-        UI_SpriteDraw((s16)(task->pos.x + (i + 5) * 8), (s16)task->pos.y, 1, UI_SPRITE_ALT_PAGE);
+        UI_SpriteDraw((s16)(task->pos.vx + (i + 5) * 8), task->pos.vy, 1, UI_SPRITE_ALT_PAGE);
         i++;
     } while (i < 0xA);
     i = 0;
     do {
-        UI_SpriteDraw((s16)task->pos.x, (s16)(task->pos.y + (i + 3) * 8), 4, UI_SPRITE_ALT_PAGE);
+        UI_SpriteDraw(task->pos.vx, (s16)(task->pos.vy + (i + 3) * 8), 4, UI_SPRITE_ALT_PAGE);
         i++;
     } while (i < 0x11);
-    UI_SpriteDraw((s16)(task->pos.x + 0x90), (s16)(task->pos.y + 0x18), 0x20, UI_SPRITE_ALT_PAGE);
+    UI_SpriteDraw((s16)(task->pos.vx + 0x90), (s16)(task->pos.vy + 0x18), 0x20, UI_SPRITE_ALT_PAGE);
     i = 0;
     do {
-        UI_SpriteDraw((s16)(task->pos.x + 0x90), (s16)(task->pos.y + (i + 4) * 8), 0x21, UI_SPRITE_ALT_PAGE);
+        UI_SpriteDraw((s16)(task->pos.vx + 0x90), (s16)(task->pos.vy + (i + 4) * 8), 0x21, UI_SPRITE_ALT_PAGE);
         i++;
     } while (i < 0xF);
-    UI_SpriteDraw((s16)task->pos.x, (s16)(task->pos.y + 0xA0), 5, UI_SPRITE_ALT_PAGE);
-    UI_SpriteDraw((s16)(task->pos.x + 0x90), (s16)(task->pos.y + 0x98), 0x22, UI_SPRITE_ALT_PAGE);
-    UI_SpriteDraw((s16)(task->pos.x + 8), (s16)task->pos.y, 0x32, UI_SPRITE_ALT_PAGE);
-    UI_SpriteDraw((s16)(task->pos.x + 0x90), (s16)task->pos.y, 0x34, UI_SPRITE_ALT_PAGE);
+    UI_SpriteDraw(task->pos.vx, (s16)(task->pos.vy + 0xA0), 5, UI_SPRITE_ALT_PAGE);
+    UI_SpriteDraw((s16)(task->pos.vx + 0x90), (s16)(task->pos.vy + 0x98), 0x22, UI_SPRITE_ALT_PAGE);
+    UI_SpriteDraw((s16)(task->pos.vx + 8), task->pos.vy, 0x32, UI_SPRITE_ALT_PAGE);
+    UI_SpriteDraw((s16)(task->pos.vx + 0x90), task->pos.vy, 0x34, UI_SPRITE_ALT_PAGE);
     i = 0;
     do {
-        UI_SpriteDraw((s16)(task->pos.x + (i + 1) * 8), (s16)(task->pos.y + 0xA0), 6, UI_SPRITE_ALT_PAGE);
+        UI_SpriteDraw((s16)(task->pos.vx + (i + 1) * 8), (s16)(task->pos.vy + 0xA0), 6, UI_SPRITE_ALT_PAGE);
         i++;
     } while (i < 0x11);
 }

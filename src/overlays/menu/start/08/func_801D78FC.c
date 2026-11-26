@@ -91,11 +91,11 @@ MATCH void func_801D78FC(void) {
                 panel->panel                = 6;
                 panel->active               = 1;
                 panel->state                = 10;
-                panel->pos.x                = 320;
+                panel->pos.vx               = 320;
                 panel->mode                 = 0;
                 panel->unk_0B               = 0;
                 panel->unk_0C               = 0;
-                panel->pos.y                = i * 54 + 62;
+                panel->pos.vy               = i * 54 + 62;
                 g_UiPanelTasks[i + 4].state = 7;
             }
             g_BattleChoicePhase = 4;

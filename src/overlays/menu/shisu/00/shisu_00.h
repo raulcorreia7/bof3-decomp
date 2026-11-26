@@ -150,12 +150,12 @@ static inline void Menu_SlidePanelUp(void) {
     MenuPanelTask* task;
     u16            y;
 
-    task        = g_UiPanelCurrent;
-    y           = task->pos.y - MENU_PANEL_STEP_Y;
-    task->pos.y = y;
+    task         = g_UiPanelCurrent;
+    y            = task->pos.vy - MENU_PANEL_STEP_Y;
+    task->pos.vy = y;
     if ((s16)y < MENU_PANEL_HIDDEN_Y) {
-        LOH(task->pos.y) = MENU_PANEL_HIDDEN_Y;
-        task->state      = 0;
+        task->pos.vy = MENU_PANEL_HIDDEN_Y;
+        task->state  = 0;
     }
 }
 

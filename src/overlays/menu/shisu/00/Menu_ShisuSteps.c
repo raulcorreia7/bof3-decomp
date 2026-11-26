@@ -181,7 +181,7 @@ MATCH void func_801D11F4(void) {
 
     g_UiPanelTasks[0].active = 1;
     D_80148334               = D_8014837C + g_ShisuIngredients.command * 48;
-    g_UiPanelTasks[0].pos.y  = D_8014837E + 4;
+    g_UiPanelTasks[0].pos.vy = D_8014837E + 4;
     if (g_ShisuIngredients.rounds != 0) {
         D_801DA0FC = D_801DA084 + g_ShisuBaseScale * 0xA00;
     }
@@ -292,8 +292,8 @@ MATCH void func_801D14C0(void) {
     cursor                   = g_ShisuIngredients.cursor;
     g_UiPanelTasks[0].active = 1;
     g_UiPanelTasks[0].unk_0A = cursor;
-    g_UiPanelTasks[0].pos.x  = g_UiPanelTasks[3].pos.x + 7;
-    g_UiPanelTasks[0].pos.y  = g_UiPanelTasks[3].pos.y + cursor * 13 + 26;
+    g_UiPanelTasks[0].pos.vx = g_UiPanelTasks[3].pos.vx + 7;
+    g_UiPanelTasks[0].pos.vy = g_UiPanelTasks[3].pos.vy + cursor * 13 + 26;
     g_UiPanelTasks[3].unk_0A = cursor;
     if (g_ShisuIngredients.rounds != 0) {
         D_801DA0FC = D_801DA084 + g_ShisuBaseScale * 0xA00;
@@ -445,32 +445,32 @@ MATCH void func_801D1CA4(void) {
 NON_MATCHING void func_801D1D1C(void) {
     MenuPanelTask* panel;
 
-    g_UiPanelTasks[2].pos.x      = 0x70;
-    g_UiPanelTasks[1].pos.x      = 0x14;
-    LOH(g_UiPanelTasks[1].pos.y) = -0x64;
-    LOH(g_UiPanelTasks[2].pos.y) = -0x64;
-    g_UiPanelTasks[3].mode       = 3;
-    g_UiPanelTasks[2].unk_0A     = 8;
-    LOH(g_UiPanelTasks[3].pos.x) = -0x78;
-    panel                        = &g_UiPanelTasks[0];
-    panel->active                = 0;
-    panel->panel                 = 1;
-    panel->mode                  = 0;
-    panel->state                 = 2;
-    panel->pos.x                 = 0;
-    panel->pos.y                 = 0;
+    g_UiPanelTasks[2].pos.vx      = 0x70;
+    g_UiPanelTasks[1].pos.vx      = 0x14;
+    LOH(g_UiPanelTasks[1].pos.vy) = -0x64;
+    LOH(g_UiPanelTasks[2].pos.vy) = -0x64;
+    g_UiPanelTasks[3].mode        = 3;
+    g_UiPanelTasks[2].unk_0A      = 8;
+    LOH(g_UiPanelTasks[3].pos.vx) = -0x78;
+    panel                         = &g_UiPanelTasks[0];
+    panel->active                 = 0;
+    panel->panel                  = 1;
+    panel->mode                   = 0;
+    panel->state                  = 2;
+    panel->pos.vx                 = 0;
+    panel->pos.vy                 = 0;
     panel++;
     panel->active = 1;
     panel->panel  = 1;
     panel->mode   = 1;
     panel->state  = 2;
     panel++;
-    panel->active           = 1;
-    panel->panel            = 1;
-    panel->mode             = 2;
-    panel->state            = 2;
-    panel->unk_0B           = 0xFF;
-    g_UiPanelTasks[3].pos.y = 0x3F;
+    panel->active            = 1;
+    panel->panel             = 1;
+    panel->mode              = 2;
+    panel->state             = 2;
+    panel->unk_0B            = 0xFF;
+    g_UiPanelTasks[3].pos.vy = 0x3F;
     panel++;
     panel->active     = 1;
     panel->panel      = 1;

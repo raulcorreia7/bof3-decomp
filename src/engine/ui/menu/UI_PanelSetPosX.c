@@ -3,5 +3,5 @@
 /* Menu step that sets the cursor x position. */
 /* func_8019982C */
 MATCH void UI_PanelSetPosX(void) {
-    MENU_ADVANCE_PANEL(pos.x, MENU_PANEL_STEP_X, 17);
+    MENU_ADVANCE_PANEL(pos.vx, MENU_PANEL_STEP_X, 17);
 }

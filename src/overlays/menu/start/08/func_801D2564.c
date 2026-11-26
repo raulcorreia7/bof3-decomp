@@ -20,10 +20,10 @@ MATCH void func_801D2564(void) {
     selection_index = *selection;
     /* FAKE: preserve flag store after selection read. */
     FAKE_ORDER_LOCK(D_801485DC = 1);
-    D_801485E0 = g_UiPanelTasks[selection_index + 4].pos.x;
+    D_801485E0 = g_UiPanelTasks[selection_index + 4].pos.vx;
     /* FAKE: preserve first table store order. */
     FAKE_BARRIER();
-    D_801485E2 = g_UiPanelTasks[selection_index + 4].pos.y;
+    D_801485E2 = g_UiPanelTasks[selection_index + 4].pos.vy;
     UI_MessageSetVariable(0U, 5U, g_CharSlot[g_PartyFieldOrder[selection_index]] * 0xA4 + panel_data);
     g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0x12;
     input                                                     = INPUT_REPEATED(g_PadStates[0].pressed, (PADLup | PADLdown));

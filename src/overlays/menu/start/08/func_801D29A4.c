@@ -18,8 +18,8 @@ MATCH void func_801D29A4(void) {
         panel->mode   = MENU_START_MODE_STATS;
         panel->state  = 2;
         panel->active = 1;
-        panel->pos.x  = 320;
-        panel->pos.y  = g_UiPanelTasks[index + 4].pos.y;
+        panel->pos.vx = 320;
+        panel->pos.vy = g_UiPanelTasks[index + 4].pos.vy;
         panel->unk_0A = i;
         i += 1;
     }
@@ -28,7 +28,7 @@ MATCH void func_801D29A4(void) {
     panel->mode                                         = MENU_START_MODE_MESSAGE;
     panel->state                                        = 2;
     panel->active                                       = 1;
-    panel->pos.x                                        = 20;
+    panel->pos.vx                                       = 20;
     D_801484C2                                          = -0x14;
     panel->u.addr.unk_10                                = 0;
     g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME].panel = 6;

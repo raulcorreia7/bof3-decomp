@@ -23,9 +23,9 @@ MATCH void func_801D1244(void) {
     row                            = g_UiPanelTasks[0].unk_0B;
     first                          = LOBU(D_8014833A);
     g_UiPanelTasks[1].flags        = 0;
-    g_UiPanelTasks[4].pos.x        = cursor_x + 7;
+    g_UiPanelTasks[4].pos.vx       = cursor_x + 7;
     row_offset                     = row - first;
-    g_UiPanelTasks[4].pos.y        = g_UiPanelTasks[0].pos.y + (row_offset * 13 + 26);
+    g_UiPanelTasks[4].pos.vy       = (u16)(g_UiPanelTasks[0].pos.vy + (row_offset * 13 + 26));
     g_UiPanelTasks[2].u.message.id = Item_GetDescription(category, g_UiPanelTasks[0].flags);
     g_UiPanelTasks[3].u.message.id = 221;
     buttons                        = INPUT_REPEATED(g_PadStates[0].pressed, (INPUT_DIRECTIONAL | PADL1 | PADR1));
@@ -239,8 +239,8 @@ NON_MATCHING void func_801D1C90(void) {
     g_UiPanelTasks[0].mode   = 2;
     g_UiPanelTasks[0].state  = 2;
     g_UiPanelTasks[0].active = 1;
-    g_UiPanelTasks[0].pos.x  = 0x140;
-    g_UiPanelTasks[0].pos.y  = 0x3E;
+    g_UiPanelTasks[0].pos.vx = 0x140;
+    g_UiPanelTasks[0].pos.vy = 0x3E;
     do {
         value = g_PartyFieldOrder[i];
         if (value == 0 || value == terminator) {
@@ -250,8 +250,8 @@ NON_MATCHING void func_801D1C90(void) {
         i++;
     } while (i < 3);
     g_UiPanelTasks[0].item_table    = (s32)D_801D8EE0;
-    g_UiPanelTasks[1].pos.x         = -0xAA;
-    g_UiPanelTasks[1].pos.y         = 0x3E;
+    g_UiPanelTasks[1].pos.vx        = -0xAA;
+    g_UiPanelTasks[1].pos.vy        = 0x3E;
     g_UiPanelTasks[1].unk_0C        = 7;
     g_UiPanelTasks[1].unk_0B        = 0xFF;
     g_UiPanelTasks[0].unk_09        = 0;
@@ -271,16 +271,16 @@ NON_MATCHING void func_801D1C90(void) {
     g_UiPanelTasks[2].mode          = 4;
     g_UiPanelTasks[2].state         = 2;
     g_UiPanelTasks[2].active        = 1;
-    g_UiPanelTasks[2].pos.x         = 0x14;
-    g_UiPanelTasks[2].pos.y         = -0x14;
+    g_UiPanelTasks[2].pos.vx        = 0x14;
+    g_UiPanelTasks[2].pos.vy        = -0x14;
     g_UiPanelTasks[2].u.addr.unk_12 = 0x118;
     g_UiPanelTasks[2].u.addr.unk_10 = 0;
     g_UiPanelTasks[3].panel         = 2;
     g_UiPanelTasks[3].mode          = 4;
     g_UiPanelTasks[3].state         = 3;
     g_UiPanelTasks[3].active        = 1;
-    g_UiPanelTasks[3].pos.y         = -0x14;
-    g_UiPanelTasks[3].pos.x         = 0xA4;
+    g_UiPanelTasks[3].pos.vy        = -0x14;
+    g_UiPanelTasks[3].pos.vx        = 0xA4;
     g_UiPanelTasks[3].u.addr.unk_10 = 0;
     g_UiPanelTasks[3].u.addr.unk_12 = 0x80;
     g_UiPanelTasks[4].panel         = 2;

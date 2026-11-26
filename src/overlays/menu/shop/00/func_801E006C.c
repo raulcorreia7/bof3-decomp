@@ -9,9 +9,9 @@ MATCH void func_801E006C(void) {
     D_80148340 = 0x75;
     if (g_UiPanelTasks[3].state == 0) {
         g_UiPanelTasks[21].active = 1;
-        D_80148628                = g_UiPanelTasks[3].pos.x;
+        D_80148628                = g_UiPanelTasks[3].pos.vx;
         D_80148628                = D_80148628 + 0x2A;
-        D_8014862A                = g_UiPanelTasks[3].pos.y + 7;
+        D_8014862A                = g_UiPanelTasks[3].pos.vy + 7;
     } else {
         g_UiPanelTasks[21].active = 0;
     }
@@ -48,8 +48,8 @@ MATCH void func_801E006C(void) {
         g_UiPanelTasks[4].active = input;
         g_UiPanelTasks[4].unk_0A = 0;
         g_UiPanelTasks[4].unk_0B = 0;
-        g_UiPanelTasks[4].pos.x  = BATTLE_PARTY_STRIDE;
-        g_UiPanelTasks[4].pos.y  = 0x3E;
+        g_UiPanelTasks[4].pos.vx = BATTLE_PARTY_STRIDE;
+        g_UiPanelTasks[4].pos.vy = 0x3E;
         g_UiPanelTasks[4].flags  = 0;
         (*((s8*)(&g_MenuStep.state)))++;
         return;

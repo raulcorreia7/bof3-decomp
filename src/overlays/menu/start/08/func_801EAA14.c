@@ -15,17 +15,17 @@ MATCH void func_801EAA14(MenuPanelTask* task) {
     u8         text_color;
     u8         shaded;
 
-    Menu_DrawWindowFrame(task->pos.x, task->pos.y, 0x12, 0x15);
+    Menu_DrawWindowFrame(task->pos.vx, task->pos.vy, 0x12, 0x15);
     count = 0;
-    x     = task->pos.x + 7;
-    y     = task->pos.y + 6;
+    x     = task->pos.vx + 7;
+    y     = task->pos.vy + 6;
     item  = (u8*)task->item_table;
     if (task->unk_0A == 0) {
         return;
     }
-    portrait_x = (task->pos.x + 0x5D) & HALF_MASK;
-    label_x    = task->pos.x + 0x37;
-    stat_x     = task->pos.x + 0x1F;
+    portrait_x = (task->pos.vx + 0x5D) & HALF_MASK;
+    label_x    = task->pos.vx + 0x37;
+    stat_x     = task->pos.vx + 0x1F;
     do {
         character = &g_Characters[g_CharSlot[*item]];
         shaded    = 1;

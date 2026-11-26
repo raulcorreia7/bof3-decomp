@@ -15,8 +15,8 @@ MATCH void UI_MessageOpenPresetPanel(void) {
     mode  = &g_UiPanelPlacement;
     panel = g_UiPanelCurrent;
 
-    x            = *(u16*)((u8*)&D_8017F944 + (*mode * 4));
-    panel->pos.x = ((x + 35) << 4);
+    x             = *(u16*)((u8*)&D_8017F944 + (*mode * 4));
+    panel->pos.vx = ((x + 35) << 4);
 
     y                          = *(u16*)((u8*)&D_8017F946 + (FAKE_VOLATILE(u8, *mode) * 4));
     panel->u.grow.width_delta  = 0xE3;
@@ -24,7 +24,7 @@ MATCH void UI_MessageOpenPresetPanel(void) {
     panel->u.grow.w            = 0;
     panel->u.grow.h            = 0;
     panel->unk_0A              = 0x47;
-    panel->pos.y               = ((y + 16) << 4);
+    panel->pos.vy              = ((y + 16) << 4);
 
     panel         = g_UiPanelCurrent;
     panel->unk_0B = 0x20;

@@ -11,8 +11,8 @@ MATCH void UI_PanelResetTasks(void) {
         g_UiPanelTasks[i].mode          = 0;
         g_UiPanelTasks[i].state         = 0;
         g_UiPanelTasks[i].layer         = 0;
-        g_UiPanelTasks[i].pos.x         = 0;
-        g_UiPanelTasks[i].pos.y         = 0;
+        g_UiPanelTasks[i].pos.vx        = 0;
+        g_UiPanelTasks[i].pos.vy        = 0;
         g_UiPanelTasks[i].unk_08        = 0;
         g_UiPanelTasks[i].unk_09        = 0;
         g_UiPanelTasks[i].unk_0A        = 0;

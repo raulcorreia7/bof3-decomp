@@ -29,5 +29,5 @@ MATCH void Battle_AnimatePanels(void) {
         i += 1;
     } while ((i & BYTE_MASK) < 7u);
     task = g_UiPanelCurrent;
-    Battle_DrawPanels(task->pos.x, task->pos.y);
+    Battle_DrawPanels(task->pos.vx, task->pos.vy);
 }

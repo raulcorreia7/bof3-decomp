@@ -16,8 +16,8 @@ MATCH void Menu_OpenFormationScreen(void) {
     g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].mode         = MENU_START_MODE_MESSAGE;
     g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].state        = 2;
     record[0]                                                 = 1;
-    g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.x        = 20;
-    g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.y        = 16;
+    g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.vx       = 20;
+    g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.vy       = 16;
     g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0;
     while (i < 2) {
         /* FAKE: retail adds the panel offset and `panels` in this operand order; plain forms swap it. */
@@ -37,8 +37,8 @@ MATCH void Menu_OpenFormationScreen(void) {
         panel->mode   = 0;
         panel->state  = 0;
         panel->active = 1;
-        panel->pos.x  = 17;
-        panel->pos.y  = i * 54 + 62;
+        panel->pos.vx = 17;
+        panel->pos.vy = i * 54 + 62;
         panel->unk_0B = 1;
         panel->unk_0C = 0;
         i++;

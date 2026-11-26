@@ -16,8 +16,8 @@ NON_MATCHING void func_801D5E90(void) {
     FAKE_OPAQUE(panel);
     Menu_DrawClutStrip(clut);
     g_UiPanelTasks[21].active                                 = 1;
-    D_80148628                                                = g_UiPanelTasks[14].pos.x + 7;
-    D_8014862A                                                = g_UiPanelTasks[14].pos.y + ((g_UiPanelTasks[14].unk_0B - g_UiPanelTasks[14].unk_0A) * 13 + 0x1A);
+    D_80148628                                                = g_UiPanelTasks[14].pos.vx + 7;
+    D_8014862A                                                = g_UiPanelTasks[14].pos.vy + ((g_UiPanelTasks[14].unk_0B - g_UiPanelTasks[14].unk_0A) * 13 + 0x1A);
     g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = Item_GetDescription(g_UiPanelTasks[14].unk_08, g_UiPanelTasks[14].flags);
     buttons                                                   = INPUT_REPEATED(g_PadStates[0].pressed, (INPUT_DIRECTIONAL | PADL1 | PADR1));
     func_801D6FBC();

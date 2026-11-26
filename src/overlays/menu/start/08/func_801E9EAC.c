@@ -5,12 +5,12 @@ MATCH void func_801E9EAC(void) {
     u8*            bytes;
     u16            next;
 
-    panel        = g_UiPanelCurrent;
-    bytes        = (u8*)panel;
-    next         = panel->pos.x + MENU_PANEL_STEP_X;
-    panel->pos.x = next;
+    panel         = g_UiPanelCurrent;
+    bytes         = (u8*)panel;
+    next          = panel->pos.vx + MENU_PANEL_STEP_X;
+    panel->pos.vx = next;
     if ((s16)next > (bytes[0xB] & 0x1) * 75 + 320) {
-        panel->pos.x = (bytes[11] & 0x1) * 75 + 320;
-        panel->state = 0;
+        panel->pos.vx = (bytes[11] & 0x1) * 75 + 320;
+        panel->state  = 0;
     }
 }

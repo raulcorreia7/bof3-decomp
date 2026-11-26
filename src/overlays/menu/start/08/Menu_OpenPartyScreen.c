@@ -13,8 +13,8 @@ NON_MATCHING void Menu_OpenPartyScreen(void) {
     record->mode         = MENU_START_MODE_MESSAGE;
     record->state        = 2;
     record->active       = 1;
-    record->pos.x        = 0x14;
-    LOH(record->pos.y)   = -0x14;
+    record->pos.vx       = 0x14;
+    LOH(record->pos.vy)  = -0x14;
     record->u.message.id = 0;
     for (i = 0; i < 2; i++) {
         panels[i].panel  = 6;
@@ -28,8 +28,8 @@ NON_MATCHING void Menu_OpenPartyScreen(void) {
     D_801485B8                                     = 1;
     g_BattleEquipSlot                              = 7;
     g_UiPanelTasks[18].unk_0B                      = 0xFF;
-    g_UiPanelTasks[18].pos.x                       = 0x70;
-    LOH(g_UiPanelTasks[18].pos.y)                  = -0x14;
+    g_UiPanelTasks[18].pos.vx                      = 0x70;
+    LOH(g_UiPanelTasks[18].pos.vy)                 = -0x14;
     g_UiPanelTasks[MENU_START_PANEL_CURSOR].panel  = 6;
     g_UiPanelTasks[MENU_START_PANEL_CURSOR].mode   = MENU_START_MODE_CURSOR;
     g_UiPanelTasks[MENU_START_PANEL_CURSOR].active = 0;

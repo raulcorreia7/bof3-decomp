@@ -11,8 +11,8 @@ MATCH void Menu_ChoosePartyCommand(void) {
     g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = g_MenuPartyCommand + 0x1F;
     if (g_BattlePanelMode == 0) {
         g_UiPanelTasks[MENU_START_PANEL_CURSOR].active = 1;
-        g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.x  = g_UiPanelTasks[18].pos.x + (g_MenuPartyCommand * 0x30);
-        g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.y  = g_UiPanelTasks[18].pos.y + 4;
+        g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.vx = g_UiPanelTasks[18].pos.vx + (g_MenuPartyCommand * 0x30);
+        g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.vy = g_UiPanelTasks[18].pos.vy + 4;
     } else {
         g_UiPanelTasks[MENU_START_PANEL_CURSOR].active = 0;
     }

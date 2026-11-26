@@ -17,10 +17,10 @@ NON_MATCHING void func_801D20D0(void) {
     cursor                    = &D_80148656;
     idx                       = (s8)*cursor + 3;
     g_UiPanelTasks[20].active = 1;
-    D_80148604                = g_UiPanelTasks[idx].pos.x;
+    D_80148604                = g_UiPanelTasks[idx].pos.vx;
     /* FAKE: block boundary keeps each copy beside its own load. */
     FAKE_ORDER_FENCE();
-    D_80148606 = g_UiPanelTasks[idx].pos.y;
+    D_80148606 = g_UiPanelTasks[idx].pos.vy;
     count      = Party_CountOrder(PARTY_ORDER_FIELD);
     buttons    = INPUT_REPEATED(g_PadStates[0].pressed, (PADLup | PADLdown));
     old        = *cursor;

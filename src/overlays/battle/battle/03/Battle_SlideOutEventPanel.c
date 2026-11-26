@@ -3,7 +3,7 @@
 /* func_801EA774 */
 MATCH void Battle_SlideOutEventPanel(void) {
     MenuPanelTask* panel = g_UiPanelCurrent;
-    s16            state = panel->pos.y;
+    s16            state = panel->pos.vy;
 
     if (state == -0x16) {
         u8* gate = &g_Battle.outcome.event_flags;
@@ -11,6 +11,6 @@ MATCH void Battle_SlideOutEventPanel(void) {
         *gate &= ~D_801EB4DC->event_type;
         UI_PanelClear();
     } else {
-        panel->pos.y = state - 8;
+        panel->pos.vy = state - 8;
     }
 }

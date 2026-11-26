@@ -24,8 +24,8 @@ MATCH void func_801D8680(void) {
     task                                           = (MenuPanelTask*)&panel[0x76];
     g_UiPanelTasks[18].unk_0C                      = flag_value;
     g_UiPanelTasks[16].unk_0C                      = flag_value;
-    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.x  = g_UiPanelTasks[18].pos.x + 5;
-    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.y  = g_UiPanelTasks[18].pos.y + (g_UiPanelTasks[18].unk_0B * 16 + 26);
+    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.vx = g_UiPanelTasks[18].pos.vx + 5;
+    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.vy = (u16)(g_UiPanelTasks[18].pos.vy + (g_UiPanelTasks[18].unk_0B * 16 + 26));
     buttons                                        = INPUT_GetRepeatedButtons(g_PadStates[0].pressed & (PADLup | PADLdown));
     at_end                                         = g_UiPanelTasks[16].unk_0B == 3;
     if (buttons & PADLup) {

@@ -55,8 +55,8 @@ MATCH void func_801D0D4C(void) {
         return;
     }
     g_UiPanelTasks[1].active = 1;
-    g_UiPanelTasks[1].pos.x  = g_UiPanelTasks[0].pos.x + 7;
-    g_UiPanelTasks[1].pos.y  = g_UiPanelTasks[0].pos.y + ((g_Commu04ItemPanel.group_cursor - g_Commu04ItemPanel.group_first) * 0xD + 0x1A);
+    g_UiPanelTasks[1].pos.vx = g_UiPanelTasks[0].pos.vx + 7;
+    g_UiPanelTasks[1].pos.vy = (u16)(g_UiPanelTasks[0].pos.vy + ((g_Commu04ItemPanel.group_cursor - g_Commu04ItemPanel.group_first) * 0xD + 0x1A));
     buttons                  = INPUT_REPEATED(g_PadStates[0].pressed, (INPUT_DIRECTIONAL | PADL1 | PADR1));
     if (buttons & PADLleft) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
@@ -232,20 +232,20 @@ MATCH void func_801D1628(void) {
 #include "overlays/commu/shared/Fairy_EndCommuScene.h"
 
 MATCH void func_801D16A4(void) {
-    g_UiPanelTasks[0].panel      = 2;
-    g_UiPanelTasks[0].mode       = 0;
-    g_UiPanelTasks[0].state      = 2;
-    g_UiPanelTasks[0].active     = 1;
-    LOH(g_UiPanelTasks[0].pos.x) = -0xAA;
-    g_UiPanelTasks[0].pos.y      = 0x3E;
-    g_UiPanelTasks[0].unk_0A     = 0;
-    g_UiPanelTasks[0].unk_0B     = 0;
-    g_UiPanelTasks[0].unk_0C     = 0;
-    g_UiPanelTasks[0].flags      = 0xFF;
-    g_UiPanelTasks[0].unk_08     = 0;
-    g_UiPanelTasks[0].unk_09     = 0;
-    g_UiPanelTasks[0].u.grow.w   = 0;
-    g_UiPanelTasks[0].u.grow.h   = 0;
+    g_UiPanelTasks[0].panel    = 2;
+    g_UiPanelTasks[0].mode     = 0;
+    g_UiPanelTasks[0].state    = 2;
+    g_UiPanelTasks[0].active   = 1;
+    g_UiPanelTasks[0].pos.vx   = -0xAA;
+    g_UiPanelTasks[0].pos.vy   = 0x3E;
+    g_UiPanelTasks[0].unk_0A   = 0;
+    g_UiPanelTasks[0].unk_0B   = 0;
+    g_UiPanelTasks[0].unk_0C   = 0;
+    g_UiPanelTasks[0].flags    = 0xFF;
+    g_UiPanelTasks[0].unk_08   = 0;
+    g_UiPanelTasks[0].unk_09   = 0;
+    g_UiPanelTasks[0].u.grow.w = 0;
+    g_UiPanelTasks[0].u.grow.h = 0;
 
     g_UiPanelTasks[1].panel  = 2;
     g_UiPanelTasks[1].mode   = 1;

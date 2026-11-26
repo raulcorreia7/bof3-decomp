@@ -7,8 +7,8 @@ MATCH void func_801D53AC(void) {
     Menu_DrawClutStrip(g_WindowClut);
     g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = D_801EC440[(s8)D_801ED620];
     g_UiPanelTasks[MENU_START_PANEL_CURSOR].active            = 1;
-    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.x             = (u16)g_UiPanelTasks[MENU_START_PANEL_COMMANDS].pos.x + (s8)D_801ED620 * 0x30;
-    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.y             = (u16)g_UiPanelTasks[MENU_START_PANEL_COMMANDS].pos.y + 4;
+    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.vx            = (u16)g_UiPanelTasks[MENU_START_PANEL_COMMANDS].pos.vx + (s8)D_801ED620 * 0x30;
+    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.vy            = (u16)g_UiPanelTasks[MENU_START_PANEL_COMMANDS].pos.vy + 4;
     g_UiPanelTasks[MENU_START_PANEL_ITEMS].flags              = 1;
     g_UiPanelTasks[MENU_START_PANEL_COMMANDS].unk_0B          = 0xFF;
     pressed                                                   = INPUT_GetRepeatedButtons(g_PadStates[0].pressed & (PADLright | PADLleft));

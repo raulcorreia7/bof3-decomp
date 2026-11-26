@@ -4,6 +4,6 @@ MATCH void func_800B0E24(void) {
     s16 current;
 
     func_800B0F9C();
-    current                 = g_UiPanelCurrent->pos.x;
-    g_UiPanelCurrent->pos.x = (current < 91 ? current + 32 : 91);
+    current                  = g_UiPanelCurrent->pos.vx;
+    g_UiPanelCurrent->pos.vx = (current < 91 ? current + 32 : 91);
 }

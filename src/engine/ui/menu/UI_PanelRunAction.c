@@ -7,5 +7,5 @@ MATCH void UI_PanelRunAction(void) {
 
     g_MenuActionSteps[((MenuPanelTask*)g_UiPanelCurrent)->state]();
     task = (MenuPanelTask*)g_UiPanelCurrent;
-    func_801D5634(7, task->pos.x, task->pos.y, task->item_table, task->flags, task);
+    func_801D5634(7, task->pos.vx, task->pos.vy, task->item_table, task->flags, task);
 }

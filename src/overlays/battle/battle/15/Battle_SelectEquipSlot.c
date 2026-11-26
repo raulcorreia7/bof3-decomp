@@ -41,8 +41,8 @@ MATCH void Battle_SelectEquipSlot(void) {
         D_801485DC                = 0;
         g_Battle.ui_step          = 1;
         g_Battle.ui_mode          = 0;
-        g_UiPanelTasks[16].pos.x  = D_80148598;
-        g_UiPanelTasks[16].pos.y  = D_8014859A;
+        g_UiPanelTasks[16].pos.vx = D_80148598;
+        g_UiPanelTasks[16].pos.vy = D_8014859A;
         return;
     }
     if ((held & PADRleft) != 0u) {

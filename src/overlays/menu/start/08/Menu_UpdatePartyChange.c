@@ -20,19 +20,19 @@ NON_MATCHING void Menu_UpdatePartyChange(void) {
     frame                                                = &D_801485DC;
     *frame                                               = 0;
     g_UiPanelTasks[20].active                            = 0;
-    g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME].pos.x  = D_801EC548[D_80148659][D_80148658[0]].x;
+    g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME].pos.vx = D_801EC548[D_80148659][D_80148658[0]].x;
     y                                                    = D_801EC548[D_80148659][D_80148658[0]].y;
     *frame                                               = 1;
-    g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME].pos.y  = y;
+    g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME].pos.vy = y;
     g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0A = D_801EC548[D_80148659][D_80148658[0]].value;
     g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0B = 1;
     if ((s8)D_8014865D != 0x7F) {
         u16 y2;
 
-        g_UiPanelTasks[20].pos.x  = D_801EC548[(s8)D_8014865D][(s8)D_8014865A].x;
+        g_UiPanelTasks[20].pos.vx = D_801EC548[(s8)D_8014865D][(s8)D_8014865A].x;
         y2                        = D_801EC548[(s8)D_8014865D][(s8)D_8014865A].y;
         D_80148600                = 1;
-        g_UiPanelTasks[20].pos.y  = y2;
+        g_UiPanelTasks[20].pos.vy = y2;
         g_UiPanelTasks[20].unk_0B = 0;
         g_UiPanelTasks[20].unk_0A = D_801EC548[(s8)D_8014865D][(s8)D_8014865A].value;
     }

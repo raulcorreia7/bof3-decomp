@@ -7,11 +7,11 @@ MATCH void Battle_SlideInMessagePanel(void) {
 
     panel      = g_UiPanelCurrent;
     D_801EC2E4 = 1u;
-    state      = panel->pos.y;
+    state      = panel->pos.vy;
     if (state == 0x12) {
         panel->state++;
     } else {
-        panel->pos.y = state + 8;
+        panel->pos.vy = state + 8;
     }
     Battle_DrawMessagePanel();
 }

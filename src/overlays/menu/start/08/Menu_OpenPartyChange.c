@@ -27,8 +27,8 @@ MATCH void Menu_OpenPartyChange(u16 buttons) {
     g_UiPanelTasks[MENU_START_PANEL_COMMANDS].panel  = 6;
     g_UiPanelTasks[MENU_START_PANEL_COMMANDS].mode   = 0x13;
     g_UiPanelTasks[MENU_START_PANEL_COMMANDS].state  = 2;
-    g_UiPanelTasks[MENU_START_PANEL_COMMANDS].pos.x  = SCREEN_WIDTH;
-    g_UiPanelTasks[MENU_START_PANEL_COMMANDS].pos.y  = 0x3B;
+    g_UiPanelTasks[MENU_START_PANEL_COMMANDS].pos.vx = SCREEN_WIDTH;
+    g_UiPanelTasks[MENU_START_PANEL_COMMANDS].pos.vy = 0x3B;
     D_80148500                                       = D_801ED690;
 
     for (i = 0; i < n; i++) {

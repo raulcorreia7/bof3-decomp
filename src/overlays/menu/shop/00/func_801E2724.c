@@ -14,10 +14,10 @@ MATCH void func_801E2724(void) {
     g_UiPanelTasks[2].unk_0A = g_UiPanelTasks[1].flags;
     *flags                   = 1;
     g_UiPanelTasks[3].mode   = 0x11;
-    g_UiPanelTasks[3].pos.x  = 0xB4;
+    g_UiPanelTasks[3].pos.vx = 0xB4;
     g_UiPanelTasks[3].panel  = 7;
     g_UiPanelTasks[3].state  = 2;
-    g_UiPanelTasks[3].pos.y  = 0xF0;
+    g_UiPanelTasks[3].pos.vy = 0xF0;
     flags += 0x24;
     *flags = 1;
 }

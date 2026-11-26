@@ -5,12 +5,12 @@ MATCH void func_801E4278(void) {
     u16            next_val;
     s16            clamp_val;
 
-    task_root        = g_UiPanelCurrent;
-    next_val         = (task_root->pos.x - 0x20);
-    task_root->pos.x = next_val;
+    task_root         = g_UiPanelCurrent;
+    next_val          = (task_root->pos.vx - 0x20);
+    task_root->pos.vx = next_val;
     if ((s16)next_val < -120) {
-        clamp_val        = -120;
-        task_root->pos.x = clamp_val;
-        task_root->state = 0;
+        clamp_val         = -120;
+        task_root->pos.vx = clamp_val;
+        task_root->state  = 0;
     }
 }

@@ -21,8 +21,8 @@ MATCH void func_801D2AC8(void) {
     g_UiPanelTasks[15].state = 2;
     *panel                   = 1;
     panel += 0x24;
-    g_UiPanelTasks[15].pos.x  = BATTLE_PARTY_STRIDE;
-    g_UiPanelTasks[15].pos.y  = 116;
+    g_UiPanelTasks[15].pos.vx = BATTLE_PARTY_STRIDE;
+    g_UiPanelTasks[15].pos.vy = 116;
     g_UiPanelTasks[16].mode   = 7;
     g_UiPanelTasks[16].panel  = 6;
     g_BattleChoicePhase       = 2;
@@ -30,7 +30,7 @@ MATCH void func_801D2AC8(void) {
     *panel                    = 1;
     /* D_80148574 stays an address symbol: a g_UiPanelTasks[16] view changes the code. */
     D_80148574                = -100;
-    g_UiPanelTasks[16].pos.y  = 120;
+    g_UiPanelTasks[16].pos.vy = 120;
     g_UiPanelTasks[17].mode   = 8;
     g_UiPanelTasks[16].unk_0A = D_80148656;
     g_UiPanelTasks[17].panel  = 6;
@@ -38,6 +38,6 @@ MATCH void func_801D2AC8(void) {
     panel += 0x24;
     *panel                    = 1;
     D_80148598                = -100;
-    g_UiPanelTasks[17].pos.y  = 168;
+    g_UiPanelTasks[17].pos.vy = 168;
     g_UiPanelTasks[17].unk_0A = D_80148656;
 }
