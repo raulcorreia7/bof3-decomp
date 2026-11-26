@@ -238,6 +238,7 @@ typedef enum BMagicEffectType {
     BMAGIC_EFFECT_SUPER_COMBO        = 1,
     BMAGIC_EFFECT_NOTING             = 3,
     BMAGIC_EFFECT_WHELP_BREATH       = 15,
+    BMAGIC_EFFECT_INTIMIDATE         = 24,
     BMAGIC_EFFECT_SKILL_STRIKE       = 31,
     BMAGIC_EFFECT_SHIELD             = 34,
     BMAGIC_EFFECT_CHARGE_FLYING_KICK = 35,

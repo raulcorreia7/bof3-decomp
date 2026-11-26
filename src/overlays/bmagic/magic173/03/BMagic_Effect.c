@@ -4,8 +4,9 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
+/* BMagic_IntimidateUpdate */
 /* func_801EEC04 */
-MATCH void func_801EEC04(void) {
+MATCH void BMagic_IntimidateUpdate(void) {
     Callback handlers[2] = {BMagic_IntimidateInit, Effect_MarkDamagedOnZeroTick};
 
     SYS_DISPATCH_TASK(handlers, 1, g_Task);
@@ -26,7 +27,7 @@ MATCH void BMagic_IntimidateInit(void) {
     task->param.unk_0B = 0;
     TASK(PartyMember)->header.mode += 1;
     for (i = 0; i < 2; i++) {
-        slot                               = Battle_AllocEffect(1, 24);
+        slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_INTIMIDATE);
         work                               = TASK(PartyMember);
         g_BattleEffects[slot].header.mode  = 0;
         g_BattleEffects[slot].unk_04       = i;
@@ -156,7 +157,7 @@ MATCH void BMagic_IntimidateStreakFly(void) {
         Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10);
     }
     if (TASK(PartyMember)->header.step == 2) {
-        slot                               = Battle_AllocEffect(1, 24) & BYTE_MASK;
+        slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_INTIMIDATE) & BYTE_MASK;
         battler                            = g_BattleEffectBattler;
         g_BattleEffects[slot].header.mode  = 1;
         g_BattleEffects[slot].target.party = battler;
