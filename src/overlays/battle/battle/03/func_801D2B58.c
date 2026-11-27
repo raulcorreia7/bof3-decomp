@@ -45,7 +45,7 @@ NON_MATCHING void func_801D2B58(void) {
             g_Battle.active_actor = &g_Game.members[id];
             actor                 = g_BattleActiveActor;
             g_Battle.action       = action;
-            index                 = g_Game.members[id].chr.character_id * 8 + actor->facing * 2;
+            index                 = actor->facing * 2 + g_Game.members[id].chr.character_id * 8;
             dx                    = g_BattlePanelOffsets[index];
             ACTIVE_X              = actor->screen_x.value + dx;
             index                 = actor->facing * 2 + g_Game.members[id].chr.character_id * 8;
