@@ -41,25 +41,11 @@ MATCH void func_801D53AC(void) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
         step                                               = &g_MenuStep.sub_step;
-<<<<<<< HEAD
-        g_UIPanelTasks[MENU_START_PANEL_DESCRIPTION].state = 1;
-        g_UIPanelTasks[MENU_START_PANEL_COMMANDS].state    = 1;
-        g_UIPanelTasks[MENU_START_PANEL_ITEMS].state       = 1;
-        D_801485DC                                         = 0;
-        g_UIPanelTasks[MENU_START_PANEL_CURSOR].active     = 0;
-||||||| 072714357
-        g_UIPanelTasks[MENU_START_PANEL_DESCRIPTION].state = 1;
-        g_UIPanelTasks[MENU_START_PANEL_COMMANDS].state    = 1;
-        g_UIPanelTasks[MENU_START_PANEL_ITEMS].state       = 1;
-        D_801485DC                                         = 0;
-        g_UIPanelTasks[MENU_START_PANEL_CURSOR].active     = 0;
-=======
         g_UIPanelTasks[MENU_START_PANEL_DESCRIPTION].state = 1;
         g_UIPanelTasks[MENU_START_PANEL_COMMANDS].state    = 1;
         g_UIPanelTasks[MENU_START_PANEL_ITEMS].state       = 1;
         g_UIPanelTasks[19].active                          = 0;
         g_UIPanelTasks[MENU_START_PANEL_CURSOR].active     = 0;
->>>>>>> public/main
         D_80148654                                         = 0;
         *step += 5;
     }

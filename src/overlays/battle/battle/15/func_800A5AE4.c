@@ -25,7 +25,7 @@ MATCH void func_800A5AE4(void) {
     s32  input;
     u8*  cue_counter;
 
-    if (*(s16*)&g_UiPanelTasks[19].pos.vx != 0x5B) {
+    if (*(s16*)&g_UIPanelTasks[19].pos.vx != 0x5B) {
         return;
     }
 

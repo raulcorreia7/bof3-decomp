@@ -11,7 +11,7 @@ MATCH bool func_800A5D00(void) {
 
     /* battle_15.h types the pair as volatile u16; the signed non-volatile view is
      * required (a volatile 16-bit load is not emitted as lh). */
-    entry_index = *(s16*)&g_UiPanelTasks[19].u.battle.cursor + *(s16*)&g_UiPanelTasks[19].u.battle.row_base;
+    entry_index = *(s16*)&g_UIPanelTasks[19].u.battle.cursor + *(s16*)&g_UIPanelTasks[19].u.battle.row_base;
     if (D_80145518[entry_index].gate_03 == GAME_NONE) {
         return 0;
     }

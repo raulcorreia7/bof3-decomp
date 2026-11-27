@@ -23,19 +23,9 @@ MATCH void func_801D7E4C(void) {
         x                                                    = g_UIPanelTasks[MENU_START_PANEL_ITEMS].pos.vx;
         y                                                    = D_80148658[0] * 0x36;
         *latch                                               = 1;
-<<<<<<< HEAD
-        g_UIPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0B = 1;
-        D_801485E0                                           = x;
-        D_801485E2                                           = g_UIPanelTasks[MENU_START_PANEL_ITEMS].pos.vy + y;
-||||||| 072714357
-        g_UIPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0B = 1;
-        D_801485E0                                           = x;
-        D_801485E2                                           = g_UIPanelTasks[MENU_START_PANEL_ITEMS].pos.vy + y;
-=======
         g_UIPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0B = 1;
         g_UIPanelTasks[19].pos.vx                            = x;
         g_UIPanelTasks[19].pos.vy                            = g_UIPanelTasks[MENU_START_PANEL_ITEMS].pos.vy + y;
->>>>>>> public/main
     } else {
         *latch = 0;
     }

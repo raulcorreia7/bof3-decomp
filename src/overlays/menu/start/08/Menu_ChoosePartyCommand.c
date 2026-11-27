@@ -47,19 +47,9 @@ MATCH void Menu_ChoosePartyCommand(void) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
         g_UIPanelTasks[MENU_START_PANEL_DESCRIPTION].state = 1;
         g_BattlePanelMode                                  = 1;
-<<<<<<< HEAD
-        g_UIPanelTasks[MENU_START_PANEL_CURSOR].active     = 0;
-        D_801485DC                                         = 0;
-        g_UIPanelTasks[20].active                          = 0;
-||||||| 072714357
-        g_UIPanelTasks[MENU_START_PANEL_CURSOR].active     = 0;
-        D_801485DC                                         = 0;
-        g_UIPanelTasks[20].active                          = 0;
-=======
         g_UIPanelTasks[MENU_START_PANEL_CURSOR].active     = 0;
         g_UIPanelTasks[19].active                          = 0;
         g_UIPanelTasks[20].active                          = 0;
->>>>>>> public/main
         D_80148652                                         = 0;
         D_80148654                                         = 5;
         cursor                                             = &D_80148651;

@@ -16,35 +16,11 @@ MATCH void func_801D2564(void) {
     panel_data = &g_WindowClut;
     Menu_DrawClutStrip(*panel_data);
     panel_data += 0x15;
-<<<<<<< HEAD
-    selection       = &D_80148656;
-    selection_index = *selection;
-    /* FAKE: preserve flag store after selection read. */
-    do {
-        D_801485DC = 1;
-    } while (0);
-    D_801485E0 = g_UIPanelTasks[selection_index + 4].pos.vx;
-    /* FAKE: preserve first table store order. */
-    FAKE_BARRIER();
-    D_801485E2 = g_UIPanelTasks[selection_index + 4].pos.vy;
-||||||| 072714357
-    selection       = &D_80148656;
-    selection_index = *selection;
-    /* FAKE: preserve flag store after selection read. */
-    do {
-        D_801485DC = 1;
-    } while (0);
-    D_801485E0 = g_UIPanelTasks[selection_index + 4].pos.vx;
-    /* FAKE: preserve first table store order. */
-    FAKE_BARRIER();
-    D_801485E2 = g_UIPanelTasks[selection_index + 4].pos.vy;
-=======
     selection                 = &D_80148656;
     selection_index           = *selection;
     g_UIPanelTasks[19].active = 1;
     g_UIPanelTasks[19].pos.vx = g_UIPanelTasks[selection_index + 4].pos.vx;
     g_UIPanelTasks[19].pos.vy = g_UIPanelTasks[selection_index + 4].pos.vy;
->>>>>>> public/main
     UI_MessageSetVariable(0U, 5U, g_CharSlot[g_PartyFieldOrder[selection_index]] * 0xA4 + panel_data);
     g_UIPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0x12;
     input                                                     = INPUT_REPEATED(g_PadStates[0].pressed, (PADLup | PADLdown));
@@ -89,16 +65,8 @@ MATCH void func_801D2564(void) {
             g_UIPanelTasks[i + 12].state = 1;
             i++;
         }
-<<<<<<< HEAD
-        g_UIPanelTasks[MENU_START_PANEL_DESCRIPTION].state = 1;
-        D_801485DC                                         = 0;
-||||||| 072714357
-        g_UIPanelTasks[MENU_START_PANEL_DESCRIPTION].state = 1;
-        D_801485DC                                         = 0;
-=======
         g_UIPanelTasks[MENU_START_PANEL_DESCRIPTION].state = 1;
         g_UIPanelTasks[19].active                          = 0;
->>>>>>> public/main
         D_80148654                                         = 8;
         D_80148651 += 2;
     }

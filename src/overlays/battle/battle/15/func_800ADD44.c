@@ -27,7 +27,7 @@ MATCH void func_800ADD44(void) {
     work->unk_4B              = 0xFF;
     slotp                     = SELF(PartyMember);
     work->pos.z.fixed         = 0;
-    pair                      = &g_UiPanelTasks[19].u.battle.row_base;
+    pair                      = &g_UIPanelTasks[19].u.battle.row_base;
     base                      = (u8*)D_80145518;
     row                       = base + ((*pair + slotp->unk_09) * 4);
     slot                      = row[slotp->timer];
