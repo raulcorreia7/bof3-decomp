@@ -3,7 +3,7 @@
 /* Moves the formation cursor over the party slots and swaps the picked pair. */
 #ifdef NON_MATCHING
 NON_MATCHING void Menu_UpdateFormation(void) {
-    volatile u8* frame;
+    MenuPanelTask* frame;
     s32          index;
     s8           dx;
     s8           dy;
@@ -18,24 +18,25 @@ NON_MATCHING void Menu_UpdateFormation(void) {
     dy         = 0;
     old_column = 0;
     Menu_DrawClutStrip(g_WindowClut);
-    frame  = &D_801485DC;
-    *frame = 0;
+    frame         = &g_CursorFramePanel;
+    frame->active = 0;
     if (g_FormationPickColumn != 0x7F) {
         s32 pick;
         u16 y2;
 
+        frame = &g_CursorFramePanel;
         pick                                                 = g_FormationPickRow * 3 + g_FormationPickColumn;
-        D_801485E0                                           = D_801EC4D0[pick].unk_00;
+        g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME].pos.vx = D_801EC4D0[pick].unk_00;
         y2                                                   = D_801EC4D0[pick].unk_02;
-        *frame                                               = 1;
-        D_801485E2                                           = y2;
+        frame->active = 1;
+        g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME].pos.vy = y2;
         g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0A = D_801EC4D0[pick].unk_04 + 1;
         g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0B = 0;
     }
     index                     = g_FormationCursorRow * 3 + g_FormationCursorColumn;
     g_UiPanelTasks[20].pos.vx = D_801EC4D0[index].unk_00;
     y                         = D_801EC4D0[index].unk_02;
-    frame[0x24]               = 1;
+    frame[1].active = 1;
     g_UiPanelTasks[20].pos.vy = y;
     g_UiPanelTasks[20].unk_0A = D_801EC4D0[index].unk_04 + 1;
     g_UiPanelTasks[20].unk_0B = 1;

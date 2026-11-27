@@ -23,10 +23,10 @@ NON_MATCHING void func_801F3070(s32 mode) {
         SetPolyFT4(prim);
         SetShadeTex(prim, 0);
         /* FAKE: retail loads the step byte with lbu and sign-extends it apart (sll/sra 24); a plain (s8) read combines into lb. */
-        off                       = SELF(Actor)->screen_y * (s8)FAKE_VOLATILE(u8, D_801F3F84[i]) + 0x40;
+        off                       = (u16)SELF(Actor)->screen_y * (s8)FAKE_VOLATILE(u8, D_801F3F84[i]) + 0x40;
         y                         = ((SELF(Actor)->pos.y.part.integer - 0x7F) << 7) + off;
         g_ScratchPadVectors[0].vy = g_ScratchPadVectors[2].vy = y;
-        off                                                   = SELF(Actor)->screen_y * (s8)FAKE_VOLATILE(u8, D_801F3F84[i]) - 0x40;
+        off                                                   = (u16)SELF(Actor)->screen_y * (s8)FAKE_VOLATILE(u8, D_801F3F84[i]) - 0x40;
         y1                                                    = ((SELF(Actor)->pos.y.part.integer - 0x80) << 7) + off;
         g_ScratchPadVectors[1].vy = g_ScratchPadVectors[3].vy = y1;
 
