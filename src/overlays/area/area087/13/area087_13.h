@@ -9,8 +9,6 @@
 /* The world-map entry keys WORLD_MAP_SELECT_KEY_SCRIPT scans. */
 extern WorldMapKey D_801F4DAC[10];
 extern u8          D_801F4DD4[2626];
-extern u8          D_801F4DAE[];
-extern u8          D_801F4DD4[];
 extern u8          D_801F4DD5[];
 extern Callback    D_801F5734[];
 extern Callback    D_801F5748[];
