@@ -1,7 +1,6 @@
 #ifndef OVERLAY_SCENARIO_SCENA00_00_H
 #define OVERLAY_SCENARIO_SCENA00_00_H
 
-#define FAKE_DECL_GAME_SCRATCH_BASE_SCALAR
 #include "common/vector.h"
 #include "overlays/scenario/scenario.h"
 #include "common/util.h"

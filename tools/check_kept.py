@@ -14,7 +14,8 @@ name at the same `config/symbols/<image>.toml` address (functions and globals), 
 offset of the same record, a new define with the same value, a new enumerator with the same value
 in the same enum, or a new record with the same layout. A thing degrades when its successor is a
 default or unknown name (`func_`, `D_`, `unk_`, `pad`), when a typed member's successor is raw
-bytes or an integer, or when a record global is split back into loose integer globals.
+bytes or an integer, or when a record global is split back into loose integer globals. A `FAKE_`
+name is a matching helper the project wants gone, so losing one is never reported.
 
 Clang parses the sources (`-fsyntax-only` with the AST as JSON and the record layouts), so struct
 members, nested records and offsets come from a real C parse. `#define` lines are read as text.
@@ -22,9 +23,6 @@ members, nested records and offsets come from a real C parse. `#define` lines ar
 A deliberate removal passes with a commit message line between the merge base and HEAD:
 
     Kept-Removed: <name> <reason>
-
-A rename passes with a line `Renamed: <old> -> <new>` per name: the new name must be in use, and a
-`#define` must keep its definition once every renamed name in the old one is replaced.
 
 Usage: python3 tools/check_kept.py REF [HEAD]
 """
@@ -69,7 +67,6 @@ WEAK_WORDS = frozenset(
     "u8 s8 u16 s16 u32 s32 u64 s64 int char short long unsigned signed void const volatile".split()
 )
 KEPT_REMOVED = re.compile(r"^Kept-Removed:\s*(\S+)", re.M)
-RENAMED = re.compile(r"^Renamed:\s*(\w+)\s*->\s*(\w+)", re.M)
 DEFINE = re.compile(r"^[ \t]*#[ \t]*define[ \t]+(\w+)(\([^)]*\))?(.*)$")
 INCLUDE = re.compile(r'^\s*#\s*include\s+"([^"]+)"', re.M)
 IDENT = re.compile(r"[A-Za-z_]\w*")
@@ -500,38 +497,16 @@ def layout_signature(layouts: list[list[Member]]) -> set[tuple]:
     return {tuple((m.offset, m.path.count(".")) for m in layout) for layout in layouts}
 
 
-def renamed_to(
-    name: str, old: Entities, new: Entities, renamed: dict[str, str]
-) -> bool:
-    """Whether a `Renamed:` line moved NAME to a name in use that keeps its definition."""
-    target = renamed.get(name)
-    if target is None:
-        return False
-    if name not in old.defines:
-        return True
-    value = old.defines[name]
-    for was, now in renamed.items():
-        value = re.sub(rf"\b{was}\b", now, value)
-    return new.defines.get(target) == value
-
-
-def compare(
-    before: Snapshot,
-    after: Snapshot,
-    removed: set[str],
-    renamed: dict[str, str] | None = None,
-) -> list[str]:
+def compare(before: Snapshot, after: Snapshot, removed: set[str]) -> list[str]:
     """Every loss or degradation from BEFORE to AFTER, one line each."""
     problems: list[str] = []
     old, new = before.entities, after.entities
-    renamed = {was: now for was, now in (renamed or {}).items() if now in after.tokens}
 
     def gone(name: str) -> bool:
-        if renamed_to(name, old, new, renamed):
-            return False
-        # A name built by token pasting (a static assertion) never appears in the text.
+        # A name built by token pasting (a static assertion) never appears in the text; a FAKE_ helper may go.
         return (
             not is_default(name)
+            and not name.startswith("FAKE_")
             and name in before.tokens
             and name not in after.tokens
             and name not in removed
@@ -613,12 +588,6 @@ def removals(base: str, head: str) -> set[str]:
     )
 
 
-def renames(base: str, head: str) -> dict[str, str]:
-    return dict(
-        RENAMED.findall(git("log", "--format=%B", f"{base}..{head}", root=ROOT))
-    )
-
-
 def record_files(tree: Path, names: set[str]) -> set[str]:
     """Files at one revision that define one of the named records."""
     if not names:
@@ -680,7 +649,7 @@ def main(argv: list[str]) -> int:
             before_entities, *read_tree(trees["before"]), *addresses(base)
         )
         after = Snapshot(after_entities, after_uses, after_defines, *addresses(head))
-    problems = compare(before, after, removals(base, head), renames(base, head))
+    problems = compare(before, after, removals(base, head))
     for problem in problems:
         print(problem)
     if problems:
