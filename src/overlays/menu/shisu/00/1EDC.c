@@ -21,12 +21,12 @@ MATCH void func_801D2ADC(void) {
     }
     green = &g_ShisuToppingG;
     if (0xFF - *green > g_ShisuIngredients.used[3] * 3) {
-        shade = *green + g_ShisuIngredients.used[3] * 3;
+        shade  = *green + g_ShisuIngredients.used[3] * 3;
+        *green = shade;
     } else {
-        shade = -1;
+        shade  = -1;
+        *green = shade;
     }
-    *green = shade;
-    FAKE_BARRIER(); /* FAKE: keeps the tint store ahead of the next color's address. */
     blue = &g_ShisuToppingB;
     if (*blue > g_ShisuIngredients.used[3] * 3) {
         *blue -= g_ShisuIngredients.used[3] * 3;

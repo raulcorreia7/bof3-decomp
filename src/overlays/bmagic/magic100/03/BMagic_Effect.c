@@ -165,12 +165,12 @@ MATCH void func_801EF358(void) {
     position_task->pos.y.fixed = position_task->pos.y.fixed + position_task->unk_10;
     COORD_INT(position_task->pos.z) += 0x40;
     if (position_task->param.unk_0B & 1) {
-        angle = position_task->unk_20 + ANGLE_45;
+        angle                 = position_task->unk_20 + ANGLE_45;
+        position_task->unk_20 = angle & ANGLE_MASK;
     } else {
-        angle = position_task->unk_20 - ANGLE_45;
+        angle                 = position_task->unk_20 - ANGLE_45;
+        position_task->unk_20 = angle & ANGLE_MASK;
     }
-    position_task->unk_20 = angle & ANGLE_MASK;
-    FAKE_BARRIER(); /* FAKE: keeps the timer load after the angle store. */
     timer_task        = SELF(PartyMember);
     timer             = timer_task->timer - 1;
     timer_task->timer = timer;

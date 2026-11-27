@@ -668,23 +668,23 @@ MATCH void func_801F9020(Coord* position, s32* step) {
     if (!(SELF(Actor)->unk_06 & 1)) {
         point[0] = position[0].fixed - step[0];
         point[1] = position[1].fixed + step[1];
+        point[2] = position[2].fixed + step[2];
     } else {
         point[0] = position[0].fixed + step[0];
         point[1] = position[1].fixed - step[1];
+        point[2] = position[2].fixed + step[2];
     }
-    point[2] = position[2].fixed + step[2];
-    FAKE_BARRIER(); /* FAKE: keep the point stores before the call setup. */
     Camera_ProjectPoint(point, &screen[1]);
 
     if (!(SELF(Actor)->unk_06 & 1)) {
         point[0] = position[0].fixed + step[0];
         point[1] = position[1].fixed - step[1];
+        point[2] = position[2].fixed - step[2];
     } else {
         point[0] = position[0].fixed - step[0];
         point[1] = position[1].fixed + step[1];
+        point[2] = position[2].fixed - step[2];
     }
-    point[2] = position[2].fixed - step[2];
-    FAKE_BARRIER(); /* FAKE: keep the point stores before the call setup. */
     Camera_ProjectPoint(point, &screen[2]);
 
     point[0] = position[0].fixed - step[0];
@@ -728,22 +728,22 @@ MATCH void func_801F92F0(Coord* position, s32* step) {
     if (!(SELF(Actor)->unk_06 & 1)) {
         point[0] = origin[0].fixed - delta[0];
         point[1] = origin[1].fixed + delta[1];
+        point[2] = origin[2].fixed + delta[2];
     } else {
         point[0] = origin[0].fixed + delta[0];
         point[1] = origin[1].fixed - delta[1];
+        point[2] = origin[2].fixed + delta[2];
     }
-    point[2] = origin[2].fixed + delta[2];
-    FAKE_BARRIER(); /* FAKE: keep the second projected point stores before its call setup. */
     Camera_ProjectPoint(point, (DVECTOR*)&poly->x1);
     if (!(SELF(Actor)->unk_06 & 1)) {
         point[0] = origin[0].fixed + delta[0];
         point[1] = origin[1].fixed - delta[1];
+        point[2] = origin[2].fixed - delta[2];
     } else {
         point[0] = origin[0].fixed - delta[0];
         point[1] = origin[1].fixed + delta[1];
+        point[2] = origin[2].fixed - delta[2];
     }
-    point[2] = origin[2].fixed - delta[2];
-    FAKE_BARRIER(); /* FAKE: keep the third projected point stores before its call setup. */
     Camera_ProjectPoint(point, (DVECTOR*)&poly->x2);
 
     point[0] = origin[0].fixed - delta[0];
@@ -772,12 +772,12 @@ MATCH void func_801F9500(WorldPos* pos, s32* vx) {
     if (!(SELF(Actor)->unk_06 & 1)) {
         point[0] = pos->x.fixed - vx[0];
         point[1] = pos->y.fixed + vx[1];
+        point[2] = pos->z.fixed + vx[2];
     } else {
         point[0] = pos->x.fixed + vx[0];
         point[1] = pos->y.fixed - vx[1];
+        point[2] = pos->z.fixed + vx[2];
     }
-    point[2] = pos->z.fixed + vx[2];
-    FAKE_BARRIER(); /* FAKE: keep the point stores before the call setup. */
     Camera_ProjectPoint(point, (DVECTOR*)&prim->x0);
 
     point[0] = pos->x.fixed + vx[0];
@@ -793,12 +793,12 @@ MATCH void func_801F9500(WorldPos* pos, s32* vx) {
     if (!(SELF(Actor)->unk_06 & 1)) {
         point[0] = pos->x.fixed + vx[0];
         point[1] = pos->y.fixed - vx[1];
+        point[2] = pos->z.fixed - vx[2];
     } else {
         point[0] = pos->x.fixed - vx[0];
         point[1] = pos->y.fixed + vx[1];
+        point[2] = pos->z.fixed - vx[2];
     }
-    point[2] = pos->z.fixed - vx[2];
-    FAKE_BARRIER(); /* FAKE: keep the point stores before the call setup. */
     Camera_ProjectPoint(point, (DVECTOR*)&prim->x3);
 
     setUV4(prim, cell->u, cell->v, cell->u + 0x18, cell->v, cell->u, cell->v + 0x10, cell->u + 0x18, cell->v + 0x10);
@@ -874,23 +874,23 @@ MATCH void func_801F9A20(WorldPos* pos, s32* vx) {
     if (!(SELF(Actor)->unk_06 & 1)) {
         point[0] = pos->x.fixed - vx[0];
         point[1] = pos->y.fixed + vx[1];
+        point[2] = pos->z.fixed + vx[2];
     } else {
         point[0] = pos->x.fixed + vx[0];
         point[1] = pos->y.fixed - vx[1];
+        point[2] = pos->z.fixed + vx[2];
     }
-    point[2] = pos->z.fixed + vx[2];
-    FAKE_BARRIER(); /* FAKE: keep the point stores before the call setup. */
     Camera_ProjectPoint(point, (DVECTOR*)&poly->x1);
 
     if (!(SELF(Actor)->unk_06 & 1)) {
         point[0] = pos->x.fixed + vx[0];
         point[1] = pos->y.fixed - vx[1];
+        point[2] = pos->z.fixed - vx[2];
     } else {
         point[0] = pos->x.fixed - vx[0];
         point[1] = pos->y.fixed + vx[1];
+        point[2] = pos->z.fixed - vx[2];
     }
-    point[2] = pos->z.fixed - vx[2];
-    FAKE_BARRIER(); /* FAKE: keep the point stores before the call setup. */
     Camera_ProjectPoint(point, (DVECTOR*)&poly->x2);
 
     point[0] = pos->x.fixed - vx[0];

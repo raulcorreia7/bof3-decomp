@@ -27,13 +27,12 @@ MATCH void func_8009EDB4(void) {
     }
     raw = D_801EC310;
     if (((raw >> 1) + 0x1E) >= 0x65) {
-        level = 0x64;
+        level                         = 0x64;
+        g_BattleCalcStats[1].accuracy = level;
     } else {
-        level = ((raw >> 1) + 0x1E);
+        level                         = ((raw >> 1) + 0x1E);
+        g_BattleCalcStats[1].accuracy = level;
     }
-    g_BattleCalcStats[1].accuracy = level;
-    /* FAKE: keep the level store ahead of the counter store. */
-    FAKE_BARRIER();
     counter  = &D_801EC30C;
     *counter = 0;
     Char_AddStat(counter, action + (g_BattleCalcStats[1].defense));

@@ -21,15 +21,14 @@ MATCH void func_8009EB28(void) {
     battler = g_Battle.active_battler;
     *flagp  = flag | BATTLE_STATE_DAMAGE_APPLIED;
     if (BATTLER_IS_PLAYER(battler)) {
-        base = g_Game.members[battler].chr.stats.power;
+        base       = g_Game.members[battler].chr.stats.power;
+        D_801EC30C = base;
     } else {
         /* FAKE: retail computes the enemy row index in v0, the row offset in v1. */
         FAKE_REG(u32, enemy, "v0") = battler - 3;
         base                       = g_BattleEnemyBattlers[enemy].stats.power;
+        D_801EC30C                 = base;
     }
-    D_801EC30C = base;
-    /* FAKE: retail stores the scaled base before materialising the next addresses. */
-    FAKE_BARRIER();
     battlerp                          = &g_Battle.active_battler;
     battler_check                     = *battlerp;
     scaledp                           = &D_801EC30C;
