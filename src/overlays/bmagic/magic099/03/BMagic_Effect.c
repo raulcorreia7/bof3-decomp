@@ -147,19 +147,19 @@ MATCH void func_801EF554(void) {
     SELF(PartyMember)->unk_09 = 0;
     SELF(PartyMember)->timer  = 0;
 
-    work                             = SELF(PartyMember);
-    temp                             = work->unk_03 << 5;
-    angle_cell                       = &D_1F800004;
-    angle                            = (temp & 0x7F) << 5;
-    FAKE_VOLATILE(s32, work->unk_0C) = temp;
-    *angle_cell                      = angle;
-    g_ScratchPad                     = 0x28;
+    work                        = SELF(PartyMember);
+    temp                        = work->unk_03 << 5;
+    angle_cell                  = &g_ScratchPad.cells.words[1];
+    angle                       = (temp & 0x7F) << 5;
+    work->unk_0C                = temp;
+    *angle_cell                 = angle;
+    g_ScratchPad.cells.words[0] = 0x28;
 
-    velocity          = rcos(angle) * g_ScratchPad;
+    velocity          = rcos(angle) * g_ScratchPad.cells.words[0];
     work              = SELF(PartyMember);
     work->pos.x.fixed = BATTLE_ACTIVE_WORK->pos.x.fixed + velocity;
 
-    velocity                       = rsin(*angle_cell) * g_ScratchPad;
+    velocity                       = rsin(*angle_cell) * g_ScratchPad.cells.words[0];
     SELF(PartyMember)->pos.y.fixed = BATTLE_ACTIVE_WORK->pos.y.fixed + velocity;
 
     SELF(PartyMember)->pos.z.part.integer = BATTLE_ACTIVE_WORK->pos.z.part.integer;
@@ -183,19 +183,19 @@ MATCH void func_801EF7D8(void) {
 
     SELF(PartyMember)->param.unk_0B++;
 
-    work                             = SELF(PartyMember);
-    counter                          = work->unk_0C + 1;
-    FAKE_VOLATILE(s32, work->unk_0C) = counter;
-    angle                            = (counter & 0x7F) << 5;
-    angle_cell                       = &D_1F800004;
-    *angle_cell                      = angle;
-    g_ScratchPad                     = 0x28;
+    work                        = SELF(PartyMember);
+    counter                     = work->unk_0C + 1;
+    work->unk_0C                = counter;
+    angle                       = (counter & 0x7F) << 5;
+    angle_cell                  = &g_ScratchPad.cells.words[1];
+    *angle_cell                 = angle;
+    g_ScratchPad.cells.words[0] = 0x28;
 
-    velocity          = rcos(angle) * g_ScratchPad;
+    velocity          = rcos(angle) * g_ScratchPad.cells.words[0];
     work              = SELF(PartyMember);
     work->pos.x.fixed = BATTLE_ACTIVE_WORK->pos.x.fixed + velocity;
 
-    velocity                       = rsin(*angle_cell) * g_ScratchPad;
+    velocity                       = rsin(*angle_cell) * g_ScratchPad.cells.words[0];
     SELF(PartyMember)->pos.y.fixed = BATTLE_ACTIVE_WORK->pos.y.fixed + velocity;
 
     if (--SELF(PartyMember)->timer == 0) {
@@ -218,18 +218,18 @@ NON_MATCHING void func_801EF8F0(s16 band_height, s16 radius, s16 jitter_mask) {
     s32*     cell;
     s32*     base;
 
-    base                      = &g_ScratchPad;
-    *base                     = 16;
-    D_1F800004                = (SELF(PartyMember)->param.unk_0B & 0xF) * 256;
-    D_1F800008                = SELF(PartyMember)->timer * 15;
-    shade                     = SELF(PartyMember)->timer * 15;
-    g_ScratchPadVectors[0].vy = FIXED_MUL(rsin(D_1F800004), *base);
-    g_ScratchPadVectors[0].vz = 0;
-    tpage                     = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
+    base                        = &g_ScratchPad.cells.words[0];
+    *base                       = 16;
+    g_ScratchPad.cells.words[1] = (SELF(PartyMember)->param.unk_0B & 0xF) * 256;
+    g_ScratchPad.cells.words[2] = SELF(PartyMember)->timer * 15;
+    shade                       = SELF(PartyMember)->timer * 15;
+    g_ScratchPadVectors[0].vy   = FIXED_MUL(rsin(g_ScratchPad.cells.words[1]), *base);
+    g_ScratchPadVectors[0].vz   = 0;
+    tpage                       = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_CellAddPrim(SELF(PartyMember)->pos.x.fixed, SELF(PartyMember)->pos.y.fixed, 2, sizeof(DR_MODE));
     for (i = 1; i < 18; i++) {
-        cell                      = &D_1F800004;
+        cell                      = &g_ScratchPad.cells.words[1];
         cell[0]                   = ((SELF(PartyMember)->param.unk_0B + i) & 0xF) << 8;
         cell[-1]                  = radius + (RANDOM_MASK(1) ? (rand() & jitter_mask) : -(rand() & jitter_mask));
         g_ScratchPadVectors[2].vx = 0;
@@ -285,13 +285,13 @@ NON_MATCHING void func_801EF8F0(s16 band_height, s16 radius, s16 jitter_mask) {
             SetPolyG4(prim);
             SetSemiTrans(prim, 1);
             setRGB0(prim, 1, 1, shade);
-            setRGB1(prim, (&D_1F800004)[1], (&D_1F800004)[1], (&D_1F800004)[1]);
+            setRGB1(prim, g_ScratchPad.cells.words[2], g_ScratchPad.cells.words[2], g_ScratchPad.cells.words[2]);
             if (i == 1) {
                 setRGB2(prim, 1, 1, 1);
                 setRGB3(prim, 1, 1, 1);
             } else {
                 setRGB2(prim, 1, 1, shade);
-                setRGB3(prim, (&D_1F800004)[1], (&D_1F800004)[1], (&D_1F800004)[1]);
+                setRGB3(prim, g_ScratchPad.cells.words[2], g_ScratchPad.cells.words[2], g_ScratchPad.cells.words[2]);
             }
             RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3,
                           &p, &flag);
@@ -345,18 +345,18 @@ MATCH void func_801F0090(void) {
     SELF(PartyMember)->unk_09       = 0;
     SELF(PartyMember)->timer        = 0;
 
-    work                             = SELF(PartyMember);
-    counter                          = (work->unk_03 << 5) + 0x10;
-    angle                            = (counter & 0x7F) << 5;
-    FAKE_VOLATILE(s32, work->unk_0C) = counter;
-    angle_cell                       = &D_1F800004;
-    *angle_cell                      = angle;
-    g_ScratchPad                     = 0x18;
+    work                        = SELF(PartyMember);
+    counter                     = (work->unk_03 << 5) + 0x10;
+    angle                       = (counter & 0x7F) << 5;
+    work->unk_0C                = counter;
+    angle_cell                  = &g_ScratchPad.cells.words[1];
+    *angle_cell                 = angle;
+    g_ScratchPad.cells.words[0] = 0x18;
 
-    velocity                       = rcos(angle) * g_ScratchPad;
+    velocity                       = rcos(angle) * g_ScratchPad.cells.words[0];
     SELF(PartyMember)->pos.x.fixed = BATTLE_ACTIVE_WORK->pos.x.fixed + velocity;
 
-    velocity                       = rsin(*angle_cell) * g_ScratchPad;
+    velocity                       = rsin(*angle_cell) * g_ScratchPad.cells.words[0];
     SELF(PartyMember)->pos.y.fixed = BATTLE_ACTIVE_WORK->pos.y.fixed + velocity;
 
     COORD_INT(SELF(PartyMember)->pos.z) = COORD_INT(BATTLE_ACTIVE_WORK->pos.z);
@@ -390,19 +390,19 @@ MATCH void func_801F0314(void) {
 
     SELF(PartyMember)->param.unk_0B++;
 
-    work                             = SELF(PartyMember);
-    counter                          = work->unk_0C + 1;
-    FAKE_VOLATILE(s32, work->unk_0C) = counter;
-    angle                            = (counter & 0x7F) << 5;
-    angle_cell                       = &D_1F800004;
-    *angle_cell                      = angle;
-    g_ScratchPad                     = 0x18;
+    work                        = SELF(PartyMember);
+    counter                     = work->unk_0C + 1;
+    work->unk_0C                = counter;
+    angle                       = (counter & 0x7F) << 5;
+    angle_cell                  = &g_ScratchPad.cells.words[1];
+    *angle_cell                 = angle;
+    g_ScratchPad.cells.words[0] = 0x18;
 
-    velocity          = rcos(angle) * g_ScratchPad;
+    velocity          = rcos(angle) * g_ScratchPad.cells.words[0];
     work              = SELF(PartyMember);
     work->pos.x.fixed = BATTLE_ACTIVE_WORK->pos.x.fixed + velocity;
 
-    velocity             = rsin(*angle_cell) * g_ScratchPad;
+    velocity             = rsin(*angle_cell) * g_ScratchPad.cells.words[0];
     scratch              = SELF(PartyMember);
     scratch->pos.y.fixed = BATTLE_ACTIVE_WORK->pos.y.fixed + velocity;
     scratch->timer -= 2;
@@ -421,11 +421,11 @@ MATCH void func_801F070C(void) {
     s32      angle;
     s32      i;
 
-    g_ScratchPad = RANDOM_MASK(7) + SELF(PartyMember)->timer * 3;
+    g_ScratchPad.cells.words[0] = RANDOM_MASK(7) + SELF(PartyMember)->timer * 3;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256), 0);
     i      = 0;
-    radius = &g_ScratchPad;
+    radius = &g_ScratchPad.cells.words[0];
     Area_CellAddPrim(SELF(PartyMember)->pos.x.fixed, SELF(PartyMember)->pos.y.fixed, 2, sizeof(DR_MODE));
 
     do {

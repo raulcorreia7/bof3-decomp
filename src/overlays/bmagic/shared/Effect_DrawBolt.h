@@ -13,7 +13,7 @@ MATCH void Effect_DrawBolt(void) {
     s32      page;
     s32      i;
 
-    d                         = &g_ScratchPad;
+    d                         = &g_ScratchPad.cells.words[0];
     vec                       = g_ScratchPadVectorHalves;
     d[0]                      = BOLT_RADIUS;
     D_1F800004                = ((SELF(PartyMember)->param.unk_0B + 2) & 0xF) << 8;
