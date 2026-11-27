@@ -6,10 +6,10 @@ MATCH void func_800A5244(void) {
     latch = &D_801485B8;
     if (!(*latch & 0x1)) {
         func_80097FE8();
-        D_80148594                 = 0;
-        *latch                     = 0;
-        g_BattleChoicePanel.active = 0;
-        D_801485DC                 = 0;
+        D_80148594                       = 0;
+        *latch                           = 0;
+        g_BattleChoicePanel.items.active = 0;
+        D_801485DC                       = 0;
         EMI_ArchiveLoad(EMI_SLOT_BATL_RE2);
         g_Battle.ui_step = 4;
         g_Battle.ui_mode = 3;

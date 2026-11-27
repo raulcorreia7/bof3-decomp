@@ -12,6 +12,38 @@
 #include "menu/clock.h"
 #include "menu/save_data.h"
 
+/* The battle choice panel (panel task 16) while it lists one member's abilities. The setup steps the
+ * pointer three records on to the cursor frame (panel task 19). */
+typedef struct BattleAbilityPanel {
+    u8   active;
+    u8   panel;
+    u8   mode;
+    u8   state;
+    Pos2 pos;
+    u8   type; /* 0x08: as MenuChoicePanel.type */
+    u8   unk_09;
+    u8   member;       /* 0x0A: the party member; indexes D_801454F4 */
+    u8   ability_type; /* 0x0B: Party_GetAbilities' type */
+    u8   cursor;       /* 0x0C: the cursor's row */
+    u8   drawn_cursor; /* 0x0D: 0xFF when none */
+    u8   pad_0E[2];
+    s16  first_row; /* 0x10: the first row shown */
+    s16  scroll;    /* 0x12: 0xF0 or 0x10 while the list scrolls a row */
+    u16  unk_14;
+    u8   pad_16[0x0E];
+} BattleAbilityPanel;
+
+ASSERT_OFFSET(BattleAbilityPanel, member, 0x0A);
+ASSERT_OFFSET(BattleAbilityPanel, first_row, 0x10);
+ASSERT_OFFSET(BattleAbilityPanel, unk_14, 0x14);
+ASSERT_SIZE(BattleAbilityPanel, MENU_PANEL_TASK_SIZE);
+
+/* Panel task 16 in its two modes. */
+typedef union BattleChoicePanel {
+    MenuChoicePanel    items;
+    BattleAbilityPanel abilities;
+} BattleChoicePanel;
+
 /* FAKE: the callers pass the counter as volatile and the delta as s32, which the real prototype (u16*, s16) lacks. */
 #define Char_AddStat                   ((s16 (*)(volatile u16*, s32))Char_AddStat)
 
@@ -477,8 +509,8 @@ extern volatile u8               g_BattleTarget;
 extern u8                        g_BattleTarget_nv;
 extern u16                       D_801463B4;
 /* D_801463D8 */
-/* D_80148570: g_UiPanelTasks[16] under its own symbol, which the item list reads as a choice panel. */
-extern MenuChoicePanel           g_BattleChoicePanel;
+/* D_80148570: g_UiPanelTasks[16] under its own symbol, in the item mode or the ability mode. */
+extern BattleChoicePanel         g_BattleChoicePanel;
 extern u8                        D_80148594;
 extern u8                        D_80148596;
 extern u16                       D_80148598;

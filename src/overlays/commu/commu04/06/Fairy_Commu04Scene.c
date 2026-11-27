@@ -60,13 +60,13 @@ MATCH void func_801D0D4C(void) {
     buttons                  = INPUT_REPEATED(g_PadStates[0].pressed, (INPUT_DIRECTIONAL | PADL1 | PADR1));
     if (buttons & PADLleft) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
-        g_Commu04ItemPanel.unk_10 = 0x32;
+        g_Commu04ItemPanel.message_id = 0x32;
         g_Commu04ItemPanel.group--;
         if ((s8)g_Commu04ItemPanel.group < 0) {
             g_Commu04ItemPanel.group = 3;
         }
     } else if (buttons & PADLright) {
-        g_Commu04ItemPanel.unk_10 = 0x31;
+        g_Commu04ItemPanel.message_id = 0x31;
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
         g_Commu04ItemPanel.group++;
         if (g_Commu04ItemPanel.group >= 4U) {
