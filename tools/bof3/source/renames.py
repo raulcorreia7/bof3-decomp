@@ -34,7 +34,7 @@ def apply(text: str, renames: dict[str, str]) -> str:
 
 def main(argv: list[str]) -> int:
     if len(argv) != 2 or argv[1] in ("-h", "--help"):
-        print(__doc__.strip(), file=sys.stderr)
+        print((__doc__ or "").strip(), file=sys.stderr)
         return 2
     renames = since(argv[1])
     for line in sys.stdin:
