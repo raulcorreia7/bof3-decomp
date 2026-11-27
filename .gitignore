@@ -20,14 +20,7 @@ dist/
 # Derived outputs (regenerable) and agent drafts
 /build/
 /objdiff.json
-/report.json
 /work/
-/src/**/out/
-/artifacts/
-
-# Debug artifacts
-debug_*.o
-debug_*.c
 
 # GCC RTL pass dumps (-da / -fdump-rtl-*): codegen-probe byproduct, never source.
 # Run dump probes with cwd under build/ so they never reach the repo root.
@@ -104,7 +97,6 @@ toolchains/*
 /asm/**/.splat.stamp
 /asm/**/nonmatchings/
 /asm/**/data/
-/tasks/
 
 # SDK objects never enter include/
 include/**/*.[oO]
