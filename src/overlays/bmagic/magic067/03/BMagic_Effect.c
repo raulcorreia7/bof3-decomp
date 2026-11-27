@@ -11,10 +11,13 @@ MATCH void func_801EEC24(void) {
     SYS_DISPATCH_TASK(handlers.steps, 1, g_Self);
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EEC94(void) {
-    BattleEffect*    effect;
+/* Starts the spell's effects and prepares the palette. */
+MATCH void func_801EEC94(void) {
     BattleWorkImage* image;
+    u32              effect_offset;
+    void*            effect_table;
+    void*            effect_record;
+    u8*              effects;
     PartyMember*     work;
     u32              slot;
     u32              enemy;
@@ -31,14 +34,15 @@ NON_MATCHING void func_801EEC94(void) {
     g_BattleEffects[slot].unk_08       = g_BattleEffectBattler->facing;
     SELF(PartyMember)->param.unk_0B += 1;
     slot                               = Battle_AllocEffect(1, 0x13) & BYTE_MASK;
-    work                               = g_Self;
+    work                               = SELF(PartyMember);
     g_BattleEffects[slot].header.mode  = 1;
     g_BattleEffects[slot].target.party = work;
     SELF(PartyMember)->param.unk_0B += 1;
+
     i   = 0;
-    dst = MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BMAGIC_ROW));
-    src = MEM_PTR(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BMAGIC_ROW));
-    for (; i < 0x100; i++) {
+    dst = g_AreaPaletteCopy->rows[AREA_PALETTE_BMAGIC_ROW].colors;
+    src = g_AreaPaletteArena->rows[AREA_PALETTE_BMAGIC_ROW].colors;
+    for (; i < AREA_PALETTE_COLORS; i++) {
         dst[i] = src[i] | PSX_COLOR_STP_BIT;
     }
     BMAGIC_POINT_AT_PALETTE_ROW(dst, src, i);
@@ -51,11 +55,14 @@ NON_MATCHING void func_801EEC94(void) {
     g_GfxPalettePending = 1;
     if (g_Battle.encounter != 0) {
         if (g_BattleEnemyBattlers[g_Battle.active_battler - BATTLE_PARTY_CHARACTERS_COUNT].unk_F0 == 0x29) {
-            slot                              = Battle_AllocEffect(1, 0x13) & BYTE_MASK;
-            enemy                             = g_Battle.active_battler - BATTLE_PARTY_CHARACTERS_COUNT;
-            effect                            = &g_BattleEffects[slot];
-            image                             = (BattleWorkImage*)&g_BattleEnemyBattlers[enemy];
-            *(BattleWorkImage*)effect         = *image;
+            slot          = Battle_AllocEffect(1, 0x13) & BYTE_MASK;
+            effect_offset = slot * sizeof(g_BattleEffects[0]);
+            enemy         = g_Battle.active_battler - BATTLE_PARTY_CHARACTERS_COUNT;
+            effect_table  = g_BattleEffects;
+            effects       = effect_table;
+            effect_record = effects + effect_offset;
+            image         = effect_record;
+            memcpy(image, &g_BattleEnemyBattlers[enemy], sizeof(*image));
             g_BattleEffects[slot].header.mode = 3;
             g_BattleEffects[slot].unk_06      = 1;
             g_BattleEffects[slot].header.step = 0;
@@ -64,9 +71,6 @@ NON_MATCHING void func_801EEC94(void) {
         }
     }
 }
-#else
-INCLUDE_ASM(func_801EEC94);
-#endif
 
 #include "overlays/bmagic/shared/Effect_CountDownTimerCallSelector.h"
 

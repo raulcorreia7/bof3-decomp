@@ -15,6 +15,7 @@ NON_MATCHING void func_801F2DA0(void* position, s32 radius1, s32 radius2) {
     s32      turn;
     u8       i;
     u16      angle;
+    s32      sine;
 
     GFX_ADD_DITHERED_DRAW_MODE(GFX_LAYER_EFFECT_FRONT, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x380, 0x100));
     Camera_SetMatrix(&camera);
@@ -28,7 +29,7 @@ NON_MATCHING void func_801F2DA0(void* position, s32 radius1, s32 radius2) {
     Camera_ProjectPoint((s32*)&point, &outer);
     turn = 0;
 
-    for (i = 0; i < 32; i++) {
+    for (i = 0; i < 32;) {
         last = point;
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x380, 0x100), 0);
         Area_CellAddPrim(last.vx, last.vy, 0, sizeof(DR_MODE));
@@ -41,7 +42,11 @@ NON_MATCHING void func_801F2DA0(void* position, s32 radius1, s32 radius2) {
         point.vz = pos[2] + (((s16)radius1 * rsin(angle)) << 4);
         Camera_ProjectPoint((s32*)&point, &inner);
         point.vy = pos[1] + (((s16)radius2 * rcos(angle)) >> 4);
-        point.vz = pos[2] + (((s16)radius2 * rsin(angle)) << 4);
+        sine     = (s16)radius2 * rsin(angle);
+        ++i;
+        /* FAKE: keeps the segment step beside the second radius (54 rows with plain C). */
+        FAKE_BARRIER();
+        point.vz = pos[2] + (sine << 4);
         Camera_ProjectPoint((s32*)&point, &outer);
         prim->x2 = inner.vx;
         prim->y2 = inner.vy;

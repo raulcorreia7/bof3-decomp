@@ -6,28 +6,31 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/shared/BMagic_DispatchMode.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EEC7C(void) {
+/* Starts the spell's effects and prepares the palette. */
+MATCH void func_801EEC7C(void) {
     u16*             dst;
     u16*             src;
-    s32              index;
+    s32              slot;
     u32              i;
     u32              enemy;
-    BattleEffect*    effect;
     BattleWorkImage* image;
+    void*            effect_record;
+    s32              effect_offset;
+    void*            effect_table;
+    u8*              effects;
 
     SELF(PartyMember)->param.unk_0B = 0;
     SELF(PartyMember)->unk_09       = 0x18;
     SELF(PartyMember)->header.mode += 1;
-    index                               = (u8)Battle_AllocEffect(1, 0x4B);
-    g_BattleEffects[index].target.party = g_Self;
-    g_BattleEffects[index].header.mode  = 0;
-    g_BattleEffects[index].unk_08       = g_BattleEffectBattler->facing;
+    slot                               = (u8)Battle_AllocEffect(1, 0x4B);
+    g_BattleEffects[slot].target.party = g_Self;
+    g_BattleEffects[slot].header.mode  = 0;
+    g_BattleEffects[slot].unk_08       = g_BattleEffectBattler->facing;
 
     SELF(PartyMember)->param.unk_0B += 1;
-    index                               = (u8)Battle_AllocEffect(1, 0x4B);
-    g_BattleEffects[index].target.party = g_Self;
-    g_BattleEffects[index].header.mode  = 1;
+    slot                               = (u8)Battle_AllocEffect(1, 0x4B);
+    g_BattleEffects[slot].target.party = g_Self;
+    g_BattleEffects[slot].header.mode  = 1;
 
     SELF(PartyMember)->param.unk_0B += 1;
     BMAGIC_POINT_AT_PALETTE_ROW(dst, src, i);
@@ -37,23 +40,23 @@ NON_MATCHING void func_801EEC7C(void) {
     g_GfxPalettePending = 1;
     if (g_Battle.encounter != 0) {
         if (g_BattleEnemyBattlers[g_Battle.active_battler - BATTLE_PARTY_CHARACTERS_COUNT].unk_F0 == 0x29) {
-            index                              = (u8)Battle_AllocEffect(1, 0x4B);
-            enemy                              = g_Battle.active_battler - BATTLE_PARTY_CHARACTERS_COUNT;
-            effect                             = &g_BattleEffects[index];
-            image                              = (BattleWorkImage*)&g_BattleEnemyBattlers[enemy];
-            *(BattleWorkImage*)effect          = *image;
-            g_BattleEffects[index].header.mode = 2;
-            g_BattleEffects[index].unk_06      = 1;
-            g_BattleEffects[index].effect_type = 0x4B;
-            g_BattleEffects[index].header.step = 0;
-            g_BattleEffects[index].arg.unk_09  = 0;
-            g_BattleEffects[index].unk_29      = 3;
+            slot          = (u8)Battle_AllocEffect(1, 0x4B);
+            effect_offset = slot * sizeof(g_BattleEffects[0]);
+            enemy         = g_Battle.active_battler - BATTLE_PARTY_CHARACTERS_COUNT;
+            effect_table  = g_BattleEffects;
+            effects       = effect_table;
+            effect_record = effects + effect_offset;
+            image         = effect_record;
+            memcpy(image, &g_BattleEnemyBattlers[enemy], sizeof(*image));
+            g_BattleEffects[slot].header.mode = 2;
+            g_BattleEffects[slot].unk_06      = 1;
+            g_BattleEffects[slot].effect_type = 0x4B;
+            g_BattleEffects[slot].header.step = 0;
+            g_BattleEffects[slot].arg.unk_09  = 0;
+            g_BattleEffects[slot].unk_29      = 3;
         }
     }
 }
-#else
-INCLUDE_ASM(func_801EEC7C);
-#endif
 
 #include "overlays/bmagic/shared/Effect_CountDownTimerCallSelector.h"
 
