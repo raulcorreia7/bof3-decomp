@@ -24,8 +24,8 @@ MATCH void func_801D7E4C(void) {
         y                                                    = D_80148658[0] * 0x36;
         *latch                                               = 1;
         g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0B = 1;
-        g_UiPanelTasks[19].pos.vx                                           = x;
-        g_UiPanelTasks[19].pos.vy                                           = g_UiPanelTasks[MENU_START_PANEL_ITEMS].pos.vy + y;
+        g_UiPanelTasks[19].pos.vx                            = x;
+        g_UiPanelTasks[19].pos.vy                            = g_UiPanelTasks[MENU_START_PANEL_ITEMS].pos.vy + y;
     } else {
         *latch = 0;
     }

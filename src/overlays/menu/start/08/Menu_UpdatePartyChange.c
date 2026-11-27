@@ -1,28 +1,27 @@
 #include "start_08.h"
 
 /* func_801DA474 */
-#ifdef NON_MATCHING
-NON_MATCHING void Menu_UpdatePartyChange(void) {
-    u8*          clut;
-    volatile u8* frame;
-    u8*          side;
-    s8*          row;
-    s32          next;
-    s32          input;
-    u8           count;
-    u8           old_side;
-    u8           old_row;
-    u8           result;
-    u16          y;
+MATCH void Menu_UpdatePartyChange(void) {
+    u8*            clut;
+    MenuPanelTask* frame;
+    u8*            side;
+    s8*            row;
+    s32            next;
+    s32            input;
+    u8             count;
+    u8             old_side;
+    u8             old_row;
+    u8             result;
+    u16            y;
 
     clut = &g_WindowClut;
     Menu_DrawClutStrip(*clut);
-    frame                                                = &g_UiPanelTasks[19].active;
-    *frame                                               = 0;
-    g_UiPanelTasks[20].active                            = 0;
+    frame                                                = &g_CursorFramePanel;
+    frame->active                                        = 0;
+    frame[1].active                                      = 0;
     g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME].pos.vx = D_801EC548[D_80148659][D_80148658[0]].x;
     y                                                    = D_801EC548[D_80148659][D_80148658[0]].y;
-    *frame                                               = 1;
+    frame->active                                        = 1;
     g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME].pos.vy = y;
     g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0A = D_801EC548[D_80148659][D_80148658[0]].value;
     g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0B = 1;
@@ -31,10 +30,10 @@ NON_MATCHING void Menu_UpdatePartyChange(void) {
 
         g_UiPanelTasks[20].pos.vx = D_801EC548[(s8)D_8014865D][(s8)D_8014865A].x;
         y2                        = D_801EC548[(s8)D_8014865D][(s8)D_8014865A].y;
-        D_80148600                = 1;
+        g_UiPanelTasks[20].active = 1;
         g_UiPanelTasks[20].pos.vy = y2;
-        g_UiPanelTasks[20].unk_0B = 0;
         g_UiPanelTasks[20].unk_0A = D_801EC548[(s8)D_8014865D][(s8)D_8014865A].value;
+        g_UiPanelTasks[20].unk_0B = 0;
     }
     if (D_801ED69C == GAME_NONE) {
         D_801484CC = 0x60;
@@ -105,13 +104,10 @@ NON_MATCHING void Menu_UpdatePartyChange(void) {
             D_8014865D = 0x7F;
             return;
         }
-        D_80148654 = 5;
-        g_UiPanelTasks[19].active = 0;
-        D_80148600 = 0;
-        D_801484E3 = 1;
+        D_80148654                = 5;
+        g_CursorFramePanel.active = 0;
+        g_UiPanelTasks[20].active = 0;
+        D_801484E3                = 1;
         D_80148652 += 1;
     }
 }
-#else
-INCLUDE_ASM(Menu_UpdatePartyChange);
-#endif

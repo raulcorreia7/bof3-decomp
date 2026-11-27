@@ -16,8 +16,8 @@ MATCH void func_801D2564(void) {
     panel_data = &g_WindowClut;
     Menu_DrawClutStrip(*panel_data);
     panel_data += 0x15;
-    selection       = &D_80148656;
-    selection_index = *selection;
+    selection                 = &D_80148656;
+    selection_index           = *selection;
     g_UiPanelTasks[19].active = 1;
     g_UiPanelTasks[19].pos.vx = g_UiPanelTasks[selection_index + 4].pos.vx;
     g_UiPanelTasks[19].pos.vy = g_UiPanelTasks[selection_index + 4].pos.vy;
@@ -49,7 +49,7 @@ MATCH void func_801D2564(void) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
         func_801D2AC8();
         g_UiPanelTasks[19].active = 0;
-        D_80148654 = 8;
+        D_80148654                = 8;
         D_80148651 += 1;
         /* FAKE: keep pad reload after state updates. */
         FAKE_BARRIER();
@@ -66,7 +66,7 @@ MATCH void func_801D2564(void) {
             i++;
         }
         g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].state = 1;
-        g_UiPanelTasks[19].active = 0;
+        g_UiPanelTasks[19].active                          = 0;
         D_80148654                                         = 8;
         D_80148651 += 2;
     }
