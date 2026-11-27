@@ -91,6 +91,12 @@ def test_a_define_passes_when_its_users_use_one_of_the_same_value() -> None:
     assert compare(before, inlined, {"PARTY_RECORD_COUNT"}) == []
 
 
+def test_a_removed_fake_helper_define_passes() -> None:
+    old = Entities(defines={"FAKE_DECL_GAME_SCRATCH_BASE_SCALAR": ""})
+    before = snapshot(old, {"a.c": {"FAKE_DECL_GAME_SCRATCH_BASE_SCALAR"}})
+    assert compare(before, snapshot(Entities(), {"a.c": set()}), set()) == []
+
+
 def test_enumerator_values_never_change() -> None:
     before = snapshot(
         Entities(enums={"STATE_IDLE": ("State", 0)}), {"a.h": {"STATE_IDLE"}}

@@ -14,7 +14,8 @@ name at the same `config/symbols/<image>.toml` address (functions and globals), 
 offset of the same record, a new define with the same value, a new enumerator with the same value
 in the same enum, or a new record with the same layout. A thing degrades when its successor is a
 default or unknown name (`func_`, `D_`, `unk_`, `pad`), when a typed member's successor is raw
-bytes or an integer, or when a record global is split back into loose integer globals.
+bytes or an integer, or when a record global is split back into loose integer globals. A `FAKE_`
+name is a matching helper the project wants gone, so losing one is never reported.
 
 Clang parses the sources (`-fsyntax-only` with the AST as JSON and the record layouts), so struct
 members, nested records and offsets come from a real C parse. `#define` lines are read as text.
@@ -502,9 +503,10 @@ def compare(before: Snapshot, after: Snapshot, removed: set[str]) -> list[str]:
     old, new = before.entities, after.entities
 
     def gone(name: str) -> bool:
-        # A name built by token pasting (a static assertion) never appears in the text.
+        # A name built by token pasting (a static assertion) never appears in the text; a FAKE_ helper may go.
         return (
             not is_default(name)
+            and not name.startswith("FAKE_")
             and name in before.tokens
             and name not in after.tokens
             and name not in removed

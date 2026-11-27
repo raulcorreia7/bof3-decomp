@@ -202,7 +202,7 @@ a tree with uncommitted changes fails before any check runs. `BASE_REF` defaults
 | `drafts`        | a `.c` file the change touches holds a `NON_MATCHING` draft that does not compile with `-DNON_MATCHING` | compiler   |
 | `names`         | a new name carries an 8-digit address, a listed legacy one is gone, an added line names a parameter `argN`, or a changed image keeps an address-named layout row for a named symbol | none |
 | `addrs`         | a symbol address that `config/symbols/<image>.toml` records on `main` is gone                   | none       |
-| `kept`          | a named helper, define, global, type, member or function is lost or degraded            | none       |
+| `kept`          | a named helper, define, global, type, member or function is lost or degraded; a `FAKE_` name may go | none       |
 | `matches`       | a function that is `MATCH` C at the base is not at an address of its image, without `Match-Removed:` | none       |
 | `quality`       | a touched file gains casts, fake helpers, `func_`/`D_` names or pasted bodies           | none       |
 | `order`         | declarations or symbols in a changed file are out of their recorded order               | none       |
