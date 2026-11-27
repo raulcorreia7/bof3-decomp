@@ -191,7 +191,7 @@ a tree with uncommitted changes fails before any check runs. `BASE_REF` defaults
 | `check-headers` | a public header does not compile alone                                                  | compiler   |
 | `objdiff`       | a unit has no compiled object, or the objdiff project cannot be written (about 30 s)   | disc       |
 | `check-plain`   | a source does not build as plain C                                                      | compiler   |
-| `check-tree`    | an added line has a register pin, decompiler local, stack name, task offset, m2c macro, raw address, duplicate prototype, wrong header guard or shared body; a prototype differs from its definition without a `sig-kept:` note; a tracked file is game data or over 1 MiB, a relative include or import, or an enum member | none |
+| `check-tree`    | an added line has a register pin, decompiler local, stack name, task offset, m2c macro, raw address, duplicate prototype, wrong header guard or shared body; a prototype differs from its definition without a `sig-kept:` note; a tracked file is game data or over 1 MiB, a relative include or import, an old-style (K&R) definition, or an enum member | none |
 | `externs`       | a `.c` file gains an `extern` line                                                      | none       |
 | `check-asm`   | there are more `INCLUDE_ASM` lines than at the base ref, in total or in one image       | none       |
 | `format-check`  | C, Python, TOML or Markdown differs from the formatter                                  | none       |

@@ -108,6 +108,12 @@ CASES = [
         "removed spelling",
     ),
     (
+        "old-style definition",
+        {},
+        {"src/overlays/test/arc/00/a.c": "MATCH void f(x, y)\ns16 x;\ns16 y;\n{\n}\n"},
+        "old-style definitions",
+    ),
+    (
         "task offset",
         {},
         {"src/overlays/test/arc/00/a.c": "u8 *p = ((u8 *)g_Self);\n"},

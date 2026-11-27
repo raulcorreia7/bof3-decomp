@@ -21,7 +21,7 @@ extern s8           D_801D19F4;
 
 void      func_801D1048(s16 x, s16 y, u8 group);
 void      func_801D129C(s16 x, s16 y, u8 group);
-void      func_801D14C8(s16 x, s16 y, s32 group);
+void      func_801D14C8(s16 x, s16 y, u8 group);
 void      func_801D1724(u16 x, u16 y);
 extern u8 D_801457E8[][5];
 extern u8 D_80145E30[];

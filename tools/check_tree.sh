@@ -1,5 +1,5 @@
 #!/bin/sh
-# Reject tracked retail media, files over 1 MiB (config/symbols/<image>.toml and config/attempts.jsonl, the append-only tables: 4 MiB), relative includes or imports, struct members of enum type, prototypes that differ from their definition, and sources no image layout compiles. Needs no build inputs.
+# Reject tracked retail media, files over 1 MiB (config/symbols/<image>.toml and config/attempts.jsonl, the append-only tables: 4 MiB), relative includes or imports, struct members of enum type, old-style (K&R) definitions, prototypes that differ from their definition, and sources no image layout compiles. Needs no build inputs.
 set -eu
 case "${1:-}" in
 -h | --help) sed -n '2,2p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
@@ -25,6 +25,14 @@ if [ -n "$relative" ]; then
 	echo "check-tree: relative includes or imports:"
 	echo "$relative"
 	echo "check-tree: include from the source root (\"overlays/area/X.h\") and import as bof3.<module>"
+	exit 1
+fi
+# A definition takes its parameter types in the parentheses; the old-style form `f(x, y)` with the types on the next lines is not written.
+oldstyle=$(git grep -nE '^[A-Za-z_][A-Za-z0-9_ *]*[ *][A-Za-z_][A-Za-z0-9_]*\([[:space:]]*[A-Za-z_][A-Za-z0-9_]*([[:space:]]*,[[:space:]]*[A-Za-z_][A-Za-z0-9_]*)*[[:space:]]*\)[[:space:]]*$' -- src include ':!include/psyq' | grep -vF '(void)') || true
+if [ -n "$oldstyle" ]; then
+	echo "check-tree: old-style definitions:"
+	echo "$oldstyle"
+	echo "check-tree: write the types in the parameter list: s16 x as a parameter, or wide parameters and narrowing locals (s16 x = raw_x;)"
 	exit 1
 fi
 # Lists the decompiler locals (temp_, var_, phi_, saved_reg_) that a file has at HEAD and lacks at the base.
