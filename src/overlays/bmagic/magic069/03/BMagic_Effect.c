@@ -399,40 +399,29 @@ MATCH void BMagic_InfluenceDrawRing(void) {
 /* Draws a cross of two 8 long lines at the effect's screen point. */
 /* func_801F0104 */
 MATCH void BMagic_InfluenceDrawCross(void) {
-    LINE_F2*      line;
-    volatile u16* shade;
+    LINE_F2* line;
+    s16*     shade;
 
-    shade      = (volatile u16*)&D_1F800006;
-    line       = (LINE_F2*)g_GfxPrimCursor;
-    *shade     = 0x80;
-    D_1F80000C = SELF(PartyMember)->screen_x.value;
-    /* FAKE: retail stores each staged coordinate before loading the next. */
-    FAKE_ORDER_FENCE();
-    D_1F80000E = SELF(PartyMember)->screen_y.value;
-    /* FAKE: retail keeps the argument move in the call's delay slot. */
-    FAKE_ORDER_FENCE();
+    shade                        = &g_ScratchPad.cells.halves[3];
+    line                         = (LINE_F2*)g_GfxPrimCursor;
+    *shade                       = 0x80;
+    g_ScratchPad.cells.halves[6] = SELF(PartyMember)->screen_x.value;
+    g_ScratchPad.cells.halves[7] = SELF(PartyMember)->screen_y.value;
     SetLineF2(line);
     SetSemiTrans(line, 1);
-    line->x0 = D_1F80000C - 4;
-    /* FAKE: retail keeps each staged coordinate access in order. */
-    FAKE_ORDER_FENCE();
-    line->y0 = D_1F80000E;
-    FAKE_ORDER_FENCE();
-    line->x1 = D_1F80000C + 4;
-    FAKE_ORDER_FENCE();
-    line->y1 = D_1F80000E;
+    line->x0 = g_ScratchPad.cells.halves[6] - 4;
+    line->y0 = g_ScratchPad.cells.halves[7];
+    line->x1 = g_ScratchPad.cells.halves[6] + 4;
+    line->y1 = g_ScratchPad.cells.halves[7];
     setRGB0(line, *shade, *shade, *shade);
     GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(LINE_F2));
     line = (LINE_F2*)g_GfxPrimCursor;
     SetLineF2(line);
     SetSemiTrans(line, 1);
-    line->x0 = D_1F80000C;
-    FAKE_ORDER_FENCE();
-    line->y0 = D_1F80000E + 4;
-    FAKE_ORDER_FENCE();
-    line->x1 = D_1F80000C;
-    FAKE_ORDER_FENCE();
-    line->y1 = D_1F80000E - 4;
+    line->x0 = g_ScratchPad.cells.halves[6];
+    line->y0 = g_ScratchPad.cells.halves[7] + 4;
+    line->x1 = g_ScratchPad.cells.halves[6];
+    line->y1 = g_ScratchPad.cells.halves[7] - 4;
     setRGB0(line, *shade, *shade, *shade);
     GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(LINE_F2));
 }
