@@ -473,10 +473,10 @@ MATCH void func_801D835C(MenuChoicePanel* panel) {
     u8       flags;
     u8       n;
 
-    UI_WindowDraw((panel->pos.x + 3) & HALF_MASK, (panel->pos.y + 3) & HALF_MASK, 154, 160, 0, g_WindowStyle);
+    UI_WindowDraw((panel->pos.vx + 3) & HALF_MASK, (panel->pos.vy + 3) & HALF_MASK, 154, 160, 0, g_WindowStyle);
     n    = 0;
     list = Party_GetAbilities(panel->group, panel->group_first, 0);
-    y    = panel->pos.y;
+    y    = panel->pos.vy;
     do {
         if (*list != 0) {
             locked = (u8)func_801AF5B0(panel->type, D_80148656, *list) == 0;
@@ -489,21 +489,21 @@ MATCH void func_801D835C(MenuChoicePanel* panel) {
             count   = Char_AbilityGetCost(g_CharSlot[g_PartyFieldOrder[(s8)D_80148656]], *list, 0);
             if (n == panel->drawn_cursor || n == panel->group_cursor) {
                 if (shade != UI_TEXT_DIM) {
-                    UI_ListDrawAbilityRow((s16)(panel->pos.x + 7), (s16)(y + 0x1A), UI_TEXT_DIM, level, (u8*)ability, count, 1);
+                    UI_ListDrawAbilityRow((s16)(panel->pos.vx + 7), (s16)(y + 0x1A), UI_TEXT_DIM, level, (u8*)ability, count, 1);
                 }
-                UI_ListDrawAbilityRow((s16)(panel->pos.x + 7), (s16)(y + 0x18), shade, level, (u8*)ability, count, locked);
+                UI_ListDrawAbilityRow((s16)(panel->pos.vx + 7), (s16)(y + 0x18), shade, level, (u8*)ability, count, locked);
             } else {
-                UI_ListDrawAbilityRow((s16)(panel->pos.x + 7), (s16)(y + 0x1A), shade, level, (u8*)ability, count, locked);
+                UI_ListDrawAbilityRow((s16)(panel->pos.vx + 7), (s16)(y + 0x1A), shade, level, (u8*)ability, count, locked);
             }
         }
         n++;
         y += 13;
         list++;
     } while (n < 10);
-    x = panel->pos.x + 0x4E;
-    UI_TextDraw((x - strlen(D_801D9EA4[panel->group_first]) * 4), (panel->pos.y + 7), 0, MENU_LABEL_LENGTH, D_801D9EA4[panel->group_first]);
-    UI_SpriteDrawRun(panel->pos.x, panel->pos.y, (FIELD(u8, panel, 0x9u) & MENU_LIST_FLAG_TAB_2) ? g_MenuListTab2OnSprites : g_MenuListTab2OffSprites, UI_SPRITE_ALT_PAGE);
-    UI_SpriteDrawRun(panel->pos.x, panel->pos.y, (FIELD(u8, panel, 0x9u) & MENU_LIST_FLAG_TAB_1) ? D_801D999C : D_801D9990, UI_SPRITE_ALT_PAGE);
+    x = (u16)panel->pos.vx + 0x4E;
+    UI_TextDraw((x - strlen(D_801D9EA4[panel->group_first]) * 4), (panel->pos.vy + 7), 0, MENU_LABEL_LENGTH, D_801D9EA4[panel->group_first]);
+    UI_SpriteDrawRun(panel->pos.vx, panel->pos.vy, (FIELD(u8, panel, 0x9u) & MENU_LIST_FLAG_TAB_2) ? g_MenuListTab2OnSprites : g_MenuListTab2OffSprites, UI_SPRITE_ALT_PAGE);
+    UI_SpriteDrawRun(panel->pos.vx, panel->pos.vy, (FIELD(u8, panel, 0x9u) & MENU_LIST_FLAG_TAB_1) ? D_801D999C : D_801D9990, UI_SPRITE_ALT_PAGE);
     flags = FIELD(u8, panel, 0x9u);
     if (!(flags & MENU_LIST_FRAME_MASK)) {
         FIELD(u8, panel, 0x9u) = 0;
@@ -511,23 +511,23 @@ MATCH void func_801D835C(MenuChoicePanel* panel) {
         FIELD(u8, panel, 0x9u) = flags - MENU_LIST_FRAME_STEP;
     }
     for (n = 0; n < 10; n++) {
-        UI_SpriteDraw(panel->pos.x + (n + 5) * 8, panel->pos.y, 1, UI_SPRITE_ALT_PAGE);
+        UI_SpriteDraw(panel->pos.vx + (n + 5) * 8, panel->pos.vy, 1, UI_SPRITE_ALT_PAGE);
     }
     for (n = 0; n < 17; n++) {
-        UI_SpriteDraw(panel->pos.x, panel->pos.y + (n + 3) * 8, 4, UI_SPRITE_ALT_PAGE);
+        UI_SpriteDraw(panel->pos.vx, panel->pos.vy + (n + 3) * 8, 4, UI_SPRITE_ALT_PAGE);
     }
-    UI_SpriteDraw(panel->pos.x + 144, panel->pos.y + 24, 0x20, UI_SPRITE_ALT_PAGE);
+    UI_SpriteDraw(panel->pos.vx + 144, panel->pos.vy + 24, 0x20, UI_SPRITE_ALT_PAGE);
     for (n = 0; n < 15; n++) {
-        UI_SpriteDraw(panel->pos.x + 144, panel->pos.y + (n + 4) * 8, 0x21, UI_SPRITE_ALT_PAGE);
+        UI_SpriteDraw(panel->pos.vx + 144, panel->pos.vy + (n + 4) * 8, 0x21, UI_SPRITE_ALT_PAGE);
     }
-    UI_SpriteDraw(panel->pos.x, panel->pos.y + 160, 5, UI_SPRITE_ALT_PAGE);
-    UI_SpriteDraw(panel->pos.x + 144, panel->pos.y + 152, 0x22, UI_SPRITE_ALT_PAGE);
-    if ((s16)panel->unk_10 != 0) {
-        UI_SpriteDraw(panel->pos.x + 8, panel->pos.y, 0x32, UI_SPRITE_ALT_PAGE);
-        UI_SpriteDraw(panel->pos.x + 144, panel->pos.y, 0x34, UI_SPRITE_ALT_PAGE);
+    UI_SpriteDraw(panel->pos.vx, panel->pos.vy + 160, 5, UI_SPRITE_ALT_PAGE);
+    UI_SpriteDraw(panel->pos.vx + 144, panel->pos.vy + 152, 0x22, UI_SPRITE_ALT_PAGE);
+    if (panel->message_id != 0) {
+        UI_SpriteDraw(panel->pos.vx + 8, panel->pos.vy, 0x32, UI_SPRITE_ALT_PAGE);
+        UI_SpriteDraw(panel->pos.vx + 144, panel->pos.vy, 0x34, UI_SPRITE_ALT_PAGE);
     }
     for (n = 0; n < 17; n++) {
-        UI_SpriteDraw(panel->pos.x + (n + 1) * 8, panel->pos.y + 160, 6, UI_SPRITE_ALT_PAGE);
+        UI_SpriteDraw(panel->pos.vx + (n + 1) * 8, panel->pos.vy + 160, 6, UI_SPRITE_ALT_PAGE);
     }
 }
 

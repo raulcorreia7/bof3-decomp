@@ -1,7 +1,5 @@
 #include "battle_15.h"
 
-/* g_BattleChoicePanel byte 0x0B is the panel page base. */
-
 /* func_80096FBC */
 MATCH void Battle_SetCommandType(void) {
     u32 flags;
@@ -13,7 +11,7 @@ MATCH void Battle_SetCommandType(void) {
     flags = g_BattleActorTurn->action_flags.value;
     if (flags & BATTLER_ACTION_DRAGON_FORM) {
         if (!(flags & BATTLER_ACTION_DRAGON_FORM_CONTROLLED)) {
-            g_UiPanelTasks[16].unk_0B = 2u;
+            g_BattleChoicePanel.abilities.ability_type = 2u;
         }
     }
     stage            = g_BattleUIStep;

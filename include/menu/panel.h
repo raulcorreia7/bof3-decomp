@@ -22,8 +22,8 @@
 #define MENU_PANEL_HIDDEN_X    (-150)
 #define MENU_PANEL_HIDDEN_Y    (-20)
 
-#define MENU_CHOICE_PANEL_SIZE 0x14
 #define MENU_PANEL_TASK_SIZE   0x24
+#define MENU_CHOICE_PANEL_SIZE MENU_PANEL_TASK_SIZE
 
 /* One panel animation body: the panel moves along the member in fixed pixel
  * steps toward a bound and stops there, clearing its state. An advance tests
@@ -75,22 +75,28 @@
  * `emi/etc/start/08@0x801D3D00` reads the same four fields of the start panel
  * through g_ItemCategoryIds and g_ItemCategoryCounts and clears the drawn cursor with 0xFF.
  * The x and y are the panel's screen position: the draw calls take x + 7 and
- * y + 7, and the panel animation slides x (MENU_ADVANCE_PANEL). */
+ * y + 7, and the panel animation slides x (MENU_ADVANCE_PANEL). The battle choice panel is
+ * slot 16; its setup steps the same pointer three records on to the cursor frame. */
 typedef struct MenuChoicePanel {
-    u8    active; /* 0x00: set while the panel is armed */
-    u8    pad_01[0x03];
-    Pos2u pos;          /* 0x04 */
-    u8    type;         /* 0x08: the panel's type, the first argument of Item_PassesTest */
-    u8    pad_09;       /* 0x09 */
-    u8    group;        /* 0x0A: the group the cursor walks */
-    u8    group_first;  /* 0x0B: the group's first entry, the page start */
-    u8    group_cursor; /* 0x0C: the cursor's entry */
-    u8    drawn_cursor; /* 0x0D: the drawn cursor, 0xFF when none */
-    u8    pad_0E[0x02];
-    u16   unk_10;        /* 0x10: 0x31 or 0x32 after a cursor move; role unknown */
-    s16   confirm_timer; /* 0x12: non-zero closes the confirm step */
+    u8   active;       /* 0x00: set while the panel is armed */
+    u8   panel;        /* 0x01: the panel handler, as MenuPanelTask.panel */
+    u8   mode;         /* 0x02 */
+    u8   state;        /* 0x03: the panel's step; non-zero while it opens or closes */
+    Pos2 pos;          /* 0x04 */
+    u8   type;         /* 0x08: the panel's type, the first argument of Item_PassesTest */
+    u8   unk_09;       /* 0x09 */
+    u8   group;        /* 0x0A: the group the cursor walks */
+    u8   group_first;  /* 0x0B: the group's first entry, the page start */
+    u8   group_cursor; /* 0x0C: the cursor's entry */
+    u8   drawn_cursor; /* 0x0D: the drawn cursor, 0xFF when none */
+    u8   pad_0E[0x02];
+    s16  message_id;    /* 0x10: the message the header bar draws (MenuPanelMessage.id); 0x31 or 0x32 after a group step */
+    s16  confirm_timer; /* 0x12: non-zero closes the confirm step */
+    u16  unk_14;
+    u8   pad_16[0x0E];
 } MenuChoicePanel;
 
+ASSERT_OFFSET(MenuChoicePanel, state, 0x03);
 ASSERT_OFFSET(MenuChoicePanel, pos, 0x04);
 ASSERT_OFFSET(MenuChoicePanel, group, 0x0A);
 ASSERT_OFFSET(MenuChoicePanel, group_first, 0x0B);

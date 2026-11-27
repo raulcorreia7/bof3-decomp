@@ -135,8 +135,8 @@ NON_MATCHING void Battle_ChooseAbility(void) {
         entry                                            = Party_GetAbilities(message[0], group->index, 1);
         turn                                             = g_BattleActorTurn;
         turn->command.id                                 = entry[group->cursor];
-        g_BattleChoicePanel[3]                           = 1u;
-        g_BattleChoicePanel[0x6C]                        = 0u;
+        g_BattleChoicePanel.abilities.state              = 1u;
+        g_UiPanelTasks[19].active                        = 0u;
         if (turn->command.id == 0x97u) {
             g_BattleMessageState              = 2u;
             g_BattleActorTurn->command.target = g_BattleMessageSlot[5];

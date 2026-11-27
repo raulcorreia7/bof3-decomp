@@ -26,8 +26,8 @@ MATCH void func_801D667C(void) {
     panel->state  = 2;
     panel->active = 1;
     panel += 6;
-    D_80148504.pos.x        = 320;
-    D_80148504.pos.y        = 62;
+    D_80148504.pos.vx       = 320;
+    D_80148504.pos.vy       = 62;
     D_80148524              = g_EquipPreview;
     panel->mode             = MENU_START_MODE_CURSOR_FRAME;
     D_80148504.group_cursor = 0;
