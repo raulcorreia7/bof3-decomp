@@ -9,7 +9,7 @@ MATCH void func_801F2F38(s32 index, s32 height) {
     long      depth;
     POLY_FT4* prim;
     u8*       first_tile;
-    u8*       tile_table;
+    u8*       tile_ids;
     s32       tile_offset;
     u8*       tile;
     s32       vertex;
@@ -36,11 +36,11 @@ MATCH void func_801F2F38(s32 index, s32 height) {
     RotMatrix(&rot, &matrix);
     MulMatrix2(&g_CameraMatrix, &matrix);
     SetRotMatrix(&matrix);
-    tile_table = D_801F3F18;
+    tile_ids = D_801F3F18;
     SetTransMatrix(&matrix);
 
     tile_offset = index * 4;
-    first_tile  = tile_table + tile_offset;
+    first_tile  = tile_ids + tile_offset;
     tile        = first_tile;
 next_tile:
     {
