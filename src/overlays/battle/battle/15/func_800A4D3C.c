@@ -12,7 +12,7 @@ MATCH void func_800A4D3C(void) {
     s16  cursor_row;
     u16  cursor_total;
 
-    if (D_801485BC != 0x5B) {
+    if (g_UiPanelTasks[18].pos.vx != 0x5B) {
         return;
     }
     padp  = &g_PadStates[0].pressed;

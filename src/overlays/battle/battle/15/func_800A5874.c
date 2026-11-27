@@ -7,7 +7,7 @@ MATCH void func_800A5874(void) {
     latch = &g_UiPanelTasks[21].active;
     if ((*latch & 0x1) == 0) {
         func_80097FE8();
-        D_80148594                       = 0;
+        g_UiPanelTasks[17].active        = 0;
         *latch                           = 0;
         g_BattleChoicePanel.items.active = 0;
         g_UiPanelTasks[19].active        = 0;

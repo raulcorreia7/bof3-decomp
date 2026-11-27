@@ -30,9 +30,9 @@ MATCH void func_801D28D0(void) {
         initial_cursor            = panel->group_cursor;
         initial_first             = panel->group_first;
         g_UiPanelTasks[10].active = 0;
-        D_80148628                = panel_x + 7;
+        g_UiPanelTasks[21].pos.vx = panel_x + 7;
         row_offset                = ((initial_cursor - initial_first) * 0xD) + 0x1B;
-        D_8014862A                = panel->pos.vy + row_offset;
+        g_UiPanelTasks[21].pos.vy = panel->pos.vy + row_offset;
     }
     buttons = INPUT_REPEATED(g_PadStates[0].pressed, (INPUT_DIRECTIONAL | PADL1 | PADR1));
     if (buttons & PADLleft) {
@@ -95,10 +95,10 @@ MATCH void func_801D28D0(void) {
     }
     if (panel->confirm_timer == 0) {
         if ((g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) != 0) {
-            selected_item      = (g_ShopItemId = g_ItemCategoryIds[panel->group][panel->group_cursor]);
-            g_ShopItemCategory = panel->group;
-            D_80148628         = panel->pos.vx + 7;
-            D_8014862A         = panel->pos.vy + (((panel->group_cursor - panel->group_first) * ((unsigned long)0xD)) + 0x1B);
+            selected_item             = (g_ShopItemId = g_ItemCategoryIds[panel->group][panel->group_cursor]);
+            g_ShopItemCategory        = panel->group;
+            g_UiPanelTasks[21].pos.vx = panel->pos.vx + 7;
+            g_UiPanelTasks[21].pos.vy = panel->pos.vy + (((panel->group_cursor - panel->group_first) * ((unsigned long)0xD)) + 0x1B);
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
             if (Item_PassesTest(panel->type, CHAR_ID_RYU_YOUNG, g_ShopItemCategory, g_ShopItemId) & BYTE_MASK) {
                 SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));

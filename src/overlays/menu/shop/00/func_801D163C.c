@@ -29,8 +29,8 @@ MATCH void func_801D163C(void) {
         /* FAKE: block boundary keeps the panel-task stores base-relative off one la. */
         FAKE_ORDER_FENCE();
         g_UiPanelTasks[21].active = 1;
-        D_80148628                = (u16)D_80148454 + 4;
-        D_8014862A                = (u16)D_80148456 + g_ShopStockIndex * 0xD + 0xA;
+        g_UiPanelTasks[21].pos.vx = (u16)g_UiPanelTasks[8].pos.vx + 4;
+        g_UiPanelTasks[21].pos.vy = (u16)g_UiPanelTasks[8].pos.vy + g_ShopStockIndex * 0xD + 0xA;
         D_80148644                = D_8018E7CC;
     }
     input = INPUT_REPEATED(g_PadStates[0].pressed, (PADLup | PADLdown));

@@ -10,11 +10,11 @@ MATCH void Battle_PreviewEquipment(void) {
     saveBuf   = g_UiPanelTasks[17].flags;
     selectBit = g_CharSlot[g_PartyBattleOrder[g_UiPanelTasks[18].unk_0C]];
     if (((Item_GetEquipability(g_UiPanelTasks[17].unk_08, saveBuf) & BYTE_MASK) >> selectBit) & 0x1) {
-        D_801485C5 = 0;
-        bitIndex   = selectBit & BYTE_MASK;
+        g_UiPanelTasks[18].flags = 0;
+        bitIndex                 = selectBit & BYTE_MASK;
     } else {
-        D_801485C5 = 1;
-        bitIndex   = selectBit & BYTE_MASK;
+        g_UiPanelTasks[18].flags = 1;
+        bitIndex                 = selectBit & BYTE_MASK;
     }
     record                               = bitIndex;
     s_BattleEquipment[0]                 = g_Characters[record].equip.weapon;

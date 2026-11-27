@@ -12,8 +12,8 @@ MATCH void func_800AD4D4(void) {
     first                = work->param.unk_0B;
     second               = work->param.unk_0B;
     remainder            = (u8)first % 6;
-    work->screen_x.value = D_80148628 + (remainder * 0x1E + 0x13);
-    work->screen_y.value = (second / 3 * 0x10 & 0x1FE0) + (0x30 + D_8014862A);
+    work->screen_x.value = g_UiPanelTasks[21].pos.vx + (remainder * 0x1E + 0x13);
+    work->screen_y.value = (second / 3 * 0x10 & 0x1FE0) + (0x30 + g_UiPanelTasks[21].pos.vy);
     index                = 0;
     if (g_Battle.gene_count != 0) {
         do {

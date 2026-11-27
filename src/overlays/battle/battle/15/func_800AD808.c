@@ -15,7 +15,7 @@ MATCH void func_800AD808(void) {
         SELF(PartyMember)->header.step    = 0;
         return;
     }
-    *(u16*)(work + 0x2E) = D_80148628 + 0x14;
-    *(u16*)(work + 0x30) = D_8014862A + 0x12;
+    *(u16*)(work + 0x2E) = g_UiPanelTasks[21].pos.vx + 0x14;
+    *(u16*)(work + 0x30) = g_UiPanelTasks[21].pos.vy + 0x12;
     Area_AddActor();
 }

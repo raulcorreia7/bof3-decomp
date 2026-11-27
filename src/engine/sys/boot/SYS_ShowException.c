@@ -5,19 +5,19 @@
  * updating the double-buffered debug screen.
  */
 MATCH void SYS_ShowException(void) {
-    const u32*   exception_frame;
+    u32*         exception_frame;
     Cpy16*       src;
     Cpy16*       dst;
     Cpy16*       end;
     u32          saved_context[48];
     u32          exception_code;
-    const u32*   exception_pc;
+    u32*         exception_pc;
     unsigned int i;
     s16          y;
     u8           x_value;
     s16          x_label;
 
-    exception_frame = **(const u32***)0x108;
+    exception_frame = **(u32***)0x108;
     src             = (Cpy16*)exception_frame;
     dst             = (Cpy16*)saved_context;
     end             = (Cpy16*)(exception_frame + 48);
@@ -26,9 +26,7 @@ MATCH void SYS_ShowException(void) {
     } while (src != end);
 
     exception_code = exception_frame[0x26];
-    /* FAKE: pins the code spill before the PC load. */
-    FAKE_BARRIER();
-    exception_pc = (const u32*)exception_frame[0x22];
+    exception_pc   = (u32*)exception_frame[0x22];
 
     ExitCriticalSection();
 
@@ -67,7 +65,7 @@ MATCH void SYS_ShowException(void) {
         }
 
         UI_TextDrawGlyphString(20, 20, 0, (void*)g_ExceptionTitle);
-        UI_TextDrawGlyphString(100, 20, UI_TEXT_HIGHLIGHT, *(void* const*)((const u8*)g_ExceptionCauseNames + (exception_code & CAUSE_EXCMASK)));
+        UI_TextDrawGlyphString(100, 20, UI_TEXT_HIGHLIGHT, *(void* const*)((u8*)g_ExceptionCauseNames + (exception_code & CAUSE_EXCMASK)));
 
         TEXT_Format(g_UiTextFormatBuffer, g_ExceptionHexFormat, exception_pc);
         UI_TextDrawGlyphString(70, 36, 3, (void*)g_UiTextFormatBuffer);

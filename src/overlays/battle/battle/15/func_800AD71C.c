@@ -23,9 +23,9 @@ MATCH void func_800AD71C(void) {
     }
     record                 = SELF(PartyMember);
     record->pos.z.fixed    = 0;
-    record->screen_x.value = D_80148628 + 0x14;
+    record->screen_x.value = g_UiPanelTasks[21].pos.vx + 0x14;
     count                  = record->header.mode;
-    label                  = D_8014862A;
+    label                  = g_UiPanelTasks[21].pos.vy;
     record->header.mode    = count + 1;
     record->screen_y.value = label + 0x12;
     Script_Select(0x13);
