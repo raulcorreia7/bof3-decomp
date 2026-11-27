@@ -20,7 +20,7 @@ extern s8  D_801F4D94[][4][3];
 extern u32 D_801F4DF4[][2];
 extern s8  D_801F4E34[][2][2];
 
-void func_801F3AE4(s32 angle, s32 pos, s32 variant);
+void func_801F3AE4(u16 angle, s32 pos, s32 variant);
 
 extern u8 D_801F4D80[];
 
