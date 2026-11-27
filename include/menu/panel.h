@@ -22,7 +22,8 @@
 #define MENU_PANEL_HIDDEN_X  (-150)
 #define MENU_PANEL_HIDDEN_Y  (-20)
 
-#define MENU_PANEL_TASK_SIZE 0x24
+#define MENU_PANEL_TASK_SIZE   0x24
+#define MENU_CHOICE_PANEL_SIZE MENU_PANEL_TASK_SIZE
 
 /* One panel animation body: the panel moves along the member in fixed pixel
  * steps toward a bound and stops there, clearing its state. An advance tests
@@ -102,7 +103,7 @@ ASSERT_OFFSET(MenuChoicePanel, group_first, 0x0B);
 ASSERT_OFFSET(MenuChoicePanel, group_cursor, 0x0C);
 ASSERT_OFFSET(MenuChoicePanel, drawn_cursor, 0x0D);
 ASSERT_OFFSET(MenuChoicePanel, confirm_timer, 0x12);
-ASSERT_SIZE(MenuChoicePanel, MENU_PANEL_TASK_SIZE);
+ASSERT_SIZE(MenuChoicePanel, MENU_CHOICE_PANEL_SIZE);
 
 /* What a list panel lists: the shop's item list reads a price discount (and
  * dims the whole list when it is set), the ability lists read whose abilities

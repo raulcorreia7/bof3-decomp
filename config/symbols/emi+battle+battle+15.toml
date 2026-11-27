@@ -259,6 +259,7 @@ g_BattleTurnCursor = { addr = 0x80146322, source = "Index into g_BattleTurnOrder
 g_BattleTurnCount = { addr = 0x80146323, source = "Number of battlers ranked in g_BattleTurnOrder, set by Battle_BuildTurnOrder; the turn_count member of g_Battle.", alias = true }
 g_BattleActiveBattler_nv = { addr = 0x80146374, alias = true, source = "The g_Battle.active_battler byte (0x80146374) under a symbol of its own; the battle sites that need a separate %hi/%lo load match through it." }
 g_BattleTarget_nv = { addr = 0x80146394, alias = true, source = "The g_Battle.target byte (0x80146394) under a symbol of its own; the battle sites that need a separate %hi/%lo load match through it." }
+g_BattleSelectionHead = { addr = 0x80148570, alias = true, source = "Folded into g_BattleChoicePanel.items.active (panel task 16)." }
 D_801485DD = { addr = 0x801485DD, size = 0x1, source = "Set to 8 when a battle selection starts." }
 D_80148656 = { addr = 0x80148656, size = 0x1, source = "Party slot of the battler whose message the battle shows; the field menu line draw also uses it as an index into g_PartyFieldOrder." }
 g_ItemCategoryIds = { addr = 0x801C893C, size = 0x14, source = "Pointers to the five item categories." }
