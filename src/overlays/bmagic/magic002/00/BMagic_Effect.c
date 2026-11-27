@@ -150,9 +150,9 @@ NON_MATCHING void func_801EF1FC(s16 x0, s16 y0, s16 x1, s16 y1, s16 x2, s16 y2) 
             prev_light[j]  = ring_light[j];
             prev_mirror[j] = ring_mirror[j];
         }
-        ring_x[0]   = FIXED_MUL(-x1, rsin(i << 8));
+        ring_x[0]   = -(x1 * rsin(i << 8)) >> 12;
         ring_z[0]   = 0;
-        ring_height = FIXED_MUL(-x1, rcos(i << 8));
+        ring_height = -(x1 * rcos(i << 8)) >> 12;
         ring_radius = ring_x[0];
         vec.vx      = ring_x[0];
         vec.vy      = ring_height;

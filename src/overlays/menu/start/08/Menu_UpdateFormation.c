@@ -48,7 +48,7 @@ NON_MATCHING void Menu_UpdateFormation(void) {
     }
     g_UIPanelTasks[g_FormationRow * 2 + (g_FormationColumn + 0xB)].unk_0C = g_FormationCursorColumn == 0 ? 1 << g_FormationCursorRow : 7;
     if (g_FormationCursorColumn != 0) {
-        message = g_FormationCursorRow * 2 + (g_FormationCursorColumn + 0x76);
+        message = (s16)(g_FormationCursorColumn + 0x76) + (s16)(g_FormationCursorRow << 1);
     } else {
         message = 0x3B;
     }
@@ -94,7 +94,7 @@ NON_MATCHING void Menu_UpdateFormation(void) {
             MenuPanelTask* card;
 
             D_80148654       = 0;
-            g_PartyFormation = (u8)g_FormationRow * 2 + ((u8)g_FormationColumn - 1);
+            g_PartyFormation = (u8)g_FormationRow * 2 + (g_FormationColumn - 1);
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
             for (i = 0; i < 6; i++) {
                 card = &closed[i - 7];
