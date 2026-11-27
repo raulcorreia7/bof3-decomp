@@ -10,8 +10,6 @@ MATCH u8 func_801B0E44(void) {
     s32        y;
     u8         result;
     s32        height;
-    /* FAKE: retail's frame is 64 bytes larger than the statements need. */
-    FAKE_STACK_PADS(s32, 16);
 
     saved_dir = SELF(Actor)->direction;
     result    = func_801B9598();
@@ -30,7 +28,10 @@ MATCH u8 func_801B0E44(void) {
         g_ScratchPad.cells.words[3] = SELF(Actor)->pos.y.fixed + g_FacingOffsets[SELF(Actor)->direction].y * divisor * SELF(Actor)->timer * 2;
     }
     if (g_GameStateIndex != GAME_REQUEST_SCENE_CAMERA) {
-        if (((s32 (*)(s32, s32))Area_IsStepBlocked)(g_ScratchPad.cells.words[2], g_ScratchPad.cells.words[3]) != 0) {
+        Coord step_x = {g_ScratchPad.cells.words[2]};
+        Coord step_y = {g_ScratchPad.cells.words[3]};
+
+        if (((s32 (*)(s32, s32))Area_IsStepBlocked)(step_x.fixed, step_y.fixed) != 0) {
             result = 0;
             if (SELF(Actor)->header.mode == 2) {
                 return 0xFF;
@@ -40,7 +41,12 @@ MATCH u8 func_801B0E44(void) {
     switch (result & BYTE_MASK) {
         case 2:
             /* FAKE: The caller truncates the height after the scratch flag test. */
-            height = ((s32 (*)(s32, s32, s32))Area_HeightReadStep)(g_ScratchPad.cells.words[2], g_ScratchPad.cells.words[3], SELF(Actor)->direction);
+            {
+                Coord sample_x = {g_ScratchPad.cells.words[2]};
+                Coord sample_y = {g_ScratchPad.cells.words[3]};
+
+                height = ((s32 (*)(s32, s32, s32))Area_HeightReadStep)(sample_x.fixed, sample_y.fixed, SELF(Actor)->direction);
+            }
             func_801B13BC();
             if (g_ScratchPad.cells.bytes[0] != 0) {
                 if ((s16)height >= 0x41) {
@@ -79,14 +85,24 @@ MATCH u8 func_801B0E44(void) {
             return 0;
         case 3:
             /* FAKE: The caller truncates the height after the scratch flag test. */
-            height = ((s32 (*)(s32, s32, s32))Area_HeightReadStep)(g_ScratchPad.cells.words[2], g_ScratchPad.cells.words[3], SELF(Actor)->direction);
+            {
+                Coord sample_x = {g_ScratchPad.cells.words[2]};
+                Coord sample_y = {g_ScratchPad.cells.words[3]};
+
+                height = ((s32 (*)(s32, s32, s32))Area_HeightReadStep)(sample_x.fixed, sample_y.fixed, SELF(Actor)->direction);
+            }
             if (g_ScratchPad.cells.bytes[0] != 0) {
                 if ((s16)height >= 0x41) {
                     g_AreaCameraSpeed      = 0;
                     SELF(Actor)->direction = saved_dir;
                     return 1;
                 }
-                Area_HeightRead(g_ScratchPad.cells.words[2], g_ScratchPad.cells.words[3]);
+                {
+                    Coord sample_x = {g_ScratchPad.cells.words[2]};
+                    Coord sample_y = {g_ScratchPad.cells.words[3]};
+
+                    Area_HeightRead(sample_x.fixed, sample_y.fixed);
+                }
                 return 0;
             }
             return 0;

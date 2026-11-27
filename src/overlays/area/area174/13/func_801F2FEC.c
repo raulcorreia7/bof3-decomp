@@ -19,7 +19,12 @@ NON_MATCHING void func_801F2FEC(s32* pos, s16 radius_x, s16 radius_y, u16 rotati
     angle = 0;
     i     = 0;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, NULL);
-    Area_CellAddPrim(pos[0], pos[1], 0, sizeof(DR_MODE));
+    {
+        Coord cell_x = {pos[0]};
+        Coord cell_y = {pos[1]};
+
+        Area_CellAddPrim(cell_x.fixed, cell_y.fixed, 0, sizeof(DR_MODE));
+    }
 
     Camera_ProjectPoint(pos, &screen);
     size.vx = radius_x;
@@ -43,7 +48,12 @@ NON_MATCHING void func_801F2FEC(s32* pos, s16 radius_x, s16 radius_y, u16 rotati
         setRGB0(prim, center_shade, center_shade, center_shade);
         setRGB1(prim, rim_shade, rim_shade, rim_shade);
         setRGB2(prim, rim_shade, rim_shade, rim_shade);
-        Area_CellAddPrim(pos[0], pos[1], 0, sizeof(POLY_G3));
+        {
+            Coord cell_x = {pos[0]};
+            Coord cell_y = {pos[1]};
+
+            Area_CellAddPrim(cell_x.fixed, cell_y.fixed, 0, sizeof(POLY_G3));
+        }
         i++;
     } while (i < 16);
 }

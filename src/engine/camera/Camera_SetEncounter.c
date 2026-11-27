@@ -15,8 +15,6 @@ MATCH void Camera_SetEncounter(s32 mode) {
     s32             mode_index;
     s32             offset_x;
     s32             offset_y;
-    /* FAKE: the retail frame holds 0x10 bytes no statement explains. */
-    FAKE_STACK_PADS(u8, 0x10);
 
     mode_index = mode;
     count      = 0;
@@ -26,7 +24,12 @@ MATCH void Camera_SetEncounter(s32 mode) {
     do {
         if (entry->active != 0) {
             count += 1;
-            D_801CD954 += Area_HeightSample(entry->pos.x, entry->pos.y);
+            {
+                Coord sample_x = {entry->pos.x};
+                Coord sample_y = {entry->pos.y};
+
+                D_801CD954 += Area_HeightSample(sample_x.fixed, sample_y.fixed);
+            }
         }
         entry++;
         index += 1;

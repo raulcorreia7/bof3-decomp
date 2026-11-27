@@ -19,8 +19,6 @@ MATCH void Game_BattleScrollToLeader(void) {
     s32  x;
     s32  y;
     u8   key;
-    /* FAKE: retail frame reserves 16 bytes no statement uses; pure-C best 95.04%. */
-    FAKE_STACK_PADS(u8, 16);
 
     index = 0;
     limit = g_Game.party_size;
@@ -67,7 +65,12 @@ MATCH void Game_BattleScrollToLeader(void) {
         dy  = abs(*py - y);
         *py = *((s32*)((u8*)&g_Game.members[0].pos.y.fixed + member_offset));
         adx = MAX(adx, dy);
-        ret = Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY) - g_AreaCameraHeight;
+        {
+            Coord sample_x = {g_AreaScrollTargetX};
+            Coord sample_y = {g_AreaScrollTargetY};
+
+            ret = Area_HeightSample(sample_x.fixed, sample_y.fixed) - g_AreaCameraHeight;
+        }
         adx = (u32)adx >> 13;
         adx &= BYTE_MASK;
         if (adx != 0) {

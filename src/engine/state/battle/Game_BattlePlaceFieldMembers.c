@@ -10,8 +10,6 @@ MATCH void Game_BattlePlaceFieldMembers(void) {
     u8           size;
     u8           count;
     s32          value;
-    /* FAKE: unused frame, 16 bytes. */
-    FAKE_STACK_PADS(u8, 16);
 
     i = 0;
     while (i < g_PartySize) {
@@ -46,9 +44,14 @@ MATCH void Game_BattlePlaceFieldMembers(void) {
                 if (g_PartyBattleOrder[j] == g_Game.members[i].chr.character_id)
                     break;
             }
-            value                                = SCRATCH[j];
-            g_Game.members[i].pos.y.fixed        = value;
-            g_Game.members[i].pos.z.part.integer = Area_HeightRead(g_Game.members[i].pos.x.fixed, value);
+            value = SCRATCH[j];
+            {
+                Coord sample_x = {g_Game.members[i].pos.x.fixed};
+                Coord sample_y = {value};
+
+                g_Game.members[i].pos.y.fixed        = value;
+                g_Game.members[i].pos.z.part.integer = Area_HeightRead(sample_x.fixed, sample_y.fixed);
+            }
             i++;
             size = g_PartySize;
         } while (i < size);

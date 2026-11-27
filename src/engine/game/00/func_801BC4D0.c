@@ -6,7 +6,6 @@ MATCH s32 func_801BC4D0(void) {
     u8  rate;
     s32 result;
 
-    FAKE_STACK_PADS(u8, 0x20); /* FAKE: retail frame reserves 32 unused bytes. */
     saved = SELF(Actor)->direction;
     type  = func_801B9598();
     if ((SELF(Actor)->direction == FACING_UP_RIGHT) || (SELF(Actor)->direction == FACING_DOWN_LEFT)) {
@@ -29,16 +28,25 @@ MATCH s32 func_801BC4D0(void) {
         case 4:
         case 5:
             return 1;
-        case 3:
-            result = ((s32 (*)(s32, s32, u8))Area_HeightReadStep)(*(s32*)&g_ScratchPad.cells.halves[4], FIELD(s32, (&g_ScratchPad.cells.halves[4]), 0x4u), SELF(Actor)->direction);
+        case 3: {
+            Coord step_x = {*(s32*)&g_ScratchPad.cells.halves[4]};
+            Coord step_y = {FIELD(s32, (&g_ScratchPad.cells.halves[4]), 0x4u)};
+
+            result = ((s32 (*)(s32, s32, u8))Area_HeightReadStep)(step_x.fixed, step_y.fixed, SELF(Actor)->direction);
             if (SP_REF(u8, 0) != 0) {
                 if ((s16)result >= 0x41) {
                     SELF(Actor)->direction = saved;
                     return 1;
                 }
-                Area_HeightRead(*(s32*)&g_ScratchPad.cells.halves[4], FIELD(s32, (&g_ScratchPad.cells.halves[4]), 0x4u));
+                {
+                    Coord sample_x = {*(s32*)&g_ScratchPad.cells.halves[4]};
+                    Coord sample_y = {FIELD(s32, (&g_ScratchPad.cells.halves[4]), 0x4u)};
+
+                    Area_HeightRead(sample_x.fixed, sample_y.fixed);
+                }
             }
             return 0;
+        }
         case 6:
             return 5;
         case 7:

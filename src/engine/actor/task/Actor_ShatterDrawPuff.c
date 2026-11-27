@@ -3,10 +3,8 @@
 /* func_8019DAA0 */
 /* Draws one dust puff as a semi-transparent screen quad. */
 MATCH s32 Actor_ShatterDrawPuff(s32* puff, s16 quad_size, u8 brightness) {
-    DVECTOR screen;
-    u16     size[2];
-    /* FAKE: retail reserves frame bytes above size[] that no statement uses. */
-    FAKE_STACK_PADS(u8, 12);
+    DVECTOR   screen;
+    u16       size[2];
     POLY_FT4* primitive;
 
     primitive = (POLY_FT4*)g_GfxPrimCursor;
@@ -26,5 +24,10 @@ MATCH s32 Actor_ShatterDrawPuff(s32* puff, s16 quad_size, u8 brightness) {
     primitive->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 704, 256);
     setRGB0(primitive, brightness, brightness, brightness);
 
-    Area_CellAddPrim(puff[0], puff[1], 2, sizeof(POLY_FT4));
+    {
+        Coord cell_x = {puff[0]};
+        Coord cell_y = {puff[1]};
+
+        Area_CellAddPrim(cell_x.fixed, cell_y.fixed, 2, sizeof(POLY_FT4));
+    }
 }

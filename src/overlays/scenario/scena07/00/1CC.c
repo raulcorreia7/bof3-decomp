@@ -137,10 +137,12 @@ MATCH void func_801F73C4(void) {
 }
 
 MATCH void func_801F7408(void) {
-    /* FAKE: the retail frame holds 0x10 bytes no statement explains. */
-    FAKE_STACK_PADS(u8, 0x10);
+    {
+        Coord sample_x = {SELF(Actor)->pos.x.fixed};
+        Coord sample_y = {SELF(Actor)->pos.y.fixed};
 
-    SELF(Actor)->pos.z.fixed = TO_COORD(Area_HeightSample(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed));
+        SELF(Actor)->pos.z.fixed = TO_COORD(Area_HeightSample(sample_x.fixed, sample_y.fixed));
+    }
     func_801F9DA8();
     SELF(Actor)->timer = 0;
     SELF(Actor)->vx    = 95;
@@ -182,20 +184,17 @@ MATCH void func_801F75F4(void) {
 
 MATCH void func_801F7638(void) {
     Scena07Burst* burst;
-    s32           y;
 
-    /* FAKE: the retail frame holds 0x10 bytes no statement explains. */
-    FAKE_STACK_PADS(u8, 0x10);
+    {
+        Coord sample_x = {SELF(Actor)->pos.x.fixed};
+        Coord sample_y = {SELF(Actor)->pos.y.fixed};
 
-    SELF(Actor)->pos.z.fixed = TO_COORD(Area_HeightSample(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed));
-    burst                    = SCENA07_BURST_RECORD;
-    burst->pos.vx            = SELF(Actor)->pos.x.fixed;
-    y                        = SELF(Actor)->pos.y.fixed;
-    D_801FDFBC               = burst;
-    /* FAKE: the block keeps the y store after the pointer store; 33 of 38 instructions otherwise. */
-    do {
-        burst->pos.vy = y;
-    } while (0);
+        SELF(Actor)->pos.z.fixed = TO_COORD(Area_HeightSample(sample_x.fixed, sample_y.fixed));
+    }
+    burst              = SCENA07_BURST_RECORD;
+    burst->pos.vx      = SELF(Actor)->pos.x.fixed;
+    D_801FDFBC         = burst;
+    burst->pos.vy      = SELF(Actor)->pos.y.fixed;
     burst->pos.vz      = SELF(Actor)->pos.z.fixed;
     burst->unk_10      = 0;
     SELF(Actor)->timer = 0;
@@ -264,8 +263,6 @@ MATCH void func_801F79EC(void) {
 }
 
 MATCH void func_801F7A30(void) {
-    /* FAKE: retail reserves 16 bytes of frame that no statement uses. */
-    FAKE_STACK_PADS(u8, 0x10);
     Actor* work;
 
     Scene_PlaceAtLead();
@@ -333,9 +330,6 @@ MATCH void func_801F7D28(void) {
 }
 
 MATCH void func_801F7D6C(void) {
-    /* FAKE: retail reserves 16 bytes of frame that no statement uses. */
-    FAKE_STACK_PADS(u8, 0x10);
-
     Scene_PlaceAtLead();
     func_801FA01C();
     SELF(Actor)->vx = 120;
@@ -819,8 +813,6 @@ MATCH void func_801F9E10(u8* effect) {
     s32  radius;
     u32  angle;
     s32* cell;
-    /* FAKE: the retail frame holds 16 bytes no statement explains. */
-    FAKE_STACK_PADS(u8, 16);
 
     cell      = (s32*)effect;
     effect[0] = 1;
@@ -832,8 +824,13 @@ MATCH void func_801F9E10(u8* effect) {
     angle     = rand() & 0xFC0;
     cell[1]   = SELF(Actor)->pos.x.fixed + ((radius * rcos(angle)) >> 12);
     cell[2]   = SELF(Actor)->pos.y.fixed + ((radius * rsin(angle)) >> 12);
-    cell[7]   = Area_HeightSample(cell[1], cell[2]) << 16;
-    cell[3]   = cell[7];
+    {
+        Coord sample_x = {cell[1]};
+        Coord sample_y = {cell[2]};
+
+        cell[7] = Area_HeightSample(sample_x.fixed, sample_y.fixed) << 16;
+    }
+    cell[3] = cell[7];
 }
 
 /* Advances the active effects: project, update and retire each. */

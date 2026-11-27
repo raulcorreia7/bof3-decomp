@@ -721,8 +721,6 @@ MATCH void func_801F92F0(Coord* position, s32* step) {
     Coord*   origin;
     s32      point[4];
 
-    FAKE_STACK_PADS(u8, 0xC); /* FAKE: retail keeps the point row aligned in a 64-byte frame. */
-
     poly   = (POLY_F4*)g_GfxPrimCursor;
     delta  = step;
     origin = position;
@@ -759,7 +757,12 @@ MATCH void func_801F92F0(Coord* position, s32* step) {
     point[2] = origin[2].fixed - delta[2];
     Camera_ProjectPoint(point, (DVECTOR*)&poly->x3);
     setRGB0(poly, 255, 255, 255);
-    Area_CellAddPrim(origin[0].fixed, origin[1].fixed, 0, sizeof(POLY_F4));
+    {
+        Coord cell_x = {origin[0].fixed};
+        Coord cell_y = {origin[1].fixed};
+
+        Area_CellAddPrim(cell_x.fixed, cell_y.fixed, 0, sizeof(POLY_F4));
+    }
 }
 
 MATCH void func_801F9500(WorldPos* pos, s32* vx) {

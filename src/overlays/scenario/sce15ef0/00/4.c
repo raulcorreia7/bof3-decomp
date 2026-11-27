@@ -116,8 +116,8 @@ MATCH void func_801D1220(s32 value) {
     POLY_F4* new_var;
     s32      tpage;
     u8       i;
-
-    FAKE_STACK_PADS(u8, 0x18); /* FAKE: retail keeps six unused words between the point rows and the saved registers. */
+    /* FAKE: retail reserves 8 more frame bytes than the cell position takes, between the point rows and the saved registers. */
+    FAKE_STACK_PADS(u8, 8);
 
     front[0] = back[0] = TO_COORD(44) + COORD_HALF;
     front[1] = back[1] = TO_COORD(113) + COORD_HALF;
@@ -127,7 +127,12 @@ MATCH void func_801D1220(s32 value) {
     do {
         tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-        Area_CellAddPrim(front[0], front[1], 0, 0xC);
+        {
+            Coord cell_x = {front[0]};
+            Coord cell_y = {front[1]};
+
+            Area_CellAddPrim(cell_x.fixed, cell_y.fixed, 0, 0xC);
+        }
         i++;
         /* FAKE: the copy in its own block fixes the cursor pointer's allocation; retail keeps the load and the draw setup apart. */
         do {

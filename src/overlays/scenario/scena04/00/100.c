@@ -234,16 +234,18 @@ MATCH void func_801F77EC(void) {
     ScenePath* work;
     u8         i;
 
-    /* FAKE: retail reserves 16 bytes of unused stack. */
-    FAKE_STACK_PADS(u8, 16);
-
     work = MEM_PTR(ScenePath, AREA_WORK + 0x1400);
     setVector(&work->focus, g_PartyActors[0].pos.x.fixed, g_AreaFocus.y.fixed, g_PartyActors[0].pos.z.fixed >> 8);
     i = 0;
     do {
         work->points[i].vx = work->focus.vx + D_801FA1A4[i];
         work->points[i].vy = work->focus.vy + D_801FA1C4[i];
-        work->points[i].vz = (s16)Area_HeightSample(work->points[i].vx, work->points[i].vy) << 8;
+        {
+            Coord sample_x = {work->points[i].vx};
+            Coord sample_y = {work->points[i].vy};
+
+            work->points[i].vz = (s16)Area_HeightSample(sample_x.fixed, sample_y.fixed) << 8;
+        }
         i++;
     } while (i < ARRAY_COUNT(work->points));
     func_801F7FCC();
