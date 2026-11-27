@@ -789,7 +789,8 @@ MATCH void Scene_RunSaveMenu(void) {
 
 /* func_801F9504 */
 MATCH void Scene_EnterSaveMenu(void) {
-    s32 i;
+    s32  i;
+    u16* substate;
 
     SYS_SetFlag(g_SceneEventFlags, 146);
     for (i = 9; i < 23; i++) {
@@ -819,7 +820,8 @@ MATCH void Scene_EnterSaveMenu(void) {
     GFX_PaletteCopy(1);
     GFX_PaletteCopy(2);
     g_GfxPalettePending = 1;
-    FAKE_VOLATILE(u16, g_GameEntrySubstate) += 1;
+    substate            = &g_GameEntrySubstate;
+    *substate += 1;
 }
 
 /* func_801F9654 */

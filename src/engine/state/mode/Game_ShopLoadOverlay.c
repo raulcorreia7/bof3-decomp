@@ -2,6 +2,7 @@
 
 MATCH void Game_ShopLoadOverlay(void) {
     Actor* work;
+    u16*   substate;
 
     if (D_8014865C >= 0) {
         work = &g_Actors[D_8014865C];
@@ -30,5 +31,6 @@ MATCH void Game_ShopLoadOverlay(void) {
     GFX_PaletteCopy(2u);
     g_GfxPalettePending = 1u;
     Area_RunFrame();
-    FAKE_VOLATILE(u16, g_GameEntrySubstate) += 1u;
+    substate = &g_GameEntrySubstate;
+    *substate += 1;
 }
