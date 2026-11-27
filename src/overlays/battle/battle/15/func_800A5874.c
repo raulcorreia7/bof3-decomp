@@ -10,7 +10,7 @@ MATCH void func_800A5874(void) {
         D_80148594                       = 0;
         *latch                           = 0;
         g_BattleChoicePanel.items.active = 0;
-        D_801485DC                       = 0;
+        g_UiPanelTasks[19].active        = 0;
         EMI_ArchiveLoad(EMI_SLOT_BATL_RE2);
         counter  = &g_Battle.ui_mode;
         *counter = *counter + 1;

@@ -24,8 +24,8 @@ MATCH void func_801D7E4C(void) {
         y                                                    = D_80148658[0] * 0x36;
         *latch                                               = 1;
         g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0B = 1;
-        D_801485E0                                           = x;
-        D_801485E2                                           = g_UiPanelTasks[MENU_START_PANEL_ITEMS].pos.vy + y;
+        g_UiPanelTasks[19].pos.vx                            = x;
+        g_UiPanelTasks[19].pos.vy                            = g_UiPanelTasks[MENU_START_PANEL_ITEMS].pos.vy + y;
     } else {
         *latch = 0;
     }
@@ -65,7 +65,7 @@ MATCH void func_801D7E4C(void) {
     if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
-        D_801485DC = 0;
+        g_UiPanelTasks[19].active = 0;
         for (i = 0; i < Party_CountOrder(PARTY_ORDER_FIELD); i++) {
             g_UiPanelTasks[i + MENU_PANEL_MEMBER_ROW_FIRST].state = 9;
             g_UiPanelTasks[i + 4].state                           = 8;

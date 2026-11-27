@@ -24,6 +24,10 @@ A deliberate removal passes with a commit message line between the merge base an
 
     Kept-Removed: <name> <reason>
 
+A dead declaration, one that only the file defining it names, goes with a line that states why:
+
+    Removed: <name> <reason>
+
 Usage: python3 tools/check_kept.py REF [HEAD]
 """
 
@@ -67,6 +71,7 @@ WEAK_WORDS = frozenset(
     "u8 s8 u16 s16 u32 s32 u64 s64 int char short long unsigned signed void const volatile".split()
 )
 KEPT_REMOVED = re.compile(r"^Kept-Removed:\s*(\S+)", re.M)
+REMOVED = re.compile(r"^Removed:\s*(\S+)\s+\S", re.M)
 DEFINE = re.compile(r"^[ \t]*#[ \t]*define[ \t]+(\w+)(\([^)]*\))?(.*)$")
 INCLUDE = re.compile(r'^\s*#\s*include\s+"([^"]+)"', re.M)
 IDENT = re.compile(r"[A-Za-z_]\w*")
@@ -497,10 +502,18 @@ def layout_signature(layouts: list[list[Member]]) -> set[tuple]:
     return {tuple((m.offset, m.path.count(".")) for m in layout) for layout in layouts}
 
 
-def compare(before: Snapshot, after: Snapshot, removed: set[str]) -> list[str]:
-    """Every loss or degradation from BEFORE to AFTER, one line each."""
+def compare(
+    before: Snapshot, after: Snapshot, removed: set[str], dead: set[str] = frozenset()
+) -> list[str]:
+    """Every loss or degradation from BEFORE to AFTER, one line each.
+
+    REMOVED names pass outright; DEAD names pass when only one file named them in BEFORE.
+    """
     problems: list[str] = []
     old, new = before.entities, after.entities
+    removed = set(removed) | {
+        n for n in dead if sum(n in used for used in before.uses.values()) <= 1
+    }
 
     def gone(name: str) -> bool:
         # A name built by token pasting (a static assertion) never appears in the text; a FAKE_ helper may go.
@@ -582,10 +595,10 @@ def compare(before: Snapshot, after: Snapshot, removed: set[str]) -> list[str]:
     return sorted(set(problems))
 
 
-def removals(base: str, head: str) -> set[str]:
-    return set(
-        KEPT_REMOVED.findall(git("log", "--format=%B", f"{base}..{head}", root=ROOT))
-    )
+def removals(base: str, head: str) -> tuple[set[str], set[str]]:
+    """The `Kept-Removed:` names and the `Removed:` names of the commits in BASE..HEAD."""
+    log = git("log", "--format=%B", f"{base}..{head}", root=ROOT)
+    return set(KEPT_REMOVED.findall(log)), set(REMOVED.findall(log))
 
 
 def record_files(tree: Path, names: set[str]) -> set[str]:
@@ -649,7 +662,7 @@ def main(argv: list[str]) -> int:
             before_entities, *read_tree(trees["before"]), *addresses(base)
         )
         after = Snapshot(after_entities, after_uses, after_defines, *addresses(head))
-    problems = compare(before, after, removals(base, head))
+    problems = compare(before, after, *removals(base, head))
     for problem in problems:
         print(problem)
     if problems:

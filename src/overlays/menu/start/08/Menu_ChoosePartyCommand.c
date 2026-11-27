@@ -48,7 +48,7 @@ MATCH void Menu_ChoosePartyCommand(void) {
         g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].state = 1;
         g_BattlePanelMode                                  = 1;
         g_UiPanelTasks[MENU_START_PANEL_CURSOR].active     = 0;
-        D_801485DC                                         = 0;
+        g_UiPanelTasks[19].active                          = 0;
         g_UiPanelTasks[20].active                          = 0;
         D_80148652                                         = 0;
         D_80148654                                         = 5;

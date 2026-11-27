@@ -97,6 +97,16 @@ def test_a_removed_fake_helper_define_passes() -> None:
     assert compare(before, snapshot(Entities(), {"a.c": set()}), set()) == []
 
 
+def test_a_dead_typedef_passes_with_removed_and_a_used_one_does_not() -> None:
+    old = Entities(typedefs={"PanelView": "struct PanelView"})
+    after = snapshot(Entities(), {"a.c": set(), "b.c": set()})
+    dead = snapshot(old, {"a.c": {"PanelView"}, "b.c": set()})
+    used = snapshot(old, {"a.c": {"PanelView"}, "b.c": {"PanelView"}})
+    assert compare(dead, after, set(), {"PanelView"}) == []
+    assert compare(dead, after, set()) == ["typedef PanelView is gone"]
+    assert compare(used, after, set(), {"PanelView"}) == ["typedef PanelView is gone"]
+
+
 def test_enumerator_values_never_change() -> None:
     before = snapshot(
         Entities(enums={"STATE_IDLE": ("State", 0)}), {"a.h": {"STATE_IDLE"}}

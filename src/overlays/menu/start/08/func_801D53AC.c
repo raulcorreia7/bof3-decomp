@@ -44,7 +44,7 @@ MATCH void func_801D53AC(void) {
         g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].state = 1;
         g_UiPanelTasks[MENU_START_PANEL_COMMANDS].state    = 1;
         g_UiPanelTasks[MENU_START_PANEL_ITEMS].state       = 1;
-        D_801485DC                                         = 0;
+        g_UiPanelTasks[19].active                          = 0;
         g_UiPanelTasks[MENU_START_PANEL_CURSOR].active     = 0;
         D_80148654                                         = 0;
         *step += 5;

@@ -23,10 +23,10 @@ NON_MATCHING void func_801D759C(void) {
     }
     D_80148624 = 0;
     if (g_BattleMessageState == 0) {
-        window[0x64] = 1;
-        D_801485E7   = 1;
-        D_801485E0   = D_801483C4;
-        D_801485E2   = D_801483C6 + D_8014857A * 0x36;
+        window[0x64]              = 1;
+        D_801485E7                = 1;
+        g_UiPanelTasks[19].pos.vx = D_801483C4;
+        g_UiPanelTasks[19].pos.vy = D_801483C6 + D_8014857A * 0x36;
     } else {
         window[0x64] = 0;
     }
@@ -85,7 +85,7 @@ NON_MATCHING void func_801D759C(void) {
         D_80148651++;
     } else if ((g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) != 0) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
-        D_801485DC = 0;
+        g_UiPanelTasks[19].active = 0;
         D_80148651--;
     }
 }
