@@ -10,7 +10,7 @@ MATCH void func_800A5E98(void) {
     g_Battle.gene_count = 0;
     i                   = 0;
     do {
-        entry_index = *(s16*)&D_801485EC + FIELD(s16, (&D_801485EC), 0x2u);
+        entry_index = *(s16*)&g_UiPanelTasks[19].u.battle.cursor + FIELD(s16, (&g_UiPanelTasks[19].u.battle.cursor), 0x2u);
         entry       = (u8*)&D_80145518[entry_index];
         value       = entry[i & BYTE_MASK];
         if (value != GAME_NONE) {
@@ -22,7 +22,7 @@ MATCH void func_800A5E98(void) {
 
     Battle_SetGeneCount();
     SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 4));
-    D_801485DF = 2;
+    g_UiPanelTasks[19].state = 2;
     BATTLE_ACTIVE_MEMBER->u.turn.action_flags.volatile_value |= BATTLER_ACTION_ABILITY_ALT_POSE;
     counter  = (u8*)&g_Battle.ui_mode;
     *counter = *counter + 1;

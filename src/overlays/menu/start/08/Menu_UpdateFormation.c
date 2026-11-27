@@ -18,17 +18,17 @@ NON_MATCHING void Menu_UpdateFormation(void) {
     dy         = 0;
     old_column = 0;
     Menu_DrawClutStrip(g_WindowClut);
-    frame  = &D_801485DC;
+    frame  = &g_UiPanelTasks[19].active;
     *frame = 0;
     if (g_FormationPickColumn != 0x7F) {
         s32 pick;
         u16 y2;
 
         pick                                                 = g_FormationPickRow * 3 + g_FormationPickColumn;
-        D_801485E0                                           = D_801EC4D0[pick].unk_00;
+        g_UiPanelTasks[19].pos.vx                                           = D_801EC4D0[pick].unk_00;
         y2                                                   = D_801EC4D0[pick].unk_02;
         *frame                                               = 1;
-        D_801485E2                                           = y2;
+        g_UiPanelTasks[19].pos.vy                                           = y2;
         g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0A = D_801EC4D0[pick].unk_04 + 1;
         g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0B = 0;
     }
@@ -50,7 +50,7 @@ NON_MATCHING void Menu_UpdateFormation(void) {
     }
     D_801484CC = message;
     if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
-        D_801485DC = 0;
+        g_UiPanelTasks[19].active = 0;
         if (g_FormationCursorColumn != 0) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 4));
             g_FormationPickColumn = 0x7F;
@@ -77,7 +77,7 @@ NON_MATCHING void Menu_UpdateFormation(void) {
         volatile u8* closed;
 
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
-        closed     = &D_801485DC;
+        closed     = &g_UiPanelTasks[19].active;
         *closed    = 0;
         D_80148600 = 0;
         if (g_FormationPickColumn != 0x7F) {

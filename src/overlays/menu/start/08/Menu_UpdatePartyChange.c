@@ -17,7 +17,7 @@ NON_MATCHING void Menu_UpdatePartyChange(void) {
 
     clut = &g_WindowClut;
     Menu_DrawClutStrip(*clut);
-    frame                                                = &D_801485DC;
+    frame                                                = &g_UiPanelTasks[19].active;
     *frame                                               = 0;
     g_UiPanelTasks[20].active                            = 0;
     g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME].pos.vx = D_801EC548[D_80148659][D_80148658[0]].x;
@@ -106,7 +106,7 @@ NON_MATCHING void Menu_UpdatePartyChange(void) {
             return;
         }
         D_80148654 = 5;
-        D_801485DC = 0;
+        g_UiPanelTasks[19].active = 0;
         D_80148600 = 0;
         D_801484E3 = 1;
         D_80148652 += 1;

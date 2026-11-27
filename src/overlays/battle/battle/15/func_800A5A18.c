@@ -11,15 +11,12 @@ MATCH void func_800A5A18(void) {
     if ((*flag & 0x1) == 0) {
         *flag = 0;
         UI_PanelOpenTask(0x13, 5);
-        D_801485DE = 3;
-        D_801485E0 = 0x15B;
-        D_801485DF = 0;
-        D_801485E2 = 0x3F;
-        /* FAKE: statement boundary keeps the retail register order and schedule. */
-        do {
-            D_801485EC = 0;
-        } while (0);
-        D_801485EE                                      = 0;
+        g_UiPanelTasks[19].mode = 3;
+        g_UiPanelTasks[19].pos.vx = 0x15B;
+        g_UiPanelTasks[19].state = 0;
+        g_UiPanelTasks[19].pos.vy = 0x3F;
+        g_UiPanelTasks[19].u.battle.cursor = 0;
+        g_UiPanelTasks[19].u.battle.row_base                                      = 0;
         g_BattleMessages[((D_801EC328 - 1) & 0xF)].text = UI_MessageGetText(0x63);
         count                                           = g_BattleUIState + 1;
         state                                           = &g_Battle.selection;

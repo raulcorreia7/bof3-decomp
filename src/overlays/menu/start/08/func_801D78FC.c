@@ -17,8 +17,8 @@ MATCH void func_801D78FC(void) {
     if (g_BattleMessageState == 0) {
         panel->active = 1;
         D_801485E7    = 0;
-        D_801485E0    = D_801483C4;
-        D_801485E2    = D_801483C6 + D_8014857A * 54;
+        g_UiPanelTasks[19].pos.vx    = D_801483C4;
+        g_UiPanelTasks[19].pos.vy    = D_801483C6 + D_8014857A * 54;
     } else {
         panel->active = 0;
     }
@@ -100,7 +100,7 @@ MATCH void func_801D78FC(void) {
             }
             g_BattleChoicePhase = 4;
             D_80148624          = 1;
-            D_801485DC          = 0;
+            g_UiPanelTasks[19].active          = 0;
             D_80148658[0]       = 0;
             D_8014857D          = D_8014857C;
             D_80148651++;

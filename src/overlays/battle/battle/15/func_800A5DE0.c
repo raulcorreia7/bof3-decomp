@@ -12,6 +12,6 @@ MATCH void func_800A5DE0(void) {
     D_8014862E              = 1;
     counter                 = (u8*)&g_Battle.ui_mode;
     count                   = *counter;
-    D_801485DF              = 2;
+    g_UiPanelTasks[19].state              = 2;
     *counter                = (count + 1);
 }
