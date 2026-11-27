@@ -14,7 +14,7 @@ as `+`. Run each Python tool with `.venv/bin/python tools/<name>.py` or directly
 | Check one image                          | `meson compile -C build/meson check-<image>`                             | same                                                      |
 | Rank the open functions, cheapest route first | `tools/worklist.py -n 10 [--image <glob>]`                          | `--help`                                                  |
 | List one lane's open functions in match order | `tools/worklist.py --image <glob> [--except <name>] --order strategy [--measure]` | `--help`                                                  |
-| Write rows for another program           | `<tool> --jsonl` (worklist, dups, sigs, quality `--queue`, symbol refs, template_diff, m2c_sweep) | `--help`                                                  |
+| Write rows for another program           | `<tool> --jsonl` (worklist, dups, quality `--queue`, symbol refs, template_diff, m2c_sweep) | `--help`                                                  |
 | Run every check before a push            | `meson compile -C build/meson pre-push`                                  | [pre-push](#pre-push)                                     |
 | Compare one function with retail         | `tools/match.sh <target>@0x<ADDR>`                                       | [match.sh](../docs/toolchain.md#matchsh)                  |
 | Preprocess the context for m2c or a scratch | `tools/m2ctx.py include/common.h -o ctx.c`                            | [m2c](../docs/toolchain.md#m2c)                           |
@@ -60,7 +60,6 @@ as `+`. Run each Python tool with `.venv/bin/python tools/<name>.py` or directly
 | Split a data unit                        | add a `[0xOFFSET, type, name]` row to `config/<target>/splat.yaml`       | [split](../docs/toolchain.md#split)                       |
 | Count readability debt, gate touched files | `tools/quality.py`, `--queue`, `--diff BASE`, `--markdown [--update]`                         | [quality](#quality)                                       |
 | Check type loss between two revisions    | `tools/typeloss.py HEAD~5 HEAD`                                          | `--help`                                                  |
-| Scan prototypes against definitions      | `tools/sigs.py scan`                                                     | `--help`                                                  |
 | Format                                   | `meson compile -C build/meson format` (or `tools/format.sh`)             | [toolchain: commands](../docs/toolchain.md#commands)      |
 | Write the progress report                | `meson compile -C build/meson report`                                    | [toolchain: commands](../docs/toolchain.md#commands)      |
 | Set up a worktree for parallel work      | `tools/worktree.sh --from <checkout> [--dir <dir>] <branch>`             | [worktrees](#worktrees)                                   |
