@@ -22,13 +22,13 @@ MATCH void Battle_SelectActiveBattlerScript(s32 step, s32 payload) {
     u32   type;
 
     work  = (u8*)g_BattleEffectBattler;
-    saved = TASK(void);
+    saved = SELF(void);
     type  = g_Battle.active_battler;
-    TASK_SET(work);
+    SELF_SET(work);
     if (type < 3u) {
         Actor_SelectScript_keep_a1((step + ((PartyMember*)work)->facing) & BYTE_MASK, payload);
     } else {
         func_801E24F8(type, payload & BYTE_MASK);
     }
-    TASK_SET(saved);
+    SELF_SET(saved);
 }

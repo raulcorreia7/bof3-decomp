@@ -23,9 +23,9 @@ MATCH void func_801DFCB4(void) {
 
     D_801463DA                               = 0;
     g_Battle.pending_status                  = 0;
-    slot                                     = TASK(PartyMember)->slot;
+    slot                                     = SELF(PartyMember)->slot;
     self                                     = g_GameState;
-    D_8014639C                               = g_Task;
+    D_8014639C                               = g_Self;
     g_Battle.target_record                   = &self->u.turn;
     g_Battle.target                          = slot;
     /* Plain pointer stores, not field stores: retail keeps each one ahead
@@ -52,7 +52,7 @@ MATCH void func_801DFCB4(void) {
     }
     lock_work = g_Game.current;
     if ((lock_work->u.turn.target_flags & BATTLE_HIT_HP) && lock_work->u.turn.hp_change == 0) {
-        TASK(PartyMember)->header.step = 3;
+        SELF(PartyMember)->header.step = 3;
         return;
     }
     if (!(g_Game.current->u.turn.damage_flags.value & BATTLER_DAMAGE_ROW_PRESENT)) {
@@ -74,11 +74,11 @@ MATCH void func_801DFCB4(void) {
     }
     hit_work = g_GameState;
     if (hit_work->u.turn.target_flags & BATTLE_HIT_HP) {
-        Battle_QueueAction(hit_work->u.turn.hp_change, TASK(PartyMember)->slot);
+        Battle_QueueAction(hit_work->u.turn.hp_change, SELF(PartyMember)->slot);
         hit_work = g_Game.current;
     }
     if (hit_work->u.turn.target_flags & BATTLE_HIT_AP) {
-        func_800AAEBC(hit_work->u.turn.ap_change, TASK(PartyMember)->slot);
+        func_800AAEBC(hit_work->u.turn.ap_change, SELF(PartyMember)->slot);
     }
     pending   = &g_Battle.pending_status;
     tail_work = g_Game.current;
@@ -94,7 +94,7 @@ MATCH void func_801DFCB4(void) {
             if (!(g_Game.current->u.turn.action_flags.value & BATTLER_ACTION_DRAGON_FORM)) {
                 Battle_PlayEffectSE(1);
             }
-            GFX_PaletteFreeFadeTarget(TASK(void));
+            GFX_PaletteFreeFadeTarget(SELF(void));
         } else {
             Battle_PlayEffectSE(0);
         }
@@ -117,5 +117,5 @@ MATCH void func_801DFCB4(void) {
         *flags &= ~0x80;
     }
     func_801DEDE4();
-    TASK(PartyMember)->unk_03 += 1;
+    SELF(PartyMember)->unk_03 += 1;
 }

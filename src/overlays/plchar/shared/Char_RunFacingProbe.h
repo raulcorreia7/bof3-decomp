@@ -8,11 +8,11 @@
         s32 cell_y;                                                                           \
         s32 y_ahead;                                                                          \
                                                                                               \
-        TASK(Actor)->unk_0A--;                                                                \
-        if (TASK(Actor)->unk_0A == 0) {                                                       \
-            x       = TASK(Actor)->pos.x.fixed + g_FacingSteps[TASK(Actor)->direction].x * 2; \
+        SELF(Actor)->unk_0A--;                                                                \
+        if (SELF(Actor)->unk_0A == 0) {                                                       \
+            x       = SELF(Actor)->pos.x.fixed + g_FacingSteps[SELF(Actor)->direction].x * 2; \
             /* FAKE: retail keeps a second copy of the row for the edge test. */              \
-            y_ahead = TASK(Actor)->pos.y.fixed + g_FacingSteps[TASK(Actor)->direction].y * 2; \
+            y_ahead = SELF(Actor)->pos.y.fixed + g_FacingSteps[SELF(Actor)->direction].y * 2; \
             y       = y_ahead;                                                                \
             hit     = Actor_FindInRange(x, y, 0);                                             \
             if (hit != -1) {                                                                  \
@@ -31,7 +31,7 @@
                     PlChar_ProbeCellSpawn(cell_x, (s16)(cell_y + 1));                         \
                 }                                                                             \
             }                                                                                 \
-            TASK(Actor)->header.step++;                                                       \
+            SELF(Actor)->header.step++;                                                       \
         }                                                                                     \
         Script_AnimStepOnce();                                                                \
     }

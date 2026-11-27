@@ -7,7 +7,7 @@ MATCH void func_801DDC54(void) {
     FishingState* spad;
 
     if (WINDOW_EFFECT_IDLE()) {
-        spad                = TASK(FishingState);
+        spad                = SELF(FishingState);
         s_ShopMode          = 0;
         D_800F724D          = 0;
         D_800F724E          = 0;

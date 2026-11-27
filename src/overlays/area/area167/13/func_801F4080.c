@@ -3,7 +3,7 @@
 MATCH void func_801F4080(void) {
     Actor* work;
 
-    work = TASK(Actor);
+    work = SELF(Actor);
     if (COORD_INT(work->pos.z) != 960) {
         work->header.flags &= ~ACTOR_FLAG_HIDDEN;
         SYS_ToggleFlag(g_SceneEventFlags, 75);

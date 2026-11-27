@@ -16,20 +16,20 @@ MATCH void func_801EFEF4(void) {
     BMagic_SetXFixed((RANDOM_MASK(3)) | 0x18);
     BMAGIC_DRAW_IN_ACTOR_MATRIX(func_801F03E0);
     if (g_FrameCount & 0x1) {
-        TASK(PartyMember)->unk_09 += 1;
+        SELF(PartyMember)->unk_09 += 1;
     }
-    task         = TASK(PartyMember);
+    task         = SELF(PartyMember);
     timer        = task->timer - 1;
     vel          = task->unk_14 + task->unk_20;
     task->timer  = timer;
     task->unk_14 = vel;
     task->pos.z.part.integer += vel;
     if ((timer & BYTE_MASK) == 0) {
-        reset         = TASK(PartyMember);
+        reset         = SELF(PartyMember);
         reset->unk_14 = -0x10;
         reset->timer  = 8;
         reset->unk_20 = 4;
-        TASK(PartyMember)->header.step += 1;
+        SELF(PartyMember)->header.step += 1;
     }
 }
 
@@ -42,16 +42,16 @@ MATCH void func_801EFFE8(void) {
     BMagic_SetXFixed((RANDOM_MASK(3)) | 0x18);
     BMAGIC_DRAW_IN_ACTOR_MATRIX(func_801F03E0);
     if (g_FrameCount & 0x1) {
-        TASK(PartyMember)->unk_09 += 1;
+        SELF(PartyMember)->unk_09 += 1;
     }
-    task         = TASK(PartyMember);
+    task         = SELF(PartyMember);
     timer        = task->timer - 1;
     vel          = task->unk_14 + task->unk_20;
     task->timer  = timer;
     task->unk_14 = vel;
     task->pos.z.part.integer += vel;
     if ((timer & BYTE_MASK) == 0) {
-        TASK(PartyMember)->timer = 28 - TASK(PartyMember)->param.unk_0B;
-        TASK(PartyMember)->header.step += 1;
+        SELF(PartyMember)->timer = 28 - SELF(PartyMember)->param.unk_0B;
+        SELF(PartyMember)->header.step += 1;
     }
 }

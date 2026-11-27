@@ -4,6 +4,6 @@ MATCH void func_801F5068(void) {
     D_8014933A = 0;
     Area_DrawGradient(0x10001805);
     if (g_ScriptVars[0] == 0x37) {
-        TASK(Actor)->header.step++;
+        SELF(Actor)->header.step++;
     }
 }

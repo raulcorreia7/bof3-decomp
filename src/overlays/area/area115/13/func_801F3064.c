@@ -4,10 +4,10 @@
  * the compiler must assume may alias the cell. */
 
 MATCH void func_801F3064(void) {
-    TASK(Actor)->active_flags = 0x80;
+    SELF(Actor)->active_flags = 0x80;
     Area_SceneSelectRecord(0x1C7);
-    TASK(Actor)->draw_layer = 5;
-    TASK(Actor)->mirror     = 0;
+    SELF(Actor)->draw_layer = 5;
+    SELF(Actor)->mirror     = 0;
     ACTOR_CLEAR_TINT();
-    TASK(Actor)->header.mode = 1;
+    SELF(Actor)->header.mode = 1;
 }

@@ -7,9 +7,9 @@ static inline void Screen_DrawTintLayer(u32 layer, s32 tpage) {
     GFX_AddDitheredDrawMode(layer, tpage);
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
-    tile->r0 = TASK(Actor)->tint.bytes.rgb.r;
-    tile->g0 = TASK(Actor)->tint.bytes.rgb.g;
-    blue     = TASK(Actor)->tint.bytes.rgb.b;
+    tile->r0 = SELF(Actor)->tint.bytes.rgb.r;
+    tile->g0 = SELF(Actor)->tint.bytes.rgb.g;
+    blue     = SELF(Actor)->tint.bytes.rgb.b;
     tile->w  = SCREEN_WIDTH;
     setXY0(tile, 0, 0);
     tile->h  = SCREEN_HEIGHT;

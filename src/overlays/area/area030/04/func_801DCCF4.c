@@ -11,7 +11,7 @@ MATCH void func_801DCCF4(void) {
         g_SpawnedActors[6].unk_07 = value;
         UI_CursorDraw(28, ((value << 4) + 88), 0);
 
-        record          = TASK(FishingState);
+        record          = SELF(FishingState);
         record->flag_04 = (record->flag_04 + 1);
     }
 

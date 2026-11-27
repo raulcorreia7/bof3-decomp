@@ -1,4 +1,4 @@
-#define FAKE_DECL_TASK_VOLATILE
+#define FAKE_DECL_SELF_VOLATILE
 #include "engine/slus/slus.h"
 #include <inline_c.h>
 
@@ -22,7 +22,7 @@ NON_MATCHING void func_8015A9A4(void) {
     u8      step;
     s8      sstep;
 
-    task = TASK(Actor);
+    task = SELF(Actor);
     dx   = COORD_INT(task->pos.x) - g_AreaTileOriginX;
     dy   = COORD_INT(task->pos.y) - g_AreaTileOriginY;
     if (COORD_FRAC(task->pos.x) != 0) {
@@ -30,10 +30,10 @@ NON_MATCHING void func_8015A9A4(void) {
     }
     sum = dx + dy;
     key = sum + 1;
-    if (COORD_FRAC(TASK(Actor)->pos.y) == 0) {
+    if (COORD_FRAC(SELF(Actor)->pos.y) == 0) {
         key = sum;
     }
-    actor         = TASK(Actor);
+    actor         = SELF(Actor);
     task->unk_32  = key;
     key           = (actor->unk_32 + (s8)((u8*)actor->range_54.table)[1]) << 8;
     actor->unk_32 = key;
@@ -46,30 +46,30 @@ NON_MATCHING void func_8015A9A4(void) {
     } else {
         actor->unk_32 = key | ((((u16)COORD_INT(actor->pos.z) >> 5) & BYTE_MASK) ^ 0x80);
     }
-    if (!(((u8*)TASK(Actor)->range_54.table)[3] & 0x10)) {
+    if (!(((u8*)SELF(Actor)->range_54.table)[3] & 0x10)) {
         Actor_ReadValue();
     }
-    view = TASK(Actor);
+    view = SELF(Actor);
     setVector(&vec, (view->pos.x.fixed >> 9) - 0x4000, (view->pos.y.fixed >> 9) - 0x4000, -COORD_INT(view->pos.z) / 2);
     gte_ldv0(&vec);
     gte_rtps();
     gte_stsxy(sxy);
-    gte_stszotz(&TASK(Actor)->unk_60);
-    actor           = TASK(Actor);
+    gte_stszotz(&SELF(Actor)->unk_60);
+    actor           = SELF(Actor);
     actor->screen_x = sxy[0];
     sy              = sxy[1];
     actor->screen_y = sy;
     pad             = (((u8*)actor->range_54.table)[3] >> 1) & 4;
     x               = (s16)actor->screen_x;
     if ((((&D_80182174)[pad] + 320) < x) || (x < -(s32)(&D_80182175)[pad]) || (((&D_80182176)[pad] + 240) < (s16)sy) || ((s16)sy < -(s32)(&D_80182177)[pad])) {
-        TASK(Actor)->header.flags |= 0x80;
+        SELF(Actor)->header.flags |= 0x80;
         return;
     }
     actor->header.flags &= 0x7F;
     count = g_AreaGridActorCount;
     if (count < 40) {
         g_AreaGridActorCount    = count + 1;
-        g_AreaGridActors[count] = (s32)g_Task;
+        g_AreaGridActors[count] = (s32)g_Self;
     }
 }
 #else

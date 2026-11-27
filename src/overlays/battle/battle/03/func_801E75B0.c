@@ -15,5 +15,5 @@ MATCH void func_801E75B0(void) {
         }
     }
     EMI_ArchiveLoad(slot);
-    TASK(PartyMember)->header.mode++;
+    SELF(PartyMember)->header.mode++;
 }

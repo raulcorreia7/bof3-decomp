@@ -22,7 +22,7 @@ MATCH s32 PlChar_ProbeCellSpawn(s16 x, s16 y) {
                 Game_RewardZenny(spawn_cue & BYTE_MASK);
                 PlChar_SpawnActor(1, x, y);
             }
-            TASK(Actor)->param.unk_0B = 1;
+            SELF(Actor)->param.unk_0B = 1;
         }
         Area_CellClear(x, y);
         return 1;
@@ -41,7 +41,7 @@ MATCH s32 PlChar_ProbeCellSpawn(s16 x, s16 y) {
             UI_MessageRequest(MSG_SYSTEM_FOUND_ITEM_NO_ROOM);
         }
         g_GameStateIndex          = GAME_REQUEST_MESSAGE;
-        TASK(Actor)->param.unk_0B = 1;
+        SELF(Actor)->param.unk_0B = 1;
         Area_CellClear(x, y);
         return 1;
     }

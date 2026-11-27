@@ -5,18 +5,18 @@
 MATCH bool Area_ClimbMountTurn(void) {
     u8 frames;
 
-    TASK(Actor)->unk_0A = (TASK(Actor)->unk_0A - 1);
-    frames              = TASK(Actor)->unk_0A;
+    SELF(Actor)->unk_0A = (SELF(Actor)->unk_0A - 1);
+    frames              = SELF(Actor)->unk_0A;
     if (frames == 0) {
-        Script_Request(TASK(Actor)->direction == FACING_RIGHT ? 0x37 : 0x34);
-        TASK(Actor)->direction ^= 4;
+        Script_Request(SELF(Actor)->direction == FACING_RIGHT ? 0x37 : 0x34);
+        SELF(Actor)->direction ^= 4;
         return true;
     }
-    if (TASK(Actor)->direction == FACING_RIGHT) {
+    if (SELF(Actor)->direction == FACING_RIGHT) {
         Script_Request((7 - frames));
     } else {
         Script_Request((frames + 1));
     }
-    TASK(Actor)->timer = 1;
+    SELF(Actor)->timer = 1;
     return false;
 }

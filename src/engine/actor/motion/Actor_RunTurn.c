@@ -7,30 +7,30 @@ MATCH void Actor_RunTurn(Actor* entity) {
     u8  current;
     s32 sel;
 
-    if (TASK(Actor)->option_flags & ACTOR_OPT_ROUTE_LOCKED) {
-        TASK(Actor)->direction = entity->unk_79;
+    if (SELF(Actor)->option_flags & ACTOR_OPT_ROUTE_LOCKED) {
+        SELF(Actor)->direction = entity->unk_79;
     }
 
-    if (TASK(Actor)->unk_0A != 0) {
-        TASK(Actor)->unk_0A--;
+    if (SELF(Actor)->unk_0A != 0) {
+        SELF(Actor)->unk_0A--;
         return;
     }
 
     target  = entity->unk_79;
-    current = TASK(Actor)->direction;
+    current = SELF(Actor)->direction;
     if (target == current) {
-        TASK(Actor)->header.mode = TASK(Actor)->unk_03;
-        if (!(TASK(Actor)->option_flags & ACTOR_OPT_NO_TARGET)) {
+        SELF(Actor)->header.mode = SELF(Actor)->unk_03;
+        if (!(SELF(Actor)->option_flags & ACTOR_OPT_NO_TARGET)) {
             if ((Actor_IsAheadBlocked(entity) & BYTE_MASK) != 0u) {
-                TASK(Actor)->direction &= 7u;
-                TASK(Actor)->unk_0A = 0u;
+                SELF(Actor)->direction &= 7u;
+                SELF(Actor)->unk_0A = 0u;
                 return;
             }
         }
-        Area_MoveActorRoute((u8*)entity + 0x74, TASK(Actor)->direction);
-        TASK(Actor)->direction |= 8u;
+        Area_MoveActorRoute((u8*)entity + 0x74, SELF(Actor)->direction);
+        SELF(Actor)->direction |= 8u;
         entity->interaction_flags |= ACTOR_INTERACTION_MOVING;
-        TASK(Actor)->unk_0A = TASK(Actor)->timer >> 1;
+        SELF(Actor)->unk_0A = SELF(Actor)->timer >> 1;
         return;
     }
 
@@ -39,10 +39,10 @@ MATCH void Actor_RunTurn(Actor* entity) {
         sel = 1;
     }
 
-    TASK(Actor)->unk_0A    = 3u;
-    current                = TASK(Actor)->direction;
-    TASK(Actor)->vy        = 0;
-    TASK(Actor)->vx        = 0;
-    TASK(Actor)->direction = (current + sel) & 0x7u;
+    SELF(Actor)->unk_0A    = 3u;
+    current                = SELF(Actor)->direction;
+    SELF(Actor)->vy        = 0;
+    SELF(Actor)->vx        = 0;
+    SELF(Actor)->direction = (current + sel) & 0x7u;
     entity->interaction_flags |= ACTOR_INTERACTION_MOVING;
 }

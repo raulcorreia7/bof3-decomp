@@ -6,6 +6,6 @@
 
 /* func_801D9B14 */
 MATCH void Fishing_SceneRun(void) {
-    Callback handler = g_FishingSceneModes[TASK(Actor)->header.step];
+    Callback handler = g_FishingSceneModes[SELF(Actor)->header.step];
     handler();
 }

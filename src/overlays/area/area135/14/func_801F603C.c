@@ -14,7 +14,7 @@ MATCH s32 func_801F603C(s32 x, s32 y) {
     step_y = g_PartyActors[3].vy * timer;
     dx     = abs(x - (g_PartyActors[3].pos.x.fixed + step_x));
     dy     = y - (g_PartyActors[3].pos.y.fixed + step_y);
-    range  = (TASK(Actor)->voice_flags.scene_flag + g_PartyActors[3].voice_flags.scene_flag + 2) << 15;
+    range  = (SELF(Actor)->voice_flags.scene_flag + g_PartyActors[3].voice_flags.scene_flag + 2) << 15;
     if (dx < range) {
         if (abs(dy) < range) {
             return 1;

@@ -15,24 +15,24 @@ MATCH void Actor_TossStart(void) {
     s32              z;
     GameRouteRequest request;
 
-    TASK(Actor)->direction = g_Game.members[0].facing & 0x7;
+    SELF(Actor)->direction = g_Game.members[0].facing & 0x7;
     Area_SceneSelectRecord(0x18);
-    TASK(Actor)->unk_48       = 0;
-    TASK(Actor)->active_flags = 0;
-    TASK(Actor)->mirror       = 0;
+    SELF(Actor)->unk_48       = 0;
+    SELF(Actor)->active_flags = 0;
+    SELF(Actor)->mirror       = 0;
     Script_Select(8);
-    work                    = TASK(Actor);
+    work                    = SELF(Actor);
     work->pos.x.fixed       = g_Actors[work->unk_06].pos.x.fixed;
     work->pos.y.fixed       = g_Actors[work->unk_06].pos.y.fixed;
     z                       = g_Actors[work->unk_06].pos.z.fixed;
     work->tint.bytes.flags  = 0;
-    work2                   = TASK(Actor);
+    work2                   = SELF(Actor);
     work->pos.z.fixed       = z;
     work2->tint.bytes.rgb.b = 0;
     work2->tint.bytes.rgb.g = 0;
     work2->tint.bytes.rgb.r = 0;
     request.rate            = 3;
     request.flags           = 0;
-    Area_MoveActorRoute(&request, TASK(Actor)->direction);
+    Area_MoveActorRoute(&request, SELF(Actor)->direction);
     Actor_TossLaunch();
 }

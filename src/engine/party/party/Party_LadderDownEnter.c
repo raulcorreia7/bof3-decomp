@@ -5,21 +5,21 @@
 MATCH void Party_LadderDownEnter(void) {
     s32 value;
 
-    COORD_INT(TASK(Actor)->pos.z) = Area_HeightRead(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed) + 0x200;
+    COORD_INT(SELF(Actor)->pos.z) = Area_HeightRead(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed) + 0x200;
     value                         = 0x3D;
-    if (TASK(Actor)->direction == FACING_RIGHT) {
+    if (SELF(Actor)->direction == FACING_RIGHT) {
         value = 0x3C;
     }
     Script_Request(value);
-    if (TASK(Actor)->unk_05 != 0) {
+    if (SELF(Actor)->unk_05 != 0) {
         Actor_SetSemiTransparent();
-        TASK(Actor)->tint.steps.delta.r = -0x80;
-        TASK(Actor)->tint.steps.delta.g = -0x80;
-        TASK(Actor)->tint.steps.delta.b = -0x80;
-        TASK(Actor)->tint.bytes.flags   = 1;
-        TASK(Actor)->header.flags &= ~ACTOR_FLAG_HIDDEN;
-        TASK(Actor)->unk_04 = 7;
+        SELF(Actor)->tint.steps.delta.r = -0x80;
+        SELF(Actor)->tint.steps.delta.g = -0x80;
+        SELF(Actor)->tint.steps.delta.b = -0x80;
+        SELF(Actor)->tint.bytes.flags   = 1;
+        SELF(Actor)->header.flags &= ~ACTOR_FLAG_HIDDEN;
+        SELF(Actor)->unk_04 = 7;
     } else {
-        TASK(Actor)->unk_04 = 8;
+        SELF(Actor)->unk_04 = 8;
     }
 }

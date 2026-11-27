@@ -3,11 +3,11 @@
 MATCH void BMagic_RingBandShrink(void) {
     u8 counter;
 
-    TASK(PartyMember)->param.unk_0B += 1;
-    TASK(PartyMember)->timer += 2;
-    counter                   = TASK(PartyMember)->unk_09 - 2;
-    TASK(PartyMember)->unk_09 = counter;
+    SELF(PartyMember)->param.unk_0B += 1;
+    SELF(PartyMember)->timer += 2;
+    counter                   = SELF(PartyMember)->unk_09 - 2;
+    SELF(PartyMember)->unk_09 = counter;
     if ((counter & BYTE_MASK) == BMAGIC_RING_BAND_SHRINK_LIMIT) {
-        TASK(PartyMember)->header.mode += 1;
+        SELF(PartyMember)->header.mode += 1;
     }
 }

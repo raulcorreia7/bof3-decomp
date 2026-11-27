@@ -9,7 +9,7 @@ MATCH void func_801F46D4(void) {
         timer = &D_801F58CA;
         *timer -= rand() % 2 + 4;
         g_SpawnedActors[D_801F58CE[1]].vx -= 1;
-        TASK_SET(&g_Game);
+        SELF_SET(&g_Game);
         g_Game.members[0].unk_4A = 1;
         Script_AnimStepLoop();
         D_801F58C8 = 0;

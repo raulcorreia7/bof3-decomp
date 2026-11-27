@@ -4,12 +4,12 @@ MATCH void Area_SpawnSpinEffect(void) {
     s32 i;
     u8  slot;
 
-    TASK(Actor)->direction = g_Game.members[0].facing;
+    SELF(Actor)->direction = g_Game.members[0].facing;
     SYS_InitScratchpad(((AreaLoad*)g_AreaLoads[g_GameAreaId])->field_08 + 8);
-    TASK(Actor)->tint.steps.delta.r = -0x80;
-    TASK(Actor)->tint.steps.delta.g = -0x80;
-    TASK(Actor)->tint.steps.delta.b = -0x80;
-    TASK(Actor)->header.mode += 1;
+    SELF(Actor)->tint.steps.delta.r = -0x80;
+    SELF(Actor)->tint.steps.delta.g = -0x80;
+    SELF(Actor)->tint.steps.delta.b = -0x80;
+    SELF(Actor)->header.mode += 1;
     AREA_TURN_SYNC();
     if (g_GameAreaId == AREA_ID_TIDAL_CAVES_ENTRANCE && !Item_VitalHas(VITAL_ITEM_SEA_CHARTS)) {
         return;

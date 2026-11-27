@@ -5,7 +5,7 @@ MATCH void func_801E320C(void) {
     g_Battle.choose_ending_hook                = Battle_RunDesertDefeat;
     g_Battle.end_hook                          = func_801E57C8;
     Battle_RequestEnemyScript(0);
-    TASK(PartyMember)->header.flags |= ACTOR_FLAG_HIDDEN;
+    SELF(PartyMember)->header.flags |= ACTOR_FLAG_HIDDEN;
     func_801DDAB4(g_BattleCurrentEnemy->status);
-    TASK(PartyMember)->header.mode += 1;
+    SELF(PartyMember)->header.mode += 1;
 }

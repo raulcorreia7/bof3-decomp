@@ -9,11 +9,11 @@ MATCH void func_801E414C(void) {
 
     Script_AnimStepOnce();
     if ((g_BattleCurrentEnemy->status & STATUS_KO) != 0) {
-        GFX_PaletteFreeFadeTarget(TASK(void));
+        GFX_PaletteFreeFadeTarget(SELF(void));
         half = &g_Battle.flags;
         *half &= ~BATTLE_STATE_REPRISAL_PENDING;
-        TASK(PartyMember)->header.mode = 6;
-        TASK(PartyMember)->header.step = 4;
+        SELF(PartyMember)->header.mode = 6;
+        SELF(PartyMember)->header.step = 4;
     } else {
         half2 = &g_Battle.flags;
         if ((*half2 & BATTLE_STATE_REPRISAL_PENDING) != 0) {
@@ -31,12 +31,12 @@ MATCH void func_801E414C(void) {
                 g_Battle.flags |= BATTLE_STATE_REPRISAL_PENDING;
             }
         }
-        Battle_ClearSlotPending(TASK(PartyMember)->slot);
+        Battle_ClearSlotPending(SELF(PartyMember)->slot);
         enemy                          = g_BattleCurrentEnemy;
         flags                          = enemy->turn.damage_flags.value & ~(BATTLER_DAMAGE_UNK_4 | BATTLER_DAMAGE_UNK_5 | BATTLER_DAMAGE_TAKEN);
         enemy->turn.damage_flags.value = flags & ~0x200;
-        TASK(PartyMember)->header.mode = 2;
-        TASK(PartyMember)->header.step = 0;
+        SELF(PartyMember)->header.mode = 2;
+        SELF(PartyMember)->header.step = 0;
     }
-    TASK(PartyMember)->unk_03 = 0;
+    SELF(PartyMember)->unk_03 = 0;
 }

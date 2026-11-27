@@ -6,7 +6,7 @@ MATCH void func_800AE728(void) {
     PartyMember* work;
     u8           next;
 
-    work         = TASK(PartyMember);
+    work         = SELF(PartyMember);
     next         = work->unk_09 + 1;
     work->unk_09 = next;
     if (next == 0x1C) {

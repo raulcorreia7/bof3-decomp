@@ -7,7 +7,7 @@ MATCH void Actor_RunRouteWait(void* record) {
 
     timer = FIELD(u8, record, 0x75u);
     if (timer == 0) {
-        TASK(Actor)->header.mode = TASK(Actor)->unk_03;
+        SELF(Actor)->header.mode = SELF(Actor)->unk_03;
         return;
     }
     FIELD(u8, record, 0x75u) = timer - 1;

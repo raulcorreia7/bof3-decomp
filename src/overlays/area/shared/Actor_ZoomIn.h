@@ -7,15 +7,15 @@ MATCH void Actor_ZoomIn(void) {
 
     Actor_SetScreenOrigin();
 
-    scratch        = TASK(Actor);
+    scratch        = SELF(Actor);
     timer          = scratch->timer;
     scratch->timer = timer - 1;
-    scratch2       = TASK(Actor);
+    scratch2       = SELF(Actor);
     scratch->scale.x += 0x2000;
 
     if (scratch2->timer == 0) {
         scratch2->unk_48         = 0;
-        TASK(Actor)->header.mode = 3;
+        SELF(Actor)->header.mode = 3;
     }
 
     Area_AddActor();

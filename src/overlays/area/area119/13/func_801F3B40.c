@@ -2,8 +2,8 @@
 
 MATCH void func_801F3B40(void) {
     if (g_AreaSceneMode != 0) {
-        TASK(Actor)->timer        = 1;
-        TASK(Actor)->param.unk_0B = 0;
-        TASK(Actor)->header.step++;
+        SELF(Actor)->timer        = 1;
+        SELF(Actor)->param.unk_0B = 0;
+        SELF(Actor)->header.step++;
     }
 }

@@ -4,6 +4,6 @@
 /* Begins stepping off the ladder. */
 MATCH void Party_LadderUpExitBegin(void) {
     if (Area_ClimbDismountExitBegin() & BYTE_MASK) {
-        TASK(Actor)->unk_04++;
+        SELF(Actor)->unk_04++;
     }
 }

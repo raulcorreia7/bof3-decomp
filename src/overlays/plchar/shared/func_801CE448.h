@@ -5,34 +5,34 @@ MATCH void func_801CE448(void) {
 
     if (SYS_TestFlag(g_SceneFlagRows[1], 0x16)) {
         if (Party_CountOrder(PARTY_ORDER_FIELD) == 1 && !(g_GameRequestFlags & AREA_LOAD_FLAG_SHOP)) {
-            TASK(Actor)->unk_04 = 0x50;
+            SELF(Actor)->unk_04 = 0x50;
         } else {
-            TASK(Actor)->unk_04 = 0x40;
+            SELF(Actor)->unk_04 = 0x40;
         }
     } else {
-        TASK(Actor)->unk_04 = 0x41;
+        SELF(Actor)->unk_04 = 0x41;
     }
-    switch (TASK(Actor)->unk_04) {
+    switch (SELF(Actor)->unk_04) {
         case 0x50:
-            direction = TASK(Actor)->direction;
+            direction = SELF(Actor)->direction;
             if (abs(direction - FACING_DOWN) > abs(direction - FACING_RIGHT)) {
-                TASK(Actor)->param.turn_delta = Actor_GetTurnStep(FACING_RIGHT);
-                TASK(Actor)->unk_03           = FACING_RIGHT;
+                SELF(Actor)->param.turn_delta = Actor_GetTurnStep(FACING_RIGHT);
+                SELF(Actor)->unk_03           = FACING_RIGHT;
             } else {
-                TASK(Actor)->param.turn_delta = Actor_GetTurnStep(FACING_DOWN);
-                TASK(Actor)->unk_03           = FACING_DOWN;
-                TASK(Actor)->unk_04           = 0x52;
+                SELF(Actor)->param.turn_delta = Actor_GetTurnStep(FACING_DOWN);
+                SELF(Actor)->unk_03           = FACING_DOWN;
+                SELF(Actor)->unk_04           = 0x52;
             }
             break;
         case 0x40:
-            TASK(Actor)->param.turn_delta = Actor_GetTurnStep(FACING_RIGHT);
-            TASK(Actor)->unk_03           = FACING_RIGHT;
+            SELF(Actor)->param.turn_delta = Actor_GetTurnStep(FACING_RIGHT);
+            SELF(Actor)->unk_03           = FACING_RIGHT;
             break;
         case 0x41:
-            TASK(Actor)->param.turn_delta = Actor_GetTurnStep(FACING_DOWN);
-            TASK(Actor)->unk_03           = FACING_DOWN;
+            SELF(Actor)->param.turn_delta = Actor_GetTurnStep(FACING_DOWN);
+            SELF(Actor)->unk_03           = FACING_DOWN;
             break;
     }
-    TASK(Actor)->timer = 2;
-    TASK(Actor)->header.step++;
+    SELF(Actor)->timer = 2;
+    SELF(Actor)->header.step++;
 }

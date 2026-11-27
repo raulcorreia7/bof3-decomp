@@ -21,11 +21,11 @@ MATCH void Battle_ApplyEnemyEvent(EnemyBattler* work_arg, BattleEventPacket* eve
             work->event_flags = event->selector;
             break;
         case 2:
-            saved = TASK(void);
-            TASK_SET(work);
+            saved = SELF(void);
+            SELF_SET(work);
             Battle_CureStatus(work->slot, 0xFFFF);
-            Battle_AddStatus(TASK(EnemyBattler)->slot, *(u8*)&((EnemyBattler*)(void*)work)->status | event->selector);
-            TASK_SET(saved);
+            Battle_AddStatus(SELF(EnemyBattler)->slot, *(u8*)&((EnemyBattler*)(void*)work)->status | event->selector);
+            SELF_SET(saved);
             break;
         case 3:
             mask = event->selector;

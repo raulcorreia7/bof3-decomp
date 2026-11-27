@@ -11,12 +11,12 @@ MATCH void func_801D4B60(void) {
     s32 mask;
 
     Fishing_DrawCatchBar(0, FISHING_CATCH_BAR_Y);
-    key  = TASK(FishingState)->bounce.half.key;
+    key  = SELF(FishingState)->bounce.half.key;
     fish = g_FishingBestCatch[key];
     if (fish != 0) {
         Fishing_DrawCatchRow(key & BYTE_MASK, fish, 0);
-        Fishing_DrawCatchIcon(FISHING_CATCH_ICON_X, FISHING_CATCH_ICON_Y, TASK(FishingState)->bounce.half.key);
-        Fishing_DrawIconRow(8, FISHING_CATCH_ROW_Y, TASK(FishingState)->bounce.half.key);
+        Fishing_DrawCatchIcon(FISHING_CATCH_ICON_X, FISHING_CATCH_ICON_Y, SELF(FishingState)->bounce.half.key);
+        Fishing_DrawIconRow(8, FISHING_CATCH_ROW_Y, SELF(FishingState)->bounce.half.key);
     } else {
         Fishing_DrawCatchRow(0xFF, 0, 0);
         Fishing_DrawCatchIcon(FISHING_CATCH_ICON_X, FISHING_CATCH_ICON_Y, GAME_NONE);
@@ -27,7 +27,7 @@ MATCH void func_801D4B60(void) {
     Fishing_DrawWindowFrame(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
     mask = 0;
     if (D_80145E93[0] >= 3u) {
-        mask = BIT(TASK(FishingState)->cue_index) & BYTE_MASK;
+        mask = BIT(SELF(FishingState)->cue_index) & BYTE_MASK;
     }
     func_801D7C10(FISHING_SHOP_COLUMNS_X, FISHING_SHOP_COLUMNS_Y, mask);
 }

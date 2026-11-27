@@ -20,8 +20,8 @@ MATCH void func_801E496C(void) {
         }
     }
     if ((g_BattleCurrentEnemy->turn.target_flags & BATTLE_HIT_HP) != 0) {
-        Battle_QueueAction(g_BattleCurrentEnemy->turn.hp_change, TASK(PartyMember)->slot);
+        Battle_QueueAction(g_BattleCurrentEnemy->turn.hp_change, SELF(PartyMember)->slot);
     }
     Battle_IsEnemyBlocked();
-    TASK(PartyMember)->unk_03 = TASK(PartyMember)->unk_03 + 1;
+    SELF(PartyMember)->unk_03 = SELF(PartyMember)->unk_03 + 1;
 }

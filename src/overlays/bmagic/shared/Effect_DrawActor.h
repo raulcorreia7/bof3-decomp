@@ -4,10 +4,10 @@
 MATCH void Effect_DrawActor(void) {
     BMagicActorSteps handlers = g_BMagicRingModes;
 
-    SYS_DISPATCH_BYTE(handlers.steps, TASK(PartyMember)->header.mode);
-    if (TASK(PartyMember)->header.flags != 0) {
+    SYS_DISPATCH_BYTE(handlers.steps, SELF(PartyMember)->header.mode);
+    if (SELF(PartyMember)->header.flags != 0) {
         Battle_ProjectRange();
-        TASK(PartyMember)->screen_y.value -= 0x10;
+        SELF(PartyMember)->screen_y.value -= 0x10;
         BMagic_RingDrawDisc();
         Effect_SetActorMatrix();
         BMagic_RingDrawShade();

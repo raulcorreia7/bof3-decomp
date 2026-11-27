@@ -4,5 +4,5 @@
  * func_801F735C (scena09), func_801F6F68 (scena10), func_801F7174 (scena12), func_801F6EA4 (scena13),
  * func_801F6F38 (scena15) */
 MATCH void Scene_DispatchEntity(void) {
-    g_SceneEntityDispatch[TASK(Actor)->header.mode]();
+    g_SceneEntityDispatch[SELF(Actor)->header.mode]();
 }

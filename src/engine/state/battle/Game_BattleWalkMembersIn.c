@@ -23,8 +23,8 @@ MATCH bool Game_BattleWalkMembersIn(void) {
     for (i = 0; i < g_Game.party_size; i++) {
         work           = &g_Game.members[i];
         g_Game.current = work;
-        TASK_SET(work);
-        if (TASK(Actor)->param.unk_0B == 0) {
+        SELF_SET(work);
+        if (SELF(Actor)->param.unk_0B == 0) {
             if (func_801C29A0(8) & BYTE_MASK) {
                 for (order = 0; order < PARTY_SLOT_COUNT; order++) {
                     if (g_PartyBattleOrder[order] == g_Game.current->chr.character_id) {
@@ -32,16 +32,16 @@ MATCH bool Game_BattleWalkMembersIn(void) {
                     }
                 }
                 g_Game.current->status.field.flags.unsigned_value &= 0xFE;
-                TASK(Actor)->draw_layer       = g_AreaDrawMode;
-                TASK(Actor)->pos.x            = g_AreaEncounterPlacement.party[order].x;
-                TASK(Actor)->pos.y            = g_AreaEncounterPlacement.party[order].y;
-                COORD_INT(TASK(Actor)->pos.z) = Area_HeightRead(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed);
-                TASK(Actor)->unk_48           = 0;
-                TASK(Actor)->param.unk_0B     = 1;
+                SELF(Actor)->draw_layer       = g_AreaDrawMode;
+                SELF(Actor)->pos.x            = g_AreaEncounterPlacement.party[order].x;
+                SELF(Actor)->pos.y            = g_AreaEncounterPlacement.party[order].y;
+                COORD_INT(SELF(Actor)->pos.z) = Area_HeightRead(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed);
+                SELF(Actor)->unk_48           = 0;
+                SELF(Actor)->param.unk_0B     = 1;
             }
-        } else if (TASK(Actor)->param.unk_0B == 1) {
+        } else if (SELF(Actor)->param.unk_0B == 1) {
             if (func_801C2894(8) & BYTE_MASK) {
-                actor = TASK(Actor);
+                actor = SELF(Actor);
                 for (j = 0; j < 32; j++) {
                     clut_offset    = actor->unk_05 << 6;
                     dst            = (u16*)(GAME_PALETTE_MIRROR + clut_offset);
@@ -52,11 +52,11 @@ MATCH bool Game_BattleWalkMembersIn(void) {
                     MEM(u16, palette_offset) = color;
                 }
                 g_GfxPalettePending = 1;
-                TASK(Actor)->header.flags &= ~ACTOR_FLAG_SEMI_TRANSPARENT;
-                TASK(Actor)->param.unk_0B = 0;
+                SELF(Actor)->header.flags &= ~ACTOR_FLAG_SEMI_TRANSPARENT;
+                SELF(Actor)->param.unk_0B = 0;
                 ACTOR_CLEAR_TINT();
-                TASK(Actor)->tint.bytes.flags = 0;
-                TASK(Actor)->param.unk_0B     = 2;
+                SELF(Actor)->tint.bytes.flags = 0;
+                SELF(Actor)->param.unk_0B     = 2;
             }
         }
         Script_AnimStepLoop();

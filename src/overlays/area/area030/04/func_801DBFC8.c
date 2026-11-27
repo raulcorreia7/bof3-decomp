@@ -18,8 +18,8 @@ MATCH void func_801DBFC8(void) {
     Fishing_DrawIconRow(8, FISHING_CATCH_ROW_Y, 67);
 
     if (g_PadStates[0].pressed != 0) {
-        TASK(FishingState)->cue_index = 0;
-        work                          = TASK(FishingState);
+        SELF(FishingState)->cue_index = 0;
+        work                          = SELF(FishingState);
         work->sub_index               = (work->sub_index + 1);
     }
     Script_AnimStepLoop();

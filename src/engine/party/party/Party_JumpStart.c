@@ -5,12 +5,12 @@
 MATCH void Party_JumpStart(void) {
     u32 route;
 
-    route = TASK(Actor)->direction;
+    route = SELF(Actor)->direction;
     if (route == FACING_RIGHT) {
         Script_Request(0x38);
     } else {
         Script_Request(0x39);
     }
     g_Game.current->u.field.counter.unsigned_value = 3;
-    TASK(Actor)->unk_03                            = PARTY_JUMP_STEP_LAUNCH;
+    SELF(Actor)->unk_03                            = PARTY_JUMP_STEP_LAUNCH;
 }

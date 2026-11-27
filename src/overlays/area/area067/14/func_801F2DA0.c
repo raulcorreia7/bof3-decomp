@@ -5,16 +5,16 @@ MATCH void func_801F2DA0(void) {
     AreaRippleQuad* quad;
     u8              count;
 
-    quad = (AreaRippleQuad*)&TASK(Actor)->vx;
-    if (TASK(Actor)->timer >= 0x1A) {
+    quad = (AreaRippleQuad*)&SELF(Actor)->vx;
+    if (SELF(Actor)->timer >= 0x1A) {
         quad->radius += 2;
     } else {
         quad->radius -= 2;
     }
     quad->height += 0x40;
     func_801F31C8(quad);
-    ACTOR_COUNT_DOWN(TASK(Actor), count, timer);
+    ACTOR_COUNT_DOWN(SELF(Actor), count, timer);
     if (count == 0) {
-        TASK(Actor)->header.mode++;
+        SELF(Actor)->header.mode++;
     }
 }

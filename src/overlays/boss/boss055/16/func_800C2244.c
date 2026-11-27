@@ -3,5 +3,5 @@
 MATCH void func_800C2244(void) {
     func_801E567C();
     ACTOR_SET_MODE(2);
-    TASK(PartyMember)->header.step = 0;
+    SELF(PartyMember)->header.step = 0;
 }

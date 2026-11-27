@@ -19,18 +19,18 @@ MATCH s32 Actor_RockIsPointBlocked(s32 x, s32 y) {
     if (Actor_RockIsCellBlocked(xh, yh) & BYTE_MASK) {
         return 1;
     }
-    if (TASK(Actor)->vx != 0) {
+    if (SELF(Actor)->vx != 0) {
         if ((x & HALF_MASK) == 0) {
             goto fail;
         }
         pos = (xh << 16) | 0x8000;
-        Area_HeightGet(pos, y, TASK(Actor)->direction);
+        Area_HeightGet(pos, y, SELF(Actor)->direction);
         if (SP_REF(u8, 0x0u) != 0) {
-            if (COORD_INT(TASK(Actor)->pos.z) < Area_HeightSample(pos, y)) {
+            if (COORD_INT(SELF(Actor)->pos.z) < Area_HeightSample(pos, y)) {
                 return 1;
             }
         }
-        if (TASK(Actor)->vx <= 0) {
+        if (SELF(Actor)->vx <= 0) {
             goto fail;
         }
         next_x = (s16)((x >> 16) + 1);
@@ -40,13 +40,13 @@ MATCH s32 Actor_RockIsPointBlocked(s32 x, s32 y) {
             goto fail;
         }
         pos = (yh << 16) | 0x8000;
-        Area_HeightGet(x, pos, TASK(Actor)->direction);
+        Area_HeightGet(x, pos, SELF(Actor)->direction);
         if (SP_REF(u8, 0x0u) != 0) {
-            if (COORD_INT(TASK(Actor)->pos.z) < Area_HeightSample(x, pos)) {
+            if (COORD_INT(SELF(Actor)->pos.z) < Area_HeightSample(x, pos)) {
                 return 1;
             }
         }
-        if (TASK(Actor)->vy <= 0) {
+        if (SELF(Actor)->vy <= 0) {
             goto fail;
         }
         next_x = x >> 16;

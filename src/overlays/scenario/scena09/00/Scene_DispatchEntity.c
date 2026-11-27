@@ -9,8 +9,8 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801F73A0(void) {
     Scene_ClearWorkRows();
     func_801F76D0();
-    TASK(Actor)->timer = 0xFF;
-    TASK(Actor)->header.mode++;
+    SELF(Actor)->timer = 0xFF;
+    SELF(Actor)->header.mode++;
 }
 
 MATCH void func_801F73F0(void) {
@@ -42,7 +42,7 @@ MATCH void Scene_ClearWorkRows(void) {
     SparkParticle* particle;
     u8             i;
 
-    particle = (SparkParticle*)(MEM_PTR(u8, AREA_WORK + 0x800) + TASK(Actor)->unk_06 * 0x500);
+    particle = (SparkParticle*)(MEM_PTR(u8, AREA_WORK + 0x800) + SELF(Actor)->unk_06 * 0x500);
     for (i = 0; i < SCENE_SPARK_COUNT; i++, particle++) {
         particle->header.active = 0;
     }
@@ -57,7 +57,7 @@ MATCH s32 func_801F75BC(void) {
 
     Camera_SetMatrix(&camera);
     alive    = 0;
-    particle = (SparkParticle*)(MEM_PTR(u8, AREA_WORK + 0x800) + TASK(Actor)->unk_06 * 0x500);
+    particle = (SparkParticle*)(MEM_PTR(u8, AREA_WORK + 0x800) + SELF(Actor)->unk_06 * 0x500);
     for (i = 0; i < SCENE_SPARK_COUNT; particle++, i++) {
         if (particle->header.active == 0) {
             continue;
@@ -85,11 +85,11 @@ MATCH void func_801F76D0(void) {
     u8             i;
 
     FAKE_STACK_PADS(u8, 0x20); /* FAKE: retail reserves 32 unused stack bytes. */
-    mode  = TASK(Actor)->unk_06;
+    mode  = SELF(Actor)->unk_06;
     spark = MEM_PTR(SparkParticle, AREA_WORK + 0x800 + mode * 0x500);
     i     = 0;
     do {
-        if (TASK(Actor)->unk_06 == 0) {
+        if (SELF(Actor)->unk_06 == 0) {
             setVector(&spark->pos, ((rand() & 0x1FF) << 8) + 0x120000, ((rand() & 0x1FF) << 8) + 0x2E8000, TO_COORD(2112) - ((spark->pos.vx - 0x120000) << 7));
             setVector(&spark->velocity, (spark->pos.vx - 0x130000) >> 4, (spark->pos.vy - 0x2F8000) >> 4, (-(rand() & 0xFF)) << 5);
             spark->velocity.vx -= 0x800;

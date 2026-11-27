@@ -7,7 +7,7 @@ jtbl_801F6D6C = { addr = 0x801F6D6C, type = "Callback", source = "The switch tab
 jtbl_801F6DE4 = { addr = 0x801F6DE4, type = "Callback", source = "The switch table of func_801FB268: the jump targets of its jr dispatch." }
 jtbl_801F6E1C = { addr = 0x801F6E1C, type = "Callback", source = "The switch table of func_801FB8A4: the jump targets of its jr dispatch." }
 Scene_DispatchEntity = { addr = 0x801F6E70, type = "func", source = "dispatches a scene entity by its callback index" }
-func_801F6E78 = { addr = 0x801F6E78, alias = true, source = "Scene_DispatchEntity+0x8, after its g_Task load; the start the split used before the function was moved back to that load" }
+func_801F6E78 = { addr = 0x801F6E78, alias = true, source = "Scene_DispatchEntity+0x8, after its g_Self load; the start the split used before the function was moved back to that load" }
 Actor_FreePaletteFades = { addr = 0x801F7334, type = "func", source = "Frees the two palette fade targets of the actor slot and resets the area work." }
 Actor_Reveal = { addr = 0x801F78E0, type = "func", source = "Keeps the actor slot at the work byte 0x0B hidden until the timer at byte 0x09 reaches zero, then shows it, clears the two actor slots at the work bytes 0x03 and 0x04 and sets the handler index at byte 0x01 to 2." }
 Actor_FreePaletteFades2 = { addr = 0x801F7A14, type = "func", source = "Frees the two palette fade targets of the actor slot and resets the area work; same bytes as Actor_FreePaletteFades at 0x801F7334." }

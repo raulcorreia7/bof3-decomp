@@ -7,7 +7,7 @@ MATCH void func_801D3574(void) {
     FishingState* work;
     s32           val;
 
-    work           = TASK(FishingState);
+    work           = SELF(FishingState);
     val            = work->origin_x - 0x1E;
     work->origin_x = val;
 

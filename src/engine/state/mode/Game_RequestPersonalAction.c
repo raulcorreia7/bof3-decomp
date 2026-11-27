@@ -13,7 +13,7 @@ MATCH bool Game_RequestPersonalAction(void) {
         return 0;
     if (g_GameRequestFlags & AREA_LOAD_FLAG_WORLD_MAP)
         return 0;
-    TASK(Actor)->header.mode = FIELD_TASK_MODE_PERSONAL_ACTION;
+    SELF(Actor)->header.mode = FIELD_TASK_MODE_PERSONAL_ACTION;
     ACTOR_CLEAR_STEP();
     g_Game.current->u.field.mode.unsigned_value = GAME_PANEL_MODE_PERSONAL_ACTION;
     return 1;

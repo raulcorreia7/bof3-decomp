@@ -10,7 +10,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #include "overlays/plchar/shared/PlChar_RunStepScriptRyuAdult.h"
 
 MATCH void func_801CFCDC(void) {
-    SYS_DISPATCH_TASK(D_801D07E4, 2, g_Task);
+    SYS_DISPATCH_TASK(D_801D07E4, 2, g_Self);
 }
 
 #include "overlays/plchar/shared/PlChar_WalkStep.h"

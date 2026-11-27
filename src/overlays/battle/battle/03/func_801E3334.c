@@ -6,11 +6,11 @@
 MATCH void func_801E3334(void) {
     PartyMember* work;
 
-    TASK(PartyMember)->header.flags &= ~ACTOR_FLAG_HIDDEN;
+    SELF(PartyMember)->header.flags &= ~ACTOR_FLAG_HIDDEN;
     Battle_RequestEnemyScript(0);
-    work          = TASK(PartyMember);
+    work          = SELF(PartyMember);
     work->unk_48  = 2u;
-    work          = TASK(PartyMember);
+    work          = SELF(PartyMember);
     work->unk_18  = 0x666u;
     work->scale.y = 0u;
     work->scale.x = 0u;

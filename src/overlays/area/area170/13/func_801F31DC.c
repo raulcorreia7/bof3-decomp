@@ -2,7 +2,7 @@
 
 #ifdef NON_MATCHING
 /* Draws the three glyph panels, the arrow between them and, every other frame, the row bars of
- * the panel TASK(Actor)->unk_06 selects. */
+ * the panel SELF(Actor)->unk_06 selects. */
 NON_MATCHING void func_801F31DC(s16 x, s16 y) {
     s16 left;
     s16 right;
@@ -25,11 +25,11 @@ NON_MATCHING void func_801F31DC(s16 x, s16 y) {
     top    = (s16)(y + 0x29);
     middle = (s16)(y + 0x2D);
     bottom = (s16)(y + 0x31);
-    func_801F3698((s16)(x + TASK(Actor)->unk_06 * 100 + 7), top, (s16)(x + TASK(Actor)->unk_06 * 100 + 3), middle, (s16)(x + TASK(Actor)->unk_06 * 100 + 7), bottom, 0xC8, 0xC8, 0xC8, 0);
-    func_801F3698((s16)(x + (TASK(Actor)->unk_06 + 1) * 100 + 4), top, (s16)(x + (TASK(Actor)->unk_06 + 1) * 100 + 8), middle, (s16)(x + (TASK(Actor)->unk_06 + 1) * 100 + 4), bottom, 0xC8, 0xC8, 0xC8,
+    func_801F3698((s16)(x + SELF(Actor)->unk_06 * 100 + 7), top, (s16)(x + SELF(Actor)->unk_06 * 100 + 3), middle, (s16)(x + SELF(Actor)->unk_06 * 100 + 7), bottom, 0xC8, 0xC8, 0xC8, 0);
+    func_801F3698((s16)(x + (SELF(Actor)->unk_06 + 1) * 100 + 4), top, (s16)(x + (SELF(Actor)->unk_06 + 1) * 100 + 8), middle, (s16)(x + (SELF(Actor)->unk_06 + 1) * 100 + 4), bottom, 0xC8, 0xC8, 0xC8,
                   0);
-    left   = (s16)(x + TASK(Actor)->unk_06 * 100 + 0xA);
-    right  = (s16)(x + TASK(Actor)->unk_06 * 100 + 0x64);
+    left   = (s16)(x + SELF(Actor)->unk_06 * 100 + 0xA);
+    right  = (s16)(x + SELF(Actor)->unk_06 * 100 + 0x64);
     top    = (s16)(y + 5);
     bottom = (s16)(y + 0x50);
     func_801F3774(left, top, right, top, 0xC8, 0xC8, 0xC8, 0);

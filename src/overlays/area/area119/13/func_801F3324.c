@@ -17,8 +17,8 @@ MATCH void func_801F3324(void) {
     SetPolyFT4(prim);
     SetShadeTex(prim, 0);
     g_ScratchPadVectors[0].vx = g_ScratchPadVectors[1].vx = g_ScratchPadVectors[2].vx = g_ScratchPadVectors[3].vx = -0x1F40;
-    g_ScratchPadVectors[0].vy = g_ScratchPadVectors[2].vy = TASK(Actor)->screen_y - 0x2040;
-    g_ScratchPadVectors[1].vy = g_ScratchPadVectors[3].vy = TASK(Actor)->screen_y - 0x2140;
+    g_ScratchPadVectors[0].vy = g_ScratchPadVectors[2].vy = SELF(Actor)->screen_y - 0x2040;
+    g_ScratchPadVectors[1].vy = g_ScratchPadVectors[3].vy = SELF(Actor)->screen_y - 0x2140;
     x                                                     = (g_ScratchPadVectors[0].vx + 0x4000) << 9;
     y                                                     = (g_ScratchPadVectors[0].vy + 0x4000) << 9;
     g_ScratchPadVectors[0].vz                             = -Area_HeightSample(x, y) / 2 + 0x40;

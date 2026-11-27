@@ -7,7 +7,7 @@ MATCH void Battle_HoldScreenFade(void) {
 
     ScratchPad* sp;
 
-    work               = TASK(PartyMember);
+    work               = SELF(PartyMember);
     value              = work->unk_09;
     sp                 = SPAD(0u);
     sp->cells.bytes[2] = value;

@@ -3,5 +3,5 @@
 /* Dispatches the AREA030 scratchpad work byte 0x01 through the
  * overlay's handler table. */
 MATCH void func_801D0C98(void) {
-    D_801E1CD4[TASK(FishingState)->handler_index]();
+    D_801E1CD4[SELF(FishingState)->handler_index]();
 }

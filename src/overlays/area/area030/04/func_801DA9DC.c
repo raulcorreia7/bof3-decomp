@@ -8,13 +8,13 @@ MATCH void func_801DA9DC(void) {
     Coord*        target;
     SpawnedActor* actor;
 
-    if ((TASK(FishingState)->cue_index != 0) && (g_SpawnedActors[4].header.mode == 3)) {
-        TASK(FishingState)->cue_index = 0;
+    if ((SELF(FishingState)->cue_index != 0) && (g_SpawnedActors[4].header.mode == 3)) {
+        SELF(FishingState)->cue_index = 0;
         func_801DDE94(1);
     }
     if ((g_PadStates[0].pressed & PADRup) && (g_SpawnedActors[4].header.mode == 0)) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 3));
-        TASK(FishingState)->sub_index++;
+        SELF(FishingState)->sub_index++;
         g_SpawnedActors[2].header.mode = 0;
         g_SpawnedActors[0].header.mode = 0;
         g_SpawnedActors[3].header.mode = 7;
@@ -25,8 +25,8 @@ MATCH void func_801DA9DC(void) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 3));
         g_SpawnedActors[2].header.mode = 0;
         g_SpawnedActors[0].header.mode = 0;
-        TASK(FishingState)->mode_index = 1;
-        TASK(FishingState)->sub_index  = 0;
+        SELF(FishingState)->mode_index = 1;
+        SELF(FishingState)->sub_index  = 0;
         return;
     }
     if (Area_HeightSample(g_SpawnedActors[0].pos.x.fixed, g_SpawnedActors[0].pos.y.fixed) >= COORD_INT(g_SpawnedActors[0].pos.z)) {
@@ -39,8 +39,8 @@ MATCH void func_801DA9DC(void) {
                 g_AreaScrollTargetY = g_SpawnedActors[0].pos.y.fixed;
             }
             g_AreaCameraSpeed              = 0x10;
-            TASK(FishingState)->mode_index = 5;
-            TASK(FishingState)->sub_index  = 0;
+            SELF(FishingState)->mode_index = 5;
+            SELF(FishingState)->sub_index  = 0;
             return;
         }
         COORD_INT(actor->pos.z) = Area_HeightSample(actor->pos.x.fixed, actor->pos.y.fixed);

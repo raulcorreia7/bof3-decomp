@@ -6,13 +6,13 @@ MATCH void Actor_SlideScreenToEdge(void) {
     u16    screen_y;
     s16    v;
 
-    work           = TASK(Actor);
+    work           = SELF(Actor);
     screen_y       = work->screen_y + 0x10;
     work->screen_y = screen_y;
     if ((s16)screen_y >= 0x80) {
-        TASK(Actor)->header.step += 1;
+        SELF(Actor)->header.step += 1;
     }
-    v = TASK(Actor)->unk_32;
+    v = SELF(Actor)->unk_32;
     if (v != 0) {
         Area_Update(0);
     } else {

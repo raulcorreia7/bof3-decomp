@@ -6,17 +6,17 @@ MATCH void Actor_TossLaunch(void) {
     Actor* work;
     s16    dist;
 
-    dist = Area_HeightSample(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed);
-    work = TASK(Actor);
+    dist = Area_HeightSample(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed);
+    work = SELF(Actor);
     if (dist >= COORD_INT(work->pos.z) || (work->header.flags & ACTOR_FLAG_OFFSCREEN) || work->header.mode == 0) {
         work->vz      = s_ActorTossArcs[work->header.step].vz;
         work->gravity = s_ActorTossArcs[work->header.step].gravity;
         work->header.mode++;
     }
-    TASK(Actor)->pos.x.fixed += TASK(Actor)->vx;
-    TASK(Actor)->pos.y.fixed += TASK(Actor)->vy;
-    TASK(Actor)->pos.z.fixed += TASK(Actor)->vz;
-    TASK(Actor)->vz -= TASK(Actor)->gravity;
+    SELF(Actor)->pos.x.fixed += SELF(Actor)->vx;
+    SELF(Actor)->pos.y.fixed += SELF(Actor)->vy;
+    SELF(Actor)->pos.z.fixed += SELF(Actor)->vz;
+    SELF(Actor)->vz -= SELF(Actor)->gravity;
     Script_AnimStepLoop();
     Area_SetDrawMode();
 }

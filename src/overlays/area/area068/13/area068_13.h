@@ -75,13 +75,13 @@ extern u16 g_WellSwishButtons;
         SND_SEPlay(end_cue);                             \
         g_WellLowerTimer         = 0;                    \
         g_WellLowerCount         = g_WellPressCount;     \
-        TASK(Actor)->header.mode = WELL_MODE_LOWER_DONE; \
+        SELF(Actor)->header.mode = WELL_MODE_LOWER_DONE; \
     } else if (g_PadStates[0].pressed == PADRup) {       \
         g_WellIdleFrames = 0;                            \
         g_WellPressCount += 1;                           \
-        TASK(Actor)->header.mode = (press_mode);         \
+        SELF(Actor)->header.mode = (press_mode);         \
     } else {                                             \
-        TASK(Actor)->header.mode = (idle_mode);          \
+        SELF(Actor)->header.mode = (idle_mode);          \
     }
 
 #endif

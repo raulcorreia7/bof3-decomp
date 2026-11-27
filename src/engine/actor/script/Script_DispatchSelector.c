@@ -14,14 +14,14 @@ MATCH void Script_DispatchSelector(u8 selector) {
     u16    table_word;
     s32    index;
 
-    work = TASK(Actor);
+    work = SELF(Actor);
     if (work->unk_06 < 8U) {
         if (work->unk_06 != 6) {
             work->mirror = D_801C839D[selector * 2];
             context      = g_CurrentActor[0x95];
             index        = selector * 2;
             if (context != GAME_NONE) {
-                frame      = TASK(Actor);
+                frame      = SELF(Actor);
                 table_byte = D_801C839C[index];
                 if (frame->script_record != table_byte) {
                     table_word = table_byte;

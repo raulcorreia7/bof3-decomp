@@ -3,7 +3,7 @@
 MATCH void func_801F336C(void) {
     Actor* actor;
 
-    actor              = TASK(Actor);
+    actor              = SELF(Actor);
     actor->screen_x    = 256;
     actor->screen_y    = 0;
     actor->unk_32      = 24;

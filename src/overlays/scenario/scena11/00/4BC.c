@@ -21,9 +21,9 @@ MATCH s32 func_801F7104(void) {
     D_801481E8.x             = g_AreaCameraAngle.vx << 16;
     D_801481E8.y             = g_AreaCameraAngle.vy << 16;
     D_801481E8.z             = g_AreaCameraAngle.vz << 16;
-    g_AreaCameraRefreshCount = TASK(Actor)->timer;
+    g_AreaCameraRefreshCount = SELF(Actor)->timer;
     mode                     = 1;
-    TASK(Actor)->header.mode = mode;
+    SELF(Actor)->header.mode = mode;
     return mode;
 }
 
@@ -39,7 +39,7 @@ MATCH void func_801F7178(void) {
         if (g_GameStateIndex == GAME_REQUEST_IDLE) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 3));
         }
-        TASK(Actor)->header.mode = 2;
+        SELF(Actor)->header.mode = 2;
     }
 }
 
@@ -55,7 +55,7 @@ MATCH void func_801F7200(void) {
         if (g_GameStateIndex == GAME_REQUEST_IDLE) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 3));
         }
-        TASK(Actor)->header.mode = 1;
+        SELF(Actor)->header.mode = 1;
     }
 }
 

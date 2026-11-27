@@ -8,17 +8,17 @@ MATCH void func_801F60C0(void) {
         g_GameFlags &= ~GAME_FLAG_MENU_LOCK;
         Actor_Clear();
     } else if (g_GameStateIndex == GAME_REQUEST_IDLE && g_Game.members[0].header.mode == 0xC) {
-        if (TASK(Actor)->unk_0A == 0) {
-            if (TASK(Actor)->timer == 0) {
+        if (SELF(Actor)->unk_0A == 0) {
+            if (SELF(Actor)->timer == 0) {
                 Game_RequestAreaChange(0x79, 0x190000, 0x2D0000, 7);
                 g_GameFlags &= ~GAME_FLAG_MENU_LOCK;
                 Actor_Clear();
                 return;
             }
-            TASK(Actor)->timer--;
-            TASK(Actor)->unk_0A = 0x1D;
+            SELF(Actor)->timer--;
+            SELF(Actor)->unk_0A = 0x1D;
         } else {
-            TASK(Actor)->unk_0A--;
+            SELF(Actor)->unk_0A--;
         }
     }
     /* FAKE: the prototype takes u8, which zero-extends; retail calls without it and sign-extends. */
@@ -30,11 +30,11 @@ MATCH void func_801F60C0(void) {
     } else {
         digit = 0;
     }
-    digit += (u8)(TASK(Actor)->unk_0A % 3) * 3;
+    digit += (u8)(SELF(Actor)->unk_0A % 3) * 3;
     digit = digit < 0 ? 0 : digit < 10 ? digit : 9;
-    sprintf(g_UiTextFormatBuffer, D_801F2C08, TASK(Actor)->timer, (u8)(TASK(Actor)->unk_0A / 3), digit);
+    sprintf(g_UiTextFormatBuffer, D_801F2C08, SELF(Actor)->timer, (u8)(SELF(Actor)->unk_0A / 3), digit);
     g_UiTextFormatBuffer[2] = 0x8F;
-    if (TASK(Actor)->timer < 10 && (g_FrameCount & 4)) {
+    if (SELF(Actor)->timer < 10 && (g_FrameCount & 4)) {
         UI_TextDrawAscii(0x8E, 0x30, 2, g_UiTextFormatBuffer);
     } else {
         UI_TextDrawAscii(0x8E, 0x30, 0, g_UiTextFormatBuffer);

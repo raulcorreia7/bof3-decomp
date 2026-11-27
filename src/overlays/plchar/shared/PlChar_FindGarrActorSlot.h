@@ -14,14 +14,14 @@ MATCH s8 PlChar_FindGarrActorSlot(void) {
         return -1;
     }
 
-    direction = TASK(Actor)->direction;
-    pos_x     = TASK(Actor)->pos.x.fixed + g_FacingSteps[direction].x;
-    pos_y     = TASK(Actor)->pos.y.fixed + g_FacingSteps[direction].y;
+    direction = SELF(Actor)->direction;
+    pos_x     = SELF(Actor)->pos.x.fixed + g_FacingSteps[direction].x;
+    pos_y     = SELF(Actor)->pos.y.fixed + g_FacingSteps[direction].y;
 
     for (i = 0; i < ACTOR_SLOT_COUNT; i++) {
         if (g_SpawnedActors[i].header.flags != 0 && g_SpawnedActors[i].type == ACTOR_TYPE_BLOCK) {
-            if ((Actor_IsInRange(pos_x, pos_y, COORD_INT(TASK(Actor)->pos.z), 1, (Actor*)&g_SpawnedActors[i]) & BYTE_MASK) != 0 &&
-                (g_SpawnedActors[i].pos.x.fixed == TASK(Actor)->pos.x.fixed || g_SpawnedActors[i].pos.y.fixed == TASK(Actor)->pos.y.fixed)) {
+            if ((Actor_IsInRange(pos_x, pos_y, COORD_INT(SELF(Actor)->pos.z), 1, (Actor*)&g_SpawnedActors[i]) & BYTE_MASK) != 0 &&
+                (g_SpawnedActors[i].pos.x.fixed == SELF(Actor)->pos.x.fixed || g_SpawnedActors[i].pos.y.fixed == SELF(Actor)->pos.y.fixed)) {
                 return (s8)i;
             }
         }

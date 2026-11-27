@@ -8,6 +8,6 @@ MATCH void func_801E19DC(void) {
     PartyMember* work;
 
     Battle_IsPartyMemberBlocked();
-    work = TASK(PartyMember);
+    work = SELF(PartyMember);
     work->header.step += 1;
 }

@@ -25,7 +25,7 @@ MATCH void Actor_ShatterRunDust(void) {
     i     = 0;
     do {
         Actor_ShatterDrawPuff((s32*)rec, state->size, state->brightness);
-        if (TASK(Actor)->timer >= 12u) {
+        if (SELF(Actor)->timer >= 12u) {
             rec->pos.vx += rec->vel.vx * 2;
             rec->pos.vy += rec->vel.vy * 2;
             rec->pos.vz += rec->vel.vz * 2;
@@ -37,7 +37,7 @@ MATCH void Actor_ShatterRunDust(void) {
         rec += 1;
         i++;
     } while ((i & BYTE_MASK) < 8u);
-    if (TASK(Actor)->timer >= 12u) {
+    if (SELF(Actor)->timer >= 12u) {
         state->size += 0x80;
     } else {
         state->brightness -= 5;

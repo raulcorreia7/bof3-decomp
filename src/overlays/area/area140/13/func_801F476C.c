@@ -3,9 +3,9 @@
 MATCH void func_801F476C(void) {
     u8* work;
 
-    work = TASK(u8);
+    work = SELF(u8);
     SYS_ClearFlag(g_SceneEventFlags, work[0xB]);
-    work = TASK(u8);
+    work = SELF(u8);
     Area_CellSetPalette(FIELD(s16, work, 0x36), FIELD(s16, work, 0x3A));
     Actor_Clear();
 }

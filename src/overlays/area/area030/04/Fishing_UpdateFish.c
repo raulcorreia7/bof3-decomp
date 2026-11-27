@@ -2,7 +2,7 @@
 
 /* Walks the 30 state records (stride 0x98) at g_Actors; for every
  * live record it publishes the record pointer to the scratch work slot
- * g_Task and to g_CurrentActor, dispatches through the handler table
+ * g_Self and to g_CurrentActor, dispatches through the handler table
  * g_FishingFishSteps with the record's type byte, then rebuilds the record's blend byte
  * 0x5D from flag 0x20 and the signed halfword 0x3E and copies it to 0x5E and
  * 0x5F. */
@@ -28,11 +28,11 @@ MATCH void Fishing_UpdateFish(void) {
 
         /* FAKE: retail reads g_Actors as u8[]. */
         cur            = &((u8*)g_Actors)[off];
-        g_Task         = cur;
+        g_Self         = cur;
         g_CurrentActor = cur;
         table[cur[1]]();
 
-        record = TASK(FishingState);
+        record = SELF(FishingState);
         if ((record->flags & ACTOR_FLAG_SEMI_TRANSPARENT) != 0) {
             s16 value = record->bounce.half.key;
 
@@ -47,7 +47,7 @@ MATCH void Fishing_UpdateFish(void) {
             record->tint_5D = 0;
         }
 
-        TASK(FishingState)->tint_5E = TASK(FishingState)->tint_5D;
-        TASK(FishingState)->tint_5F = TASK(FishingState)->tint_5D;
+        SELF(FishingState)->tint_5E = SELF(FishingState)->tint_5D;
+        SELF(FishingState)->tint_5F = SELF(FishingState)->tint_5D;
     }
 }

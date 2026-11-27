@@ -2,12 +2,12 @@
 /* AREA_SPAWN_SLOT_STEP (area098 0x801F3B5C, area188 0x801F364C) */
 #define AREA_SPAWN_SLOT_STEP(DRAW)             \
     u8 count;                                  \
-    count               = TASK(Actor)->unk_06; \
-    TASK(Actor)->unk_06 = count + 1;           \
+    count               = SELF(Actor)->unk_06; \
+    SELF(Actor)->unk_06 = count + 1;           \
     if ((count & 3) == 0) {                    \
         Area_ClaimSpawnSlot();                 \
     }                                          \
     DRAW();                                    \
     Area_UpdateSpawnSlots();                   \
-    TASK(Actor)->timer = 32;                   \
-    TASK(Actor)->header.mode += 1;
+    SELF(Actor)->timer = 32;                   \
+    SELF(Actor)->header.mode += 1;

@@ -12,7 +12,7 @@ g_ScratchPadVectors = { addr = 0x1F800014, source = "ScratchPad.vectors: the fou
 D_1F80001C = { addr = 0x1F80001C, type = "SVECTOR", source = "ScratchPad.vectors[1]: the second corner vector RotTransPers4 projects, written on its own by the tile-ring draw (Area_CellDrawRing)." }
 D_1F800024 = { addr = 0x1F800024, type = "SVECTOR", source = "ScratchPad.vectors[2]: the third corner vector RotTransPers4 projects, written on its own by the tile-ring draw (Area_CellDrawRing)." }
 D_1F80002C = { addr = 0x1F80002C, type = "SVECTOR", source = "ScratchPad.vectors[3]: the fourth corner vector RotTransPers4 projects, written on its own by the tile-ring draw (Area_CellDrawRing)." }
-g_Task = { addr = 0x1F800044, size = 0x4, source = "ScratchPad.task: the work record the current overlay runs; each header types it with a g_Task view." }
+g_Self = { addr = 0x1F800044, size = 0x4, source = "ScratchPad.task: the work record the current overlay runs; each header types it with a g_Self view." }
 jtbl_800327B0 = { addr = 0x800327B0, type = "Callback", source = "The switch table of LZ77_DecodeStep: the jump targets of its jr dispatch." }
 D_80033A08 = { addr = 0x80033A08, type = "u16", source = "Window colors, 0x40 bytes per window style." }
 g_AreaMapBundle = { addr = 0x80104000, type = "AreaMapBundle", size = 0x30, source = "Header of the area map bundle." }

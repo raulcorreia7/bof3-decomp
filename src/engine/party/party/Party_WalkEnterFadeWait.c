@@ -4,6 +4,6 @@
 /* Waits for the fade-in to end, then advances the sub-step. */
 MATCH void Party_WalkEnterFadeWait(void) {
     if (func_801C27E0(8) & BYTE_MASK) {
-        TASK(Actor)->unk_03 = (TASK(Actor)->unk_03 + 1);
+        SELF(Actor)->unk_03 = (SELF(Actor)->unk_03 + 1);
     }
 }

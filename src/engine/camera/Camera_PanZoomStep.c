@@ -8,7 +8,7 @@ MATCH void Camera_PanZoomStep(void) {
     s32    step;
 
     Camera_PanAngleStep();
-    work                = TASK(Actor);
+    work                = SELF(Actor);
     pos                 = (g_AreaCameraOffsetZ << 16) + work->vy;
     /* FAKE: volatile re-read keeps the direction load before the store.
      */

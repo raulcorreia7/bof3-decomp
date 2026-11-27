@@ -8,7 +8,7 @@ MATCH void Actor_DispatchAll(void) {
     do {
         if (g_SpawnedActors[count & BYTE_MASK].header.flags != 0) {
             slot = &g_SpawnedActors[count & BYTE_MASK];
-            TASK_SET(slot);
+            SELF_SET(slot);
             g_ActorTypes[slot->type]();
         }
         count++;

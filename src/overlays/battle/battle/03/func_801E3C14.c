@@ -21,9 +21,9 @@ MATCH void func_801E3C14(void) {
 
     D_801463DA                               = 0;
     g_Battle.pending_status                  = 0;
-    slot                                     = TASK(PartyMember)->slot;
+    slot                                     = SELF(PartyMember)->slot;
     self                                     = g_BattleCurrentEnemy;
-    D_8014639C                               = g_Task;
+    D_8014639C                               = g_Self;
     g_Battle.target_record                   = &self->turn;
     g_Battle.target                          = slot;
     /* Plain pointer stores, not field stores: retail keeps each one ahead
@@ -46,7 +46,7 @@ MATCH void func_801E3C14(void) {
     }
     lock_work = g_BattleCurrentEnemy;
     if ((lock_work->turn.target_flags & BATTLE_HIT_HP) && lock_work->turn.hp_change == 0) {
-        TASK(PartyMember)->header.step = 3;
+        SELF(PartyMember)->header.step = 3;
         return;
     }
     if (!(g_BattleCurrentEnemy->turn.damage_flags.value & BATTLER_DAMAGE_ROW_PRESENT)) {
@@ -62,11 +62,11 @@ MATCH void func_801E3C14(void) {
     }
     hit_work = g_BattleCurrentEnemy;
     if (hit_work->turn.target_flags & BATTLE_HIT_HP) {
-        Battle_QueueAction(hit_work->turn.hp_change, TASK(PartyMember)->slot);
+        Battle_QueueAction(hit_work->turn.hp_change, SELF(PartyMember)->slot);
         hit_work = g_BattleCurrentEnemy;
     }
     if (hit_work->turn.target_flags & BATTLE_HIT_AP) {
-        func_800AAEBC(hit_work->turn.ap_change, TASK(PartyMember)->slot);
+        func_800AAEBC(hit_work->turn.ap_change, SELF(PartyMember)->slot);
     }
     pending = &g_Battle.pending_status;
     g_BattleCurrentEnemy->status |= *pending;
@@ -75,9 +75,9 @@ MATCH void func_801E3C14(void) {
     tail_work = g_BattleCurrentEnemy;
     if (tail_work->turn.hp_change > 0) {
         if (tail_work->hp == 0) {
-            TASK(PartyMember)->unk_09 = 0;
+            SELF(PartyMember)->unk_09 = 0;
             if (g_Battle.flags & BATTLE_STATE_CRITICAL) {
-                GFX_PaletteAllocFade(TASK(void), 16, 16, 16, 0);
+                GFX_PaletteAllocFade(SELF(void), 16, 16, 16, 0);
             }
             g_BattleCurrentEnemy->status = STATUS_KO;
         } else if (BATTLE_IS_SCRIPTED()) {
@@ -101,5 +101,5 @@ MATCH void func_801E3C14(void) {
     flags = &g_Battle.flags;
     *flags &= ~0x80;
     Battle_IsEnemyBlocked();
-    TASK(PartyMember)->unk_03 += 1;
+    SELF(PartyMember)->unk_03 += 1;
 }

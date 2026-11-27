@@ -6,7 +6,7 @@ MATCH void Camera_PanAngleEnd(void) {
     Actor* work;
     u8*    flags;
 
-    work  = TASK(Actor);
+    work  = SELF(Actor);
     flags = &g_ScenarioState.flags_01;
     setVector(&g_AreaCameraAngle, work->angle_x, work->angle_y, work->angle_z);
     *flags &= ~SCENARIO_STATE_CAMERA_MOVING;

@@ -49,6 +49,6 @@ MATCH void func_801F3584(s32 height, s32 y, s32 flag) {
                D_801F4320[flag][1] + ((rcos((i + 1) << 7) * height) >> 16), D_801F4320[flag][0] + ((rsin(i << 7) * y) >> 16), D_801F4320[flag][1] + ((rcos(i << 7) * y) >> 16),
                D_801F4320[flag][0] + ((rsin((i + 1) << 7) * y) >> 16), D_801F4320[flag][1] + ((rcos((i + 1) << 7) * y) >> 16));
 
-        Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, 0, sizeof(POLY_FT4));
+        Area_CellAddPrim(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed, 0, sizeof(POLY_FT4));
     }
 }

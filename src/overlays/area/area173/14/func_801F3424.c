@@ -10,7 +10,7 @@ MATCH void func_801F3424(void) {
         func_801F3954(1);
         func_801F3954(2);
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0x05));
-        work = TASK(Actor);
+        work = SELF(Actor);
         work->header.step++;
     }
 }

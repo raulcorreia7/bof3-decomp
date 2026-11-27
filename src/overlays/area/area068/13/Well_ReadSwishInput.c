@@ -14,38 +14,38 @@ MATCH void Well_ReadSwishInput(void) {
         switch (*input) {
             case PADLup:
             case (PADLup | PADLright):
-                work        = TASK(Actor);
+                work        = SELF(Actor);
                 g_GameState = g_Game.members;
-                TASK_SET(g_Game.members);
+                SELF_SET(g_Game.members);
                 g_Game.members[0].pos.y.fixed -= 0x800;
-                g_Task = work;
+                g_Self = work;
                 break;
             case PADLright:
             case (PADLdown | PADLright):
-                work        = TASK(Actor);
+                work        = SELF(Actor);
                 g_GameState = g_Game.members;
-                TASK_SET(g_Game.members);
+                SELF_SET(g_Game.members);
                 g_Game.members[0].pos.x.fixed += 0x800;
-                g_Task = work;
+                g_Self = work;
                 break;
             case PADLdown:
             case (PADLleft | PADLdown):
-                work        = TASK(Actor);
+                work        = SELF(Actor);
                 g_GameState = g_Game.members;
-                TASK_SET(g_Game.members);
+                SELF_SET(g_Game.members);
                 g_Game.members[0].pos.y.fixed += 0x800;
-                g_Task = work;
+                g_Self = work;
                 break;
             case PADLleft:
             case (PADLleft | PADLup):
-                work        = TASK(Actor);
+                work        = SELF(Actor);
                 g_GameState = g_Game.members;
-                TASK_SET(g_Game.members);
+                SELF_SET(g_Game.members);
                 g_Game.members[0].pos.x.fixed -= 0x800;
-                g_Task = work;
+                g_Self = work;
                 break;
         }
-        TASK(Actor)->header.mode = WELL_MODE_SWISH_DELAY;
-        TASK(Actor)->timer       = WELL_SWISH_DELAY_FRAMES;
+        SELF(Actor)->header.mode = WELL_MODE_SWISH_DELAY;
+        SELF(Actor)->timer       = WELL_SWISH_DELAY_FRAMES;
     }
 }

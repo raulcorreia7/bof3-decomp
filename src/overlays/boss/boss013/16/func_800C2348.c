@@ -7,10 +7,10 @@ MATCH void func_800C2348(void) {
         Battle_EndVictory();
     } else {
         if (g_Battle.boss_flags & 0x40) {
-            g_Task = &D_801EB860;
+            g_Self = &D_801EB860;
             Area_SceneSelectRecord(0xF9);
-            TASK(PartyMember)->unk_24 &= 0xFE;
-            TASK(PartyMember)->unk_2A = 1;
+            SELF(PartyMember)->unk_24 &= 0xFE;
+            SELF(PartyMember)->unk_2A = 1;
             Script_Select(1U);
         }
         *g_ScriptVars = 0x50;

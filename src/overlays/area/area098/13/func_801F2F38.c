@@ -10,9 +10,9 @@ MATCH void func_801F2F38(void) {
     u8        col;
 
     Camera_SetMatrix(scratch);
-    point[0] = g_Game.members[TASK(Actor)->option_flags].pos.x.fixed;
-    point[1] = g_Game.members[TASK(Actor)->option_flags].pos.y.fixed;
-    point[2] = g_Game.members[TASK(Actor)->option_flags].pos.z.fixed;
+    point[0] = g_Game.members[SELF(Actor)->option_flags].pos.x.fixed;
+    point[1] = g_Game.members[SELF(Actor)->option_flags].pos.y.fixed;
+    point[2] = g_Game.members[SELF(Actor)->option_flags].pos.z.fixed;
     Camera_ProjectPoint(point, &screen);
     D_801F651C = 0;
     pixels     = MEM_PTR(u16, AREA_WORK);
@@ -29,5 +29,5 @@ MATCH void func_801F2F38(void) {
             pixels++;
         }
     }
-    TASK(Actor)->header.mode++;
+    SELF(Actor)->header.mode++;
 }

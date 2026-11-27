@@ -2,9 +2,9 @@
 
 MATCH void func_801F2C48(void) {
     func_801F349C();
-    TASK(Actor)->timer  = 128;
-    TASK(Actor)->unk_0A = 0;
-    TASK(Actor)->header.mode++;
+    SELF(Actor)->timer  = 128;
+    SELF(Actor)->unk_0A = 0;
+    SELF(Actor)->header.mode++;
     SND_SEPlay(512);
     SND_SEPlay(522);
 }

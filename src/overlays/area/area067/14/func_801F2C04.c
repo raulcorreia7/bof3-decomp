@@ -1,5 +1,5 @@
 #include "area067_14.h"
 
 MATCH s32 func_801F2C04(void) {
-    SYS_DISPATCH_BYTE(D_801F4624, TASK(Actor)->header.mode);
+    SYS_DISPATCH_BYTE(D_801F4624, SELF(Actor)->header.mode);
 }

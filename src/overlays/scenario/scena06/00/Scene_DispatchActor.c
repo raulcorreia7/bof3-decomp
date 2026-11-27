@@ -161,7 +161,7 @@ MATCH void func_801FD29C(void) {
 }
 
 MATCH s8 func_801FD34C(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta, u8 landing_script, u8 flags) {
-    return D_801FE46C[TASK(Actor)->unk_04](entry, dir_x, dir_y, vz_start, vz_delta, landing_script, flags);
+    return D_801FE46C[SELF(Actor)->unk_04](entry, dir_x, dir_y, vz_start, vz_delta, landing_script, flags);
 }
 
 MATCH s8 func_801FD3BC(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta, u8 landing_script, u8 flags) {
@@ -175,27 +175,27 @@ MATCH s8 func_801FD3BC(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta
         return 0;
     }
     absY               = abs(dir_y);
-    TASK(Actor)->timer = 0;
+    SELF(Actor)->timer = 0;
     span               = absY;
     absX               = abs(dir_x);
     if (absX >= absY) {
         span = absX;
     }
     if (span != 0) {
-        TASK(Actor)->param.unk_0B = span - 1;
+        SELF(Actor)->param.unk_0B = span - 1;
     } else {
-        TASK(Actor)->param.unk_0B = 0;
+        SELF(Actor)->param.unk_0B = 0;
     }
-    TASK(Actor)->unk_0A = 16 / size;
-    TASK(Actor)->vz     = vz_start << 8;
+    SELF(Actor)->unk_0A = 16 / size;
+    SELF(Actor)->vz     = vz_start << 8;
     if (span != 0) {
-        TASK(Actor)->vx = (dir_x << 15) / (TASK(Actor)->unk_0A * span);
-        TASK(Actor)->vy = (dir_y << 15) / (TASK(Actor)->unk_0A * span);
+        SELF(Actor)->vx = (dir_x << 15) / (SELF(Actor)->unk_0A * span);
+        SELF(Actor)->vy = (dir_y << 15) / (SELF(Actor)->unk_0A * span);
     } else {
-        TASK(Actor)->vy = 0;
-        TASK(Actor)->vx = 0;
+        SELF(Actor)->vy = 0;
+        SELF(Actor)->vx = 0;
     }
-    TASK(Actor)->unk_04 = 1;
+    SELF(Actor)->unk_04 = 1;
     return 1;
 }
 
@@ -206,7 +206,7 @@ MATCH s8 func_801FD568(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta
     u8     count;
     s32    sum;
 
-    work              = TASK(Actor);
+    work              = SELF(Actor);
     speed             = work->vz;
     sum               = work->pos.x.fixed;
     count             = work->unk_0A - 1;
@@ -215,21 +215,21 @@ MATCH s8 func_801FD568(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta
     COORD_INT(work->pos.z) += work->vz >> 8;
     work->unk_0A = count;
     work->vz     = speed + vz_delta;
-    height       = Area_HeightSample(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed);
-    if (TASK(Actor)->vz < 0 && height > COORD_INT(TASK(Actor)->pos.z) + 576) {
-        COORD_INT(TASK(Actor)->pos.z) = height + 576;
+    height       = Area_HeightSample(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed);
+    if (SELF(Actor)->vz < 0 && height > COORD_INT(SELF(Actor)->pos.z) + 576) {
+        COORD_INT(SELF(Actor)->pos.z) = height + 576;
     }
-    if (TASK(Actor)->vz <= 0 && speed >= 0 && landing_script != GAME_NONE) {
-        TASK(Actor)->mirror = flags != 0;
+    if (SELF(Actor)->vz <= 0 && speed >= 0 && landing_script != GAME_NONE) {
+        SELF(Actor)->mirror = flags != 0;
         Script_Request(landing_script);
     }
-    if (TASK(Actor)->unk_0A == 0) {
-        if (TASK(Actor)->param.unk_0B != 0) {
-            TASK(Actor)->unk_0A = 0x10 / g_RouteSpeedScale[((Actor*)entry)->unk_04];
-            TASK(Actor)->param.unk_0B -= 1;
+    if (SELF(Actor)->unk_0A == 0) {
+        if (SELF(Actor)->param.unk_0B != 0) {
+            SELF(Actor)->unk_0A = 0x10 / g_RouteSpeedScale[((Actor*)entry)->unk_04];
+            SELF(Actor)->param.unk_0B -= 1;
         } else {
             Actor_ApplyVelocity();
-            TASK(Actor)->unk_04 = 2;
+            SELF(Actor)->unk_04 = 2;
         }
     }
     return 1;
@@ -239,15 +239,15 @@ MATCH s8 func_801FD748(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta
     s16 distance;
     s16 z;
 
-    distance = Area_HeightSample(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed);
-    z        = COORD_INT(TASK(Actor)->pos.z);
+    distance = Area_HeightSample(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed);
+    z        = COORD_INT(SELF(Actor)->pos.z);
     if (distance < z - 0x240) {
-        COORD_INT(TASK(Actor)->pos.z) = z + (TASK(Actor)->vz >> 8);
-        TASK(Actor)->vz += vz_delta;
+        COORD_INT(SELF(Actor)->pos.z) = z + (SELF(Actor)->vz >> 8);
+        SELF(Actor)->vz += vz_delta;
         return 1;
     }
-    COORD_INT(TASK(Actor)->pos.z) = Area_HeightSample(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed) + 0x240;
-    TASK(Actor)->unk_04           = 0;
+    COORD_INT(SELF(Actor)->pos.z) = Area_HeightSample(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed) + 0x240;
+    SELF(Actor)->unk_04           = 0;
     return 0;
 }
 

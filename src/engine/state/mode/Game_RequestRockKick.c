@@ -8,7 +8,7 @@ MATCH bool Game_RequestRockKick(s32 walk_speed) {
     type = g_Game.current->chr.character_id;
     if (type != CHAR_ID_TEEPO && type != CHAR_ID_PECO)
         return false;
-    if (!(TASK(Actor)->direction & 0x1))
+    if (!(SELF(Actor)->direction & 0x1))
         return false;
     if ((walk_speed & BYTE_MASK) != FIELD_SPEED_RUN)
         return false;
@@ -16,9 +16,9 @@ MATCH bool Game_RequestRockKick(s32 walk_speed) {
     if (result == -1)
         return false;
     g_Game.current->u.field.mode.unsigned_value = GAME_PANEL_MODE_PERSONAL_ACTION;
-    TASK(Actor)->param.unk_0B                   = result;
-    TASK(Actor)->header.mode                    = FIELD_TASK_MODE_PERSONAL_ACTION;
-    TASK(Actor)->header.step                    = 1;
-    TASK(Actor)->unk_03                         = 0;
+    SELF(Actor)->param.unk_0B                   = result;
+    SELF(Actor)->header.mode                    = FIELD_TASK_MODE_PERSONAL_ACTION;
+    SELF(Actor)->header.step                    = 1;
+    SELF(Actor)->unk_03                         = 0;
     return true;
 }

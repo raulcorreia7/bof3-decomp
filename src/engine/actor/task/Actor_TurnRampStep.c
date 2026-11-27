@@ -10,7 +10,7 @@ MATCH void Actor_TurnRampStep(void* unused) {
     s8     old_a;
     s8     old_b;
 
-    if (TASK(Actor)->unk_06 == 0x0A) {
+    if (SELF(Actor)->unk_06 == 0x0A) {
         slot = (s32)(-(((s32)g_CurrentActor - (s32)g_PartyActors) * 0xD79435E5)) >> 3;
         n    = slot;
         if (n < 0) {
@@ -20,14 +20,14 @@ MATCH void Actor_TurnRampStep(void* unused) {
         old_a = g_ActorTurnRamps[index].frames_xy;
         if (old_a != 0) {
             g_ActorTurnRamps[index].frames_xy = old_a - 1;
-            work                              = TASK(Actor);
+            work                              = SELF(Actor);
             work->angle_x += g_ActorTurnRamps[index].delta_x;
             work->angle_y += g_ActorTurnRamps[index].delta_y;
         }
         old_b = g_ActorTurnRamps[index].frames_z;
         if (old_b != 0) {
             g_ActorTurnRamps[index].frames_z = old_b - 1;
-            work                             = TASK(Actor);
+            work                             = SELF(Actor);
             work->angle_z += g_ActorTurnRamps[index].delta_z;
         }
     }

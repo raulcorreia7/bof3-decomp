@@ -1,11 +1,11 @@
 #include "game_00.h"
 
-#define STEP_TILE_X(n) ((((s16)TASK(Actor)->pos.x.part.integer + (n)) << 0x10) >> 1)
+#define STEP_TILE_X(n) ((((s16)SELF(Actor)->pos.x.part.integer + (n)) << 0x10) >> 1)
 #define PAD_FLAG       SP_REF(u8, 0x0)
 #define PAD_A          SP_REF(u8, 0x8)
 #define PAD_B          SP_REF(u8, 0x9)
 #define PAD_C          SP_REF(u8, 0xA)
-#define WDIR           TASK(Actor)->direction
+#define WDIR           SELF(Actor)->direction
 
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_801B95E0(void) {
@@ -22,16 +22,16 @@ NON_MATCHING s32 func_801B95E0(void) {
         return 1;
     }
     dir = WDIR;
-    if (COORD_FRAC(TASK(Actor)->pos.x) != 0 && COORD_FRAC(TASK(Actor)->pos.y) != 0) {
+    if (COORD_FRAC(SELF(Actor)->pos.x) != 0 && COORD_FRAC(SELF(Actor)->pos.y) != 0) {
         return 1;
     }
-    x     = FIELD(u16, g_Task, 0x36u) + (s8)D_80181B00[WDIR][0];
-    y_arg = y = FIELD(u16, g_Task, 0x3Au) + (s8)D_80181B00[WDIR][1];
+    x     = FIELD(u16, g_Self, 0x36u) + (s8)D_80181B00[WDIR][0];
+    y_arg = y = FIELD(u16, g_Self, 0x3Au) + (s8)D_80181B00[WDIR][1];
     Area_WalkProbeCells(x, y_arg);
 
     if (!(WDIR & AREA_LOAD_FLAG_WORLD_MAP)) {
-        if (COORD_FRAC(TASK(Actor)->pos.x) == 0) {
-            if (COORD_FRAC(TASK(Actor)->pos.y) == 0) {
+        if (COORD_FRAC(SELF(Actor)->pos.x) == 0) {
+            if (COORD_FRAC(SELF(Actor)->pos.y) == 0) {
                 pad    = (u8*)&D_1F800008;
                 pad[0] = func_801B9F08(1, 2, 3);
                 pad[1] = func_801B9F08(2, 0, 0);
@@ -49,7 +49,7 @@ NON_MATCHING s32 func_801B95E0(void) {
                         } else if (PAD_C == 0x10) {
                             Actor_SnapFacing(4, 6, 5);
                         } else {
-                            TASK(Actor)->direction = (WDIR + 1) & 7;
+                            SELF(Actor)->direction = (WDIR + 1) & 7;
                         }
                     }
                     if (!(g_GameRequestFlags & AREA_LOAD_FLAG_WORLD_MAP)) {
@@ -77,7 +77,7 @@ NON_MATCHING s32 func_801B95E0(void) {
                             return 1;
                         }
                         if (!(WDIR & AREA_LOAD_FLAG_WORLD_MAP)) {
-                            probe = Area_HeightReadStep(x << 0x10, (((s16)FIELD(u16, g_Task, 0x3Au) + y) << 0x10) >> 1, 1) << 0x10;
+                            probe = Area_HeightReadStep(x << 0x10, (((s16)FIELD(u16, g_Self, 0x3Au) + y) << 0x10) >> 1, 1) << 0x10;
                             if (PAD_FLAG != 0 && (probe >> 0x10) >= 0x41) {
                                 Actor_SnapFacing(2, 4, 3);
                                 return 1;
@@ -89,7 +89,7 @@ NON_MATCHING s32 func_801B95E0(void) {
             }
             goto north_south;
         }
-        if (COORD_FRAC(TASK(Actor)->pos.y) == 0) {
+        if (COORD_FRAC(SELF(Actor)->pos.y) == 0) {
             PAD_A = func_801B9F08(2, 4, 0);
             if (PAD_A == 0x70) {
                 Actor_SnapFacing(4, 6, 5);
@@ -127,8 +127,8 @@ NON_MATCHING s32 func_801B95E0(void) {
         return func_801BB7B0(8) & BYTE_MASK;
     }
 
-    if (COORD_FRAC(TASK(Actor)->pos.x) == 0) {
-        if (COORD_FRAC(TASK(Actor)->pos.y) == 0) {
+    if (COORD_FRAC(SELF(Actor)->pos.x) == 0) {
+        if (COORD_FRAC(SELF(Actor)->pos.y) == 0) {
             PAD_A = func_801B9F08(1, 0, 0);
             if (PAD_A == 0xB0) {
                 return 6;
@@ -143,8 +143,8 @@ NON_MATCHING s32 func_801B95E0(void) {
         }
         goto diag_south;
     }
-    if (COORD_FRAC(TASK(Actor)->pos.y) == 0) {
-        if (TASK(Actor)->direction & 2) {
+    if (COORD_FRAC(SELF(Actor)->pos.y) == 0) {
+        if (SELF(Actor)->direction & 2) {
             return 3;
         }
         PAD_A = func_801B9F08(2, 4, 0);
@@ -178,7 +178,7 @@ NON_MATCHING s32 func_801B95E0(void) {
         if ((PAD_A & 0xF0) == 0xA0) {
             return func_801BB7B0(8) & BYTE_MASK;
         }
-        probe = Area_HeightReadStep(((((s16)FIELD(u16, g_Task, 0x36u) * 2) + 1) << 0x10) >> 1, y_arg << 0x10, 1) << 0x10;
+        probe = Area_HeightReadStep(((((s16)FIELD(u16, g_Self, 0x36u) * 2) + 1) << 0x10) >> 1, y_arg << 0x10, 1) << 0x10;
         if (PAD_FLAG != 0 && (probe >> 0x10) >= 0x41) {
             WDIR = 7;
             return 1;
@@ -220,7 +220,7 @@ diag_south:
     if ((PAD_A & 0xF0) == 0xA0) {
         return func_801BB7B0(8) & BYTE_MASK;
     }
-    probe = Area_HeightReadStep(x << 0x10, ((((s16)FIELD(u16, g_Task, 0x3Au) * 2) + 1) << 0x10) >> 1, 1) << 0x10;
+    probe = Area_HeightReadStep(x << 0x10, ((((s16)FIELD(u16, g_Self, 0x3Au) * 2) + 1) << 0x10) >> 1, 1) << 0x10;
     if (PAD_FLAG != 0 && (probe >> 0x10) >= 0x41) {
         WDIR = 1;
         return 1;

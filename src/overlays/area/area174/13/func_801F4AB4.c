@@ -3,5 +3,5 @@
 MATCH void func_801F4AB4(void) {
     Callback table[2] = {func_801F4B0C, func_801F4C68};
 
-    table[TASK(Actor)->unk_04]();
+    table[SELF(Actor)->unk_04]();
 }

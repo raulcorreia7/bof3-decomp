@@ -10,43 +10,43 @@ MATCH void Fishing_ChooseAction(void) {
         case PADRup:
             g_SpawnedActors[3].header.mode = 7;
             g_SpawnedActors[1].header.mode = 4;
-            TASK(FishingState)->sub_index++;
+            SELF(FishingState)->sub_index++;
             break;
         case PADRleft:
             g_SpawnedActors[3].header.mode = 7;
             g_SpawnedActors[1].header.mode = 4;
-            TASK(FishingState)->mode_index = 9;
-            TASK(FishingState)->sub_index  = 0;
+            SELF(FishingState)->mode_index = 9;
+            SELF(FishingState)->sub_index  = 0;
             break;
         case PADRdown:
             g_SpawnedActors[3].header.mode = 7;
             if (g_FishingEquipment.lure_id == 0 || g_FishingEquipment.rod_id == 0) {
                 g_SpawnedActors[1].header.mode = 4;
-                TASK(FishingState)->mode_index = 9;
-                TASK(FishingState)->sub_index  = 0;
+                SELF(FishingState)->mode_index = 9;
+                SELF(FishingState)->sub_index  = 0;
                 break;
             }
             if (Fishing_FishStacksFull() & BYTE_MASK) {
                 if (g_FishingFullNoticeShown == 0) {
                     g_FishingFullNoticeShown       = 1;
                     g_SpawnedActors[1].header.mode = 4;
-                    TASK(FishingState)->sub_index  = 7;
+                    SELF(FishingState)->sub_index  = 7;
                     break;
                 }
             } else {
                 g_FishingFullNoticeShown = 0;
             }
-            TASK(FishingState)->mode_index = 2;
+            SELF(FishingState)->mode_index = 2;
             /* FAKE: the order lock steers regalloc */
             FAKE_ORDER_LOCK_BEGIN
-                TASK(FishingState)->sub_index = 0;
+                SELF(FishingState)->sub_index = 0;
             FAKE_ORDER_LOCK_END;
             break;
         case PADL1:
             g_SpawnedActors[3].header.mode = 7;
             g_SpawnedActors[1].header.mode = 4;
-            TASK(FishingState)->mode_index = 0xA;
-            TASK(FishingState)->sub_index  = 0;
+            SELF(FishingState)->mode_index = 0xA;
+            SELF(FishingState)->sub_index  = 0;
             break;
     }
 }

@@ -12,5 +12,5 @@ MATCH void func_801F2DB0(void) {
         return;
     }
     Game_SetScriptActive();
-    TASK(Actor)->unk_04 += 1;
+    SELF(Actor)->unk_04 += 1;
 }

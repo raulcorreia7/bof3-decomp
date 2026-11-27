@@ -6,7 +6,7 @@ MATCH void func_801F38F0(void) {
     if (g_AreaSceneMode == 0x20) {
         goto call;
     }
-    work = TASK(Actor);
+    work = SELF(Actor);
     if (abs(g_Game.members[0].pos.x.fixed - ((((s32)COORD_INT(work->pos.x) + 1) << 16) | 0x8000)) > TO_COORD(2)) {
         goto advance;
     }

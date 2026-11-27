@@ -8,7 +8,7 @@ MATCH s8 func_8014DE78(void) {
     s8     i;
 
     i    = 0;
-    self = TASK(Actor);
+    self = SELF(Actor);
     for (; i < 34; i++) {
         if (!ACTOR_IN_USE(g_Actors[i])) {
             continue;

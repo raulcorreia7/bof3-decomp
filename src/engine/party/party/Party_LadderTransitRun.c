@@ -4,5 +4,5 @@
 /* Runs the ladder transit for the actor's climb direction. */
 MATCH void Party_LadderTransitRun(void) {
     g_Game.current->u.field.mode.unsigned_value = 3;
-    g_PartyLadderTransits[TASK(Actor)->unk_03]();
+    g_PartyLadderTransits[SELF(Actor)->unk_03]();
 }

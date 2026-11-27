@@ -3,10 +3,10 @@
 MATCH void func_801F3590(void) {
     Actor* work;
 
-    if (g_GameCellType == 0 && g_AreaSceneMode == TASK(Actor)->unk_0A) {
+    if (g_GameCellType == 0 && g_AreaSceneMode == SELF(Actor)->unk_0A) {
         return;
     }
-    work = TASK(Actor);
+    work = SELF(Actor);
     /* FAKE: keeps the work pseudo first in allocation, so the task pointer stays in a1 as retail has it. */
     FAKE_USE(work);
     if (work->direction != 0) {

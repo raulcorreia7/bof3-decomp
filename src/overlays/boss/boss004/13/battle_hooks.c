@@ -1,7 +1,7 @@
 #include "boss004_13.h"
 
 MATCH void func_800C1860(void) {
-    SYS_DISPATCH_TASK(D_800C2740, 1, g_Task);
+    SYS_DISPATCH_TASK(D_800C2740, 1, g_Self);
 }
 
 MATCH void func_800C18A4(void) {
@@ -9,7 +9,7 @@ MATCH void func_800C18A4(void) {
 }
 
 MATCH void func_800C18FC(void) {
-    SYS_DISPATCH_TASK(D_800C2770, 2, g_Task);
+    SYS_DISPATCH_TASK(D_800C2770, 2, g_Self);
 }
 
 MATCH void Boss_EndDefeat(void) {
@@ -17,37 +17,37 @@ MATCH void Boss_EndDefeat(void) {
 }
 
 MATCH void func_800C19C0(void) {
-    SYS_DISPATCH_TASK(D_800C2788, 2, g_Task);
+    SYS_DISPATCH_TASK(D_800C2788, 2, g_Self);
 }
 
 MATCH void func_800C1A04(void) {
     Battle_RequestEnemyScript(4);
-    TASK(PartyMember)->unk_09 = 60;
-    TASK(PartyMember)->header.step++;
+    SELF(PartyMember)->unk_09 = 60;
+    SELF(PartyMember)->header.step++;
 }
 
 MATCH void func_800C1A4C(void) {
     u8* result;
     u8  timer;
 
-    timer                     = TASK(PartyMember)->unk_09 - 1;
-    TASK(PartyMember)->unk_09 = timer;
+    timer                     = SELF(PartyMember)->unk_09 - 1;
+    SELF(PartyMember)->unk_09 = timer;
     if (!(timer & BYTE_MASK)) {
         Area_SceneSelectRecord(0x5F);
         if (g_Battle.encounter == 5) {
-            TASK(PartyMember)->unk_2A = 0;
-            TASK(PartyMember)->pos.y.fixed += TO_COORD(1) + COORD_HALF;
+            SELF(PartyMember)->unk_2A = 0;
+            SELF(PartyMember)->pos.y.fixed += TO_COORD(1) + COORD_HALF;
         } else {
-            TASK(PartyMember)->unk_2A = 1;
-            TASK(PartyMember)->pos.x.fixed += TO_COORD(1) + COORD_HALF;
+            SELF(PartyMember)->unk_2A = 1;
+            SELF(PartyMember)->pos.x.fixed += TO_COORD(1) + COORD_HALF;
         }
-        COORD_INT(TASK(PartyMember)->pos.z) = Area_HeightSample(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed);
+        COORD_INT(SELF(PartyMember)->pos.z) = Area_HeightSample(SELF(PartyMember)->pos.x.fixed, SELF(PartyMember)->pos.y.fixed);
         g_BattleCurrentEnemy->script        = &D_800C272C;
         Script_Select(1U);
         result = &g_Battle.outcome.result;
         *result |= 4;
-        g_Battle.boss_flags |= 1 << TASK(PartyMember)->slot;
-        TASK(PartyMember)->header.step += 1;
+        g_Battle.boss_flags |= 1 << SELF(PartyMember)->slot;
+        SELF(PartyMember)->header.step += 1;
     }
     Script_AnimStepLoop();
 }
@@ -98,20 +98,20 @@ MATCH void Boss_EndBattle(void) {
     }
     Battle_ShowActorEntry(0);
     Battle_CopyActorEntry(0, (PartyMember*)g_BattleEnemyBattlers, 1);
-    TASK_SET(func_800AC754(0));
+    SELF_SET(func_800AC754(0));
     Area_SceneSelectRecord(0x5F);
-    TASK(PartyMember)->unk_48 = 0;
-    TASK(PartyMember)->unk_2A = 1;
+    SELF(PartyMember)->unk_48 = 0;
+    SELF(PartyMember)->unk_2A = 1;
     Script_Select(1);
-    TASK(PartyMember)->unk_58 = g_BattleEnemyBattlers[0].unk_58;
-    TASK(PartyMember)->unk_5A = g_BattleEnemyBattlers[0].unk_5A;
+    SELF(PartyMember)->unk_58 = g_BattleEnemyBattlers[0].unk_58;
+    SELF(PartyMember)->unk_5A = g_BattleEnemyBattlers[0].unk_5A;
     Battle_ShowActorEntry(1);
     Battle_CopyActorEntry(1, (PartyMember*)&g_BattleEnemyBattlers[1], 1);
-    TASK_SET(func_800AC754(1));
+    SELF_SET(func_800AC754(1));
     Area_SceneSelectRecord(0x5F);
-    TASK(PartyMember)->unk_48 = 0;
-    TASK(PartyMember)->unk_2A = 1;
+    SELF(PartyMember)->unk_48 = 0;
+    SELF(PartyMember)->unk_2A = 1;
     Script_Select(1);
-    TASK(PartyMember)->unk_58 = g_BattleEnemyBattlers[1].unk_58;
-    TASK(PartyMember)->unk_5A = g_BattleEnemyBattlers[1].unk_5A;
+    SELF(PartyMember)->unk_58 = g_BattleEnemyBattlers[1].unk_58;
+    SELF(PartyMember)->unk_5A = g_BattleEnemyBattlers[1].unk_5A;
 }

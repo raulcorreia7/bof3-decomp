@@ -9,24 +9,24 @@ MATCH void func_801DB8F0(void) {
     s32 offset;
 
     if ((g_PadStates[0].pressed & PADRdown) != 0) {
-        TASK(FishingState)->timer = g_Actors[g_FishingHookedFish].roll_90;
+        SELF(FishingState)->timer = g_Actors[g_FishingHookedFish].roll_90;
     } else {
-        TASK(FishingState)->timer = (TASK(FishingState)->timer + 1);
+        SELF(FishingState)->timer = (SELF(FishingState)->timer + 1);
     }
 
     Fishing_DrawCatchBar(0, FISHING_CATCH_BAR_Y);
     Fishing_DrawCatchIcon(FISHING_CATCH_ICON_X, FISHING_CATCH_ICON_Y, g_Actors[g_FishingHookedFish].unk_06);
 
     offset = g_FishingHookedFish * 0x98;
-    Fishing_DrawCatchRow(g_Actors[g_FishingHookedFish].unk_06, TASK(FishingState)->timer, 0);
+    Fishing_DrawCatchRow(g_Actors[g_FishingHookedFish].unk_06, SELF(FishingState)->timer, 0);
 
-    if (TASK(FishingState)->timer == g_Actors[g_FishingHookedFish].roll_90) {
+    if (SELF(FishingState)->timer == g_Actors[g_FishingHookedFish].roll_90) {
         if (g_FishingNewRecord != 0) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 13));
         }
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
-        TASK(FishingState)->timer     = 4;
-        TASK(FishingState)->sub_index = (TASK(FishingState)->sub_index + 1);
+        SELF(FishingState)->timer     = 4;
+        SELF(FishingState)->sub_index = (SELF(FishingState)->sub_index + 1);
     }
     Script_AnimStepLoop();
     Fishing_DrawDimScreen();

@@ -79,13 +79,13 @@ void func_801F431C(void);
         ok = func_801F3980(&x, &y);                                          \
         if (ok != 0) {                                                       \
             if (g_ScriptVars[3] == 10) {                                     \
-                if (TASK(Actor)->pos.x.fixed != (stop_x)) {                  \
+                if (SELF(Actor)->pos.x.fixed != (stop_x)) {                  \
                     func_801F3BA0(x, y);                                     \
                     g_ScriptState->cursor += 6;                              \
                 }                                                            \
             } else if (g_ScriptVars[3] == 20) {                              \
                 func_801F3A14(x, y);                                         \
-                if (TASK(Actor)->pos.x.fixed == TO_COORD_HALF(133)) {        \
+                if (SELF(Actor)->pos.x.fixed == TO_COORD_HALF(133)) {        \
                     g_ScriptState->cursor += 3;                              \
                     /* FAKE: keeps the step store after the cursor store. */ \
                     FAKE_BARRIER();                                          \

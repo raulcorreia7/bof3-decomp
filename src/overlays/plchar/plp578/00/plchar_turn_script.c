@@ -5,7 +5,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801CE404(void) {
-    D_801CFAB8[TASK(Actor)->header.step]();
+    D_801CFAB8[SELF(Actor)->header.step]();
 }
 
 #include "overlays/plchar/shared/PlChar_StartTurnMomo.h"

@@ -5,9 +5,9 @@ MATCH void func_801E383C(void) {
 
     if (g_Battle.selection_latch != 0) {
         value = g_BattleActorTurn->command.target;
-        if ((value == TASK(PartyMember)->slot) || (value & BATTLE_TARGET_ENEMY_SIDE)) {
-            TASK(PartyMember)->unk_07      = GFX_PaletteAllocFade(TASK(void), 0, 0, 0, 0);
-            TASK(PartyMember)->header.step = 1;
+        if ((value == SELF(PartyMember)->slot) || (value & BATTLE_TARGET_ENEMY_SIDE)) {
+            SELF(PartyMember)->unk_07      = GFX_PaletteAllocFade(SELF(void), 0, 0, 0, 0);
+            SELF(PartyMember)->header.step = 1;
         }
     }
 }

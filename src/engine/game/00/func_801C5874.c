@@ -19,8 +19,8 @@ MATCH void func_801C5874(void) {
     }
     list   = FIELD(s32*, g_AreaLoads[g_GameAreaId], 0x1Cu);
     target = list[D_80143FBF];
-    /* The cells at D_80143FBD are g_Task's interaction_flags and timer. */
-    TASK_SET((Actor*)(base - 0x75));
+    /* The cells at D_80143FBD are g_Self's interaction_flags and timer. */
+    SELF_SET((Actor*)(base - 0x75));
     sel        = Script_Run(base - 1, target);
     D_80143F50 = sel;
     if (base[-1] & 0x8) {

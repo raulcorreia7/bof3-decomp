@@ -8,10 +8,10 @@ MATCH void Script_Switch(u8 value, u8* dst, s32 size) {
     s32 current;
 
     Script_CopyRecord(value, dst, (u16)size);
-    if (TASK(Actor)->script_record == value) {
-        current = TASK(Actor)->script_pc - 2;
+    if (SELF(Actor)->script_record == value) {
+        current = SELF(Actor)->script_pc - 2;
     } else {
-        TASK(Actor)->script_record = value;
+        SELF(Actor)->script_record = value;
         current                    = 0;
     }
     Script_Seek(current);

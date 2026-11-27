@@ -8,7 +8,7 @@ MATCH void func_800AD5C8(void) {
 
     i = 0;
     if (g_Battle.gene_count != 0) {
-        work  = TASK(PartyMember);
+        work  = SELF(PartyMember);
         count = work->param.unk_0B;
         base  = (u16*)(&D_80148628);
         do {
@@ -20,5 +20,5 @@ MATCH void func_800AD5C8(void) {
             i++;
         } while (i < g_Battle.gene_count);
     }
-    TASK(PartyMember)->header.step--;
+    SELF(PartyMember)->header.step--;
 }

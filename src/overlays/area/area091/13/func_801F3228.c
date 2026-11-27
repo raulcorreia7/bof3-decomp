@@ -10,16 +10,16 @@ MATCH void func_801F3228(void) {
     u16*   colors;
 
     if (g_AreaCameraMoving == 0) {
-        task                     = TASK(Actor);
+        task                     = SELF(Actor);
         task->pos.x.fixed        = TO_COORD_HALF(31);
         task->voice_flags.raw    = 0;
         task->pos.y.fixed        = TO_COORD(26);
         task->pos.z.part.integer = -0x100;
         task->header.flags &= ~0x40;
-        TASK(Actor)->unk_04++;
+        SELF(Actor)->unk_04++;
         i = 0;
         do {
-            cell      = TASK(Actor)->clut_select;
+            cell      = SELF(Actor)->clut_select;
             row       = (cell >> 3) * AREA_PALETTE_ROW;
             palette   = AREA_PALETTE_WORK + row;
             col       = (cell & 7) * AREA_PALETTE_UNIT;
@@ -28,8 +28,8 @@ MATCH void func_801F3228(void) {
             i++;
         } while (i < 32);
         g_GfxPalettePending++;
-        TASK(Actor)->param.unk_0B = 0;
-        TASK(Actor)->unk_0A       = 2;
+        SELF(Actor)->param.unk_0B = 0;
+        SELF(Actor)->unk_0A       = 2;
     }
     func_801F2ED4(300, 0xFF);
 }

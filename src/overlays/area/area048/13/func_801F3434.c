@@ -9,8 +9,8 @@ MATCH void func_801F3434(s16 x1, s16 y1, s16 radius1, u16 angle1, s16 x2, s16 y2
     SetSemiTrans(prim, 1);
     setXY4(prim, x1, y1, x2, y2, x1 + FIXED_MUL(radius1, rcos(angle1)), y1 + FIXED_MUL(radius1, rsin(angle1)), x2 + FIXED_MUL(radius2, rcos(angle2 + ANGLE_180)),
            y2 + FIXED_MUL(radius2, rsin(angle2 + ANGLE_180)));
-    setRGB0(prim, D_801F4D5C[TASK(Actor)->unk_06 * 3], D_801F4D5D[TASK(Actor)->unk_06 * 3], D_801F4D5E[TASK(Actor)->unk_06 * 3]);
-    setRGB1(prim, D_801F4D5C[(s16)(TASK(Actor)->unk_06 * 3)], D_801F4D5D[(s16)(TASK(Actor)->unk_06 * 3)], D_801F4D5E[(s16)(TASK(Actor)->unk_06 * 3)]);
+    setRGB0(prim, D_801F4D5C[SELF(Actor)->unk_06 * 3], D_801F4D5D[SELF(Actor)->unk_06 * 3], D_801F4D5E[SELF(Actor)->unk_06 * 3]);
+    setRGB1(prim, D_801F4D5C[(s16)(SELF(Actor)->unk_06 * 3)], D_801F4D5D[(s16)(SELF(Actor)->unk_06 * 3)], D_801F4D5E[(s16)(SELF(Actor)->unk_06 * 3)]);
     setRGB2(prim, 0, 0, 0);
     setRGB3(prim, 0, 0, 0);
     GFX_AddPrim(GFX_LAYER_EFFECT, sizeof(POLY_G4));

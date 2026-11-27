@@ -5,9 +5,9 @@ MATCH void Area_Update(void) {
     Actor* scratch;
 
     if (D_801454F2 == 2) {
-        TASK(Actor)->header.step = 3;
+        SELF(Actor)->header.step = 3;
     }
 
-    scratch = TASK(Actor);
+    scratch = SELF(Actor);
     Area_DrawHud(0x10, scratch->screen_x);
 }

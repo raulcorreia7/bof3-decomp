@@ -23,11 +23,11 @@ extern BattleEffect D_801F0710[];
  * u8 i and u8 slot. */
 #define MAGIC220_SWAY_AND_SPAWN()                                                                        \
     if (g_FrameCount & 0x1) {                                                                            \
-        TASK(PartyMember)->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + TASK(PartyMember)->unk_0C; \
-        TASK(PartyMember)->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed - TASK(PartyMember)->unk_0C; \
+        SELF(PartyMember)->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + SELF(PartyMember)->unk_0C; \
+        SELF(PartyMember)->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed - SELF(PartyMember)->unk_0C; \
     } else {                                                                                             \
-        TASK(PartyMember)->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed - TASK(PartyMember)->unk_0C; \
-        TASK(PartyMember)->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + TASK(PartyMember)->unk_0C; \
+        SELF(PartyMember)->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed - SELF(PartyMember)->unk_0C; \
+        SELF(PartyMember)->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + SELF(PartyMember)->unk_0C; \
     }                                                                                                    \
     if ((g_FrameCount & 0x7) == 0) {                                                                     \
         SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 2));                                             \

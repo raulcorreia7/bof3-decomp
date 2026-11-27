@@ -9,13 +9,13 @@ MATCH void func_801F4614(void) {
     u8  facing;
     u8  next;
 
-    saved_z                  = TASK(Actor)->pos.z.fixed;
-    group                    = (TASK(Actor)->direction & 6) << 2;
-    trail                    = g_PartyTrailStep[TASK(Actor)->timer >> 3];
-    TASK(Actor)->pos.z.fixed = TASK(Actor)->gravity;
+    saved_z                  = SELF(Actor)->pos.z.fixed;
+    group                    = (SELF(Actor)->direction & 6) << 2;
+    trail                    = g_PartyTrailStep[SELF(Actor)->timer >> 3];
+    SELF(Actor)->pos.z.fixed = SELF(Actor)->gravity;
     i                        = 0;
     do {
-        code = Game_GetPartySize(TASK(Actor)->pos.x.fixed + TO_COORD(g_PartyTrailOffset[group + trail[i]][0]), TASK(Actor)->pos.y.fixed + TO_COORD(g_PartyTrailOffset[group + trail[i]][1]), 0);
+        code = Game_GetPartySize(SELF(Actor)->pos.x.fixed + TO_COORD(g_PartyTrailOffset[group + trail[i]][0]), SELF(Actor)->pos.y.fixed + TO_COORD(g_PartyTrailOffset[group + trail[i]][1]), 0);
         if (code != GAME_NONE && !(g_Game.walk_flags & (AREA_WALK_LEADER_SWITCH_ACTIVE | AREA_WALK_TRANSITION)) && g_GameStateIndex == GAME_REQUEST_IDLE) {
             facing = g_Game.members[code].facing;
             next   = facing & 7;
@@ -29,5 +29,5 @@ MATCH void func_801F4614(void) {
         }
         i++;
     } while (i < 2);
-    TASK(Actor)->pos.z.fixed = saved_z;
+    SELF(Actor)->pos.z.fixed = saved_z;
 }

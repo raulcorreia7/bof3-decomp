@@ -4,6 +4,6 @@
 /* Dismount phase 1: runs the rise and moves to phase 2 when it ends. */
 MATCH void Area_ClimbDismountRiseStep(void) {
     if (Area_ClimbDismountRise() & BYTE_MASK) {
-        TASK(Actor)->unk_03 = 2;
+        SELF(Actor)->unk_03 = 2;
     }
 }

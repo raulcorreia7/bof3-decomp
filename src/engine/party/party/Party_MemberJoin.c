@@ -12,13 +12,13 @@ MATCH s32 Party_MemberJoin(s32 char_id) {
         g_PartyBattleOrder[g_PartySize]          = char_id;
         g_Game.members[g_PartySize].header.flags = PARTY_MEMBER_FLAG_OCCUPIED;
         Party_BattlersClearState(g_PartySize);
-        TASK_SET(&g_Game.members[g_PartySize]);
-        TASK(Actor)->active_flags = 1;
+        SELF_SET(&g_Game.members[g_PartySize]);
+        SELF(Actor)->active_flags = 1;
         Party_MemberLoadSprite(id, g_Game.party_size);
         /* FAKE: retail reads g_CharSlot as u8[]. */
         g_Game.members[g_Game.party_size].chr             = g_Characters[((u8*)g_CharSlot)[id]];
-        TASK(Actor)->unk_05                               = g_PartySize;
-        TASK(Actor)->script_record                        = 0xFF;
+        SELF(Actor)->unk_05                               = g_PartySize;
+        SELF(Actor)->script_record                        = 0xFF;
         /* FAKE: retail reads g_CharSlot as u8[]. */
         g_Game.members[g_Game.party_size].character_index = ((u8*)g_CharSlot)[char_id & BYTE_MASK];
         /* FAKE: retail keeps the incremented party count in v0. */

@@ -11,10 +11,10 @@ MATCH void func_801F3570(void) {
     func_801F3954(1);
     *slot = 0;
     func_801F3954(2);
-    TASK(Actor)->timer++;
-    if (TASK(Actor)->timer >= 31) {
+    SELF(Actor)->timer++;
+    if (SELF(Actor)->timer >= 31) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 6));
-        TASK(Actor)->timer = 8;
-        TASK(Actor)->header.step++;
+        SELF(Actor)->timer = 8;
+        SELF(Actor)->header.step++;
     }
 }

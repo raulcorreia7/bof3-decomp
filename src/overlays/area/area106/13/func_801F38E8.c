@@ -5,6 +5,6 @@ MATCH void func_801F38E8(void) {
 
     if (g_CharSlot[g_Game.members[0].chr.character_id] == 0) {
         g_AreaSceneMode           = 1;
-        TASK(Actor)->header.flags = 0;
+        SELF(Actor)->header.flags = 0;
     }
 }

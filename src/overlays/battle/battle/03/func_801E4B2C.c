@@ -7,7 +7,7 @@ MATCH void func_801E4B2C(void) {
         if (((EnemyBattler*)g_BattleCurrentEnemy)->turn.command.type == BATTLE_COMMAND_ABILITY) {
             if (BATTLE_IS_SCRIPTED()) {
                 if (!(func_801DDF50((((EnemyBattler*)g_BattleCurrentEnemy)->unk_F0 + 0x20) & BYTE_MASK, g_Battle.unk_EA[3]) & BYTE_MASK)) {
-                    TASK(PartyMember)->unk_09 = 0x1EU;
+                    SELF(PartyMember)->unk_09 = 0x1EU;
                 } else {
                     /* Shared zero store: blocked ability or non-4 state. */
                     goto block_5;
@@ -15,15 +15,15 @@ MATCH void func_801E4B2C(void) {
             }
         } else {
         block_5:
-            TASK(PartyMember)->unk_09 = 0U;
+            SELF(PartyMember)->unk_09 = 0U;
         }
         if (!(D_801CA71C[g_Battle.action_id].mask & 0x800)) {
-            TASK(PartyMember)->unk_09 = MEM_PTR(u8, 0x800E40CFu)[((EnemyBattler*)g_BattleCurrentEnemy)->type * 0x88u];
+            SELF(PartyMember)->unk_09 = MEM_PTR(u8, 0x800E40CFu)[((EnemyBattler*)g_BattleCurrentEnemy)->type * 0x88u];
             Battle_RequestEnemyScript(6U);
-            work              = TASK(PartyMember);
+            work              = SELF(PartyMember);
             work->header.step = (work->header.step + 1);
         } else {
-            TASK(PartyMember)->header.mode = (TASK(PartyMember)->header.mode + 1);
+            SELF(PartyMember)->header.mode = (SELF(PartyMember)->header.mode + 1);
         }
         Battle_IsEnemyBlockedOnce();
     }

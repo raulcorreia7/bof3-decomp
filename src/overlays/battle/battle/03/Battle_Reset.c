@@ -90,11 +90,11 @@ MATCH void Battle_Reset(void) {
     for (slot = 0; slot < 0xB; slot++) {
         if (slot < 3) {
             if (ACTOR_IN_USE(g_Game.members[slot])) {
-                TASK_SET(&g_Game.members[slot]);
+                SELF_SET(&g_Game.members[slot]);
                 goto found; /* joins the shared work-pointer exit */
             }
         } else if (!(Battle_SlotIsBlocked(slot) & BYTE_MASK) && (g_Battle.encounter != 37)) {
-            TASK_SET(g_BattleEnemies + ((slot * 36u - slot) * 8u));
+            SELF_SET(g_BattleEnemies + ((slot * 36u - slot) * 8u));
         found: /* the live battler's work pointer */
             GFX_PaletteUploadRows();
         }

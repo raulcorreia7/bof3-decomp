@@ -8,8 +8,8 @@ MATCH void Effect_SetActorMatrixQuarterRoll(void) {
 
     PushMatrix();
     setVector(&rot, 0, 0, 0);
-    if (TASK(PartyMember)->facing & 1) {
+    if (SELF(PartyMember)->facing & 1) {
         rot.vz = ONE / 4;
     }
-    BMAGIC_PROJECT_ACTOR_MATRIX(TASK(PartyMember));
+    BMAGIC_PROJECT_ACTOR_MATRIX(SELF(PartyMember));
 }

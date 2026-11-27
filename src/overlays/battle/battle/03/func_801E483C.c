@@ -9,9 +9,9 @@ MATCH void func_801E483C(void) {
     if (global[0x62EAu] != 0u) {
         Battle_PlayEnemySE(*(u16*)((*(u32*)(((u32)g_BattleCurrentEnemy + 0xE8u)) + 6u)));
     }
-    GFX_PaletteFreeFadeTarget(TASK(void));
-    GFX_PaletteAllocFade(TASK(void), 255, 255, 255, 0);
-    work                         = TASK(PartyMember);
+    GFX_PaletteFreeFadeTarget(SELF(void));
+    GFX_PaletteAllocFade(SELF(void), 255, 255, 255, 0);
+    work                         = SELF(PartyMember);
     work->unk_1C                 = -0x2000;
     work->unk_10                 = 0;
     ((PartyMember*)work)->unk_03 = 3;

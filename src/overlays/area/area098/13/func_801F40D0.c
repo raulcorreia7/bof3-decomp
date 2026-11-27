@@ -19,11 +19,11 @@ MATCH void func_801F40D0(s32 unused) {
             shade            = speed / 0x300;
             slot->tail_shade = shade;
             slot->head_shade = shade;
-            slot->tail.vx    = TASK(Actor)->pos.x.fixed + ((speed * rcos(angle)) >> 12);
+            slot->tail.vx    = SELF(Actor)->pos.x.fixed + ((speed * rcos(angle)) >> 12);
             slot->head.vx    = slot->tail.vx;
-            slot->tail.vy    = TASK(Actor)->pos.y.fixed + ((speed * rsin(angle)) >> 12);
+            slot->tail.vy    = SELF(Actor)->pos.y.fixed + ((speed * rsin(angle)) >> 12);
             slot->head.vy    = slot->tail.vy;
-            slot->tail.vz    = TASK(Actor)->pos.z.fixed;
+            slot->tail.vz    = SELF(Actor)->pos.z.fixed;
             slot->head.vz    = slot->tail.vz;
             slot->vel[0]     = (-rcos(angle)) << 1;
             slot->vel[1]     = (-rsin(angle)) << 1;

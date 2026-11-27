@@ -6,23 +6,23 @@ MATCH u8 Actor_FindFreeFacing(Actor* entity) {
     u8 saved;
     u8 i;
 
-    saved = TASK(Actor)->direction & 0x7;
+    saved = SELF(Actor)->direction & 0x7;
     i     = 0;
 
     while (i < 4u) {
         if ((Actor_IsAheadBlocked(entity) & BYTE_MASK) == 0u) {
             break;
         }
-        TASK(Actor)->direction = (TASK(Actor)->direction + 2) & 0x7;
+        SELF(Actor)->direction = (SELF(Actor)->direction + 2) & 0x7;
         i++;
     }
 
-    if (saved != TASK(Actor)->direction) {
+    if (saved != SELF(Actor)->direction) {
         entity->interaction_flags |= ACTOR_INTERACTION_MOVING;
     }
 
     if (i < 4u) {
-        return TASK(Actor)->direction & 0x7;
+        return SELF(Actor)->direction & 0x7;
     }
     return 0xFF;
 }

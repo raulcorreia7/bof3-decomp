@@ -9,6 +9,6 @@ MATCH void func_801DDDBC(void) {
     g_SpawnedActors[3].header.mode = 7;
     g_SpawnedActors[4].unk_06      = 3;
     g_SpawnedActors[4].header.mode += 1;
-    TASK(FishingState)->sub_index += 1;
+    SELF(FishingState)->sub_index += 1;
     Script_AnimStepLoop();
 }

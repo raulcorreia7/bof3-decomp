@@ -15,18 +15,18 @@ MATCH void Area_Update(void) {
 
     tpage = getTPage(1, 0, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, NULL);
-    Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, -2, sizeof(DR_MODE));
+    Area_CellAddPrim(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed, -2, sizeof(DR_MODE));
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
     SetShadeTex(prim, 0);
-    if (TASK(Actor)->direction != 0) {
-        g_ScratchPadVectors[0].vy = g_ScratchPadVectors[1].vy = g_ScratchPadVectors[2].vy = g_ScratchPadVectors[3].vy = ((FIX_INT(TASK(Actor)->pos.y.fixed) - 0x80) << 7) | 0x40;
-        g_ScratchPadVectors[0].vx = g_ScratchPadVectors[2].vx = ((FIX_INT(TASK(Actor)->pos.x.fixed) - 0x7F) << 7) - (TASK(Actor)->screen_y - 0x40);
-        g_ScratchPadVectors[1].vx = g_ScratchPadVectors[3].vx = ((FIX_INT(TASK(Actor)->pos.x.fixed) - 0x80) << 7) - (TASK(Actor)->screen_y + 0x40);
+    if (SELF(Actor)->direction != 0) {
+        g_ScratchPadVectors[0].vy = g_ScratchPadVectors[1].vy = g_ScratchPadVectors[2].vy = g_ScratchPadVectors[3].vy = ((FIX_INT(SELF(Actor)->pos.y.fixed) - 0x80) << 7) | 0x40;
+        g_ScratchPadVectors[0].vx = g_ScratchPadVectors[2].vx = ((FIX_INT(SELF(Actor)->pos.x.fixed) - 0x7F) << 7) - (SELF(Actor)->screen_y - 0x40);
+        g_ScratchPadVectors[1].vx = g_ScratchPadVectors[3].vx = ((FIX_INT(SELF(Actor)->pos.x.fixed) - 0x80) << 7) - (SELF(Actor)->screen_y + 0x40);
     } else {
-        g_ScratchPadVectors[0].vx = g_ScratchPadVectors[1].vx = g_ScratchPadVectors[2].vx = g_ScratchPadVectors[3].vx = ((FIX_INT(TASK(Actor)->pos.x.fixed) - 0x80) << 7) | 0x40;
-        g_ScratchPadVectors[0].vy = g_ScratchPadVectors[2].vy = ((FIX_INT(TASK(Actor)->pos.y.fixed) - 0x7F) << 7) + (TASK(Actor)->screen_y + 0x40);
-        g_ScratchPadVectors[1].vy = g_ScratchPadVectors[3].vy = ((FIX_INT(TASK(Actor)->pos.y.fixed) - 0x80) << 7) + (s16)(TASK(Actor)->screen_y - 0x40);
+        g_ScratchPadVectors[0].vx = g_ScratchPadVectors[1].vx = g_ScratchPadVectors[2].vx = g_ScratchPadVectors[3].vx = ((FIX_INT(SELF(Actor)->pos.x.fixed) - 0x80) << 7) | 0x40;
+        g_ScratchPadVectors[0].vy = g_ScratchPadVectors[2].vy = ((FIX_INT(SELF(Actor)->pos.y.fixed) - 0x7F) << 7) + (SELF(Actor)->screen_y + 0x40);
+        g_ScratchPadVectors[1].vy = g_ScratchPadVectors[3].vy = ((FIX_INT(SELF(Actor)->pos.y.fixed) - 0x80) << 7) + (s16)(SELF(Actor)->screen_y - 0x40);
     }
     x                         = (g_ScratchPadVectors[0].vx + 0x4000) << 9;
     y                         = (g_ScratchPadVectors[0].vy + 0x4000) << 9;
@@ -38,6 +38,6 @@ MATCH void Area_Update(void) {
     g_ScratchPadVectors[3].vz = -Area_HeightSample(x1, y1) / 2 + 0x180;
     RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth,
                   &flag);
-    Area_ApplyTileToQuad((TASK(Actor)->direction << 21) | AREA_FLOOR_QUAD_PART | (s16)TASK(Actor)->screen_x, prim, 1);
-    Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, -2, sizeof(POLY_FT4));
+    Area_ApplyTileToQuad((SELF(Actor)->direction << 21) | AREA_FLOOR_QUAD_PART | (s16)SELF(Actor)->screen_x, prim, 1);
+    Area_CellAddPrim(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed, -2, sizeof(POLY_FT4));
 }

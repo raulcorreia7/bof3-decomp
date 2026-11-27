@@ -13,7 +13,7 @@ MATCH u32 func_800AF720(u32 start, u32 end, u32 value) {
 
     result     = 0;
     half_value = value >> 1;
-    work       = TASK(BattleRange);
+    work       = SELF(BattleRange);
     first      = work->range_x + half_value - start;
     second     = work->range_y + half_value - end;
     if (value >= first) {

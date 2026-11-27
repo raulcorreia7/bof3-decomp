@@ -16,7 +16,7 @@ MATCH void Actor_BeginScriptFromAreaTable(void) {
     row += g_ScriptState->cursor;
     step = row[2];
     arg  = row[3];
-    Script_Begin(step, (u16)(TASK(Actor)->script_pc - 2));
-    TASK(Actor)->mirror = arg;
+    Script_Begin(step, (u16)(SELF(Actor)->script_pc - 2));
+    SELF(Actor)->mirror = arg;
     g_ScriptState->cursor += 2;
 }

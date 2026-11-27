@@ -86,7 +86,7 @@ shares one layer. Each row carries the image, name, address, layer, caller count
 body, and whether the body is already one shared header. `--jsonl` writes one object per line.
 
 `accesses` lists every load and store that reaches a record type or a global, decoded from the
-built function index: direct globals, globals that point at the type, and the image's `g_Task` view
+built function index: direct globals, globals that point at the type, and the image's `g_Self` view
 are followed. Each row gives the byte offset, the widths seen, reads and writes, the member the
 current definition has there, up to five examples, the constants it is compared with or assigned,
 the callee argument slots it is passed to, and a problem (`unknown member`, `width differs`,

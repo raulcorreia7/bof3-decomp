@@ -3,9 +3,9 @@
 MATCH void Effect_CountDownTickerAndStep(void) {
     u8 timer;
 
-    timer                           = TASK(PartyMember)->param.unk_0B - 1;
-    TASK(PartyMember)->param.unk_0B = timer;
+    timer                           = SELF(PartyMember)->param.unk_0B - 1;
+    SELF(PartyMember)->param.unk_0B = timer;
     if (timer == 0) {
-        TASK(PartyMember)->header.step = TASK(PartyMember)->header.step + 1;
+        SELF(PartyMember)->header.step = SELF(PartyMember)->header.step + 1;
     }
 }

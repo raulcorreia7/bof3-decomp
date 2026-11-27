@@ -6,6 +6,6 @@ MATCH void func_801DC838(void) {
     Callback handler;
 
     Fishing_DrawDimScreen();
-    handler = D_801E22D0[TASK(Actor)->unk_03];
+    handler = D_801E22D0[SELF(Actor)->unk_03];
     handler();
 }

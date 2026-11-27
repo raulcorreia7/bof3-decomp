@@ -47,22 +47,22 @@ found:
     do {
         rec            = (u8*)g_Game.members + off;
         g_Game.current = rec;
-        TASK_SET(rec);
+        SELF_SET(rec);
         type  = rec[0x13C];
         flags = g_Characters[type].status;
         if ((flags & 0x4000) != 0) {
             Script_Stage(rec[0x4B], 0, MEM_PTR(u8, BATTLE_SCRIPT_TABLE), 0xA00);
-            TASK(Actor)->param.unk_0B = 0;
+            SELF(Actor)->param.unk_0B = 0;
         } else {
             sel = rec[0x08];
             if ((sel & BYTE_MASK) == s_RouteIndexByMode[g_Battle.scroll_dir]) {
                 if (rec[0x0B] != 0) {
                     Script_Stage(sel, 0, MEM_PTR(u8, BATTLE_SCRIPT_TABLE), 0xA00);
-                    TASK(Actor)->param.unk_0B = 0;
+                    SELF(Actor)->param.unk_0B = 0;
                 }
             } else {
                 rec[0x08] = (sel + rec[0x0B]) & 0x7;
-                Script_Stage(TASK(Actor)->direction, 0, MEM_PTR(u8, BATTLE_SCRIPT_TABLE), 0xA00);
+                Script_Stage(SELF(Actor)->direction, 0, MEM_PTR(u8, BATTLE_SCRIPT_TABLE), 0xA00);
             }
             Script_AnimStepLoop();
         }
@@ -84,7 +84,7 @@ phase2:
         phase2_base = (u8*)g_Game.members + off;
         phase2_rec  = phase2_base;
         g_GameState = phase2_rec;
-        TASK_SET(phase2_rec);
+        SELF_SET(phase2_rec);
         do {
             base               = (u8*)((phase2_rec[0x05] << 6) + (u32)tbl);
             source             = (u16*)base;
@@ -94,11 +94,11 @@ phase2:
         } while (index < 32);
         off += BATTLE_PARTY_STRIDE;
         Actor_SetSemiTransparent();
-        TASK(Actor)->param.unk_0B     = 0;
-        TASK(Actor)->tint.bytes.rgb.r = neg;
-        TASK(Actor)->tint.bytes.rgb.g = neg;
-        TASK(Actor)->tint.bytes.rgb.b = neg;
-        TASK(Actor)->tint.bytes.flags = 1;
+        SELF(Actor)->param.unk_0B     = 0;
+        SELF(Actor)->tint.bytes.rgb.r = neg;
+        SELF(Actor)->tint.bytes.rgb.g = neg;
+        SELF(Actor)->tint.bytes.rgb.b = neg;
+        SELF(Actor)->tint.bytes.flags = 1;
         slot++;
     } while (slot < g_Game.party_size);
     return 1;

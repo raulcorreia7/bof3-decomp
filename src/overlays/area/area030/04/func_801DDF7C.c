@@ -6,8 +6,8 @@
 MATCH s32 func_801DDF7C(u16 request) {
     if ((g_PadStates[0].pressed & request) != 0) {
         UI_ModeSet(2);
-        TASK(FishingState)->mode_index = 8;
-        TASK(FishingState)->sub_index  = 0;
+        SELF(FishingState)->mode_index = 8;
+        SELF(FishingState)->sub_index  = 0;
         return 1;
     }
     return 0;

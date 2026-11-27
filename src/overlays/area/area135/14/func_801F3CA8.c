@@ -18,8 +18,8 @@ MATCH void func_801F3CA8(void) {
         g_ScratchPadVectors[0].vx = g_ScratchPadVectors[1].vx = g_ScratchPadVectors[2].vx = g_ScratchPadVectors[3].vx = -0x2940;
         g_ScratchPadVectors[0].vy = g_ScratchPadVectors[2].vy = y_top;
         g_ScratchPadVectors[1].vy = g_ScratchPadVectors[3].vy = y_bottom;
-        g_ScratchPadVectors[0].vz = g_ScratchPadVectors[1].vz = COORD_FRAC(TASK(Actor)->pos.z);
-        g_ScratchPadVectors[2].vz = g_ScratchPadVectors[3].vz = FIX_FRAC(TASK(Actor)->pos.z.fixed + 0x100);
+        g_ScratchPadVectors[0].vz = g_ScratchPadVectors[1].vz = COORD_FRAC(SELF(Actor)->pos.z);
+        g_ScratchPadVectors[2].vz = g_ScratchPadVectors[3].vz = FIX_FRAC(SELF(Actor)->pos.z.fixed + 0x100);
         RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3,
                       &depth, &flag);
         Area_ApplyTileToQuad(AREA135_FLOOR_PART_WORD, prim, 1);
@@ -29,7 +29,7 @@ MATCH void func_801F3CA8(void) {
         SetPolyFT4(prim);
         SetShadeTex(prim, 0);
         g_ScratchPadVectors[2].vx = g_ScratchPadVectors[3].vx = -0x2A40;
-        g_ScratchPadVectors[2].vz = g_ScratchPadVectors[3].vz = COORD_FRAC(TASK(Actor)->pos.z);
+        g_ScratchPadVectors[2].vz = g_ScratchPadVectors[3].vz = COORD_FRAC(SELF(Actor)->pos.z);
         RotTransPers4(&g_ScratchPadVectors[3], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[0], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3,
                       &depth, &flag);
         Area_ApplyTileToQuad(AREA135_WALL_PART_WORD, prim, 1);

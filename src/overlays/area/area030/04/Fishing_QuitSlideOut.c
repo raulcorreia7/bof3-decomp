@@ -10,12 +10,12 @@ MATCH void Fishing_QuitSlideOut(void) {
     u8*  byte_counter;
     u16* word_counter;
 
-    TASK(FishingState)->timer = (TASK(FishingState)->timer + 1);
-    Fishing_DrawPromptBox((s16)(0x6C - (TASK(FishingState)->timer * 0x50)), 86);
-    work = TASK(u8);
+    SELF(FishingState)->timer = (SELF(FishingState)->timer + 1);
+    Fishing_DrawPromptBox((s16)(0x6C - (SELF(FishingState)->timer * 0x50)), 86);
+    work = SELF(u8);
     if (work[9] == 5) {
         work[9] = 0;
-        work    = TASK(u8);
+        work    = SELF(u8);
         if (work[6] == 0) {
             word_counter = &g_GameEntrySubstate;
             *word_counter += 1;
@@ -26,8 +26,8 @@ MATCH void Fishing_QuitSlideOut(void) {
         }
     }
     Fishing_DrawDimScreen();
-    if (TASK(FishingState)->timer != 0) {
-        Fishing_DrawWindowFrame(MENU_HEADER_X, (MENU_HEADER_Y - (TASK(FishingState)->timer * 8)) & 0xFFFE, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
-        UI_TextDraw(29, 21 - (TASK(FishingState)->timer * 8), 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_MESSAGE_QUIT_PROMPT));
+    if (SELF(FishingState)->timer != 0) {
+        Fishing_DrawWindowFrame(MENU_HEADER_X, (MENU_HEADER_Y - (SELF(FishingState)->timer * 8)) & 0xFFFE, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
+        UI_TextDraw(29, 21 - (SELF(FishingState)->timer * 8), 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_MESSAGE_QUIT_PROMPT));
     }
 }

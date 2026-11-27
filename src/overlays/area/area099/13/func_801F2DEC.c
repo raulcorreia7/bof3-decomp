@@ -3,7 +3,7 @@
 MATCH void func_801F2DEC(void) {
     Actor* work;
 
-    work = TASK(Actor);
+    work = SELF(Actor);
     if (work->unk_0A != 0) {
         work->pos.y.fixed -= D_801F4990[work->unk_0A & 0xF] << 11;
         work->unk_0A--;

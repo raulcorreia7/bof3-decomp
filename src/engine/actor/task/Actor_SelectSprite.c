@@ -15,7 +15,7 @@ MATCH void Actor_SelectSprite(u32 record_index) {
     u8*    base0;
     u8     level;
 
-    work   = TASK(Actor);
+    work   = SELF(Actor);
     header = (u8*)work->unk_4C;
     base0  = header + ((s32*)header)[0];
     base8  = header + ((s32*)header)[2];
@@ -32,6 +32,6 @@ MATCH void Actor_SelectSprite(u32 record_index) {
         (&D_80145A04)[g_GfxTransferCount] = (base0 + ((u32*)base0)[entry[0]]);
         g_GfxTransferCount++;
     }
-    TASK(Actor)->mirror = entry[2];
-    TASK(Actor)->script = base8 + ((u16*)base8)[entry[1]];
+    SELF(Actor)->mirror = entry[2];
+    SELF(Actor)->script = base8 + ((u16*)base8)[entry[1]];
 }

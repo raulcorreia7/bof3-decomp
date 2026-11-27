@@ -30,7 +30,7 @@ MATCH u8 func_800C2208(u32 mode) {
                 UI_MessageStartArea(MSG_BOSS025_025);
                 g_Battle.boss_flags |= 1;
             } else if (!(g_Battle.boss_flags & 2)) {
-                g_Task = (PartyMember*)g_BattleEnemyBattlers;
+                g_Self = (PartyMember*)g_BattleEnemyBattlers;
                 Battle_RequestEnemyScript(8);
                 g_Battle.boss_flags |= 2;
             } else if ((D_801462EC & 0x600) == 0x200) {

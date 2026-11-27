@@ -5,7 +5,7 @@ MATCH void func_801F5324(void) {
     u8* work;
 
     g_Game.current->u.field.mode.unsigned_value = 1;
-    work                                        = TASK(u8);
+    work                                        = SELF(u8);
     count                                       = work[0x09];
     if (count == 0) {
         func_801F5380();

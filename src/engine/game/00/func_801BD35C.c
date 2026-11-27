@@ -2,6 +2,6 @@
 
 MATCH void func_801BD35C(void) {
     if (!(g_Game.walk_flags & AREA_WALK_MENU_ACTIVE)) {
-        TASK(Actor)->header.mode = 1;
+        SELF(Actor)->header.mode = 1;
     }
 }

@@ -10,5 +10,5 @@ MATCH void func_800A8450(void) {
     g_Game.members[*selection_index].header.step = value;
     g_Game.members[*selection_index].unk_03      = value;
     g_Game.members[*selection_index].unk_04      = 0u;
-    TASK(PartyMember)->header.mode++;
+    SELF(PartyMember)->header.mode++;
 }

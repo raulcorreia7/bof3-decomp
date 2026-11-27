@@ -8,15 +8,15 @@ MATCH void func_801D0E9C(void) {
     s32           position;
     FishingState* sub;
 
-    work            = TASK(FishingState);
+    work            = SELF(FishingState);
     position        = work->cursor_10 + 8;
     work->cursor_10 = position;
     if (position >= 241) {
         work->handler_index           = 1;
-        sub                           = TASK(FishingState);
+        sub                           = SELF(FishingState);
         work->cursor_10               = 0xF0;
         sub->mode_index               = 0;
-        TASK(FishingState)->sub_index = 0;
+        SELF(FishingState)->sub_index = 0;
     }
-    Fishing_DrawHud(12, TASK(FishingState)->cursor_10);
+    Fishing_DrawHud(12, SELF(FishingState)->cursor_10);
 }

@@ -17,7 +17,7 @@ MATCH void Actor_ShatterSpinShards(void) {
     dst   = MEM_PTR(u16, AREA_WORK);
     count = 0;
     work  = MEM_PTR(u16, 0x800E4804u);
-    src   = (s16*)TASK(Actor)->script;
+    src   = (s16*)SELF(Actor)->script;
     for (;; work += 0x1C) {
         a                      = work[4];
         b                      = work[2];

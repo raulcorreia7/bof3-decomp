@@ -16,34 +16,34 @@ NON_MATCHING s32 func_801BA678(void) {
     if (g_GameFlags & 0x400) {
         return 1;
     }
-    facing = TASK(Actor)->direction;
-    if (COORD_FRAC(TASK(Actor)->pos.x) == 0 && COORD_FRAC(TASK(Actor)->pos.y) == 0) {
+    facing = SELF(Actor)->direction;
+    if (COORD_FRAC(SELF(Actor)->pos.x) == 0 && COORD_FRAC(SELF(Actor)->pos.y) == 0) {
         return 1;
     }
-    dx = D_80181B00[TASK(Actor)->direction][0];
+    dx = D_80181B00[SELF(Actor)->direction][0];
     if (dx == 1) {
         dx = 2;
     }
-    dy = D_80181B00[TASK(Actor)->direction][1];
+    dy = D_80181B00[SELF(Actor)->direction][1];
     if (dy == 1) {
         dy = 2;
     }
-    near_x  = COORD_INT(TASK(Actor)->pos.x);
-    ahead_x = COORD_INT(TASK(Actor)->pos.x) + dx;
-    ahead_y = COORD_INT(TASK(Actor)->pos.y) + dy;
-    if (D_80181B00[TASK(Actor)->direction][0] == 1) {
+    near_x  = COORD_INT(SELF(Actor)->pos.x);
+    ahead_x = COORD_INT(SELF(Actor)->pos.x) + dx;
+    ahead_y = COORD_INT(SELF(Actor)->pos.y) + dy;
+    if (D_80181B00[SELF(Actor)->direction][0] == 1) {
         near_x += 1;
     }
-    near_y = COORD_INT(TASK(Actor)->pos.y);
-    if (D_80181B00[TASK(Actor)->direction][1] == 1) {
+    near_y = COORD_INT(SELF(Actor)->pos.y);
+    if (D_80181B00[SELF(Actor)->direction][1] == 1) {
         near_y += 1;
     }
     func_801BBCCC(ahead_x, ahead_y, near_x, near_y);
 
-    dir = TASK(Actor)->direction;
+    dir = SELF(Actor)->direction;
     if (!(dir & 1)) {
-        if (COORD_FRAC(TASK(Actor)->pos.x) != 0) {
-            if (COORD_FRAC(TASK(Actor)->pos.y) != 0) {
+        if (COORD_FRAC(SELF(Actor)->pos.x) != 0) {
+            if (COORD_FRAC(SELF(Actor)->pos.y) != 0) {
                 g_ScratchPad.cells.bytes[8]  = func_801BA278(1, 2, 3, 4, 5);
                 g_ScratchPad.cells.bytes[9]  = func_801BA278(4, 5, 0, 0, 0);
                 cell                         = func_801BA278(2, 3, 0, 0, 0);
@@ -62,19 +62,19 @@ NON_MATCHING s32 func_801BA678(void) {
                 if (func_801BB1B8(2)) {
                     return 0;
                 }
-                if ((g_ScratchPad.cells.bytes[9] & 0xF0) == 0xA0 && (TASK(Actor)->direction == FACING_UP || TASK(Actor)->direction == FACING_DOWN)) {
+                if ((g_ScratchPad.cells.bytes[9] & 0xF0) == 0xA0 && (SELF(Actor)->direction == FACING_UP || SELF(Actor)->direction == FACING_DOWN)) {
                     return (u8)func_801BB7B0(9);
                 }
-                if ((g_ScratchPad.cells.bytes[10] & 0xF0) == 0xA0 && (TASK(Actor)->direction == FACING_RIGHT || TASK(Actor)->direction == FACING_LEFT)) {
+                if ((g_ScratchPad.cells.bytes[10] & 0xF0) == 0xA0 && (SELF(Actor)->direction == FACING_RIGHT || SELF(Actor)->direction == FACING_LEFT)) {
                     return (u8)func_801BB7B0(10);
                 }
                 if ((g_ScratchPad.cells.bytes[9] & 0xF0) == 0xA0) {
-                    TASK(Actor)->direction = facing;
+                    SELF(Actor)->direction = facing;
                     Actor_SnapFacing(4, 6, 5);
                     return (u8)func_801BB7B0(9);
                 }
                 if ((g_ScratchPad.cells.bytes[10] & 0xF0) == 0xA0) {
-                    TASK(Actor)->direction = facing;
+                    SELF(Actor)->direction = facing;
                     Actor_SnapFacing(2, 4, 3);
                     return (u8)func_801BB7B0(10);
                 }
@@ -90,22 +90,22 @@ NON_MATCHING s32 func_801BA678(void) {
                 Actor_SnapFacing(4, 6, 5);
             }
             if ((g_ScratchPad.cells.bytes[8] & 0xF0) == 0xA0) {
-                if (!(TASK(Actor)->direction & 1)) {
+                if (!(SELF(Actor)->direction & 1)) {
                     Actor_SnapFacing(2, 4, 3);
                 }
                 return (u8)func_801BB7B0(8);
             }
-            if (TASK(Actor)->direction & 1) {
+            if (SELF(Actor)->direction & 1) {
                 return 3;
             }
             probe = ahead_x;
-            if (Area_IsStepTooHigh(probe, probe, COORD_INT(TASK(Actor)->pos.y), COORD_INT(TASK(Actor)->pos.y) + 1, 1)) {
+            if (Area_IsStepTooHigh(probe, probe, COORD_INT(SELF(Actor)->pos.y), COORD_INT(SELF(Actor)->pos.y) + 1, 1)) {
                 Actor_SnapFacing(4, 6, 5);
             }
-            if (TASK(Actor)->direction & 1) {
+            if (SELF(Actor)->direction & 1) {
                 return 3;
             }
-            if (Area_IsStepTooHigh(probe, probe, COORD_INT(TASK(Actor)->pos.y), COORD_INT(TASK(Actor)->pos.y) - 1, 1)) {
+            if (Area_IsStepTooHigh(probe, probe, COORD_INT(SELF(Actor)->pos.y), COORD_INT(SELF(Actor)->pos.y) - 1, 1)) {
                 Actor_SnapFacing(4, 6, 5);
             }
             return 3;
@@ -119,29 +119,29 @@ NON_MATCHING s32 func_801BA678(void) {
             Actor_SnapFacing(2, 4, 3);
         }
         if ((g_ScratchPad.cells.bytes[8] & 0xF0) == 0xA0) {
-            if (!(TASK(Actor)->direction & 1)) {
+            if (!(SELF(Actor)->direction & 1)) {
                 Actor_SnapFacing(4, 6, 5);
             }
             return (u8)func_801BB7B0(8);
         }
-        if (TASK(Actor)->direction & 1) {
+        if (SELF(Actor)->direction & 1) {
             return 3;
         }
         probe = ahead_y;
-        if (Area_IsStepTooHigh(COORD_INT(TASK(Actor)->pos.x), COORD_INT(TASK(Actor)->pos.x) + 1, probe, probe, 3)) {
+        if (Area_IsStepTooHigh(COORD_INT(SELF(Actor)->pos.x), COORD_INT(SELF(Actor)->pos.x) + 1, probe, probe, 3)) {
             Actor_SnapFacing(2, 4, 3);
         }
-        if (TASK(Actor)->direction & 1) {
+        if (SELF(Actor)->direction & 1) {
             return 3;
         }
-        if (Area_IsStepTooHigh(COORD_INT(TASK(Actor)->pos.x), COORD_INT(TASK(Actor)->pos.x) - 1, probe, probe, 3)) {
+        if (Area_IsStepTooHigh(COORD_INT(SELF(Actor)->pos.x), COORD_INT(SELF(Actor)->pos.x) - 1, probe, probe, 3)) {
             Actor_SnapFacing(2, 4, 3);
         }
         return 3;
     }
 
-    if (COORD_FRAC(TASK(Actor)->pos.x) != 0) {
-        if (COORD_FRAC(TASK(Actor)->pos.y) != 0) {
+    if (COORD_FRAC(SELF(Actor)->pos.x) != 0) {
+        if (COORD_FRAC(SELF(Actor)->pos.y) != 0) {
             if (dir & 2) {
                 g_ScratchPad.cells.bytes[8] = func_801BA278(2, 3, 0, 0, 0);
             } else {
@@ -160,14 +160,14 @@ NON_MATCHING s32 func_801BA678(void) {
             if ((cell & 0xF0) == 0xA0) {
                 return (u8)func_801BB7B0(8);
             }
-            if (TASK(Actor)->direction & 2) {
+            if (SELF(Actor)->direction & 2) {
                 probe = ahead_x;
-                if (Area_IsStepTooHigh(probe, probe, COORD_INT(TASK(Actor)->pos.y), COORD_INT(TASK(Actor)->pos.y) + 1, 1)) {
+                if (Area_IsStepTooHigh(probe, probe, COORD_INT(SELF(Actor)->pos.y), COORD_INT(SELF(Actor)->pos.y) + 1, 1)) {
                     return 0;
                 }
             } else {
                 probe = ahead_y;
-                if (Area_IsStepTooHigh(COORD_INT(TASK(Actor)->pos.x), COORD_INT(TASK(Actor)->pos.x) + 1, probe, probe, 3)) {
+                if (Area_IsStepTooHigh(COORD_INT(SELF(Actor)->pos.x), COORD_INT(SELF(Actor)->pos.x) + 1, probe, probe, 3)) {
                     return 0;
                 }
             }
@@ -206,12 +206,12 @@ NON_MATCHING s32 func_801BA678(void) {
             return (u8)func_801BB7B0(8);
         }
         probe = ahead_x;
-        if (Area_IsStepTooHigh(probe, probe, COORD_INT(TASK(Actor)->pos.y), COORD_INT(TASK(Actor)->pos.y) + 1, 1)) {
-            TASK(Actor)->direction = FACING_UP;
+        if (Area_IsStepTooHigh(probe, probe, COORD_INT(SELF(Actor)->pos.y), COORD_INT(SELF(Actor)->pos.y) + 1, 1)) {
+            SELF(Actor)->direction = FACING_UP;
             return 1;
         }
-        if (Area_IsStepTooHigh(probe, probe, COORD_INT(TASK(Actor)->pos.y), COORD_INT(TASK(Actor)->pos.y) - 1, 1)) {
-            TASK(Actor)->direction = FACING_DOWN;
+        if (Area_IsStepTooHigh(probe, probe, COORD_INT(SELF(Actor)->pos.y), COORD_INT(SELF(Actor)->pos.y) - 1, 1)) {
+            SELF(Actor)->direction = FACING_DOWN;
             return 1;
         }
         return 3;
@@ -249,12 +249,12 @@ NON_MATCHING s32 func_801BA678(void) {
         return (u8)func_801BB7B0(8);
     }
     probe = ahead_y;
-    if (Area_IsStepTooHigh(COORD_INT(TASK(Actor)->pos.x), COORD_INT(TASK(Actor)->pos.x) + 1, probe, probe, 3)) {
-        TASK(Actor)->direction = FACING_LEFT;
+    if (Area_IsStepTooHigh(COORD_INT(SELF(Actor)->pos.x), COORD_INT(SELF(Actor)->pos.x) + 1, probe, probe, 3)) {
+        SELF(Actor)->direction = FACING_LEFT;
         return 1;
     }
-    if (Area_IsStepTooHigh(COORD_INT(TASK(Actor)->pos.x), COORD_INT(TASK(Actor)->pos.x) - 1, probe, probe, 3)) {
-        TASK(Actor)->direction = FACING_RIGHT;
+    if (Area_IsStepTooHigh(COORD_INT(SELF(Actor)->pos.x), COORD_INT(SELF(Actor)->pos.x) - 1, probe, probe, 3)) {
+        SELF(Actor)->direction = FACING_RIGHT;
         return 1;
     }
     return 3;

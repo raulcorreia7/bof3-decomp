@@ -8,20 +8,20 @@ MATCH void Actor_BlockStart(void) {
     Actor* work;
     Actor* counter;
 
-    TASK(Actor)->direction = FACING_UP;
-    SYS_InitScratchpad((u8*)(((AreaLoad*)g_AreaLoads[g_GameAreaId])->field_08 + (TASK(Actor)->param.unk_0B * 8)));
-    record                          = TASK(Actor);
+    SELF(Actor)->direction = FACING_UP;
+    SYS_InitScratchpad((u8*)(((AreaLoad*)g_AreaLoads[g_GameAreaId])->field_08 + (SELF(Actor)->param.unk_0B * 8)));
+    record                          = SELF(Actor);
     record->tint.steps.delta.r      = -0x80;
-    other                           = TASK(Actor);
+    other                           = SELF(Actor);
     record->voice_flags.raw         = 1;
     other->tint.steps.delta.g       = -0x80;
-    TASK(Actor)->tint.steps.delta.b = -0x80;
-    work                            = TASK(Actor);
+    SELF(Actor)->tint.steps.delta.b = -0x80;
+    work                            = SELF(Actor);
     setVector(work, 0, 0, 0);
     work->timer = 0;
     Actor_BlockClaimCells();
-    TASK(Actor)->param.unk_0B = 0U;
-    counter                   = TASK(Actor);
+    SELF(Actor)->param.unk_0B = 0U;
+    counter                   = SELF(Actor);
     counter->header.mode      = (counter->header.mode + 1);
     Actor_ProjectForDraw();
 }

@@ -11,7 +11,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801F743C(void) {
     Actor* actor;
 
-    actor              = TASK(Actor);
+    actor              = SELF(Actor);
     actor->vx          = 0;
     actor->header.mode = actor->header.mode + 1;
 }
@@ -20,11 +20,11 @@ MATCH void func_801F743C(void) {
 MATCH void func_801F745C(void) {
     Actor* work;
 
-    work = TASK(Actor);
+    work = SELF(Actor);
     func_801F7660(work->pos.x.fixed, work->pos.y.fixed, work->pos.z.fixed, work->vx);
-    TASK(Actor)->vx += 16;
-    if (TASK(Actor)->vx > 1280) {
-        TASK(Actor)->header.mode += 1;
+    SELF(Actor)->vx += 16;
+    if (SELF(Actor)->vx > 1280) {
+        SELF(Actor)->header.mode += 1;
     }
 }
 
@@ -33,13 +33,13 @@ MATCH void func_801F74CC(void) {
 }
 
 MATCH void func_801F74EC(void) {
-    SYS_DISPATCH_TASK(D_801FD5B4, 1, g_Task);
+    SYS_DISPATCH_TASK(D_801FD5B4, 1, g_Self);
 }
 
 MATCH void func_801F7530(void) {
     Actor* actor;
 
-    actor              = TASK(Actor);
+    actor              = SELF(Actor);
     actor->vx          = 4096;
     actor->header.mode = actor->header.mode + 1;
 }
@@ -55,13 +55,13 @@ MATCH void func_801F7554(void) {
             spawned               = &g_SpawnedActors[slot];
             spawned->header.flags = 1;
             spawned->type         = 0x26;
-            actor                 = TASK(Actor);
+            actor                 = SELF(Actor);
             spawned->pos.x.fixed  = actor->pos.x.fixed;
             spawned->pos.y.fixed  = actor->pos.y.fixed;
             spawned->pos.z.fixed  = Area_HeightSample(actor->pos.x.fixed, actor->pos.y.fixed) << 16;
         }
     }
-    actor = TASK(Actor);
+    actor = SELF(Actor);
     actor->vx -= 1;
     if (actor->vx == 0) {
         actor->header.mode += 1;

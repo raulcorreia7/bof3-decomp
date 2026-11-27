@@ -13,16 +13,16 @@ MATCH void func_801EEC5C(void) {
     u32          slot;
     PartyMember* work;
 
-    TASK(PartyMember)->param.unk_0B = 0;
+    SELF(PartyMember)->param.unk_0B = 0;
     for (i = 0; i < 4; i++) {
         slot                               = Battle_AllocEffect(1, 43) & BYTE_MASK;
-        work                               = TASK(PartyMember);
+        work                               = SELF(PartyMember);
         g_BattleEffects[slot].header.mode  = i;
         g_BattleEffects[slot].header.step  = 0;
         g_BattleEffects[slot].arg.unk_09   = 0x10;
         g_BattleEffects[slot].target.party = work;
-        TASK(PartyMember)->param.unk_0B    = TASK(PartyMember)->param.unk_0B + 1;
+        SELF(PartyMember)->param.unk_0B    = SELF(PartyMember)->param.unk_0B + 1;
     }
     SND_SEQueueSelection(0x100);
-    TASK(PartyMember)->header.mode = TASK(PartyMember)->header.mode + 1;
+    SELF(PartyMember)->header.mode = SELF(PartyMember)->header.mode + 1;
 }

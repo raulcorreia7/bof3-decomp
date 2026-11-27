@@ -15,14 +15,14 @@ MATCH void Fishing_EntryBegin(void) {
     g_FishingFullNoticeShown = 0;
     g_FishingNewRecord       = 0;
 
-    work           = TASK(FishingState);
+    work           = SELF(FishingState);
     work->state_29 = 5;
 
-    state    = TASK(FishingState);
+    state    = SELF(FishingState);
     distance = Area_HeightSample(state->motion.unk_34, state->y_38.pos_y);
 
     panel                               = g_Game.current;
-    TASK(FishingState)->bounce.half.key = distance;
+    SELF(FishingState)->bounce.half.key = distance;
     flag                                = panel[0x79];
     if (flag == 0) {
         Script_Begin(0xA, 2);
@@ -30,6 +30,6 @@ MATCH void Fishing_EntryBegin(void) {
         Script_Select(0xB);
     }
 
-    work            = TASK(FishingState);
+    work            = SELF(FishingState);
     work->sub_index = (work->sub_index + 1);
 }

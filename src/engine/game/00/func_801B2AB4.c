@@ -16,7 +16,7 @@ MATCH void func_801B2AB4(void) {
                 index++;
             } while (index < g_Game.party_size);
         }
-        TASK(Actor)->param.unk_0B = 0xFF;
+        SELF(Actor)->param.unk_0B = 0xFF;
     }
-    TASK(Actor)->header.step = 1;
+    SELF(Actor)->header.step = 1;
 }

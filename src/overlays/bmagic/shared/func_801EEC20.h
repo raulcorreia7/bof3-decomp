@@ -4,5 +4,5 @@ MATCH void func_801EEC20(void) {
     Callback handlers[7];
 
     memcpy(handlers, D_801EEC04, sizeof(handlers));
-    SYS_DISPATCH_BYTE(handlers, TASK(PartyMember)->header.mode);
+    SYS_DISPATCH_BYTE(handlers, SELF(PartyMember)->header.mode);
 }

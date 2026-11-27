@@ -41,7 +41,7 @@ void func_801EFB00(s32 value, s32 x, s32 y);
 #define MAGIC060_ADVANCE_AT_EFFECT_PARAM(param_value) \
     work = (PartyMember*)g_BattleEffectBattler;       \
     if (work->param.unk_0B == (param_value)) {        \
-        TASK(PartyMember)->header.step++;             \
+        SELF(PartyMember)->header.step++;             \
     }
 
 #endif

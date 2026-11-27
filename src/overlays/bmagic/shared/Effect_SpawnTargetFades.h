@@ -10,32 +10,32 @@
         BMAGIC_EFFECT_SLOTS[i].header.mode  = 0;                                                   \
         BMAGIC_EFFECT_SLOTS[i].header.step  = 0;                                                   \
     }                                                                                              \
-    TASK(PartyMember)->unk_04       = (task_04);                                                   \
-    TASK(PartyMember)->param.unk_0B = 0;                                                           \
-    TASK(PartyMember)->header.mode += 1;                                                           \
+    SELF(PartyMember)->unk_04       = (task_04);                                                   \
+    SELF(PartyMember)->param.unk_0B = 0;                                                           \
+    SELF(PartyMember)->header.mode += 1;                                                           \
     if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {                                     \
         for (i = 0; i < 8; i++) {                                                                  \
             battler = i + BATTLE_PARTY_CHARACTERS_COUNT;                                           \
             if (!Battle_SlotIsBlocked(battler)) {                                                  \
                 slot                               = Battle_AllocEffect(1, (handler)) & BYTE_MASK; \
-                g_BattleEffects[slot].target.party = g_Task;                                       \
+                g_BattleEffects[slot].target.party = g_Self;                                       \
                 g_BattleEffects[slot].header.mode  = 0;                                            \
                 g_BattleEffects[slot].unk_04       = battler;                                      \
                 g_BattleEffects[slot].arg.unk_09   = count * 28 + 1;                               \
                 count++;                                                                           \
-                TASK(PartyMember)->param.unk_0B += 1;                                              \
+                SELF(PartyMember)->param.unk_0B += 1;                                              \
             }                                                                                      \
         }                                                                                          \
     } else {                                                                                       \
         for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {                                      \
             if (!Battle_SlotIsBlocked(i)) {                                                        \
                 slot                               = Battle_AllocEffect(1, (handler)) & BYTE_MASK; \
-                g_BattleEffects[slot].target.party = g_Task;                                       \
+                g_BattleEffects[slot].target.party = g_Self;                                       \
                 g_BattleEffects[slot].header.mode  = 0;                                            \
                 g_BattleEffects[slot].unk_04       = i;                                            \
                 g_BattleEffects[slot].arg.unk_09   = count * 28 + 1;                               \
                 count++;                                                                           \
-                TASK(PartyMember)->param.unk_0B += 1;                                              \
+                SELF(PartyMember)->param.unk_0B += 1;                                              \
             }                                                                                      \
         }                                                                                          \
     }                                                                                              \

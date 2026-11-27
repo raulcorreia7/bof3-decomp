@@ -18,7 +18,7 @@ MATCH void func_801F2E78(s32* first, s32* second) {
     SetSemiTrans(line, 0);
     Camera_ProjectPoint(first, (DVECTOR*)&line->x0);
     Camera_ProjectPoint(second, (DVECTOR*)&line->x1);
-    setRGB0(line, D_801F52C4[TASK(Actor)->unk_06 * 3], D_801F52C5[TASK(Actor)->unk_06 * 3], D_801F52C6[TASK(Actor)->unk_06 * 3]);
+    setRGB0(line, D_801F52C4[SELF(Actor)->unk_06 * 3], D_801F52C5[SELF(Actor)->unk_06 * 3], D_801F52C6[SELF(Actor)->unk_06 * 3]);
     GFX_AddPrim(GFX_LAYER_EFFECT, sizeof(LINE_F2));
     angle   = ratan2(line->y1 - line->y0, line->x1 - line->x0);
     size[0] = 64;

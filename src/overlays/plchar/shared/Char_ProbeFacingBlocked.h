@@ -8,7 +8,7 @@
         u8     blocked;                                                 \
         s32    cell;                                                    \
                                                                         \
-        task      = TASK(Actor);                                        \
+        task      = SELF(Actor);                                        \
         direction = task->direction;                                    \
         x         = task->pos.x.fixed + g_FacingSteps[direction].x * 2; \
         y         = task->pos.y.fixed + g_FacingSteps[direction].y * 2; \

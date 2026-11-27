@@ -20,7 +20,7 @@ MATCH void Game_BattleStartEncounter(s32 origin_x, s32 origin_y, s32 scroll_mode
             type        = 0;
             record      = (u8*)g_Game.members + offset;
             g_GameState = record;
-            TASK_SET(record);
+            SELF_SET(record);
             key = record[0x79];
             while (1) {
                 if (g_PartyBattleOrder[type & BYTE_MASK] == key)
@@ -32,11 +32,11 @@ MATCH void Game_BattleStartEncounter(s32 origin_x, s32 origin_y, s32 scroll_mode
             type &= BYTE_MASK;
             Game_BattleSetEncounterSpot(g_EncounterOriginX, g_EncounterOriginY, type);
             type <<= 3;
-            *(s32*)((u8*)g_AreaEncounterPlacement.party + type)       = TASK(Actor)->pos.x.fixed;
-            *(s32*)((u8*)&g_AreaEncounterPlacement.party[0].y + type) = TASK(Actor)->pos.y.fixed;
-            TASK(Actor)->unk_48                                       = 0;
-            TASK(Actor)->direction                                    = s_RouteIndexByMode[g_Battle.scroll_dir];
-            Script_Request(TASK(Actor)->direction);
+            *(s32*)((u8*)g_AreaEncounterPlacement.party + type)       = SELF(Actor)->pos.x.fixed;
+            *(s32*)((u8*)&g_AreaEncounterPlacement.party[0].y + type) = SELF(Actor)->pos.y.fixed;
+            SELF(Actor)->unk_48                                       = 0;
+            SELF(Actor)->direction                                    = s_RouteIndexByMode[g_Battle.scroll_dir];
+            Script_Request(SELF(Actor)->direction);
             offset += BATTLE_PARTY_STRIDE;
             count += 1;
         } while (count < g_Game.party_size);

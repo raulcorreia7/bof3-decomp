@@ -2,5 +2,5 @@
 
 MATCH void func_801F2C68(void) {
     g_Game.current->status.field.flags.unsigned_value &= 0xFE;
-    TASK(Actor)->draw_layer = g_AreaDrawMode;
+    SELF(Actor)->draw_layer = g_AreaDrawMode;
 }

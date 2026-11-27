@@ -12,13 +12,13 @@
  * on the work record's screen position. They differ only in the vertex colours. */
 #define SCENA15_SPRITE_GEOMETRY(prim, x, y)                                                                                                                                      \
     setXY4(prim, x, y, (x) + 24, y, x, (y) + 48, (x) + 24, (y) + 48);                                                                                                            \
-    setUV4(prim, (u8)TASK(Actor)->screen_x - 12, (u8)TASK(Actor)->screen_y - 37, (u8)TASK(Actor)->screen_x + 12, (u8)TASK(Actor)->screen_y - 37, (u8)TASK(Actor)->screen_x - 12, \
-           (u8)TASK(Actor)->screen_y + 11, (u8)TASK(Actor)->screen_x + 12, (u8)TASK(Actor)->screen_y + 11)
+    setUV4(prim, (u8)SELF(Actor)->screen_x - 12, (u8)SELF(Actor)->screen_y - 37, (u8)SELF(Actor)->screen_x + 12, (u8)SELF(Actor)->screen_y - 37, (u8)SELF(Actor)->screen_x - 12, \
+           (u8)SELF(Actor)->screen_y + 11, (u8)SELF(Actor)->screen_x + 12, (u8)SELF(Actor)->screen_y + 11)
 
 #define SCENA15_SPRITE_END(prim)                                                              \
     (prim)->tpage = GetTPage(TPAGE_DEPTH_15BIT, TPAGE_ABR_ADD, 0x340, 0x100);                 \
     SetSemiTrans(prim, 1);                                                                    \
-    Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, 1, sizeof(POLY_GT4))
+    Area_CellAddPrim(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed, 1, sizeof(POLY_GT4))
 
 extern u32      D_801F6C00;
 /* D_801FE57C */

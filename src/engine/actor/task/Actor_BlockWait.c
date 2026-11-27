@@ -18,38 +18,38 @@ MATCH void Actor_BlockWait(void) {
             Actor_BlockReleaseCells();
             goto block_9;
         }
-        if (TASK(Actor)->param.unk_0B != 0) {
-            TASK(Actor)->direction = g_Game.members[0].facing;
-            TASK(Actor)->vx        = g_FacingOffsets[TASK(Actor)->direction].x * 2;
-            TASK(Actor)->vy        = g_FacingOffsets[TASK(Actor)->direction].y * 2;
-            TASK(Actor)->timer     = 16;
-            step                   = TASK(Actor)->timer;
-            move_x                 = TASK(Actor)->pos.x.fixed;
-            move_y                 = TASK(Actor)->pos.y.fixed;
-            move_x += TASK(Actor)->vx * step;
-            move_y += TASK(Actor)->vy * step;
+        if (SELF(Actor)->param.unk_0B != 0) {
+            SELF(Actor)->direction = g_Game.members[0].facing;
+            SELF(Actor)->vx        = g_FacingOffsets[SELF(Actor)->direction].x * 2;
+            SELF(Actor)->vy        = g_FacingOffsets[SELF(Actor)->direction].y * 2;
+            SELF(Actor)->timer     = 16;
+            step                   = SELF(Actor)->timer;
+            move_x                 = SELF(Actor)->pos.x.fixed;
+            move_y                 = SELF(Actor)->pos.y.fixed;
+            move_x += SELF(Actor)->vx * step;
+            move_y += SELF(Actor)->vy * step;
             Actor_BlockReleaseCells();
             if (Actor_BlockIsPathBlocked(move_x, move_y) & BYTE_MASK) {
                 copy_dst   = (u8*)BATTLE_SCRIPT_TABLE;
-                copy_count = *TASK(Actor)->range_54.table * 0x28;
+                copy_count = *SELF(Actor)->range_54.table * 0x28;
                 copy_index = 0;
                 if (copy_count > 0) {
                     do {
-                        *copy_dst = *TASK(Actor)->script;
+                        *copy_dst = *SELF(Actor)->script;
                         copy_index += 1;
-                        TASK(Actor)->script = (u8*)TASK(Actor)->script + 1;
+                        SELF(Actor)->script = (u8*)SELF(Actor)->script + 1;
                         copy_dst += 1;
                     } while (copy_index < copy_count);
                 }
-                TASK(Actor)->script = (u8*)BATTLE_SCRIPT_TABLE; /* the same buffer */
+                SELF(Actor)->script = (u8*)BATTLE_SCRIPT_TABLE; /* the same buffer */
                 Actor_ShatterBuildShards();
                 Actor_ShatterStartDust();
                 SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 14));
-                TASK(Actor)->header.mode = ACTOR_BLOCK_MODE_SHATTER;
+                SELF(Actor)->header.mode = ACTOR_BLOCK_MODE_SHATTER;
                 goto block_9;
             }
             Actor_BlockSlide();
-            TASK(Actor)->header.mode += 1;
+            SELF(Actor)->header.mode += 1;
             return;
         }
         goto block_9;

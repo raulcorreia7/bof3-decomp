@@ -4,15 +4,15 @@ MATCH void func_8019A580(void) {
     Actor* work;
     Actor* next;
 
-    work = TASK(Actor);
+    work = SELF(Actor);
     work->timer--;
-    next = TASK(Actor);
+    next = SELF(Actor);
     if (next->timer == 0) {
         next->header.mode++;
         return;
     }
     Script_AnimStepLoop();
-    next = TASK(Actor);
+    next = SELF(Actor);
     if ((next->timer & 0x4) != 0) {
         if (next->unk_05 == 6) {
             Area_AddActor();

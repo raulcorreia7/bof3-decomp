@@ -3,7 +3,7 @@
    (area045), func_801F3464 (area115), func_801F3478 (area121), func_801F3494 (area087), func_801F3498 (area065),
    func_801F3524 (area104), func_801F3FC4 (area088) */
 MATCH void Actor_NextStep(void) {
-    TASK(Actor)->timer        = 0;
-    TASK(Actor)->param.unk_0B = 0;
-    TASK(Actor)->header.mode += 1;
+    SELF(Actor)->timer        = 0;
+    SELF(Actor)->param.unk_0B = 0;
+    SELF(Actor)->header.mode += 1;
 }

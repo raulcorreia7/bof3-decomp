@@ -3,7 +3,7 @@
 MATCH u8 func_801B4494(u8 wanted_code) {
     u8 result;
 
-    if (TASK(Actor)->voice_flags.scene_flag != 0) {
+    if (SELF(Actor)->voice_flags.scene_flag != 0) {
         result = func_801B4D7C(wanted_code);
     } else {
         result = func_801B44DC(wanted_code);

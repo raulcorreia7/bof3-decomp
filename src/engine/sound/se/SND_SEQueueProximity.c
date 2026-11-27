@@ -3,7 +3,7 @@
 /* One band: the marked_id fires when the work record's x and y both lie within `radius` of the target point
  * (g_AreaTargetCellX, g_AreaTargetCellY); `table` is the marked_id table the band stores. */
 #define SND_PROXIMITY_BAND(radius, table)              \
-    work   = g_Task;                                   \
+    work   = g_Self;                                   \
     x      = COORD_INT(work->pos.x);                   \
     target = g_AreaTargetCellX;                        \
     edge   = x + (radius);                             \

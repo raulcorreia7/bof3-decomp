@@ -4,8 +4,8 @@ MATCH void func_801F400C(void) {
     u16 level;
     s32 fade;
 
-    level                 = TASK(Actor)->screen_y;
-    TASK(Actor)->screen_y = level + 1;
+    level                 = SELF(Actor)->screen_y;
+    SELF(Actor)->screen_y = level + 1;
     if ((s16)(level + 1) >= 0x5B) {
         fade = (level - 0x59) * 4;
         if ((s16)fade >= 0x100) {
@@ -13,8 +13,8 @@ MATCH void func_801F400C(void) {
         }
         func_801F5050(fade);
     }
-    TASK(Actor)->screen_x -= 1;
-    if ((s16)TASK(Actor)->screen_x == 0) {
+    SELF(Actor)->screen_x -= 1;
+    if ((s16)SELF(Actor)->screen_x == 0) {
         Actor_Clear();
     }
 }

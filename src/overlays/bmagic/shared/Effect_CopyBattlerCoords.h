@@ -6,12 +6,12 @@
         PartyMember* src;                                                     \
                                                                               \
         src                            = (PartyMember*)g_BattleEffectBattler; \
-        TASK(PartyMember)->pos.x       = src->pos.x;                          \
-        TASK(PartyMember)->pos.y       = src->pos.y;                          \
-        TASK(PartyMember)->pos.z       = src->pos.z;                          \
-        TASK(PartyMember)->unk_09      = 0;                                   \
-        TASK(PartyMember)->timer       = 0;                                   \
-        TASK(PartyMember)->header.step = TASK(PartyMember)->header.step + 1;  \
+        SELF(PartyMember)->pos.x       = src->pos.x;                          \
+        SELF(PartyMember)->pos.y       = src->pos.y;                          \
+        SELF(PartyMember)->pos.z       = src->pos.z;                          \
+        SELF(PartyMember)->unk_09      = 0;                                   \
+        SELF(PartyMember)->timer       = 0;                                   \
+        SELF(PartyMember)->header.step = SELF(PartyMember)->header.step + 1;  \
     } while (0)
 
 MATCH void Effect_CopyBattlerCoords(void) {

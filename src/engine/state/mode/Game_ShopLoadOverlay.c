@@ -6,14 +6,14 @@ MATCH void Game_ShopLoadOverlay(void) {
 
     if (D_8014865C >= 0) {
         work = &g_Actors[D_8014865C];
-        TASK_SET(work);
+        SELF_SET(work);
         if (work->unk_18 == 9) {
             g_GameEntryState    = GAME_MODE_FIELD;
             g_GameEntrySubstate = 0u;
             g_GameStateIndex    = GAME_REQUEST_IDLE;
             if (!(work->option_flags & ACTOR_OPT_ROUTE_LOCKED)) {
                 work->direction = work->unk_79;
-                Script_DispatchSelector(TASK(Actor)->direction);
+                Script_DispatchSelector(SELF(Actor)->direction);
                 work->interaction_flags = (work->interaction_flags | ACTOR_INTERACTION_MOVING);
             }
             work->interaction_flags = (work->interaction_flags & ~ACTOR_INTERACTION_SCRIPT_PENDING);

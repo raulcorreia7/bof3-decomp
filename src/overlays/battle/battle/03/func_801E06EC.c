@@ -1,7 +1,7 @@
 #include "battle_03.h"
 
 MATCH void func_801E06EC(void) {
-    volatile PartyMember* work = TASK(PartyMember);
+    volatile PartyMember* work = SELF(PartyMember);
     volatile PartyMember* battle_work;
 
     work->unk_03 += 1;

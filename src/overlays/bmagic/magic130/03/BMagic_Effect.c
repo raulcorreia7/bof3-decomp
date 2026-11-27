@@ -14,22 +14,22 @@ MATCH void func_801EEC70(void) {
     u16*         src;
 
     Battle_CenterCamera();
-    TASK(PartyMember)->facing       = g_BattleEffectBattler->facing;
-    TASK(PartyMember)->param.unk_0B = 0;
-    TASK(PartyMember)->unk_09       = 30;
-    TASK(PartyMember)->header.mode += 1;
+    SELF(PartyMember)->facing       = g_BattleEffectBattler->facing;
+    SELF(PartyMember)->param.unk_0B = 0;
+    SELF(PartyMember)->unk_09       = 30;
+    SELF(PartyMember)->header.mode += 1;
     slot                               = Battle_AllocEffect(1, 102) & BYTE_MASK;
-    work                               = TASK(PartyMember);
+    work                               = SELF(PartyMember);
     g_BattleEffects[slot].header.mode  = 0;
     g_BattleEffects[slot].target.party = work;
-    TASK(PartyMember)->param.unk_0B += 1;
+    SELF(PartyMember)->param.unk_0B += 1;
     for (i = 0; i < 6; i++) {
         slot                               = Battle_AllocEffect(1, 102) & BYTE_MASK;
-        work                               = TASK(PartyMember);
+        work                               = SELF(PartyMember);
         g_BattleEffects[slot].header.mode  = 1;
         g_BattleEffects[slot].unk_0B       = i;
         g_BattleEffects[slot].target.party = work;
-        TASK(PartyMember)->param.unk_0B += 1;
+        SELF(PartyMember)->param.unk_0B += 1;
     }
     BMAGIC_POINT_AT_PALETTE_ROW(dst, src, i);
     for (; i < AREA_PALETTE_COLORS; i++) {

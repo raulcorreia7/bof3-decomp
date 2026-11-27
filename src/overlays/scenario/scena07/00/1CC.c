@@ -9,7 +9,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #include "overlays/scenario/shared/Scene_DispatchEntity.h"
 
 MATCH void func_801F6E10(void) {
-    SYS_DISPATCH_TASK(D_801FDD3C, 2, g_Task);
+    SYS_DISPATCH_TASK(D_801FDD3C, 2, g_Self);
 }
 
 MATCH void func_801F6E54(void) {
@@ -24,15 +24,15 @@ MATCH void func_801F6E54(void) {
 MATCH void func_801F6E90(void) {
     FallingSpark* spark;
 
-    if ((TASK(Actor)->vx & 0x7) == 0) {
+    if ((SELF(Actor)->vx & 0x7) == 0) {
         spark = func_801F8394();
         if (spark != NULL) {
             Scene_InitSpark(spark);
         }
     }
     func_801F85D8();
-    if (--TASK(Actor)->vx == 0) {
-        TASK(Actor)->header.step++;
+    if (--SELF(Actor)->vx == 0) {
+        SELF(Actor)->header.step++;
     }
 }
 
@@ -43,7 +43,7 @@ MATCH void func_801F6F14(void) {
 }
 
 MATCH void func_801F6F48(void) {
-    SYS_DISPATCH_TASK(D_801FDD48, 2, g_Task);
+    SYS_DISPATCH_TASK(D_801FDD48, 2, g_Self);
 }
 
 MATCH void func_801F6F8C(void) {
@@ -55,15 +55,15 @@ MATCH void func_801F6F8C(void) {
 }
 
 MATCH void func_801F6FB0(void) {
-    func_801F3C3C(TASK(Actor)->vy);
-    TASK(Actor)->vy += (g_FrameCount & 0xF) == 0;
-    if (TASK(Actor)->vy == 0) {
+    func_801F3C3C(SELF(Actor)->vy);
+    SELF(Actor)->vy += (g_FrameCount & 0xF) == 0;
+    if (SELF(Actor)->vy == 0) {
         Actor_Clear();
     }
 }
 
 MATCH void func_801F700C(void) {
-    SYS_DISPATCH_TASK(D_801FDD50, 2, g_Task);
+    SYS_DISPATCH_TASK(D_801FDD50, 2, g_Self);
 }
 
 MATCH void func_801F7050(void) {
@@ -72,7 +72,7 @@ MATCH void func_801F7050(void) {
     u8     i;
 
     /* FAKE: the second pointer reproduces retail's copy of the scratch pointer (move into a2). */
-    work       = TASK(Actor);
+    work       = SELF(Actor);
     D_800E4C1E = 0xC0;
     actor      = work;
     actor->vz  = 0;
@@ -83,32 +83,32 @@ MATCH void func_801F7050(void) {
         actor->pos.z.fixed += actor->vz;
     }
     SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 2));
-    TASK(Actor)->vz = -TASK(Actor)->vz;
-    TASK(Actor)->header.step++;
+    SELF(Actor)->vz = -SELF(Actor)->vz;
+    SELF(Actor)->header.step++;
 }
 
 MATCH void func_801F70F8(void) {
     Trail_Update(SCENA07_TRAIL);
     Trail_Draw(SCENA07_TRAIL);
-    TASK(Actor)->pos.x.fixed -= TO_COORD(1);
-    TASK(Actor)->pos.y.fixed += 0; /* FAKE: retail reloads and stores y with no change. */
-    TASK(Actor)->pos.z.fixed += TASK(Actor)->vz;
-    if (TASK(Actor)->vz != 0) {
-        TASK(Actor)->vz += TO_COORD(128);
+    SELF(Actor)->pos.x.fixed -= TO_COORD(1);
+    SELF(Actor)->pos.y.fixed += 0; /* FAKE: retail reloads and stores y with no change. */
+    SELF(Actor)->pos.z.fixed += SELF(Actor)->vz;
+    if (SELF(Actor)->vz != 0) {
+        SELF(Actor)->vz += TO_COORD(128);
     }
-    if (TASK(Actor)->pos.x.fixed == TASK(Actor)->vx && TASK(Actor)->pos.y.fixed == TASK(Actor)->vy) {
-        TASK(Actor)->timer = 47;
-        TASK(Actor)->header.step++;
+    if (SELF(Actor)->pos.x.fixed == SELF(Actor)->vx && SELF(Actor)->pos.y.fixed == SELF(Actor)->vy) {
+        SELF(Actor)->timer = 47;
+        SELF(Actor)->header.step++;
     }
 }
 
 MATCH void func_801F71C0(void) {
     Trail_Update(SCENA07_TRAIL);
     Trail_Draw(SCENA07_TRAIL);
-    if (--TASK(Actor)->timer == 0) {
+    if (--SELF(Actor)->timer == 0) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 3));
-        TASK(Actor)->timer = 32;
-        TASK(Actor)->header.step++;
+        SELF(Actor)->timer = 32;
+        SELF(Actor)->header.step++;
     }
 }
 
@@ -133,18 +133,18 @@ MATCH void func_801F73A4(void) {
 }
 
 MATCH void func_801F73C4(void) {
-    SYS_DISPATCH_TASK(D_801FDD70, 2, g_Task);
+    SYS_DISPATCH_TASK(D_801FDD70, 2, g_Self);
 }
 
 MATCH void func_801F7408(void) {
     /* FAKE: the retail frame holds 0x10 bytes no statement explains. */
     FAKE_STACK_PADS(u8, 0x10);
 
-    TASK(Actor)->pos.z.fixed = TO_COORD(Area_HeightSample(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed));
+    SELF(Actor)->pos.z.fixed = TO_COORD(Area_HeightSample(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed));
     func_801F9DA8();
-    TASK(Actor)->timer = 0;
-    TASK(Actor)->vx    = 95;
-    TASK(Actor)->header.step++;
+    SELF(Actor)->timer = 0;
+    SELF(Actor)->vx    = 95;
+    SELF(Actor)->header.step++;
     SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 5));
 }
 
@@ -152,21 +152,21 @@ MATCH void func_801F7480(void) {
     u8  i;
     u8* effect;
 
-    if ((TASK(Actor)->vx & D_801FDD7C[TASK(Actor)->timer]) == 0) {
-        D_801FDFBC->unk_10 += D_801FDD84[TASK(Actor)->timer];
-        for (i = 0; i < D_801FDD84[TASK(Actor)->timer]; i++) {
+    if ((SELF(Actor)->vx & D_801FDD7C[SELF(Actor)->timer]) == 0) {
+        D_801FDFBC->unk_10 += D_801FDD84[SELF(Actor)->timer];
+        for (i = 0; i < D_801FDD84[SELF(Actor)->timer]; i++) {
             effect = func_801F9DD4();
             if (effect != NULL) {
                 func_801F9E10(effect);
             }
         }
     }
-    if ((TASK(Actor)->vx & 0xF) == 0) {
-        TASK(Actor)->timer++;
+    if ((SELF(Actor)->vx & 0xF) == 0) {
+        SELF(Actor)->timer++;
     }
     func_801F9EFC();
-    if (--TASK(Actor)->vx == 0) {
-        TASK(Actor)->header.step++;
+    if (--SELF(Actor)->vx == 0) {
+        SELF(Actor)->header.step++;
     }
 }
 
@@ -177,7 +177,7 @@ MATCH void func_801F75C0(void) {
 }
 
 MATCH void func_801F75F4(void) {
-    SYS_DISPATCH_TASK(D_801FDD8C, 2, g_Task);
+    SYS_DISPATCH_TASK(D_801FDD8C, 2, g_Self);
 }
 
 MATCH void func_801F7638(void) {
@@ -187,39 +187,39 @@ MATCH void func_801F7638(void) {
     /* FAKE: the retail frame holds 0x10 bytes no statement explains. */
     FAKE_STACK_PADS(u8, 0x10);
 
-    TASK(Actor)->pos.z.fixed = TO_COORD(Area_HeightSample(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed));
+    SELF(Actor)->pos.z.fixed = TO_COORD(Area_HeightSample(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed));
     burst                    = SCENA07_BURST_RECORD;
-    burst->pos.vx            = TASK(Actor)->pos.x.fixed;
-    y                        = TASK(Actor)->pos.y.fixed;
+    burst->pos.vx            = SELF(Actor)->pos.x.fixed;
+    y                        = SELF(Actor)->pos.y.fixed;
     D_801FDFBC               = burst;
     /* FAKE: the order lock keeps the y store after the pointer store; 33 of 38 instructions otherwise. */
     FAKE_ORDER_LOCK(burst->pos.vy = y);
-    burst->pos.vz      = TASK(Actor)->pos.z.fixed;
+    burst->pos.vz      = SELF(Actor)->pos.z.fixed;
     burst->unk_10      = 0;
-    TASK(Actor)->timer = 0;
-    TASK(Actor)->vx    = 95;
-    TASK(Actor)->header.step++;
+    SELF(Actor)->timer = 0;
+    SELF(Actor)->vx    = 95;
+    SELF(Actor)->header.step++;
 }
 
 MATCH void func_801F76D0(void) {
-    if ((TASK(Actor)->vx & D_801FDD9C[TASK(Actor)->timer]) == 0) {
-        D_801FDFBC->unk_10 += D_801FDDA4[TASK(Actor)->timer];
+    if ((SELF(Actor)->vx & D_801FDD9C[SELF(Actor)->timer]) == 0) {
+        D_801FDFBC->unk_10 += D_801FDDA4[SELF(Actor)->timer];
     }
-    if ((TASK(Actor)->vx & 0xF) == 0) {
-        TASK(Actor)->timer++;
+    if ((SELF(Actor)->vx & 0xF) == 0) {
+        SELF(Actor)->timer++;
     }
     func_801F97E0(D_801FDFBC);
-    if (--TASK(Actor)->vx == 0) {
-        TASK(Actor)->vx = 0x10;
-        TASK(Actor)->header.step++;
+    if (--SELF(Actor)->vx == 0) {
+        SELF(Actor)->vx = 0x10;
+        SELF(Actor)->header.step++;
     }
 }
 
 MATCH void func_801F77AC(void) {
     D_801FDFBC->unk_10 += 4;
     func_801F97E0(D_801FDFBC);
-    if (--TASK(Actor)->vx == 0) {
-        TASK(Actor)->header.step += 1;
+    if (--SELF(Actor)->vx == 0) {
+        SELF(Actor)->header.step += 1;
     }
 }
 
@@ -232,7 +232,7 @@ MATCH void func_801F7810(void) {
 }
 
 MATCH void func_801F786C(void) {
-    SYS_DISPATCH_TASK(D_801FDDAC, 2, g_Task);
+    SYS_DISPATCH_TASK(D_801FDDAC, 2, g_Self);
 }
 
 #ifdef NON_MATCHING
@@ -242,16 +242,16 @@ NON_MATCHING void func_801F78B0(void) {
     /* FAKE: the retail frame holds 0x10 bytes no statement explains. */
     FAKE_STACK_PADS(u8, 0x10);
 
-    TASK(Actor)->pos.z.fixed = Area_HeightSample(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed) << 16;
+    SELF(Actor)->pos.z.fixed = Area_HeightSample(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed) << 16;
     buffer                   = MEM_PTR(Scena07BurstBuffer, AREA_WORK + 0x424);
     D_801FDFC0               = buffer;
-    buffer->pos.vx           = TASK(Actor)->pos.x.fixed;
-    buffer->pos.vy           = TASK(Actor)->pos.y.fixed;
-    buffer->pos.vz           = TASK(Actor)->pos.z.fixed + TO_COORD(0x200);
+    buffer->pos.vx           = SELF(Actor)->pos.x.fixed;
+    buffer->pos.vy           = SELF(Actor)->pos.y.fixed;
+    buffer->pos.vz           = SELF(Actor)->pos.z.fixed + TO_COORD(0x200);
     buffer->angle            = 0;
     func_801F90F4(MEM_PTR(Scena07BurstBuffer, AREA_WORK + 0x424));
-    TASK(Actor)->vx = 0x28;
-    TASK(Actor)->header.step++;
+    SELF(Actor)->vx = 0x28;
+    SELF(Actor)->header.step++;
     SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 9));
 }
 #else
@@ -263,7 +263,7 @@ MATCH void func_801F7960(void) {
 }
 
 MATCH void func_801F79EC(void) {
-    SYS_DISPATCH_TASK(D_801FDDB4, 2, g_Task);
+    SYS_DISPATCH_TASK(D_801FDDB4, 2, g_Self);
 }
 
 MATCH void func_801F7A30(void) {
@@ -273,25 +273,25 @@ MATCH void func_801F7A30(void) {
 
     Scene_PlaceAtLead();
     func_801F8358();
-    work         = TASK(Actor);
+    work         = SELF(Actor);
     work->unk_06 = 1;
     work->vx     = 40;
-    TASK(Actor)->header.step += 1;
+    SELF(Actor)->header.step += 1;
 }
 
 MATCH void func_801F7AB0(void) {
     FallingSpark* spark;
 
     func_801F9330(D_801FDFC0);
-    if (TASK(Actor)->vx >= 9) {
+    if (SELF(Actor)->vx >= 9) {
         spark = func_801F8394();
-        if (((TASK(Actor)->vx & 3) == 0) && (spark != NULL)) {
+        if (((SELF(Actor)->vx & 3) == 0) && (spark != NULL)) {
             func_801F8478(spark);
         }
     }
     func_801F85D8();
-    if (--TASK(Actor)->vx == 0) {
-        TASK(Actor)->header.step++;
+    if (--SELF(Actor)->vx == 0) {
+        SELF(Actor)->header.step++;
     }
 }
 
@@ -302,7 +302,7 @@ MATCH void func_801F7B68(void) {
 }
 
 MATCH void func_801F7B9C(void) {
-    SYS_DISPATCH_TASK(D_801FDDC0, 2, g_Task);
+    SYS_DISPATCH_TASK(D_801FDDC0, 2, g_Self);
 }
 
 #ifdef NON_MATCHING
@@ -312,18 +312,18 @@ NON_MATCHING void func_801F7BE0(void) {
     /* FAKE: the retail frame holds 0x10 bytes no statement explains. */
     FAKE_STACK_PADS(u8, 0x10);
 
-    TASK(Actor)->pos.x.fixed = g_Game.members[0].pos.x.fixed;
-    TASK(Actor)->pos.y.fixed = g_Game.members[0].pos.y.fixed;
-    TASK(Actor)->pos.z.fixed = TO_COORD(Area_HeightSample(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed));
+    SELF(Actor)->pos.x.fixed = g_Game.members[0].pos.x.fixed;
+    SELF(Actor)->pos.y.fixed = g_Game.members[0].pos.y.fixed;
+    SELF(Actor)->pos.z.fixed = TO_COORD(Area_HeightSample(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed));
     buffer                   = MEM_PTR(Scena07BurstBuffer, AREA_WORK + 0x424);
-    buffer->pos.vx           = TASK(Actor)->pos.x.fixed;
+    buffer->pos.vx           = SELF(Actor)->pos.x.fixed;
     D_801FDFC0               = buffer;
-    buffer->pos.vy           = TASK(Actor)->pos.y.fixed;
-    buffer->pos.vz           = TASK(Actor)->pos.z.fixed + TO_COORD(0x200);
+    buffer->pos.vy           = SELF(Actor)->pos.y.fixed;
+    buffer->pos.vz           = SELF(Actor)->pos.z.fixed + TO_COORD(0x200);
     buffer->angle            = 0x800;
     func_801F90F4(MEM_PTR(Scena07BurstBuffer, AREA_WORK + 0x424));
-    TASK(Actor)->vx = 0x28;
-    TASK(Actor)->header.step++;
+    SELF(Actor)->vx = 0x28;
+    SELF(Actor)->header.step++;
 }
 #else
 INCLUDE_ASM(func_801F7BE0);
@@ -334,7 +334,7 @@ MATCH void func_801F7C9C(void) {
 }
 
 MATCH void func_801F7D28(void) {
-    SYS_DISPATCH_TASK(D_801FDDC8, 2, g_Task);
+    SYS_DISPATCH_TASK(D_801FDDC8, 2, g_Self);
 }
 
 MATCH void func_801F7D6C(void) {
@@ -343,20 +343,20 @@ MATCH void func_801F7D6C(void) {
 
     Scene_PlaceAtLead();
     func_801FA01C();
-    TASK(Actor)->vx = 120;
-    TASK(Actor)->header.step += 1;
+    SELF(Actor)->vx = 120;
+    SELF(Actor)->header.step += 1;
 }
 
 MATCH void func_801F7DDC(void) {
     func_801FA38C();
-    TASK(Actor)->vx = TASK(Actor)->vx - 1;
-    if (TASK(Actor)->vx == 0) {
+    SELF(Actor)->vx = SELF(Actor)->vx - 1;
+    if (SELF(Actor)->vx == 0) {
         Actor_Clear();
     }
 }
 
 MATCH void func_801F7E24(void) {
-    SYS_DISPATCH_TASK(D_801FDDD0, 2, g_Task);
+    SYS_DISPATCH_TASK(D_801FDDD0, 2, g_Self);
 }
 
 MATCH void func_801F7E68(void) {
@@ -366,34 +366,34 @@ MATCH void func_801F7E68(void) {
     for (i = 0; i < 32; i++) {
         Trail_Update(SCENA07_TRAIL);
     }
-    if (TASK(Actor)->unk_06 != 0) {
+    if (SELF(Actor)->unk_06 != 0) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 3));
     }
-    TASK(Actor)->header.step++;
+    SELF(Actor)->header.step++;
 }
 
 MATCH void func_801F7EF8(void) {
     Trail_Update(SCENA07_TRAIL);
     Trail_Draw(SCENA07_TRAIL);
-    TASK(Actor)->pos.x.fixed += TASK(Actor)->vx;
-    TASK(Actor)->pos.y.fixed += TASK(Actor)->vy;
-    TASK(Actor)->pos.z.fixed += TASK(Actor)->vz;
-    if (TASK(Actor)->pos.x.fixed == TASK(Actor)->unk_18 && TASK(Actor)->pos.y.fixed == TASK(Actor)->unk_1C) {
-        TASK(Actor)->timer = 47;
-        TASK(Actor)->header.step++;
+    SELF(Actor)->pos.x.fixed += SELF(Actor)->vx;
+    SELF(Actor)->pos.y.fixed += SELF(Actor)->vy;
+    SELF(Actor)->pos.z.fixed += SELF(Actor)->vz;
+    if (SELF(Actor)->pos.x.fixed == SELF(Actor)->unk_18 && SELF(Actor)->pos.y.fixed == SELF(Actor)->unk_1C) {
+        SELF(Actor)->timer = 47;
+        SELF(Actor)->header.step++;
     }
 }
 
 MATCH void func_801F7FA4(void) {
     Trail_Update(SCENA07_TRAIL);
     Trail_Draw(SCENA07_TRAIL);
-    if (--TASK(Actor)->timer == 0) {
-        if (TASK(Actor)->unk_06 == 0) {
+    if (--SELF(Actor)->timer == 0) {
+        if (SELF(Actor)->unk_06 == 0) {
             Actor_Clear();
         } else {
             SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 4));
-            TASK(Actor)->timer = 32;
-            TASK(Actor)->header.step++;
+            SELF(Actor)->timer = 32;
+            SELF(Actor)->header.step++;
         }
     }
 }
@@ -470,9 +470,9 @@ MATCH void func_801F8478(FallingSpark* spark) {
     yaw                  = rand() & 0x7FF;
     pitch                = rand() & 0xFFF;
     radius               = ((rand() % 2) << 12) | (rand() & 0xFFF);
-    spark->pos.vx        = TASK(Actor)->pos.x.fixed + ((radius * ((rsin(yaw) * rcos(pitch)) >> 12)) >> 8);
-    spark->pos.vy        = TASK(Actor)->pos.y.fixed + ((radius * ((rsin(yaw) * rsin(pitch)) >> 12)) >> 8);
-    spark->pos.vz        = TASK(Actor)->pos.z.fixed + radius * rcos(yaw) + TO_COORD(512);
+    spark->pos.vx        = SELF(Actor)->pos.x.fixed + ((radius * ((rsin(yaw) * rcos(pitch)) >> 12)) >> 8);
+    spark->pos.vy        = SELF(Actor)->pos.y.fixed + ((radius * ((rsin(yaw) * rsin(pitch)) >> 12)) >> 8);
+    spark->pos.vz        = SELF(Actor)->pos.z.fixed + radius * rcos(yaw) + TO_COORD(512);
 }
 
 MATCH u8 func_801F85D8(void) {
@@ -520,7 +520,7 @@ MATCH void func_801F8764(FallingSpark* spark) {
     s32 speed;
 
     if (D_801FDFC8 == 0) {
-        if (TASK(Actor)->unk_06 == 0) {
+        if (SELF(Actor)->unk_06 == 0) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 1));
         }
         D_801FDFC8 = 1;
@@ -835,8 +835,8 @@ MATCH void func_801F9E10(u8* effect) {
     cell[5]   = 0;
     radius    = ((rand() % 2) << 16) | ((rand() & BYTE_MASK) << 8);
     angle     = rand() & 0xFC0;
-    cell[1]   = TASK(Actor)->pos.x.fixed + ((radius * rcos(angle)) >> 12);
-    cell[2]   = TASK(Actor)->pos.y.fixed + ((radius * rsin(angle)) >> 12);
+    cell[1]   = SELF(Actor)->pos.x.fixed + ((radius * rcos(angle)) >> 12);
+    cell[2]   = SELF(Actor)->pos.y.fixed + ((radius * rsin(angle)) >> 12);
     cell[7]   = Area_HeightSample(cell[1], cell[2]) << 16;
     cell[3]   = cell[7];
 }
@@ -981,9 +981,9 @@ MATCH void func_801FA38C(void) {
     screen = MEM_PTR(DVECTOR, AREA_WORK + 0x206C);
     vertex = MEM_PTR(s16, AREA_WORK + 0x115C);
     for (i = 0, depth = MEM_PTR(s16, AREA_WORK + 0x1160); i < 482; i++) {
-        pos[0] = TASK(Actor)->pos.x.fixed + (vertex[0] << 5);
-        pos[1] = TASK(Actor)->pos.y.fixed + (depth[-1] << 5);
-        pos[2] = TASK(Actor)->pos.z.fixed + (depth[0] << 13) + TO_COORD(0x200);
+        pos[0] = SELF(Actor)->pos.x.fixed + (vertex[0] << 5);
+        pos[1] = SELF(Actor)->pos.y.fixed + (depth[-1] << 5);
+        pos[2] = SELF(Actor)->pos.z.fixed + (depth[0] << 13) + TO_COORD(0x200);
         Camera_ProjectPoint(pos, screen);
         vertex += 4;
         depth += 4;

@@ -16,7 +16,7 @@ MATCH u8 Area_UpdateShots(void) {
     do {
         if (shot->active != 0) {
             active = 1;
-            work   = TASK(Actor);
+            work   = SELF(Actor);
             shot->pos.x.fixed += shot->velocity.x;
             shot->pos.y.fixed += shot->velocity.y;
             shot->pos.z.fixed += shot->velocity.z;

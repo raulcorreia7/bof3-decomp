@@ -57,15 +57,15 @@ MATCH void Game_BattlePlaceFieldMembers(void) {
         for (i = 0; i < g_PartySize; i++) {
             member      = &g_Game.members[i];
             g_GameState = member;
-            TASK_SET(member);
-            TASK(Actor)->direction    = s_RouteIndexByMode[g_Battle.scroll_dir];
-            TASK(PartyMember)->unk_29 = 6;
+            SELF_SET(member);
+            SELF(Actor)->direction    = s_RouteIndexByMode[g_Battle.scroll_dir];
+            SELF(PartyMember)->unk_29 = 6;
             if (i != 0) {
-                TASK(PartyMember)->unk_07 = 0;
-                TASK(PartyMember)->pad_06 = TASK(PartyMember)->slot - 1;
+                SELF(PartyMember)->unk_07 = 0;
+                SELF(PartyMember)->pad_06 = SELF(PartyMember)->slot - 1;
             }
             func_801C3204();
-            Script_Select(TASK(Actor)->direction);
+            Script_Select(SELF(Actor)->direction);
         }
     } else {
         Scene_SetupParty(g_Game.battle_order);

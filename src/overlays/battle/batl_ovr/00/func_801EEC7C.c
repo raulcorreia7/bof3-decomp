@@ -12,7 +12,7 @@ MATCH void func_801EEC7C(void) {
     count                    = &g_BattlePartyCount;
     g_UiPanelTasks[0].active = 0;
     if (*count != 0) {
-        TASK_SET(&g_Game.members[0]);
+        SELF_SET(&g_Game.members[0]);
         Script_Request(g_Game.members[0].facing + 0x1C);
         g_Game.members[0].unk_24 |= 0x80;
         g_Game.members[0].screen_x.value = D_801EF60C[*count - 1][0][0];
@@ -20,7 +20,7 @@ MATCH void func_801EEC7C(void) {
         g_Game.members[0].unk_29         = 1;
         GFX_PaletteFreeFadeTarget(&g_Game.members[0]);
         if (*count >= 2) {
-            TASK_SET(&g_Game.members[1]);
+            SELF_SET(&g_Game.members[1]);
             Script_Request(g_Game.members[1].facing + 0x1C);
             g_Game.members[1].unk_24 |= 0x80;
             g_Game.members[1].screen_x.value = D_801EF60C[*count - 1][1][0];
@@ -28,7 +28,7 @@ MATCH void func_801EEC7C(void) {
             g_Game.members[1].unk_29         = 1;
             GFX_PaletteFreeFadeTarget(&g_Game.members[1]);
             if (*count == 3) {
-                TASK_SET(&g_Game.members[2]);
+                SELF_SET(&g_Game.members[2]);
                 Script_Request(g_Game.members[2].facing + 0x1C);
                 g_Game.members[2].unk_24 |= 0x80;
                 g_Game.members[2].screen_x.value = D_801EF60C[*count - 1][2][0];

@@ -11,7 +11,7 @@ MATCH void Actor_SpawnBattleEntry(u8* script) {
         return;
     }
 
-    TASK_SET(&g_Actors[slot]);
+    SELF_SET(&g_Actors[slot]);
     GAME_WORK_AREA_PTR = &g_Actors[slot];
 
     g_ScratchPad.cells.ray.y = ((script[1] << 8) | script[2]);
@@ -19,20 +19,20 @@ MATCH void Actor_SpawnBattleEntry(u8* script) {
     Actor_ResetMotion();
     Area_SceneSelectRecord(g_ScratchPad.cells.ray.y);
 
-    TASK(Actor)->header.flags = ACTOR_FLAG_IN_USE;
+    SELF(Actor)->header.flags = ACTOR_FLAG_IN_USE;
 
-    work                                               = TASK(Actor);
+    work                                               = SELF(Actor);
     g_Actors[g_ScratchPad.cells.halves[0]].walk_dest_x = work->pos.x.fixed = (script[6] << 16) | (script[5] != 0 ? 0x8000 : 0);
 
     g_Actors[g_ScratchPad.cells.halves[0]].walk_dest_y = work->pos.y.fixed = (script[8] << 16) | (script[7] != 0 ? 0x8000 : 0);
 
     g_Actors[g_ScratchPad.cells.halves[0]].unk_88 = 0;
 
-    COORD_INT(TASK(Actor)->pos.z) = Area_HeightSample(work->pos.x.fixed, work->pos.y.fixed);
-    TASK(Actor)->header.mode      = script[9];
-    TASK(Actor)->header.step      = script[0xB];
-    TASK(Actor)->direction        = script[0] & 0xF;
-    TASK(Actor)->unk_06           = script[0] >> 4;
+    COORD_INT(SELF(Actor)->pos.z) = Area_HeightSample(work->pos.x.fixed, work->pos.y.fixed);
+    SELF(Actor)->header.mode      = script[9];
+    SELF(Actor)->header.step      = script[0xB];
+    SELF(Actor)->direction        = script[0] & 0xF;
+    SELF(Actor)->unk_06           = script[0] >> 4;
 
     FIELD(u16, &D_80146914, g_ScratchPad.cells.halves[0] * ACTOR_SIZE) = script[3];
     FIELD(s16, &D_80146916, g_ScratchPad.cells.halves[0] * ACTOR_SIZE) = script[4];
@@ -44,10 +44,10 @@ MATCH void Actor_SpawnBattleEntry(u8* script) {
 
     Actor_SetOptionFlags(script + 0xC);
 
-    TASK(Actor)->tint.bytes.rgb.r = 0;
-    TASK(Actor)->tint.bytes.rgb.b = 0;
-    TASK(Actor)->tint.bytes.rgb.g = 0;
-    TASK(Actor)->tint.bytes.flags = 2;
+    SELF(Actor)->tint.bytes.rgb.r = 0;
+    SELF(Actor)->tint.bytes.rgb.b = 0;
+    SELF(Actor)->tint.bytes.rgb.g = 0;
+    SELF(Actor)->tint.bytes.flags = 2;
 
     Actor_StartFacingScript();
 

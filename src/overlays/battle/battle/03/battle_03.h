@@ -1015,7 +1015,7 @@ static inline void BattleDrainWorkCounter(void) {
         work->scale.x -= 0x2000;
     } else {
         work->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
-        TASK(PartyMember)->header.mode++;
+        SELF(PartyMember)->header.mode++;
     }
 }
 
@@ -1024,13 +1024,13 @@ static inline void BattleAdvanceCoords(u8 (*tail_update)(void)) {
     PartyMember* work;
     u8           timer;
 
-    timer                    = TASK(PartyMember)->timer - 1;
-    TASK(PartyMember)->timer = timer;
+    timer                    = SELF(PartyMember)->timer - 1;
+    SELF(PartyMember)->timer = timer;
     if (timer == 0) {
-        TASK(PartyMember)->timer = 4;
-        TASK(PartyMember)->unk_03 += 1;
+        SELF(PartyMember)->timer = 4;
+        SELF(PartyMember)->unk_03 += 1;
     }
-    work = TASK(PartyMember);
+    work = SELF(PartyMember);
     work->pos.x.fixed += work->unk_0C;
     work->pos.y.fixed += work->unk_10;
     tail_update();

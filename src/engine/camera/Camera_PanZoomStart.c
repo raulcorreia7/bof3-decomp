@@ -6,6 +6,6 @@ MATCH void Camera_PanZoomStart(void) {
     Actor* work;
 
     Camera_PanAngleStart();
-    work     = TASK(Actor);
+    work     = SELF(Actor);
     work->vy = ((work->vx - g_AreaCameraOffsetZ) << 0x10) / work->timer;
 }

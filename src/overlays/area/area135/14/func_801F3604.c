@@ -1,7 +1,7 @@
 #include "area135_14.h"
 
 MATCH void func_801F3604(void) {
-    if (TASK(Actor)->unk_06 != 0) {
+    if (SELF(Actor)->unk_06 != 0) {
         UI_WindowDrawPanelBox(D_801F6210, D_801F6212, D_801F6214, D_801F6216);
         func_801F37C4();
     }

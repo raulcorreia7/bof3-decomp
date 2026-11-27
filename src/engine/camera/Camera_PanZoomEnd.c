@@ -5,7 +5,7 @@
 MATCH void Camera_PanZoomEnd(void) {
     Actor* work;
 
-    work                = TASK(Actor);
+    work                = SELF(Actor);
     g_AreaCameraOffsetZ = work->vx;
     Camera_PanAngleEnd();
 }

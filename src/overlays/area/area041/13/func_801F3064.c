@@ -18,14 +18,14 @@ MATCH void func_801F3064(void) {
     corner1  = quad + 1;
     corner2  = quad + 2;
     corner3  = quad + 3;
-    quad->vx = corner1->vx = TASK(Actor)->pos.x.fixed + 0x10;
-    corner2->vx = corner3->vx = TASK(Actor)->pos.x.fixed + 0x10;
-    quad->vy = corner2->vy = TASK(Actor)->pos.y.fixed + 0x100;
-    corner1->vy = corner3->vy = TASK(Actor)->pos.y.fixed + 0x80;
+    quad->vx = corner1->vx = SELF(Actor)->pos.x.fixed + 0x10;
+    corner2->vx = corner3->vx = SELF(Actor)->pos.x.fixed + 0x10;
+    quad->vy = corner2->vy = SELF(Actor)->pos.y.fixed + 0x100;
+    corner1->vy = corner3->vy = SELF(Actor)->pos.y.fixed + 0x80;
     quad->vz = corner1->vz = -0x160;
     corner2->vz = corner3->vz = -0xE0;
 
     RotTransPers4(quad, corner1, corner2, corner3, (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
     Area_ApplyTileToQuad((0xBD50u << 16) | 0x00F9u, prim, 1);
-    Area_CellAddPrim((TASK(Actor)->pos.x.fixed + AREA_CELL_ORIGIN) << 9, (TASK(Actor)->pos.y.fixed + 0x40C0) << 9, 1, sizeof(POLY_FT4));
+    Area_CellAddPrim((SELF(Actor)->pos.x.fixed + AREA_CELL_ORIGIN) << 9, (SELF(Actor)->pos.y.fixed + 0x40C0) << 9, 1, sizeof(POLY_FT4));
 }

@@ -4,6 +4,6 @@
 /* Runs the dismount rise of the up ladder. */
 MATCH void Party_LadderUpDismount(void) {
     if (Area_ClimbDismountRise() & BYTE_MASK) {
-        TASK(Actor)->unk_04++;
+        SELF(Actor)->unk_04++;
     }
 }

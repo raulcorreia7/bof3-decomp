@@ -5,7 +5,7 @@ MATCH void func_801F301C(void) {
         if (g_GameStateIndex == GAME_REQUEST_IDLE) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0x00));
         }
-        TASK(Actor)->header.step = 2;
+        SELF(Actor)->header.step = 2;
     }
 
     if (abs(g_Game.members[0].pos.x.fixed - TO_COORD_HALF(0x42)) <= COORD_HALF) {
@@ -13,7 +13,7 @@ MATCH void func_801F301C(void) {
             if (g_GameStateIndex == GAME_REQUEST_IDLE) {
                 SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0x00));
             }
-            TASK(Actor)->header.step = 2;
+            SELF(Actor)->header.step = 2;
         }
     }
 

@@ -8,16 +8,16 @@ MATCH void Actor_TossFall(void) {
     s16    counter;
     s32    diff;
 
-    dist    = Area_HeightSample(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed);
-    counter = COORD_INT(TASK(Actor)->pos.z);
-    if ((counter >= dist + 0x80) || (counter < dist) || (TASK(Actor)->header.flags & ACTOR_FLAG_OFFSCREEN)) {
-        work = TASK(Actor);
+    dist    = Area_HeightSample(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed);
+    counter = COORD_INT(SELF(Actor)->pos.z);
+    if ((counter >= dist + 0x80) || (counter < dist) || (SELF(Actor)->header.flags & ACTOR_FLAG_OFFSCREEN)) {
+        work = SELF(Actor);
         work->header.mode++;
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
     }
-    TASK(Actor)->pos.z.fixed += TASK(Actor)->vz;
-    diff            = TASK(Actor)->vz - TASK(Actor)->gravity;
-    TASK(Actor)->vz = diff;
+    SELF(Actor)->pos.z.fixed += SELF(Actor)->vz;
+    diff            = SELF(Actor)->vz - SELF(Actor)->gravity;
+    SELF(Actor)->vz = diff;
     Script_AnimStepLoop();
     Area_SetDrawMode();
 }

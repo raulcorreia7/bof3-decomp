@@ -54,13 +54,13 @@ DEFINITION = re.compile(r"^\w[^;]*\)\s*\{\s*$")
 UNKNOWN_TYPE = re.compile(r"(?:^[ \t]*|[(,][ \t]*)\?(?=[\s*,)])", re.M)
 COMMENT = re.compile(r"\s*/\*.*?\*/\s*$")
 # The work cell at 0x1F800044 holds a pointer to the mode's work record (include/sys/scratchpad.h).
-SPAD_CELL = "g_Task"
+SPAD_CELL = "g_Self"
 SPAD_VIEW_NAME = (
     "g_SpadView"  # the typed twin of the cell that the context declares for m2c
 )
 SPAD_HI = re.compile(r"\(0x1F800044 >> 16\)")
 SPAD_LO = re.compile(r"\(0x1F800044 & 0xFFFF\)")
-SPAD_CAST = re.compile(r"\(\(?(?:volatile\s+)?(\w+)\s*\*\)\s*g_Task\b")
+SPAD_CAST = re.compile(r"\(\(?(?:volatile\s+)?(\w+)\s*\*\)\s*g_Self\b")
 SPAD_TYPES = (  # image prefix -> work record, for a context that never casts the cell
     ("emi/battle/", "PartyMember"),
     ("emi/bmagic/", "PartyMember"),
@@ -127,7 +127,7 @@ def typed_asm(text: str) -> str:
 
 
 def wrap_cell(body: str, name: str, root: Path, func: Func) -> str:
-    """Spell the cell as `((T *)g_Task)` in a body, unless the unit defines a view macro."""
+    """Spell the cell as `((T *)g_Self)` in a body, unless the unit defines a view macro."""
     macro = re.compile(rf"^[ \t]*#[ \t]*define[ \t]+{SPAD_CELL}\b", re.M)
     files = try_body.closure(root, func.src or "", 6, True)
     head, sep, rest = body.partition("MATCH ")

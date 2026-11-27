@@ -41,42 +41,42 @@ MATCH void func_801FB30C(void) {
                 break;
             }
             if (g_PartyFieldOrder[0] == 0) {
-                TASK_SET(&g_Game.members[0]);
-                TASK(Actor)->param.actor_slot = Actor_FindFreeSpawned();
-                if (TASK(Actor)->param.actor_slot != GAME_NONE) {
-                    g_SpawnedActors[TASK(Actor)->param.actor_slot].header.flags = 1;
-                    g_SpawnedActors[TASK(Actor)->param.actor_slot].type         = 6;
-                    g_SpawnedActors[TASK(Actor)->param.actor_slot].unk_06       = 3;
-                    g_SpawnedActors[TASK(Actor)->param.actor_slot].vx           = 0;
-                    g_SpawnedActors[TASK(Actor)->param.actor_slot].selection    = D_801FE3BC[g_PartyFieldOrder[0]];
-                    g_SpawnedActors[TASK(Actor)->param.actor_slot].screen_x     = TASK(Actor)->screen_x;
-                    g_SpawnedActors[TASK(Actor)->param.actor_slot].screen_y     = TASK(Actor)->screen_y;
+                SELF_SET(&g_Game.members[0]);
+                SELF(Actor)->param.actor_slot = Actor_FindFreeSpawned();
+                if (SELF(Actor)->param.actor_slot != GAME_NONE) {
+                    g_SpawnedActors[SELF(Actor)->param.actor_slot].header.flags = 1;
+                    g_SpawnedActors[SELF(Actor)->param.actor_slot].type         = 6;
+                    g_SpawnedActors[SELF(Actor)->param.actor_slot].unk_06       = 3;
+                    g_SpawnedActors[SELF(Actor)->param.actor_slot].vx           = 0;
+                    g_SpawnedActors[SELF(Actor)->param.actor_slot].selection    = D_801FE3BC[g_PartyFieldOrder[0]];
+                    g_SpawnedActors[SELF(Actor)->param.actor_slot].screen_x     = SELF(Actor)->screen_x;
+                    g_SpawnedActors[SELF(Actor)->param.actor_slot].screen_y     = SELF(Actor)->screen_y;
                 }
             }
             if (g_PartyFieldOrder[1] == 0) {
-                TASK_SET(&g_Game.members[1]);
-                TASK(Actor)->param.actor_slot = Actor_FindFreeSpawned();
-                if (TASK(Actor)->param.actor_slot != GAME_NONE) {
-                    g_SpawnedActors[TASK(Actor)->param.actor_slot].header.flags = 1;
-                    g_SpawnedActors[TASK(Actor)->param.actor_slot].type         = 6;
-                    g_SpawnedActors[TASK(Actor)->param.actor_slot].unk_06       = 3;
-                    g_SpawnedActors[TASK(Actor)->param.actor_slot].vx           = 0;
-                    g_SpawnedActors[TASK(Actor)->param.actor_slot].selection    = D_801FE3BC[g_PartyFieldOrder[1]];
-                    g_SpawnedActors[TASK(Actor)->param.actor_slot].screen_x     = TASK(Actor)->screen_x;
-                    g_SpawnedActors[TASK(Actor)->param.actor_slot].screen_y     = TASK(Actor)->screen_y;
+                SELF_SET(&g_Game.members[1]);
+                SELF(Actor)->param.actor_slot = Actor_FindFreeSpawned();
+                if (SELF(Actor)->param.actor_slot != GAME_NONE) {
+                    g_SpawnedActors[SELF(Actor)->param.actor_slot].header.flags = 1;
+                    g_SpawnedActors[SELF(Actor)->param.actor_slot].type         = 6;
+                    g_SpawnedActors[SELF(Actor)->param.actor_slot].unk_06       = 3;
+                    g_SpawnedActors[SELF(Actor)->param.actor_slot].vx           = 0;
+                    g_SpawnedActors[SELF(Actor)->param.actor_slot].selection    = D_801FE3BC[g_PartyFieldOrder[1]];
+                    g_SpawnedActors[SELF(Actor)->param.actor_slot].screen_x     = SELF(Actor)->screen_x;
+                    g_SpawnedActors[SELF(Actor)->param.actor_slot].screen_y     = SELF(Actor)->screen_y;
                 }
             }
             if (g_PartyFieldOrder[2] == 0) {
-                TASK_SET(&g_Game.members[2]);
-                TASK(Actor)->param.actor_slot = Actor_FindFreeSpawned();
-                if (TASK(Actor)->param.actor_slot != GAME_NONE) {
-                    g_SpawnedActors[TASK(Actor)->param.actor_slot].header.flags = 1;
-                    g_SpawnedActors[TASK(Actor)->param.actor_slot].type         = 6;
-                    g_SpawnedActors[TASK(Actor)->param.actor_slot].unk_06       = 3;
-                    g_SpawnedActors[TASK(Actor)->param.actor_slot].vx           = 0;
-                    g_SpawnedActors[TASK(Actor)->param.actor_slot].selection    = D_801FE3BC[g_PartyFieldOrder[2]];
-                    g_SpawnedActors[TASK(Actor)->param.actor_slot].screen_x     = TASK(Actor)->screen_x;
-                    g_SpawnedActors[TASK(Actor)->param.actor_slot].screen_y     = TASK(Actor)->screen_y;
+                SELF_SET(&g_Game.members[2]);
+                SELF(Actor)->param.actor_slot = Actor_FindFreeSpawned();
+                if (SELF(Actor)->param.actor_slot != GAME_NONE) {
+                    g_SpawnedActors[SELF(Actor)->param.actor_slot].header.flags = 1;
+                    g_SpawnedActors[SELF(Actor)->param.actor_slot].type         = 6;
+                    g_SpawnedActors[SELF(Actor)->param.actor_slot].unk_06       = 3;
+                    g_SpawnedActors[SELF(Actor)->param.actor_slot].vx           = 0;
+                    g_SpawnedActors[SELF(Actor)->param.actor_slot].selection    = D_801FE3BC[g_PartyFieldOrder[2]];
+                    g_SpawnedActors[SELF(Actor)->param.actor_slot].screen_x     = SELF(Actor)->screen_x;
+                    g_SpawnedActors[SELF(Actor)->param.actor_slot].screen_y     = SELF(Actor)->screen_y;
                 }
             }
             g_ScenarioState.step = 5;

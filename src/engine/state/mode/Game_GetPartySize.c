@@ -20,7 +20,7 @@ MATCH s8 Game_GetPartySize(s32 pos_x, s32 pos_y, s32 range_mode) {
         off = 0;
         do {
             ptr = (u8*)g_Game.members + off;
-            if (((void*)ptr != (void*)g_Task) && (((u8*)g_Game.members)[off] != 0)) {
+            if (((void*)ptr != (void*)g_Self) && (((u8*)g_Game.members)[off] != 0)) {
                 a1v = pos_y;
                 if ((Actor_IsInRange(pos_x, a1v, v, range_mode, (Actor*)ptr) & BYTE_MASK) != 0) {
                     return index;

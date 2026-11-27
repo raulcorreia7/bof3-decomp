@@ -14,9 +14,9 @@ CHAR_DEFINE_PROBE_FACING_BLOCKED(func_801D02A0);
 #include "overlays/plchar/shared/PlChar_ProbeFacingClearance.h"
 
 MATCH void func_801D05A8(void) {
-    D_801D0690[TASK(Actor)->unk_2C]();
+    D_801D0690[SELF(Actor)->unk_2C]();
 }
 
 MATCH void func_801D05EC(void) {
-    D_801D069C[TASK(Actor)->unk_2C]();
+    D_801D069C[SELF(Actor)->unk_2C]();
 }

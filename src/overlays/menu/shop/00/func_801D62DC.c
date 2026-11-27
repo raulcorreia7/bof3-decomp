@@ -2,7 +2,7 @@
 #include "area/map.h"
 
 /* UI-owner row field behind the scratchpad row pointer. */
-#define SPAD_ROW(type, offset) FIELD(type, g_Task, offset)
+#define SPAD_ROW(type, offset) FIELD(type, g_Self, offset)
 
 MATCH void func_801D62DC(void) {
     s32 offset;
@@ -41,13 +41,13 @@ MATCH void func_801D62DC(void) {
         if (g_Game.party_size != 0) {
             base = selection * 0x30;
             do {
-                TASK_SET(((u8*)g_Game.members + i * BATTLE_PARTY_STRIDE));
+                SELF_SET(((u8*)g_Game.members + i * BATTLE_PARTY_STRIDE));
                 Party_MemberLoadSprite(g_Game.members[i].chr.character_id, i);
-                Script_Select(TASK(Actor)->direction);
+                Script_Select(SELF(Actor)->direction);
                 offset                      = i * 0x10 + base;
-                TASK(ShopSelection)->unk_34 = FIELD(s32, &D_801E537C, offset);
-                TASK(ShopSelection)->unk_38 = FIELD(s32, &D_801E5380, offset);
-                TASK(ShopSelection)->unk_3C = FIELD(s32, &D_801E5384, offset);
+                SELF(ShopSelection)->unk_34 = FIELD(s32, &D_801E537C, offset);
+                SELF(ShopSelection)->unk_38 = FIELD(s32, &D_801E5380, offset);
+                SELF(ShopSelection)->unk_3C = FIELD(s32, &D_801E5384, offset);
                 SPAD_ROW(u8, 0x1u)          = 0;
                 SPAD_ROW(u8, 0x2u)          = 0;
                 SPAD_ROW(u8, 0x3u)          = 0;

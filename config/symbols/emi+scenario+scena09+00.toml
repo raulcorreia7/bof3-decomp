@@ -11,7 +11,7 @@ jtbl_801F702C = { addr = 0x801F702C, type = "Callback", size = 0x3C, source = "T
 jtbl_801F706C = { addr = 0x801F706C, type = "Callback", source = "The switch table of func_801FAE0C: the jump targets of its jr dispatch." }
 jtbl_801F72CC = { addr = 0x801F72CC, type = "Callback", source = "The switch table of func_801FBD6C: the jump targets of its jr dispatch." }
 Scene_DispatchEntity = { addr = 0x801F735C, type = "func", source = "dispatches a scene entity by its callback index" }
-func_801F7364 = { addr = 0x801F7364, alias = true, source = "Scene_DispatchEntity+0x8, after its g_Task load; the start the split used before the function was moved back to that load" }
+func_801F7364 = { addr = 0x801F7364, alias = true, source = "Scene_DispatchEntity+0x8, after its g_Self load; the start the split used before the function was moved back to that load" }
 Scene_ClearWorkRows = { addr = 0x801F7574, type = "func", source = "clears 32 work rows at 0x800E5000 plus the task slot offset, zeroing each row header" }
 Scene_DispatchActor = { addr = 0x801FC5E4, type = "func", source = "dispatches a scenario actor to its callback handler" }
 Scene_JoinAdultNinaWithGarr = { addr = 0x801FDCF4, type = "func", source = "loads RyuAdult/NinaAdult/Garr archives, builds field battlers, joins adult Nina and reloads palettes (scena09)" }

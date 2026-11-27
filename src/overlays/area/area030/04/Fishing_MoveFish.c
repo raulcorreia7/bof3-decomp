@@ -7,9 +7,9 @@
 MATCH void Fishing_MoveFish(void) {
     FishingState* work;
 
-    if (TASK(Actor)->timer != 0) {
-        TASK(Actor)->timer = (u8)(TASK(Actor)->timer - 1u);
-        work               = TASK(FishingState);
+    if (SELF(Actor)->timer != 0) {
+        SELF(Actor)->timer = (u8)(SELF(Actor)->timer - 1u);
+        work               = SELF(FishingState);
         work->motion.unk_34 += work->pos_x;
         work->y_38.pos_y += work->cursor_10;
         work->bounce.half.key = (u16)(work->bounce.half.key + work->bounce_speed);

@@ -2,6 +2,6 @@
 
 MATCH void Boss_EndBattle3(void) {
     BOSS008_END_BATTLE_BEGIN(2);
-    TASK(PartyMember)->unk_2A = 1;
+    SELF(PartyMember)->unk_2A = 1;
     BOSS008_END_BATTLE_FINISH();
 }

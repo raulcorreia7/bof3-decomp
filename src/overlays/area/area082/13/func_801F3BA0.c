@@ -9,7 +9,7 @@ MATCH void func_801F3BA0(void) {
         return;
     }
     SYS_SetFlag(g_Scenario2Flags + 0x40, 4);
-    task               = TASK(Actor);
+    task               = SELF(Actor);
     vx                 = task->vx;
     vy                 = task->vy;
     task->pos.z.fixed  = 0x3A0;
@@ -21,8 +21,8 @@ MATCH void func_801F3BA0(void) {
     task->vy           = 0;
     task->vx           = 0;
     task->param.unk_0B = 2;
-    TASK(Actor)->timer = 0;
+    SELF(Actor)->timer = 0;
     SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 4));
-    TASK(Actor)->header.step++;
+    SELF(Actor)->header.step++;
     func_801F4430();
 }

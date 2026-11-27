@@ -10,7 +10,7 @@
 /* The statements of Effect_TickOnTimerZero; each member declares work and
  * passes the amount the effect timer drops per tick. */
 #define BMAGIC_TICK_ON_TIMER_ZERO(step)                           \
-    work         = g_Task;                                        \
+    work         = g_Self;                                        \
     work->unk_09 = work->unk_09 - (step);                         \
     if (work->unk_09 == 0) {                                      \
         work               = (PartyMember*)g_BattleEffectBattler; \

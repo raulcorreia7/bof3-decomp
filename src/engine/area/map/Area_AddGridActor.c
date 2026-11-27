@@ -36,21 +36,21 @@ NON_MATCHING void Area_AddGridActor(void) {
     }
     key = row + col;
 
-    zero  = (COORD_FRAC(TASK(Actor)->pos.x) == 0);
-    table = &g_SpriteCellRotations[TASK(Actor)->unk_2B * 3];
-    if (COORD_FRAC(TASK(Actor)->pos.y) == 0) {
+    zero  = (COORD_FRAC(SELF(Actor)->pos.x) == 0);
+    table = &g_SpriteCellRotations[SELF(Actor)->unk_2B * 3];
+    if (COORD_FRAC(SELF(Actor)->pos.y) == 0) {
         ptr = table + 1 + zero;
     } else {
         ptr = table + zero;
     }
-    if (COORD_FRAC(TASK(Actor)->pos.y) != 0) {
+    if (COORD_FRAC(SELF(Actor)->pos.y) != 0) {
         key += *ptr + 1;
     } else {
         key += *ptr;
     }
     work->unk_32 = key;
 
-    task = TASK(Actor);
+    task = SELF(Actor);
     if ((u16)task->unk_32 >= 0x37) {
         task->header.flags |= ACTOR_FLAG_OFFSCREEN;
         return;
@@ -69,17 +69,17 @@ NON_MATCHING void Area_AddGridActor(void) {
     task->unk_32 = sort;
     Actor_ReadValue();
 
-    setVector(&vec, (TASK(Actor)->pos.x.fixed >> 9) - 0x4000, (TASK(Actor)->pos.y.fixed >> 9) - 0x4000, -COORD_INT(TASK(Actor)->pos.z) / 2);
+    setVector(&vec, (SELF(Actor)->pos.x.fixed >> 9) - 0x4000, (SELF(Actor)->pos.y.fixed >> 9) - 0x4000, -COORD_INT(SELF(Actor)->pos.z) / 2);
     rot = RotTransPers(&vec, (s32*)&sxy, &p, &flag);
 
-    TASK(Actor)->unk_60   = rot;
-    TASK(Actor)->screen_x = (u16)sxy.vx;
-    TASK(Actor)->screen_y = (u16)sxy.vy;
+    SELF(Actor)->unk_60   = rot;
+    SELF(Actor)->screen_x = (u16)sxy.vx;
+    SELF(Actor)->screen_y = (u16)sxy.vy;
     if ((u8)g_AreaGridActorCount < 0x28) {
-        g_AreaGridActors[(u8)g_AreaGridActorCount] = (s32)g_Task;
+        g_AreaGridActors[(u8)g_AreaGridActorCount] = (s32)g_Self;
         g_AreaGridActorCount++;
-        if (TASK(Actor)->header.flags & ACTOR_FLAG_SELECTION_EFFECT) {
-            func_80161454((u32)g_Task);
+        if (SELF(Actor)->header.flags & ACTOR_FLAG_SELECTION_EFFECT) {
+            func_80161454((u32)g_Self);
         }
     }
 }

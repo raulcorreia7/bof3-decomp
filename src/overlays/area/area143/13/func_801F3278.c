@@ -6,9 +6,9 @@ MATCH void func_801F3278(void) {
     s32 top;
     s32 bottom;
 
-    z                        = TASK(Actor)->pos.z.fixed;
+    z                        = SELF(Actor)->pos.z.fixed;
     height                   = z + 8;
-    TASK(Actor)->pos.z.fixed = height;
+    SELF(Actor)->pos.z.fixed = height;
     if (height < 0x100) {
         top = height;
     } else {
@@ -23,7 +23,7 @@ MATCH void func_801F3278(void) {
     func_801F3584(top, bottom, 1);
 
     if (bottom >= 0x100) {
-        TASK(Actor)->pos.z.fixed = 0;
-        TASK(Actor)->header.step++;
+        SELF(Actor)->pos.z.fixed = 0;
+        SELF(Actor)->header.step++;
     }
 }

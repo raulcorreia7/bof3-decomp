@@ -3,12 +3,12 @@
 MATCH void func_801F38F0(void) {
     u8 slot;
 
-    TASK(Actor)->param.actor_slot = Actor_FindFreeSpawned();
-    slot                          = TASK(Actor)->param.actor_slot;
+    SELF(Actor)->param.actor_slot = Actor_FindFreeSpawned();
+    slot                          = SELF(Actor)->param.actor_slot;
     if (slot != GAME_NONE) {
         g_SpawnedActors[slot].header.flags                  = 1;
-        g_SpawnedActors[TASK(Actor)->param.actor_slot].type = 0x47;
-        g_SpawnedActors[TASK(Actor)->param.actor_slot].link = 1;
+        g_SpawnedActors[SELF(Actor)->param.actor_slot].type = 0x47;
+        g_SpawnedActors[SELF(Actor)->param.actor_slot].link = 1;
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0x00));
         return;
     }

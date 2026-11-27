@@ -8,17 +8,17 @@ MATCH void func_801F400C(void) {
     s32       size[2];
     s32       i;
 
-    if (TASK(Actor)->header.step == 0) {
+    if (SELF(Actor)->header.step == 0) {
         return;
     }
-    shade[0] = (0x80 - abs(0x80 - TASK(Actor)->header.step)) >> 1;
-    if (abs(0x80 - TASK(Actor)->header.step) > 0x40) {
-        shade[1] = 0x80 - abs(0x80 - TASK(Actor)->header.step);
+    shade[0] = (0x80 - abs(0x80 - SELF(Actor)->header.step)) >> 1;
+    if (abs(0x80 - SELF(Actor)->header.step) > 0x40) {
+        shade[1] = 0x80 - abs(0x80 - SELF(Actor)->header.step);
     } else {
-        shade[1] = ((rcos((TASK(Actor)->header.step - 0x40) << 5) >> 7) + 0x60) >> 1;
+        shade[1] = ((rcos((SELF(Actor)->header.step - 0x40) << 5) >> 7) + 0x60) >> 1;
     }
-    size[0] = TASK(Actor)->header.step & 0x3F;
-    size[1] = (TASK(Actor)->header.step * 2) & 0x3F;
+    size[0] = SELF(Actor)->header.step & 0x3F;
+    size[1] = (SELF(Actor)->header.step * 2) & 0x3F;
 
     for (i = 0; i < 2; i++) {
         window          = (RECT*)g_GfxPrimCursor;
@@ -61,5 +61,5 @@ MATCH void func_801F400C(void) {
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 448, 256), window);
         GFX_AddPrim(GFX_LAYER_BATTLE_SCENE, sizeof(DR_MODE));
     }
-    TASK(Actor)->header.step += 4;
+    SELF(Actor)->header.step += 4;
 }

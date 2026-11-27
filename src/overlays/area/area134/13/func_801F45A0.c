@@ -6,12 +6,12 @@ MATCH void func_801F45A0(void) {
     Actor* work;
     s32    sample_y;
 
-    work               = TASK(Actor);
+    work               = SELF(Actor);
     work->vx           = work->pos.x.fixed + TO_COORD(-1);
     sample_y           = work->pos.y.fixed + TO_COORD(-1);
     work->vy           = sample_y;
     work->vz           = Area_HeightSample(work->vx, sample_y) << 0x10;
     work->unk_1C       = 0;
-    TASK(Actor)->timer = 10;
-    TASK(Actor)->header.mode += 1;
+    SELF(Actor)->timer = 10;
+    SELF(Actor)->header.mode += 1;
 }

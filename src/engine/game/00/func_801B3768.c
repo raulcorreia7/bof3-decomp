@@ -57,13 +57,13 @@ MATCH void func_801B3768(void) {
         }
         actor_slot = g_Game.current->status.field.slot;
         if (!(g_Actors[actor_slot].param.unk_0B & 0x1)) {
-            saved_work = TASK(Actor);
-            TASK_SET(&g_Actors[actor_slot]);
+            saved_work = SELF(Actor);
+            SELF_SET(&g_Actors[actor_slot]);
             Script_Select(1U);
-            TASK_SET(saved_work);
+            SELF_SET(saved_work);
         }
     }
-    work              = TASK(Actor);
+    work              = SELF(Actor);
     g_GameStateIndex  = GAME_REQUEST_MESSAGE;
     work->header.step = (work->header.step + 1);
 }

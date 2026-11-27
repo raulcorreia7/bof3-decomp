@@ -30,7 +30,7 @@ MATCH void Battle_ReloadPartySprites(void) {
             PartyMember* work = &g_Game.members[i];
             u16          half = work->unk_58;
 
-            TASK_SET(work);
+            SELF_SET(work);
             Script_Stage(work->unk_4B, (u16)(half - 2u), MEM_PTR(u8, BATTLE_SCRIPT_TABLE), 0x1800);
         }
     }

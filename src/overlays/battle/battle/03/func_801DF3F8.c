@@ -11,12 +11,12 @@ MATCH void func_801DF3F8(void) {
     u8           slot;
 
     {
-        PartyMember* work = TASK(PartyMember);
+        PartyMember* work = SELF(PartyMember);
 
         D_801EB154[work->header.step]();
     }
     {
-        PartyMember* work = TASK(PartyMember);
+        PartyMember* work = SELF(PartyMember);
 
         work->unk_5F = 0;
         work->unk_5E = 0;
@@ -27,11 +27,11 @@ MATCH void func_801DF3F8(void) {
 
         if (g_Game.current->chr.character_id != g_Game.members[g_Battle.unk_0E].chr.character_id) {
             offset       = -0x1E;
-            work         = TASK(PartyMember);
+            work         = SELF(PartyMember);
             work->unk_5F = offset;
         } else {
             offset       = 0x78;
-            work         = TASK(PartyMember);
+            work         = SELF(PartyMember);
             work->unk_5F = offset;
         }
         work->unk_5E = offset;
@@ -42,7 +42,7 @@ MATCH void func_801DF3F8(void) {
 
         if (HAS_STATUS(*battler, STATUS_CONFUSED)) {
             if (battler->u.turn.damage_flags.value & BATTLER_DAMAGE_UNK_11) {
-                PartyMember* work = TASK(PartyMember);
+                PartyMember* work = SELF(PartyMember);
                 s8           level;
 
                 slot                           = work->slot;
@@ -53,7 +53,7 @@ MATCH void func_801DF3F8(void) {
                     goto confuse_flip;
                 }
             } else {
-                PartyMember* work = TASK(PartyMember);
+                PartyMember* work = SELF(PartyMember);
                 s8           level;
 
                 slot                           = work->slot;
@@ -64,7 +64,7 @@ MATCH void func_801DF3F8(void) {
                     g_Game.current->u.turn.damage_flags.value ^= 0x800;
                 }
             }
-            actor = TASK(PartyMember);
+            actor = SELF(PartyMember);
             mode  = actor->facing;
             if ((mode == 1) || (mode == 3)) {
                 actor->pos.x.fixed = g_BattleEffects[actor->slot].pos.x.fixed + (g_BattleEffects[actor->slot].arg.sway << 9);
@@ -74,7 +74,7 @@ MATCH void func_801DF3F8(void) {
             }
         }
     } else if ((g_Battle.flags & BATTLE_STATE_RELOAD_PARTY) && (g_Game.current->u.turn.action_flags.value & BATTLER_ACTION_DRAGON_FORM)) {
-        PartyMember* work = TASK(PartyMember);
+        PartyMember* work = SELF(PartyMember);
 
         s32 x = g_AreaEncounterPlacement.origin.x.fixed;
         s32 y = g_AreaEncounterPlacement.origin.y.fixed;
@@ -82,7 +82,7 @@ MATCH void func_801DF3F8(void) {
         work->pos.x.fixed = x;
         work->pos.y.fixed = y;
     } else {
-        actor              = TASK(PartyMember);
+        actor              = SELF(PartyMember);
         actor->pos.x.fixed = g_BattleEffects[actor->slot].pos.x.fixed;
         y_pos              = g_BattleEffects[actor->slot].pos.y.fixed;
     store_coord_y:

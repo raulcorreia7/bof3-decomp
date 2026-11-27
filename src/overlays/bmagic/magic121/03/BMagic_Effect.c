@@ -6,7 +6,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 MATCH void func_801EEC04(void) {
     Callback handlers[2] = {func_801EEC5C, func_801EEE08};
-    SYS_DISPATCH_TASK(handlers, 1, g_Task);
+    SYS_DISPATCH_TASK(handlers, 1, g_Self);
 }
 
 MATCH void func_801EEC5C(void) {
@@ -17,14 +17,14 @@ MATCH void func_801EEC5C(void) {
     u16*         dst;
     u16*         src;
 
-    TASK(PartyMember)->facing          = g_BattleEffectBattler->facing;
+    SELF(PartyMember)->facing          = g_BattleEffectBattler->facing;
     battler                            = g_BattleEffectBattler;
-    task                               = TASK(PartyMember);
+    task                               = SELF(PartyMember);
     task->pos.x.fixed                  = battler->pos.x.fixed;
     task->pos.y.fixed                  = battler->pos.y.fixed;
     task->pos.z.fixed                  = battler->pos.z.fixed;
     slot                               = Battle_AllocEffect(1, 90) & BYTE_MASK;
-    g_BattleEffects[slot].target.party = TASK(PartyMember);
+    g_BattleEffects[slot].target.party = SELF(PartyMember);
     g_BattleEffects[slot].header.mode  = 0;
     g_BattleEffects[slot].arg.unk_09   = 4;
     /* Copies the first three colour rows of arena palette 26 into the work copy, STP set on rows 0 and 2. */
@@ -48,9 +48,9 @@ MATCH void func_801EEC5C(void) {
     g_AreaPaletteCopy->rows[AREA_PALETTE_BATL_OVR_ROW].colors[32] = 0;
     g_GfxPalettePending                                           = 1;
     SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0));
-    TASK(PartyMember)->param.unk_0B = 0;
-    TASK(PartyMember)->unk_09       = 0;
-    TASK(PartyMember)->header.mode += 1;
+    SELF(PartyMember)->param.unk_0B = 0;
+    SELF(PartyMember)->unk_09       = 0;
+    SELF(PartyMember)->header.mode += 1;
 }
 
 #include "overlays/bmagic/shared/Effect_PlayOnIdleTick.h"
@@ -59,19 +59,19 @@ MATCH void func_801EEC5C(void) {
 #include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void BMagic_UpdateDragonBreath(void) {
-    SYS_DISPATCH_TASK((g_BMagicEffectModes + 1), 2, g_Task);
-    if (TASK(PartyMember)->header.flags != 0 && TASK(PartyMember)->header.step != 0) {
+    SYS_DISPATCH_TASK((g_BMagicEffectModes + 1), 2, g_Self);
+    if (SELF(PartyMember)->header.flags != 0 && SELF(PartyMember)->header.step != 0) {
         if ((g_FrameCount & 0x7) == 0) {
-            TASK(PartyMember)->unk_5D = RANDOM_MASK(1);
-            TASK(PartyMember)->unk_5E = RANDOM_MASK(3);
-            TASK(PartyMember)->unk_5F = RANDOM_MASK(3);
+            SELF(PartyMember)->unk_5D = RANDOM_MASK(1);
+            SELF(PartyMember)->unk_5E = RANDOM_MASK(3);
+            SELF(PartyMember)->unk_5F = RANDOM_MASK(3);
         }
-        func_801F0198(TASK(PartyMember)->unk_5D + 3);
-        func_801F0198(TASK(PartyMember)->unk_5E + 7);
-        func_801F0198(11 - TASK(PartyMember)->unk_5F);
-        func_801F06E8(4 - TASK(PartyMember)->unk_5D);
-        func_801F06E8(TASK(PartyMember)->unk_5F + 8);
-        func_801F06E8(12 - TASK(PartyMember)->unk_5E);
+        func_801F0198(SELF(PartyMember)->unk_5D + 3);
+        func_801F0198(SELF(PartyMember)->unk_5E + 7);
+        func_801F0198(11 - SELF(PartyMember)->unk_5F);
+        func_801F06E8(4 - SELF(PartyMember)->unk_5D);
+        func_801F06E8(SELF(PartyMember)->unk_5F + 8);
+        func_801F06E8(12 - SELF(PartyMember)->unk_5E);
         BMagic_DrawDragonBreath();
     }
 }
@@ -85,36 +85,36 @@ MATCH void func_801EF03C(void) {
     PartyMember* effect;
     u8           timer;
 
-    timer                     = TASK(PartyMember)->unk_09 - 1;
-    TASK(PartyMember)->unk_09 = timer;
+    timer                     = SELF(PartyMember)->unk_09 - 1;
+    SELF(PartyMember)->unk_09 = timer;
     if (!(timer & BYTE_MASK)) {
-        TASK(PartyMember)->facing = g_BattleEffectBattler->facing;
+        SELF(PartyMember)->facing = g_BattleEffectBattler->facing;
         Battle_CenterCamera();
         Battle_ProjectRange();
-        D_1F800008[2] = TASK(PartyMember)->screen_x.value;
-        D_1F800008[3] = TASK(PartyMember)->screen_y.value;
+        D_1F800008[2] = SELF(PartyMember)->screen_x.value;
+        D_1F800008[3] = SELF(PartyMember)->screen_y.value;
         func_800B0118();
         battler           = g_BattleEffectBattler;
-        task              = TASK(PartyMember);
+        task              = SELF(PartyMember);
         task->pos.x.fixed = battler->pos.x.fixed;
         task->pos.y.fixed = battler->pos.y.fixed;
         task->pos.z.fixed = battler->pos.z.fixed;
         Battle_ProjectRange();
-        TASK(PartyMember)->screen_x.value += TASK(PartyMember)->unk_0C;
-        TASK(PartyMember)->screen_y.value += TASK(PartyMember)->unk_10;
-        D_1F800008[0]                   = TASK(PartyMember)->screen_x.value;
-        D_1F800008[1]                   = TASK(PartyMember)->screen_y.value;
-        TASK(PartyMember)->unk_14       = ratan2(D_1F800008[2] - D_1F800008[0], D_1F800008[3] - D_1F800008[1]);
-        TASK(PartyMember)->unk_5D       = RANDOM_MASK(1);
-        TASK(PartyMember)->unk_5E       = RANDOM_MASK(3);
-        TASK(PartyMember)->unk_5F       = RANDOM_MASK(3);
-        effect                          = TASK(PartyMember);
+        SELF(PartyMember)->screen_x.value += SELF(PartyMember)->unk_0C;
+        SELF(PartyMember)->screen_y.value += SELF(PartyMember)->unk_10;
+        D_1F800008[0]                   = SELF(PartyMember)->screen_x.value;
+        D_1F800008[1]                   = SELF(PartyMember)->screen_y.value;
+        SELF(PartyMember)->unk_14       = ratan2(D_1F800008[2] - D_1F800008[0], D_1F800008[3] - D_1F800008[1]);
+        SELF(PartyMember)->unk_5D       = RANDOM_MASK(1);
+        SELF(PartyMember)->unk_5E       = RANDOM_MASK(3);
+        SELF(PartyMember)->unk_5F       = RANDOM_MASK(3);
+        effect                          = SELF(PartyMember);
         effect->unk_04                  = 0;
         effect->unk_0C                  = 0;
-        TASK(PartyMember)->param.unk_0B = 0;
-        TASK(PartyMember)->unk_09       = 16;
-        TASK(PartyMember)->timer        = 0;
-        TASK(PartyMember)->header.step += 1;
+        SELF(PartyMember)->param.unk_0B = 0;
+        SELF(PartyMember)->unk_09       = 16;
+        SELF(PartyMember)->timer        = 0;
+        SELF(PartyMember)->header.step += 1;
     }
 }
 
@@ -127,11 +127,11 @@ MATCH void func_801EF218(void) {
 MATCH void func_801EF268(void) {
     u8 timer;
 
-    timer                           = TASK(PartyMember)->param.unk_0B + 1;
-    TASK(PartyMember)->param.unk_0B = timer;
+    timer                           = SELF(PartyMember)->param.unk_0B + 1;
+    SELF(PartyMember)->param.unk_0B = timer;
     if (timer == 8) {
         Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10);
-        TASK(PartyMember)->header.step = TASK(PartyMember)->header.step + 1;
+        SELF(PartyMember)->header.step = SELF(PartyMember)->header.step + 1;
     }
 }
 
@@ -140,7 +140,7 @@ MATCH void func_801EF268(void) {
 MATCH void func_801EF324(void) {
     PartyMember* work;
 
-    work = TASK(PartyMember);
+    work = SELF(PartyMember);
     if (++work->unk_0C == 0x2E) {
         work->header.step++;
     }
@@ -149,10 +149,10 @@ MATCH void func_801EF324(void) {
 MATCH void func_801EF35C(void) {
     u8 timer;
 
-    timer                     = TASK(PartyMember)->unk_04 - 2;
-    TASK(PartyMember)->unk_04 = timer;
+    timer                     = SELF(PartyMember)->unk_04 - 2;
+    SELF(PartyMember)->unk_04 = timer;
     if (timer == 0) {
-        TASK(PartyMember)->header.step = TASK(PartyMember)->header.step + 1;
+        SELF(PartyMember)->header.step = SELF(PartyMember)->header.step + 1;
     }
 }
 
@@ -160,12 +160,12 @@ MATCH void func_801EF3A8(void) {
     u8 ticks;
     u8 count;
 
-    ticks = TASK(PartyMember)->param.unk_0B;
+    ticks = SELF(PartyMember)->param.unk_0B;
     if (ticks != 0) {
-        TASK(PartyMember)->param.unk_0B = ticks - 1;
+        SELF(PartyMember)->param.unk_0B = ticks - 1;
     }
-    count                     = TASK(PartyMember)->unk_09 - 1;
-    TASK(PartyMember)->unk_09 = count;
+    count                     = SELF(PartyMember)->unk_09 - 1;
+    SELF(PartyMember)->unk_09 = count;
     if (!(count & BYTE_MASK)) {
         g_BattleEffectBattler->param.unk_0B = 0xFF;
         Effect_Reset();
@@ -186,23 +186,23 @@ MATCH void BMagic_DrawDragonBreath(void) {
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_OVER_BATTLERS, tpage);
     jitter                       = 0;
-    g_ScratchPad.cells.halves[4] = TASK(PartyMember)->screen_x.value;
-    g_ScratchPad.cells.halves[5] = TASK(PartyMember)->screen_y.value;
-    for (i = 1; i < TASK(PartyMember)->timer + 1; i++) {
+    g_ScratchPad.cells.halves[4] = SELF(PartyMember)->screen_x.value;
+    g_ScratchPad.cells.halves[5] = SELF(PartyMember)->screen_y.value;
+    for (i = 1; i < SELF(PartyMember)->timer + 1; i++) {
         /* The old spine point becomes the near end of this step's ribbon. */
         g_ScratchPad.cells.halves[6] = g_ScratchPad.cells.halves[4];
         g_ScratchPad.cells.halves[7] = g_ScratchPad.cells.halves[5];
-        g_ScratchPad.cells.halves[4] += FIXED_MUL(rsin(TASK(PartyMember)->unk_14), 12);
-        g_ScratchPad.cells.halves[5] += FIXED_MUL(rcos(TASK(PartyMember)->unk_14), 12);
+        g_ScratchPad.cells.halves[4] += FIXED_MUL(rsin(SELF(PartyMember)->unk_14), 12);
+        g_ScratchPad.cells.halves[5] += FIXED_MUL(rcos(SELF(PartyMember)->unk_14), 12);
         /* The ribbon keeps its last thickness once the step index reaches four. */
-        g_ScratchPad.cells.halves[0] = g_ScratchPad.cells.halves[1] = TASK(PartyMember)->param.unk_0B * 4;
+        g_ScratchPad.cells.halves[0] = g_ScratchPad.cells.halves[1] = SELF(PartyMember)->param.unk_0B * 4;
         if (i - 1 < 4) {
-            g_ScratchPad.cells.halves[0] = TASK(PartyMember)->param.unk_0B * (i - 1);
+            g_ScratchPad.cells.halves[0] = SELF(PartyMember)->param.unk_0B * (i - 1);
         }
         if (i < 4) {
-            g_ScratchPad.cells.halves[1] = TASK(PartyMember)->param.unk_0B * i;
+            g_ScratchPad.cells.halves[1] = SELF(PartyMember)->param.unk_0B * i;
         }
-        g_ScratchPad.cells.halves[3] = TASK(PartyMember)->unk_09 * 15;
+        g_ScratchPad.cells.halves[3] = SELF(PartyMember)->unk_09 * 15;
         prev_jitter                  = jitter;
         jitter                       = rand() & 3;
         prim                         = (POLY_G4*)g_GfxPrimCursor;
@@ -211,7 +211,7 @@ MATCH void BMagic_DrawDragonBreath(void) {
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
         /* Lit lip: the near side swings off both spine points at heading + 0x400. */
-        g_ScratchPad.cells.halves[2] = (TASK(PartyMember)->unk_14 + 0x400) & ANGLE_MASK;
+        g_ScratchPad.cells.halves[2] = (SELF(PartyMember)->unk_14 + 0x400) & ANGLE_MASK;
         prim->x1                     = g_ScratchPad.cells.halves[6] + FIXED_MUL(rsin(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[0]);
         prim->y1                     = g_ScratchPad.cells.halves[7] + FIXED_MUL(rcos(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[0]);
         prim->x3                     = g_ScratchPad.cells.halves[4] + FIXED_MUL(rsin(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[1]);
@@ -229,7 +229,7 @@ MATCH void BMagic_DrawDragonBreath(void) {
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
-        g_ScratchPad.cells.halves[2] = (TASK(PartyMember)->unk_14 - 0x400) & ANGLE_MASK;
+        g_ScratchPad.cells.halves[2] = (SELF(PartyMember)->unk_14 - 0x400) & ANGLE_MASK;
         prim->x0                     = g_ScratchPad.cells.halves[6] + FIXED_MUL(rsin(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[0]);
         prim->y0                     = g_ScratchPad.cells.halves[7] + FIXED_MUL(rcos(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[0]);
         prim->x2                     = g_ScratchPad.cells.halves[4] + FIXED_MUL(rsin(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[1]);
@@ -247,13 +247,13 @@ MATCH void BMagic_DrawDragonBreath(void) {
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
-        g_ScratchPad.cells.halves[2] = (TASK(PartyMember)->unk_14 + 0x400) & ANGLE_MASK;
-        g_ScratchPad.cells.halves[0] = g_ScratchPad.cells.halves[1] = (TASK(PartyMember)->param.unk_0B + 4) * 4;
+        g_ScratchPad.cells.halves[2] = (SELF(PartyMember)->unk_14 + 0x400) & ANGLE_MASK;
+        g_ScratchPad.cells.halves[0] = g_ScratchPad.cells.halves[1] = (SELF(PartyMember)->param.unk_0B + 4) * 4;
         if (i - 1 < 4) {
-            g_ScratchPad.cells.halves[0] = (TASK(PartyMember)->param.unk_0B + 4) * (i - 1);
+            g_ScratchPad.cells.halves[0] = (SELF(PartyMember)->param.unk_0B + 4) * (i - 1);
         }
         if (i < 4) {
-            g_ScratchPad.cells.halves[1] = (TASK(PartyMember)->param.unk_0B + 4) * i;
+            g_ScratchPad.cells.halves[1] = (SELF(PartyMember)->param.unk_0B + 4) * i;
         }
         g_ScratchPad.cells.halves[0] += prev_jitter;
         g_ScratchPad.cells.halves[1] += jitter;
@@ -261,12 +261,12 @@ MATCH void BMagic_DrawDragonBreath(void) {
         prim->y1                     = g_ScratchPad.cells.halves[7] + FIXED_MUL(rcos(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[0]);
         prim->x3                     = g_ScratchPad.cells.halves[4] + FIXED_MUL(rsin(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[1]);
         prim->y3                     = g_ScratchPad.cells.halves[5] + FIXED_MUL(rcos(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[1]);
-        g_ScratchPad.cells.halves[0] = g_ScratchPad.cells.halves[1] = TASK(PartyMember)->param.unk_0B * 4;
+        g_ScratchPad.cells.halves[0] = g_ScratchPad.cells.halves[1] = SELF(PartyMember)->param.unk_0B * 4;
         if (i - 1 < 4) {
-            g_ScratchPad.cells.halves[0] = TASK(PartyMember)->param.unk_0B * (i - 1);
+            g_ScratchPad.cells.halves[0] = SELF(PartyMember)->param.unk_0B * (i - 1);
         }
         if (i < 4) {
-            g_ScratchPad.cells.halves[1] = TASK(PartyMember)->param.unk_0B * i;
+            g_ScratchPad.cells.halves[1] = SELF(PartyMember)->param.unk_0B * i;
         }
         g_ScratchPad.cells.halves[0] += prev_jitter;
         g_ScratchPad.cells.halves[1] += jitter;
@@ -283,13 +283,13 @@ MATCH void BMagic_DrawDragonBreath(void) {
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
-        g_ScratchPad.cells.halves[2] = (TASK(PartyMember)->unk_14 - 0x400) & ANGLE_MASK;
-        g_ScratchPad.cells.halves[0] = g_ScratchPad.cells.halves[1] = (TASK(PartyMember)->param.unk_0B + 4) * 4;
+        g_ScratchPad.cells.halves[2] = (SELF(PartyMember)->unk_14 - 0x400) & ANGLE_MASK;
+        g_ScratchPad.cells.halves[0] = g_ScratchPad.cells.halves[1] = (SELF(PartyMember)->param.unk_0B + 4) * 4;
         if (i - 1 < 4) {
-            g_ScratchPad.cells.halves[0] = (TASK(PartyMember)->param.unk_0B + 4) * (i - 1);
+            g_ScratchPad.cells.halves[0] = (SELF(PartyMember)->param.unk_0B + 4) * (i - 1);
         }
         if (i < 4) {
-            g_ScratchPad.cells.halves[1] = (TASK(PartyMember)->param.unk_0B + 4) * i;
+            g_ScratchPad.cells.halves[1] = (SELF(PartyMember)->param.unk_0B + 4) * i;
         }
         g_ScratchPad.cells.halves[0] += prev_jitter;
         g_ScratchPad.cells.halves[1] += jitter;
@@ -297,12 +297,12 @@ MATCH void BMagic_DrawDragonBreath(void) {
         prim->y0                     = g_ScratchPad.cells.halves[7] + FIXED_MUL(rcos(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[0]);
         prim->x2                     = g_ScratchPad.cells.halves[4] + FIXED_MUL(rsin(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[1]);
         prim->y2                     = g_ScratchPad.cells.halves[5] + FIXED_MUL(rcos(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[1]);
-        g_ScratchPad.cells.halves[0] = g_ScratchPad.cells.halves[1] = TASK(PartyMember)->param.unk_0B * 4;
+        g_ScratchPad.cells.halves[0] = g_ScratchPad.cells.halves[1] = SELF(PartyMember)->param.unk_0B * 4;
         if (i - 1 < 4) {
-            g_ScratchPad.cells.halves[0] = TASK(PartyMember)->param.unk_0B * (i - 1);
+            g_ScratchPad.cells.halves[0] = SELF(PartyMember)->param.unk_0B * (i - 1);
         }
         if (i < 4) {
-            g_ScratchPad.cells.halves[1] = TASK(PartyMember)->param.unk_0B * i;
+            g_ScratchPad.cells.halves[1] = SELF(PartyMember)->param.unk_0B * i;
         }
         g_ScratchPad.cells.halves[0] += prev_jitter;
         g_ScratchPad.cells.halves[1] += jitter;

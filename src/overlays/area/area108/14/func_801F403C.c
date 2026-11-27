@@ -3,6 +3,6 @@
 MATCH void func_801F403C(void) {
     Actor* actor;
 
-    actor = TASK(Actor);
+    actor = SELF(Actor);
     actor->header.step++;
 }

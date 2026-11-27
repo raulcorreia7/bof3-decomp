@@ -15,35 +15,35 @@ MATCH s8 Actor_MovementInit(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_
         return 0;
     }
     absY               = abs(dir_y);
-    TASK(Actor)->timer = 0;
+    SELF(Actor)->timer = 0;
     span               = absY;
     absX               = abs(dir_x);
     if (absX >= absY) {
         span = absX;
     }
     if (span != 0) {
-        TASK(Actor)->param.unk_0B = span - 1;
+        SELF(Actor)->param.unk_0B = span - 1;
     } else {
-        TASK(Actor)->param.unk_0B = 0;
+        SELF(Actor)->param.unk_0B = 0;
     }
-    TASK(Actor)->unk_0A = 16 / size;
-    TASK(Actor)->vz     = vz_start << 8;
+    SELF(Actor)->unk_0A = 16 / size;
+    SELF(Actor)->vz     = vz_start << 8;
 
     if ((u8)(Actor_GetOwner()) != 2) {
         if (span != 0) {
-            TASK(Actor)->vx = (dir_x << 15) / (TASK(Actor)->unk_0A * span);
-            TASK(Actor)->vy = (dir_y << 15) / (TASK(Actor)->unk_0A * span);
+            SELF(Actor)->vx = (dir_x << 15) / (SELF(Actor)->unk_0A * span);
+            SELF(Actor)->vy = (dir_y << 15) / (SELF(Actor)->unk_0A * span);
         } else {
-            TASK(Actor)->vy = 0;
-            TASK(Actor)->vx = 0;
+            SELF(Actor)->vy = 0;
+            SELF(Actor)->vx = 0;
         }
-        TASK(Actor)->unk_04 = 1;
+        SELF(Actor)->unk_04 = 1;
     } else {
         g_AreaCameraSpeed           = size * 8;
         g_AreaCameraHeightDelta     = 0;
         g_AreaCamera.scroll_x.fixed = g_PartyPos.x.fixed + (dir_x << 15);
         g_AreaCamera.scroll_y.fixed = g_PartyPos.y.fixed + (dir_y << 15);
-        TASK(Actor)->unk_04         = 2;
+        SELF(Actor)->unk_04         = 2;
     }
     return 1;
 }

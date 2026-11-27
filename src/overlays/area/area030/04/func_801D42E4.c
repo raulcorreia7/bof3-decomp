@@ -7,15 +7,15 @@ MATCH void func_801D42E4(void) {
     FishingState* work;
     FishingState* advanced;
 
-    TASK(Actor)->direction    = FACING_UP_LEFT;
-    TASK(Actor)->unk_06       = 0;
-    TASK(Actor)->option_flags = ACTOR_OPT_NO_TARGET;
-    TASK(Actor)->timer        = 4;
-    TASK(Actor)->unk_0A       = 0;
+    SELF(Actor)->direction    = FACING_UP_LEFT;
+    SELF(Actor)->unk_06       = 0;
+    SELF(Actor)->option_flags = ACTOR_OPT_NO_TARGET;
+    SELF(Actor)->timer        = 4;
+    SELF(Actor)->unk_0A       = 0;
 
-    work              = TASK(FishingState);
+    work              = SELF(FishingState);
     work->saved_index = 0;
-    advanced          = TASK(FishingState);
+    advanced          = SELF(FishingState);
 
     work->motion.unk_34 = 0;
     work->y_38.pos_y    = 0;

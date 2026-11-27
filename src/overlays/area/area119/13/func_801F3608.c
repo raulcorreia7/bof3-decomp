@@ -1,7 +1,7 @@
 #include "area119_13.h"
 
 MATCH void func_801F3608(void) {
-    u8  frame = TASK(Actor)->timer;
+    u8  frame = SELF(Actor)->timer;
     s32 level = 0x80;
 
     if (frame < 0x20) {
@@ -14,5 +14,5 @@ MATCH void func_801F3608(void) {
         Actor_Clear();
     }
     func_801F369C(level);
-    TASK(Actor)->timer++;
+    SELF(Actor)->timer++;
 }

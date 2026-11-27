@@ -7,25 +7,25 @@ MATCH void func_801D6CB0(void) {
     u8 steps;
     s8 direction;
 
-    steps = TASK(FishingState)->timer;
+    steps = SELF(FishingState)->timer;
     if (steps == 0) {
-        if (D_801E207C[TASK(FishingState)->step_index].animation_id == -1) {
-            TASK(FishingState)->step_index = D_801E207C[TASK(FishingState)->step_index].next_step;
+        if (D_801E207C[SELF(FishingState)->step_index].animation_id == -1) {
+            SELF(FishingState)->step_index = D_801E207C[SELF(FishingState)->step_index].next_step;
         }
-        Script_Request(D_801E207C[TASK(FishingState)->step_index].animation_id & 0x7F);
-        TASK(FishingState)->timer      = D_801E207C[TASK(FishingState)->step_index].next_step;
-        TASK(FishingState)->step_index = TASK(FishingState)->step_index + 1;
+        Script_Request(D_801E207C[SELF(FishingState)->step_index].animation_id & 0x7F);
+        SELF(FishingState)->timer      = D_801E207C[SELF(FishingState)->step_index].next_step;
+        SELF(FishingState)->step_index = SELF(FishingState)->step_index + 1;
     } else {
-        TASK(FishingState)->timer = steps - 1;
-        if (!(D_801E207C[TASK(FishingState)->step_index - 1].animation_id & 0x80)) {
+        SELF(FishingState)->timer = steps - 1;
+        if (!(D_801E207C[SELF(FishingState)->step_index - 1].animation_id & 0x80)) {
             Script_AnimStepLoop();
         }
     }
-    TASK(FishingState)->pos_x += D_801E207C[TASK(FishingState)->step_index - 1].delta_x;
-    TASK(FishingState)->cursor_10 += D_801E207C[TASK(FishingState)->step_index - 1].delta_y;
-    TASK(FishingState)->cue_index -= D_801E207C[TASK(FishingState)->step_index - 1].delta_x;
+    SELF(FishingState)->pos_x += D_801E207C[SELF(FishingState)->step_index - 1].delta_x;
+    SELF(FishingState)->cursor_10 += D_801E207C[SELF(FishingState)->step_index - 1].delta_y;
+    SELF(FishingState)->cue_index -= D_801E207C[SELF(FishingState)->step_index - 1].delta_x;
     direction = 1;
-    if (D_801E207C[TASK(FishingState)->step_index - 1].delta_y < 0) {
+    if (D_801E207C[SELF(FishingState)->step_index - 1].delta_y < 0) {
         /* FAKE: keeps GCC from turning the flag into sge (nor/srl); 7 pure-C spellings stayed at 96.24%. */
         FAKE_BARRIER();
         direction = 0;

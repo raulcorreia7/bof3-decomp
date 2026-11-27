@@ -6,6 +6,6 @@
 
 /* func_801DA5B4 */
 MATCH void Fishing_CastRun(void) {
-    Callback handler = g_FishingCastSteps[TASK(Actor)->unk_03];
+    Callback handler = g_FishingCastSteps[SELF(Actor)->unk_03];
     handler();
 }

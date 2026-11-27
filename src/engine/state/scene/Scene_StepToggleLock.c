@@ -6,7 +6,7 @@ MATCH void Scene_StepToggleLock(void) {
     Actor* work;
     u8     value;
 
-    work  = TASK(Actor);
+    work  = SELF(Actor);
     value = work->timer;
     if (value == 0) {
         SYS_ClearFlag(g_SceneEventFlags, 28u);

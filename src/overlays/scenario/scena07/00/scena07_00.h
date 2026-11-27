@@ -116,10 +116,10 @@ void                       func_801F9330(Scena07BurstBuffer* buffer);
  * both members matching. */
 static inline void Scene_TurnBurst(s32 step) {
     func_801F9330(D_801FDFC0);
-    if (TASK(Actor)->vx >= 9) {
+    if (SELF(Actor)->vx >= 9) {
         D_801FDFC0->angle += step;
     }
-    if (--TASK(Actor)->vx == 0) {
+    if (--SELF(Actor)->vx == 0) {
         func_80196070();
     }
 }
@@ -129,9 +129,9 @@ void func_801F81D4(FallingSpark* spark);
 /* The position setup func_801F7A30 and func_801F7D6C share: place the actor at the lead member's position and
  * sample the ground there. Every change must keep both members matching. */
 static inline void Scene_PlaceAtLead(void) {
-    TASK(Actor)->pos.x.fixed = g_Game.members[0].pos.x.fixed;
-    TASK(Actor)->pos.y.fixed = g_Game.members[0].pos.y.fixed;
-    TASK(Actor)->pos.z.fixed = Area_HeightSample(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed) << 16;
+    SELF(Actor)->pos.x.fixed = g_Game.members[0].pos.x.fixed;
+    SELF(Actor)->pos.y.fixed = g_Game.members[0].pos.y.fixed;
+    SELF(Actor)->pos.z.fixed = Area_HeightSample(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed) << 16;
 }
 
 void Scene_InitSpark(FallingSpark* spark);
@@ -154,8 +154,8 @@ extern u8 D_801FDFC8;
     Trail_Update(SCENA07_TRAIL);     \
     Trail_Draw(SCENA07_TRAIL);       \
     D_800E4C1E -= 0xC;               \
-    if (--TASK(Actor)->timer == 0) { \
-        TASK(Actor)->header.step++;  \
+    if (--SELF(Actor)->timer == 0) { \
+        SELF(Actor)->header.step++;  \
     }
 
 /* The panel brighten step func_801F724C and func_801F805C share: draw the panel table, brighten it by 6
@@ -164,9 +164,9 @@ extern u8 D_801FDFC8;
     Trail_Update(SCENA07_TRAIL);      \
     Trail_Draw(SCENA07_TRAIL);        \
     D_800E4C1E += 6;                  \
-    if (--TASK(Actor)->timer == 0) {  \
-        TASK(Actor)->timer = 32;      \
-        TASK(Actor)->header.step++;   \
+    if (--SELF(Actor)->timer == 0) {  \
+        SELF(Actor)->timer = 32;      \
+        SELF(Actor)->header.step++;   \
     }
 u8   func_801F85D8(void);
 void func_801F9DA8(void);

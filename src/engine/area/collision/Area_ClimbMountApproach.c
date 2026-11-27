@@ -9,13 +9,13 @@ MATCH s32 Area_ClimbMountApproach(void) {
     u8     slot;
     s32    ended;
 
-    actor  = TASK(Actor);
+    actor  = SELF(Actor);
     frames = actor->timer;
     ended  = 0;
     if (frames != 0) {
         actor->timer = (frames - 1);
         Actor_Move();
-        actor_b = TASK(Actor);
+        actor_b = SELF(Actor);
         if (actor_b->timer == actor_b->unk_0A) {
             slot                                            = actor_b->unk_05;
             g_GfxPalettePending                             = 1;
@@ -24,7 +24,7 @@ MATCH s32 Area_ClimbMountApproach(void) {
     } else {
         ended = 1;
         Script_Request(actor->direction);
-        TASK(Actor)->unk_0A = 4U;
+        SELF(Actor)->unk_0A = 4U;
     }
     Script_AnimStepLoop();
     return ended;

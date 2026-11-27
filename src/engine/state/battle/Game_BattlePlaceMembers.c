@@ -19,7 +19,7 @@ MATCH void Game_BattlePlaceMembers(void) {
             i           = 0;
             rec         = (u8*)g_Game.members + rec_off;
             g_GameState = rec;
-            TASK_SET(rec);
+            SELF_SET(rec);
             key = rec[0x79];
             while (1) {
                 if (g_PartyFieldOrder[i & BYTE_MASK] == key)
@@ -28,9 +28,9 @@ MATCH void Game_BattlePlaceMembers(void) {
                 if ((i & BYTE_MASK) >= 3U)
                     break;
             }
-            TASK(Actor)->pos.x.fixed = *(s32*)((u8*)g_AreaEncounterPlacement.party + tab);
-            val                      = Area_HeightRead(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed = *(s32*)((u8*)&g_AreaEncounterPlacement.party[0].y + tab));
-            work                     = TASK(Actor);
+            SELF(Actor)->pos.x.fixed = *(s32*)((u8*)g_AreaEncounterPlacement.party + tab);
+            val                      = Area_HeightRead(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed = *(s32*)((u8*)&g_AreaEncounterPlacement.party[0].y + tab));
+            work                     = SELF(Actor);
             work->param.unk_0B       = 0;
             COORD_INT(work->pos.z)   = val;
             if ((g_Characters[g_GameState->character_index].status & STATUS_KO) != 0)

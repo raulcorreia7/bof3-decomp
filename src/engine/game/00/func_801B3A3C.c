@@ -15,10 +15,10 @@ MATCH void func_801B3A3C(void) {
     if (g_UiMessageRequest == 3u) {
         off = g_Game.current->status.field.slot * ACTOR_SIZE;
         if (!(FIELD(u8, D_80146893, off) & 0x1u)) {
-            saved = TASK(Actor);
-            TASK_SET(((u8*)g_Actors + off));
+            saved = SELF(Actor);
+            SELF_SET(((u8*)g_Actors + off));
             Script_Select(0u);
-            TASK_SET(saved);
+            SELF_SET(saved);
         }
     } else {
         off = g_Game.current->status.field.slot * ACTOR_SIZE;
@@ -29,11 +29,11 @@ MATCH void func_801B3A3C(void) {
         }
     }
     if (g_GameRequestFlags & AREA_LOAD_FLAG_NO_ACTOR_SCRIPT) {
-        work              = TASK(Actor);
+        work              = SELF(Actor);
         work->header.mode = 0x0Cu;
     } else {
-        Script_Request(TASK(Actor)->direction);
-        TASK(Actor)->header.mode = 1u;
+        Script_Request(SELF(Actor)->direction);
+        SELF(Actor)->header.mode = 1u;
     }
     ACTOR_CLEAR_STEP();
 }

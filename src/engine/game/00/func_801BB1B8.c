@@ -17,7 +17,7 @@ MATCH bool func_801BB1B8(void) {
             Actor_SnapFacing(4, 6, 5);
             return 0;
         }
-        TASK(Actor)->direction = (TASK(Actor)->direction + 1) & 0x7;
+        SELF(Actor)->direction = (SELF(Actor)->direction + 1) & 0x7;
     }
     return 0;
 }

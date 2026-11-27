@@ -4,7 +4,7 @@ MATCH void func_801F3C78(void) {
     Actor* work;
     u8     mode;
 
-    work               = TASK(Actor);
+    work               = SELF(Actor);
     g_PartyPos.x.fixed = work->pos.x.fixed;
     g_PartyPos.y.fixed = work->pos.y.fixed;
     g_PartyPos.z.fixed = work->pos.z.fixed;

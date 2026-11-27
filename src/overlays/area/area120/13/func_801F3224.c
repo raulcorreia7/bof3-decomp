@@ -10,5 +10,5 @@ MATCH void func_801F3224(void) {
         row += 12;
     }
     SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0x00));
-    TASK(Actor)->header.mode++;
+    SELF(Actor)->header.mode++;
 }

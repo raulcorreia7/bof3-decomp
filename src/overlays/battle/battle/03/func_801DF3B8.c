@@ -8,6 +8,6 @@ MATCH void func_801DF3B8(void) {
 
     func_801DEFE4();
     func_801DEDE4();
-    work = TASK(PartyMember);
+    work = SELF(PartyMember);
     work->header.mode += 1;
 }

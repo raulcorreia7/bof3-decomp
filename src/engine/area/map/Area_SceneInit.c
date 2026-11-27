@@ -7,10 +7,10 @@
 MATCH void Area_SceneInit(void) {
     Actor* work;
 
-    TASK(Actor)->unk_05                     = 0;
-    TASK(Actor)->param.unk_0B               = g_Game.members[0].status.field.flags.unsigned_value;
+    SELF(Actor)->unk_05                     = 0;
+    SELF(Actor)->param.unk_0B               = g_Game.members[0].status.field.flags.unsigned_value;
     *(u8*)&g_Game.current->u.turn.hp_change = 3; /* FAKE: retail stores the byte. */
-    work                                    = TASK(Actor);
+    work                                    = SELF(Actor);
     FIELD(u32, work, 0x34u)                 = g_Game.members[0].pos.x.fixed;
     FIELD(u32, work, 0x38u)                 = g_Game.members[0].pos.y.fixed;
     FIELD(u32, work, 0x3Cu)                 = g_Game.members[0].pos.z.fixed;

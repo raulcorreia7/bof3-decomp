@@ -10,20 +10,20 @@ MATCH void func_801D5D88(void) {
 
     u8 mode;
 
-    mode = TASK(FishingState)->timer;
+    mode = SELF(FishingState)->timer;
     if (mode == 0) {
-        offset = TASK(FishingState)->step_index * 3;
+        offset = SELF(FishingState)->step_index * 3;
         if (D_801E2008[offset] == GAME_NONE) {
-            TASK(FishingState)->step_index = D_801E2009[offset];
-            TASK(FishingState)->pos_x      = 0;
-            TASK(FishingState)->step_delta = 4;
-            TASK(FishingState)->cue_index  = 0;
+            SELF(FishingState)->step_index = D_801E2009[offset];
+            SELF(FishingState)->pos_x      = 0;
+            SELF(FishingState)->step_delta = 4;
+            SELF(FishingState)->cue_index  = 0;
         }
-        Script_Select(D_801E2008[TASK(FishingState)->step_index * 3]);
-        TASK(FishingState)->timer = D_801E2009[TASK(FishingState)->step_index * 3];
-        TASK(FishingState)->step_index += 1;
+        Script_Select(D_801E2008[SELF(FishingState)->step_index * 3]);
+        SELF(FishingState)->timer = D_801E2009[SELF(FishingState)->step_index * 3];
+        SELF(FishingState)->step_index += 1;
     } else {
-        TASK(FishingState)->timer = mode - 1;
+        SELF(FishingState)->timer = mode - 1;
         Script_AnimStepLoop();
     }
     Area_AddActor();
@@ -31,7 +31,7 @@ MATCH void func_801D5D88(void) {
     Fishing_DrawSprite(21, 1, 50, 122);
     Fishing_DrawSprite(22, 1, 188, 122);
     Fishing_DrawSprite(16, 1, 54, 128);
-    work     = TASK(FishingState);
+    work     = SELF(FishingState);
     previous = work->step_index - 1;
     mode     = D_801E200A[previous * 3];
     if (mode == 0) {
@@ -49,8 +49,8 @@ MATCH void func_801D5D88(void) {
     } else if (mode == 0x1 && !(g_FrameCount & 1)) {
         work->cue_index = work->cue_index + 1;
     }
-    Fishing_DrawGaugeFill(57, 151, TASK(FishingState)->pos_x, 1);
-    TEXT_Format(g_UiTextFormatBuffer, D_801D0C04, TASK(FishingState)->cue_index);
+    Fishing_DrawGaugeFill(57, 151, SELF(FishingState)->pos_x, 1);
+    TEXT_Format(g_UiTextFormatBuffer, D_801D0C04, SELF(FishingState)->cue_index);
     UI_TextDrawAscii(172, 148, 0, g_UiTextFormatBuffer);
     Area_AddActor();
 }

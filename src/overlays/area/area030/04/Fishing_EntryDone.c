@@ -6,7 +6,7 @@
 MATCH void Fishing_EntryDone(void) {
     if (g_SpawnedActors[4].header.mode == 4) {
         g_SpawnedActors[1].header.mode += 1;
-        TASK(FishingState)->mode_index += 1;
-        TASK(FishingState)->sub_index = 0;
+        SELF(FishingState)->mode_index += 1;
+        SELF(FishingState)->sub_index = 0;
     }
 }

@@ -4,6 +4,6 @@
 /* Mount phase 1: runs the approach and moves to phase 2 when it ends. */
 MATCH void Area_ClimbMountApproachStep(void) {
     if (Area_ClimbMountApproach() & BYTE_MASK) {
-        TASK(Actor)->unk_03 = 2;
+        SELF(Actor)->unk_03 = 2;
     }
 }

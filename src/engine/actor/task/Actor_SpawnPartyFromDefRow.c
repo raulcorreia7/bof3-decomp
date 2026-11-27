@@ -34,17 +34,17 @@ MATCH void Actor_SpawnPartyFromDefRow(u8* record) {
 
     script = record;
     off    = script[9] * 8;
-    TASK_SET(&g_PartyActors[script[0xB]]);
+    SELF_SET(&g_PartyActors[script[0xB]]);
     g_CurrentActor         = &g_PartyActors[script[0xB]];
     src                    = *(u8**)((u8*)g_AreaLoads[g_GameAreaId] + 8) + off;
-    TASK(Actor)->direction = script[0] & 0xF;
+    SELF(Actor)->direction = script[0] & 0xF;
 
     Actor_ResetMotion();
     Actor_TurnRampClear(script[0xB]);
     SYS_InitScratchpad(src);
 
     x    = script[2] << 16;
-    work = TASK(Actor);
+    work = SELF(Actor);
     if (script[1] != 0) {
         x |= 32768;
     }
@@ -55,14 +55,14 @@ MATCH void Actor_SpawnPartyFromDefRow(u8* record) {
         y |= 32768;
     }
     work->pos.y.fixed             = y;
-    COORD_INT(TASK(Actor)->pos.z) = Area_HeightSample(work->pos.x.fixed, y);
+    COORD_INT(SELF(Actor)->pos.z) = Area_HeightSample(work->pos.x.fixed, y);
     data                          = (SpawnScript*)script;
 
-    work                     = TASK(Actor);
+    work                     = SELF(Actor);
     work->header.mode        = data->mode;
-    TASK(Actor)->header.step = data->step;
-    TASK(Actor)->unk_06      = (data->unk_00 >> 4) - 1;
-    tail                     = TASK(Actor);
+    SELF(Actor)->header.step = data->step;
+    SELF(Actor)->unk_06      = (data->unk_00 >> 4) - 1;
+    tail                     = SELF(Actor);
     shared                   = tail->range_54.table;
     tail->gravity            = 0;
     tail->unk_1C             = 0;
@@ -80,8 +80,8 @@ MATCH void Actor_SpawnPartyFromDefRow(u8* record) {
     g_PartyActors[data->index].unk_94 = 0x7F;
 
     Actor_SetOptionFlags((u8*)data + 8);
-    TASK(Actor)->tint.steps.delta.r = -0x80;
-    TASK(Actor)->tint.steps.delta.b = -0x80;
-    TASK(Actor)->tint.steps.delta.g = -0x80;
-    TASK(Actor)->tint.bytes.flags   = 2;
+    SELF(Actor)->tint.steps.delta.r = -0x80;
+    SELF(Actor)->tint.steps.delta.b = -0x80;
+    SELF(Actor)->tint.steps.delta.g = -0x80;
+    SELF(Actor)->tint.bytes.flags   = 2;
 }

@@ -8,7 +8,7 @@ MATCH void func_801DDCF8(void) {
     if (WINDOW_EFFECT_IDLE()) {
         counter = &g_SpawnedActors[1].header.mode;
         *counter += 1;
-        TASK(FishingState)->mode_index = 1;
-        TASK(FishingState)->sub_index  = 0;
+        SELF(FishingState)->mode_index = 1;
+        SELF(FishingState)->sub_index  = 0;
     }
 }

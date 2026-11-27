@@ -12,19 +12,19 @@ MATCH void func_801F49EC(void) {
     y_offset = -TO_COORD_HALF(12);
     /* FAKE: retail forms the fixed-point offset before the task read. */
     FAKE_BARRIER();
-    TASK(Actor)->direction = FACING_DOWN;
-    delta                  = TASK(Actor)->pos.y.fixed + y_offset;
+    SELF(Actor)->direction = FACING_DOWN;
+    delta                  = SELF(Actor)->pos.y.fixed + y_offset;
     g_ScriptState->steps   = ((s32)((count << 17) - delta) >> 0xF);
     if ((s8)g_ScriptState->steps < 0) {
         magnitude            = (u8)g_ScriptState->steps;
         g_ScriptState->steps = -magnitude;
-        TASK(Actor)->direction ^= 4;
+        SELF(Actor)->direction ^= 4;
     }
     if (g_ScriptState->steps != 0) {
-        Area_MoveActorRoute(g_ScriptState, TASK(Actor)->direction);
-        TASK(Actor)->vz = 0;
+        Area_MoveActorRoute(g_ScriptState, SELF(Actor)->direction);
+        SELF(Actor)->vz = 0;
     }
-    work = TASK(Actor);
+    work = SELF(Actor);
     work->unk_04 += 1;
     g_ScriptState->cursor -= 2;
 }

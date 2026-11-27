@@ -11,8 +11,8 @@ NON_MATCHING void func_801F5050(u8 shade) {
 
     GFX_ADD_DITHERED_DRAW_MODE(GFX_LAYER_EFFECT_FRONT, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK);
     Camera_SetMatrix(scratch);
-    point[0] = TASK(Actor)->pos.x.fixed - TO_COORD(2);
-    point[1] = TASK(Actor)->pos.y.fixed;
+    point[0] = SELF(Actor)->pos.x.fixed - TO_COORD(2);
+    point[1] = SELF(Actor)->pos.y.fixed;
     point[2] = TO_COORD(512);
     Camera_ProjectPoint(point, &screen0);
     point[2] = TO_COORD(1280);

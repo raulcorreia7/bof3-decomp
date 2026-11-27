@@ -5,12 +5,12 @@ MATCH void AreaAction_WaitMessage(void) {
     Actor* work;
 
     if (g_SysThreads[0].tail.game_entry.request != GAME_REQUEST_MESSAGE) {
-        work = TASK(Actor);
+        work = SELF(Actor);
         if (!(work->option_flags & ACTOR_OPT_ROUTE_LOCKED)) {
             Script_DispatchSelector(work->direction);
         }
         g_CurrentActor->interaction_flags = (g_CurrentActor->interaction_flags & ~ACTOR_INTERACTION_PENDING);
         g_GameFlags &= ~GAME_FLAG_SCRIPT_ACTIVE;
-        TASK(Actor)->unk_04 = 0;
+        SELF(Actor)->unk_04 = 0;
     }
 }

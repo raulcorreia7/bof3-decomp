@@ -12,26 +12,26 @@ MATCH void func_801D339C(void) {
 
     Area_SceneSelectRecord(0x2B);
 
-    panel               = TASK(FishingState);
+    panel               = SELF(FishingState);
     panel->origin_x     = 0x186;
     panel->active_flags = 0x80;
-    other               = TASK(FishingState);
+    other               = SELF(FishingState);
     panel->origin_y     = 0x6E;
     other->counter_48   = 0;
 
-    TASK(FishingState)->state_29 = 2;
-    TASK(FishingState)->tint_5D  = 0;
-    TASK(FishingState)->tint_5E  = 0;
-    TASK(FishingState)->tint_5F  = 0;
-    TASK(FishingState)->state_2A = 0;
+    SELF(FishingState)->state_29 = 2;
+    SELF(FishingState)->tint_5D  = 0;
+    SELF(FishingState)->tint_5E  = 0;
+    SELF(FishingState)->tint_5F  = 0;
+    SELF(FishingState)->state_2A = 0;
 
-    Script_Select(TASK(FishingState)->cue_index);
+    Script_Select(SELF(FishingState)->cue_index);
 
-    cue = D_801E1DA0[TASK(FishingState)->cue_index];
+    cue = D_801E1DA0[SELF(FishingState)->cue_index];
     if (cue != 0xFFFF) {
         SND_SEPlay(cue);
     }
 
-    state                = TASK(FishingState);
+    state                = SELF(FishingState);
     state->handler_index = (state->handler_index + 1);
 }

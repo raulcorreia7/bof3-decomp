@@ -8,19 +8,19 @@ MATCH void func_801F5038(void) {
 
     g_ScratchPadVectors[0].vx = (s16)(((((g_AreaScrollTargetX - 1) & 0xFFFFFF) + 1) >> 9) - 0x4000);
     g_ScratchPadVectors[0].vy = (s16)(((((g_AreaScrollTargetY - 1) & 0xFFFFFF) + 1) >> 9) - 0x4000);
-    g_ScratchPadVectors[0].vz = -COORD_INT(TASK(Actor)->pos.z) / 2;
+    g_ScratchPadVectors[0].vz = -COORD_INT(SELF(Actor)->pos.z) / 2;
     RotTransPers(&g_ScratchPadVectors[0], (long*)D_1F800034, &depth, &flag);
 
     flags                 = g_SceneFlagRows[SCENARIO_DESERT_OF_DEATH];
-    TASK(Actor)->screen_y = D_1F800034[1];
-    TASK(Actor)->vz       = 0;
+    SELF(Actor)->screen_y = D_1F800034[1];
+    SELF(Actor)->vz       = 0;
     if (SYS_TestFlag(flags, 9) != 0 && SYS_TestFlag(flags, 10) == 0) {
         g_SpawnedActors[0].header.flags |= ACTOR_FLAG_HIDDEN;
-        TASK(Actor)->header.step = 3;
-        TASK(Actor)->vy          = -0x2000;
-        TASK(Actor)->timer       = 0x78;
+        SELF(Actor)->header.step = 3;
+        SELF(Actor)->vy          = -0x2000;
+        SELF(Actor)->timer       = 0x78;
         g_ScenarioState.timer_06 = 0x3C;
     } else {
-        TASK(Actor)->header.step = 2;
+        SELF(Actor)->header.step = 2;
     }
 }

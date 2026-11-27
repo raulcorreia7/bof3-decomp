@@ -7,7 +7,7 @@ Area_StepSparkEmitters = { addr = 0x801F30A0, type = "func", source = "Counts do
 UI_MessageAnswerSelect = { addr = 0x801F3ACC, type = "func", source = "Sets g_UiMessageRequest to 0x4A when g_UiMessageChoice is nonzero, otherwise to 0x49." }
 UI_MessageClearRequest = { addr = 0x801F3B8C, type = "func", source = "Clears the message request; when the menu selection is idle sets g_SceneEventMode to SCENE_EVENT_INN, g_SceneEventStep to 0 and g_SceneEventSelection to AREA_RESET_VARIANT." }
 UI_MessageClear = { addr = 0x801F3BCC, type = "func", source = "Clears the message request; when the menu selection is idle sets g_SceneEventMode to SCENE_EVENT_INN, g_SceneEventStep to 5 and g_SceneEventSelection to 0xFF." }
-Actor_RunAreaStep = { addr = 0x801F3C40, type = "func", source = "Clears the work byte 0x48 and frees the palette fade target of the current g_Task." }
+Actor_RunAreaStep = { addr = 0x801F3C40, type = "func", source = "Clears the work byte 0x48 and frees the palette fade target of the current g_Self." }
 UI_MessageShowParty = { addr = 0x801F3C74, type = "func", source = "Looks through the tags of g_PartyMemberMessages[0] for the first one matching a party member's tag byte (D_80145F09[j][0]), starts its area message and sets g_GameStateIndex to GAME_REQUEST_MESSAGE." }
 Area_SkipScriptIfAdultRyu = { addr = 0x801F3D38, type = "func", source = "Entry slot 14 of the 18-pointer area script-call table; adds 3 to the script cursor when g_Game.current chr.character_id is CHAR_ID_RYU_ADULT." }
 Actor_SnapToGround = { addr = 0x801F3F48, type = "func", source = "Stores the ground height Area_HeightSample returns at the actor position, shifted left 16, at byte 0x3C and adds 1 to header.mode (byte 0x01)." }

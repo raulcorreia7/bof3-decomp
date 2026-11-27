@@ -15,10 +15,10 @@ MATCH void func_801F4430(void) {
     s32       y;
     u32       tile;
 
-    setVector(&pos, TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, TASK(Actor)->pos.z.fixed);
+    setVector(&pos, SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed, SELF(Actor)->pos.z.fixed);
     rot.vy = 0;
     rot.vx = 0;
-    rot.vz = TASK(Actor)->unk_32;
+    rot.vz = SELF(Actor)->unk_32;
 
     PushMatrix();
     RotTransMatrix(&pos, matrix, &flag);
@@ -27,10 +27,10 @@ MATCH void func_801F4430(void) {
     SetRotMatrix(&matrix);
     SetTransMatrix(&matrix);
 
-    if (TASK(Actor)->param.unk_0B != 0) {
+    if (SELF(Actor)->param.unk_0B != 0) {
         tile = (1U << 28) | (3U << 24) | (1U << 15) | (TPAGE_ABR_ADD << 12) | 0x0F;
-        SND_SEPlay(TASK(Actor)->param.unk_0B + 0x201);
-        TASK(Actor)->param.unk_0B = 0;
+        SND_SEPlay(SELF(Actor)->param.unk_0B + 0x201);
+        SELF(Actor)->param.unk_0B = 0;
     } else {
         tile = (1U << 28) | (3U << 24) | (1U << 15) | (TPAGE_ABR_ADD << 12) | (1U << 11) | 0x0C;
     }
@@ -58,10 +58,10 @@ MATCH void func_801F4430(void) {
 
         RotTransPers4(&quad[0], &quad[1], &quad[2], &quad[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
 
-        screen_y = TASK(Actor)->screen_y;
+        screen_y = SELF(Actor)->screen_y;
         if (screen_y >= 0x41) {
-            y = (rcos(TASK(Actor)->unk_32 + (i << 10)) >> 7) + 0x20;
-            y = (s16)TASK(Actor)->screen_y - y;
+            y = (rcos(SELF(Actor)->unk_32 + (i << 10)) >> 7) + 0x20;
+            y = (s16)SELF(Actor)->screen_y - y;
         } else {
             y = screen_y;
         }

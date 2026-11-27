@@ -6,10 +6,10 @@ MATCH void func_801F3224(void) {
 
     Actor_SetScreenOrigin();
 
-    scratch = TASK(u8);
+    scratch = SELF(u8);
     scratch[0x09] -= 1;
 
-    check = TASK(u8);
+    check = SELF(u8);
     *(s32*)(scratch + 0x40) -= 0x2000;
 
     if (check[0x09] == 0) {
@@ -18,7 +18,7 @@ MATCH void func_801F3224(void) {
             return;
         }
         check[0x48]              = 0;
-        TASK(Actor)->header.mode = 1;
+        SELF(Actor)->header.mode = 1;
         return;
     }
 

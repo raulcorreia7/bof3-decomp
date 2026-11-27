@@ -14,7 +14,7 @@ MATCH void func_801F3F08(void) {
     index = 0;
     do {
         Area_DrawSpinTriangle(spin);
-        work = TASK(Actor);
+        work = SELF(Actor);
         spin->spin_angle += 0x10;
         if (work->timer < 4) {
             spin->fade += 0x20;
@@ -26,7 +26,7 @@ MATCH void func_801F3F08(void) {
     } while (index < 0x20);
 
     PopMatrix();
-    work     = TASK(Actor);
+    work     = SELF(Actor);
     frame    = work->vx + 1;
     work->vx = frame;
     if (frame >= 0xB9) {

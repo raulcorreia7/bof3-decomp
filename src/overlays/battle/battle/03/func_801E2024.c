@@ -6,7 +6,7 @@ MATCH void func_801E2024(void) {
     u8           count;
     u8           chance;
 
-    work         = TASK(PartyMember);
+    work         = SELF(PartyMember);
     count        = work->unk_09 - 1;
     work->unk_09 = count;
     if (count == 0) {
@@ -23,6 +23,6 @@ MATCH void func_801E2024(void) {
             Battle_PlayEffectSE(3);
         }
         Battle_PlayEffectSE(4);
-        TASK(PartyMember)->header.step = TASK(PartyMember)->header.step + 1;
+        SELF(PartyMember)->header.step = SELF(PartyMember)->header.step + 1;
     }
 }

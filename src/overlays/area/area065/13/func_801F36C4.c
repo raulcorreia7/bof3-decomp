@@ -1,5 +1,5 @@
 #include "area065_13.h"
 
 MATCH void func_801F36C4(void) {
-    SYS_DISPATCH_BYTE(D_801F52A0, TASK(Actor)->unk_03);
+    SYS_DISPATCH_BYTE(D_801F52A0, SELF(Actor)->unk_03);
 }

@@ -6,5 +6,5 @@ MATCH void func_800C1A54(void) {
     Script_Select(2);
     *value = 0x80;
     Battle_MarkDamaged(0x80);
-    TASK(Actor)->header.step++;
+    SELF(Actor)->header.step++;
 }

@@ -15,9 +15,9 @@ MATCH void Battle_WaitAilmentEffect(void) {
             flags = ENEMY_COMBATANT(index).status & (STATUS_BLIND | STATUS_SILENCED | STATUS_SLEEPING);
         }
         if (flags == 0) {
-            TASK(PartyMember)->header.mode = 0;
+            SELF(PartyMember)->header.mode = 0;
             return;
         }
-        TASK(PartyMember)->header.mode = TASK(PartyMember)->header.mode - 1;
+        SELF(PartyMember)->header.mode = SELF(PartyMember)->header.mode - 1;
     }
 }

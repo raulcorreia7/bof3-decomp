@@ -8,7 +8,7 @@ MATCH void func_801F2CC8(void) {
     if ((g_FrameCount & 0x7) == 0) {
         func_801F32C4();
     }
-    work = TASK(Actor);
+    work = SELF(Actor);
     if (--work->vx == 0) {
         work->vx = 16;
         work->header.mode++;

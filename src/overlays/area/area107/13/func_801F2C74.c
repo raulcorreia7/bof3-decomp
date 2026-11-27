@@ -3,10 +3,10 @@
 MATCH void func_801F2C74(void) {
     if (g_GameStateIndex != GAME_REQUEST_BATTLE) {
         if (g_BattleCount % 5 != 0) {
-            TASK(Actor)->header.mode = 0;
+            SELF(Actor)->header.mode = 0;
         } else {
             Game_SetScriptActive();
-            TASK(Actor)->header.mode = 2;
+            SELF(Actor)->header.mode = 2;
         }
     }
 }

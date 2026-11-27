@@ -15,7 +15,7 @@ MATCH s32 Area_GetActorFacingStepX(void) {
     s32    offset;
     s8     found;
 
-    work   = TASK(Actor);
+    work   = SELF(Actor);
     found  = 0;
     step_x = g_FacingSteps[work->direction].x;
     step_y = g_FacingSteps[work->direction].y;
@@ -26,7 +26,7 @@ MATCH s32 Area_GetActorFacingStepX(void) {
         pos_y += step_y;
     }
     dist    = Area_HeightRead(pos_x, pos_y);
-    counter = COORD_INT(TASK(Actor)->pos.z);
+    counter = COORD_INT(SELF(Actor)->pos.z);
     diff    = counter - dist;
     if (ABS(diff) > 0x100) {
         dist = counter;
@@ -34,7 +34,7 @@ MATCH s32 Area_GetActorFacingStepX(void) {
     for (i = 0, offset = 0; i < 34; i++, offset += ACTOR_SIZE) {
         if (((u8*)g_Actors)[offset] != 0 && !((&g_Actors[0].option_flags)[offset] & 0x80)) {
             rec = (Actor*)((u8*)g_Actors + offset);
-            if (Actor_IsInRange(pos_x, pos_y, dist, TASK(Actor)->voice_flags.scene_flag, rec) & BYTE_MASK) {
+            if (Actor_IsInRange(pos_x, pos_y, dist, SELF(Actor)->voice_flags.scene_flag, rec) & BYTE_MASK) {
                 found        = 1;
                 rec->roll_90 = FIELD(u16, D_80146918, offset) + 1;
             }
@@ -42,7 +42,7 @@ MATCH s32 Area_GetActorFacingStepX(void) {
     }
     if (found != 0) {
         g_Game.current->u.field.counter.unsigned_value = 3;
-        TASK(Actor)->timer                             = 0;
+        SELF(Actor)->timer                             = 0;
     }
     return found;
 }

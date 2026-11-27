@@ -5,5 +5,5 @@ MATCH void func_801EEC14(void) {
     Magic010Steps handlers;
 
     handlers = D_801EEC04;
-    SYS_DISPATCH_TASK(handlers.steps, 1, g_Task);
+    SYS_DISPATCH_TASK(handlers.steps, 1, g_Self);
 }

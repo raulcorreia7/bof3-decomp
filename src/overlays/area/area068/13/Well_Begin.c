@@ -12,5 +12,5 @@ MATCH void Well_Begin(void) {
     g_WellSwishButtons       = 0;
     g_WellPressCount         = 0;
     g_WellLowerCount         = 0;
-    TASK(Actor)->header.mode = WELL_MODE_LOWER_READY;
+    SELF(Actor)->header.mode = WELL_MODE_LOWER_READY;
 }

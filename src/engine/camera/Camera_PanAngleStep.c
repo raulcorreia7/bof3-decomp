@@ -6,7 +6,7 @@ MATCH void Camera_PanAngleStep(void) {
     Actor*  work;
     Angle3* angle;
 
-    work = TASK(Actor);
+    work = SELF(Actor);
     if (work->timer != 0) {
         angle = &D_801481E8;
         angle->x += D_801481F8.x;

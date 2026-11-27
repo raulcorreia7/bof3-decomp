@@ -8,7 +8,7 @@ MATCH void func_801F4190(void) {
     s32    quotient;
     s32    roll;
 
-    work     = TASK(Actor);
+    work     = SELF(Actor);
     value    = work->vz;
     quotient = value / 10000;
     value += quotient * (quotient - 10);
@@ -17,24 +17,24 @@ MATCH void func_801F4190(void) {
     if ((work->screen_x & 0x800) != (work->unk_32 & 0x800)) {
         work->param.unk_0B = ((s16)work->unk_32 >> 11) + 1;
     }
-    band           = TASK(Actor);
+    band           = SELF(Actor);
     band->screen_x = band->unk_32;
     if ((u32)(band->vz - 680000) <= 340000u) {
         roll            = rand();
-        TASK(Actor)->vx = roll & 0x1000;
+        SELF(Actor)->vx = roll & 0x1000;
         roll            = rand();
-        TASK(Actor)->vy = roll & 0x1000;
+        SELF(Actor)->vy = roll & 0x1000;
     }
-    if (TASK(Actor)->vz > 1019999) {
+    if (SELF(Actor)->vz > 1019999) {
         roll            = rand();
-        TASK(Actor)->vx = roll & 0x2000;
+        SELF(Actor)->vx = roll & 0x2000;
         roll            = rand();
-        TASK(Actor)->vy = roll & 0x2000;
+        SELF(Actor)->vy = roll & 0x2000;
         if (g_ScriptVars[0] == 6) {
             g_ScriptVars[0]++;
         }
     }
-    actor = TASK(Actor);
+    actor = SELF(Actor);
     if (actor->vz > 1369999) {
         actor->header.step++;
     }

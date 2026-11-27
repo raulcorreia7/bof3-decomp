@@ -20,9 +20,9 @@ MATCH void func_801F2F44(s32 steps) {
 
     phase   = (g_FrameCount * 4) & 7;
     step    = phase * steps;
-    x       = (COORD_INT(TASK(Actor)->pos.x) - 0x80) << 7;
-    y       = (COORD_INT(TASK(Actor)->pos.y) - 0x80) << 7;
-    height  = (s16) - (COORD_INT(TASK(Actor)->pos.z) / 2);
+    x       = (COORD_INT(SELF(Actor)->pos.x) - 0x80) << 7;
+    y       = (COORD_INT(SELF(Actor)->pos.y) - 0x80) << 7;
+    height  = (s16) - (COORD_INT(SELF(Actor)->pos.z) / 2);
     i       = 0;
     corners = g_ScratchPadVectors;
     out     = D_1F800034;
@@ -44,7 +44,7 @@ loop:
     prim->y2 = prim->y3 = out[1] + spread;
     Area_ApplyTileToQuad((shade & 0xF80000) | AREA_CELL_QUAD_CODE, prim, 1);
     order += steps;
-    Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, 1, sizeof(POLY_FT4));
+    Area_CellAddPrim(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed, 1, sizeof(POLY_FT4));
     i++;
     if (i < 8) {
         goto loop;

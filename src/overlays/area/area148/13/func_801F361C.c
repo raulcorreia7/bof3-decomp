@@ -7,11 +7,11 @@ MATCH void func_801F361C(void) {
     if (SYS_TestFlag(g_SceneEventFlags, 90) != 0) {
         mode                     = 0;
         value                    = -2;
-        TASK(Actor)->screen_y    = 128;
-        TASK(Actor)->header.step = 3;
+        SELF(Actor)->screen_y    = 128;
+        SELF(Actor)->header.step = 3;
     } else {
-        TASK(Actor)->screen_y = 0;
-        TASK(Actor)->header.step += 1;
+        SELF(Actor)->screen_y = 0;
+        SELF(Actor)->header.step += 1;
         func_801F37B8(0, 1);
         mode  = 1;
         value = 1;

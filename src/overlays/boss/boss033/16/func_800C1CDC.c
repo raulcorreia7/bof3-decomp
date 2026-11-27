@@ -3,6 +3,6 @@
 MATCH void func_800C1CDC(void) {
     if (g_BattleCurrentEnemy->hp == 65535) {
         g_Battle.action_type = 3;
-        TASK(Actor)->unk_04  = 0;
+        SELF(Actor)->unk_04  = 0;
     }
 }

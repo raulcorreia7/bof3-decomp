@@ -11,7 +11,7 @@ MATCH void func_801D7B64(void) {
     UI_TextDrawAscii(284, 69, 0, D_801D0C10);
 
     buffer = g_UiTextFormatBuffer;
-    record = TASK(FishingState);
+    record = SELF(FishingState);
     TEXT_Format(buffer, D_801D0C04, record->bounce.half.key + 1);
 
     if (buffer[0] == ' ') {

@@ -6,12 +6,12 @@ MATCH void func_801F43B0(void) {
 
     Area_GetCursor(&x.fixed, &y.fixed);
     Area_HeightSet(--COORD_INT(x), COORD_INT(y), 0x10);
-    TASK(Actor)->unk_18 |= (u8)Area_CellGetCode(COORD_INT(x), COORD_INT(y));
+    SELF(Actor)->unk_18 |= (u8)Area_CellGetCode(COORD_INT(x), COORD_INT(y));
     func_801A4BC0(COORD_INT(x), COORD_INT(y), 0x11);
     Area_HeightSet(COORD_INT(x), ++COORD_INT(y), 0x10);
-    TASK(Actor)->unk_1C |= (u8)Area_CellGetCode(COORD_INT(x), COORD_INT(y));
+    SELF(Actor)->unk_1C |= (u8)Area_CellGetCode(COORD_INT(x), COORD_INT(y));
     func_801A4BC0(COORD_INT(x), COORD_INT(y), 0x11);
-    TASK(Actor)->direction = FACING_LEFT;
+    SELF(Actor)->direction = FACING_LEFT;
     Area_MoveActorRoute(g_ScriptState, 7);
     g_ScriptState->steps = 2;
 }

@@ -6,9 +6,9 @@
     bank  = g_AreaLoads[g_GameAreaId];                                                                \
     table = ((AreaLoad*)bank)->scripts;                                                               \
     row   = *(u8**)(table + g_ScriptState->script_index * 4);                                         \
-    if (TASK(Actor)->direction != row[g_ScriptState->cursor + 2]) {                                   \
-        TASK(Actor)->direction = (NEXT_DIRECTION) & 7;                                                \
-        func_801F4A5C(D_801F6748[*(row + (u32)(g_ScriptState->cursor + 3))], TASK(Actor)->direction); \
+    if (SELF(Actor)->direction != row[g_ScriptState->cursor + 2]) {                                   \
+        SELF(Actor)->direction = (NEXT_DIRECTION) & 7;                                                \
+        func_801F4A5C(D_801F6748[*(row + (u32)(g_ScriptState->cursor + 3))], SELF(Actor)->direction); \
         g_ScriptState->cursor -= 2;                                                                   \
     } else {                                                                                          \
         g_ScriptState->cursor += 2;                                                                   \

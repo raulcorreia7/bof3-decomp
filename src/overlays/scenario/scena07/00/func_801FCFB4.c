@@ -21,11 +21,11 @@ MATCH void func_801FD000(void) {
         if (g_ScratchPad.cells.halves[0] != GAME_NONE) {
             idx = i;
             Actor_SpawnFromRecord(&D_801FDE8C[idx * 17]);
-            TASK(Actor)->pos.z.part.integer = 0xA00;
+            SELF(Actor)->pos.z.part.integer = 0xA00;
             if (D_801FDF7C[idx] != 0) {
                 g_CurrentActor->timer_75 = D_801FDF7C[idx];
-                TASK(Actor)->unk_03      = TASK(Actor)->header.mode;
-                TASK(Actor)->header.mode = 5;
+                SELF(Actor)->unk_03      = SELF(Actor)->header.mode;
+                SELF(Actor)->header.mode = 5;
             }
         }
     }

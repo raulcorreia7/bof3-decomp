@@ -197,14 +197,14 @@ static inline void Area_ProbeParty(s32 slot, const u8* table, s32 type) {
     u8           selection;
     s32          result;
 
-    TASK_SET(&g_Game.members[slot]);
+    SELF_SET(&g_Game.members[slot]);
     index     = g_PartyFieldOrder[slot];
     y         = g_Game.members[slot].screen_y.signed_value;
     x         = g_Game.members[slot].screen_x.signed_value;
     selection = table[index];
     result    = Actor_ClaimSlot(type, 0, selection, x, y);
     if ((u8)result != GAME_NONE) {
-        battler               = TASK(PartyMember);
+        battler               = SELF(PartyMember);
         battler->param.unk_0B = (u8)result;
     }
 }
@@ -277,24 +277,24 @@ static inline s32 Area_StepIntoTrigger(s32 x, s32 y, s32 first_row) {
         x      = FIX_INT(g_Game.members[0].pos.x.fixed + scaled);                                              \
         y      = FIX_INT(g_Game.members[0].pos.y.fixed + g_Game.members[0].unk_10 * g_Game.members[0].unk_09); \
                                                                                                                \
-        scratch     = g_Task;                                                                                  \
+        scratch     = g_Self;                                                                                  \
         scratch->vx = x;                                                                                       \
         scratch->vy = y;                                                                                       \
                                                                                                                \
         /* The step stores re-read the work cell: the compiler must assume a call may have changed it. */      \
         if ((Area_CellGetCode(x, y) & BYTE_MASK) == 0xA1) {                                                    \
-            TASK(Actor)->param.unk_0B = 1;                                                                     \
+            SELF(Actor)->param.unk_0B = 1;                                                                     \
         } else if ((Area_CellGetCode(x, y) & BYTE_MASK) == 0xA0) {                                             \
-            TASK(Actor)->param.unk_0B = 2;                                                                     \
+            SELF(Actor)->param.unk_0B = 2;                                                                     \
         } else if ((Area_CellGetCode(x, y) & BYTE_MASK) == 0xAE) {                                             \
-            TASK(Actor)->param.unk_0B = 3;                                                                     \
+            SELF(Actor)->param.unk_0B = 3;                                                                     \
         } else if (g_Game.walk_flags & AREA_WALK_TRANSITION) {                                                 \
-            TASK(Actor)->param.unk_0B = 4;                                                                     \
+            SELF(Actor)->param.unk_0B = 4;                                                                     \
         } else {                                                                                               \
-            TASK(Actor)->param.unk_0B = 0;                                                                     \
+            SELF(Actor)->param.unk_0B = 0;                                                                     \
         }                                                                                                      \
                                                                                                                \
-        steps[TASK(Actor)->header.mode]();                                                                     \
+        steps[SELF(Actor)->header.mode]();                                                                     \
     }
 
 void Area_DrawHud(s16 x, s16 y);

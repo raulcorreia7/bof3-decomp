@@ -1,6 +1,6 @@
 ["emi/world04/area189/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Area_CellSetTexture = { addr = 0x801F3378, type = "func", source = "Sets a cell primitive's clut, texture page, corner UVs and shade from the packed cell texture word." }
-Actor_ClearVelocity = { addr = 0x801F5F20, type = "func", source = "Zeroes the velocity members of the current g_Task (+0x0C, +0x10 and vz) that Actor_ApplyVelocity integrates into x and y." }
+Actor_ClearVelocity = { addr = 0x801F5F20, type = "func", source = "Zeroes the velocity members of the current g_Self (+0x0C, +0x10 and vz) that Actor_ApplyVelocity integrates into x and y." }
 Actor_ClearVelocity_801F5F20 = { addr = 0x801F5F20, type = "func", source = "Link-only name for the area189 copy of Actor_ClearVelocity; the engine copy at 0x801C5798 is visible to the area189 link too, so a draft cannot resolve the bare name.", alias = true }
 Char_AddFatigue = { addr = 0x801F6024, type = "func", source = "Adds 1 to the fatigue of each of the seven g_Characters while it is below 9 and rebuilds that character's stats with Char_RebuildStats." }

@@ -12,23 +12,23 @@ __asm__(".include \"include/match/macro.inc\"\n");
  * frame and advances header.mode (byte 0x01) at sixteen. */
 /* func_801EED0C */
 MATCH void Effect_BrightenPalette(void) {
-    g_PaletteFades[TASK(Magic010Task)->timer].offset.r++;
-    g_PaletteFades[TASK(Magic010Task)->timer].offset.g++;
-    g_PaletteFades[TASK(Magic010Task)->timer].offset.b++;
-    if (++TASK(Magic010Task)->unk_09 == 16) {
-        TASK(Magic010Task)->header.mode++;
+    g_PaletteFades[SELF(Magic010Task)->timer].offset.r++;
+    g_PaletteFades[SELF(Magic010Task)->timer].offset.g++;
+    g_PaletteFades[SELF(Magic010Task)->timer].offset.b++;
+    if (++SELF(Magic010Task)->unk_09 == 16) {
+        SELF(Magic010Task)->header.mode++;
     }
 }
 
 /* func_801EEE20 */
 MATCH void Effect_FadePaletteOut(void) {
-    g_PaletteFades[TASK(Magic010Task)->timer].offset.r--;
-    g_PaletteFades[TASK(Magic010Task)->timer].offset.g--;
-    g_PaletteFades[TASK(Magic010Task)->timer].offset.b--;
-    if (--TASK(Magic010Task)->unk_09 == 0) {
+    g_PaletteFades[SELF(Magic010Task)->timer].offset.r--;
+    g_PaletteFades[SELF(Magic010Task)->timer].offset.g--;
+    g_PaletteFades[SELF(Magic010Task)->timer].offset.b--;
+    if (--SELF(Magic010Task)->unk_09 == 0) {
         GFX_PaletteFreeFadeTarget(g_Battle.selected_actor);
         Battle_FadePoisonedBattler(g_Battle.target_selector);
-        TASK(Magic010Task)->header.mode++;
+        SELF(Magic010Task)->header.mode++;
     }
 }
 

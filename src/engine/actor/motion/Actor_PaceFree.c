@@ -6,9 +6,9 @@ MATCH s32 Actor_PaceFree(s32 unused, s32 divisor, s32 flag_bits) {
     Actor* work;
 
     if (flag_bits & 0x2) {
-        work         = TASK(Actor);
+        work         = SELF(Actor);
         work->timer  = (0x20 / (divisor & BYTE_MASK));
-        work         = TASK(Actor);
+        work         = SELF(Actor);
         work->unk_0A = (work->timer >> 1);
     }
     return 1;

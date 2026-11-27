@@ -11,15 +11,15 @@ MATCH void func_801EEC70(void) {
     PartyMember* actor;
     s32          z;
 
-    TASK(PartyMember)->facing = g_BattleEffectBattler->facing;
-    work                      = TASK(PartyMember);
+    SELF(PartyMember)->facing = g_BattleEffectBattler->facing;
+    work                      = SELF(PartyMember);
     actor                     = g_BattleEffectBattler;
     work->pos.x.fixed         = actor->pos.x.fixed;
     work->pos.y.fixed         = actor->pos.y.fixed;
     z                         = actor->pos.z.fixed;
     work->param.unk_0B        = 0;
     work->pos.z.fixed         = z;
-    TASK(PartyMember)->header.mode += 1;
+    SELF(PartyMember)->header.mode += 1;
 }
 
 /* Rolls the steal: the chance is the drop rate entry of the target enemy scaled by
@@ -81,7 +81,7 @@ MATCH void func_801EECDC(void) {
     } else {
         func_801DE8C0(1, 0xFF, UI_MessageGetText(0x3A));
     }
-    TASK(PartyMember)->header.mode += 1;
+    SELF(PartyMember)->header.mode += 1;
 }
 
 MATCH void func_801EEF58(void) {

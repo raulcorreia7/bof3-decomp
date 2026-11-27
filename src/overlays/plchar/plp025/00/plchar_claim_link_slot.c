@@ -5,7 +5,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801CFB30(void) {
-    SYS_DISPATCH_TASK(D_801CFFE0, 2, g_Task);
+    SYS_DISPATCH_TASK(D_801CFFE0, 2, g_Self);
 }
 
 MATCH void func_801CFB74(void) {

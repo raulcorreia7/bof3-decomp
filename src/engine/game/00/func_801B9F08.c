@@ -49,7 +49,7 @@ done:
 
     if ((count & 1) != 0) {
         for (index = 0; index < (count & BYTE_MASK); index++) {
-            if ((TASK(Actor)->direction & 1) == 0 && cells[index] == 0xA2)
+            if ((SELF(Actor)->direction & 1) == 0 && cells[index] == 0xA2)
                 return 0x10;
             if (cells[index] == 0xA3 || cells[index] == 0xA0)
                 return 0x10;
@@ -59,7 +59,7 @@ done:
     } else {
         if ((cells[0] & 0xF0) == 0xA0 || (cells[1] & 0xF0) == 0xA0) {
             if ((cells[0] & BYTE_MASK) == 0xA2 && cells[1] == cells[0]) {
-                if ((TASK(Actor)->direction & 1) == 0)
+                if ((SELF(Actor)->direction & 1) == 0)
                     return 0x10;
                 return 0xA2;
             }

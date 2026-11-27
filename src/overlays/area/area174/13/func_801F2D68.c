@@ -3,17 +3,17 @@
 MATCH void func_801F2D68(void) {
     s32 result;
 
-    if (!(TASK(Actor)->timer & 0x7)) {
+    if (!(SELF(Actor)->timer & 0x7)) {
         result = func_801F2E88();
         if (result != 0) {
             func_801F3378(result);
         }
     }
-    TASK(Actor)->timer += 1;
-    if (TASK(Actor)->unk_06 != 0) {
+    SELF(Actor)->timer += 1;
+    if (SELF(Actor)->unk_06 != 0) {
         Area_UpdateShots();
     }
     if (g_PartyActors[0].pos.x.fixed == TO_COORD(64) + COORD_HALF) {
-        TASK(Actor)->header.mode += 1;
+        SELF(Actor)->header.mode += 1;
     }
 }

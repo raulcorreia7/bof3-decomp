@@ -10,7 +10,7 @@ MATCH void Area_UpdateParty(void) {
         Actor* work;
 
         work = &g_PartyActors[index];
-        TASK_SET(work);
+        SELF_SET(work);
 
         if ((work->header.flags & ACTOR_FLAG_IN_USE) && ((work->header.flags & 0x40u) == 0u)) {
             Actor_ProjectForDraw();

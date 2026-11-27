@@ -5,9 +5,9 @@ MATCH void func_800C1A34(void) {
     g_Battle.end_hook           = func_800C1B74;
     g_Battle.boss_event_hook    = func_800C1B08;
     g_Battle.target_selector    = BATTLE_TARGET_ENEMY_SIDE;
-    TASK_SET(&g_BattleEnemyBattlers[7]);
+    SELF_SET(&g_BattleEnemyBattlers[7]);
     Battle_CenterCamera();
-    g_AreaScrollTargetCoordX.fixed = g_AreaEncounterPlacement.origin.x.fixed + (TASK(PartyMember)->pos.x.fixed - g_AreaEncounterPlacement.origin.x.fixed) / 2;
-    g_AreaScrollTargetCoordY.fixed = g_AreaEncounterPlacement.origin.y.fixed + (TASK(PartyMember)->pos.y.fixed - g_AreaEncounterPlacement.origin.y.fixed) / 2;
+    g_AreaScrollTargetCoordX.fixed = g_AreaEncounterPlacement.origin.x.fixed + (SELF(PartyMember)->pos.x.fixed - g_AreaEncounterPlacement.origin.x.fixed) / 2;
+    g_AreaScrollTargetCoordY.fixed = g_AreaEncounterPlacement.origin.y.fixed + (SELF(PartyMember)->pos.y.fixed - g_AreaEncounterPlacement.origin.y.fixed) / 2;
     g_AreaCameraSpeed              = 0x20;
 }

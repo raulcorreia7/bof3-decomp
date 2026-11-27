@@ -2,5 +2,5 @@
 
 /* func_801B32D0 */
 MATCH void Area_ClimbMount(void) {
-    g_AreaClimbMountSteps[TASK(Actor)->unk_03]();
+    g_AreaClimbMountSteps[SELF(Actor)->unk_03]();
 }

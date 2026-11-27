@@ -3,6 +3,6 @@
 MATCH void func_801F2E18(void) {
     Actor* actor;
 
-    actor            = TASK(Actor);
+    actor            = SELF(Actor);
     actor->direction = (actor->direction + 1) & 0x7;
 }

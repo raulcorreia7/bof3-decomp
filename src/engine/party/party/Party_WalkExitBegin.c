@@ -4,8 +4,8 @@
 /* Marks the area entry active and starts the walk animation. */
 MATCH void Party_WalkExitBegin(void) {
     g_AreaWalkFlags |= AREA_WALK_ENTRY_ACTIVE;
-    Script_Request((TASK(Actor)->direction + 8));
-    TASK(Actor)->timer  = 0;
-    TASK(Actor)->unk_0A = 0;
-    TASK(Actor)->unk_03 = (TASK(Actor)->unk_03 + 1);
+    Script_Request((SELF(Actor)->direction + 8));
+    SELF(Actor)->timer  = 0;
+    SELF(Actor)->unk_0A = 0;
+    SELF(Actor)->unk_03 = (SELF(Actor)->unk_03 + 1);
 }

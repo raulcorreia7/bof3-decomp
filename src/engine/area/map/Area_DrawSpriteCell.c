@@ -18,7 +18,7 @@ MATCH void Area_DrawSpriteCell(s32 mirror, SpriteCell* cell, u16 clut) {
     s32         sprite_mirror = mirror;
     s16         sprite_clut   = clut;
 
-    tpage = getTPage(TASK(Actor)->palette_8bit != PALETTE_TYPE_CELL, TASK(Actor)->tint.bytes.flags, TASK(Actor)->sheet_page << 6, (TASK(Actor)->sheet_page >> 4) << 8);
+    tpage = getTPage(SELF(Actor)->palette_8bit != PALETTE_TYPE_CELL, SELF(Actor)->tint.bytes.flags, SELF(Actor)->sheet_page << 6, (SELF(Actor)->sheet_page >> 4) << 8);
     GFX_ADD_LAYER_DRAW_MODE(SPAD_CURSOR->draw_layer, tpage);
     sprite = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprite);

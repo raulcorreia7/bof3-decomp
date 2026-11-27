@@ -10,23 +10,23 @@ MATCH void func_801F2E20(void) {
     x      = FIX_INT(g_Game.members[0].pos.x.fixed + scaled);
     y      = FIX_INT(g_Game.members[0].pos.y.fixed + g_Game.members[0].unk_10 * g_Game.members[0].unk_09);
 
-    scratch                 = TASK(u8);
+    scratch                 = SELF(u8);
     *(s32*)(scratch + 0x0C) = x;
     *(s32*)(scratch + 0x10) = y;
 
     /* The step stores re-read the work cell: the compiler must assume a call
      * may have changed it. */
     if ((Area_CellGetCode(x, y) & BYTE_MASK) == 0xA1) {
-        TASK(Actor)->param.unk_0B = 1;
+        SELF(Actor)->param.unk_0B = 1;
     } else if ((Area_CellGetCode(x, y) & BYTE_MASK) == 0xA0) {
-        TASK(Actor)->param.unk_0B = 2;
+        SELF(Actor)->param.unk_0B = 2;
     } else if ((Area_CellGetCode(x, y) & BYTE_MASK) == 0xAE) {
-        TASK(Actor)->param.unk_0B = 3;
+        SELF(Actor)->param.unk_0B = 3;
     } else if (g_Game.walk_flags & AREA_WALK_TRANSITION) {
-        TASK(Actor)->param.unk_0B = 4;
+        SELF(Actor)->param.unk_0B = 4;
     } else {
-        TASK(Actor)->param.unk_0B = 0;
+        SELF(Actor)->param.unk_0B = 0;
     }
 
-    D_801F4F64[TASK(Actor)->header.mode]();
+    D_801F4F64[SELF(Actor)->header.mode]();
 }

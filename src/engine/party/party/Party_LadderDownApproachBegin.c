@@ -5,5 +5,5 @@
 MATCH void Party_LadderDownApproachBegin(void) {
     Area_ClimbMountApproachBegin();
     g_AreaWalkFlags |= AREA_WALK_ENTRY_ACTIVE;
-    TASK(Actor)->unk_04 = 1;
+    SELF(Actor)->unk_04 = 1;
 }

@@ -11,12 +11,12 @@ MATCH void func_801D5574(void) {
     s32 mask;
     s32 t;
 
-    TASK(FishingState)->timer += 1;
-    if (TASK(FishingState)->saved_index == 0) {
-        Fishing_DrawWindowFrame(MENU_HEADER_X, (MENU_HEADER_Y - TASK(FishingState)->timer * 16) & 0xFFFE, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
+    SELF(FishingState)->timer += 1;
+    if (SELF(FishingState)->saved_index == 0) {
+        Fishing_DrawWindowFrame(MENU_HEADER_X, (MENU_HEADER_Y - SELF(FishingState)->timer * 16) & 0xFFFE, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
         y      = FISHING_SHOP_COLUMNS_Y;
         mask   = 0;
-        t      = TASK(FishingState)->timer * 3;
+        t      = SELF(FishingState)->timer * 3;
         offset = t << 4;
         offset -= t;
         offset += FISHING_SHOP_COLUMNS_X;
@@ -25,20 +25,20 @@ MATCH void func_801D5574(void) {
         Fishing_DrawWindowFrame(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
         mask = 0;
         if (D_80145E93[0] >= 3) {
-            mask = (1 << TASK(FishingState)->cue_index) & BYTE_MASK;
+            mask = (1 << SELF(FishingState)->cue_index) & BYTE_MASK;
         }
         offset = FISHING_SHOP_COLUMNS_X;
         y      = FISHING_SHOP_COLUMNS_Y;
     }
     func_801D7C10(offset, y, mask);
-    func_801D72E4(39, (TASK(FishingState)->timer * 60 + 64));
-    if (TASK(FishingState)->timer == 4) {
-        if (TASK(FishingState)->saved_index == 0) {
-            TASK(FishingState)->handler_index = 0;
-        } else if (TASK(FishingState)->cue_index == 0) {
-            TASK(FishingState)->handler_index = 2;
-        } else if (TASK(FishingState)->cue_index == 1) {
-            TASK(FishingState)->handler_index = 6;
+    func_801D72E4(39, (SELF(FishingState)->timer * 60 + 64));
+    if (SELF(FishingState)->timer == 4) {
+        if (SELF(FishingState)->saved_index == 0) {
+            SELF(FishingState)->handler_index = 0;
+        } else if (SELF(FishingState)->cue_index == 0) {
+            SELF(FishingState)->handler_index = 2;
+        } else if (SELF(FishingState)->cue_index == 1) {
+            SELF(FishingState)->handler_index = 6;
         }
     }
 }

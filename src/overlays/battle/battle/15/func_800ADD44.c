@@ -1,5 +1,5 @@
 /* Dropping the volatile cell changes the code: retail reloads it. */
-#define FAKE_DECL_TASK_VOLATILE
+#define FAKE_DECL_SELF_VOLATILE
 #include "battle_15.h"
 
 MATCH void func_800ADD44(void) {
@@ -12,20 +12,20 @@ MATCH void func_800ADD44(void) {
     u8*          row;
     u8           slot;
 
-    TASK(PartyMember)->unk_29 = 1;
-    TASK(PartyMember)->unk_25 = 0x1E;
-    TASK(PartyMember)->unk_26 = 0;
-    TASK(PartyMember)->unk_24 = 0x80;
-    TASK(PartyMember)->unk_27 = 0x1B;
-    TASK(PartyMember)->unk_28 = 1;
-    work                      = TASK(volatile PartyMember);
+    SELF(PartyMember)->unk_29 = 1;
+    SELF(PartyMember)->unk_25 = 0x1E;
+    SELF(PartyMember)->unk_26 = 0;
+    SELF(PartyMember)->unk_24 = 0x80;
+    SELF(PartyMember)->unk_27 = 0x1B;
+    SELF(PartyMember)->unk_28 = 1;
+    work                      = SELF(volatile PartyMember);
     work->unk_2B              = 0;
-    next                      = TASK(PartyMember);
+    next                      = SELF(PartyMember);
     work->unk_2C.signed_value = 2;
     next->unk_2A              = 0;
-    work                      = TASK(volatile PartyMember);
+    work                      = SELF(volatile PartyMember);
     work->unk_4B              = 0xFF;
-    slotp                     = TASK(PartyMember);
+    slotp                     = SELF(PartyMember);
     work->pos.z.fixed         = 0;
     pair                      = &D_801485EE;
     base                      = (u8*)D_80145518;
@@ -35,6 +35,6 @@ MATCH void func_800ADD44(void) {
         Script_Select(slot);
     }
     D_801485FA        = *pair;
-    work              = TASK(volatile PartyMember);
+    work              = SELF(volatile PartyMember);
     work->header.mode = work->header.mode + 1;
 }

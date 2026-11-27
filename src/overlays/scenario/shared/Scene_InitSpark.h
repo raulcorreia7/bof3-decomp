@@ -7,7 +7,7 @@ MATCH void Scene_InitSpark(FallingSpark* spark) {
     spark->header.shade  = 0;
     spark->speed         = 0;
     spark->life_reload   = 64;
-    spark->pos.vx        = TASK(Actor)->pos.x.fixed + (RANDOM_MASK(BYTE_MASK) << 11) - TO_COORD(4);
-    spark->pos.vy        = TASK(Actor)->pos.y.fixed + (RANDOM_MASK(BYTE_MASK) << 11) - TO_COORD(4);
-    spark->pos.vz        = TASK(Actor)->pos.z.fixed;
+    spark->pos.vx        = SELF(Actor)->pos.x.fixed + (RANDOM_MASK(BYTE_MASK) << 11) - TO_COORD(4);
+    spark->pos.vy        = SELF(Actor)->pos.y.fixed + (RANDOM_MASK(BYTE_MASK) << 11) - TO_COORD(4);
+    spark->pos.vz        = SELF(Actor)->pos.z.fixed;
 }

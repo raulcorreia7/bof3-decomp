@@ -11,6 +11,6 @@ MATCH void func_801F2C48(void) {
         g_AreaCellCodes[*width * 60 + 0x45] = 0x10;
         g_AreaCellCodes[*width * 60 + 0x46] = 0x10;
         func_801F2F3C(-0x100, 0x80);
-        TASK(Actor)->header.step += 1;
+        SELF(Actor)->header.step += 1;
     }
 }

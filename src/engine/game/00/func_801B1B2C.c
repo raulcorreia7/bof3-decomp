@@ -13,7 +13,7 @@ MATCH s32 func_801B1B2C(s32 x, s32 y, s32 probe_type, s32 flags) {
     py          = y;
     mode        = flags;
     value       = Area_HeightRead(x, y);
-    work        = TASK(Actor);
+    work        = SELF(Actor);
     saved       = work->timer;
     work->timer = 0U;
     if (Game_TestPlacement(px, py, mode & BYTE_MASK, value) & BYTE_MASK) {
@@ -27,7 +27,7 @@ MATCH s32 func_801B1B2C(s32 x, s32 y, s32 probe_type, s32 flags) {
         SP_REF(s32, 0x8)   = px;
         SP_REF(s32, 0xC)   = py;
         SP_REF(s16, 0x2)   = Area_HeightRead(px, py);
-        TASK(Actor)->timer = saved;
+        SELF(Actor)->timer = saved;
         return 1;
     }
     return 0;

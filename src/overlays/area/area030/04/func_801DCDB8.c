@@ -17,19 +17,19 @@ MATCH void func_801DCDB8(void) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
         D_801442AC = 0xFFFF;
         g_SpawnedActors[6].unk_07 |= 0x80;
-        TASK(FishingState)->sub_index -= 1;
-        TASK(FishingState)->flag_04 = 0;
+        SELF(FishingState)->sub_index -= 1;
+        SELF(FishingState)->flag_04 = 0;
         return;
     }
     if (pad & g_InputMasks[FISHING_INPUT_CAST]) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
         g_SpawnedActors[6].unk_07 |= 2;
-        TASK(FishingState)->flag_04 += 1;
+        SELF(FishingState)->flag_04 += 1;
     } else if (input & (PADLup | PADLdown)) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
         g_SpawnedActors[6].unk_07 ^= 1;
         g_SpawnedActors[6].header.mode ^= 7;
-        TASK(FishingState)->flag_04 -= 1;
+        SELF(FishingState)->flag_04 -= 1;
     }
 
     if (!(g_SpawnedActors[6].unk_07 & 0x1)) {

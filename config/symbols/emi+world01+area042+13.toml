@@ -1,6 +1,6 @@
 ["emi/world01/area042/13"]
 jtbl_801F2C14 = { addr = 0x801F2C14, type = "Callback", size = 0x2C, source = "The switch table of func_801F4378: 11 jump targets of its jr dispatch." }
-Area_SetPosX = { addr = 0x801F3D18, type = "func", source = "the body stores into g_Task->pos.x" }
+Area_SetPosX = { addr = 0x801F3D18, type = "func", source = "the body stores into g_Self->pos.x" }
 UI_MessageAnswerSet = { addr = 0x801F3D90, type = "func", source = "Stores the message id the answer table D_801F56C4 holds for the menu choice g_UiMessageChoice in g_UiMessageRequest." }
 Scene_EventBegin = { addr = 0x801F4188, type = "func", source = "Begins the saved scene event: seeds g_SceneEventState (step 0, mode 7, selection 60), picks the countdown phase D_801F56F8 from the event timer in the save, and keeps the saved actor that carries the phase's spawn flag." }
 UI_WindowDrawPanel = { addr = 0x801F4B0C, type = "func", source = "Draws a window panel at (x, y) as four textured quads (the left edge, two halves of the middle, the right edge) between two texture-window draw modes, then its frame with UI_WindowDrawFrame; mode selects the bright shade, the additive page and the clut row." }

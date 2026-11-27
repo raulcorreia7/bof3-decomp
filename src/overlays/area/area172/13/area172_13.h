@@ -32,7 +32,7 @@ extern u8 D_80145BD6[];
 
 #define AREA_SPAWN_SLOT_LIFE        0x20
 #define AREA_SPAWN_SLOT_RADIUS      0x180
-#define AREA_SPAWN_SLOT_CORE_SHADE  TASK(Actor)->tint.bytes.rgb.r
+#define AREA_SPAWN_SLOT_CORE_SHADE  SELF(Actor)->tint.bytes.rgb.r
 #define AREA_SPAWN_SLOT_RADIUS_STEP 0xC
 
 void func_801F36C0(void* position, s32 radius, s32 colors);

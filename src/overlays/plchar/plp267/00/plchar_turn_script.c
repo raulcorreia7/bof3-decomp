@@ -6,7 +6,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801CE404(void) {
-    D_801D0988[TASK(Actor)->header.step]();
+    D_801D0988[SELF(Actor)->header.step]();
 }
 
 #include "overlays/plchar/shared/PlChar_StartTurnGarr.h"
@@ -14,7 +14,7 @@ MATCH void func_801CE404(void) {
 #include "overlays/plchar/shared/PlChar_RunStepScriptGarr.h"
 
 MATCH void func_801CE610(void) {
-    SYS_DISPATCH_TASK(D_801D0994, 2, g_Task);
+    SYS_DISPATCH_TASK(D_801D0994, 2, g_Self);
 }
 
 /* func_801CE654 */
@@ -34,7 +34,7 @@ MATCH void PlChar_RunGarrFieldTask(void) {
 #include "overlays/plchar/shared/PlChar_ProbeFacingFollower.h"
 
 MATCH void func_801CEBFC(void) {
-    SYS_DISPATCH_TASK(D_801D099C, 2, g_Task);
+    SYS_DISPATCH_TASK(D_801D099C, 2, g_Self);
 }
 
 #include "overlays/plchar/shared/PlChar_StartTurn.h"

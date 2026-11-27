@@ -11,7 +11,7 @@ MATCH void Area_UpdateIdleActor(void) {
         Actor_ClearVelocity();
         g_Game.current->u.field.counter.value = 3;
         func_801BC000();
-        work = TASK(Actor);
+        work = SELF(Actor);
         if ((work->vx == 0) && (work->vy == 0) && (work->header.mode == 1)) {
             work->header.step = 0;
         }

@@ -17,7 +17,7 @@ MATCH void func_800AEEC8(s32 effect_mode, u8 target_slot) {
         mode = 8;
     }
     slot                               = Battle_AllocEffect(1, 0x48);
-    g_BattleEffects[slot].target.party = TASK(PartyMember);
+    g_BattleEffects[slot].target.party = SELF(PartyMember);
     g_BattleEffects[slot].unk_04       = mode;
     g_BattleEffects[slot].arg.unk_09   = 1;
     g_BattleEffects[slot].unk_0A       = 0;

@@ -7,15 +7,15 @@ MATCH void func_800ADB74(void) {
     s32          slot;
 
     if ((g_UiPanelTasks[18].active & 0x1) == 0) {
-        TASK(PartyMember)->header.mode = 2;
-        TASK(PartyMember)->header.step = 0;
+        SELF(PartyMember)->header.mode = 2;
+        SELF(PartyMember)->header.step = 0;
         return;
     }
     if ((s16)g_UiPanelTasks[18].u.addr.unk_1E != (s16)g_UiPanelTasks[18].u.battle.row_base) {
-        TASK(PartyMember)->header.mode = 0;
+        SELF(PartyMember)->header.mode = 0;
         return;
     }
-    work                 = TASK(PartyMember);
+    work                 = SELF(PartyMember);
     work->screen_x.value = g_UiPanelTasks[18].pos.vx + (work->timer * 0x16 + 0x44);
     work->screen_y.value = g_UiPanelTasks[18].pos.vy + (work->unk_09 * 0x20 + 0x22);
     entries              = g_BattleTargetRows;

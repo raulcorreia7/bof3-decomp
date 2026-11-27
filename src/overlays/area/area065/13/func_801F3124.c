@@ -1,5 +1,5 @@
 /* Dropping the volatile cell changes the code: retail reloads it. */
-#define FAKE_DECL_TASK_VOLATILE
+#define FAKE_DECL_SELF_VOLATILE
 #include "area065_13.h"
 #include "overlays/area/shared/WorldMap_SelectKeyScript.h"
 

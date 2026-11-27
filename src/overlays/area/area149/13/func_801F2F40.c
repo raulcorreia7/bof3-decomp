@@ -5,7 +5,7 @@ MATCH void func_801F2F40(void) {
         g_PartyActors[0].unk_78 = 1;
         g_ScriptVars[0]         = 10;
         SND_SEPlay(1);
-        TASK(Actor)->unk_04++;
+        SELF(Actor)->unk_04++;
     }
     func_801F3140(-4);
     g_ScriptState->cursor -= 2;

@@ -10,18 +10,18 @@ MATCH void Actor_ShatterStart(void) {
     s32 limit;
 
     dst   = MEM_PTR(u8, BATTLE_SCRIPT_TABLE);
-    limit = *TASK(Actor)->range_54.table * 0x28;
+    limit = *SELF(Actor)->range_54.table * 0x28;
     index = 0;
     if (limit > 0) {
         do {
-            *dst = *TASK(Actor)->script;
-            TASK(Actor)->script += 1;
+            *dst = *SELF(Actor)->script;
+            SELF(Actor)->script += 1;
             index += 1;
             dst += 1;
         } while (index < limit);
     }
-    TASK(Actor)->script = MEM_PTR(u8, BATTLE_SCRIPT_TABLE);
+    SELF(Actor)->script = MEM_PTR(u8, BATTLE_SCRIPT_TABLE);
     Actor_ShatterBuildShards();
     Actor_ShatterStartDust();
-    TASK(Actor)->timer = 16;
+    SELF(Actor)->timer = 16;
 }

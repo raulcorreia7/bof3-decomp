@@ -4,8 +4,8 @@ MATCH void func_801F2D1C(void) {
     SpawnedActor* slot;
     u8            index;
 
-    TASK(Actor)->param.actor_slot = Actor_FindFreeSpawned();
-    index                         = TASK(Actor)->param.actor_slot;
+    SELF(Actor)->param.actor_slot = Actor_FindFreeSpawned();
+    index                         = SELF(Actor)->param.actor_slot;
     if (index != GAME_NONE) {
         slot               = &g_SpawnedActors[index];
         slot->header.flags = 1;

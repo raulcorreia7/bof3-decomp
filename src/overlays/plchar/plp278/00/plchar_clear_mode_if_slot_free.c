@@ -5,7 +5,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801CFA64(void) {
-    SYS_DISPATCH_TASK(D_801CFCEC, 2, g_Task);
+    SYS_DISPATCH_TASK(D_801CFCEC, 2, g_Self);
 }
 
 #include "overlays/plchar/shared/PlChar_ClaimHelperSlotStep.h"
@@ -18,9 +18,9 @@ MATCH void PlChar_StartSpawnedActorTurn(void) {
 #include "overlays/plchar/shared/PlChar_ClearModeIfSlotFree.h"
 
 MATCH void func_801CFC2C(void) {
-    D_801CFCF4[TASK(Actor)->unk_2C]();
+    D_801CFCF4[SELF(Actor)->unk_2C]();
 }
 
 MATCH void func_801CFC70(void) {
-    D_801CFD00[TASK(Actor)->unk_2C]();
+    D_801CFD00[SELF(Actor)->unk_2C]();
 }

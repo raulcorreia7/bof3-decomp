@@ -5,7 +5,7 @@ MATCH void Boss_EndBattle(void) {
 
     Battle_ShowActorEntry(0);
     work = (u8*)func_800AC754(0);
-    TASK_SET(work);
+    SELF_SET(work);
     work[0x2A] = 0;
     Script_Select(4);
     func_800AC934(1);

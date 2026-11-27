@@ -4,6 +4,6 @@ MATCH void Effect_RecordTrail(void) {
     s32 i;
 
     BMAGIC_SHIFT_TRAIL(BMagic_Trail)
-    BMagic_Trail[TASK(PartyMember)->unk_04][TASK(PartyMember)->param.unk_0B].vx = TASK(PartyMember)->screen_x.value;
-    BMagic_Trail[TASK(PartyMember)->unk_04][TASK(PartyMember)->param.unk_0B].vy = TASK(PartyMember)->screen_y.value;
+    BMagic_Trail[SELF(PartyMember)->unk_04][SELF(PartyMember)->param.unk_0B].vx = SELF(PartyMember)->screen_x.value;
+    BMagic_Trail[SELF(PartyMember)->unk_04][SELF(PartyMember)->param.unk_0B].vy = SELF(PartyMember)->screen_y.value;
 }

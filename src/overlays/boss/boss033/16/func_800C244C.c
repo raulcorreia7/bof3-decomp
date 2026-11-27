@@ -3,7 +3,7 @@
 MATCH void func_800C244C(void) {
     PartyMember* work;
 
-    work = TASK(PartyMember);
+    work = SELF(PartyMember);
     work->pos.x.fixed += work->unk_0C;
     work->pos.y.fixed += work->unk_10;
     COORD_INT(work->pos.z) += work->unk_14;

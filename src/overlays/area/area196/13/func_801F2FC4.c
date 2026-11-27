@@ -1,9 +1,9 @@
 #include "area196_13.h"
 
 MATCH void func_801F2FC4(void) {
-    TASK(Actor)->timer -= 4;
-    if (TASK(Actor)->timer == 0) {
+    SELF(Actor)->timer -= 4;
+    if (SELF(Actor)->timer == 0) {
         Actor_Clear();
     }
-    Game_SetCurrentActor(TASK(Actor)->timer);
+    Game_SetCurrentActor(SELF(Actor)->timer);
 }

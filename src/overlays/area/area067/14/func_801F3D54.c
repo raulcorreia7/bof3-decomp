@@ -6,7 +6,7 @@ MATCH void func_801F3D54(s16* row) {
     s16             radius;
     s16             y;
 
-    quad   = (AreaRippleQuad*)&TASK(Actor)->vx;
+    quad   = (AreaRippleQuad*)&SELF(Actor)->vx;
     angle  = rand() & 0xFC0;
     radius = rand() & 0x38;
     row[0] = quad->x + ((radius * rcos(angle)) >> 12);

@@ -45,7 +45,7 @@ MATCH void func_801F7F08(void) {
             }
             break;
         case 1:
-            TASK_SET(&g_Game.members[0]);
+            SELF_SET(&g_Game.members[0]);
             g_GameState = &g_Game.members[0];
             Party_FlashDamage(PARTY_DAMAGE_COLOR_RED);
             Char_HPLose(1, 6);

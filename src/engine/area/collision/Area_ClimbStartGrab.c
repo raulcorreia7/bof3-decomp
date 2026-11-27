@@ -5,7 +5,7 @@
 MATCH void Area_ClimbStartGrab(void) {
     u32 route;
 
-    route = TASK(Actor)->direction;
+    route = SELF(Actor)->direction;
     if (route == FACING_LEFT) {
         Script_Request(0x3C);
     } else {

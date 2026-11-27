@@ -3,12 +3,12 @@
 MATCH void Effect_CountUpTimersAndStep(void) {
     PartyMember* work;
 
-    work = TASK(PartyMember);
+    work = SELF(PartyMember);
     work->unk_09++;
-    work = TASK(PartyMember);
+    work = SELF(PartyMember);
     work->timer++;
     if (work->timer == 16) {
-        work = TASK(PartyMember);
+        work = SELF(PartyMember);
         work->header.step++;
     }
 }

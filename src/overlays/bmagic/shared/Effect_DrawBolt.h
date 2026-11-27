@@ -16,8 +16,8 @@ MATCH void Effect_DrawBolt(void) {
     d                         = &g_ScratchPad;
     vec                       = g_ScratchPadVectorHalves;
     d[0]                      = BOLT_RADIUS;
-    D_1F800004                = ((TASK(PartyMember)->param.unk_0B + 2) & 0xF) << 8;
-    D_1F80000C                = TASK(PartyMember)->timer;
+    D_1F800004                = ((SELF(PartyMember)->param.unk_0B + 2) & 0xF) << 8;
+    D_1F80000C                = SELF(PartyMember)->timer;
     i                         = 1;
     D_1F800008                = RANDOM_MASK(0x3F);
     vec[0]                    = 0;
@@ -27,8 +27,8 @@ MATCH void Effect_DrawBolt(void) {
         point = vec;
         cell  = d + 1;
         do {
-            x = (point[0] >> 3) + TASK(PartyMember)->pos.x.fixed;
-            y = (point[1] >> 3) + TASK(PartyMember)->pos.y.fixed;
+            x = (point[0] >> 3) + SELF(PartyMember)->pos.x.fixed;
+            y = (point[1] >> 3) + SELF(PartyMember)->pos.y.fixed;
             SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256), 0);
             Area_CellAddPrim(x, y, 2, sizeof(DR_MODE));
             primitive = (LINE_G2*)g_GfxPrimCursor;
@@ -40,7 +40,7 @@ MATCH void Effect_DrawBolt(void) {
             } else {
                 BOLT_FLICKER_CELL = BOLT_FLICKER_BASE - RANDOM_MASK(BOLT_FLICKER_MASK);
             }
-            page     = ((TASK(PartyMember)->param.unk_0B + i + 2) & 0xF) << 8;
+            page     = ((SELF(PartyMember)->param.unk_0B + i + 2) & 0xF) << 8;
             point[0] = 0;
             cell[0]  = page;
             point[1] = FIXED_MUL(rsin(page), cell[-1]);

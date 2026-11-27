@@ -11,5 +11,5 @@ MATCH void func_800C1E34(void) {
         Script_Request(0xC);
     }
     func_801E30F8();
-    TASK(PartyMember)->header.mode++;
+    SELF(PartyMember)->header.mode++;
 }

@@ -22,21 +22,21 @@ extern s16 D_1F800008[];
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);                                                                                \
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);                                                                                     \
     GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(DR_MODE));                                                                                   \
-    g_ScratchPad.cells.halves[4] = TASK(PartyMember)->screen_x.value;                                                                           \
-    g_ScratchPad.cells.halves[5] = TASK(PartyMember)->screen_y.value;                                                                           \
+    g_ScratchPad.cells.halves[4] = SELF(PartyMember)->screen_x.value;                                                                           \
+    g_ScratchPad.cells.halves[5] = SELF(PartyMember)->screen_y.value;                                                                           \
     for (i = 0; i < (COUNT) + 1; i++) {                                                                                                         \
-        g_ScratchPad.cells.halves[4] += FIXED_MUL(rsin(TASK(PartyMember)->unk_14), 12);                                                         \
-        g_ScratchPad.cells.halves[5] += FIXED_MUL(rcos(TASK(PartyMember)->unk_14), 12);                                                         \
+        g_ScratchPad.cells.halves[4] += FIXED_MUL(rsin(SELF(PartyMember)->unk_14), 12);                                                         \
+        g_ScratchPad.cells.halves[5] += FIXED_MUL(rcos(SELF(PartyMember)->unk_14), 12);                                                         \
     }                                                                                                                                           \
     g_ScratchPadVectors[1].vx    = g_ScratchPad.cells.halves[4];                                                                                \
     g_ScratchPadVectors[1].vy    = g_ScratchPad.cells.halves[5];                                                                                \
-    g_ScratchPad.cells.halves[2] = (TASK(PartyMember)->unk_14 + (TURN)) & 0xFFF;                                                                \
+    g_ScratchPad.cells.halves[2] = (SELF(PartyMember)->unk_14 + (TURN)) & 0xFFF;                                                                \
     g_ScratchPad.cells.halves[6] = g_ScratchPad.cells.halves[4] + FIXED_MUL(rsin(g_ScratchPad.cells.halves[2]), 32);                            \
     g_ScratchPad.cells.halves[7] = g_ScratchPad.cells.halves[5] + FIXED_MUL(rcos(g_ScratchPad.cells.halves[2]), 32);                            \
     g_ScratchPad.cells.halves[0] = (u32)rsin(0) >> 8;                                                                                           \
     g_ScratchPadVectors[0].vx    = g_ScratchPad.cells.halves[6] + FIXED_MUL(rsin(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[0]);  \
     g_ScratchPadVectors[0].vy    = g_ScratchPad.cells.halves[7] + FIXED_MUL(rcos(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[0]);  \
-    g_ScratchPad.cells.halves[3] = ((rand() & 7) + 5) * TASK(PartyMember)->unk_04;                                                              \
+    g_ScratchPad.cells.halves[3] = ((rand() & 7) + 5) * SELF(PartyMember)->unk_04;                                                              \
     for (i = 1; i < 48; i++) {                                                                                                                  \
         line = (LINE_F2*)g_GfxPrimCursor;                                                                                                       \
         SetLineF2(line);                                                                                                                        \
@@ -44,14 +44,14 @@ extern s16 D_1F800008[];
         g_ScratchPad.cells.halves[0] = rand() & 7;                                                                                              \
         run += g_ScratchPad.cells.halves[0];                                                                                                    \
         if (run < 12) {                                                                                                                         \
-            g_ScratchPad.cells.halves[4] += FIXED_MUL(rsin(TASK(PartyMember)->unk_14), g_ScratchPad.cells.halves[0]);                           \
-            g_ScratchPad.cells.halves[5] += FIXED_MUL(rcos(TASK(PartyMember)->unk_14), g_ScratchPad.cells.halves[0]);                           \
+            g_ScratchPad.cells.halves[4] += FIXED_MUL(rsin(SELF(PartyMember)->unk_14), g_ScratchPad.cells.halves[0]);                           \
+            g_ScratchPad.cells.halves[5] += FIXED_MUL(rcos(SELF(PartyMember)->unk_14), g_ScratchPad.cells.halves[0]);                           \
             g_ScratchPad.cells.halves[6] = g_ScratchPad.cells.halves[4] + FIXED_MUL(rsin(g_ScratchPad.cells.halves[2]), 32);                    \
             g_ScratchPad.cells.halves[7] = g_ScratchPad.cells.halves[5] + FIXED_MUL(rcos(g_ScratchPad.cells.halves[2]), 32);                    \
         } else {                                                                                                                                \
             run                          = 0;                                                                                                   \
-            g_ScratchPad.cells.halves[4] = g_ScratchPadVectors[1].vx + FIXED_MUL(rsin(TASK(PartyMember)->unk_14), 12);                          \
-            g_ScratchPad.cells.halves[5] = g_ScratchPadVectors[1].vy + FIXED_MUL(rcos(TASK(PartyMember)->unk_14), 12);                          \
+            g_ScratchPad.cells.halves[4] = g_ScratchPadVectors[1].vx + FIXED_MUL(rsin(SELF(PartyMember)->unk_14), 12);                          \
+            g_ScratchPad.cells.halves[5] = g_ScratchPadVectors[1].vy + FIXED_MUL(rcos(SELF(PartyMember)->unk_14), 12);                          \
             g_ScratchPadVectors[1].vx    = g_ScratchPad.cells.halves[4];                                                                        \
             g_ScratchPadVectors[1].vy    = g_ScratchPad.cells.halves[5];                                                                        \
             g_ScratchPad.cells.halves[6] = g_ScratchPad.cells.halves[4] + FIXED_MUL(rsin(g_ScratchPad.cells.halves[2]), 32);                    \

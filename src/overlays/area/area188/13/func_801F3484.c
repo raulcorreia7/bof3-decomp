@@ -5,18 +5,18 @@ MATCH void func_801F3484(void) {
     u8          timer;
     u8          i;
 
-    TASK(Actor)->angle_z += 0xC0000;
-    TASK(Actor)->screen_x -= 6;
-    GFX_DrawColorFan(&TASK(Actor)->angle_x, (s16)TASK(Actor)->screen_x, 6);
-    ACTOR_COUNT_DOWN(TASK(Actor), timer, timer);
+    SELF(Actor)->angle_z += 0xC0000;
+    SELF(Actor)->screen_x -= 6;
+    GFX_DrawColorFan(&SELF(Actor)->angle_x, (s16)SELF(Actor)->screen_x, 6);
+    ACTOR_COUNT_DOWN(SELF(Actor), timer, timer);
     if ((timer & BYTE_MASK) == 0) {
-        TASK(Actor)->timer  = 0x20;
-        TASK(Actor)->unk_06 = 0;
-        TASK(Actor)->header.mode += 1;
+        SELF(Actor)->timer  = 0x20;
+        SELF(Actor)->unk_06 = 0;
+        SELF(Actor)->header.mode += 1;
         Area_ClearWorkColumn();
-        TASK(Actor)->pos.x.fixed = TASK(Actor)->angle_x;
-        TASK(Actor)->pos.y.fixed = TASK(Actor)->angle_y;
-        TASK(Actor)->pos.z.fixed = TASK(Actor)->angle_z;
+        SELF(Actor)->pos.x.fixed = SELF(Actor)->angle_x;
+        SELF(Actor)->pos.y.fixed = SELF(Actor)->angle_y;
+        SELF(Actor)->pos.z.fixed = SELF(Actor)->angle_z;
         spin                     = MEM_PTR(SpinEffect, AREA_WORK + 0xC0);
         i                        = 0;
         do {

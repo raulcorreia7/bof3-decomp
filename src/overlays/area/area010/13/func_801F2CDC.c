@@ -9,7 +9,7 @@ MATCH void func_801F2CDC(void) {
         slot               = &g_SpawnedActors[index];
         slot->header.flags = 1;
         slot->type         = 0x1C;
-        slot->pos.x.fixed  = TASK(Actor)->pos.x.fixed;
-        slot->pos.y.fixed  = TASK(Actor)->pos.y.fixed;
+        slot->pos.x.fixed  = SELF(Actor)->pos.x.fixed;
+        slot->pos.y.fixed  = SELF(Actor)->pos.y.fixed;
     }
 }

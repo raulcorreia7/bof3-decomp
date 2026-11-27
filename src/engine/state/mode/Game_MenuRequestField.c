@@ -7,9 +7,9 @@ MATCH bool Game_MenuRequestField(void) {
         if (!(g_Game.flags & GAME_FLAG_MENU_LOCK)) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 5));
             g_Game.walk_flags |= AREA_WALK_MENU_ACTIVE;
-            Actor_RequestRoute(TASK(Actor)->direction);
-            TASK(Actor)->header.mode = FIELD_TASK_MODE_MENU;
-            TASK(Actor)->header.step = 0;
+            Actor_RequestRoute(SELF(Actor)->direction);
+            SELF(Actor)->header.mode = FIELD_TASK_MODE_MENU;
+            SELF(Actor)->header.step = 0;
             return 1;
         }
     }

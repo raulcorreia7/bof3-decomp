@@ -15,22 +15,22 @@ MATCH void Fishing_QuitInput(void) {
 
     if ((*pad & (PADLup | PADLdown)) != 0) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
-        work            = TASK(FishingState);
+        work            = SELF(FishingState);
         work->cue_index = (work->cue_index ^ 0x1);
     }
 
     if ((*pad & (PADRup | PADRdown)) != 0) {
         if ((*pad & PADRup) != 0) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
-            TASK(FishingState)->cue_index = 1;
+            SELF(FishingState)->cue_index = 1;
         } else {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
         }
-        work            = TASK(FishingState);
+        work            = SELF(FishingState);
         work->sub_index = (work->sub_index + 1);
     }
 
-    UI_CursorDraw(112, (130 - TASK(FishingState)->cue_index * 16) & 0xFFFE, 0);
+    UI_CursorDraw(112, (130 - SELF(FishingState)->cue_index * 16) & 0xFFFE, 0);
     Fishing_DrawDimScreen();
     Fishing_DrawWindowFrame(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
     UI_TextDraw(29, 21, 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_MESSAGE_QUIT_PROMPT));

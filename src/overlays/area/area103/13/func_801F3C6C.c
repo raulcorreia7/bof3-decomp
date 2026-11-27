@@ -4,7 +4,7 @@ MATCH void func_801F3C6C(void) {
     s32 slot;
 
     if (*g_ScriptVars == 0xC) {
-        TASK(Actor)->header.step++;
+        SELF(Actor)->header.step++;
         g_AreaSceneMode                    = 0x23;
         slot                               = Actor_FindFreeSpawned() & BYTE_MASK;
         g_SpawnedActors[slot].header.flags = 1;

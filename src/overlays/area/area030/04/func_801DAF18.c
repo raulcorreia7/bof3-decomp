@@ -13,5 +13,5 @@ MATCH void func_801DAF18(void) {
     g_AreaScrollTargetCoordY.fixed = *(u32*)(D_801468C0 + g_FishingHookedFish * 152);
     SND_StartDecrescendo(0, 0, 0x64, 8);
     g_SpawnedActors[3].header.mode = 7;
-    TASK(FishingState)->sub_index += 1;
+    SELF(FishingState)->sub_index += 1;
 }

@@ -13,11 +13,11 @@ MATCH void func_801F3E08(void) {
     i = 0;
     do {
         g_ScratchPadVectors[1].vz = (g_FrameCount << 5) + (i << 10);
-        func_801F46C8(TASK(Actor)->timer << 2, 0x1F, 0xE00 + i * 0x400, 0x18);
+        func_801F46C8(SELF(Actor)->timer << 2, 0x1F, 0xE00 + i * 0x400, 0x18);
         i++;
     } while (i < 4);
 
-    if (TASK(Actor)->timer >= 3) {
+    if (SELF(Actor)->timer >= 3) {
         g_ScratchPadVectors[0].vz = 0x3A0;
         g_ScratchPadVectors[1].vx = 0x400;
         g_ScratchPadVectors[1].vy = 0;
@@ -37,9 +37,9 @@ MATCH void func_801F3E08(void) {
     }
 
     func_801F4430();
-    TASK(Actor)->timer++;
-    if (TASK(Actor)->timer >= 8) {
-        TASK(Actor)->header.step++;
+    SELF(Actor)->timer++;
+    if (SELF(Actor)->timer >= 8) {
+        SELF(Actor)->header.step++;
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0));
     }
 }

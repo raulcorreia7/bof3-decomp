@@ -7,13 +7,13 @@ MATCH void func_801F3F80(void) {
     u8  selection;
     s32 result;
 
-    TASK_SET(&g_Game.members[0]);
+    SELF_SET(&g_Game.members[0]);
     index     = g_PartyFieldOrder[0];
     y         = g_Game.members[0].pos.y.fixed;
     x         = g_Game.members[0].pos.x.fixed;
     selection = D_801F4644[index];
     result    = Actor_SpawnHelper(3, 0, selection, x, y, g_Game.members[0].pos.z.fixed);
     if ((u8)result != GAME_NONE) {
-        TASK(Actor)->param.unk_0B = result;
+        SELF(Actor)->param.unk_0B = result;
     }
 }

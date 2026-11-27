@@ -39,11 +39,11 @@ u16 y;
         if (g_Accessories[*slot_list].type != ITEM_TYPE_FISHING_ROD) {
             continue;
         }
-        work = TASK(FishingState);
+        work = SELF(FishingState);
         if (work->pos_x == row) {
             work->motion.half.cursor = slot;
         }
-        if (D_80145E94[0] == 2 && !(((work = TASK(FishingState))->counter_07) & 1) && work->pos_x == row) {
+        if (D_80145E94[0] == 2 && !(((work = SELF(FishingState))->counter_07) & 1) && work->pos_x == row) {
             UI_TextDraw(x + 5, (s16)icon_y, UI_TEXT_DIM, ITEM_NAME_LENGTH, (u8*)&g_Accessories[*slot_list]);
             UI_TextDraw(x + 5, (s16)(y + 23 + row_offset), 0, ITEM_NAME_LENGTH, (u8*)&g_Accessories[*slot_list]);
             qty = g_InventoryCounts[3][slot];
@@ -64,7 +64,7 @@ u16 y;
         row_offset += FISHING_ACCESSORY_ROW_HEIGHT;
         row += 1;
     }
-    work             = TASK(FishingState);
+    work             = SELF(FishingState);
     work->step_delta = row;
     if (work->pos_x >= row) {
         if (row == 0) {

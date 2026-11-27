@@ -14,5 +14,5 @@ CHAR_DEFINE_PROBE_FACING_BLOCKED(func_801CF99C);
 #include "overlays/plchar/shared/PlChar_ProbeFacingClearance.h"
 
 MATCH void func_801CFCA4(void) {
-    SYS_DISPATCH_TASK(D_801D09D0, 2, g_Task);
+    SYS_DISPATCH_TASK(D_801D09D0, 2, g_Self);
 }

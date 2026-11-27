@@ -39,7 +39,7 @@ typedef struct SpriteOffset {
 
 ASSERT_SIZE(SpriteOffset, 8);
 
-/* One sprite offset per actor type, indexed by TASK(Actor)->unk_06. */
+/* One sprite offset per actor type, indexed by SELF(Actor)->unk_06. */
 extern SpriteOffset D_801F43D4[];
 
 /* This image's copy of the sprite coordinate rounding (link-only name: the slus copy shares it). */

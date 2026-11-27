@@ -30,14 +30,14 @@ MATCH void func_801D130C(void) {
 
     D_800396C0                      = 0;
     D_800396FE                      = 0;
-    TASK(FishingState)->saved_index = TASK(FishingState)->saved_value_27;
-    TASK(FishingState)->flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
-    TASK(FishingState)->saved_value_27 = 0x7B;
-    TASK(FishingState)->unk_5C         = 1;
-    TASK(FishingState)->tint_5D        = -0x40;
-    TASK(FishingState)->tint_5E        = -0x40;
-    TASK(FishingState)->tint_5F        = -0x40;
-    state_work                         = TASK(FishingState);
+    SELF(FishingState)->saved_index = SELF(FishingState)->saved_value_27;
+    SELF(FishingState)->flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
+    SELF(FishingState)->saved_value_27 = 0x7B;
+    SELF(FishingState)->unk_5C         = 1;
+    SELF(FishingState)->tint_5D        = -0x40;
+    SELF(FishingState)->tint_5E        = -0x40;
+    SELF(FishingState)->tint_5F        = -0x40;
+    state_work                         = SELF(FishingState);
     g_GfxPalettePending                = 1;
     state_work->sub_index              = (state_work->sub_index + 1);
     Area_AddActor();

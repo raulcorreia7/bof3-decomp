@@ -9,14 +9,14 @@ MATCH void func_801F3628(void) {
     u8           type;
 
     g_GameFlags &= 0xDFFF;
-    saved = TASK(PartyMember);
+    saved = SELF(PartyMember);
     i     = 0;
     if (g_PartySize != 0) {
         do {
             index       = i & 0xFF;
             record      = &g_Game.members[index];
             g_GameState = record;
-            TASK_SET(record);
+            SELF_SET(record);
             if ((bounds = func_801F355C((u8)index)) == 0xFF) {
                 if (((saved->param.unk_0B >> index) & 1) != 0) {
                     saved->param.unk_0B &= ~BIT(index);
@@ -31,28 +31,28 @@ MATCH void func_801F3628(void) {
                 saved->param.unk_0B |= BIT(index);
                 g_AreaWalkFlags |= BIT(index);
                 g_GameState->u.field.counter.unsigned_value = 2;
-                TASK(PartyMember)->unk_09                   = 0;
-                TASK(PartyMember)->facing                   = D_801F3B9C[bounds].unk_04;
-                Script_Request(TASK(PartyMember)->facing);
+                SELF(PartyMember)->unk_09                   = 0;
+                SELF(PartyMember)->facing                   = D_801F3B9C[bounds].unk_04;
+                Script_Request(SELF(PartyMember)->facing);
                 goto next_record;
             }
-            if (TASK(PartyMember)->unk_09 == 0) {
+            if (SELF(PartyMember)->unk_09 == 0) {
                 func_801C2538();
                 if (index == 0) {
                     func_801C2710();
                 }
             } else {
                 type = D_801F3B9C[bounds].unk_04;
-                if (TASK(PartyMember)->facing != type) {
-                    TASK(PartyMember)->facing = type;
-                    TASK(PartyMember)->unk_0C = -TASK(PartyMember)->unk_0C;
-                    TASK(PartyMember)->unk_10 = -TASK(PartyMember)->unk_10;
-                    TASK(PartyMember)->unk_14 = -TASK(PartyMember)->unk_14;
-                    TASK(PartyMember)->unk_09 = 8 - TASK(PartyMember)->unk_09;
+                if (SELF(PartyMember)->facing != type) {
+                    SELF(PartyMember)->facing = type;
+                    SELF(PartyMember)->unk_0C = -SELF(PartyMember)->unk_0C;
+                    SELF(PartyMember)->unk_10 = -SELF(PartyMember)->unk_10;
+                    SELF(PartyMember)->unk_14 = -SELF(PartyMember)->unk_14;
+                    SELF(PartyMember)->unk_09 = 8 - SELF(PartyMember)->unk_09;
                 }
             }
             func_801B0DFC();
-            TASK(PartyMember)->unk_09--;
+            SELF(PartyMember)->unk_09--;
             Script_AnimStepLoop();
             g_GameFlags |= 0x2000;
         next_record:
@@ -62,5 +62,5 @@ MATCH void func_801F3628(void) {
     if (g_GameStateIndex == GAME_REQUEST_AREA_CHANGE) {
         g_GameFlags &= 0xDFFF;
     }
-    TASK_SET(saved);
+    SELF_SET(saved);
 }

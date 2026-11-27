@@ -5,40 +5,40 @@
 MATCH void Area_WalkTurnFromHighStep(s16 probe_x, s16 probe_y) {
     u8 route;
 
-    if (TASK(Actor)->direction & 0x1) {
+    if (SELF(Actor)->direction & 0x1) {
         return;
     }
-    if (Area_IsStepTooHigh(probe_x, probe_x, COORD_INT(TASK(Actor)->pos.y), (s16)(COORD_INT(TASK(Actor)->pos.y) + 1), 1) & BYTE_MASK) {
+    if (Area_IsStepTooHigh(probe_x, probe_x, COORD_INT(SELF(Actor)->pos.y), (s16)(COORD_INT(SELF(Actor)->pos.y) + 1), 1) & BYTE_MASK) {
         Actor_SnapFacing(4, 6, 5);
     }
-    if (TASK(Actor)->direction & 0x1) {
+    if (SELF(Actor)->direction & 0x1) {
         return;
     }
-    if (!(TASK(Actor)->direction & 0x4)) {
-        if (Area_IsStepTooHigh(probe_x, probe_x, COORD_INT(TASK(Actor)->pos.y), probe_y, 1) & BYTE_MASK) {
+    if (!(SELF(Actor)->direction & 0x4)) {
+        if (Area_IsStepTooHigh(probe_x, probe_x, COORD_INT(SELF(Actor)->pos.y), probe_y, 1) & BYTE_MASK) {
             Actor_SnapFacing(4, 6, 5);
         }
     } else {
-        if (Area_IsStepTooHigh(probe_x, probe_x, probe_y, (s16)((u16)COORD_INT(TASK(Actor)->pos.y) + 1), 1) & BYTE_MASK) {
+        if (Area_IsStepTooHigh(probe_x, probe_x, probe_y, (s16)((u16)COORD_INT(SELF(Actor)->pos.y) + 1), 1) & BYTE_MASK) {
             Actor_SnapFacing(4, 6, 5);
         }
     }
-    if (TASK(Actor)->direction & 0x1) {
+    if (SELF(Actor)->direction & 0x1) {
         return;
     }
-    if (Area_IsStepTooHigh(COORD_INT(TASK(Actor)->pos.x), (s16)(COORD_INT(TASK(Actor)->pos.x) + 1), probe_y, probe_y, 3) & BYTE_MASK) {
+    if (Area_IsStepTooHigh(COORD_INT(SELF(Actor)->pos.x), (s16)(COORD_INT(SELF(Actor)->pos.x) + 1), probe_y, probe_y, 3) & BYTE_MASK) {
         Actor_SnapFacing(2, 4, 3);
     }
-    route = TASK(Actor)->direction;
+    route = SELF(Actor)->direction;
     if (route & 0x1) {
         return;
     }
     if ((route == FACING_UP_LEFT) || (route == FACING_DOWN_LEFT)) {
-        if (Area_IsStepTooHigh(COORD_INT(TASK(Actor)->pos.x), probe_x, probe_y, probe_y, 3) & BYTE_MASK) {
+        if (Area_IsStepTooHigh(COORD_INT(SELF(Actor)->pos.x), probe_x, probe_y, probe_y, 3) & BYTE_MASK) {
             Actor_SnapFacing(2, 4, 3);
         }
     } else {
-        if (Area_IsStepTooHigh((s16)((u16)COORD_INT(TASK(Actor)->pos.x) + 1), probe_x, probe_y, probe_y, 3) & BYTE_MASK) {
+        if (Area_IsStepTooHigh((s16)((u16)COORD_INT(SELF(Actor)->pos.x) + 1), probe_x, probe_y, probe_y, 3) & BYTE_MASK) {
             Actor_SnapFacing(2, 4, 3);
         }
     }

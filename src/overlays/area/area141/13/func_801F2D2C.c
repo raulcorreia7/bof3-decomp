@@ -10,11 +10,11 @@ MATCH void func_801F2D2C(void) {
     s32            id;
     u32            value;
 
-    TASK(Actor)->timer = 0;
-    for (row = D_801F47D4[COORD_INT(TASK(Actor)->pos.x)].y0; row <= D_801F47D4[COORD_INT(TASK(Actor)->pos.x)].y1; row++) {
+    SELF(Actor)->timer = 0;
+    for (row = D_801F47D4[COORD_INT(SELF(Actor)->pos.x)].y0; row <= D_801F47D4[COORD_INT(SELF(Actor)->pos.x)].y1; row++) {
         map  = (AreaMapBundle*)MAP_BUNDLE_BASE;
         base = (u8*)map;
-        for (col = D_801F47D4[COORD_INT(TASK(Actor)->pos.x)].x0; col <= D_801F47D4[COORD_INT(TASK(Actor)->pos.x)].x1; col++) {
+        for (col = D_801F47D4[COORD_INT(SELF(Actor)->pos.x)].x0; col <= D_801F47D4[COORD_INT(SELF(Actor)->pos.x)].x1; col++) {
             entry_base = MEM(u16, MAP_BUNDLE_BASE + 2) * 4 + (((map->width * MEM(u8, MAP_BUNDLE_BASE + 1) + 1) / 2) * 4 + (u32)base);
             entry      = (u32*)(entry_base + MEM(u16, col * 2 + (row * map->width * 2 + MEM(u16, MAP_BUNDLE_BASE + 2) * 4) + (u32)base) * 4);
             value      = *entry;
@@ -25,5 +25,5 @@ MATCH void func_801F2D2C(void) {
             }
         }
     }
-    TASK(Actor)->header.step++;
+    SELF(Actor)->header.step++;
 }

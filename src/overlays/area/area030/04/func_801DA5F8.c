@@ -9,5 +9,5 @@ MATCH void func_801DA5F8(void) {
 
     (*state_byte)++;
     Script_Request(1);
-    TASK(Actor)->unk_03 = 1;
+    SELF(Actor)->unk_03 = 1;
 }

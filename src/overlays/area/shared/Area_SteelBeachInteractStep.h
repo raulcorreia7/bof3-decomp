@@ -9,11 +9,11 @@
     if (g_GameAreaId != AREA_ID_STEEL_BEACH_MAP) {                                 \
         return;                                                                    \
     }                                                                              \
-    x    = TASK(Actor)->pos.x.fixed + g_FacingSteps[TASK(Actor)->direction].x * 2; \
-    y    = TASK(Actor)->pos.y.fixed + g_FacingSteps[TASK(Actor)->direction].y * 2; \
+    x    = SELF(Actor)->pos.x.fixed + g_FacingSteps[SELF(Actor)->direction].x * 2; \
+    y    = SELF(Actor)->pos.y.fixed + g_FacingSteps[SELF(Actor)->direction].y * 2; \
     slot = Actor_FindInRange(x, y, 1);                                             \
     if (g_PadStates[0].held & g_InputMasks[FIELD_INPUT_RUN]) {                     \
-        if (TASK(Actor)->direction == (g_Actors[(u8)slot].direction & 0x7)) {      \
+        if (SELF(Actor)->direction == (g_Actors[(u8)slot].direction & 0x7)) {      \
             g_Actors[(u8)slot].interaction_flags |= ACTOR_INTERACTION_PENDING;     \
             return;                                                                \
         }                                                                          \
@@ -22,7 +22,7 @@
         return;                                                                    \
     }                                                                              \
     Area_RunWalk();                                                                \
-    TASK(Actor)->timer -= 1;                                                       \
+    SELF(Actor)->timer -= 1;                                                       \
     Actor_MovementUpdate();                                                        \
     g_Game.current->u.field.mode.value = 1;                                        \
-    TASK(Actor)->header.step           = 1;
+    SELF(Actor)->header.step           = 1;

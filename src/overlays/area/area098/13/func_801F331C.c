@@ -9,7 +9,7 @@ MATCH void func_801F331C(void) {
     dot = AREA_TRAIL_DOTS;
     for (i = 0; i < D_801F651C; dot++, i++) {
         if (dot->active != 0) {
-            if (TASK(Actor)->unk_06 == 0) {
+            if (SELF(Actor)->unk_06 == 0) {
                 if (dot->life != 0) {
                     dot->x += dot->dx;
                     dot->y += dot->dy;
@@ -29,7 +29,7 @@ MATCH void func_801F331C(void) {
         }
         dot->active ^= 1;
     }
-    ACTOR_COUNT_DOWN(TASK(Actor), timer, timer);
+    ACTOR_COUNT_DOWN(SELF(Actor), timer, timer);
     if (timer == 0) {
         Actor_Clear();
     }

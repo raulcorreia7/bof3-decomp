@@ -17,9 +17,9 @@ MATCH void func_801F5174(s32 steps, s32 radius) {
     s32       z;
     s32       height;
 
-    x       = (TASK(Actor)->pos.x.part.integer - 0x80) << 7;
-    y       = (TASK(Actor)->pos.y.part.integer - 0x80) << 7;
-    height  = (s16)Area_HeightSample(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed) / 2;
+    x       = (SELF(Actor)->pos.x.part.integer - 0x80) << 7;
+    y       = (SELF(Actor)->pos.y.part.integer - 0x80) << 7;
+    height  = (s16)Area_HeightSample(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed) / 2;
     height  = -height;
     i       = 0;
     corners = g_ScratchPadVectors;
@@ -48,6 +48,6 @@ MATCH void func_801F5174(s32 steps, s32 radius) {
         part   = (7 - i) * 8 + (7 - phase);
         radius = part * (radius << 18) / 128 & (0xF8 << 16);
         Area_ApplyTileToQuad((part / 4 << 19) | (0xBA00 << 16) | 0x9124, prim, 1);
-        Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, 2, sizeof(POLY_FT4));
+        Area_CellAddPrim(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed, 2, sizeof(POLY_FT4));
     }
 }

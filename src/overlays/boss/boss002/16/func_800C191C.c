@@ -9,7 +9,7 @@ MATCH void func_800C191C(void) {
     index  = (u8)func_800AC7D0(0);
     record = &g_Actors[index].interaction_flags;
     if (!Actor_Run(record, 0, -0xE, 0x40, -0x400, 0xFF, 0)) {
-        Battle_ClearSlotPending(TASK(Actor)->unk_05);
+        Battle_ClearSlotPending(SELF(Actor)->unk_05);
         flags = &g_Battle.outcome.result;
         *flags |= BATTLE_RESULT_VICTORY;
         func_800ACFF4();

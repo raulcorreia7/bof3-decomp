@@ -5,7 +5,7 @@ MATCH void Actor_SnapFacing(u8 arg_a, u8 arg_b, u8 arg_c) {
     Actor* work;
     u8     current;
 
-    work    = TASK(Actor);
+    work    = SELF(Actor);
     current = work->direction;
 
     if (current & 0x1) {

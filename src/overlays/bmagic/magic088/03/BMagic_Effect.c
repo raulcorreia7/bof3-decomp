@@ -14,32 +14,32 @@ MATCH void func_801EECA4(void) {
     u16*         dst;
 
     actor                           = g_Battle.selected_actor;
-    TASK(PartyMember)->pos.x.fixed  = actor->pos.x.fixed;
-    TASK(PartyMember)->pos.y.fixed  = actor->pos.y.fixed;
-    TASK(PartyMember)->pos.z.fixed  = actor->pos.z.fixed;
-    TASK(PartyMember)->unk_04       = func_801EF34C();
-    TASK(PartyMember)->param.unk_0B = 0;
-    TASK(PartyMember)->unk_09       = 16;
-    TASK(PartyMember)->header.mode += 1;
+    SELF(PartyMember)->pos.x.fixed  = actor->pos.x.fixed;
+    SELF(PartyMember)->pos.y.fixed  = actor->pos.y.fixed;
+    SELF(PartyMember)->pos.z.fixed  = actor->pos.z.fixed;
+    SELF(PartyMember)->unk_04       = func_801EF34C();
+    SELF(PartyMember)->param.unk_0B = 0;
+    SELF(PartyMember)->unk_09       = 16;
+    SELF(PartyMember)->header.mode += 1;
     slot                               = Battle_AllocEffect(1, 32);
-    g_BattleEffects[slot].target.party = TASK(PartyMember);
+    g_BattleEffects[slot].target.party = SELF(PartyMember);
     g_BattleEffects[slot].header.mode  = 0;
     g_BattleEffects[slot].arg.unk_09   = 0;
     g_BattleEffects[slot].unk_0A       = 0;
-    g_BattleEffects[slot].pos.x.fixed  = TASK(PartyMember)->pos.x.fixed;
-    g_BattleEffects[slot].pos.y.fixed  = TASK(PartyMember)->pos.y.fixed;
-    g_BattleEffects[slot].pos.z.fixed  = TASK(PartyMember)->pos.z.fixed;
-    TASK(PartyMember)->param.unk_0B += 1;
+    g_BattleEffects[slot].pos.x.fixed  = SELF(PartyMember)->pos.x.fixed;
+    g_BattleEffects[slot].pos.y.fixed  = SELF(PartyMember)->pos.y.fixed;
+    g_BattleEffects[slot].pos.z.fixed  = SELF(PartyMember)->pos.z.fixed;
+    SELF(PartyMember)->param.unk_0B += 1;
     slot                               = Battle_AllocEffect(1, 32);
-    g_BattleEffects[slot].target.party = TASK(PartyMember);
+    g_BattleEffects[slot].target.party = SELF(PartyMember);
     g_BattleEffects[slot].header.mode  = 1;
-    g_BattleEffects[slot].unk_04       = TASK(PartyMember)->unk_04;
-    g_BattleEffects[slot].arg.unk_09   = TASK(PartyMember)->unk_09;
+    g_BattleEffects[slot].unk_04       = SELF(PartyMember)->unk_04;
+    g_BattleEffects[slot].arg.unk_09   = SELF(PartyMember)->unk_09;
     g_BattleEffects[slot].unk_0A       = 16;
-    g_BattleEffects[slot].pos.x.fixed  = TASK(PartyMember)->pos.x.fixed;
-    g_BattleEffects[slot].pos.y.fixed  = TASK(PartyMember)->pos.y.fixed;
-    g_BattleEffects[slot].pos.z.fixed  = TASK(PartyMember)->pos.z.fixed;
-    TASK(PartyMember)->param.unk_0B += 1;
+    g_BattleEffects[slot].pos.x.fixed  = SELF(PartyMember)->pos.x.fixed;
+    g_BattleEffects[slot].pos.y.fixed  = SELF(PartyMember)->pos.y.fixed;
+    g_BattleEffects[slot].pos.z.fixed  = SELF(PartyMember)->pos.z.fixed;
+    SELF(PartyMember)->param.unk_0B += 1;
     for (i = 0, dst = g_AreaPaletteCopy->rows[AREA_PALETTE_BATL_OVR_ROW].colors, src = g_AreaPaletteArena->rows[AREA_PALETTE_BATL_OVR_ROW].colors; i < 16; i++) {
         dst[i]      = src[i];
         dst[i + 16] = src[i + 16];
@@ -53,26 +53,26 @@ MATCH void func_801EEEF4(void) {
     u8           value;
 
     battler                   = g_Battle.selected_actor;
-    value                     = TASK(PartyMember)->unk_09 - 1;
-    TASK(PartyMember)->unk_09 = value;
+    value                     = SELF(PartyMember)->unk_09 - 1;
+    SELF(PartyMember)->unk_09 = value;
     if (!(value & BYTE_MASK)) {
         battler->unk_5C = 1;
         GFX_PaletteFreeFadeTarget(battler);
-        TASK(PartyMember)->timer  = GFX_PaletteAllocFade(battler, 0, 0, 0, 1);
-        TASK(PartyMember)->unk_09 = 8;
-        TASK(PartyMember)->header.mode += 1;
+        SELF(PartyMember)->timer  = GFX_PaletteAllocFade(battler, 0, 0, 0, 1);
+        SELF(PartyMember)->unk_09 = 8;
+        SELF(PartyMember)->header.mode += 1;
     }
 }
 
 MATCH void func_801EEFA0(void) {
     u8 timer;
 
-    g_PaletteFades[TASK(PartyMember)->timer].offset.r--;
-    g_PaletteFades[TASK(PartyMember)->timer].offset.g--;
-    timer                     = TASK(PartyMember)->unk_09 - 1;
-    TASK(PartyMember)->unk_09 = timer;
+    g_PaletteFades[SELF(PartyMember)->timer].offset.r--;
+    g_PaletteFades[SELF(PartyMember)->timer].offset.g--;
+    timer                     = SELF(PartyMember)->unk_09 - 1;
+    SELF(PartyMember)->unk_09 = timer;
     if (timer == 0) {
-        TASK(PartyMember)->header.mode = TASK(PartyMember)->header.mode + 1;
+        SELF(PartyMember)->header.mode = SELF(PartyMember)->header.mode + 1;
     }
 }
 
@@ -82,39 +82,39 @@ MATCH void func_801EF0A8(void) {
     PartyMember* actor;
 
     actor = g_Battle.selected_actor;
-    g_PaletteFades[TASK(PartyMember)->timer].offset.r++;
-    g_PaletteFades[TASK(PartyMember)->timer].offset.g++;
-    if (g_PaletteFades[TASK(PartyMember)->timer].offset.r != 0) {
+    g_PaletteFades[SELF(PartyMember)->timer].offset.r++;
+    g_PaletteFades[SELF(PartyMember)->timer].offset.g++;
+    if (g_PaletteFades[SELF(PartyMember)->timer].offset.r != 0) {
         return;
     }
     actor->unk_5C = 0;
     func_80196718(actor);
     Battle_FadePoisonedBattler(g_Battle.target_selector);
-    TASK(PartyMember)->header.mode += 1;
+    SELF(PartyMember)->header.mode += 1;
 }
 
 MATCH void func_801EF1AC(void) {
     u32 slot;
 
-    if (TASK(PartyMember)->param.unk_0B != 0) {
+    if (SELF(PartyMember)->param.unk_0B != 0) {
         return;
     }
-    if (Battle_CanTarget(D_800B6BF0[TASK(PartyMember)->unk_04], g_Battle.target_selector) & BYTE_MASK) {
+    if (Battle_CanTarget(D_800B6BF0[SELF(PartyMember)->unk_04], g_Battle.target_selector) & BYTE_MASK) {
         slot                               = Battle_AllocEffect(1, 72) & BYTE_MASK;
-        g_BattleEffects[slot].target.party = TASK(PartyMember);
-        g_BattleEffects[slot].unk_04       = TASK(PartyMember)->unk_04 + 4;
+        g_BattleEffects[slot].target.party = SELF(PartyMember);
+        g_BattleEffects[slot].unk_04       = SELF(PartyMember)->unk_04 + 4;
         g_BattleEffects[slot].arg.unk_09   = 1;
         g_BattleEffects[slot].unk_0A       = 0;
-        TASK(PartyMember)->param.unk_0B++;
+        SELF(PartyMember)->param.unk_0B++;
     } else {
         slot                               = Battle_AllocEffect(1, 72) & BYTE_MASK;
-        g_BattleEffects[slot].target.party = TASK(PartyMember);
+        g_BattleEffects[slot].target.party = SELF(PartyMember);
         g_BattleEffects[slot].unk_04       = 8;
         g_BattleEffects[slot].arg.unk_09   = 1;
         g_BattleEffects[slot].unk_0A       = 0;
-        TASK(PartyMember)->param.unk_0B++;
+        SELF(PartyMember)->param.unk_0B++;
     }
-    TASK(PartyMember)->header.mode++;
+    SELF(PartyMember)->header.mode++;
 }
 
 #include "overlays/bmagic/shared/Effect_StartOnZeroTick.h"
@@ -157,7 +157,7 @@ MATCH s32 func_801EF34C(void) {
 #include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF524(void) {
-    SYS_DISPATCH_BYTE(D_801F0030, TASK(PartyMember)->header.step);
+    SYS_DISPATCH_BYTE(D_801F0030, SELF(PartyMember)->header.step);
     BMAGIC_DRAW_IF_ALIVE(func_801EF68C);
 }
 
@@ -176,7 +176,7 @@ MATCH void func_801EF68C(void) {
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_BEHIND_BATTLERS, tpage);
-    g_ScratchPad.cells.halves[5] = TASK(PartyMember)->unk_09 * 12;
+    g_ScratchPad.cells.halves[5] = SELF(PartyMember)->unk_09 * 12;
     g_ScratchPad.cells.halves[0] = 240;
     g_ScratchPadVectors[2].vx    = FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[0]);
     g_ScratchPadVectors[2].vy    = FIXED_MUL(rcos(0), g_ScratchPad.cells.halves[0]);
@@ -202,8 +202,8 @@ MATCH void func_801EF68C(void) {
 }
 
 MATCH void func_801EF900(void) {
-    SYS_DISPATCH_BYTE(D_801F005C, TASK(PartyMember)->header.step);
-    if (TASK(PartyMember)->header.flags != 0 && TASK(PartyMember)->header.step != 0) {
+    SYS_DISPATCH_BYTE(D_801F005C, SELF(PartyMember)->header.step);
+    if (SELF(PartyMember)->header.flags != 0 && SELF(PartyMember)->header.step != 0) {
         Effect_SetActorMatrix();
         func_801EFAE8();
         func_801EFB34();
@@ -218,20 +218,20 @@ MATCH void func_801EF900(void) {
 MATCH void func_801EFA2C(void) {
     u8 timer_next;
 
-    timer_next               = TASK(PartyMember)->timer - 1;
-    TASK(PartyMember)->timer = timer_next;
+    timer_next               = SELF(PartyMember)->timer - 1;
+    SELF(PartyMember)->timer = timer_next;
     if (!(timer_next & BYTE_MASK)) {
         g_BattleEffectBattler->param.unk_0B -= 1;
-        TASK(PartyMember)->header.step += 1;
+        SELF(PartyMember)->header.step += 1;
     }
 }
 
 MATCH void func_801EFA94(void) {
     PartyMember* work;
 
-    work         = TASK(PartyMember);
+    work         = SELF(PartyMember);
     work->unk_09 = work->unk_09 - 2;
-    if (TASK(PartyMember)->unk_09 == 0) {
+    if (SELF(PartyMember)->unk_09 == 0) {
         Effect_Reset();
     }
 }
@@ -258,14 +258,14 @@ MATCH void func_801EFB34(void) {
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 2, sizeof(DR_MODE));
-    g_ScratchPad.cells.halves[4] = TASK(PartyMember)->unk_09;
+    Area_CellAddPrim(SELF(PartyMember)->pos.x.fixed, SELF(PartyMember)->pos.y.fixed, 2, sizeof(DR_MODE));
+    g_ScratchPad.cells.halves[4] = SELF(PartyMember)->unk_09;
     for (band = 0; band < 6; band++) {
         g_ScratchPad.cells.halves[0] = band << 5;
         g_ScratchPad.cells.halves[1] = (band + 1) << 5;
-        g_ScratchPad.cells.halves[5] = D_801EFFE0[TASK(PartyMember)->unk_04][band][0] * (TASK(PartyMember)->unk_09 >> 1);
-        g_ScratchPad.cells.halves[6] = D_801EFFE0[TASK(PartyMember)->unk_04][band][1] * (TASK(PartyMember)->unk_09 >> 1);
-        g_ScratchPad.cells.halves[7] = D_801EFFE0[TASK(PartyMember)->unk_04][band][2] * (TASK(PartyMember)->unk_09 >> 1);
+        g_ScratchPad.cells.halves[5] = D_801EFFE0[SELF(PartyMember)->unk_04][band][0] * (SELF(PartyMember)->unk_09 >> 1);
+        g_ScratchPad.cells.halves[6] = D_801EFFE0[SELF(PartyMember)->unk_04][band][1] * (SELF(PartyMember)->unk_09 >> 1);
+        g_ScratchPad.cells.halves[7] = D_801EFFE0[SELF(PartyMember)->unk_04][band][2] * (SELF(PartyMember)->unk_09 >> 1);
         g_ScratchPad.cells.halves[3] = (D_801F003C[band] & 0xF) << 8;
         g_ScratchPadVectors[1].vx    = FIXED_MUL(rcos(0), g_ScratchPad.cells.halves[1]);
         g_ScratchPadVectors[1].vy    = FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[1]);
@@ -291,7 +291,7 @@ MATCH void func_801EFB34(void) {
             RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3,
                           &depth, &flag);
             setRGB0(prim, g_ScratchPad.cells.halves[5], g_ScratchPad.cells.halves[6], g_ScratchPad.cells.halves[7]);
-            Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 2, sizeof(POLY_F4));
+            Area_CellAddPrim(SELF(PartyMember)->pos.x.fixed, SELF(PartyMember)->pos.y.fixed, 2, sizeof(POLY_F4));
         }
     }
 }

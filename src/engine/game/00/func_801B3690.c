@@ -6,8 +6,8 @@ MATCH void func_801B3690(void) {
     hint = g_EmiLoadedCharacterIndex;
     g_PersonalActions[hint & 0x7F]();
     if (g_Game.current->u.field.mode.unsigned_value == 0) {
-        Script_Request(TASK(Actor)->direction);
+        Script_Request(SELF(Actor)->direction);
         Party_BattlersClearState(CHAR_INDEX_RYU);
-        TASK(Actor)->header.mode = 1;
+        SELF(Actor)->header.mode = 1;
     }
 }

@@ -1,7 +1,7 @@
 /* Starts a 0x88-frame wait and advances the step. */
 /* func_801EFF8C (magic067), func_801EFCC0 (magic137), func_801EF0B8 (magic223) */
 MATCH void Effect_ArmCounterNextStep(void) {
-    TASK(PartyMember)->unk_09 = 0;
-    TASK(PartyMember)->timer  = 136;
+    SELF(PartyMember)->unk_09 = 0;
+    SELF(PartyMember)->timer  = 136;
     BMagic_NextStep();
 }

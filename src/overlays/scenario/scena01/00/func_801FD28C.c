@@ -68,9 +68,9 @@ MATCH void func_801FD60C(Actor* actor) {
     actor->unk_7E          = 0;
     actor->unk_7B          = 0;
     actor->unk_77          = 10;
-    TASK(Actor)->direction = g_Game.members[0].facing ^ 4;
-    Script_DispatchSelector(TASK(Actor)->direction);
-    TASK(Actor)->option_flags |= ACTOR_OPT_ROUTE_LOCKED;
+    SELF(Actor)->direction = g_Game.members[0].facing ^ 4;
+    Script_DispatchSelector(SELF(Actor)->direction);
+    SELF(Actor)->option_flags |= ACTOR_OPT_ROUTE_LOCKED;
     g_ScenarioState.step     = 10;
     g_ScenarioState.state_04 = 13;
 }
@@ -80,9 +80,9 @@ MATCH void func_801FD6CC(Actor* actor) {
     actor->header.mode     = 4;
     actor->unk_7B          = 0;
     actor->unk_77          = 0xA;
-    TASK(Actor)->direction = g_Game.members[0].facing ^ 0x4;
-    Script_DispatchSelector(TASK(Actor)->direction);
-    TASK(Actor)->option_flags |= ACTOR_OPT_ROUTE_LOCKED;
+    SELF(Actor)->direction = g_Game.members[0].facing ^ 0x4;
+    Script_DispatchSelector(SELF(Actor)->direction);
+    SELF(Actor)->option_flags |= ACTOR_OPT_ROUTE_LOCKED;
     SCRIPT_VARS_CLEAR_ALL();
     g_ScenarioState.step     = 13;
     g_ScenarioState.state_04 = 13;
@@ -94,9 +94,9 @@ MATCH void func_801FD788(Actor* actor) {
     actor->unk_7E          = 0;
     actor->unk_7B          = 0;
     actor->unk_77          = 11;
-    TASK(Actor)->direction = g_Game.members[0].facing ^ 4;
-    Script_DispatchSelector(TASK(Actor)->direction);
-    TASK(Actor)->option_flags |= ACTOR_OPT_ROUTE_LOCKED;
+    SELF(Actor)->direction = g_Game.members[0].facing ^ 4;
+    Script_DispatchSelector(SELF(Actor)->direction);
+    SELF(Actor)->option_flags |= ACTOR_OPT_ROUTE_LOCKED;
     g_ScenarioState.step = 16;
     SCRIPT_VARS_CLEAR_ALL();
     g_ScenarioState.state_04 = 13;
@@ -108,9 +108,9 @@ MATCH void func_801FD84C(Actor* actor) {
     actor->unk_7E          = 0;
     actor->unk_7B          = 0;
     actor->unk_77          = 0xB;
-    TASK(Actor)->direction = g_Game.members[0].facing ^ 0x4;
-    Script_DispatchSelector(TASK(Actor)->direction);
-    TASK(Actor)->option_flags |= ACTOR_OPT_ROUTE_LOCKED;
+    SELF(Actor)->direction = g_Game.members[0].facing ^ 0x4;
+    Script_DispatchSelector(SELF(Actor)->direction);
+    SELF(Actor)->option_flags |= ACTOR_OPT_ROUTE_LOCKED;
     g_ScenarioState.step     = 16;
     g_ScriptVars[3]          = 0;
     g_ScenarioState.state_04 = 13;

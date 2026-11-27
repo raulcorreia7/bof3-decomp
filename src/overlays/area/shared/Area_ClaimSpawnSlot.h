@@ -10,9 +10,9 @@ MATCH void Area_ClaimSpawnSlot(void) {
             slot->active     = 1;
             slot->unk_01     = 0;
             slot->life       = AREA_SPAWN_SLOT_LIFE;
-            slot->pos.x      = TASK(Actor)->pos.x;
-            slot->pos.y      = TASK(Actor)->pos.y;
-            slot->pos.z      = TASK(Actor)->pos.z;
+            slot->pos.x      = SELF(Actor)->pos.x;
+            slot->pos.y      = SELF(Actor)->pos.y;
+            slot->pos.z      = SELF(Actor)->pos.z;
             slot->radius     = AREA_SPAWN_SLOT_RADIUS;
             slot->core_shade = AREA_SPAWN_SLOT_CORE_SHADE;
             slot->rim_shade  = 0;

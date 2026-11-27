@@ -2,12 +2,12 @@
 
 MATCH void func_801F338C(void) {
     if (SYS_TestFlag(D_80144EA0, 6)) {
-        Actor* a = TASK(Actor);
+        Actor* a = SELF(Actor);
         s32    x = a->pos.x.fixed;
 
         a->timer       = 0;
         a->pos.x.fixed = x + 0x40;
-        TASK(Actor)->header.step++;
+        SELF(Actor)->header.step++;
     }
     func_801F2EFC();
     func_801F3064();

@@ -4,7 +4,7 @@ MATCH void func_801F31B8(void) {
     u8* work;
     u8* flag;
 
-    work    = TASK(u8);
+    work    = SELF(u8);
     flag    = &g_ScriptVars[1];
     work[1] = 0;
     if (*flag == GAME_NONE || g_ScriptVars[2] == 0x80) {

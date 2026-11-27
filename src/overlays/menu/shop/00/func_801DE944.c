@@ -32,14 +32,14 @@ MATCH void func_801DE944(void) {
         if (i < g_Game.party_size) {
             row = 0;
             do {
-                TASK_SET(((u8*)g_Game.members + row));
+                SELF_SET(((u8*)g_Game.members + row));
                 Party_MemberLoadSprite(((PartyMember*)((u8*)&g_Game.members[0] + row))->chr.character_id, (u8)i);
-                Script_Select(TASK(Actor)->direction);
+                Script_Select(SELF(Actor)->direction);
                 if (g_SaveData.return_point.pending != 0) {
                     ACTOR_SET_MODE(0);
-                    TASK(Actor)->header.step = 0;
-                    TASK(Actor)->unk_03      = 0;
-                    TASK(Actor)->unk_04      = 0;
+                    SELF(Actor)->header.step = 0;
+                    SELF(Actor)->unk_03      = 0;
+                    SELF(Actor)->unk_04      = 0;
                 }
                 row += BATTLE_PARTY_STRIDE;
                 i++;
@@ -55,17 +55,17 @@ MATCH void func_801DE944(void) {
             Area_InitMapRenderer();
         }
     } else {
-        TASK_SET((actor - 0x79));
+        SELF_SET((actor - 0x79));
         g_Game.party_size        = 1;
         g_Game.members[0].slot   = 0;
         *(Character*)(actor - 5) = g_SaveData.characters[0];
-        TASK(Actor)->unk_48      = 0;
+        SELF(Actor)->unk_48      = 0;
         Party_MemberLoadSprite(g_Game.members[0].chr.character_id, 0);
-        Script_Select(TASK(Actor)->direction);
+        Script_Select(SELF(Actor)->direction);
         ACTOR_SET_MODE(0);
-        TASK(Actor)->header.step = 0;
-        TASK(Actor)->unk_03      = 0;
-        TASK(Actor)->unk_04      = 0;
+        SELF(Actor)->header.step = 0;
+        SELF(Actor)->unk_03      = 0;
+        SELF(Actor)->unk_04      = 0;
     }
     if (g_GameAreaId == AREA_ID_BOAT_AFTER_BLACK_SHIP) {
         i = 0;

@@ -17,7 +17,7 @@ MATCH void func_801C05AC(void) {
             member = &g_Game.members[i];
             if (!((g_GameFlags >> i) & 0x1)) {
                 g_GameState = member;
-                TASK_SET(member);
+                SELF_SET(member);
                 if (g_Game.members[i].slot == 0) {
                     Party_RunLeader();
                 } else {

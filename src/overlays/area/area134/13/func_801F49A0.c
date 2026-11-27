@@ -15,7 +15,7 @@ MATCH s32 func_801F49A0(void) {
     work  = (AreaQuadSprite*)AREA_WORK;
     i     = 0;
     do {
-        if (work->unk_00[0] != TASK(Actor)->unk_06) {
+        if (work->unk_00[0] != SELF(Actor)->unk_06) {
             goto next;
         }
         found = 1;

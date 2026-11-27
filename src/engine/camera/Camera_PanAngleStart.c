@@ -8,7 +8,7 @@ MATCH void Camera_PanAngleStart(void) {
     s32    start_y;
     s32    start_z;
 
-    work                     = TASK(Actor);
+    work                     = SELF(Actor);
     start_x                  = g_AreaCameraAngle.vx;
     start_y                  = g_AreaCameraAngle.vy;
     start_z                  = g_AreaCameraAngle.vz;

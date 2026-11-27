@@ -10,16 +10,16 @@ MATCH void func_801F6FAC(void) {
     Actor* work;
 
     Area_SceneSelectRecord(0x1EA);
-    work                      = TASK(Actor);
+    work                      = SELF(Actor);
     work->unk_48              = 0;
     work->pos.z.part.integer  = 0x64;
-    TASK(Actor)->active_flags = 0;
-    TASK(Actor)->mirror       = 0;
-    TASK(Actor)->timer        = 0;
-    TASK(Actor)->unk_0A       = 0x1E;
-    TASK(Actor)->draw_layer   = 1;
-    Script_Select((u8)(TASK(Actor)->unk_06 - 0x4E));
-    TASK(Actor)->header.mode = 1;
+    SELF(Actor)->active_flags = 0;
+    SELF(Actor)->mirror       = 0;
+    SELF(Actor)->timer        = 0;
+    SELF(Actor)->unk_0A       = 0x1E;
+    SELF(Actor)->draw_layer   = 1;
+    Script_Select((u8)(SELF(Actor)->unk_06 - 0x4E));
+    SELF(Actor)->header.mode = 1;
 }
 
 /* Grows the three window outlines with the actor timer; mode 2 once all six sides are full. */
@@ -33,7 +33,7 @@ MATCH void func_801F7068(void) {
     i     = 0;
     count = 0;
     while (i < 3) {
-        limit = TASK(Actor)->timer << 4;
+        limit = SELF(Actor)->timer << 4;
         if (limit < D_801FE7CC[i].box.w) {
             width = limit;
         } else {
@@ -46,14 +46,14 @@ MATCH void func_801F7068(void) {
             height = D_801FE7CC[i].box.h;
             count++;
         }
-        if ((TASK(Actor)->option_flags & (1 << i)) == 0) {
+        if ((SELF(Actor)->option_flags & (1 << i)) == 0) {
             UI_WindowDrawBoxOutline(D_801FE7CC[i].signed_box.x, D_801FE7CC[i].signed_box.y, (u8)width, (u8)height);
         }
         i++;
     }
-    TASK(Actor)->timer++;
+    SELF(Actor)->timer++;
     if (count == 6) {
-        TASK(Actor)->header.mode = 2;
+        SELF(Actor)->header.mode = 2;
     }
 }
 
@@ -62,28 +62,28 @@ MATCH void func_801F719C(void) {
 
     i = 0;
     do {
-        if (((TASK(Actor)->option_flags >> i) & 1) == 0) {
+        if (((SELF(Actor)->option_flags >> i) & 1) == 0) {
             UI_WindowDrawPanelBox(D_801FE7CC[i].signed_box.x, D_801FE7CC[i].signed_box.y, (u8)D_801FE7CC[i].signed_box.w, (u8)D_801FE7CC[i].signed_box.h);
         }
         i++;
     } while (i < 3);
-    if ((TASK(Actor)->option_flags & 1) == 0) {
-        TASK(Actor)->screen_x = (u16)D_801FE7CC[0].signed_box.x + D_801FE804[0];
-        TASK(Actor)->screen_y = (u16)D_801FE7CC[0].signed_box.y + D_801FE804[1];
+    if ((SELF(Actor)->option_flags & 1) == 0) {
+        SELF(Actor)->screen_x = (u16)D_801FE7CC[0].signed_box.x + D_801FE804[0];
+        SELF(Actor)->screen_y = (u16)D_801FE7CC[0].signed_box.y + D_801FE804[1];
         Script_AnimStepLoop();
         Area_AddActor();
     }
-    if (((TASK(Actor)->option_flags >> 1) & 1) == 0) {
-        sprintf((char*)g_UiTextFormatBuffer, D_801F6C04, Item_GetRecord(ITEM_CATEGORY_ITEM, TASK(Actor)->unk_06));
+    if (((SELF(Actor)->option_flags >> 1) & 1) == 0) {
+        sprintf((char*)g_UiTextFormatBuffer, D_801F6C04, Item_GetRecord(ITEM_CATEGORY_ITEM, SELF(Actor)->unk_06));
         UI_TextDraw((s16)((u16)D_801FE7CC[1].signed_box.x + 4), (s16)((u16)D_801FE7CC[1].signed_box.y + 2), 0, 8, g_UiTextFormatBuffer);
-        sprintf((char*)g_UiTextFormatBuffer, D_801F6C08, (u16)Item_Count(ITEM_CATEGORY_ITEM, TASK(Actor)->unk_06, 0));
+        sprintf((char*)g_UiTextFormatBuffer, D_801F6C08, (u16)Item_Count(ITEM_CATEGORY_ITEM, SELF(Actor)->unk_06, 0));
         UI_TextDraw((s16)((u16)D_801FE7CC[1].signed_box.x + 0x48), (s16)((u16)D_801FE7CC[1].signed_box.y + 2), 0, 2, g_UiTextFormatBuffer);
     }
     func_801F781C((u16)D_801FE7CC[2].signed_box.x + 1, (u16)D_801FE7CC[2].signed_box.y + 1, 0x80, 0x68);
-    if (TASK(Actor)->unk_0A != 0) {
-        TASK(Actor)->unk_0A--;
+    if (SELF(Actor)->unk_0A != 0) {
+        SELF(Actor)->unk_0A--;
     } else if (g_PadStates[0].held != 0) {
-        TASK(Actor)->header.mode = 3;
+        SELF(Actor)->header.mode = 3;
     }
 }
 
@@ -99,7 +99,7 @@ NON_MATCHING void func_801F73EC(void) {
         width = D_801FE7CC[i].box.w;
         /* FAKE: retail keeps the loaded width in a2 for the clamp; without this the load folds (0x108). */
         FAKE_OPAQUE(width);
-        limit = TASK(Actor)->timer << 4;
+        limit = SELF(Actor)->timer << 4;
         if (((u16)limit) < width) {
             width = limit;
         }
@@ -107,14 +107,14 @@ NON_MATCHING void func_801F73EC(void) {
         if (((u16)limit) < height) {
             height = limit;
         }
-        if (((TASK(Actor)->option_flags >> i) & 1) == 0) {
+        if (((SELF(Actor)->option_flags >> i) & 1) == 0) {
             UI_WindowDrawBoxOutline(D_801FE7CC[i].signed_box.x, D_801FE7CC[i].signed_box.y, (u8)width, (u8)height);
         }
         i++;
     } while (i < 3);
-    TASK(Actor)->timer--;
-    if (TASK(Actor)->timer == 0) {
-        TASK(Actor)->header.mode = 4;
+    SELF(Actor)->timer--;
+    if (SELF(Actor)->timer == 0) {
+        SELF(Actor)->header.mode = 4;
     }
 }
 #else
@@ -126,13 +126,13 @@ MATCH void func_801F74F8(void) {
 }
 
 MATCH void func_801F7518(void) {
-    SYS_DISPATCH_TASK(D_801FE820, 1, g_Task);
+    SYS_DISPATCH_TASK(D_801FE820, 1, g_Self);
 }
 
 MATCH void func_801F755C(void) {
-    TASK(Actor)->unk_06 = 0x4E;
+    SELF(Actor)->unk_06 = 0x4E;
     func_801F6FAC();
-    TASK(Actor)->header.step = 0;
+    SELF(Actor)->header.step = 0;
 }
 
 /* Item panel step: move the cursor, switch panel, or move one of the selected item into the stock at D_80144908. */
@@ -140,28 +140,28 @@ MATCH void func_801F7590(void) {
     func_801F7DDC();
     if (g_PadStates[0].pressed & (PADLup | PADLdown)) {
         if (g_PadStates[0].pressed & PADLup) {
-            TASK(Actor)->header.step--;
+            SELF(Actor)->header.step--;
         } else {
-            TASK(Actor)->header.step++;
+            SELF(Actor)->header.step++;
         }
-        TASK(Actor)->header.step &= 7;
+        SELF(Actor)->header.step &= 7;
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 6));
-        TASK(Actor)->unk_06 = (TASK(Actor)->header.step & 7) + 0x4E;
-        Script_Select(TASK(Actor)->unk_06 - 0x4E);
+        SELF(Actor)->unk_06 = (SELF(Actor)->header.step & 7) + 0x4E;
+        Script_Select(SELF(Actor)->unk_06 - 0x4E);
     }
     if (g_PadStates[0].pressed & PADRleft) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 9));
-        TASK(Actor)->unk_0A      = 20;
-        TASK(Actor)->header.mode = 2;
+        SELF(Actor)->unk_0A      = 20;
+        SELF(Actor)->header.mode = 2;
     } else if (g_PadStates[0].pressed & PADRup) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 12));
-        TASK(Actor)->header.mode = 3;
+        SELF(Actor)->header.mode = 3;
     } else if (g_PadStates[0].pressed & PADRdown) {
-        if (Item_Count(ITEM_CATEGORY_ITEM, TASK(Actor)->unk_06, 0) & 0xFFFF) {
-            if (D_80144908[TASK(Actor)->header.step] < 100) {
-                D_80144908[TASK(Actor)->header.step]++;
+        if (Item_Count(ITEM_CATEGORY_ITEM, SELF(Actor)->unk_06, 0) & 0xFFFF) {
+            if (D_80144908[SELF(Actor)->header.step] < 100) {
+                D_80144908[SELF(Actor)->header.step]++;
             }
-            Item_Remove(ITEM_CATEGORY_ITEM, TASK(Actor)->unk_06, 1, 0);
+            Item_Remove(ITEM_CATEGORY_ITEM, SELF(Actor)->unk_06, 1, 0);
             SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 10));
         } else {
             SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 13));
@@ -175,11 +175,11 @@ MATCH void func_801F7758(void) {
     rect = &D_801FE7CC[2];
     UI_WindowDrawPanelBox(rect->signed_box.x, rect->signed_box.y, (u8)rect->signed_box.w, (u8)rect->signed_box.h);
     func_801F781C((u16)rect->signed_box.x + 1, (u16)rect->signed_box.y + 1, 128, 104);
-    if (TASK(Actor)->unk_0A != 0) {
-        TASK(Actor)->unk_0A--;
+    if (SELF(Actor)->unk_0A != 0) {
+        SELF(Actor)->unk_0A--;
     } else if (g_PadStates[0].pressed != 0) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 12));
-        TASK(Actor)->header.mode = 1;
+        SELF(Actor)->header.mode = 1;
     }
 }
 
@@ -278,10 +278,10 @@ MATCH void func_801F7DDC(void) {
     sprintf(g_UiTextFormatBuffer, D_801F6C04, D_801FE874);
     UI_TextDraw((u16)D_801FE7CC[3].box.x + 8, D_801FE7CC[3].box.y + 2, 0, ITEM_NAME_LENGTH, g_UiTextFormatBuffer);
     func_801F7AD4();
-    UI_CursorDraw(D_801FE808[0], (u16)(D_801FE808[1] + (TASK(Actor)->header.step & 7) * 15), 0);
+    UI_CursorDraw(D_801FE808[0], (u16)(D_801FE808[1] + (SELF(Actor)->header.step & 7) * 15), 0);
     func_801F7C34();
-    TASK(Actor)->screen_x = D_801FE7CC[5].signed_box.x + D_801FE804[0];
-    TASK(Actor)->screen_y = D_801FE7CC[5].signed_box.y + D_801FE804[1];
+    SELF(Actor)->screen_x = D_801FE7CC[5].signed_box.x + D_801FE804[0];
+    SELF(Actor)->screen_y = D_801FE7CC[5].signed_box.y + D_801FE804[1];
     UI_WindowDrawPanelBox(D_801FE7CC[5].signed_box.x, D_801FE7CC[5].signed_box.y, (u8)D_801FE7CC[5].signed_box.w, (u8)D_801FE7CC[5].signed_box.h);
     Script_AnimStepLoop();
     Area_AddActor();

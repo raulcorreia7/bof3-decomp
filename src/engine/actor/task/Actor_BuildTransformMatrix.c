@@ -11,7 +11,7 @@ MATCH void Actor_BuildTransformMatrix(void* matrix) {
     long    flag;
     Actor*  work;
 
-    work = TASK(Actor);
+    work = SELF(Actor);
     setVector(&vertex, (s16)(work->pos.x.fixed >> 9) - 0x4000, (s16)(work->pos.y.fixed >> 9) - 0x4000, (s16)(-COORD_INT(work->pos.z) / 2));
     setVector(&rotation, (s16)work->angle_x, (s16)work->angle_y, (s16)work->angle_z);
     RotTrans(&vertex, (VECTOR*)((MATRIX*)matrix)->t, &flag);

@@ -20,8 +20,8 @@ MATCH s32 Script_OpsRunSpawn(ScriptState* state, u8* table, s32 value) {
         case 0x93:
         case 0x94:
         case 0x95:
-            TASK(Actor)->param.unk_0B =
-                Actor_ClaimSlot(table[state->cursor] - 0x90, (s8)table[state->cursor + 1], (s8)table[state->cursor + 2], (s16)TASK(Actor)->screen_x, (s16)TASK(Actor)->screen_y);
+            SELF(Actor)->param.unk_0B =
+                Actor_ClaimSlot(table[state->cursor] - 0x90, (s8)table[state->cursor + 1], (s8)table[state->cursor + 2], (s16)SELF(Actor)->screen_x, (s16)SELF(Actor)->screen_y);
             state->cursor += 2;
             break;
         case ACTOR_SCRIPT_SPAWN_AT_ACTOR_FIRST:
@@ -30,12 +30,12 @@ MATCH s32 Script_OpsRunSpawn(ScriptState* state, u8* table, s32 value) {
         case 0x9B:
         case 0x9C:
         case 0x9D:
-            TASK(Actor)->param.unk_0B = Actor_SpawnHelper(table[state->cursor] - 0x98, (s8)table[state->cursor + 1], (s8)table[state->cursor + 2], TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed,
-                                                          TASK(Actor)->pos.z.fixed);
+            SELF(Actor)->param.unk_0B = Actor_SpawnHelper(table[state->cursor] - 0x98, (s8)table[state->cursor + 1], (s8)table[state->cursor + 2], SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed,
+                                                          SELF(Actor)->pos.z.fixed);
             state->cursor += 2;
             break;
         case ACTOR_SCRIPT_SPAWN_WAIT_ALIVE:
-            if (ACTOR_IN_USE(g_SpawnedActors[TASK(Actor)->param.actor_slot])) {
+            if (ACTOR_IN_USE(g_SpawnedActors[SELF(Actor)->param.actor_slot])) {
                 state->cursor -= 1;
             }
             break;

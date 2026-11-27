@@ -1,11 +1,11 @@
 ["emi/scenario/sce15ef3/00"]
 Scene_DispatchEntity = { addr = 0x801D0C04, type = "func", source = "dispatches a scene entity by its callback index" }
-func_801D0C0C = { addr = 0x801D0C0C, alias = true, source = "Scene_DispatchEntity+0x8, after its g_Task load; the start the split used before the function was moved back to that load" }
+func_801D0C0C = { addr = 0x801D0C0C, alias = true, source = "Scene_DispatchEntity+0x8, after its g_Self load; the start the split used before the function was moved back to that load" }
 Scene_EndScan = { addr = 0x801D15CC, type = "func", source = "Sets the scan effect actor screen_x to 300, clears its timer, clears the scan bars and advances header.mode (byte 0x01)." }
 Area_FindFreeSpriteRow = { addr = 0x801D171C, type = "func", source = "Finds the first empty 0x18 record in the 256-entry sprite work table at 0x800E4800, or NULL." }
 Area_StepSparkEmitters = { addr = 0x801D1A60, type = "func", source = "Counts down every active spark emitter and spawns two sprite sparks near it as its timer runs out; returns whether any is active; one body shared by sce15ef3 and area143." }
 Scene_DrawRedGradient = { addr = 0x801D1BAC, type = "func", source = "Draws two red shaded polygons across the screen, with red at the center and black at the edges." }
-Scene_SetXFixed = { addr = 0x801D230C, type = "func", source = "the body stores into g_Task->pos.x.fixed" }
+Scene_SetXFixed = { addr = 0x801D230C, type = "func", source = "the body stores into g_Self->pos.x.fixed" }
 Scene_DrawRedFade = { addr = 0x801D23AC, type = "func", source = "Draws the full-screen semi-transparent red fade tile at red intensity." }
 Scene_DrawScanBar = { addr = 0x801D2424, type = "func", source = "Draws one scan bar as two semi-transparent gradient quads across x 0..320 above and below y, each as tall as the half height plus the frame parity." }
 Scene_ClearScanBars = { addr = 0x801D25C0, type = "func", source = "Clears the in-use byte of each of the 16 scan bars." }

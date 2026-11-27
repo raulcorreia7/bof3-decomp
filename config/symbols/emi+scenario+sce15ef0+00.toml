@@ -1,5 +1,5 @@
 ["emi/scenario/sce15ef0/00"]
 Scene_DispatchEntity = { addr = 0x801D0C04, type = "func", source = "dispatches a scene entity by its callback index" }
-func_801D0C0C = { addr = 0x801D0C0C, alias = true, source = "Scene_DispatchEntity+0x8, after its g_Task load; the start the split used before the function was moved back to that load" }
+func_801D0C0C = { addr = 0x801D0C0C, alias = true, source = "Scene_DispatchEntity+0x8, after its g_Self load; the start the split used before the function was moved back to that load" }
 GFX_DrawColorFan = { addr = 0x801D1A20, type = "func", source = "Draws a ring of 32 semi-transparent triangles around a projected point, the radius the point projected at the given size plus the frame parity, the centre corner coloured by the low three bits of the flags; one body shared by sce15ef0 and area098." }
 g_SceneEntityDispatch = { addr = 0x801D1F88, source = "scenario entity dispatch table" }

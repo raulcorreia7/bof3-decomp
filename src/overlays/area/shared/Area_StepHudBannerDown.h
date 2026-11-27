@@ -9,7 +9,7 @@ MATCH void Area_StepHudBannerDown(void) {
     Actor* work;
     s16    origin_y;
 
-    work           = TASK(Actor);
+    work           = SELF(Actor);
     origin_y       = work->screen_y + 0xA;
     work->screen_y = origin_y;
     if (origin_y >= 240) {
@@ -17,9 +17,9 @@ MATCH void Area_StepHudBannerDown(void) {
     }
 
     if (D_801454F2 == 0 && g_GameStateIndex != GAME_REQUEST_MESSAGE && GAME_SCRIPT_ACTIVE() == 0) {
-        work         = TASK(Actor);
+        work         = SELF(Actor);
         work->unk_03 = 1;
     }
 
-    Area_DrawHudBanner(0x5C, TASK(Actor)->screen_y);
+    Area_DrawHudBanner(0x5C, SELF(Actor)->screen_y);
 }

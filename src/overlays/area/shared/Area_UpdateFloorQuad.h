@@ -3,5 +3,5 @@
 #include "overlays/area/shared/Area_FloorQuad.h"
 
 MATCH void Area_Update(void) {
-    AREA_DRAW_FLOOR_QUAD((TASK(Actor)->direction << 21) | 0x150010F);
+    AREA_DRAW_FLOOR_QUAD((SELF(Actor)->direction << 21) | 0x150010F);
 }

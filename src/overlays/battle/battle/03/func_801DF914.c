@@ -12,14 +12,14 @@ MATCH void func_801DF914(void) {
     current = g_Game.current;
     if ((current->u.turn.action_flags.value & BATTLER_ACTION_DRAGON_FORM) != 0) {
         selector                  = &g_Battle.dragon_form;
-        TASK(PartyMember)->unk_09 = *(u8*)((u8*)&D_801EB198 + *selector);
-        TASK(PartyMember)->timer  = *(u8*)((u8*)&D_801EB198 + *selector);
+        SELF(PartyMember)->unk_09 = *(u8*)((u8*)&D_801EB198 + *selector);
+        SELF(PartyMember)->timer  = *(u8*)((u8*)&D_801EB198 + *selector);
     } else {
-        TASK(PartyMember)->unk_09 = *(u8*)((u8*)&s_BattleCharacterSprites + current->chr.character_id);
-        TASK(PartyMember)->timer  = *(u8*)((u8*)&s_BattleCharacterSprites + g_Game.current->chr.character_id);
+        SELF(PartyMember)->unk_09 = *(u8*)((u8*)&s_BattleCharacterSprites + current->chr.character_id);
+        SELF(PartyMember)->timer  = *(u8*)((u8*)&s_BattleCharacterSprites + g_Game.current->chr.character_id);
     }
-    Script_Request((TASK(PartyMember)->facing + 0xC) & BYTE_MASK);
+    Script_Request((SELF(PartyMember)->facing + 0xC) & BYTE_MASK);
     func_801DEDE4();
-    work              = TASK(PartyMember);
+    work              = SELF(PartyMember);
     work->header.mode = work->header.mode + 1;
 }

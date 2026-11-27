@@ -7,16 +7,16 @@ MATCH void Battle_UpdateParty(void) {
 
     battle_work = g_Game.members;
     g_GameState = battle_work;
-    TASK_SET(battle_work);
+    SELF_SET(battle_work);
     func_801DEEB4();
 
     next_battle_work = battle_work + 1;
     g_GameState      = next_battle_work;
-    TASK_SET(next_battle_work);
+    SELF_SET(next_battle_work);
     func_801DEEB4();
     battle_work = next_battle_work + 1;
 
     g_Game.current = battle_work;
-    TASK_SET(battle_work);
+    SELF_SET(battle_work);
     func_801DEEB4();
 }

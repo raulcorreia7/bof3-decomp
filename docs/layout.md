@@ -119,7 +119,7 @@ To convert an image:
    `NON_MATCHING`, no `INCLUDE_ASM`, no file-scope `static`).
 2. Write `<archive>_<slot>.c` from the rows in order, include each shared body in place of its thin
    wrapper and delete the wrapper, then replace those rows by the one row at the first offset. A
-   per-unit switch (`FAKE_DECL_TASK_VOLATILE`) applies to the whole unit, so every function of the
+   per-unit switch (`FAKE_DECL_SELF_VOLATILE`) applies to the whole unit, so every function of the
    run must take it or none.
 3. Run `meson setup --reconfigure build/meson`, then `ninja -C build/meson check-<image>` and the
    full `pre-push`.
@@ -305,17 +305,17 @@ Adjacent globals that form one record are [one struct or array](conventions.md#g
 
 One name per address per image. A second name for one address (a width or `volatile` view) is a cast
 macro, not a second `extern`. A cast macro that names the object itself keeps the bytes
-(`TASK(Type)` is `((Type*)g_Task)`); an address-taking view hoists the address and changes them.
+(`SELF(Type)` is `((Type*)g_Self)`); an address-taking view hoists the address and changes them.
 
-- `g_Task` is the scratchpad cell at `0x1F800044`: the record whose handler is running. A dispatcher
+- `g_Self` is the scratchpad cell at `0x1F800044`: the record whose handler is running. A dispatcher
   sets it before each handler (`Actor_DispatchAll`, `Party_RunFrame`, `Battle_UpdateEffects`); code that
   runs another record's handler saves it first and restores it after. The record's type follows the
   mode (`Actor` on the field, `PartyMember` for a battler, the effect's own record in a spell effect,
-  `FishingState` while fishing), so `struct Task` in `include/psx/mem.h` is incomplete and no member is
-  reachable without a view. Read `TASK(Type)->member`; set `TASK_SET(record)`; save and restore through a
-  typed local or `TASK(void)`; read the bytes of a record with no type through `TASK_BYTES[n]`, which
+  `FishingState` while fishing), so `struct Self` in `include/psx/mem.h` is incomplete and no member is
+  reachable without a view. Read `SELF(Type)->member`; set `SELF_SET(record)`; save and restore through a
+  typed local or `SELF(void)`; read the bytes of a record with no type through `SELF_BYTES[n]`, which
   `check-tree` rejects in new lines: a new record gets a type. An image that reads it as `volatile`
-  defines `FAKE_DECL_TASK_VOLATILE` before the first include.
+  defines `FAKE_DECL_SELF_VOLATILE` before the first include.
 - Task header: every record the cell points at starts with the same three bytes: `flags` (0x00),
   `mode` (0x01) and `step` (0x02). A type with a `u8` there uses these names, not `unk_01` or
   `state_02`. Per-object scratch (fishing, a boss) is a union at the record's tail, one view per
@@ -330,7 +330,7 @@ merge, and the macro is not a setting to move into a header.
 
 | Macro                                         | Header                  | Selects                                              |
 | --------------------------------------------- | ----------------------- | ---------------------------------------------------- |
-| `FAKE_DECL_TASK_VOLATILE`                     | `include/psx/mem.h`     | `volatile` view of `g_Task`                          |
+| `FAKE_DECL_SELF_VOLATILE`                     | `include/psx/mem.h`     | `volatile` view of `g_Self`                          |
 | `SCRIPT_VARS_VOLATILE`                        | `include/game/script.h` | `volatile u8 g_ScriptVars`                           |
 | `FAKE_DECL_GRAPHICS_PALETTE_PENDING_VOLATILE` | `include/slus/data.h`   | `volatile u8 g_GfxPalettePending`                    |
 | `FAKE_DECL_GAME_SCRATCH_BASE_WORD`            | `include/game/spawn.h`  | `s32 g_ScratchPad` in place of the `ScratchPad` view |
@@ -345,12 +345,12 @@ splat names an unnamed unit by its uppercase hex offset. When its functions are 
 ## Symbols and the link
 
 A global's address is its row in `config/symbols/<image>.toml`, or the name itself for an address name
-(`D_80145E90`). `g_Task` is one row in the `["exe/slus_004_22"]` table. The row is the whole
+(`D_80145E90`). `g_Self` is one row in the `["exe/slus_004_22"]` table. The row is the whole
 edit: the link finds the address by itself, with no per-image list to extend and no reconfigure.
 
 ```toml
 ["exe/slus_004_22"]
-g_Task = { addr = 0x1F800044, size = 0x4, source = "..." }
+g_Self = { addr = 0x1F800044, size = 0x4, source = "..." }
 ```
 
 Rows are written in address order. Keys: `addr`; `type` and `size` for splat; `source` (what the symbol is or does);

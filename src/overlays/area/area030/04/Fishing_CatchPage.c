@@ -19,22 +19,22 @@ MATCH void Fishing_CatchPage(void) {
 
     if (g_PadStates[0].pressed & (PADRup | PADRdown)) {
         g_FishingNewRecord              = 0;
-        TASK(FishingState)->saved_index = 0;
+        SELF(FishingState)->saved_index = 0;
         /* pond record +6 (fish id), read through the table base: the
          * D_8014688E spelling lets gcc hold its address across the calls */
         /* FAKE: retail reads g_Actors as u8[]. */
         fish                            = ((u8*)g_Actors)[g_FishingHookedFish * 0x98 + 6];
         if ((u8)fish == 0x16) {
-            TASK(FishingState)->timer       = 4;
-            TASK(FishingState)->saved_index = 1;
+            SELF(FishingState)->timer       = 4;
+            SELF(FishingState)->saved_index = 1;
         } else if (!(Item_Add(ITEM_CATEGORY_ITEM, (fish + ITEM_JELLYFISH) & BYTE_MASK, 1, 0) & BYTE_MASK)) {
-            TASK(FishingState)->timer       = 4;
-            TASK(FishingState)->saved_index = 2;
+            SELF(FishingState)->timer       = 4;
+            SELF(FishingState)->saved_index = 2;
         } else {
-            TASK(FishingState)->sub_index = 0xD;
+            SELF(FishingState)->sub_index = 0xD;
         }
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
-        TASK(FishingState)->sub_index++;
+        SELF(FishingState)->sub_index++;
     }
     Script_AnimStepLoop();
     Fishing_DrawDimScreen();

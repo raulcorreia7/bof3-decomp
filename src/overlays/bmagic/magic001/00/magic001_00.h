@@ -30,10 +30,10 @@ extern Callback            D_801EEC48[];
 void func_801F0238(void);
 
 static inline void BMagic_ClearWorkFlagsAndStep(void) {
-    if (TASK(PartyMember)->param.unk_0B == 0) {
+    if (SELF(PartyMember)->param.unk_0B == 0) {
         func_800AFC54();
         BATTLE_ACTIVE_WORK->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
-        TASK(PartyMember)->header.mode += 1;
+        SELF(PartyMember)->header.mode += 1;
     }
 }
 

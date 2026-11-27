@@ -19,10 +19,10 @@ MATCH void func_800A87D4(void) {
         g_BattleEffects[index & BYTE_MASK].unk_03       = 0;
         g_BattleEffects[index & BYTE_MASK].unk_04       = 0;
         g_BattleEffects[index & BYTE_MASK].header.flags = g_BattleEffects[index & BYTE_MASK].header.flags & 0xBF;
-        work                                            = TASK_BYTES;
+        work                                            = SELF_BYTES;
         g_BattleEffects[index & BYTE_MASK].target.bytes = work;
         g_BattleEffects[index & BYTE_MASK].unk_0B       = work[0xB];
-        work                                            = TASK_BYTES;
+        work                                            = SELF_BYTES;
         if (work[0xB] != 0) {
             work[0xB]--;
         }
@@ -31,16 +31,16 @@ MATCH void func_800A87D4(void) {
     if (*type < 3) {
         Battle_MoveRangeToward((BattleRange*)&g_Game.members[*type], 0x50);
         if (func_800AF5FC((BattleRange*)&g_Game.members[*type], 0x10000) != 0) {
-            Script_Select((TASK(PartyMember)->facing + 0x44) & BYTE_MASK);
+            Script_Select((SELF(PartyMember)->facing + 0x44) & BYTE_MASK);
             Battle_MarkDamaged(*type);
-            TASK(PartyMember)->header.mode++;
+            SELF(PartyMember)->header.mode++;
         }
     } else {
         Battle_MoveRangeToward((BattleRange*)&((volatile EnemyBattler*)g_BattleEnemies)[*type], 0x50);
         if (func_800AF5FC((BattleRange*)&((volatile EnemyBattler*)g_BattleEnemies)[*type], 0x10000) != 0) {
-            Script_Select((TASK(PartyMember)->facing + 0x44) & BYTE_MASK);
+            Script_Select((SELF(PartyMember)->facing + 0x44) & BYTE_MASK);
             Battle_MarkDamaged(*type);
-            TASK(PartyMember)->header.mode++;
+            SELF(PartyMember)->header.mode++;
         }
     }
     func_801DEE4C();

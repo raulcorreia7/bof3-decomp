@@ -5,7 +5,7 @@
 MATCH void Area_HeightEnableOffset(void) {
     s32 flag;
 
-    if (TASK(u8) == D_8014626C) {
+    if (SELF(u8) == D_8014626C) {
         flag = g_Game.unk_3E7 & 0x1;
     } else {
         flag = g_Game.current->status.field.flags.unsigned_value & 0x1;

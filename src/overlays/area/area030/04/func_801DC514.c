@@ -5,7 +5,7 @@
 MATCH void func_801DC514(void) {
     if (g_SpawnedActors[4].header.mode == 3) {
         func_801DDE94(3);
-        TASK(FishingState)->sub_index += 1;
+        SELF(FishingState)->sub_index += 1;
     }
     Script_AnimStepLoop();
 }

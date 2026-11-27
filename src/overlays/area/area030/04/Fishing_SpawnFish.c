@@ -40,14 +40,14 @@ next_column:
     if (count > 0) {
         row_offset = row_index * FISHING_ROW_STRIDE;
     next_fish:
-        TASK_SET((u8*)g_Actors + row_offset);
+        SELF_SET((u8*)g_Actors + row_offset);
         g_CurrentActor       = (Actor*)((u8*)g_Actors + row_offset);
         *(u8*)g_CurrentActor = 0x21;
-        TASK(Actor)->unk_05  = row_index;
-        TASK(Actor)->unk_06  = column;
+        SELF(Actor)->unk_05  = row_index;
+        SELF(Actor)->unk_06  = column;
         FISHING_ROW->roll_90 = RANDOM_MASK(BYTE_MASK);
         fish                 = FISHING_ROW;
-        task                 = TASK(Actor);
+        task                 = SELF(Actor);
     retry:
         roll   = fish->roll_90;
         limit  = LIMIT_TABLE[task->unk_06 * FISHING_TYPE_STRIDE];
@@ -58,9 +58,9 @@ next_column:
         }
         masked        = (masked < (limit >> 1)) ? (limit >> 1) : roll;
         fish->roll_90 = masked;
-        ROW_VALUE     = FISH_TYPES[TASK(Actor)->unk_06 * FISHING_TYPE_STRIDE] * (ROW_ROLL * 10 / LIMIT_TABLE[TASK(Actor)->unk_06 * FISHING_TYPE_STRIDE]) / 10;
+        ROW_VALUE     = FISH_TYPES[SELF(Actor)->unk_06 * FISHING_TYPE_STRIDE] * (ROW_ROLL * 10 / LIMIT_TABLE[SELF(Actor)->unk_06 * FISHING_TYPE_STRIDE]) / 10;
         ROW_VALUE2    = ROW_VALUE;
-        type          = TASK(Actor)->unk_06;
+        type          = SELF(Actor)->unk_06;
         if (type != 0x15 && ROW_ROLL == LIMIT_TABLE[type * FISHING_TYPE_STRIDE]) {
             limit = LIMIT_TABLE[type * FISHING_TYPE_STRIDE];
             for (walk = 0; walk <= (u8)(limit / 10); walk++) {
@@ -70,14 +70,14 @@ next_column:
                 ROW_ROLL++;
             }
         }
-        TASK(Actor)->header.mode = 0;
+        SELF(Actor)->header.mode = 0;
         ACTOR_CLEAR_STEP();
         row_offset += FISHING_ROW_STRIDE;
-        TASK(Actor)->unk_03 = 0;
+        SELF(Actor)->unk_03 = 0;
         row_index++;
-        TASK(Actor)->unk_04 = 0;
+        SELF(Actor)->unk_04 = 0;
         count--;
-        TASK(Actor)->tint.bytes.flags = 0;
+        SELF(Actor)->tint.bytes.flags = 0;
         if (count > 0) {
             goto next_fish;
         }

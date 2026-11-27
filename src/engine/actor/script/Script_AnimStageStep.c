@@ -13,9 +13,9 @@ MATCH void Script_AnimStageStep(void) {
     u8*    table;
     u8     selected;
 
-    first_work                = TASK(Actor);
+    first_work                = SELF(Actor);
     first_work->unk_4A        = *(u8*)(first_work->script + first_work->script_pc);
-    current_work              = TASK(Actor);
+    current_work              = SELF(Actor);
     index                     = current_work->script_pc;
     entries                   = current_work->script;
     next_index                = index + 1;

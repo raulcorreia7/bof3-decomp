@@ -6,13 +6,13 @@
 MATCH void func_801E44D4(void) {
     PartyMember* work;
 
-    work                                     = TASK(PartyMember);
+    work                                     = SELF(PartyMember);
     BATTLE_CURRENT_ENEMY_PTR->turn.hp_change = 0;
     work->unk_0C                             = -0x2000;
     work->unk_10                             = 0;
     Effect_RotatePosition(work);
-    TASK(PartyMember)->timer = 4;
+    SELF(PartyMember)->timer = 4;
     Battle_IsEnemyBlocked();
     SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 5));
-    TASK(PartyMember)->unk_03 += 1;
+    SELF(PartyMember)->unk_03 += 1;
 }

@@ -2,5 +2,5 @@
 
 MATCH void func_801F3440(void) {
     g_AreaWalkFlags &= 0xFDFF;
-    TASK(Actor)->unk_04 = 0;
+    SELF(Actor)->unk_04 = 0;
 }

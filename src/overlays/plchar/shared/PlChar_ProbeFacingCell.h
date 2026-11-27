@@ -4,8 +4,8 @@ MATCH s32 PlChar_ProbeFacingCell(void) {
     s32 cy;
     u8  hit;
 
-    cx  = TASK(Actor)->pos.x.fixed + g_FacingSteps[TASK(Actor)->direction].x * 2;
-    cy  = TASK(Actor)->pos.y.fixed + g_FacingSteps[TASK(Actor)->direction].y * 2;
+    cx  = SELF(Actor)->pos.x.fixed + g_FacingSteps[SELF(Actor)->direction].x * 2;
+    cy  = SELF(Actor)->pos.y.fixed + g_FacingSteps[SELF(Actor)->direction].y * 2;
     hit = Actor_FindInRange(cx, cy, 0) != -1;
     if ((Area_CellGetCode(cx >> 16, cy >> 16) & BYTE_MASK) == 0xF2) {
         hit = 1;

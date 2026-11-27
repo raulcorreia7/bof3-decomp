@@ -71,31 +71,31 @@ MATCH void func_801F83C8(void) {
                 g_SpawnedActors[g_ScratchPad.cells.bytes[0]].type = 0x8B;
             }
             g_GameState = &g_Game.members[0];
-            TASK_SET(&g_Game.members[0]);
+            SELF_SET(&g_Game.members[0]);
             g_ScenarioState.step = 7;
             D_80145FA8 |= 0x40;
             break;
         }
         case 8:
             g_GameState = &g_Game.members[0];
-            TASK_SET(&g_Game.members[0]);
+            SELF_SET(&g_Game.members[0]);
             D_80145FA8 &= 0xBF;
             SND_SEPlay(0x201);
             SND_SeqFadeOut(0, 1, 4, 0x1E);
             g_ScenarioState.step = 9;
             break;
         case 9:
-            TASK_SET(&g_Game.members[0]);
-            TASK(Actor)->param.actor_slot = Actor_FindFreeSpawned();
-            if (TASK(Actor)->param.actor_slot != 0xFF) {
-                g_SpawnedActors[TASK(Actor)->param.actor_slot].header.flags = 1;
-                g_SpawnedActors[TASK(Actor)->param.actor_slot].type         = 6;
-                g_SpawnedActors[TASK(Actor)->param.actor_slot].unk_06       = 3;
-                g_SpawnedActors[TASK(Actor)->param.actor_slot].vx           = 0;
-                g_SpawnedActors[TASK(Actor)->param.actor_slot].selection    = 0x3A;
-                work                                                        = TASK(PartyMember);
-                g_SpawnedActors[TASK(Actor)->param.actor_slot].screen_x     = work->screen_x.value;
-                g_SpawnedActors[TASK(Actor)->param.actor_slot].screen_y     = work->screen_y.value;
+            SELF_SET(&g_Game.members[0]);
+            SELF(Actor)->param.actor_slot = Actor_FindFreeSpawned();
+            if (SELF(Actor)->param.actor_slot != 0xFF) {
+                g_SpawnedActors[SELF(Actor)->param.actor_slot].header.flags = 1;
+                g_SpawnedActors[SELF(Actor)->param.actor_slot].type         = 6;
+                g_SpawnedActors[SELF(Actor)->param.actor_slot].unk_06       = 3;
+                g_SpawnedActors[SELF(Actor)->param.actor_slot].vx           = 0;
+                g_SpawnedActors[SELF(Actor)->param.actor_slot].selection    = 0x3A;
+                work                                                        = SELF(PartyMember);
+                g_SpawnedActors[SELF(Actor)->param.actor_slot].screen_x     = work->screen_x.value;
+                g_SpawnedActors[SELF(Actor)->param.actor_slot].screen_y     = work->screen_y.value;
                 g_ScenarioState.step                                        = 0xA;
             }
             break;
@@ -129,7 +129,7 @@ MATCH void func_801F83C8(void) {
             break;
         case 0xF:
             g_GameState = &g_Game.members[0];
-            TASK_SET(&g_Game.members[0]);
+            SELF_SET(&g_Game.members[0]);
             D_80145FA8 &= 0xBF;
             SND_SeqFadeOut(0, 1, 4, 0x1E);
             Scene_SetupParty(5);

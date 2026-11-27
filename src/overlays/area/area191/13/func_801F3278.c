@@ -10,7 +10,7 @@ MATCH void func_801F3278(void) {
     s32    angle;
     s32    spin;
 
-    scratch              = TASK(Actor);
+    scratch              = SELF(Actor);
     mode                 = scratch->unk_0A - 1;
     x                    = scratch->pos.x.fixed;
     step                 = scratch->vx;
@@ -19,7 +19,7 @@ MATCH void func_801F3278(void) {
     spin                 = scratch->scale.y;
     scratch->scale.x     = angle + 0x2000;
     scratch->unk_0A      = mode;
-    check                = TASK(Actor);
+    check                = SELF(Actor);
     scratch->scale.y     = spin + 0x2000;
 
     if ((check->unk_0A & 0x3) == 0) {
@@ -28,7 +28,7 @@ MATCH void func_801F3278(void) {
 
     /* FAKE: retail splits the last re-read across the copy so the row stays
      * in one register. */
-    work    = TASK(Actor);
+    work    = SELF(Actor);
     scratch = work;
     if (scratch->unk_0A == 0) {
         work->unk_04 = 0;

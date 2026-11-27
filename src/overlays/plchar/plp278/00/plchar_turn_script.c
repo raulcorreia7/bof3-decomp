@@ -5,7 +5,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801CE404(void) {
-    D_801CFCB4[TASK(Actor)->header.step]();
+    D_801CFCB4[SELF(Actor)->header.step]();
 }
 
 #include "overlays/plchar/shared/PlChar_StartTurnGarr.h"
@@ -13,7 +13,7 @@ MATCH void func_801CE404(void) {
 #include "overlays/plchar/shared/PlChar_RunStepScriptGarr.h"
 
 MATCH void func_801CE610(void) {
-    SYS_DISPATCH_TASK(D_801CFCC0, 2, g_Task);
+    SYS_DISPATCH_TASK(D_801CFCC0, 2, g_Self);
 }
 
 /* func_801CE654 */
@@ -33,7 +33,7 @@ MATCH void PlChar_RunGarrFieldTask(void) {
 #include "overlays/plchar/shared/PlChar_ProbeFacingFollower.h"
 
 MATCH void func_801CEBFC(void) {
-    SYS_DISPATCH_TASK(D_801CFCC8, 2, g_Task);
+    SYS_DISPATCH_TASK(D_801CFCC8, 2, g_Self);
 }
 
 #include "overlays/plchar/shared/PlChar_StartFacingTurn.h"
@@ -41,7 +41,7 @@ MATCH void func_801CEBFC(void) {
 #include "overlays/plchar/shared/PlChar_RunStepScript.h"
 
 MATCH void func_801CEE30(void) {
-    SYS_DISPATCH_TASK(D_801CFCD4, 2, g_Task);
+    SYS_DISPATCH_TASK(D_801CFCD4, 2, g_Self);
 }
 
 #include "overlays/plchar/shared/PlChar_WalkStep.h"

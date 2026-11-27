@@ -16,14 +16,14 @@ MATCH void func_801B13BC(void) {
     flag     = g_ScratchPad.cells.halves[4];
     counter  = &D_1F800004;
     *counter = value;
-    if ((flag != 0) && (g_FacingOffsets[TASK(Actor)->direction].x > 0)) {
+    if ((flag != 0) && (g_FacingOffsets[SELF(Actor)->direction].x > 0)) {
         *counter = value + 1;
     }
     value2    = D_1F80000E;
     flag2     = D_1F80000C;
     counter2  = &D_1F800006;
     *counter2 = value2;
-    if ((flag2 != 0) && (g_FacingOffsets[TASK(Actor)->direction].y > 0)) {
+    if ((flag2 != 0) && (g_FacingOffsets[SELF(Actor)->direction].y > 0)) {
         *counter2 = value2 + 1;
     }
 }

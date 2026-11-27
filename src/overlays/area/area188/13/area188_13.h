@@ -62,9 +62,9 @@ void func_801F40F4(s32 arg0);
 static inline void Area_DrawFadeQuad(void) {
     POLY_G4* prim;
 
-    if (TASK(Actor)->timer++ >= 16) {
+    if (SELF(Actor)->timer++ >= 16) {
         D_801F68A0         = D_801F4DF0[D_801F689C];
-        TASK(Actor)->timer = 0;
+        SELF(Actor)->timer = 0;
         if (D_801F689C++ != 0) {
             D_801F689C = 0;
         }
@@ -75,8 +75,8 @@ static inline void Area_DrawFadeQuad(void) {
 
 /* Restarts the area task at mode 1 and resets the fade colour and its ramp index. */
 #define AREA_RESET_TASK_TO_MODE1()  \
-    TASK(Actor)->timer       = 0;   \
-    TASK(Actor)->header.mode = 1;   \
+    SELF(Actor)->timer       = 0;   \
+    SELF(Actor)->header.mode = 1;   \
     D_801F68A0               = 0xF; \
     D_801F689C               = 0;
 

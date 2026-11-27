@@ -5,12 +5,12 @@ MATCH void Well_StepSwish(void) {
     Actor* work;
 
     if (++g_WellSwishStep >= WELL_SWISH_STEPS) {
-        work        = TASK(Actor);
+        work        = SELF(Actor);
         g_GameState = g_Game.members;
-        TASK_SET(g_Game.members);
+        SELF_SET(g_Game.members);
         g_Game.members[0].pos.y.fixed &= 0xFFFFF000;
         g_Game.members[0].pos.x.fixed &= 0xFFFFF000;
-        g_Task            = work;
+        g_Self            = work;
         work->header.mode = WELL_MODE_RAISE_BEGIN;
         g_WellPressCount  = 0;
         g_WellSwishStep   = 0;
@@ -18,37 +18,37 @@ MATCH void Well_StepSwish(void) {
         switch (g_WellSwishButtons) {
             case PADLup:
             case (PADLup | PADLright):
-                work        = TASK(Actor);
+                work        = SELF(Actor);
                 g_GameState = g_Game.members;
-                TASK_SET(g_Game.members);
+                SELF_SET(g_Game.members);
                 g_Game.members[0].pos.y.fixed += 0x800;
-                g_Task = work;
+                g_Self = work;
                 break;
             case PADLright:
             case (PADLdown | PADLright):
-                work        = TASK(Actor);
+                work        = SELF(Actor);
                 g_GameState = g_Game.members;
-                TASK_SET(g_Game.members);
+                SELF_SET(g_Game.members);
                 g_Game.members[0].pos.x.fixed -= 0x800;
-                g_Task = work;
+                g_Self = work;
                 break;
             case PADLdown:
             case (PADLleft | PADLdown):
-                work        = TASK(Actor);
+                work        = SELF(Actor);
                 g_GameState = g_Game.members;
-                TASK_SET(g_Game.members);
+                SELF_SET(g_Game.members);
                 g_Game.members[0].pos.y.fixed -= 0x800;
-                g_Task = work;
+                g_Self = work;
                 break;
             case PADLleft:
             case (PADLleft | PADLup):
-                work        = TASK(Actor);
+                work        = SELF(Actor);
                 g_GameState = g_Game.members;
-                TASK_SET(g_Game.members);
+                SELF_SET(g_Game.members);
                 g_Game.members[0].pos.x.fixed += 0x800;
-                g_Task = work;
+                g_Self = work;
                 break;
         }
-        TASK(Actor)->header.mode = WELL_MODE_SWISH_INPUT;
+        SELF(Actor)->header.mode = WELL_MODE_SWISH_INPUT;
     }
 }

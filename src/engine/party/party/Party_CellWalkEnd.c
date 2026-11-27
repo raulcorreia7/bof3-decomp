@@ -6,11 +6,11 @@ MATCH void Party_CellWalkEnd(void) {
     Actor* work;
 
     g_Game.current->u.field.counter.value = 3;
-    work                                  = TASK(Actor);
+    work                                  = SELF(Actor);
     work->direction                       = work->param.unk_0B;
-    Script_Request(TASK(Actor)->direction);
+    Script_Request(SELF(Actor)->direction);
     g_Game.current->u.field.mode.value = 0;
-    TASK(Actor)->header.mode           = 1;
-    TASK(Actor)->header.step           = 0;
-    TASK(Actor)->unk_03                = 0;
+    SELF(Actor)->header.mode           = 1;
+    SELF(Actor)->header.step           = 0;
+    SELF(Actor)->unk_03                = 0;
 }

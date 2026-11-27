@@ -3,17 +3,17 @@
 MATCH void func_800C1980(void) {
     PartyMember* work;
 
-    if (--TASK(PartyMember)->unk_09 == 0) {
+    if (--SELF(PartyMember)->unk_09 == 0) {
         Battle_PlayEnemySE(*g_BattleCurrentEnemy->unk_E8);
     }
-    TASK(PartyMember)->pos.x.fixed += TASK(PartyMember)->unk_0C;
-    if (TASK(PartyMember)->pos.x.fixed == TASK(PartyMember)->unk_18) {
+    SELF(PartyMember)->pos.x.fixed += SELF(PartyMember)->unk_0C;
+    if (SELF(PartyMember)->pos.x.fixed == SELF(PartyMember)->unk_18) {
         Battle_MarkDamaged(g_Battle.target_selector);
         Battle_TriggerCritical();
-        work = TASK(PartyMember);
+        work = SELF(PartyMember);
         work->header.mode++;
         work->unk_18 -= 0x30000;
-        TASK(PartyMember)->header.step = 0;
+        SELF(PartyMember)->header.step = 0;
     }
     Battle_IsEnemyBlocked();
 }

@@ -4,11 +4,11 @@ MATCH s32 func_801B43D0(s32 x, s32 y, s32 dir) {
     s8  slot;
     s32 diff;
 
-    slot = Actor_FindInRange(x, y, TASK(Actor)->voice_flags.scene_flag);
+    slot = Actor_FindInRange(x, y, SELF(Actor)->voice_flags.scene_flag);
     if (slot != -1) {
         if ((g_Actors[slot].unk_06 != 8) && (g_Actors[slot].unk_7C != 0xFFFF)) {
             diff = COORD_INT(g_Actors[slot].pos.z);
-            diff -= COORD_INT(TASK(Actor)->pos.z);
+            diff -= COORD_INT(SELF(Actor)->pos.z);
             diff = ABS(diff);
             if (diff >= 0x101) {
                 slot = -1;

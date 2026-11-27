@@ -20,31 +20,31 @@ MATCH void BMagic_InfluenceInit(void) {
     u16*         src;
 
     actor                             = g_Battle.selected_actor;
-    TASK(PartyMember)->screen_x.value = actor->screen_x.value;
-    TASK(PartyMember)->screen_y.value = actor->screen_y.value;
-    TASK(PartyMember)->param.unk_0B   = 0;
-    TASK(PartyMember)->header.mode += 1;
+    SELF(PartyMember)->screen_x.value = actor->screen_x.value;
+    SELF(PartyMember)->screen_y.value = actor->screen_y.value;
+    SELF(PartyMember)->param.unk_0B   = 0;
+    SELF(PartyMember)->header.mode += 1;
     for (i = 0; i < BMAGIC_INFLUENCE_RING_COUNT; i++) {
         PartyMember* work;
 
         slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_INFLUENCE);
-        work                               = TASK(PartyMember);
+        work                               = SELF(PartyMember);
         g_BattleEffects[slot].header.mode  = BMAGIC_INFLUENCE_EFFECT_RIGHT_RING;
         g_BattleEffects[slot].unk_0B       = i;
         g_BattleEffects[slot].arg.unk_09   = i + 1;
         g_BattleEffects[slot].target.party = work;
-        TASK(PartyMember)->param.unk_0B += 1;
+        SELF(PartyMember)->param.unk_0B += 1;
     }
     for (i = 0; i < BMAGIC_INFLUENCE_RING_COUNT; i++) {
         PartyMember* work;
 
         slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_INFLUENCE);
-        work                               = TASK(PartyMember);
+        work                               = SELF(PartyMember);
         g_BattleEffects[slot].header.mode  = BMAGIC_INFLUENCE_EFFECT_LEFT_RING;
         g_BattleEffects[slot].unk_0B       = i;
         g_BattleEffects[slot].arg.unk_09   = i + 1;
         g_BattleEffects[slot].target.party = work;
-        TASK(PartyMember)->param.unk_0B += 1;
+        SELF(PartyMember)->param.unk_0B += 1;
     }
     /* Copies the first three CLUTs of arena palette row 26 into the work copy. */
     BMAGIC_POINT_AT_PALETTE_ROW(dst, src, i);
@@ -67,17 +67,17 @@ MATCH void BMagic_InfluenceInit(void) {
 MATCH void BMagic_InfluenceRightRingUpdate(void) {
     s32 tpage;
 
-    SYS_DISPATCH_BYTE(g_BMagicInfluenceRightRingSteps, TASK(PartyMember)->header.step);
+    SYS_DISPATCH_BYTE(g_BMagicInfluenceRightRingSteps, SELF(PartyMember)->header.step);
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_OVER_BATTLERS, tpage);
-    if (TASK(PartyMember)->header.flags & 0x1) {
-        if (TASK(PartyMember)->header.step != 0) {
+    if (SELF(PartyMember)->header.flags & 0x1) {
+        if (SELF(PartyMember)->header.step != 0) {
             BMagic_InfluenceDrawRing();
             BMagic_InfluenceDrawFans();
         }
     }
-    if (TASK(PartyMember)->header.flags & 0x1) {
-        if (TASK(PartyMember)->header.step >= 3) {
+    if (SELF(PartyMember)->header.flags & 0x1) {
+        if (SELF(PartyMember)->header.step >= 3) {
             BMagic_InfluenceDrawCross();
         }
     }
@@ -91,15 +91,15 @@ MATCH void BMagic_InfluenceRightRingStart(void) {
     PartyMember* src;
     PartyMember* dst;
 
-    if (--TASK(PartyMember)->unk_09 == 0) {
-        dst                      = TASK(PartyMember);
+    if (--SELF(PartyMember)->unk_09 == 0) {
+        dst                      = SELF(PartyMember);
         src                      = g_BattleEffectBattler;
         dst->unk_0C              = 0xB;
         dst->screen_x.value      = src->screen_x.value + 0x37;
         dst->screen_y.value      = src->screen_y.value - 0x10;
         dst->unk_09              = 0;
-        TASK(PartyMember)->timer = 32;
-        TASK(PartyMember)->header.step++;
+        SELF(PartyMember)->timer = 32;
+        SELF(PartyMember)->header.step++;
     }
 }
 
@@ -108,13 +108,13 @@ MATCH void BMagic_InfluenceRightRingStart(void) {
 MATCH void BMagic_InfluenceRightRingApproach(void) {
     s32 step_next;
 
-    step_next                 = TASK(PartyMember)->unk_0C - 1;
-    TASK(PartyMember)->unk_0C = step_next;
-    TASK(PartyMember)->screen_x.value -= step_next;
-    if (TASK(PartyMember)->unk_0C == 0) {
-        if (TASK(PartyMember)->param.unk_0B == 0) {
+    step_next                 = SELF(PartyMember)->unk_0C - 1;
+    SELF(PartyMember)->unk_0C = step_next;
+    SELF(PartyMember)->screen_x.value -= step_next;
+    if (SELF(PartyMember)->unk_0C == 0) {
+        if (SELF(PartyMember)->param.unk_0B == 0) {
             SND_SEQueueSelection(0x103);
-            TASK(PartyMember)->header.step += 1;
+            SELF(PartyMember)->header.step += 1;
             return;
         }
         g_BattleEffectBattler->param.unk_0B -= 1;
@@ -127,12 +127,12 @@ MATCH void BMagic_InfluenceRightRingApproach(void) {
 MATCH void BMagic_InfluenceRightRingSpawnMarks(void) {
     u8 count;
 
-    count                     = TASK(PartyMember)->unk_09 + 1;
-    TASK(PartyMember)->unk_09 = count;
+    count                     = SELF(PartyMember)->unk_09 + 1;
+    SELF(PartyMember)->unk_09 = count;
     if ((count & BYTE_MASK) == 0x10) {
         BMagic_InfluenceSpawnMarks();
-        TASK(PartyMember)->param.unk_0B = 0;
-        TASK(PartyMember)->header.step += 1;
+        SELF(PartyMember)->param.unk_0B = 0;
+        SELF(PartyMember)->header.step += 1;
     }
 }
 
@@ -142,23 +142,23 @@ MATCH void BMagic_InfluenceRightRingPulse(void) {
     u8 value;
     u8 value2;
 
-    if (TASK(PartyMember)->param.unk_0B != 0) {
-        value                     = TASK(PartyMember)->unk_09 + 4;
-        TASK(PartyMember)->unk_09 = value;
+    if (SELF(PartyMember)->param.unk_0B != 0) {
+        value                     = SELF(PartyMember)->unk_09 + 4;
+        SELF(PartyMember)->unk_09 = value;
         if ((value & BYTE_MASK) == 0x10) {
-            TASK(PartyMember)->param.unk_0B = 0;
+            SELF(PartyMember)->param.unk_0B = 0;
         }
     } else {
-        value2                    = TASK(PartyMember)->unk_09 - 2;
-        TASK(PartyMember)->unk_09 = value2;
+        value2                    = SELF(PartyMember)->unk_09 - 2;
+        SELF(PartyMember)->unk_09 = value2;
         if (!(value2 & BYTE_MASK)) {
-            TASK(PartyMember)->param.unk_0B = 1;
+            SELF(PartyMember)->param.unk_0B = 1;
         }
     }
     if (g_BattleEffectBattler->param.unk_0B == 1) {
         SND_SEQueueSelection(0x101);
-        TASK(PartyMember)->unk_09 = 0x10;
-        TASK(PartyMember)->header.step += 1;
+        SELF(PartyMember)->unk_09 = 0x10;
+        SELF(PartyMember)->header.step += 1;
     }
 }
 
@@ -168,7 +168,7 @@ MATCH void BMagic_InfluenceRightRingEnd(void) {
     PartyMember* work;
     u8           next;
 
-    work        = TASK(PartyMember);
+    work        = SELF(PartyMember);
     next        = work->timer - 2;
     work->timer = next;
     if (next == 8) {
@@ -180,9 +180,9 @@ MATCH void BMagic_InfluenceRightRingEnd(void) {
 /* Runs the left ring step that header.step selects and draws its ring and fans. */
 /* func_801EF30C */
 MATCH void BMagic_InfluenceLeftRingUpdate(void) {
-    SYS_DISPATCH_BYTE(g_BMagicInfluenceLeftRingSteps, TASK(PartyMember)->header.step);
+    SYS_DISPATCH_BYTE(g_BMagicInfluenceLeftRingSteps, SELF(PartyMember)->header.step);
     GFX_AddDitheredDrawMode(BMAGIC_LAYER_OVER_BATTLERS, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256));
-    if (TASK(PartyMember)->header.flags & 0x1 && TASK(PartyMember)->header.step != 0) {
+    if (SELF(PartyMember)->header.flags & 0x1 && SELF(PartyMember)->header.step != 0) {
         BMagic_InfluenceDrawRing();
         BMagic_InfluenceDrawFans();
     }
@@ -195,15 +195,15 @@ MATCH void BMagic_InfluenceLeftRingStart(void) {
     PartyMember* src;
     PartyMember* dst;
 
-    if (--TASK(PartyMember)->unk_09 == 0) {
-        dst                      = TASK(PartyMember);
+    if (--SELF(PartyMember)->unk_09 == 0) {
+        dst                      = SELF(PartyMember);
         src                      = g_BattleEffectBattler;
         dst->unk_0C              = 0xB;
         dst->screen_x.value      = src->screen_x.value - 0x37;
         dst->screen_y.value      = src->screen_y.value - 0x10;
         dst->unk_09              = 0;
-        TASK(PartyMember)->timer = 32;
-        TASK(PartyMember)->header.step++;
+        SELF(PartyMember)->timer = 32;
+        SELF(PartyMember)->header.step++;
     }
 }
 
@@ -212,10 +212,10 @@ MATCH void BMagic_InfluenceLeftRingStart(void) {
 MATCH void BMagic_InfluenceLeftRingApproach(void) {
     s32 count;
 
-    count                     = TASK(PartyMember)->unk_0C - 1;
-    TASK(PartyMember)->unk_0C = count;
-    TASK(PartyMember)->screen_x.value += count;
-    if (TASK(PartyMember)->unk_0C == 0) {
+    count                     = SELF(PartyMember)->unk_0C - 1;
+    SELF(PartyMember)->unk_0C = count;
+    SELF(PartyMember)->screen_x.value += count;
+    if (SELF(PartyMember)->unk_0C == 0) {
         BATTLE_ACTIVE_WORK->param.unk_0B -= 1;
         Effect_Reset();
     }
@@ -224,7 +224,7 @@ MATCH void BMagic_InfluenceLeftRingApproach(void) {
 /* Runs the mark step that header.step selects from g_BMagicInfluenceMarkSteps. */
 /* func_801EF520 */
 MATCH void BMagic_InfluenceMarkUpdate(void) {
-    SYS_DISPATCH_TASK(g_BMagicInfluenceMarkSteps, 2, g_Task);
+    SYS_DISPATCH_TASK(g_BMagicInfluenceMarkSteps, 2, g_Self);
 }
 
 /* Mark step 0: starts a palette fade on the mark's battler and places the mark's quad at its upper left. */
@@ -234,56 +234,56 @@ MATCH void BMagic_InfluenceMarkStart(void) {
     u8           slot;
     u16          y;
 
-    if (TASK(PartyMember)->param.unk_0B < BATTLE_PARTY_CHARACTERS_COUNT) {
-        battler = &g_Game.members[TASK(PartyMember)->param.unk_0B];
+    if (SELF(PartyMember)->param.unk_0B < BATTLE_PARTY_CHARACTERS_COUNT) {
+        battler = &g_Game.members[SELF(PartyMember)->param.unk_0B];
     } else {
-        battler = (PartyMember*)(g_BattleEnemies + TASK(PartyMember)->param.unk_0B * BATTLE_ENEMY_STRIDE);
+        battler = (PartyMember*)(g_BattleEnemies + SELF(PartyMember)->param.unk_0B * BATTLE_ENEMY_STRIDE);
     }
     GFX_PaletteFreeFadeTarget(battler);
-    TASK(PartyMember)->timer          = GFX_PaletteAllocFade(battler, 0, 0, 0, 1);
-    TASK(PartyMember)->screen_x.value = battler->screen_x.value - 32;
+    SELF(PartyMember)->timer          = GFX_PaletteAllocFade(battler, 0, 0, 0, 1);
+    SELF(PartyMember)->screen_x.value = battler->screen_x.value - 32;
     y                                 = battler->screen_y.value - 12;
-    TASK(PartyMember)->screen_y.value = y;
-    slot                              = TASK(PartyMember)->param.unk_0B;
+    SELF(PartyMember)->screen_y.value = y;
+    slot                              = SELF(PartyMember)->param.unk_0B;
     if (slot < BATTLE_PARTY_CHARACTERS_COUNT) {
         if (g_Game.members[slot].facing < 2) {
-            TASK(PartyMember)->screen_y.value = y - s_BattlePanelYOffsets[g_Game.members[slot].chr.character_id * 2];
+            SELF(PartyMember)->screen_y.value = y - s_BattlePanelYOffsets[g_Game.members[slot].chr.character_id * 2];
         } else {
-            TASK(PartyMember)->screen_y.value = y - D_801EB109[g_Game.members[slot].chr.character_id * 2];
+            SELF(PartyMember)->screen_y.value = y - D_801EB109[g_Game.members[slot].chr.character_id * 2];
         }
     } else {
-        TASK(PartyMember)->screen_y.value = y - ENCOUNTER_ENEMIES[g_BattleEnemyBattlers[slot - BATTLE_PARTY_CHARACTERS_COUNT].type].height;
+        SELF(PartyMember)->screen_y.value = y - ENCOUNTER_ENEMIES[g_BattleEnemyBattlers[slot - BATTLE_PARTY_CHARACTERS_COUNT].type].height;
     }
-    TASK(PartyMember)->unk_09 = 0;
-    TASK(PartyMember)->header.step += 1;
+    SELF(PartyMember)->unk_09 = 0;
+    SELF(PartyMember)->header.step += 1;
 }
 
 /* Mark step 1: raises the battler's palette fade by 1 per frame to 16. */
 /* func_801EF724 */
 MATCH void BMagic_InfluenceMarkFadeIn(void) {
-    g_PaletteFades[TASK(PartyMember)->timer].offset.r += 1;
-    g_PaletteFades[TASK(PartyMember)->timer].offset.g += 1;
-    g_PaletteFades[TASK(PartyMember)->timer].offset.b += 1;
-    if (g_PaletteFades[TASK(PartyMember)->timer].offset.r == 16) {
-        TASK(PartyMember)->header.step += 1;
+    g_PaletteFades[SELF(PartyMember)->timer].offset.r += 1;
+    g_PaletteFades[SELF(PartyMember)->timer].offset.g += 1;
+    g_PaletteFades[SELF(PartyMember)->timer].offset.b += 1;
+    if (g_PaletteFades[SELF(PartyMember)->timer].offset.r == 16) {
+        SELF(PartyMember)->header.step += 1;
     }
 }
 
 /* Mark step 2: lowers the battler's palette fade to 0, plays the sound for the first mark, frees the fade and restores the battler's poison fade. */
 /* func_801EF834 */
 MATCH void BMagic_InfluenceMarkFadeOut(void) {
-    g_PaletteFades[TASK(PartyMember)->timer].offset.r -= 1;
-    g_PaletteFades[TASK(PartyMember)->timer].offset.g -= 1;
-    g_PaletteFades[TASK(PartyMember)->timer].offset.b -= 1;
-    if (g_PaletteFades[TASK(PartyMember)->timer].offset.r == 0) {
-        if (TASK(PartyMember)->unk_04 == 0) {
+    g_PaletteFades[SELF(PartyMember)->timer].offset.r -= 1;
+    g_PaletteFades[SELF(PartyMember)->timer].offset.g -= 1;
+    g_PaletteFades[SELF(PartyMember)->timer].offset.b -= 1;
+    if (g_PaletteFades[SELF(PartyMember)->timer].offset.r == 0) {
+        if (SELF(PartyMember)->unk_04 == 0) {
             SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 2));
         }
-        GFX_PaletteFreeFade(TASK(PartyMember)->timer);
-        Battle_FadePoisonedBattler(TASK(PartyMember)->param.unk_0B);
-        TASK(PartyMember)->unk_09 = 0;
-        TASK(PartyMember)->timer  = 4;
-        TASK(PartyMember)->header.step += 1;
+        GFX_PaletteFreeFade(SELF(PartyMember)->timer);
+        Battle_FadePoisonedBattler(SELF(PartyMember)->param.unk_0B);
+        SELF(PartyMember)->unk_09 = 0;
+        SELF(PartyMember)->timer  = 4;
+        SELF(PartyMember)->header.step += 1;
     }
 }
 
@@ -294,14 +294,14 @@ MATCH void BMagic_InfluenceMarkGrow(void) {
     u8 counter;
 
     BMagic_InfluenceDrawMark();
-    timer = TASK(PartyMember)->timer;
+    timer = SELF(PartyMember)->timer;
     if ((timer & BYTE_MASK) != 24) {
-        TASK(PartyMember)->timer = timer + 4;
+        SELF(PartyMember)->timer = timer + 4;
     }
-    counter                   = TASK(PartyMember)->unk_09 + 1;
-    TASK(PartyMember)->unk_09 = counter;
+    counter                   = SELF(PartyMember)->unk_09 + 1;
+    SELF(PartyMember)->unk_09 = counter;
     if ((counter & BYTE_MASK) == 0x14) {
-        TASK(PartyMember)->header.step += 1;
+        SELF(PartyMember)->header.step += 1;
     }
 }
 
@@ -317,11 +317,11 @@ MATCH void BMagic_InfluenceDrawMark(void) {
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_FOREGROUND, tpage);
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
-    setXY4(prim, TASK(PartyMember)->screen_x.value, TASK(PartyMember)->screen_y.value, TASK(PartyMember)->screen_x.value + 48, TASK(PartyMember)->screen_y.value, TASK(PartyMember)->screen_x.value,
-           TASK(PartyMember)->screen_y.value + TASK(PartyMember)->timer, TASK(PartyMember)->screen_x.value + 48, TASK(PartyMember)->screen_y.value + TASK(PartyMember)->timer);
+    setXY4(prim, SELF(PartyMember)->screen_x.value, SELF(PartyMember)->screen_y.value, SELF(PartyMember)->screen_x.value + 48, SELF(PartyMember)->screen_y.value, SELF(PartyMember)->screen_x.value,
+           SELF(PartyMember)->screen_y.value + SELF(PartyMember)->timer, SELF(PartyMember)->screen_x.value + 48, SELF(PartyMember)->screen_y.value + SELF(PartyMember)->timer);
     setTPage(prim, TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 896, 256);
     setClut(prim, 32, 506);
-    setUV4(prim, 0, 32, 64, 32, 0, TASK(PartyMember)->timer + 32, 64, TASK(PartyMember)->timer + 32);
+    setUV4(prim, 0, 32, 64, 32, 0, SELF(PartyMember)->timer + 32, 64, SELF(PartyMember)->timer + 32);
     setRGB0(prim, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
     GFX_AddPrim(BMAGIC_LAYER_FOREGROUND, sizeof(POLY_FT4));
 }
@@ -333,18 +333,18 @@ MATCH void BMagic_InfluenceDrawFans(void) {
     s32      i;
     s32      j;
 
-    g_ScratchPad.cells.halves[0] = TASK(PartyMember)->timer;
-    g_ScratchPad.cells.halves[1] = (TASK(PartyMember)->timer >> 2) + 1;
-    if (TASK(PartyMember)->header.step < 2) {
-        g_ScratchPad.cells.halves[3] = 0x80 - TASK(PartyMember)->param.unk_0B * 48;
-        g_ScratchPad.cells.halves[4] = 0x80 - TASK(PartyMember)->param.unk_0B * 48;
+    g_ScratchPad.cells.halves[0] = SELF(PartyMember)->timer;
+    g_ScratchPad.cells.halves[1] = (SELF(PartyMember)->timer >> 2) + 1;
+    if (SELF(PartyMember)->header.step < 2) {
+        g_ScratchPad.cells.halves[3] = 0x80 - SELF(PartyMember)->param.unk_0B * 48;
+        g_ScratchPad.cells.halves[4] = 0x80 - SELF(PartyMember)->param.unk_0B * 48;
     } else {
-        g_ScratchPad.cells.halves[3] = TASK(PartyMember)->unk_09 * 6 + 0x80;
-        g_ScratchPad.cells.halves[4] = 0x80 - TASK(PartyMember)->unk_09 * 6;
+        g_ScratchPad.cells.halves[3] = SELF(PartyMember)->unk_09 * 6 + 0x80;
+        g_ScratchPad.cells.halves[4] = 0x80 - SELF(PartyMember)->unk_09 * 6;
     }
     for (i = 0; i < 4; i++) {
-        g_ScratchPad.cells.halves[6] = TASK(PartyMember)->screen_x.value + FIXED_MUL(rsin(i << 10), g_ScratchPad.cells.halves[0]);
-        g_ScratchPad.cells.halves[7] = TASK(PartyMember)->screen_y.value + FIXED_MUL(rcos(i << 10), g_ScratchPad.cells.halves[0]);
+        g_ScratchPad.cells.halves[6] = SELF(PartyMember)->screen_x.value + FIXED_MUL(rsin(i << 10), g_ScratchPad.cells.halves[0]);
+        g_ScratchPad.cells.halves[7] = SELF(PartyMember)->screen_y.value + FIXED_MUL(rcos(i << 10), g_ScratchPad.cells.halves[0]);
         for (j = 0; j < 3; j++) {
             prim = (POLY_G3*)g_GfxPrimCursor;
             SetPolyG3(prim);
@@ -371,11 +371,11 @@ MATCH void BMagic_InfluenceDrawRing(void) {
     s32      i;
     s32      segment;
 
-    g_ScratchPad.cells.halves[0] = TASK(PartyMember)->timer;
-    g_ScratchPad.cells.halves[6] = TASK(PartyMember)->screen_x.value;
-    g_ScratchPad.cells.halves[7] = TASK(PartyMember)->screen_y.value;
-    if (TASK(PartyMember)->header.step < 2) {
-        g_ScratchPad.cells.halves[3] = 0x80 - TASK(PartyMember)->param.unk_0B * 48;
+    g_ScratchPad.cells.halves[0] = SELF(PartyMember)->timer;
+    g_ScratchPad.cells.halves[6] = SELF(PartyMember)->screen_x.value;
+    g_ScratchPad.cells.halves[7] = SELF(PartyMember)->screen_y.value;
+    if (SELF(PartyMember)->header.step < 2) {
+        g_ScratchPad.cells.halves[3] = 0x80 - SELF(PartyMember)->param.unk_0B * 48;
     } else {
         g_ScratchPad.cells.halves[3] = 0x80;
     }
@@ -405,10 +405,10 @@ MATCH void BMagic_InfluenceDrawCross(void) {
     shade      = (volatile u16*)&D_1F800006;
     line       = (LINE_F2*)g_GfxPrimCursor;
     *shade     = 0x80;
-    D_1F80000C = TASK(PartyMember)->screen_x.value;
+    D_1F80000C = SELF(PartyMember)->screen_x.value;
     /* FAKE: retail stores each staged coordinate before loading the next. */
     FAKE_ORDER_FENCE();
-    D_1F80000E = TASK(PartyMember)->screen_y.value;
+    D_1F80000E = SELF(PartyMember)->screen_y.value;
     /* FAKE: retail keeps the argument move in the call's delay slot. */
     FAKE_ORDER_FENCE();
     SetLineF2(line);

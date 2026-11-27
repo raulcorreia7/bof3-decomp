@@ -38,7 +38,7 @@ MATCH void func_800AE9C4(u8 texture_index) {
     GFX_AddDitheredDrawMode(2, mode);
     primitive = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(primitive);
-    panel = TASK(BattlePanelGeometry);
+    panel = SELF(BattlePanelGeometry);
     setXY4(primitive, panel->origin.x + 1, panel->origin.y + 1, panel->origin.x + 49, panel->origin.y + 1, panel->origin.x + 1, panel->origin.y + (panel->height + 1), panel->origin.x + 0x31,
            panel->origin.y + (panel->height + 1));
     primitive->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, BATTLE_PANEL_TPAGE_X, BATTLE_PANEL_TPAGE_Y);
@@ -47,13 +47,13 @@ MATCH void func_800AE9C4(u8 texture_index) {
      * code materializes the table address again for each access. */
     tex_offset = texture_index * BATTLE_PANEL_TEX_STRIDE;
     setUV4(primitive, ((Pos2u*)&g_BattlePanelUV[tex_offset])->x, ((Pos2u*)&g_BattlePanelUV[tex_offset])->y, ((Pos2u*)&g_BattlePanelUV[tex_offset])->x + BATTLE_PANEL_WIDTH,
-           ((Pos2u*)&g_BattlePanelUV[tex_offset])->y, ((Pos2u*)&g_BattlePanelUV[tex_offset])->x, TASK(BattlePanelGeometry)->height + ((Pos2u*)&g_BattlePanelUV[tex_offset])->y,
-           ((Pos2u*)&g_BattlePanelUV[tex_offset])->x + BATTLE_PANEL_WIDTH, TASK(BattlePanelGeometry)->height + ((Pos2u*)&g_BattlePanelUV[tex_offset])->y);
+           ((Pos2u*)&g_BattlePanelUV[tex_offset])->y, ((Pos2u*)&g_BattlePanelUV[tex_offset])->x, SELF(BattlePanelGeometry)->height + ((Pos2u*)&g_BattlePanelUV[tex_offset])->y,
+           ((Pos2u*)&g_BattlePanelUV[tex_offset])->x + BATTLE_PANEL_WIDTH, SELF(BattlePanelGeometry)->height + ((Pos2u*)&g_BattlePanelUV[tex_offset])->y);
     setRGB0(primitive, 1, 1, 1);
     GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_FT4));
     primitive = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(primitive);
-    panel2 = TASK(BattlePanelGeometry);
+    panel2 = SELF(BattlePanelGeometry);
     setXY4(primitive, panel2->origin.x, panel2->origin.y, panel2->origin.x + BATTLE_PANEL_WIDTH, panel2->origin.y, panel2->origin.x, panel2->origin.y + panel2->height,
            panel2->origin.x + BATTLE_PANEL_WIDTH, panel2->origin.y + panel2->height);
     primitive->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, BATTLE_PANEL_TPAGE_X, BATTLE_PANEL_TPAGE_Y);
@@ -61,8 +61,8 @@ MATCH void func_800AE9C4(u8 texture_index) {
     /* The second texture block reads the work record again for its last row, the
      * way the retail code reloads the scratchpad work pointer there. */
     setUV4(primitive, ((Pos2u*)&g_BattlePanelUV[tex_offset])->x, ((Pos2u*)&g_BattlePanelUV[tex_offset])->y, ((Pos2u*)&g_BattlePanelUV[tex_offset])->x + BATTLE_PANEL_WIDTH,
-           ((Pos2u*)&g_BattlePanelUV[tex_offset])->y, ((Pos2u*)&g_BattlePanelUV[tex_offset])->x, TASK(BattlePanelGeometry)->height + ((Pos2u*)&g_BattlePanelUV[tex_offset])->y,
-           ((Pos2u*)&g_BattlePanelUV[tex_offset])->x + BATTLE_PANEL_WIDTH, TASK(BattlePanelGeometry)->height + ((Pos2u*)&g_BattlePanelUV[tex_offset])->y);
+           ((Pos2u*)&g_BattlePanelUV[tex_offset])->y, ((Pos2u*)&g_BattlePanelUV[tex_offset])->x, SELF(BattlePanelGeometry)->height + ((Pos2u*)&g_BattlePanelUV[tex_offset])->y,
+           ((Pos2u*)&g_BattlePanelUV[tex_offset])->x + BATTLE_PANEL_WIDTH, SELF(BattlePanelGeometry)->height + ((Pos2u*)&g_BattlePanelUV[tex_offset])->y);
     setRGB0(primitive, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
     GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_FT4));
 }

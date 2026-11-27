@@ -19,7 +19,7 @@ MATCH void func_801DD9A0(void) {
         if (((PADRup & g_PadStates[0].held) || (g_AreaScrollTargetCoordY.fixed == TO_COORD(21))) && (g_SpawnedActors[3].header.mode == 0)) {
             g_AreaCameraSpeed              = 0x40;
             g_AreaScrollTargetCoordY.fixed = TO_COORD(60);
-            TASK(FishingState)->sub_index  = 1;
+            SELF(FishingState)->sub_index  = 1;
         } else {
             g_AreaCameraSpeed = 0x20;
             g_AreaScrollTargetCoordY.fixed -= COORD_HALF;

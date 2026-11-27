@@ -7,6 +7,6 @@ MATCH void Party_CellWalkRun(void) {
      * a u8 flag (also written by Area_ClimbDismountExit). Promotion to a named field needs
      * a proven struct owner/layout from callers, strides, and field accesses. */
     g_Game.current->u.field.mode.unsigned_value = 5;
-    g_PartyCellWalkSteps[TASK(Actor)->unk_03]();
+    g_PartyCellWalkSteps[SELF(Actor)->unk_03]();
     Script_AnimStepLoop();
 }

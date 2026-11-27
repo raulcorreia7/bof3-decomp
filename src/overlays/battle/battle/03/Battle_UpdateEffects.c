@@ -18,7 +18,7 @@ MATCH void Battle_UpdateEffects(void) {
         if (g_BattleEffects[i].header.flags != 0u) {
             target     = g_BattleEffects[i].target.party;
             D_801EC2E0 = effect;
-            TASK_SET(effect);
+            SELF_SET(effect);
             g_BattleEffectBattler = target;
             funcs[effect->unk_06]();
         }

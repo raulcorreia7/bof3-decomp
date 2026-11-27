@@ -27,7 +27,7 @@ MATCH void func_801DCFD0(void) {
     if (*pad_state & g_InputMasks[FISHING_INPUT_CANCEL]) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
         g_SpawnedActors[6].unk_07 &= ~2;
-        TASK(FishingState)->flag_04 -= 1;
+        SELF(FishingState)->flag_04 -= 1;
         return;
     }
 
@@ -45,7 +45,7 @@ MATCH void func_801DCFD0(void) {
             }
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
             g_SpawnedActors[6].unk_07 &= ~2;
-            TASK(FishingState)->flag_04 -= 1;
+            SELF(FishingState)->flag_04 -= 1;
             return;
         }
         if (input & PADLup) {
@@ -96,7 +96,7 @@ MATCH void func_801DCFD0(void) {
             }
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
             g_SpawnedActors[6].unk_07 &= ~2;
-            TASK(FishingState)->flag_04 -= 1;
+            SELF(FishingState)->flag_04 -= 1;
             return;
         }
         if (input & PADLup) {

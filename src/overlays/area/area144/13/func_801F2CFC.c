@@ -2,6 +2,6 @@
 
 MATCH void func_801F2CFC(void) {
     if (func_801F34FC() == 0) {
-        TASK(Actor)->header.mode += 1;
+        SELF(Actor)->header.mode += 1;
     }
 }

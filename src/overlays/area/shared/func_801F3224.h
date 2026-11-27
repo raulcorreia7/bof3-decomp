@@ -7,15 +7,15 @@ MATCH void func_801F3224(void) {
 
     Actor_SetScreenOrigin();
 
-    scratch                    = TASK(Actor);
+    scratch                    = SELF(Actor);
     timer                      = *(u8*)(((u8*)scratch + 9));
     *(u8*)(((u8*)scratch + 9)) = timer - 1;
-    scratch2                   = TASK(Actor);
+    scratch2                   = SELF(Actor);
     scratch->scale.x += 0x2000;
 
     if (((u8*)scratch2)[9] == 0) {
         scratch2->unk_48         = 0;
-        TASK(Actor)->header.mode = 3;
+        SELF(Actor)->header.mode = 3;
     }
 
     Area_AddActor();

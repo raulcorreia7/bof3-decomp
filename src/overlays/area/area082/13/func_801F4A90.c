@@ -5,7 +5,7 @@ MATCH void func_801F4A90(void) {
         func_801F5388(0x40);
         D_8014933A = 0;
         Area_DrawGradient(-1);
-        TASK(Actor)->timer = 0;
-        TASK(Actor)->header.step++;
+        SELF(Actor)->timer = 0;
+        SELF(Actor)->header.step++;
     }
 }

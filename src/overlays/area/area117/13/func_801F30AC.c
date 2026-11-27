@@ -5,7 +5,7 @@ MATCH void func_801F30AC(void) {
         /* The map bundle's width byte, include/area/area.h. */
         *(g_AreaCellCodes + MEM(u8, MAP_BUNDLE_BASE) * 21 + 1) = 0xA1;
         *(g_AreaCellCodes + MEM(u8, MAP_BUNDLE_BASE) * 22 + 1) = 0xA1;
-        TASK(Actor)->header.step                               = 1;
+        SELF(Actor)->header.step                               = 1;
     }
     func_801F314C();
 }

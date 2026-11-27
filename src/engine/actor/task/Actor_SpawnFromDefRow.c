@@ -21,17 +21,17 @@ MATCH void Actor_SpawnFromDefRow(u8* script) {
 
     tile   = g_GameAreaId;
     offset = script[9] * 8;
-    TASK_SET(&g_Actors[slot]);
+    SELF_SET(&g_Actors[slot]);
     GAME_WORK_AREA_PTR = &g_Actors[slot];
     actors             = g_Actors;
 
     tile                   = FIELD(s32, g_AreaLoads[tile], 0x8u) + offset;
-    TASK(Actor)->direction = script[0] & 0xF;
+    SELF(Actor)->direction = script[0] & 0xF;
     Actor_ResetMotion();
     SYS_InitScratchpad((u8*)tile);
     Actor_TurnRampClear(4);
 
-    work = TASK(Actor);
+    work = SELF(Actor);
     x    = script[2] << 16;
     if (script[1] != 0) {
         x |= 32768;
@@ -43,14 +43,14 @@ MATCH void Actor_SpawnFromDefRow(u8* script) {
     }
     work->pos.y.fixed = y;
 
-    COORD_INT(TASK(Actor)->pos.z) = Area_HeightSample(work->pos.x.fixed, y);
-    TASK(Actor)->header.mode      = script[5];
-    TASK(Actor)->header.step      = script[7];
-    TASK(Actor)->unk_06           = script[0] >> 4;
-    TASK(Actor)->gravity          = 0;
-    TASK(Actor)->unk_1C           = 0;
-    TASK(Actor)->unk_18           = 0;
-    TASK(Actor)->voice_flags.raw  = FIELD(u8, TASK(Actor)->range_54.table, 0x2u);
+    COORD_INT(SELF(Actor)->pos.z) = Area_HeightSample(work->pos.x.fixed, y);
+    SELF(Actor)->header.mode      = script[5];
+    SELF(Actor)->header.step      = script[7];
+    SELF(Actor)->unk_06           = script[0] >> 4;
+    SELF(Actor)->gravity          = 0;
+    SELF(Actor)->unk_1C           = 0;
+    SELF(Actor)->unk_18           = 0;
+    SELF(Actor)->voice_flags.raw  = FIELD(u8, SELF(Actor)->range_54.table, 0x2u);
 
     actors[*counter].unk_88                             = 0;
     actors[*counter].walk_dest_y                        = 0;
@@ -62,21 +62,21 @@ MATCH void Actor_SpawnFromDefRow(u8* script) {
 
     Actor_SetOptionFlags(script + 8);
 
-    TASK(Actor)->tint.steps.delta.r = -0x80;
-    TASK(Actor)->tint.steps.delta.b = -0x80;
-    TASK(Actor)->tint.steps.delta.g = -0x80;
-    TASK(Actor)->tint.bytes.flags   = 2;
+    SELF(Actor)->tint.steps.delta.r = -0x80;
+    SELF(Actor)->tint.steps.delta.b = -0x80;
+    SELF(Actor)->tint.steps.delta.g = -0x80;
+    SELF(Actor)->tint.bytes.flags   = 2;
 
     if (D_80146900[*counter][0] == 0) {
-        Area_CellSetCode(COORD_INT(TASK(Actor)->pos.x), COORD_INT(TASK(Actor)->pos.y), 0x10);
-        if (COORD_FRAC(TASK(Actor)->pos.x) != 0) {
-            Area_CellSetCode((s16)((u16)COORD_INT(TASK(Actor)->pos.x) + 1), COORD_INT(TASK(Actor)->pos.y), 0x10);
+        Area_CellSetCode(COORD_INT(SELF(Actor)->pos.x), COORD_INT(SELF(Actor)->pos.y), 0x10);
+        if (COORD_FRAC(SELF(Actor)->pos.x) != 0) {
+            Area_CellSetCode((s16)((u16)COORD_INT(SELF(Actor)->pos.x) + 1), COORD_INT(SELF(Actor)->pos.y), 0x10);
         }
-        if (COORD_FRAC(TASK(Actor)->pos.y) != 0) {
-            Area_CellSetCode(COORD_INT(TASK(Actor)->pos.x), (s16)((u16)COORD_INT(TASK(Actor)->pos.y) + 1), 0x10);
+        if (COORD_FRAC(SELF(Actor)->pos.y) != 0) {
+            Area_CellSetCode(COORD_INT(SELF(Actor)->pos.x), (s16)((u16)COORD_INT(SELF(Actor)->pos.y) + 1), 0x10);
         }
-        if ((COORD_FRAC(TASK(Actor)->pos.x) != 0) && (COORD_FRAC(TASK(Actor)->pos.y) != 0)) {
-            Area_CellSetCode((s16)((u16)COORD_INT(TASK(Actor)->pos.x) + 1), (s16)((u16)COORD_INT(TASK(Actor)->pos.y) + 1), 0x10);
+        if ((COORD_FRAC(SELF(Actor)->pos.x) != 0) && (COORD_FRAC(SELF(Actor)->pos.y) != 0)) {
+            Area_CellSetCode((s16)((u16)COORD_INT(SELF(Actor)->pos.x) + 1), (s16)((u16)COORD_INT(SELF(Actor)->pos.y) + 1), 0x10);
         }
     }
 

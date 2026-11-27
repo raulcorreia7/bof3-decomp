@@ -11,13 +11,13 @@ MATCH void Fishing_ReadyBegin(void) {
 
     g_FishingHookedFish      = 0xFF;
     /* FAKE: typed word stores let the scheduler hoist the later byte store; retail keeps them in order. */
-    *(u32*)(TASK(u8) + 0x0C) = 0;
-    *(u32*)(TASK(u8) + 0x10) = 0;
-    *(u32*)(TASK(u8) + 0x14) = 0;
-    *(u32*)(TASK(u8) + 0x18) = 0;
-    *(u32*)(TASK(u8) + 0x1C) = 0;
-    *(u32*)(TASK(u8) + 0x20) = 0;
-    TASK(Actor)->timer       = 0;
+    *(u32*)(SELF(u8) + 0x0C) = 0;
+    *(u32*)(SELF(u8) + 0x10) = 0;
+    *(u32*)(SELF(u8) + 0x14) = 0;
+    *(u32*)(SELF(u8) + 0x18) = 0;
+    *(u32*)(SELF(u8) + 0x1C) = 0;
+    *(u32*)(SELF(u8) + 0x20) = 0;
+    SELF(Actor)->timer       = 0;
 
     mode = (g_FishingEquipment.lure_id && g_FishingEquipment.rod_id) ? 0 : 6;
     func_801DDE94(mode);
@@ -28,6 +28,6 @@ MATCH void Fishing_ReadyBegin(void) {
         Script_Select(0xB);
     }
 
-    record    = TASK(u8);
+    record    = SELF(u8);
     record[3] = (record[3] + 1);
 }

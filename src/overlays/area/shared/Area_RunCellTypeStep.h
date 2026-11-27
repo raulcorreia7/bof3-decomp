@@ -11,18 +11,18 @@
     scaled   = g_Game.members[0].unk_0C * g_Game.members[0].unk_09;                                          \
     x        = FIX_INT(g_Game.members[0].pos.x.fixed + scaled);                                              \
     y        = FIX_INT(g_Game.members[0].pos.y.fixed + g_Game.members[0].unk_10 * g_Game.members[0].unk_09); \
-    work     = g_Task;                                                                                       \
+    work     = g_Self;                                                                                       \
     work->vx = x;                                                                                            \
     work->vy = y;                                                                                            \
     if ((Area_CellGetCode(x, y) & BYTE_MASK) == 0xA1) {                                                      \
-        TASK(Actor)->param.unk_0B = 1;                                                                       \
+        SELF(Actor)->param.unk_0B = 1;                                                                       \
     } else if ((Area_CellGetCode(x, y) & BYTE_MASK) == 0xA0) {                                               \
-        TASK(Actor)->param.unk_0B = 2;                                                                       \
+        SELF(Actor)->param.unk_0B = 2;                                                                       \
     } else if ((Area_CellGetCode(x, y) & BYTE_MASK) == 0xAE) {                                               \
-        TASK(Actor)->param.unk_0B = 3;                                                                       \
+        SELF(Actor)->param.unk_0B = 3;                                                                       \
     } else if (g_Game.walk_flags & AREA_WALK_TRANSITION) {                                                   \
-        TASK(Actor)->param.unk_0B = 4;                                                                       \
+        SELF(Actor)->param.unk_0B = 4;                                                                       \
     } else {                                                                                                 \
-        TASK(Actor)->param.unk_0B = 0;                                                                       \
+        SELF(Actor)->param.unk_0B = 0;                                                                       \
     }                                                                                                        \
-    HANDLERS[TASK(Actor)->header.mode]();
+    HANDLERS[SELF(Actor)->header.mode]();

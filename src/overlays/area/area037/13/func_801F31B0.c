@@ -15,7 +15,7 @@ MATCH void func_801F31B0(void) {
         for (j = 0; j < 8; j++) {
             if ((j & 3) == 0) {
                 SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256), 0);
-                Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, (j >> 3) == 0, sizeof(DR_MODE));
+                Area_CellAddPrim(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed, (j >> 3) == 0, sizeof(DR_MODE));
             }
             for (i = 0; i < 32; i++) {
                 tile = (TILE_1*)g_GfxPrimCursor;
@@ -29,7 +29,7 @@ MATCH void func_801F31B0(void) {
                 gte_ldv0(g_ScratchPadVectors);
                 gte_rtps();
                 gte_stsxy2(&tile->x0);
-                Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, (j >> 3) == 0, sizeof(TILE_1));
+                Area_CellAddPrim(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed, (j >> 3) == 0, sizeof(TILE_1));
             }
         }
     }

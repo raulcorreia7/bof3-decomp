@@ -3,7 +3,7 @@
 MATCH void func_801F2C8C(void) {
     Actor* actor;
 
-    actor           = TASK(Actor);
+    actor           = SELF(Actor);
     g_AreaSceneMode = 2;
     actor->header.step++;
 }

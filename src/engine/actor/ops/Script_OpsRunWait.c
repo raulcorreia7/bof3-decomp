@@ -39,7 +39,7 @@ MATCH u8 Script_OpsRunWait(ScriptState* state, u8* base, u8 value) {
             if (g_GameStateIndex != GAME_REQUEST_BATTLE) {
                 pc                        = Actor_ReadState();
                 SPAD(0u)->cells.halves[0] = pc;
-                if (TASK(Actor)->script_pc != pc) {
+                if (SELF(Actor)->script_pc != pc) {
                     cmd = base + state->cursor;
                     if (pc == cmd[3])
                         Actor_PlayCueByDistance(cmd[1] << 8 | cmd[2], cmd[4]);
@@ -48,14 +48,14 @@ MATCH u8 Script_OpsRunWait(ScriptState* state, u8* base, u8 value) {
             state->cursor += 4;
             break;
         case ACTOR_SCRIPT_WAIT_TOGGLE_ROUTE_STEP:
-            TASK(Actor)->option_flags ^= 0x40;
-            if (TASK(Actor)->option_flags & 0x40)
-                TASK(Actor)->unk_48 = 0;
+            SELF(Actor)->option_flags ^= 0x40;
+            if (SELF(Actor)->option_flags & 0x40)
+                SELF(Actor)->unk_48 = 0;
             else
-                TASK(Actor)->unk_48 = 1;
+                SELF(Actor)->unk_48 = 1;
             break;
         case ACTOR_SCRIPT_WAIT_TOGGLE_NO_TARGET:
-            TASK(Actor)->option_flags ^= ACTOR_OPT_NO_TARGET;
+            SELF(Actor)->option_flags ^= ACTOR_OPT_NO_TARGET;
             break;
         case ACTOR_SCRIPT_WAIT_SET_PARTY_SLOT_MOVE:
             g_ScratchPad.cells.bytes[1] = g_CurrentActor - g_PartyActors;
@@ -68,9 +68,9 @@ MATCH u8 Script_OpsRunWait(ScriptState* state, u8* base, u8 value) {
                 g_ActorTurnRamps[g_ScratchPad.cells.bytes[1]].delta_y = (s16)((base + state->cursor)[3] << 8 | (base + state->cursor)[4]) / g_ActorTurnRamps[g_ScratchPad.cells.bytes[1]].frames_z;
                 g_ActorTurnRamps[g_ScratchPad.cells.bytes[1]].delta_x = (s16)((base + state->cursor)[1] << 8 | (base + state->cursor)[2]) / g_ActorTurnRamps[g_ScratchPad.cells.bytes[1]].frames_z;
             } else {
-                TASK(Actor)->angle_z = (s16)((base + state->cursor)[5] << 8 | (base + state->cursor)[6]);
-                TASK(Actor)->angle_y = (s16)((base + state->cursor)[3] << 8 | (base + state->cursor)[4]);
-                TASK(Actor)->angle_x = (s16)((base + state->cursor)[1] << 8 | (base + state->cursor)[2]);
+                SELF(Actor)->angle_z = (s16)((base + state->cursor)[5] << 8 | (base + state->cursor)[6]);
+                SELF(Actor)->angle_y = (s16)((base + state->cursor)[3] << 8 | (base + state->cursor)[4]);
+                SELF(Actor)->angle_x = (s16)((base + state->cursor)[1] << 8 | (base + state->cursor)[2]);
             }
             state->flags |= 8;
             state->cursor += 7;
@@ -110,18 +110,18 @@ MATCH u8 Script_OpsRunWait(ScriptState* state, u8* base, u8 value) {
             break;
         case ACTOR_SCRIPT_WAIT_MOVE_AND_SET_CELL_PALETTE:
             Actor_ApplyVelocity();
-            COORD_INT(TASK(Actor)->pos.z) = Area_HeightSample(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed);
+            COORD_INT(SELF(Actor)->pos.z) = Area_HeightSample(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed);
             /* fallthrough */
         case ACTOR_SCRIPT_WAIT_SET_CELL_PALETTE:
-            Area_CellSetPalette(COORD_INT(TASK(Actor)->pos.x), COORD_INT(TASK(Actor)->pos.y));
+            Area_CellSetPalette(COORD_INT(SELF(Actor)->pos.x), COORD_INT(SELF(Actor)->pos.y));
             return value;
         case ACTOR_SCRIPT_WAIT_CLEAR_CELL_PALETTE:
-            Area_CellClearPalette(COORD_INT(TASK(Actor)->pos.x), COORD_INT(TASK(Actor)->pos.y));
+            Area_CellClearPalette(COORD_INT(SELF(Actor)->pos.x), COORD_INT(SELF(Actor)->pos.y));
             return value;
         case ACTOR_SCRIPT_WAIT_CALL_AREA_SCRIPT:
             area = g_AreaLoads[g_GameAreaId];
             ((AreaScriptCallback*)area->unk_3C)[(base + state->cursor)[1]](area);
-            value = TASK(Actor)->direction;
+            value = SELF(Actor)->direction;
             state->cursor += 1;
             break;
         case ACTOR_SCRIPT_WAIT_WAIT_BATTLE:

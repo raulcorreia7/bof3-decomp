@@ -56,25 +56,25 @@
 /* The scratchpad cell at 0x1F800044: the record whose handler is running. The dispatcher sets it before each
  * handler (Actor_DispatchAll, Party_RunFrame, Battle_UpdateEffects); code that runs another record's handler
  * saves it first and restores it after. Its type follows the mode (Actor on the field, PartyMember for a
- * battler, the effect's own record in a spell effect, FishingState while fishing), so `struct Task` is
- * incomplete. Read TASK(Type)->member; set TASK_SET(record); save through a typed local or TASK(void); a
+ * battler, the effect's own record in a spell effect, FishingState while fishing), so `struct Self` is
+ * incomplete. Read SELF(Type)->member; set SELF_SET(record); save through a typed local or SELF(void); a
  * record with no type reads its bytes through the byte view below. A unit that must re-read the cell after
- * every store defines FAKE_DECL_TASK_VOLATILE before its first include. */
-#ifdef FAKE_DECL_TASK_VOLATILE
+ * every store defines FAKE_DECL_SELF_VOLATILE before its first include. */
+#ifdef FAKE_DECL_SELF_VOLATILE
 /* D_1F800044 */
-extern struct Task* volatile g_Task;
+extern struct Self* volatile g_Self;
 #else
 /* D_1F800044 */
-extern struct Task* g_Task;
+extern struct Self* g_Self;
 #endif
 
-/* The current task viewed as a Type record. */
-#define TASK(type)       ((type*)g_Task)
+/* The running record viewed as a Type record. */
+#define SELF(type)       ((type*)g_Self)
 
-/* The current task as raw bytes, for a record with no type. */
-#define TASK_BYTES       ((u8*)g_Task)
+/* The running record as raw bytes, for a record with no type. */
+#define SELF_BYTES       ((u8*)g_Self)
 
-/* Point the cell at a record of any type: the cell holds the record as an untyped task pointer. */
-#define TASK_SET(record) (g_Task = (void*)(record))
+/* Point the cell at a record of any type: the cell holds the record as an untyped pointer. */
+#define SELF_SET(record) (g_Self = (void*)(record))
 
 #endif

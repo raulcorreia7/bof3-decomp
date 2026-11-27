@@ -10,11 +10,11 @@ MATCH void func_801CF70C(void) {
 }
 
 MATCH void func_801CF72C(void) {
-    SYS_DISPATCH_TASK(D_801D0668, 2, g_Task);
+    SYS_DISPATCH_TASK(D_801D0668, 2, g_Self);
 }
 
 MATCH void func_801CF770(void) {
-    SYS_DISPATCH_TASK(D_801D0670, 3, g_Task);
+    SYS_DISPATCH_TASK(D_801D0670, 3, g_Self);
 }
 
 MATCH void PlChar_FaceFreeDirection(void) {

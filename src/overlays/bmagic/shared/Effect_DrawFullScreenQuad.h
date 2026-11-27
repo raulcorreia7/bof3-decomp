@@ -9,7 +9,7 @@
     SetPolyF4(prim);                                        \
     SetSemiTrans(prim, 1);                                  \
     setXY4(prim, 0, 0, 0x13F, 0, 0, 0xEF, 0x13F, 0xEF);     \
-    shade = TASK(PartyMember)->unk_09 * 15;                 \
+    shade = SELF(PartyMember)->unk_09 * 15;                 \
     setRGB0(prim, shade, shade, shade);                     \
     GFX_AddPrim(LAYER, sizeof(POLY_F4));                    \
     tpage = getTPage(0, 0, 320, 256);                       \

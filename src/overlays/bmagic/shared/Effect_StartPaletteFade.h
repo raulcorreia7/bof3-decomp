@@ -4,7 +4,7 @@ MATCH void Effect_StartPaletteFade(void) {
 
     actor = &g_Battle.selected_actor;
     GFX_PaletteFreeFadeTarget(*actor);
-    TASK(PartyMember)->param.unk_0B = GFX_PaletteAllocFade(*actor, 0, 0, 0, 1);
-    TASK(PartyMember)->unk_09       = 0;
-    TASK(PartyMember)->header.mode += 1;
+    SELF(PartyMember)->param.unk_0B = GFX_PaletteAllocFade(*actor, 0, 0, 0, 1);
+    SELF(PartyMember)->unk_09       = 0;
+    SELF(PartyMember)->header.mode += 1;
 }

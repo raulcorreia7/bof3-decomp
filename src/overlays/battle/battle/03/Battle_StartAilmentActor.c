@@ -8,23 +8,23 @@ MATCH void Battle_StartAilmentActor(void) {
     s32 index;
     u8  slot;
 
-    TASK(PartyMember)->param.unk_0B = 0;
+    SELF(PartyMember)->param.unk_0B = 0;
     slot                            = func_801E8FA8();
     index                           = slot & BYTE_MASK;
     if ((index != GAME_NONE) && (s_BattleBattlerStepIds[index] != 0xFF)) {
-        TASK(PartyMember)->param.unk_0B = slot;
-        TASK(PartyMember)->unk_29       = 2;
-        TASK(PartyMember)->unk_25       = 5;
-        TASK(PartyMember)->unk_26       = 0xF0;
-        TASK(PartyMember)->unk_24       = 0x80;
-        TASK(PartyMember)->unk_27       = 0xFF;
-        TASK(PartyMember)->unk_28       = 0;
-        work                            = TASK(PartyMember);
+        SELF(PartyMember)->param.unk_0B = slot;
+        SELF(PartyMember)->unk_29       = 2;
+        SELF(PartyMember)->unk_25       = 5;
+        SELF(PartyMember)->unk_26       = 0xF0;
+        SELF(PartyMember)->unk_24       = 0x80;
+        SELF(PartyMember)->unk_27       = 0xFF;
+        SELF(PartyMember)->unk_28       = 0;
+        work                            = SELF(PartyMember);
         work->unk_2B                    = 0;
-        next                            = TASK(PartyMember);
+        next                            = SELF(PartyMember);
         work->unk_2C.value              = 1;
         next->unk_48                    = 0;
-        work                            = TASK(PartyMember);
+        work                            = SELF(PartyMember);
         work->scale.y                   = 0x10000;
         work->scale.x                   = 0x10000;
         work->unk_18                    = 0x666;
@@ -32,7 +32,7 @@ MATCH void Battle_StartAilmentActor(void) {
         work->timer                     = 60;
         func_801E8DD8();
         Script_Select(s_BattleBattlerStepIds[index]);
-        work              = TASK(PartyMember);
+        work              = SELF(PartyMember);
         work->header.mode = (work->header.mode) + 2;
     }
 }

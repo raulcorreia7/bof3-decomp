@@ -206,7 +206,7 @@ for the rest):
 
 Overlays call libgpu and libgte directly and never the CD, SPU or pad: those sit behind the engine
 modules (`cd`, `sound`, `input/pad`, `emi/loader`). So the seams are the PsyQ headers in
-`include/psyq/` (a port supplies the same functions), the scratchpad cell `g_Task` in
+`include/psyq/` (a port supplies the same functions), the scratchpad cell `g_Self` in
 `include/psx/mem.h` (a port makes it a variable), the EMI loader and the fixed overlay windows (a
 port links every overlay into one program, so same-address `func_<ADDR>` names in different images
 must become `static` or carry the image), and the format headers with their 188 `ASSERT_SIZE` lines

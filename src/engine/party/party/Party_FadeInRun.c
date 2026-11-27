@@ -3,5 +3,5 @@
 /* func_801B726C */
 /* Runs the fade-in sub-step the actor's unk_03 selects. */
 MATCH void Party_FadeInRun(void) {
-    g_PartyFadeInSteps[TASK(Actor)->unk_03]();
+    g_PartyFadeInSteps[SELF(Actor)->unk_03]();
 }

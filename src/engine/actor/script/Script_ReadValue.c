@@ -47,7 +47,7 @@ MATCH s32 Script_ReadValue(u32 type) {
         case SCRIPT_VALUE_SCENARIO_FLAG:
             return g_ScenarioState.flags_01 & 0x1;
         case SCRIPT_VALUE_SCRIPT_PC:
-            return TASK(Actor)->script_pc;
+            return SELF(Actor)->script_pc;
         case SCRIPT_VALUE_LEADER_ID:
             return g_Game.members[0].chr.character_id;
         case SCRIPT_VALUE_EVENT_FLAGS:

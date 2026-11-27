@@ -36,13 +36,13 @@ void func_800C236C(u8 phase);
  * member that marks the record writes that statement between the two. */
 #define BOSS008_END_BATTLE_BEGIN(slot)          \
     Battle_ShowActorEntry(slot);                \
-    g_Task = (PartyMember*)func_800AC754(slot); \
+    g_Self = (PartyMember*)func_800AC754(slot); \
     Area_SceneSelectRecord(0x83)
 
 #define BOSS008_END_BATTLE_FINISH()                              \
     Script_Select(0);                                            \
-    TASK(PartyMember)->unk_58 = g_BattleEnemyBattlers[0].unk_58; \
-    TASK(PartyMember)->unk_5A = g_BattleEnemyBattlers[0].unk_5A
+    SELF(PartyMember)->unk_58 = g_BattleEnemyBattlers[0].unk_58; \
+    SELF(PartyMember)->unk_5A = g_BattleEnemyBattlers[0].unk_5A
 
 /* One enemy kind's colour, from kind 8 up. */
 typedef struct Boss008Color {

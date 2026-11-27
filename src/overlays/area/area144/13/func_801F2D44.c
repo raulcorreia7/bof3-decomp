@@ -3,7 +3,7 @@
 MATCH void func_801F2D44(void) {
     u8* work;
 
-    work            = TASK(u8);
+    work            = SELF(u8);
     g_AreaDrawFlags = work[6];
     work[1] += 1;
 }

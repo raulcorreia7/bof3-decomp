@@ -8,5 +8,5 @@ MATCH void Effect_SetActorMatrixRolled(void) {
 
     PushMatrix();
     setVector(&rot, 0, 0, 512);
-    BMAGIC_PROJECT_ACTOR_MATRIX(TASK(PartyMember));
+    BMAGIC_PROJECT_ACTOR_MATRIX(SELF(PartyMember));
 }

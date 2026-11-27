@@ -10,18 +10,18 @@ MATCH void func_801F3700(void) {
     u8  step;
     u8  next;
 
-    if (TASK(Actor)->unk_06 != 0) {
-        step     = TASK(Actor)->timer;
+    if (SELF(Actor)->unk_06 != 0) {
+        step     = SELF(Actor)->timer;
         sample_w = step * 0x19;
         x        = D_801F6210 + ((0xC8 - sample_w) / 2);
         sample_h = step * 6;
         y        = D_801F6212 + ((0x30 - sample_h) >> 1);
         UI_WindowDrawBoxOutline(x, y, sample_w, sample_h);
     }
-    next = TASK(Actor)->timer;
+    next = SELF(Actor)->timer;
     if (next == 0) {
         Actor_Clear();
         return;
     }
-    TASK(Actor)->timer = next - 1;
+    SELF(Actor)->timer = next - 1;
 }

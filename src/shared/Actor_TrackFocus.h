@@ -16,12 +16,12 @@ MATCH void Actor_TrackFocus(void) {
     SP_REF(s16, 0x16)      = (s16)((g_Game.members[0].pos.y.fixed >> 9) - 0x4000);
     SP_REF(s16, 0x18)      = (s16)((-COORD_INT(g_Game.members[0].pos.z)) / 2);
     result                 = RotTransPers(vertex, (long*)screen, &depth, &flag);
-    work                   = TASK(Actor);
+    work                   = SELF(Actor);
     work->unk_60           = result;
     FIELD(u16, work, 0x2E) = screen[0];
     other                  = SP_REF(u16, 0x36);
     work->timer            = 0;
-    item                   = TASK(Actor);
+    item                   = SELF(Actor);
     work->screen_y         = other;
     item->header.mode += 1;
 }

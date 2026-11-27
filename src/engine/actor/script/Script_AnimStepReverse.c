@@ -12,23 +12,23 @@ MATCH u8 Script_AnimStepReverse(void) {
     u16 prev;
 
     result              = 0;
-    count               = TASK(Actor)->unk_4A - 1;
-    TASK(Actor)->unk_4A = count;
+    count               = SELF(Actor)->unk_4A - 1;
+    SELF(Actor)->unk_4A = count;
     if ((count & BYTE_MASK) == 0) {
-        if (TASK(Actor)->script_pc == 0) {
-            TASK(Actor)->script_pc = TASK(Actor)->unk_49 * 2;
+        if (SELF(Actor)->script_pc == 0) {
+            SELF(Actor)->script_pc = SELF(Actor)->unk_49 * 2;
             result                 = 1;
         }
 
-        index                  = TASK(Actor)->script_pc;
+        index                  = SELF(Actor)->script_pc;
         prev                   = index - 1;
-        TASK(Actor)->script_pc = prev;
-        selected               = *(u8*)(TASK(Actor)->script + prev);
+        SELF(Actor)->script_pc = prev;
+        selected               = *(u8*)(SELF(Actor)->script + prev);
         index                  = index - 2;
-        TASK(Actor)->script_pc = index;
-        TASK(Actor)->unk_4A    = *(u8*)(TASK(Actor)->script + index);
+        SELF(Actor)->script_pc = index;
+        SELF(Actor)->unk_4A    = *(u8*)(SELF(Actor)->script + index);
 
-        TASK(Actor)->frame_cells = *(u16*)(TASK(Actor)->range_54.table + selected * 2);
+        SELF(Actor)->frame_cells = *(u16*)(SELF(Actor)->range_54.table + selected * 2);
     }
     return result;
 }

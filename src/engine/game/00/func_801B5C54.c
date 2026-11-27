@@ -20,7 +20,7 @@ MATCH void* func_801B5C54(void) {
     run   = entry->runs;
     if (index < 0)
         return NULL;
-    work = TASK(Actor);
+    work = SELF(Actor);
     /* Spelled run - -index: retail adds the scaled index before the base (&run[index] swaps the addu). */
     cur  = run - -index;
     for (; index >= 0; index--, cur--) {

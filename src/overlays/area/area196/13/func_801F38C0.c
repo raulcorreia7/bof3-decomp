@@ -12,14 +12,14 @@ MATCH void func_801F38C0(void) {
     if (g_AreaSceneMode == 0) {
         return;
     }
-    shade[0] = (0x80 - abs(0x80 - TASK(Actor)->timer)) >> 1;
-    if (abs(0x80 - TASK(Actor)->timer) >= 0x41) {
-        shade[1] = 0x80 - abs(0x80 - TASK(Actor)->timer);
+    shade[0] = (0x80 - abs(0x80 - SELF(Actor)->timer)) >> 1;
+    if (abs(0x80 - SELF(Actor)->timer) >= 0x41) {
+        shade[1] = 0x80 - abs(0x80 - SELF(Actor)->timer);
     } else {
-        shade[1] = ((rcos((TASK(Actor)->timer - 0x40) << 5) >> 7) + 0x60) >> 1;
+        shade[1] = ((rcos((SELF(Actor)->timer - 0x40) << 5) >> 7) + 0x60) >> 1;
     }
-    size[0] = -(TASK(Actor)->timer & 0x3F);
-    size[1] = -((TASK(Actor)->timer << 1) & 0x3F);
+    size[0] = -(SELF(Actor)->timer & 0x3F);
+    size[1] = -((SELF(Actor)->timer << 1) & 0x3F);
 
     for (i = 0; i < 2; i++) {
         window          = (RECT*)g_GfxPrimCursor;
@@ -84,8 +84,8 @@ MATCH void func_801F38C0(void) {
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 448, 256), window);
         GFX_AddPrim(GFX_LAYER_BATTLE_SCENE, sizeof(DR_MODE));
     }
-    TASK(Actor)->timer += 4;
-    if (TASK(Actor)->timer == 0) {
+    SELF(Actor)->timer += 4;
+    if (SELF(Actor)->timer == 0) {
         Actor_Clear();
     }
 }

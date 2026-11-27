@@ -9,22 +9,22 @@ MATCH void Effect_LaunchFromRing(void) {
     u8           angle;
     s32          dy;
 
-    if (--TASK(PartyMember)->unk_09 == 0) {
+    if (--SELF(PartyMember)->unk_09 == 0) {
         angle_cell                     = &D_1F800004;
-        angle                          = TASK(PartyMember)->param.unk_0B & 0x1F;
+        angle                          = SELF(PartyMember)->param.unk_0B & 0x1F;
         *angle_cell                    = angle << 7;
-        TASK(PartyMember)->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + ((rsin(angle << 7) * 0xB0) >> 3);
+        SELF(PartyMember)->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + ((rsin(angle << 7) * 0xB0) >> 3);
         dy                             = (rcos(*angle_cell) * 0xB0) >> 3;
         battler                        = g_BattleEffectBattler;
-        work                           = TASK(PartyMember);
+        work                           = SELF(PartyMember);
         work->pos.y.fixed              = battler->pos.y.fixed + dy;
         work->pos.z.fixed              = battler->pos.z.fixed;
         work->unk_14                   = 0x40;
         work->unk_20                   = -4;
         work->unk_09                   = 0;
-        TASK(PartyMember)->timer       = 0xC;
-        TASK(PartyMember)->unk_0C      = 1;
-        TASK(PartyMember)->unk_10      = 0;
-        TASK(PartyMember)->header.step += 1;
+        SELF(PartyMember)->timer       = 0xC;
+        SELF(PartyMember)->unk_0C      = 1;
+        SELF(PartyMember)->unk_10      = 0;
+        SELF(PartyMember)->header.step += 1;
     }
 }

@@ -20,24 +20,24 @@ MATCH void func_801DC0CC(void) {
 
     if ((g_PadStates[0].pressed & (PADLup | PADLdown)) != 0) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
-        work            = TASK(FishingState);
+        work            = SELF(FishingState);
         work->cue_index = (work->cue_index ^ 0x1);
     } else if ((g_PadStates[0].pressed & PADRdown) != 0) {
         cue = 0x103;
         SND_SEPlay(cue);
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
-        work            = TASK(FishingState);
+        work            = SELF(FishingState);
         work->sub_index = (work->sub_index + 1);
     } else if ((g_PadStates[0].pressed & PADRup) != 0) {
         cue             = 0x106;
-        work            = TASK(FishingState);
+        work            = SELF(FishingState);
         work->cue_index = 1;
         SND_SEPlay(cue);
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
-        work            = TASK(FishingState);
+        work            = SELF(FishingState);
         work->sub_index = (work->sub_index + 1);
     }
-    UI_CursorDraw(32, TASK(FishingState)->cue_index * 12 + 182, 0);
+    UI_CursorDraw(32, SELF(FishingState)->cue_index * 12 + 182, 0);
     Script_AnimStepLoop();
     Fishing_DrawDimScreen();
 }

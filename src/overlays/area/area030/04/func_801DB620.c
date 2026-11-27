@@ -9,18 +9,18 @@ MATCH void func_801DB620(void) {
     u8            slot;
     u16           cue;
 
-    record        = TASK(FishingState);
+    record        = SELF(FishingState);
     record->timer = (record->timer - 1);
-    Fishing_DrawCatchBar((-(TASK(FishingState)->timer * TO_COORD(40)) >> 16), FISHING_CATCH_BAR_Y);
-    if (TASK(FishingState)->timer == 0) {
+    Fishing_DrawCatchBar((-(SELF(FishingState)->timer * TO_COORD(40)) >> 16), FISHING_CATCH_BAR_Y);
+    if (SELF(FishingState)->timer == 0) {
         slot = g_Actors[g_FishingHookedFish].unk_06;
         cue  = 0x20B;
         if (D_801E2AD5[slot * 0x24] >= 2) {
             cue = 0x20C;
         }
         SND_SEPlay(cue);
-        TASK(FishingState)->timer = 4;
-        record                    = TASK(FishingState);
+        SELF(FishingState)->timer = 4;
+        record                    = SELF(FishingState);
         record->sub_index         = (record->sub_index + 1);
     }
     Script_AnimStepLoop();

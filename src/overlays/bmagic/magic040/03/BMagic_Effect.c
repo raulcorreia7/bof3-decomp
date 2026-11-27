@@ -16,22 +16,22 @@ MATCH void func_801EEC80(void) {
     u8           slot;
     u8           i;
 
-    TASK(PartyMember)->facing = g_BattleEffectBattler->facing;
+    SELF(PartyMember)->facing = g_BattleEffectBattler->facing;
     battler                   = g_BattleEffectBattler;
-    work                      = TASK(PartyMember);
+    work                      = SELF(PartyMember);
     WorldPos_Copy(&work->pos, &battler->pos);
     work->param.unk_0B = 0;
-    TASK(PartyMember)->header.mode++;
+    SELF(PartyMember)->header.mode++;
     slot                               = Battle_AllocEffect(1, 60);
-    task                               = TASK(PartyMember);
+    task                               = SELF(PartyMember);
     g_BattleEffects[slot].header.mode  = 0;
     g_BattleEffects[slot].target.party = task;
-    TASK(PartyMember)->param.unk_0B++;
+    SELF(PartyMember)->param.unk_0B++;
     slot                               = Battle_AllocEffect(1, 60);
-    owner                              = TASK(PartyMember);
+    owner                              = SELF(PartyMember);
     g_BattleEffects[slot].header.mode  = 1;
     g_BattleEffects[slot].target.party = owner;
-    TASK(PartyMember)->param.unk_0B++;
+    SELF(PartyMember)->param.unk_0B++;
     BMAGIC_POINT_AT_PALETTE_ROW(dst, src, i);
     do {
         dst[i]      = src[i];
@@ -46,27 +46,27 @@ MATCH void func_801EEDFC(void) {
     PartyMember* work;
     u8           slot;
 
-    if (TASK(PartyMember)->param.unk_0B != 0) {
+    if (SELF(PartyMember)->param.unk_0B != 0) {
         return;
     }
     if ((Battle_CanTarget(3, g_Battle.target_selector) & BYTE_MASK) != 0) {
         slot                               = Battle_AllocEffect(1, 72);
-        work                               = TASK(PartyMember);
+        work                               = SELF(PartyMember);
         g_BattleEffects[slot].unk_04       = 3;
         g_BattleEffects[slot].arg.unk_09   = 1;
         g_BattleEffects[slot].unk_0A       = 0;
         g_BattleEffects[slot].target.party = work;
-        TASK(PartyMember)->param.unk_0B += 1;
+        SELF(PartyMember)->param.unk_0B += 1;
     } else {
         slot                               = Battle_AllocEffect(1, 72);
-        work                               = TASK(PartyMember);
+        work                               = SELF(PartyMember);
         g_BattleEffects[slot].unk_04       = 8;
         g_BattleEffects[slot].arg.unk_09   = 1;
         g_BattleEffects[slot].unk_0A       = 0;
         g_BattleEffects[slot].target.party = work;
-        TASK(PartyMember)->param.unk_0B += 1;
+        SELF(PartyMember)->param.unk_0B += 1;
     }
-    TASK(PartyMember)->header.mode += 1;
+    SELF(PartyMember)->header.mode += 1;
 }
 
 #include "overlays/bmagic/shared/Effect_StartOnZeroTick.h"
@@ -78,24 +78,24 @@ MATCH void func_801EEF8C(void) {
     Magic040Steps handlers = D_801EEC10;
     u8            next_09;
 
-    SYS_DISPATCH_BYTE(handlers.steps, TASK(PartyMember)->header.step);
-    if ((TASK(PartyMember)->header.flags & BMAGIC_EFFECT_IN_USE) != 0 && TASK(PartyMember)->header.step != 0) {
+    SYS_DISPATCH_BYTE(handlers.steps, SELF(PartyMember)->header.step);
+    if ((SELF(PartyMember)->header.flags & BMAGIC_EFFECT_IN_USE) != 0 && SELF(PartyMember)->header.step != 0) {
         func_801EF7FC();
-        func_801EF600(TASK(PartyMember)->unk_09, TASK(PartyMember)->timer * 3);
-        next_09 = TASK(PartyMember)->unk_09 + 4;
-        func_801EF600(next_09, TASK(PartyMember)->timer * 2);
+        func_801EF600(SELF(PartyMember)->unk_09, SELF(PartyMember)->timer * 3);
+        next_09 = SELF(PartyMember)->unk_09 + 4;
+        func_801EF600(next_09, SELF(PartyMember)->timer * 2);
     }
 }
 
 MATCH void func_801EF074(void) {
-    TASK(PartyMember)->facing      = BATTLE_ACTIVE_WORK->facing;
-    TASK(PartyMember)->pos.x.fixed = BATTLE_ACTIVE_WORK->pos.x.fixed;
-    TASK(PartyMember)->pos.y.fixed = BATTLE_ACTIVE_WORK->pos.y.fixed;
-    TASK(PartyMember)->pos.z.fixed = BATTLE_ACTIVE_WORK->pos.z.fixed;
-    func_801EF430(g_Task);
-    TASK(PartyMember)->unk_09 = 0;
-    TASK(PartyMember)->timer  = 0;
-    TASK(PartyMember)->header.step += 1;
+    SELF(PartyMember)->facing      = BATTLE_ACTIVE_WORK->facing;
+    SELF(PartyMember)->pos.x.fixed = BATTLE_ACTIVE_WORK->pos.x.fixed;
+    SELF(PartyMember)->pos.y.fixed = BATTLE_ACTIVE_WORK->pos.y.fixed;
+    SELF(PartyMember)->pos.z.fixed = BATTLE_ACTIVE_WORK->pos.z.fixed;
+    func_801EF430(g_Self);
+    SELF(PartyMember)->unk_09 = 0;
+    SELF(PartyMember)->timer  = 0;
+    SELF(PartyMember)->header.step += 1;
 }
 
 #include "overlays/bmagic/shared/Effect_CountUpTimersAndStep.h"
@@ -112,31 +112,31 @@ void func_801EF388(void);
 MATCH void func_801EF248(void) {
     Callback handlers[2] = {func_801EF2D8, func_801EF388};
 
-    handlers[TASK(PartyMember)->header.step]();
-    if (TASK(PartyMember)->header.flags & 0x1) {
-        if (TASK(PartyMember)->header.step != 0) {
+    handlers[SELF(PartyMember)->header.step]();
+    if (SELF(PartyMember)->header.flags & 0x1) {
+        if (SELF(PartyMember)->header.step != 0) {
             BMagic_DrawShrinkingRing();
         }
     }
 }
 
 MATCH void func_801EF2D8(void) {
-    TASK(PartyMember)->facing      = g_BattleEffectBattler->facing;
-    TASK(PartyMember)->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;
-    TASK(PartyMember)->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
-    TASK(PartyMember)->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;
-    func_801EF430(g_Task);
-    TASK(PartyMember)->param.unk_0B = 0xB;
-    TASK(PartyMember)->unk_09       = 0;
-    TASK(PartyMember)->timer        = 128;
-    TASK(PartyMember)->header.step += 1;
+    SELF(PartyMember)->facing      = g_BattleEffectBattler->facing;
+    SELF(PartyMember)->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;
+    SELF(PartyMember)->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
+    SELF(PartyMember)->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;
+    func_801EF430(g_Self);
+    SELF(PartyMember)->param.unk_0B = 0xB;
+    SELF(PartyMember)->unk_09       = 0;
+    SELF(PartyMember)->timer        = 128;
+    SELF(PartyMember)->header.step += 1;
 }
 
 MATCH void func_801EF388(void) {
-    TASK(PartyMember)->param.unk_0B -= 1;
-    TASK(PartyMember)->unk_09 += TASK(PartyMember)->param.unk_0B;
-    TASK(PartyMember)->timer -= 12;
-    if (TASK(PartyMember)->param.unk_0B == 0) {
+    SELF(PartyMember)->param.unk_0B -= 1;
+    SELF(PartyMember)->unk_09 += SELF(PartyMember)->param.unk_0B;
+    SELF(PartyMember)->timer -= 12;
+    if (SELF(PartyMember)->param.unk_0B == 0) {
         BATTLE_ACTIVE_WORK->param.unk_0B -= 1;
         Effect_Reset();
     }
@@ -157,8 +157,8 @@ MATCH void func_801EF600(u8 start, u16 radius) {
     s32      tpage;
     u8       i;
 
-    g_ScratchPad.cells.halves[0] = TASK(PartyMember)->screen_x.value;
-    g_ScratchPad.cells.halves[1] = TASK(PartyMember)->screen_y.value;
+    g_ScratchPad.cells.halves[0] = SELF(PartyMember)->screen_x.value;
+    g_ScratchPad.cells.halves[1] = SELF(PartyMember)->screen_y.value;
     tpage                        = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_AddDitheredDrawMode(BMAGIC_LAYER_OVER_BATTLERS, tpage);
     for (i = start; i < start + 32; i += 8) {
@@ -183,7 +183,7 @@ MATCH void func_801EF7FC(void) {
     s32      tpage;
     s32      i;
 
-    EFFECT_DRAW_GLOW_FAN(TASK(PartyMember)->timer, 0x80);
+    EFFECT_DRAW_GLOW_FAN(SELF(PartyMember)->timer, 0x80);
 }
 
 MATCH void BMagic_DrawShrinkingRing(void) {
@@ -194,10 +194,10 @@ MATCH void BMagic_DrawShrinkingRing(void) {
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_AddDitheredDrawMode(BMAGIC_LAYER_OVER_BATTLERS, tpage);
     i                            = 0;
-    g_ScratchPad.cells.halves[0] = TASK(PartyMember)->screen_x.value;
-    g_ScratchPad.cells.halves[1] = TASK(PartyMember)->screen_y.value;
-    g_ScratchPad.cells.halves[5] = TASK(PartyMember)->timer;
-    g_ScratchPad.cells.halves[2] = TASK(PartyMember)->unk_09;
+    g_ScratchPad.cells.halves[0] = SELF(PartyMember)->screen_x.value;
+    g_ScratchPad.cells.halves[1] = SELF(PartyMember)->screen_y.value;
+    g_ScratchPad.cells.halves[5] = SELF(PartyMember)->timer;
+    g_ScratchPad.cells.halves[2] = SELF(PartyMember)->unk_09;
     for (i = 0; i < 32; i++) {
         line = (LINE_F2*)g_GfxPrimCursor;
         SetLineF2(line);

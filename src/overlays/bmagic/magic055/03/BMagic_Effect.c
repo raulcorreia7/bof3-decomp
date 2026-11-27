@@ -19,16 +19,16 @@ MATCH void BMagic_RingStart(void) {
     u16*         dst;
 
     actor                     = g_Battle.selected_actor;
-    TASK(PartyMember)->facing = actor->facing;
-    task                      = TASK(PartyMember);
+    SELF(PartyMember)->facing = actor->facing;
+    task                      = SELF(PartyMember);
     WorldPos_Copy(&task->pos, &actor->pos);
     task->param.unk_0B = 0;
     for (i = 0, delay = BMAGIC_RING_FIRST_DELAY; i < BMAGIC_RING_COUNT; i++) {
         slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_EBONFIRE);
-        work                               = TASK(PartyMember);
+        work                               = SELF(PartyMember);
         g_BattleEffects[slot].arg.unk_09   = delay;
         g_BattleEffects[slot].target.party = work;
-        TASK(PartyMember)->param.unk_0B += 1;
+        SELF(PartyMember)->param.unk_0B += 1;
         delay += BMAGIC_RING_STAGGER;
     }
     i   = 1;
@@ -41,9 +41,9 @@ MATCH void BMagic_RingStart(void) {
     g_GfxPalettePending        = 1;
     SND_SEQueueSelection(0x100);
     Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10);
-    TASK(PartyMember)->unk_09 = 1;
-    TASK(PartyMember)->timer  = 1;
-    TASK(PartyMember)->header.mode += 1;
+    SELF(PartyMember)->unk_09 = 1;
+    SELF(PartyMember)->timer  = 1;
+    SELF(PartyMember)->header.mode += 1;
 }
 
 #include "overlays/bmagic/shared/BMagic_RingExpand.h"

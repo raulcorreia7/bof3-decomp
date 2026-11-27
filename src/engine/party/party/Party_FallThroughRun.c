@@ -4,5 +4,5 @@
 /* Runs the fall sub-step the actor's unk_03 selects. */
 MATCH void Party_FallThroughRun(void) {
     g_Game.current->u.field.mode.unsigned_value = 6;
-    g_PartyFallThroughSteps[TASK(Actor)->unk_03]();
+    g_PartyFallThroughSteps[SELF(Actor)->unk_03]();
 }

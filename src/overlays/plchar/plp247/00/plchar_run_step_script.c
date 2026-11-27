@@ -11,7 +11,7 @@ MATCH void func_801CEE08(void) {
 }
 
 MATCH void func_801CEE18(void) {
-    SYS_DISPATCH_TASK(D_801CFB1C, 2, g_Task);
+    SYS_DISPATCH_TASK(D_801CFB1C, 2, g_Self);
 }
 
 #include "overlays/plchar/shared/PlChar_StartFacingTurn.h"
@@ -19,7 +19,7 @@ MATCH void func_801CEE18(void) {
 #include "overlays/plchar/shared/PlChar_RunStepScriptRyuAdult.h"
 
 MATCH void func_801CF04C(void) {
-    SYS_DISPATCH_TASK(D_801CFB28, 2, g_Task);
+    SYS_DISPATCH_TASK(D_801CFB28, 2, g_Self);
 }
 
 #include "overlays/plchar/shared/PlChar_WalkStep.h"

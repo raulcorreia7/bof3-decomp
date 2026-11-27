@@ -3,11 +3,11 @@ MATCH void PlChar_AdvanceScript(void) {
     u8 done;
 
     done = 0;
-    if (TASK(Actor)->param.unk_0B != 0) {
-        if (TASK(Actor)->param.unk_0B == 1) {
+    if (SELF(Actor)->param.unk_0B != 0) {
+        if (SELF(Actor)->param.unk_0B == 1) {
             if (Script_AnimStepOnce() & BYTE_MASK) {
-                Script_Select(TASK(Actor)->direction);
-                TASK(Actor)->param.unk_0B = 2;
+                Script_Select(SELF(Actor)->direction);
+                SELF(Actor)->param.unk_0B = 2;
             }
         } else {
             Script_AnimStepLoop();
@@ -21,7 +21,7 @@ MATCH void PlChar_AdvanceScript(void) {
         }
     }
     if (done & BYTE_MASK) {
-        TASK(Actor)->unk_2B                         = 0;
+        SELF(Actor)->unk_2B                         = 0;
         g_Game.current->u.field.mode.unsigned_value = 0;
     }
 }

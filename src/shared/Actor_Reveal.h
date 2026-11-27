@@ -3,14 +3,14 @@
 MATCH void Actor_Reveal(void) {
     u8* work;
 
-    work = TASK(u8);
+    work = SELF(u8);
     if (work[9] != 0) {
         g_Actors[work[11]].header.flags |= ACTOR_FLAG_HIDDEN;
-        TASK(Actor)->timer -= 1;
+        SELF(Actor)->timer -= 1;
     } else {
         g_Actors[work[11]].header.flags &= ~ACTOR_FLAG_HIDDEN;
-        g_Actors[TASK(Actor)->unk_03].header.flags = 0;
-        g_Actors[TASK(Actor)->unk_04].header.flags = 0;
-        TASK(Actor)->header.mode                   = 2;
+        g_Actors[SELF(Actor)->unk_03].header.flags = 0;
+        g_Actors[SELF(Actor)->unk_04].header.flags = 0;
+        SELF(Actor)->header.mode                   = 2;
     }
 }

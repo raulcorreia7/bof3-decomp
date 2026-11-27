@@ -3,9 +3,9 @@
 MATCH void func_800C1ED8(void) {
     Actor* work;
 
-    work          = TASK(Actor);
+    work          = SELF(Actor);
     work->gravity = work->pos.z.fixed + 0x4000000;
     Script_Select(2);
-    TASK(Actor)->param.unk_0B = 0x10;
-    TASK(Actor)->header.step++;
+    SELF(Actor)->param.unk_0B = 0x10;
+    SELF(Actor)->header.step++;
 }

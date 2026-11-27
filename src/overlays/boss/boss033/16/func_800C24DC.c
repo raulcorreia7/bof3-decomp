@@ -6,9 +6,9 @@ MATCH void func_800C24DC(void) {
 
     index                                     = g_Battle.active_battler - 3;
     g_BattleEnemyBattlers[index].header.flags = g_BattleEnemyBattlers[index].header.flags & 0xBF;
-    saved                                     = (TASK(PartyMember));
-    (TASK(PartyMember))                       = g_BattleEffectBattler;
+    saved                                     = (SELF(PartyMember));
+    (SELF(PartyMember))                       = g_BattleEffectBattler;
     Script_Select(0U);
-    (TASK(PartyMember)) = saved;
+    (SELF(PartyMember)) = saved;
     Effect_Reset();
 }

@@ -14,14 +14,14 @@ MATCH void Script_CopyRecord(u32 record_index, u8* staging, u32 size) {
 
     Actor_SelectSprite(record_index & BYTE_MASK);
     count     = size & HALF_MASK;
-    copy_size = count * TASK(Actor)->unk_05;
+    copy_size = count * SELF(Actor)->unk_05;
     dst       = staging + copy_size;
     i         = 0;
     if (count != 0) {
         do {
-            dst[i] = TASK(Actor)->script[i];
+            dst[i] = SELF(Actor)->script[i];
             i++;
         } while (i < count);
     }
-    TASK(Actor)->script = dst;
+    SELF(Actor)->script = dst;
 }

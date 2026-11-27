@@ -9,7 +9,7 @@ MATCH void Game_BattleRunPartyAnims(void) {
     while (i < g_PartySize) {
         work        = (u8*)g_Game.members + i * BATTLE_PARTY_STRIDE;
         g_GameState = work;
-        TASK_SET(work);
+        SELF_SET(work);
         Script_AnimStepLoop();
         i++;
     }

@@ -10,9 +10,9 @@ MATCH void func_801F33D8(void) {
     SetPolyF4(prim);
     SetSemiTrans(prim, 1);
     setXY4(prim, 0, 0, SCREEN_WIDTH, 0, 0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT);
-    setRGB0(prim, 0, 0x30, D_801F3F88[TASK(Actor)->header.step] * 8);
+    setRGB0(prim, 0, 0x30, D_801F3F88[SELF(Actor)->header.step] * 8);
     GFX_AddPrim(GFX_LAYER_EFFECT, sizeof(POLY_F4));
     if ((g_FrameCount & 7) == 0) {
-        TASK(Actor)->header.step = (TASK(Actor)->header.step + 1) & 3;
+        SELF(Actor)->header.step = (SELF(Actor)->header.step + 1) & 3;
     }
 }

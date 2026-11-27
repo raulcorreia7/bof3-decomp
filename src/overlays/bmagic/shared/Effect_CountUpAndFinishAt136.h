@@ -3,10 +3,10 @@
 MATCH void Effect_CountUpAndFinishAt136(void) {
     u8 counter;
 
-    TASK(PartyMember)->param.unk_0B += 1;
-    TASK(PartyMember)->unk_04 -= 1;
-    counter                   = TASK(PartyMember)->unk_09 + 1;
-    TASK(PartyMember)->unk_09 = counter;
+    SELF(PartyMember)->param.unk_0B += 1;
+    SELF(PartyMember)->unk_04 -= 1;
+    counter                   = SELF(PartyMember)->unk_09 + 1;
+    SELF(PartyMember)->unk_09 = counter;
     if ((counter & BYTE_MASK) == 0x88) {
         BATTLE_ACTIVE_WORK->param.unk_0B = 0xFF;
         Effect_Reset();

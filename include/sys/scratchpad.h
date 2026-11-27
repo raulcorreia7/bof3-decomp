@@ -45,7 +45,7 @@ typedef struct ScratchPad {
     /* 0x038 */ s16             unk_38; /* the area emit pair extent */
     /* 0x03A */ s16             unk_3A; /* the area emit pair mode */
     /* 0x03C */ u8              unk_3C[8];
-    /* 0x044 */ struct Task*    task;
+    /* 0x044 */ struct Self*    self;
     /* 0x048 */ u8              unk_48[0x3B8];
 } ScratchPad;
 
@@ -56,7 +56,7 @@ ASSERT_OFFSET(ScratchPad, unk_34, 0x034);
 ASSERT_OFFSET(ScratchPad, unk_38, 0x038);
 ASSERT_OFFSET(ScratchPad, unk_3A, 0x03A);
 ASSERT_OFFSET(ScratchPad, unk_3C, 0x03C);
-ASSERT_OFFSET(ScratchPad, task, 0x044);
+ASSERT_OFFSET(ScratchPad, self, 0x044);
 ASSERT_OFFSET(ScratchPad, unk_48, 0x048);
 ASSERT_SIZE(ScratchPad, SCRATCH_PAD_SIZE);
 

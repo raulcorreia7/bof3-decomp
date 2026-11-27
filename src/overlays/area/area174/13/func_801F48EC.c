@@ -6,5 +6,5 @@ MATCH void func_801F48EC(void) {
     u8* table;
     u8* row;
 
-    ACTOR_RUN_SCRIPT_ROW_STEP(TASK(Actor)->direction - 1);
+    ACTOR_RUN_SCRIPT_ROW_STEP(SELF(Actor)->direction - 1);
 }

@@ -24,9 +24,9 @@ MATCH void BMagic_SacrificeInit(void) {
     PartyMember*     member;
 
     Battle_CenterCamera();
-    TASK(PartyMember)->param.unk_0B = 0;
-    TASK(PartyMember)->unk_09       = 0;
-    TASK(PartyMember)->header.mode += 1;
+    SELF(PartyMember)->param.unk_0B = 0;
+    SELF(PartyMember)->unk_09       = 0;
+    SELF(PartyMember)->header.mode += 1;
     Battle_SelectActiveBattlerScript(8, 0);
     index  = Battle_AllocEffect(1, BMAGIC_EFFECT_SACRIFICE) & BYTE_MASK;
     active = g_Battle.active_battler;
@@ -40,13 +40,13 @@ MATCH void BMagic_SacrificeInit(void) {
         image = (BattleWorkImage*)&g_BattleEnemyBattlers[enemy];
         *slot = *image;
     }
-    work                                = TASK(PartyMember);
+    work                                = SELF(PartyMember);
     g_BattleEffects[index].header.mode  = BMAGIC_SACRIFICE_EFFECT_CLONE;
     g_BattleEffects[index].unk_06       = 1;
     g_BattleEffects[index].header.step  = 0;
     g_BattleEffects[index].effect_type  = BMAGIC_EFFECT_SACRIFICE;
     g_BattleEffects[index].target.party = work;
-    TASK(PartyMember)->param.unk_0B += 1;
+    SELF(PartyMember)->param.unk_0B += 1;
     dst = MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW));
     src = MEM_PTR(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BATL_OVR_ROW));
     for (i = 1; i < 16; i++) {
@@ -56,16 +56,16 @@ MATCH void BMagic_SacrificeInit(void) {
     *MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW))        = 0;
     *MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW) + 0x20) = 0;
     g_GfxPalettePending                                                      = 1;
-    TASK(PartyMember)->unk_27                                                = Battle_CopyCellPalette(g_BattleEffectBattler);
-    TASK(PartyMember)->unk_28                                                = g_BattleEffectBattler->unk_28;
-    TASK(PartyMember)->unk_24                                                = g_BattleEffectBattler->unk_24;
-    Battle_SetCellPaletteStp(TASK(PartyMember));
+    SELF(PartyMember)->unk_27                                                = Battle_CopyCellPalette(g_BattleEffectBattler);
+    SELF(PartyMember)->unk_28                                                = g_BattleEffectBattler->unk_28;
+    SELF(PartyMember)->unk_24                                                = g_BattleEffectBattler->unk_24;
+    Battle_SetCellPaletteStp(SELF(PartyMember));
     g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
 }
 
 /* func_801EEF3C */
 MATCH s32 BMagic_SacrificeEnd(void) {
-    if (TASK(PartyMember)->param.unk_0B == 0) {
+    if (SELF(PartyMember)->param.unk_0B == 0) {
         g_BattleEffectBattler->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
         func_800AFC54();
         Battle_SelectActiveBattlerScript(0x1C, 0);
@@ -83,7 +83,7 @@ MATCH s32 BMagic_SacrificeEnd(void) {
             ENEMY_COMBATANT(g_Battle.active_battler).status      = STATUS_KO;
             GFX_PaletteFreeFadeTarget(g_BattleEnemies + g_Battle.active_battler * BATTLE_ENEMY_STRIDE);
         }
-        TASK(PartyMember)->header.mode += 1;
+        SELF(PartyMember)->header.mode += 1;
     }
 }
 
@@ -103,14 +103,14 @@ MATCH void BMagic_SacrificeDomeUpdate(void) {
 MATCH void BMagic_SacrificeDomeExpand(void) {
     u8 counter;
 
-    if (TASK(PartyMember)->unk_09 == 4) {
+    if (SELF(PartyMember)->unk_09 == 4) {
         Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10U);
     }
-    SP_REF(s16, 0)            = TASK(PartyMember)->unk_09 * 0x1C;
-    counter                   = TASK(PartyMember)->unk_09 + 1;
-    TASK(PartyMember)->unk_09 = counter;
+    SP_REF(s16, 0)            = SELF(PartyMember)->unk_09 * 0x1C;
+    counter                   = SELF(PartyMember)->unk_09 + 1;
+    SELF(PartyMember)->unk_09 = counter;
     if ((counter & BYTE_MASK) == 0xC) {
-        TASK(PartyMember)->header.step += 1;
+        SELF(PartyMember)->header.step += 1;
     }
 }
 
@@ -118,10 +118,10 @@ MATCH void BMagic_SacrificeDomeExpand(void) {
 MATCH void BMagic_SacrificeDomeEnd(void) {
     u8 count;
 
-    SP_REF(s16, 0u) = (TASK(PartyMember)->unk_09 * 4) + 0x120;
-    TASK(PartyMember)->timer += 1;
-    count                     = TASK(PartyMember)->unk_09 + 1;
-    TASK(PartyMember)->unk_09 = count;
+    SP_REF(s16, 0u) = (SELF(PartyMember)->unk_09 * 4) + 0x120;
+    SELF(PartyMember)->timer += 1;
+    count                     = SELF(PartyMember)->unk_09 + 1;
+    SELF(PartyMember)->unk_09 = count;
     if ((count & BYTE_MASK) == 0x28) {
         g_BattleEffectBattler->param.unk_0B -= 1;
         Effect_Reset();
@@ -145,16 +145,16 @@ MATCH void BMagic_SacrificeDrawDome(void) {
     for (band = 24, row = 1; band >= 17; band--, row++) {
         g_ScratchPad.cells.halves[3] = 0x81;
         g_ScratchPad.cells.halves[4] = 0x81;
-        if (row - 1 < TASK(PartyMember)->unk_09 - 16) {
-            g_ScratchPad.cells.halves[3] = TASK(PartyMember)->unk_09 - 15 - row;
+        if (row - 1 < SELF(PartyMember)->unk_09 - 16) {
+            g_ScratchPad.cells.halves[3] = SELF(PartyMember)->unk_09 - 15 - row;
             if (g_ScratchPad.cells.halves[3] < 17) {
                 g_ScratchPad.cells.halves[3] = 0x81 - g_ScratchPad.cells.halves[3] * 8;
             } else {
                 g_ScratchPad.cells.halves[3] = 1;
             }
         }
-        if (row < TASK(PartyMember)->unk_09 - 16) {
-            g_ScratchPad.cells.halves[4] = TASK(PartyMember)->unk_09 - 16 - row;
+        if (row < SELF(PartyMember)->unk_09 - 16) {
+            g_ScratchPad.cells.halves[4] = SELF(PartyMember)->unk_09 - 16 - row;
             if (g_ScratchPad.cells.halves[4] < 17) {
                 g_ScratchPad.cells.halves[4] = 0x81 - g_ScratchPad.cells.halves[4] * 8;
             } else {
@@ -176,8 +176,8 @@ MATCH void BMagic_SacrificeDrawDome(void) {
             g_ScratchPadVectors[2].vy = g_ScratchPadVectors[3].vy;
             g_ScratchPadVectors[3].vx = FIXED_MUL(rsin(i << 7), g_ScratchPad.cells.halves[2]);
             g_ScratchPadVectors[3].vy = FIXED_MUL(rcos(i << 7), g_ScratchPad.cells.halves[2]);
-            x                         = (g_ScratchPadVectors[3].vx << 9) + TASK(PartyMember)->pos.x.fixed;
-            y                         = (g_ScratchPadVectors[3].vy << 9) + TASK(PartyMember)->pos.y.fixed;
+            x                         = (g_ScratchPadVectors[3].vx << 9) + SELF(PartyMember)->pos.x.fixed;
+            y                         = (g_ScratchPadVectors[3].vy << 9) + SELF(PartyMember)->pos.y.fixed;
             tpage                     = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
             SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
             Area_CellAddPrim(x, y, 2, sizeof(DR_MODE));
@@ -211,12 +211,12 @@ MATCH void Effect_CopyBattlerCoords2(void) {
 MATCH void BMagic_SacrificeShadowGrow(void) {
     PartyMember* work;
 
-    work = TASK(PartyMember);
+    work = SELF(PartyMember);
     work->timer += 2;
-    work = TASK(PartyMember);
+    work = SELF(PartyMember);
     work->unk_09++;
     if (work->unk_09 == 12) {
-        work = TASK(PartyMember);
+        work = SELF(PartyMember);
         work->header.step++;
     }
 }
@@ -236,14 +236,14 @@ MATCH void BMagic_SacrificeDrawShadow(void) {
     s32      scale;
 
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_BEHIND_BATTLERS, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256));
-    if (TASK(PartyMember)->header.step >= 2) {
-        g_ScratchPad.cells.halves[0] = ((TASK(PartyMember)->unk_09 * 4 + 0x210) * rcos(0x800)) >> 12;
+    if (SELF(PartyMember)->header.step >= 2) {
+        g_ScratchPad.cells.halves[0] = ((SELF(PartyMember)->unk_09 * 4 + 0x210) * rcos(0x800)) >> 12;
     } else {
         scale                        = rcos(0x800) * 48;
-        g_ScratchPad.cells.halves[0] = (scale * TASK(PartyMember)->unk_09) >> 12;
+        g_ScratchPad.cells.halves[0] = (scale * SELF(PartyMember)->unk_09) >> 12;
     }
-    g_ScratchPad.cells.halves[3] = TASK(PartyMember)->timer * 8;
-    g_ScratchPad.cells.halves[4] = TASK(PartyMember)->timer * 6;
+    g_ScratchPad.cells.halves[3] = SELF(PartyMember)->timer * 8;
+    g_ScratchPad.cells.halves[4] = SELF(PartyMember)->timer * 6;
     setVector(&g_ScratchPadVectors[2], FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[0]), FIXED_MUL(rcos(0), g_ScratchPad.cells.halves[0]), 0);
     g_ScratchPadVectors[1].vz = 0;
     g_ScratchPadVectors[0].vz = 0;
@@ -263,16 +263,16 @@ MATCH void BMagic_SacrificeCloneUpdate(void) {
     BMagicSacrificeCloneSteps handlers;
 
     handlers = g_BMagicSacrificeCloneSteps;
-    SYS_DISPATCH_BYTE(handlers.steps, TASK(PartyMember)->header.step);
-    if (TASK(PartyMember)->header.flags != 0 && TASK(PartyMember)->header.step != 0) {
+    SYS_DISPATCH_BYTE(handlers.steps, SELF(PartyMember)->header.step);
+    if (SELF(PartyMember)->header.flags != 0 && SELF(PartyMember)->header.step != 0) {
         Area_AddGridActor();
     }
 }
 
 /* func_801EFFE8 */
 MATCH void BMagic_SacrificeCloneStart(void) {
-    TASK(PartyMember)->unk_27 = BATTLE_ACTIVE_WORK->unk_27;
-    TASK(PartyMember)->header.step++;
+    SELF(PartyMember)->unk_27 = BATTLE_ACTIVE_WORK->unk_27;
+    SELF(PartyMember)->header.step++;
 }
 
 #include "overlays/bmagic/shared/Effect_PrimeTintOnScriptReady.h"
@@ -282,11 +282,11 @@ MATCH void BMagic_SacrificeCloneHide(void) {
     PartyMember* work;
     PartyMember* source;
 
-    TASK(PartyMember)->unk_5D -= 16;
-    TASK(PartyMember)->unk_5E -= 16;
-    TASK(PartyMember)->unk_5F -= 16;
-    if ((s8)TASK(PartyMember)->unk_5D == -128) {
-        work   = TASK(PartyMember);
+    SELF(PartyMember)->unk_5D -= 16;
+    SELF(PartyMember)->unk_5E -= 16;
+    SELF(PartyMember)->unk_5F -= 16;
+    if ((s8)SELF(PartyMember)->unk_5D == -128) {
+        work   = SELF(PartyMember);
         source = BATTLE_ACTIVE_WORK;
         WorldPos_Copy(&work->pos, &source->pos);
         work->header.step += 1;
@@ -295,14 +295,14 @@ MATCH void BMagic_SacrificeCloneHide(void) {
 
 /* func_801F0178 */
 MATCH void BMagic_SacrificeCloneShow(void) {
-    TASK(PartyMember)->unk_5D += 0x10;
-    TASK(PartyMember)->unk_5E += 0x10;
-    TASK(PartyMember)->unk_5F += 0x10;
-    if ((s8)TASK(PartyMember)->unk_5D == 0) {
-        TASK(PartyMember)->header.flags &= ~ACTOR_FLAG_SEMI_TRANSPARENT;
-        TASK(PartyMember)->unk_5C = 0;
-        TASK(PartyMember)->unk_09 = 8;
-        TASK(PartyMember)->header.step += 1;
+    SELF(PartyMember)->unk_5D += 0x10;
+    SELF(PartyMember)->unk_5E += 0x10;
+    SELF(PartyMember)->unk_5F += 0x10;
+    if ((s8)SELF(PartyMember)->unk_5D == 0) {
+        SELF(PartyMember)->header.flags &= ~ACTOR_FLAG_SEMI_TRANSPARENT;
+        SELF(PartyMember)->unk_5C = 0;
+        SELF(PartyMember)->unk_09 = 8;
+        SELF(PartyMember)->header.step += 1;
     }
 }
 
@@ -313,8 +313,8 @@ MATCH void BMagic_SacrificeCloneCast(void) {
     u8           slot;
     u8           count;
 
-    count                     = TASK(PartyMember)->unk_09 - 1;
-    TASK(PartyMember)->unk_09 = count;
+    count                     = SELF(PartyMember)->unk_09 - 1;
+    SELF(PartyMember)->unk_09 = count;
     if (count == 0) {
         slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_SACRIFICE);
         g_BattleEffects[slot].target.party = g_BattleEffectBattler;
@@ -332,16 +332,16 @@ MATCH void BMagic_SacrificeCloneCast(void) {
             g_GameState = saved;
         }
         if (g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT) {
-            task = TASK(PartyMember);
-            TASK_SET(&g_Game.members[g_Battle.active_battler]);
-            Script_Select(TASK(PartyMember)->facing + 16);
-            TASK_SET(task);
+            task = SELF(PartyMember);
+            SELF_SET(&g_Game.members[g_Battle.active_battler]);
+            Script_Select(SELF(PartyMember)->facing + 16);
+            SELF_SET(task);
             Script_Select(task->facing + 16);
         } else {
             func_801E257C(g_Battle.active_battler, 4);
         }
-        TASK(PartyMember)->unk_09 = 30;
-        TASK(PartyMember)->header.step += 1;
+        SELF(PartyMember)->unk_09 = 30;
+        SELF(PartyMember)->header.step += 1;
     }
 }
 
@@ -350,15 +350,15 @@ MATCH void BMagic_SacrificeCloneHold(void) {
     u8 count;
 
     Script_AnimStepLoop();
-    count                     = TASK(PartyMember)->unk_09 - 1;
-    TASK(PartyMember)->unk_09 = count;
+    count                     = SELF(PartyMember)->unk_09 - 1;
+    SELF(PartyMember)->unk_09 = count;
     if (!(count & BYTE_MASK)) {
-        TASK(PartyMember)->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
-        TASK(PartyMember)->unk_5C = 1;
-        TASK(PartyMember)->unk_5D = 0;
-        TASK(PartyMember)->unk_5E = 0;
-        TASK(PartyMember)->unk_5F = 0;
-        TASK(PartyMember)->header.step += 1;
+        SELF(PartyMember)->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
+        SELF(PartyMember)->unk_5C = 1;
+        SELF(PartyMember)->unk_5D = 0;
+        SELF(PartyMember)->unk_5E = 0;
+        SELF(PartyMember)->unk_5F = 0;
+        SELF(PartyMember)->header.step += 1;
     }
 }
 
@@ -368,11 +368,11 @@ MATCH void BMagic_SacrificeCloneVanish(void) {
     PartyMember* work;
 
     Script_AnimStepLoop();
-    TASK(PartyMember)->unk_5D -= 0x10;
-    TASK(PartyMember)->unk_5E -= 0x10;
-    TASK(PartyMember)->unk_5F -= 0x10;
-    if ((s8)TASK(PartyMember)->unk_5D == -0x80) {
-        work              = TASK(PartyMember);
+    SELF(PartyMember)->unk_5D -= 0x10;
+    SELF(PartyMember)->unk_5E -= 0x10;
+    SELF(PartyMember)->unk_5F -= 0x10;
+    if ((s8)SELF(PartyMember)->unk_5D == -0x80) {
+        work              = SELF(PartyMember);
         work->pos.x.fixed = g_BattleActiveActor->pos.x.fixed;
         /* FAKE: retail re-reads the party cell for the next copy. */
         FAKE_BARRIER();
@@ -382,26 +382,26 @@ MATCH void BMagic_SacrificeCloneVanish(void) {
         work->pos.z.fixed = g_BattleActiveActor->pos.z.fixed;
         if (g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT) {
             member = &g_Game.members[g_Battle.active_battler];
-            g_Task = member;
+            g_Self = member;
             Script_Select(member->facing + 0x1C);
-            g_Task = work;
+            g_Self = work;
             Script_Select(work->facing + 0x1C);
         } else {
             func_801E257C(g_Battle.active_battler, 4);
         }
-        TASK(PartyMember)->header.step += 1;
+        SELF(PartyMember)->header.step += 1;
     }
 }
 
 /* func_801F0658 */
 MATCH void BMagic_SacrificeCloneReturn(void) {
     if (g_BattleEffectBattler->param.unk_0B == 1) {
-        TASK(PartyMember)->unk_5D += 0x10;
-        TASK(PartyMember)->unk_5E += 0x10;
-        TASK(PartyMember)->unk_5F += 0x10;
-        if ((s8)TASK(PartyMember)->unk_5D == 0) {
+        SELF(PartyMember)->unk_5D += 0x10;
+        SELF(PartyMember)->unk_5E += 0x10;
+        SELF(PartyMember)->unk_5F += 0x10;
+        if ((s8)SELF(PartyMember)->unk_5D == 0) {
             g_BattleEffectBattler->param.unk_0B -= 1;
-            TASK(PartyMember)->header.step += 1;
+            SELF(PartyMember)->header.step += 1;
         }
     }
 }

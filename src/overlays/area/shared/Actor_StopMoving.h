@@ -4,7 +4,7 @@ MATCH void Actor_StopMoving(void) {
     Actor* work;
 
     g_Game.current->u.field.counter.unsigned_value = 3;
-    work                                           = TASK(Actor);
+    work                                           = SELF(Actor);
     g_AreaCameraSpeed                              = 0;
     g_AreaCameraHeightDelta                        = 0;
     setVector(work, 0, 0, 0);

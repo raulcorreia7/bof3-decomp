@@ -6,13 +6,13 @@ MATCH void func_800C1C9C(void) {
     PartyMember* battler;
     u32          slot;
 
-    TASK(PartyMember)->unk_24 = 0;
-    TASK(PartyMember)->unk_2A = 0;
-    TASK(PartyMember)->unk_48 = 0;
-    TASK(PartyMember)->unk_29 = 2;
+    SELF(PartyMember)->unk_24 = 0;
+    SELF(PartyMember)->unk_2A = 0;
+    SELF(PartyMember)->unk_48 = 0;
+    SELF(PartyMember)->unk_29 = 2;
     Area_SceneSelectRecord(0x15C);
     Script_Select(4);
-    party                              = TASK(PartyMember);
+    party                              = SELF(PartyMember);
     battler                            = g_BattleEffectBattler;
     COORD_INT(party->pos.x)            = COORD_INT(battler->pos.x) + 7;
     party->pos.y.fixed                 = battler->pos.y.fixed;
@@ -22,6 +22,6 @@ MATCH void func_800C1C9C(void) {
     party->unk_09                      = 6;
     slot                               = Battle_AllocEffect(3, 2) & BYTE_MASK;
     g_BattleEffects[slot].header.mode  = 1;
-    g_BattleEffects[slot].target.party = TASK(PartyMember);
-    TASK(PartyMember)->header.step += 1;
+    g_BattleEffects[slot].target.party = SELF(PartyMember);
+    SELF(PartyMember)->header.step += 1;
 }

@@ -4,8 +4,8 @@ MATCH void func_801DF34C(void) {
     volatile PartyMember* work = g_Game.current;
 
     if (HAS_STATUS(*work, 0x0800u)) {
-        Script_Request(TASK(PartyMember)->facing + 0x34u);
+        Script_Request(SELF(PartyMember)->facing + 0x34u);
         return;
     }
-    Script_Request(TASK(PartyMember)->facing + 0x10u);
+    Script_Request(SELF(PartyMember)->facing + 0x10u);
 }

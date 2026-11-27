@@ -14,13 +14,13 @@ NON_MATCHING void func_801F2D20(void) {
     s32       y;
     s32       shade;
 
-    work    = g_Task;
+    work    = g_Self;
     adopted = &g_PartyActors[work->unk_18];
 
     work->pos.x       = adopted->pos.x.fixed;
     work->pos.y       = adopted->pos.y.fixed;
     work->pos.z.fixed = adopted->pos.z.fixed;
-    TASK_SET(adopted);
+    SELF_SET(adopted);
     if (adopted->timer != 0) {
         if (adopted->vz < 0) {
             work->timer--;
@@ -35,7 +35,7 @@ NON_MATCHING void func_801F2D20(void) {
 
     func_801AC1DC(origin, work->unk_1C);
 
-    setVector(&projection, ((origin[0] + TASK(Actor)->pos.x.fixed) >> 9) - 0x4000, ((origin[1] + TASK(Actor)->pos.y.fixed) >> 9) - 0x4000, -(origin[2] + COORD_INT(TASK(Actor)->pos.z)) / 2);
+    setVector(&projection, ((origin[0] + SELF(Actor)->pos.x.fixed) >> 9) - 0x4000, ((origin[1] + SELF(Actor)->pos.y.fixed) >> 9) - 0x4000, -(origin[2] + COORD_INT(SELF(Actor)->pos.z)) / 2);
 
     work->unk_60 = RotTransPers(&projection, (long*)&poly->x3, &depth, &flag);
 
@@ -52,23 +52,23 @@ NON_MATCHING void func_801F2D20(void) {
         poly->y3 = y = 240;
     }
     poly->y2 = y;
-    g_Task   = work;
+    g_Self   = work;
     setClut(poly, 0, STAGE_PALETTE_Y + 3);
     poly->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 704, 256);
 
-    setUV4(poly, 0, TASK(Actor)->timer & 0x15, 16, TASK(Actor)->timer & 0x15, 0, (TASK(Actor)->timer & 0x15) + poly->y2, 16, (TASK(Actor)->timer & 0x15) + poly->y2);
+    setUV4(poly, 0, SELF(Actor)->timer & 0x15, 16, SELF(Actor)->timer & 0x15, 0, (SELF(Actor)->timer & 0x15) + poly->y2, 16, (SELF(Actor)->timer & 0x15) + poly->y2);
 
     SetShadeTex(poly, 0);
 
-    if (TASK(Actor)->unk_60 >= 0x221) {
+    if (SELF(Actor)->unk_60 >= 0x221) {
         setRGB0(poly, 128, 128, 128);
         SetSemiTrans(poly, 0);
-        Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, 0, sizeof(POLY_FT4));
-    } else if (TASK(Actor)->unk_60 >= 0x1E1) {
-        shade = ((TASK(Actor)->unk_60 & 0xFF) - 0x1E0) << 1;
+        Area_CellAddPrim(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed, 0, sizeof(POLY_FT4));
+    } else if (SELF(Actor)->unk_60 >= 0x1E1) {
+        shade = ((SELF(Actor)->unk_60 & 0xFF) - 0x1E0) << 1;
         setRGB0(poly, shade, shade, shade);
         SetSemiTrans(poly, 1);
-        Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, 0, sizeof(POLY_FT4));
+        Area_CellAddPrim(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed, 0, sizeof(POLY_FT4));
     }
     func_801F3004(0, 0, 256, 256);
 }

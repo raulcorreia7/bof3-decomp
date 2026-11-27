@@ -5,11 +5,11 @@ MATCH void func_8019A630(void) {
     Actor* next;
 
     if (Script_AnimStepOnce() != 0u) {
-        work = TASK(Actor);
+        work = SELF(Actor);
         work->header.mode++;
     }
 
-    next = TASK(Actor);
+    next = SELF(Actor);
     if (next->unk_05 == 6) {
         Area_AddActor();
         return;

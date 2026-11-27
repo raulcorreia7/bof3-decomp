@@ -9,7 +9,7 @@ MATCH void Battle_UpdatePartyActors(void) {
 
         battle_work = &g_Game.members[index];
         g_GameState = battle_work;
-        TASK_SET(battle_work);
+        SELF_SET(battle_work);
 
         if ((((battle_work->header.flags & PARTY_MEMBER_FLAG_OCCUPIED) != 0)) && ((battle_work->header.flags & PARTY_MEMBER_FLAG_HANDLER_BUSY) == 0u)) {
             Area_AddGridActor();

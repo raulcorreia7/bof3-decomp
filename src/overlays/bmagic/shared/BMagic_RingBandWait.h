@@ -5,17 +5,17 @@ MATCH void BMagic_RingBandWait(void) {
     PartyMember* src;
     PartyMember* work;
 
-    delay                     = TASK(PartyMember)->unk_09 - 1;
-    TASK(PartyMember)->unk_09 = delay;
+    delay                     = SELF(PartyMember)->unk_09 - 1;
+    SELF(PartyMember)->unk_09 = delay;
     if (delay == 0) {
         src                             = BATTLE_ACTIVE_WORK;
-        work                            = TASK(PartyMember);
+        work                            = SELF(PartyMember);
         work->pos.x                     = src->pos.x;
         work->pos.y                     = src->pos.y;
         work->pos.z                     = src->pos.z;
         work->unk_09                    = BMAGIC_RING_BAND_RADIUS;
-        TASK(PartyMember)->timer        = 0;
-        TASK(PartyMember)->param.unk_0B = 0;
-        TASK(PartyMember)->header.mode  = TASK(PartyMember)->header.mode + 1;
+        SELF(PartyMember)->timer        = 0;
+        SELF(PartyMember)->param.unk_0B = 0;
+        SELF(PartyMember)->header.mode  = SELF(PartyMember)->header.mode + 1;
     }
 }

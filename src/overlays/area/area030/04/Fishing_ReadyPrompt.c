@@ -5,9 +5,9 @@
 /* func_801D9FE8 */
 MATCH void Fishing_ReadyPrompt(void) {
     if (g_SpawnedActors[3].header.mode == 0 && g_SpawnedActors[1].header.mode == 1) {
-        TASK(FishingState)->timer = 4;
+        SELF(FishingState)->timer = 4;
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
-        TASK(FishingState)->sub_index += 1;
+        SELF(FishingState)->sub_index += 1;
     }
     Fishing_DrawDimScreen();
 }

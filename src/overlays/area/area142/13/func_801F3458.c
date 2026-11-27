@@ -3,8 +3,8 @@
 MATCH void func_801F3458(void) {
     if (g_ScriptVars[0] != 1) {
         if (g_GameStateIndex == GAME_REQUEST_BATTLE) {
-            TASK(Actor)->header.flags |= ACTOR_FLAG_HIDDEN;
-            TASK(Actor)->unk_04 = 1;
+            SELF(Actor)->header.flags |= ACTOR_FLAG_HIDDEN;
+            SELF(Actor)->unk_04 = 1;
         }
         g_ScriptState->cursor -= 2;
     }

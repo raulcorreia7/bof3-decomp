@@ -2,7 +2,7 @@
 
 /* func_801F57FC */
 MATCH void Actor_SetGroundHeight(void) {
-    s32 value = Area_HeightSample(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed);
+    s32 value = Area_HeightSample(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed);
 
-    COORD_INT(TASK(Actor)->pos.z) = value;
+    COORD_INT(SELF(Actor)->pos.z) = value;
 }

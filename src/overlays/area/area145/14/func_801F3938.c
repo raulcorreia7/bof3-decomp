@@ -4,7 +4,7 @@ MATCH void func_801F3938(void) {
     Actor* work;
     u32    pos[3];
 
-    work   = TASK(Actor);
+    work   = SELF(Actor);
     pos[0] = work->pos.x.fixed;
     pos[1] = work->pos.y.fixed;
     pos[2] = work->pos.z.fixed;

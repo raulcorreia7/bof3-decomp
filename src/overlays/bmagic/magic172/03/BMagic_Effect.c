@@ -8,7 +8,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void BMagic_MagicBallUpdate(void) {
     Callback handlers[2] = {BMagic_MagicBallInit, Effect_MarkDamagedOnZeroTick};
 
-    SYS_DISPATCH_TASK(handlers, 1, g_Task);
+    SYS_DISPATCH_TASK(handlers, 1, g_Self);
 }
 
 /* func_801EEC5C */
@@ -19,27 +19,27 @@ MATCH void BMagic_MagicBallInit(void) {
     u32          first_slot;
     u32          i;
 
-    TASK(PartyMember)->facing       = g_BattleEffectBattler->facing;
-    TASK(PartyMember)->pos.x        = g_BattleEffectBattler->pos.x;
-    TASK(PartyMember)->pos.y        = g_BattleEffectBattler->pos.y;
-    TASK(PartyMember)->pos.z        = g_BattleEffectBattler->pos.z;
-    TASK(PartyMember)->param.unk_0B = 0;
-    TASK(PartyMember)->header.mode += 1;
+    SELF(PartyMember)->facing       = g_BattleEffectBattler->facing;
+    SELF(PartyMember)->pos.x        = g_BattleEffectBattler->pos.x;
+    SELF(PartyMember)->pos.y        = g_BattleEffectBattler->pos.y;
+    SELF(PartyMember)->pos.z        = g_BattleEffectBattler->pos.z;
+    SELF(PartyMember)->param.unk_0B = 0;
+    SELF(PartyMember)->header.mode += 1;
     first_slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_MAGIC_BALL) & BYTE_MASK;
-    work                                     = TASK(PartyMember);
+    work                                     = SELF(PartyMember);
     g_BattleEffects[first_slot].header.mode  = 0;
     g_BattleEffects[first_slot].target.party = work;
-    TASK(PartyMember)->param.unk_0B += 1;
+    SELF(PartyMember)->param.unk_0B += 1;
     i = 0;
     do {
         slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_MAGIC_BALL);
-        target                             = TASK(PartyMember);
+        target                             = SELF(PartyMember);
         g_BattleEffects[slot].header.mode  = 1;
         g_BattleEffects[slot].unk_04       = first_slot;
         g_BattleEffects[slot].arg.unk_09   = i + 1;
         g_BattleEffects[slot].unk_0B       = i;
         g_BattleEffects[slot].target.party = target;
-        TASK(PartyMember)->param.unk_0B += 1;
+        SELF(PartyMember)->param.unk_0B += 1;
         i++;
     } while (i < 8);
     SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0));
@@ -52,9 +52,9 @@ MATCH void BMagic_MagicBallInit(void) {
 
 /* func_801EEE7C */
 MATCH void BMagic_MagicBallCoreUpdate(void) {
-    SYS_DISPATCH_BYTE(g_BMagicMagicBallCoreSteps, TASK(PartyMember)->header.step);
-    if (TASK(PartyMember)->header.flags != 0) {
-        switch (TASK(PartyMember)->header.step) {
+    SYS_DISPATCH_BYTE(g_BMagicMagicBallCoreSteps, SELF(PartyMember)->header.step);
+    if (SELF(PartyMember)->header.flags != 0) {
+        switch (SELF(PartyMember)->header.step) {
             /* FAKE: retail compare tree needs a third case below 2 on the default body; the bytes do not say which step. */
             case 1:
             default:
@@ -108,17 +108,17 @@ MATCH void BMagic_MagicBallCorePlace(void) {
     PartyMember* work;
     s32          angle;
 
-    TASK(PartyMember)->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;
-    TASK(PartyMember)->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
-    TASK(PartyMember)->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed + 0x800000;
+    SELF(PartyMember)->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;
+    SELF(PartyMember)->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
+    SELF(PartyMember)->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed + 0x800000;
     actor                          = g_Battle.selected_actor;
-    angle                          = ratan2(actor->pos.x.fixed - TASK(PartyMember)->pos.x.fixed, actor->pos.y.fixed - TASK(PartyMember)->pos.y.fixed);
-    work                           = TASK(PartyMember);
+    angle                          = ratan2(actor->pos.x.fixed - SELF(PartyMember)->pos.x.fixed, actor->pos.y.fixed - SELF(PartyMember)->pos.y.fixed);
+    work                           = SELF(PartyMember);
     work->param.unk_0B             = 0;
     work->unk_0C                   = angle;
-    TASK(PartyMember)->unk_09      = 0;
-    TASK(PartyMember)->timer       = 0;
-    TASK(PartyMember)->header.step += 1;
+    SELF(PartyMember)->unk_09      = 0;
+    SELF(PartyMember)->timer       = 0;
+    SELF(PartyMember)->header.step += 1;
 }
 
 /* func_801EF210 */
@@ -128,29 +128,29 @@ MATCH void BMagic_MagicBallCoreFly(void) {
     s32          diff;
     u8           count;
 
-    count = TASK(PartyMember)->unk_09;
+    count = SELF(PartyMember)->unk_09;
     if (count < 16) {
-        TASK(PartyMember)->unk_09 = count + 4;
+        SELF(PartyMember)->unk_09 = count + 4;
     }
     actor = g_Battle.selected_actor;
     setVector(&pos, (actor->pos.x.fixed >> 9) - AREA_CELL_ORIGIN, (actor->pos.y.fixed >> 9) - AREA_CELL_ORIGIN, (actor->pos.z.fixed + TO_COORD(256)) >> 17);
     Battle_StepRangeToward(pos, 0x40);
-    TASK(PartyMember)->unk_10 = TASK(PartyMember)->unk_0C;
-    TASK(PartyMember)->unk_0C = ratan2(actor->pos.x.fixed - TASK(PartyMember)->pos.x.fixed, actor->pos.y.fixed - TASK(PartyMember)->pos.y.fixed);
+    SELF(PartyMember)->unk_10 = SELF(PartyMember)->unk_0C;
+    SELF(PartyMember)->unk_0C = ratan2(actor->pos.x.fixed - SELF(PartyMember)->pos.x.fixed, actor->pos.y.fixed - SELF(PartyMember)->pos.y.fixed);
     if (func_800AF66C((BattleRange*)actor, 0x8000) == 0) {
-        diff                      = (TASK(PartyMember)->unk_10 & ANGLE_MASK) - (TASK(PartyMember)->unk_0C & ANGLE_MASK);
-        TASK(PartyMember)->unk_10 = diff;
+        diff                      = (SELF(PartyMember)->unk_10 & ANGLE_MASK) - (SELF(PartyMember)->unk_0C & ANGLE_MASK);
+        SELF(PartyMember)->unk_10 = diff;
         if (diff < 0) {
-            TASK(PartyMember)->unk_10 = ~diff + 1;
+            SELF(PartyMember)->unk_10 = ~diff + 1;
         }
-        if ((u32)(TASK(PartyMember)->unk_10 - 0x601) >= 0x3FF) {
+        if ((u32)(SELF(PartyMember)->unk_10 - 0x601) >= 0x3FF) {
             return;
         }
     }
     Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10);
     SND_SEQueueSelection(0x101);
-    TASK(PartyMember)->unk_09 = 16;
-    TASK(PartyMember)->header.step += 1;
+    SELF(PartyMember)->unk_09 = 16;
+    SELF(PartyMember)->header.step += 1;
 }
 
 /* func_801EF3A4 */
@@ -158,15 +158,15 @@ MATCH void BMagic_MagicBallCoreBurst(void) {
     u8 counter;
     u8 timer;
 
-    TASK(PartyMember)->param.unk_0B += 2;
-    timer = TASK(PartyMember)->timer;
+    SELF(PartyMember)->param.unk_0B += 2;
+    timer = SELF(PartyMember)->timer;
     if (timer < 16U) {
-        TASK(PartyMember)->timer = timer + 2;
+        SELF(PartyMember)->timer = timer + 2;
     }
-    counter                   = TASK(PartyMember)->unk_09 - 1;
-    TASK(PartyMember)->unk_09 = counter;
+    counter                   = SELF(PartyMember)->unk_09 - 1;
+    SELF(PartyMember)->unk_09 = counter;
     if (!(counter & BYTE_MASK)) {
-        TASK(PartyMember)->header.step += 1;
+        SELF(PartyMember)->header.step += 1;
     }
 }
 
@@ -174,13 +174,13 @@ MATCH void BMagic_MagicBallCoreBurst(void) {
 MATCH void BMagic_MagicBallCoreFade(void) {
     u8 timer_next;
 
-    TASK(PartyMember)->param.unk_0B += 4;
-    timer_next               = TASK(PartyMember)->timer - 2;
-    TASK(PartyMember)->timer = timer_next;
+    SELF(PartyMember)->param.unk_0B += 4;
+    timer_next               = SELF(PartyMember)->timer - 2;
+    SELF(PartyMember)->timer = timer_next;
     if (!(timer_next & BYTE_MASK)) {
         SND_SEQueueSelection(0x102);
-        TASK(PartyMember)->unk_09 = 0x10;
-        TASK(PartyMember)->header.step += 1;
+        SELF(PartyMember)->unk_09 = 0x10;
+        SELF(PartyMember)->header.step += 1;
     }
 }
 
@@ -188,8 +188,8 @@ MATCH void BMagic_MagicBallCoreFade(void) {
 
 /* func_801EF518 */
 MATCH void BMagic_MagicBallTrailUpdate(void) {
-    g_BMagicMagicBallTrailSteps[TASK(PartyMember)->header.step]();
-    if (TASK(PartyMember)->header.flags & TASK(PartyMember)->header.step) {
+    g_BMagicMagicBallTrailSteps[SELF(PartyMember)->header.step]();
+    if (SELF(PartyMember)->header.flags & SELF(PartyMember)->header.step) {
         Battle_ProjectRange();
         BMagic_MagicBallDrawTrail();
     }
@@ -201,16 +201,16 @@ MATCH void BMagic_MagicBallTrailPlace(void) {
     PartyMember* work;
     s32          angle;
 
-    if (--TASK(PartyMember)->unk_09 == 0) {
-        TASK(PartyMember)->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;
-        TASK(PartyMember)->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
-        TASK(PartyMember)->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed + 0x800000;
+    if (--SELF(PartyMember)->unk_09 == 0) {
+        SELF(PartyMember)->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;
+        SELF(PartyMember)->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
+        SELF(PartyMember)->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed + 0x800000;
         actor                          = g_Battle.selected_actor;
-        angle                          = ratan2(actor->pos.x.fixed - TASK(PartyMember)->pos.x.fixed, actor->pos.y.fixed - TASK(PartyMember)->pos.y.fixed);
-        work                           = TASK(PartyMember);
+        angle                          = ratan2(actor->pos.x.fixed - SELF(PartyMember)->pos.x.fixed, actor->pos.y.fixed - SELF(PartyMember)->pos.y.fixed);
+        work                           = SELF(PartyMember);
         work->unk_09                   = 0;
         work->unk_0C                   = angle;
-        TASK(PartyMember)->header.step += 1;
+        SELF(PartyMember)->header.step += 1;
     }
 }
 
@@ -219,16 +219,16 @@ MATCH void BMagic_MagicBallTrailFly(void) {
     PartyMember* actor;
     VECTOR       pos;
 
-    if (TASK(PartyMember)->unk_09 < 0x10) {
-        TASK(PartyMember)->unk_09 += 4;
+    if (SELF(PartyMember)->unk_09 < 0x10) {
+        SELF(PartyMember)->unk_09 += 4;
     }
     actor = g_Battle.selected_actor;
     setVector(&pos, (actor->pos.x.fixed >> 9) - AREA_CELL_ORIGIN, (actor->pos.y.fixed >> 9) - AREA_CELL_ORIGIN, (actor->pos.z.fixed + TO_COORD(256)) >> 17);
     Battle_StepRangeToward(pos, 0x40);
-    TASK(PartyMember)->unk_10 = TASK(PartyMember)->unk_0C;
-    TASK(PartyMember)->unk_0C = ratan2(actor->pos.x.fixed - TASK(PartyMember)->pos.x.fixed, actor->pos.y.fixed - TASK(PartyMember)->pos.y.fixed);
-    if (g_BattleEffects[TASK(PartyMember)->unk_04].header.step == 2) {
-        TASK(PartyMember)->header.step += 1;
+    SELF(PartyMember)->unk_10 = SELF(PartyMember)->unk_0C;
+    SELF(PartyMember)->unk_0C = ratan2(actor->pos.x.fixed - SELF(PartyMember)->pos.x.fixed, actor->pos.y.fixed - SELF(PartyMember)->pos.y.fixed);
+    if (g_BattleEffects[SELF(PartyMember)->unk_04].header.step == 2) {
+        SELF(PartyMember)->header.step += 1;
     }
 }
 
@@ -246,12 +246,12 @@ MATCH void BMagic_MagicBallDrawDisc(void) {
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_OVER_BATTLERS, tpage);
     g_ScratchPad.cells.halves[2] = 0;
     g_ScratchPad.cells.halves[0] = 16;
-    x                            = TASK(PartyMember)->screen_x.value;
-    y                            = TASK(PartyMember)->screen_y.value;
-    g_ScratchPad.cells.halves[3] = TASK(PartyMember)->unk_09 * 12;
-    g_ScratchPad.cells.halves[4] = TASK(PartyMember)->unk_09 * 2;
-    g_ScratchPad.cells.halves[5] = TASK(PartyMember)->unk_09 * 2;
-    g_ScratchPad.cells.halves[6] = TASK(PartyMember)->unk_09 * 14;
+    x                            = SELF(PartyMember)->screen_x.value;
+    y                            = SELF(PartyMember)->screen_y.value;
+    g_ScratchPad.cells.halves[3] = SELF(PartyMember)->unk_09 * 12;
+    g_ScratchPad.cells.halves[4] = SELF(PartyMember)->unk_09 * 2;
+    g_ScratchPad.cells.halves[5] = SELF(PartyMember)->unk_09 * 2;
+    g_ScratchPad.cells.halves[6] = SELF(PartyMember)->unk_09 * 14;
     for (i = 0; i < 16; i++) {
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
@@ -280,11 +280,11 @@ MATCH void BMagic_MagicBallDrawRing(void) {
     g_ScratchPad.cells.halves[2] = 0;
     g_ScratchPad.cells.halves[0] = 16;
     g_ScratchPad.cells.halves[1] = 24;
-    g_ScratchPad.cells.halves[4] = TASK(PartyMember)->unk_09;
-    g_ScratchPad.cells.halves[5] = TASK(PartyMember)->unk_09;
-    g_ScratchPad.cells.halves[6] = TASK(PartyMember)->unk_09 * 14;
-    x                            = TASK(PartyMember)->screen_x.value;
-    y                            = TASK(PartyMember)->screen_y.value;
+    g_ScratchPad.cells.halves[4] = SELF(PartyMember)->unk_09;
+    g_ScratchPad.cells.halves[5] = SELF(PartyMember)->unk_09;
+    g_ScratchPad.cells.halves[6] = SELF(PartyMember)->unk_09 * 14;
+    x                            = SELF(PartyMember)->screen_x.value;
+    y                            = SELF(PartyMember)->screen_y.value;
     for (i = 0; i < 16; i++) {
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
@@ -316,13 +316,13 @@ MATCH void BMagic_MagicBallDrawWaveInner(void) {
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_OVER_BATTLERS, tpage);
     g_ScratchPad.cells.halves[2] = 0;
-    g_ScratchPad.cells.halves[0] = TASK(PartyMember)->param.unk_0B;
-    g_ScratchPad.cells.halves[1] = TASK(PartyMember)->param.unk_0B * 2;
+    g_ScratchPad.cells.halves[0] = SELF(PartyMember)->param.unk_0B;
+    g_ScratchPad.cells.halves[1] = SELF(PartyMember)->param.unk_0B * 2;
     g_ScratchPad.cells.halves[4] = 1;
-    g_ScratchPad.cells.halves[5] = TASK(PartyMember)->timer * 6;
-    g_ScratchPad.cells.halves[6] = TASK(PartyMember)->timer * 8;
-    x                            = TASK(PartyMember)->screen_x.value;
-    y                            = TASK(PartyMember)->screen_y.value;
+    g_ScratchPad.cells.halves[5] = SELF(PartyMember)->timer * 6;
+    g_ScratchPad.cells.halves[6] = SELF(PartyMember)->timer * 8;
+    x                            = SELF(PartyMember)->screen_x.value;
+    y                            = SELF(PartyMember)->screen_y.value;
     for (i = 0; i < 16; i++) {
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
@@ -354,13 +354,13 @@ MATCH void BMagic_MagicBallDrawWaveOuter(void) {
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_OVER_BATTLERS, tpage);
     g_ScratchPad.cells.halves[2] = 0;
-    g_ScratchPad.cells.halves[0] = TASK(PartyMember)->param.unk_0B * 2;
-    g_ScratchPad.cells.halves[1] = TASK(PartyMember)->param.unk_0B * 4;
+    g_ScratchPad.cells.halves[0] = SELF(PartyMember)->param.unk_0B * 2;
+    g_ScratchPad.cells.halves[1] = SELF(PartyMember)->param.unk_0B * 4;
     g_ScratchPad.cells.halves[4] = 1;
-    g_ScratchPad.cells.halves[5] = TASK(PartyMember)->timer * 5;
-    g_ScratchPad.cells.halves[6] = TASK(PartyMember)->timer * 8;
-    x                            = TASK(PartyMember)->screen_x.value;
-    y                            = TASK(PartyMember)->screen_y.value;
+    g_ScratchPad.cells.halves[5] = SELF(PartyMember)->timer * 5;
+    g_ScratchPad.cells.halves[6] = SELF(PartyMember)->timer * 8;
+    x                            = SELF(PartyMember)->screen_x.value;
+    y                            = SELF(PartyMember)->screen_y.value;
     for (i = 0; i < 16; i++) {
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
@@ -417,12 +417,12 @@ MATCH void BMagic_MagicBallDrawTrail(void) {
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_OVER_BATTLERS, tpage);
     g_ScratchPad.cells.halves[2] = 0;
     g_ScratchPad.cells.halves[0] = 24;
-    x                            = TASK(PartyMember)->screen_x.value;
-    y                            = TASK(PartyMember)->screen_y.value;
-    g_ScratchPad.cells.halves[3] = TASK(PartyMember)->unk_09 * TASK(PartyMember)->param.unk_0B;
-    g_ScratchPad.cells.halves[4] = TASK(PartyMember)->unk_09 * g_BMagicMagicBallTrailTints[TASK(PartyMember)->param.unk_0B].r;
-    g_ScratchPad.cells.halves[5] = TASK(PartyMember)->unk_09;
-    g_ScratchPad.cells.halves[6] = TASK(PartyMember)->unk_09 * g_BMagicMagicBallTrailTints[TASK(PartyMember)->param.unk_0B].b;
+    x                            = SELF(PartyMember)->screen_x.value;
+    y                            = SELF(PartyMember)->screen_y.value;
+    g_ScratchPad.cells.halves[3] = SELF(PartyMember)->unk_09 * SELF(PartyMember)->param.unk_0B;
+    g_ScratchPad.cells.halves[4] = SELF(PartyMember)->unk_09 * g_BMagicMagicBallTrailTints[SELF(PartyMember)->param.unk_0B].r;
+    g_ScratchPad.cells.halves[5] = SELF(PartyMember)->unk_09;
+    g_ScratchPad.cells.halves[6] = SELF(PartyMember)->unk_09 * g_BMagicMagicBallTrailTints[SELF(PartyMember)->param.unk_0B].b;
     for (i = 0; i < 16; i++) {
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);

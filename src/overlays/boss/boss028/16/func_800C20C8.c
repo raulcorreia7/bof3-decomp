@@ -2,7 +2,7 @@
 
 MATCH void func_800C20C8(void) {
     if (!ACTOR_IN_USE(*g_BattleEffectBattler)) {
-        TASK(Actor)->header.step++;
+        SELF(Actor)->header.step++;
     }
     Script_AnimStepLoop();
 }

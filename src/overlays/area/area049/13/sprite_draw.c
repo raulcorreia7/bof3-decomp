@@ -13,11 +13,11 @@ MATCH void func_8011700C(void) {
 }
 
 MATCH void func_80117048(void) {
-    TASK(Actor)->pos.x.fixed = TO_COORD(11) + COORD_HALF;
-    TASK(Actor)->pos.y.fixed = TO_COORD(84) + COORD_HALF;
-    TASK(Actor)->pos.z.fixed = TO_COORD(256);
+    SELF(Actor)->pos.x.fixed = TO_COORD(11) + COORD_HALF;
+    SELF(Actor)->pos.y.fixed = TO_COORD(84) + COORD_HALF;
+    SELF(Actor)->pos.z.fixed = TO_COORD(256);
     func_801172D0();
-    TASK(Actor)->header.mode += 1;
+    SELF(Actor)->header.mode += 1;
 }
 
 MATCH void func_801170A4(void) {
@@ -81,7 +81,7 @@ MATCH void func_801172D0(void) {
     D_801181DC = MEM_PTR(AreaSprite, AREA_WORK);
     i          = 0;
     do {
-        actor                 = TASK(Actor);
+        actor                 = SELF(Actor);
         work                  = D_801181DC;
         work->origin.x        = actor->pos.x.fixed;
         work->origin.y        = actor->pos.y.fixed;
@@ -156,15 +156,15 @@ MATCH void func_8011759C(void) {
 }
 
 MATCH void func_80117610(void) {
-    SYS_DISPATCH_TASK(D_8011819C, 1, g_Task);
+    SYS_DISPATCH_TASK(D_8011819C, 1, g_Self);
     func_80117900();
 }
 
 MATCH void func_8011765C(void) {
     g_GameFlags |= GAME_FLAG_MENU_LOCK;
     func_801172D0();
-    TASK(Actor)->timer = 180;
-    TASK(Actor)->header.mode += 1;
+    SELF(Actor)->timer = 180;
+    SELF(Actor)->header.mode += 1;
 }
 
 MATCH void func_801176B8(void) {
@@ -178,13 +178,13 @@ MATCH void func_801176B8(void) {
             D_801181DC->normal.vz = TO_COORD(32);
         }
     }
-    timer              = TASK(Actor)->timer - 1;
-    TASK(Actor)->timer = timer;
+    timer              = SELF(Actor)->timer - 1;
+    SELF(Actor)->timer = timer;
     if (timer == 0) {
-        task        = TASK(Actor);
+        task        = SELF(Actor);
         task->timer = 0x40;
         task->vx    = TO_COORD(32);
-        TASK(Actor)->header.mode += 1;
+        SELF(Actor)->header.mode += 1;
     }
 }
 
@@ -195,14 +195,14 @@ MATCH void func_80117768(void) {
         D_801181DC = (AreaSprite*)Area_FindFreeWorkRow();
         if (D_801181DC != 0) {
             func_80117864(D_801181DC);
-            TASK(Actor)->vx -= TO_COORD(1);
-            D_801181DC->normal.vz = TASK(Actor)->vx;
+            SELF(Actor)->vx -= TO_COORD(1);
+            D_801181DC->normal.vz = SELF(Actor)->vx;
         }
     }
-    timer              = TASK(Actor)->timer - 1;
-    TASK(Actor)->timer = timer;
+    timer              = SELF(Actor)->timer - 1;
+    SELF(Actor)->timer = timer;
     if (timer == 0) {
-        TASK(Actor)->header.mode += 1;
+        SELF(Actor)->header.mode += 1;
     }
 }
 
@@ -229,7 +229,7 @@ MATCH void func_80117864(void* arg0) {
         u8  unk_26;
     }* p = arg0;
 
-    Actor* a = TASK(Actor);
+    Actor* a = SELF(Actor);
     s32    v;
 
     p->unk_04 = a->pos.x.fixed;
@@ -283,7 +283,7 @@ MATCH u8 func_80117900(void) {
 }
 
 MATCH void func_80117A30(void) {
-    SYS_DISPATCH_BYTE(D_801181AC, TASK(Actor)->header.step);
+    SYS_DISPATCH_BYTE(D_801181AC, SELF(Actor)->header.step);
 }
 
 MATCH void func_80117A74(void) {
@@ -291,14 +291,14 @@ MATCH void func_80117A74(void) {
         func_80117B60(0x40);
         func_80196070();
     }
-    TASK(Actor)->header.step++;
+    SELF(Actor)->header.step++;
 }
 
 MATCH void func_80117ACC(void) {
     if (SYS_TestFlag(D_80144ED0, 62) != 0) {
-        TASK(Actor)->timer++;
-        func_80117B60(0x80 - (TASK(Actor)->timer >> 1));
-        if (TASK(Actor)->timer >= 128) {
+        SELF(Actor)->timer++;
+        func_80117B60(0x80 - (SELF(Actor)->timer >> 1));
+        if (SELF(Actor)->timer >= 128) {
             func_80196070();
         }
     }
@@ -327,7 +327,7 @@ MATCH void func_80117B60(s32 scale) {
 }
 
 MATCH void func_80117BF4(void) {
-    SYS_DISPATCH_BYTE(D_801181B4, TASK(Actor)->header.step);
+    SYS_DISPATCH_BYTE(D_801181B4, SELF(Actor)->header.step);
 }
 
 MATCH void func_80117C38(void) {
@@ -337,36 +337,36 @@ MATCH void func_80117C38(void) {
 MATCH void func_80117C58(void) {
     u32 slot;
 
-    if (SYS_TestFlag(D_80144ED0, D_801181D0[COORD_INT(TASK(Actor)->pos.x)]) != 0) {
+    if (SYS_TestFlag(D_80144ED0, D_801181D0[COORD_INT(SELF(Actor)->pos.x)]) != 0) {
         SND_SEPlay(0x20A);
         slot = Actor_FindFreeSpawned() & BYTE_MASK;
         if (slot != GAME_NONE) {
             g_SpawnedActors[slot].header.flags = ACTOR_FLAG_IN_USE;
             g_SpawnedActors[slot].type         = 0x6E;
-            g_SpawnedActors[slot].pos.x.fixed  = D_801181C0[COORD_INT(TASK(Actor)->pos.x)].x;
-            g_SpawnedActors[slot].pos.y.fixed  = D_801181C0[COORD_INT(TASK(Actor)->pos.x)].y;
+            g_SpawnedActors[slot].pos.x.fixed  = D_801181C0[COORD_INT(SELF(Actor)->pos.x)].x;
+            g_SpawnedActors[slot].pos.y.fixed  = D_801181C0[COORD_INT(SELF(Actor)->pos.x)].y;
             g_SpawnedActors[slot].pos.z.fixed  = TO_COORD(1920);
         }
         slot = Actor_FindFreeSpawned() & BYTE_MASK;
         if (slot != GAME_NONE) {
             g_SpawnedActors[slot].header.flags = ACTOR_FLAG_IN_USE;
             g_SpawnedActors[slot].type         = 0x6D;
-            g_SpawnedActors[slot].unk_06       = COORD_INT(TASK(Actor)->pos.x);
+            g_SpawnedActors[slot].unk_06       = COORD_INT(SELF(Actor)->pos.x);
         }
-        TASK(Actor)->timer = 0;
-        TASK(Actor)->header.step += 1;
+        SELF(Actor)->timer = 0;
+        SELF(Actor)->header.step += 1;
     }
     func_80117E78(0x80, 0);
 }
 
 MATCH void func_80117DF0(void) {
     if (!(g_FrameCount & 0x1)) {
-        TASK(Actor)->timer += 1;
+        SELF(Actor)->timer += 1;
     }
-    if (TASK(Actor)->timer >= 128U) {
+    if (SELF(Actor)->timer >= 128U) {
         Actor_Clear();
     }
-    func_80117E78(128 - TASK(Actor)->timer, 0);
+    func_80117E78(128 - SELF(Actor)->timer, 0);
 }
 
 #ifdef NON_MATCHING
@@ -383,8 +383,8 @@ NON_MATCHING void func_80117E78(s32 brightness, s32 unused) {
     FAKE_STACK_PADS(u8, 8);
 
     corner = g_ScratchPadVectors;
-    for (row = D_801181D4[COORD_INT(TASK(Actor)->pos.x)][1]; row < D_801181D4[COORD_INT(TASK(Actor)->pos.x)][3]; row++) {
-        for (col = D_801181D4[COORD_INT(TASK(Actor)->pos.x)][0]; col < D_801181D4[COORD_INT(TASK(Actor)->pos.x)][2]; col++) {
+    for (row = D_801181D4[COORD_INT(SELF(Actor)->pos.x)][1]; row < D_801181D4[COORD_INT(SELF(Actor)->pos.x)][3]; row++) {
+        for (col = D_801181D4[COORD_INT(SELF(Actor)->pos.x)][0]; col < D_801181D4[COORD_INT(SELF(Actor)->pos.x)][2]; col++) {
             sum = row + col;
             if (sum & 1) {
                 setVector(corner, ((col - 0x80) << 7) + 0x40, ((row - 0x80) << 7) + 0x40, -0x340);
