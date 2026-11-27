@@ -13,14 +13,14 @@
  * screens read. */
 
 /* retail addresses */
-#define MENU_PANEL_COUNT     22
+#define MENU_PANEL_COUNT       22
 
 /* Shared panel-animation quantities. */
-#define MENU_PANEL_STEP_X    32
-#define MENU_PANEL_STEP_Y    16
-#define MENU_PANEL_FLOOR_X   (-170)
-#define MENU_PANEL_HIDDEN_X  (-150)
-#define MENU_PANEL_HIDDEN_Y  (-20)
+#define MENU_PANEL_STEP_X      32
+#define MENU_PANEL_STEP_Y      16
+#define MENU_PANEL_FLOOR_X     (-170)
+#define MENU_PANEL_HIDDEN_X    (-150)
+#define MENU_PANEL_HIDDEN_Y    (-20)
 
 #define MENU_PANEL_TASK_SIZE   0x24
 #define MENU_CHOICE_PANEL_SIZE MENU_PANEL_TASK_SIZE
