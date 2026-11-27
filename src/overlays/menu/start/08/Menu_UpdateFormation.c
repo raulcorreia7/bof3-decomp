@@ -4,15 +4,15 @@
 #ifdef NON_MATCHING
 NON_MATCHING void Menu_UpdateFormation(void) {
     MenuPanelTask* frame;
-    s32          index;
-    s8           dx;
-    s8           dy;
-    s8           old_column;
-    u8           old_row;
-    s8           i;
-    s32          input;
-    s32          message;
-    u16          y;
+    s32            index;
+    s8             dx;
+    s8             dy;
+    s8             old_column;
+    u8             old_row;
+    s8             i;
+    s32            input;
+    s32            message;
+    u16            y;
 
     dx         = 0;
     dy         = 0;
@@ -24,11 +24,11 @@ NON_MATCHING void Menu_UpdateFormation(void) {
         s32 pick;
         u16 y2;
 
-        frame = &g_CursorFramePanel;
+        frame                                                = &g_CursorFramePanel;
         pick                                                 = g_FormationPickRow * 3 + g_FormationPickColumn;
         g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME].pos.vx = D_801EC4D0[pick].unk_00;
         y2                                                   = D_801EC4D0[pick].unk_02;
-        frame->active = 1;
+        frame->active                                        = 1;
         g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME].pos.vy = y2;
         g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0A = D_801EC4D0[pick].unk_04 + 1;
         g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0B = 0;
@@ -36,7 +36,7 @@ NON_MATCHING void Menu_UpdateFormation(void) {
     index                     = g_FormationCursorRow * 3 + g_FormationCursorColumn;
     g_UiPanelTasks[20].pos.vx = D_801EC4D0[index].unk_00;
     y                         = D_801EC4D0[index].unk_02;
-    frame[1].active = 1;
+    frame[1].active           = 1;
     g_UiPanelTasks[20].pos.vy = y;
     g_UiPanelTasks[20].unk_0A = D_801EC4D0[index].unk_04 + 1;
     g_UiPanelTasks[20].unk_0B = 1;
