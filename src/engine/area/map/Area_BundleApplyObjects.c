@@ -4,8 +4,7 @@
  * bit is cleared, and its twelve-byte entries each write their payload word into the map row that the halfword table
  * and the entry's row and bits 14-19 select. */
 /* func_80154438 */
-#ifdef NON_MATCHING
-NON_MATCHING void Area_BundleApplyObjects(void) {
+MATCH void Area_BundleApplyObjects(void) {
     /* FAKE: unused frame, 16 bytes. */
     FAKE_STACK_PADS(u8, 16);
     u32* record;
@@ -34,8 +33,7 @@ NON_MATCHING void Area_BundleApplyObjects(void) {
 
     record_offset = g_AreaMapBundle.object_list_28 * 4;
     record        = (u32*)(record_offset + MAP_BUNDLE_BASE);
-    payload       = *record != 0;
-    if (payload) {
+    if (*record != 0) {
         do {
             header = *record;
             if ((header & HALF_MASK) == 0x8001) {
@@ -68,10 +66,16 @@ NON_MATCHING void Area_BundleApplyObjects(void) {
                     }
                 }
             }
-            record += ((u16*)record)[1] + 1;
+            /* FAKE: the empty loops lift the record pointer over the entry pointer in the allocator; pure C best 6 rows. */
+            do {
+                do {
+                    do {
+                        do {
+                            record += ((u16*)record)[1] + 1;
+                        } while (0);
+                    } while (0);
+                } while (0);
+            } while (0);
         } while (*record != 0);
     }
 }
-#else
-INCLUDE_ASM(Area_BundleApplyObjects);
-#endif
