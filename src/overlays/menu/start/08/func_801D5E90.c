@@ -1,8 +1,9 @@
 #include "start_08.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D5E90(void) {
+/* Runs the skill-order type list: scrolls panel 14 by the pad, stores the pick in the order tables, and confirms or cancels. */
+MATCH void func_801D5E90(void) {
     MenuPanelTask* panel;
+    MenuPanelTask* frame;
     s32            buttons;
     u16            pad;
     u8             old;
@@ -12,60 +13,61 @@ NON_MATCHING void func_801D5E90(void) {
     u8             clut;
     clut  = g_WindowClut;
     panel = &g_UiPanelTasks[14];
-    /* FAKE: hides the constant so the panel base stays in a saved register from the prologue. */
-    FAKE_OPAQUE(panel);
     Menu_DrawClutStrip(clut);
-    g_UiPanelTasks[21].active                                 = 1;
+    frame                                                     = panel + 7;
+    frame->active                                             = 1;
     D_80148628                                                = g_UiPanelTasks[14].pos.vx + 7;
     D_8014862A                                                = g_UiPanelTasks[14].pos.vy + ((g_UiPanelTasks[14].unk_0B - g_UiPanelTasks[14].unk_0A) * 13 + 0x1A);
     g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = Item_GetDescription(g_UiPanelTasks[14].unk_08, g_UiPanelTasks[14].flags);
-    buttons                                                   = INPUT_REPEATED(g_PadStates[0].pressed, (INPUT_DIRECTIONAL | PADL1 | PADR1));
+    panel                                                     = frame;
+    panel -= 7;
+    buttons = INPUT_REPEATED(g_PadStates[0].pressed, (INPUT_DIRECTIONAL | PADL1 | PADR1));
     func_801D6FBC();
-    old = g_UiPanelTasks[14].unk_0B;
+    old = D_80148533;
     if (buttons & PADLup) {
         if (old != 0) {
-            g_UiPanelTasks[14].unk_0B = old - 1;
+            D_80148533 = old - 1;
         }
-        if (g_UiPanelTasks[14].unk_0B < g_UiPanelTasks[14].unk_0A) {
+        if (D_80148533 < D_80148532) {
             g_UiPanelTasks[14].u.addr.unk_10 = 240;
         }
     } else if (buttons & PADLdown) {
         if (old < 127) {
-            g_UiPanelTasks[14].unk_0B = old + 1;
+            D_80148533 = old + 1;
         }
-        if (g_UiPanelTasks[14].unk_0B >= g_UiPanelTasks[14].unk_0A + 9) {
+        if (D_80148533 >= D_80148532 + 9) {
             g_UiPanelTasks[14].u.addr.unk_10 = 16;
         }
     } else if (buttons & PADL1) {
-        first_row = g_UiPanelTasks[14].unk_0A;
+        first_row = D_80148532;
         if (first_row == 0) {
-            g_UiPanelTasks[14].unk_0B = 0;
+            D_80148533 = 0;
         } else if (first_row < 9) {
-            g_UiPanelTasks[14].unk_0B = old - first_row;
-            g_UiPanelTasks[14].unk_0A = 0;
+            D_80148533 = old - first_row;
+            D_80148532 = 0;
         } else {
-            g_UiPanelTasks[14].unk_0B = old - 9;
-            g_UiPanelTasks[14].unk_0A = first_row - 9;
+            D_80148533 = old - 9;
+            D_80148532 = first_row - 9;
         }
     } else if (buttons & PADR1) {
-        last_row = g_UiPanelTasks[14].unk_0A;
+        last_row = D_80148532;
         if (last_row == 119) {
-            g_UiPanelTasks[14].unk_0B = 127;
+            D_80148533 = 127;
         } else if (old >= 111) {
-            next                      = old + 119;
-            g_UiPanelTasks[14].unk_0B = next - last_row;
-            g_UiPanelTasks[14].unk_0A = 119;
+            next       = old + 119;
+            D_80148533 = next - last_row;
+            D_80148532 = 119;
         } else {
-            g_UiPanelTasks[14].unk_0B = old + 9;
-            g_UiPanelTasks[14].unk_0A = last_row + 9;
+            D_80148533 = old + 9;
+            D_80148532 = last_row + 9;
         }
     }
     if (g_UiPanelTasks[13].unk_0A < 4) {
-        s_SkillOrderGroups[g_UiPanelTasks[13].unk_0C][g_UiPanelTasks[13].unk_0A] = g_UiPanelTasks[14].unk_0A;
-        s_SkillOrderTypes[g_UiPanelTasks[13].unk_0C][g_UiPanelTasks[13].unk_0A]  = g_UiPanelTasks[14].unk_0B;
+        s_SkillOrderGroups[g_UiPanelTasks[13].unk_0C][g_UiPanelTasks[13].unk_0A] = D_80148532;
+        s_SkillOrderTypes[g_UiPanelTasks[13].unk_0C][g_UiPanelTasks[13].unk_0A]  = D_80148533;
     } else {
-        s_SkillOrderGroups[g_UiPanelTasks[13].unk_0C][4] = s_SkillOrderGroups[g_UiPanelTasks[13].unk_0C][5] = g_UiPanelTasks[14].unk_0A;
-        s_SkillOrderTypes[g_UiPanelTasks[13].unk_0C][4] = s_SkillOrderTypes[g_UiPanelTasks[13].unk_0C][5] = g_UiPanelTasks[14].unk_0B;
+        s_SkillOrderGroups[g_UiPanelTasks[13].unk_0C][4] = s_SkillOrderGroups[g_UiPanelTasks[13].unk_0C][5] = D_80148532;
+        s_SkillOrderTypes[g_UiPanelTasks[13].unk_0C][4] = s_SkillOrderTypes[g_UiPanelTasks[13].unk_0C][5] = D_80148533;
     }
     if (old != (*panel).unk_0B) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
@@ -89,6 +91,3 @@ NON_MATCHING void func_801D5E90(void) {
         }
     }
 }
-#else
-INCLUDE_ASM(func_801D5E90);
-#endif
