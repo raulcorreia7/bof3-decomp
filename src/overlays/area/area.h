@@ -297,8 +297,8 @@ static inline s32 Area_StepIntoTrigger(s32 x, s32 y, s32 first_row) {
         steps[SELF(Actor)->header.mode]();                                                                     \
     }
 
-/* Store the actor index of `record` (its distance from the actor table `base`) in script variable 3 as its own block; `part` and `step` are the caller's pinned temporaries. */
-#define AREA_STORE_SCRIPT_RECORD_INDEX(record, base, part, step) \
+/* Write the actor index of `record` (its distance from the actor table `base`) in script variable 3 as its own block; `part` and `step` are the caller's pinned temporaries. */
+#define AREA_WRITE_SCRIPT_RECORD_INDEX(record, base, part, step) \
     do {                                                         \
         (record) = (Actor*)((s32)(record) - (base));             \
         (part)   = ((s32)(record) << 3) - (s32)(record);         \

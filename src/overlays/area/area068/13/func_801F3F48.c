@@ -26,7 +26,7 @@ MATCH s32 func_801F3F48(void) {
     record               = g_ScriptWorkRecord;
     base                 = (s32)g_Actors;
     record->unk_7E       = 0;
-    AREA_STORE_SCRIPT_RECORD_INDEX(record, base, part, step);
+    AREA_WRITE_SCRIPT_RECORD_INDEX(record, base, part, step);
     step                        = 3;
     g_SceneEventState.mode      = request;
     g_SceneEventState.selection = step;
