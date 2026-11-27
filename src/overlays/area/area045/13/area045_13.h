@@ -10,7 +10,8 @@
 
 #define AREA_HUD_SPRITE_CELLS ((u8*)D_801F5364 + 0x10)
 
-extern u8             D_801F4D7C[];
+/* The world-map entry keys WORLD_MAP_SELECT_KEY_SCRIPT scans. */
+extern WorldMapKey    D_801F4D7C[10];
 /* The spawn step handler table indexed by the record's step byte. */
 extern Callback       D_801F5338[];
 extern u8             D_801F534C[];

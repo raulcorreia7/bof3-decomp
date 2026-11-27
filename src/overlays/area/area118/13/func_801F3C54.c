@@ -22,18 +22,18 @@ MATCH void func_801F3C54(void) {
     SELF(Actor)->screen_x           = D_801F514C[entry];
     SELF(Actor)->screen_y           = 0;
 
-    (g_AreaCellCodes + COORD_INT(SELF(Actor)->pos.y) * ((AreaMapBundle*)MAP_BUNDLE_BASE)->width)[COORD_INT(SELF(Actor)->pos.x)]       = 0x52;
-    (g_AreaCellCodes + (COORD_INT(SELF(Actor)->pos.y) + 1) * ((AreaMapBundle*)MAP_BUNDLE_BASE)->width)[COORD_INT(SELF(Actor)->pos.x)] = 0x52;
+    (g_AreaCellCodes + COORD_INT(SELF(Actor)->pos.y) * AREA_MAP_BUNDLE->width)[COORD_INT(SELF(Actor)->pos.x)]       = 0x52;
+    (g_AreaCellCodes + (COORD_INT(SELF(Actor)->pos.y) + 1) * AREA_MAP_BUNDLE->width)[COORD_INT(SELF(Actor)->pos.x)] = 0x52;
     SELF(Actor)->header.step++;
 
     if (abs(g_Game.members[0].pos.x.fixed - (TO_COORD(COORD_INT(SELF(Actor)->pos.x) + 1) | COORD_HALF)) <= COORD_HALF) {
         if (abs(g_Game.members[0].pos.y.fixed - TO_COORD(COORD_INT(SELF(Actor)->pos.y))) <= TO_COORD(1) ||
             abs(g_Game.members[0].pos.y.fixed - TO_COORD(COORD_INT(SELF(Actor)->pos.y) + 1)) <= TO_COORD(1)) {
-            (g_AreaCellCodes + COORD_INT(SELF(Actor)->pos.y) * ((AreaMapBundle*)MAP_BUNDLE_BASE)->width)[COORD_INT(SELF(Actor)->pos.x)]       = 0xA1;
-            (g_AreaCellCodes + (COORD_INT(SELF(Actor)->pos.y) + 1) * ((AreaMapBundle*)MAP_BUNDLE_BASE)->width)[COORD_INT(SELF(Actor)->pos.x)] = 0xA1;
-            screen_y                                                                                                                          = -0x100;
-            SELF(Actor)->screen_y                                                                                                             = screen_y;
-            SELF(Actor)->header.step                                                                                                          = 3;
+            (g_AreaCellCodes + COORD_INT(SELF(Actor)->pos.y) * AREA_MAP_BUNDLE->width)[COORD_INT(SELF(Actor)->pos.x)]       = 0xA1;
+            (g_AreaCellCodes + (COORD_INT(SELF(Actor)->pos.y) + 1) * AREA_MAP_BUNDLE->width)[COORD_INT(SELF(Actor)->pos.x)] = 0xA1;
+            screen_y                                                                                                        = -0x100;
+            SELF(Actor)->screen_y                                                                                           = screen_y;
+            SELF(Actor)->header.step                                                                                        = 3;
         }
     }
     func_801F381C(0);

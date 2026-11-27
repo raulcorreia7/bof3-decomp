@@ -1,0 +1,2 @@
+{"function": "exe/slus_004_22@0x80154438", "tried": "grid through AREA_MAP_TILES/AREA_MAP_GRID column-first, do-while as the draft", "first_diff": "retail hoists 0x80104000/01/02 as three full addresses (lui/ori t3,t4,t5); the macro form loads lui+lhu 0x4002 in the loop: 70 rows; raw MEM(u16, MAP_BUNDLE_BASE + 2) reads 25", "score": 70}
+{"function": "emi/world04/area173/14@0x801F3060", "tried": "AREA_MAP_TILES[AREA_MAP_GRID_ROW(row)[13]] and [i + 14]", "first_diff": "address chain matches; retail saves s6/s7 (frame 72 vs 64), register allocation", "score": 155}

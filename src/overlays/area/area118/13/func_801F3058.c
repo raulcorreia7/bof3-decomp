@@ -29,14 +29,12 @@ MATCH void func_801F3058(void) {
     SELF(Actor)->screen_x           = D_801F514C[entry];
     SELF(Actor)->screen_y           = 0;
     if (!SYS_TestFlag(D_80144ED0, SELF(Actor)->param.unk_0B)) {
-        (g_AreaCellCodes + COORD_INT(SELF(Actor)->pos.y) * ((AreaMapBundle*)MAP_BUNDLE_BASE)->width)[COORD_INT(SELF(Actor)->pos.x)]                                                       = 0x52;
-        (g_AreaCellCodes +
-         (COORD_INT(SELF(Actor)->pos.y) + (SELF(Actor)->direction == FACING_UP_LEFT)) * ((AreaMapBundle*)MAP_BUNDLE_BASE)->width)[COORD_INT(SELF(Actor)->pos.x) + SELF(Actor)->direction] = 0x52;
+        (g_AreaCellCodes + COORD_INT(SELF(Actor)->pos.y) * AREA_MAP_BUNDLE->width)[COORD_INT(SELF(Actor)->pos.x)]                                                                         = 0x52;
+        (g_AreaCellCodes + (COORD_INT(SELF(Actor)->pos.y) + (SELF(Actor)->direction == FACING_UP_LEFT)) * AREA_MAP_BUNDLE->width)[COORD_INT(SELF(Actor)->pos.x) + SELF(Actor)->direction] = 0x52;
         SELF(Actor)->header.step                                                                                                                                                          = 5;
     } else {
-        (g_AreaCellCodes + COORD_INT(SELF(Actor)->pos.y) * ((AreaMapBundle*)MAP_BUNDLE_BASE)->width)[COORD_INT(SELF(Actor)->pos.x)]                                                       = 0xA1;
-        (g_AreaCellCodes +
-         (COORD_INT(SELF(Actor)->pos.y) + (SELF(Actor)->direction == FACING_UP_LEFT)) * ((AreaMapBundle*)MAP_BUNDLE_BASE)->width)[COORD_INT(SELF(Actor)->pos.x) + SELF(Actor)->direction] = 0xA1;
+        (g_AreaCellCodes + COORD_INT(SELF(Actor)->pos.y) * AREA_MAP_BUNDLE->width)[COORD_INT(SELF(Actor)->pos.x)]                                                                         = 0xA1;
+        (g_AreaCellCodes + (COORD_INT(SELF(Actor)->pos.y) + (SELF(Actor)->direction == FACING_UP_LEFT)) * AREA_MAP_BUNDLE->width)[COORD_INT(SELF(Actor)->pos.x) + SELF(Actor)->direction] = 0xA1;
         SELF(Actor)->header.step++;
         AREA_ENTRY_CELL_AWAY_STEP(-0x100, 1)
     }
