@@ -1,5 +1,3 @@
-/* Every step re-reads the scratchpad cell. */
-#define FAKE_DECL_TASK_VOLATILE
 #include "area167_13.h"
 
 MATCH void func_801F3624(void) {
