@@ -17,7 +17,7 @@ MATCH void func_800C238C(u8 mode, u8 index) {
         dst += 1;
     } while (src != end);
     /* FAKE: the final word completes the 0x74-byte record copy. */
-    FAKE_ORDER_LOCK(dst->w[0] = src->w[0]);
+    COPY_TAIL_WORD(dst, src);
     g_BattleEffects[effect_slot & BYTE_MASK].unk_06       = 3;
     g_BattleEffects[effect_slot & BYTE_MASK].effect_type  = 5;
     g_BattleEffects[effect_slot & BYTE_MASK].header.mode  = mode;

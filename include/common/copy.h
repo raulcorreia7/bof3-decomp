@@ -27,6 +27,9 @@ typedef struct Cpy32u {
     u8 b[32];
 } Cpy32u;
 
+/* The word after a run of Cpy16 steps, stored as its own block. */
+#define COPY_TAIL_WORD(dst, src) do { (dst)->w[0] = (src)->w[0]; } while (0)
+
 ASSERT_SIZE(Cpy16, 0x10);
 ASSERT_SIZE(Cpy8u, 0x8);
 ASSERT_SIZE(Cpy16u, 0x10);

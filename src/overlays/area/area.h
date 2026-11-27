@@ -297,6 +297,19 @@ static inline s32 Area_StepIntoTrigger(s32 x, s32 y, s32 first_row) {
         steps[SELF(Actor)->header.mode]();                                                                     \
     }
 
+/* Store the actor index of `record` (its distance from the actor table `base`) in script variable 3 as its own block; `part` and `step` are the caller's pinned temporaries. */
+#define AREA_STORE_SCRIPT_RECORD_INDEX(record, base, part, step) \
+    do {                                                         \
+        (record)         = (Actor*)((s32)(record) - (base));     \
+        (part)           = ((s32)(record) << 3) - (s32)(record); \
+        (part)           = ((part) << 2) - (s32)(record);        \
+        (step)           = ((part) << 9) - (part);               \
+        (part)           = (step) << 18;                         \
+        (step)           = -((step) + (part));                   \
+        (step) >>= 3;                                            \
+        g_ScriptVars[3] = (s8)(step);                            \
+    } while (0)
+
 void Area_DrawHud(s16 x, s16 y);
 
 void Actor_StopMoving(void);

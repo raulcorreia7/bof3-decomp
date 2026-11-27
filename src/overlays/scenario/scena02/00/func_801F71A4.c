@@ -10,8 +10,7 @@ MATCH void func_801F71A4(void) {
     /* Retail takes the handler index from the entry $v0; the uninitialised local reads it. */
     u32 index;
 
-    /* FAKE: keeps the index shift below the ra store. */
-    FAKE_ORDER_LOCK(D_801FE288[index]());
+    SYS_DISPATCH_INDEX(D_801FE288, index);
 }
 
 MATCH void func_801F71D8(void) {

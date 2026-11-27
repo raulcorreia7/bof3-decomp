@@ -25,17 +25,8 @@ MATCH s32 func_801F3F48(void) {
     record2->unk_77      = 5;
     record               = g_ScriptWorkRecord;
     base                 = (s32)g_Actors;
-    FAKE_ORDER_LOCK_BEGIN
-        record->unk_7E = 0;
-        record         = (Actor*)((s32)record - base);
-        part           = ((s32)record << 3) - (s32)record;
-        part           = (part << 2) - (s32)record;
-        step           = (part << 9) - part;
-        part           = step << 18;
-        step           = -(step + part);
-        step >>= 3;
-        g_ScriptVars[3] = (s8)step;
-    FAKE_ORDER_LOCK_END;
+    record->unk_7E = 0;
+    AREA_STORE_SCRIPT_RECORD_INDEX(record, base, part, step);
     step                        = 3;
     g_SceneEventState.mode      = request;
     g_SceneEventState.selection = step;
