@@ -13,10 +13,14 @@ MATCH void Battle_ReviveFullHp(void) {
     battler = LOBU(*state);
     if (battler < 3u) {
         if (HAS_STATUS(g_Game.members[battler], STATUS_KO)) {
-            FAKE_ORDER_LOCK(selection = -10000);
+            do {
+                selection = -10000;
+            } while (0);
             g_Battle.target_record->hp_change = selection;
             /* FAKE: retail schedules the call arguments after the count store. */
-            FAKE_ORDER_LOCK(g_BattleLivingPartyCount += 1);
+            do {
+                g_BattleLivingPartyCount += 1;
+            } while (0);
             Battle_CureStatus(*state, 0x4000);
             return;
         }

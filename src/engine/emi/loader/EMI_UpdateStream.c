@@ -20,7 +20,9 @@ MATCH void EMI_UpdateStream(void) {
     }
     /* FAKE: the scheduler sinks the zeroing past the call; hold it in the
      * call's delay slot, where retail keeps the move. */
-    FAKE_ORDER_LOCK(count = 0);
+    do {
+        count = 0;
+    } while (0);
     CD_Update();
     if ((g_EmiRingStates[g_EmiRingIndex] & 0x80) == 0) {
         slot = (s8*)(head + 8);

@@ -62,8 +62,8 @@ MATCH void SND_SetBankLayout(u32 layout) {
     w                        = FIELD(s32, g_SndBankHeaderSize, off + 12);
     v += size;
     w = v + w;
-    /* FAKE: the order lock steers regalloc. */
-    FAKE_ORDER_LOCK_BEGIN
+    /* FAKE: the block steers regalloc. */
+    do {
         g_SndBank3Header         = v;
         g_SndBank3Sequence       = w;
         g_EmiBank3SequenceBuffer = w;
@@ -103,7 +103,7 @@ MATCH void SND_SetBankLayout(u32 layout) {
         g_SndBank4Sequence       = end;
         g_SndBank5Header         = next;
         g_SndBank5Sequence       = last;
-    FAKE_ORDER_LOCK_END;
+    } while (0);
     g_SndBank6Header     = size;
     g_SndBank6Sequence   = v;
     g_EmiBank6SpuAddress = off;

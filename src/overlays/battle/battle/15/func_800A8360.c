@@ -10,14 +10,14 @@ MATCH void func_800A8360(void) {
     work_base = g_BattleChoicePanel;
     one       = 1u;
     eight     = 8u;
-    /* FAKE: the order lock holds this run in place; without it the match is 87.18%. */
-    FAKE_ORDER_LOCK_BEGIN
+    /* FAKE: the block holds this run in place; without it the match is 87.18%. */
+    do {
         work                = work_base;
         work[0]             = one;
         D_80148572          = one;
         g_BattleChoicePhase = 2u;
         D_8014857D          = 0xFFu;
-    FAKE_ORDER_LOCK_END;
+    } while (0);
     D_80148574                      = -0xAA;
     g_UiPanelTasks[16].panel        = eight;
     g_UiPanelTasks[16].unk_0A       = 0u;

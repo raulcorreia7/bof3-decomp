@@ -169,7 +169,7 @@ analyses its Rizin project and caches the references under `build/symbol-xrefs`.
 ## Quality
 
 `quality.py` counts, per directory and in total: matched functions still named `func_<ADDR>`, `D_`
-and `unk_` tokens, raw width casts, harmful fake helpers, `FAKE:` notes, and bodies pasted into
+and `unk_` tokens, raw width casts, harmful fake helpers, bare `do { } while (0)` blocks (`blocks`, trended), `FAKE:` notes, and bodies pasted into
 several images under one name (`pasted`, one `Name.h` is the rule) or several names (`twins`).
 `--queue` lists files worst first. `--diff BASE` compares BASE (at its merge-base with `--to`,
 default `HEAD`) with `--to` and exits 1 when `casts`, `harmful` or `pasted` rose over the touched

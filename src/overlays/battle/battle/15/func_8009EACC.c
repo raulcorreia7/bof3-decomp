@@ -6,11 +6,11 @@ MATCH void func_8009EACC(void) {
     u32           new_var;
 
     flags = &g_BattleState;
-    /* FAKE: the order lock holds these two stores in place. */
-    FAKE_ORDER_LOCK_BEGIN
+    /* FAKE: the block holds these two stores in place. */
+    do {
         *flags |= BATTLE_STATE_DAMAGE_APPLIED;
         new_var = g_BattleActiveBattler;
-    FAKE_ORDER_LOCK_END;
+    } while (0);
     result                            = Battle_CalcDamage(new_var, g_Battle.target, BATTLE_ELEMENT_FROM_WEAPON);
     g_Battle.target_record->hp_change = (result >> 1) + 1;
 }

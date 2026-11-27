@@ -21,7 +21,9 @@ MATCH void func_8009EC48(void) {
     g_BattleCalcStats[1].accuracy = 0x64;
     *p_flag                       = flag | BATTLE_STATE_CRITICAL;
     /* FAKE: statement boundary keeps the retail register order and schedule. */
-    FAKE_ORDER_LOCK(slot_arg = g_BattleActiveBattler);
+    do {
+        slot_arg = g_BattleActiveBattler;
+    } while (0);
     type_arg                          = g_BattleTarget;
     g_Battle.target_record->hp_change = Battle_CalcDamage(slot_arg, type_arg, BATTLE_ELEMENT_FROM_WEAPON);
     slot                              = g_Battle.active_battler;

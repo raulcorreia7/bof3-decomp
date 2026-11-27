@@ -24,7 +24,7 @@ MATCH s32 func_801F5EBC(void) {
     /* FAKE: use keeps the g_Actors row materialized before the unk_77
      * store. */
     FAKE_USE(base);
-    record = g_ScriptWorkRecord;
+    record         = g_ScriptWorkRecord;
     record->unk_7E = 0;
     AREA_STORE_SCRIPT_RECORD_INDEX(record, base, part, step);
     step                        = 9;

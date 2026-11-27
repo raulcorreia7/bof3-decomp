@@ -304,14 +304,14 @@ MATCH void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_index, s32 shad
     UI_WindowDraw(px + 3, py + 3, MENU_CHARACTER_WINDOW_WIDTH, MENU_CHARACTER_WINDOW_HEIGHT, (u8)shaded, CHARACTER_BLOCK->window_style);
     x = px;
     y = py;
-    /* FAKE: the order lock keeps the x and y copies below the window call. */
-    FAKE_ORDER_LOCK_BEGIN
+    /* FAKE: the block keeps the x and y copies below the window call. */
+    do {
         records = (Character*)CHARACTER_BLOCK->records;
         stats   = &records[character_index];
         Menu_DrawCharacterPortrait((px + 0x56) & HALF_MASK, (py + 2) & HALF_MASK, stats->character_id, (u8)shaded == 0 ? (stats->status >> 6) & 2 : 1);
         text_clut = clut & BYTE_MASK;
         UI_TextDraw(x + 20, y + 3, text_clut, CHARACTER_NAME_LENGTH, stats);
-    FAKE_ORDER_LOCK_END;
+    } while (0);
     TEXT_Format(g_UiTextFormatBuffer, g_MenuStatFormat, stats->level);
     text_y = (s16)(y + 0x17);
     UI_TextDrawGlyphString(x + 22, text_y, text_clut, g_UiTextFormatBuffer);

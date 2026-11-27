@@ -194,10 +194,10 @@ MATCH void func_801F4B58(void) {
             g_SceneEventState.mode = 0;
             g_SceneEventState.step = 0;
             /* FAKE: block boundary keeps the second counter below the mode stores. */
-            FAKE_ORDER_LOCK_BEGIN
+            do {
                 g_Game.members[2].u.field.unk_122++;
                 g_GameFlags &= 0xEFEF;
-            FAKE_ORDER_LOCK_END;
+            } while (0);
             break;
     }
 }

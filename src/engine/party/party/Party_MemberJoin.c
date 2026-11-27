@@ -22,7 +22,9 @@ MATCH s32 Party_MemberJoin(s32 char_id) {
         /* FAKE: retail reads g_CharSlot as u8[]. */
         g_Game.members[g_Game.party_size].character_index = ((u8*)g_CharSlot)[char_id & BYTE_MASK];
         /* FAKE: retail keeps the incremented party count in v0. */
-        FAKE_ORDER_LOCK(g_PartySize += 1);
+        do {
+            g_PartySize += 1;
+        } while (0);
         return 0;
     }
     g_GameStateIndex = GAME_REQUEST_SHOP;

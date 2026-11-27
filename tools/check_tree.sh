@@ -86,7 +86,7 @@ if [ -n "$base" ]; then
 	}
 	for spec in 'asm\("\$|register pin' 'goto L[0-9A-Fa-f]{4,}|decompiler label' \
 		'\bsp[0-9][0-9A-F]*\b|stack-offset name' '\bSELF_BYTES\b|\(\(u8 ?\*\) ?g_Self\)|task read by offset' \
-		'\bM2C_|m2c macro' '0x[0-9A-Fa-f]{7,8}|raw address'; do
+		'\bM2C_|m2c macro' '\bFAKE_ORDER_LOCK|removed spelling, write a plain do { } while (0)' '0x[0-9A-Fa-f]{7,8}|raw address'; do
 		out=$(rule "${spec%|*}" "${spec##*|}")
 		if [ -n "$out" ]; then
 			printf '%s\n' "$out"

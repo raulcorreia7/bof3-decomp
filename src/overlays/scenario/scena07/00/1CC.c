@@ -192,8 +192,10 @@ MATCH void func_801F7638(void) {
     burst->pos.vx            = SELF(Actor)->pos.x.fixed;
     y                        = SELF(Actor)->pos.y.fixed;
     D_801FDFBC               = burst;
-    /* FAKE: the order lock keeps the y store after the pointer store; 33 of 38 instructions otherwise. */
-    FAKE_ORDER_LOCK(burst->pos.vy = y);
+    /* FAKE: the block keeps the y store after the pointer store; 33 of 38 instructions otherwise. */
+    do {
+        burst->pos.vy = y;
+    } while (0);
     burst->pos.vz      = SELF(Actor)->pos.z.fixed;
     burst->unk_10      = 0;
     SELF(Actor)->timer = 0;

@@ -23,7 +23,9 @@ MATCH void Battle_InitItemPanel(void) {
     page_base = D_801454FE;
     cursor    = D_801454FF;
     /* FAKE: basic-block boundary pins the row constant materialization. */
-    FAKE_ORDER_LOCK(eight = 8u);
+    do {
+        eight = 8u;
+    } while (0);
     g_BattleChoicePanel[2] = one;
 
     g_BattleChoicePanel[0xD]                      = 0xFFu;

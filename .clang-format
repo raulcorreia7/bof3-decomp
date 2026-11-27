@@ -50,5 +50,3 @@ KeepEmptyLines:
   AtStartOfBlock: false
   AtStartOfFile: false
 ReflowComments: false
-MacroBlockBegin: '^FAKE_ORDER_LOCK_BEGIN$'
-MacroBlockEnd: '^FAKE_ORDER_LOCK_END$'

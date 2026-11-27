@@ -102,6 +102,12 @@ CASES = [
         "decompiler local",
     ),
     (
+        "removed lock spelling",
+        {},
+        {"src/overlays/test/arc/00/a.c": "FAKE_ORDER_LOCK(x = 1);\n"},
+        "removed spelling",
+    ),
+    (
         "task offset",
         {},
         {"src/overlays/test/arc/00/a.c": "u8 *p = ((u8 *)g_Self);\n"},

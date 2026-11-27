@@ -3,7 +3,7 @@
 MATCH void func_801F2D7C(void) {
     Actor* scratch;
 
-    FAKE_ORDER_LOCK_BEGIN
+    do {
         scratch              = SELF(Actor);
         g_AreaSceneMode      = 0;
         scratch->pos.x.fixed = 0x54;
@@ -15,5 +15,5 @@ MATCH void func_801F2D7C(void) {
         D_801F54D0[3]        = 0x54;
         D_801F54D0[4]        = 0x13;
         D_801F54D0[5]        = 0;
-    FAKE_ORDER_LOCK_END;
+    } while (0);
 }

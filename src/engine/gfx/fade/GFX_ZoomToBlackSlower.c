@@ -25,10 +25,14 @@ loop:
         first_coordinate += 0xB;
         level[0] = first_coordinate;
         /* FAKE: hold the second coordinate load after the first store. */
-        FAKE_ORDER_LOCK(second_coordinate = level[2]);
+        do {
+            second_coordinate = level[2];
+        } while (0);
         countdown -= 0x32;
         /* FAKE: hold the count store ahead of the coordinate add. */
-        FAKE_ORDER_LOCK(g_AreaCameraOffsetZ = countdown);
+        do {
+            g_AreaCameraOffsetZ = countdown;
+        } while (0);
         level[2] = second_coordinate + 0xB;
         SYS_ThreadWait(1);
         /* Retail keeps this spin as a goto loop (as in GFX_SpinToBlack). */

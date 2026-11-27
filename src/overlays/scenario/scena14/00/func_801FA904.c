@@ -13,7 +13,9 @@ MATCH u16 func_801FA904(u8* tags, u16* messages) {
         for (j = 0; j < g_PartySize; j++) {
             if (g_Game.members[j].chr.character_id == tags[i]) {
                 UI_MessageStartArea((s16)messages[i]);
-                FAKE_ORDER_LOCK(g_GameStateIndex = GAME_REQUEST_MESSAGE); /* FAKE: keeps the state store before the return value's reload. */
+                do {
+                    g_GameStateIndex = GAME_REQUEST_MESSAGE;
+                } while (0); /* FAKE: keeps the state store before the return value's reload. */
                 return messages[i];
             }
         }

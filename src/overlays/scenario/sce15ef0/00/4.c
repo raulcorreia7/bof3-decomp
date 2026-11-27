@@ -130,10 +130,10 @@ MATCH void func_801D1220(s32 value) {
         Area_CellAddPrim(front[0], front[1], 0, 0xC);
         i++;
         /* FAKE: the copy in its own block fixes the cursor pointer's allocation; retail keeps the load and the draw setup apart. */
-        FAKE_ORDER_LOCK_BEGIN
+        do {
             new_var = (POLY_F4*)g_GfxPrimCursor;
             prim    = new_var;
-        FAKE_ORDER_LOCK_END;
+        } while (0);
         SetPolyF4(prim);
         SetSemiTrans(prim, 1);
         Camera_ProjectPoint(front, (DVECTOR*)&prim->x0);

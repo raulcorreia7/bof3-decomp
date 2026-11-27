@@ -37,10 +37,10 @@ MATCH void Fishing_ChooseAction(void) {
                 g_FishingFullNoticeShown = 0;
             }
             SELF(FishingState)->mode_index = 2;
-            /* FAKE: the order lock steers regalloc */
-            FAKE_ORDER_LOCK_BEGIN
+            /* FAKE: the block steers regalloc */
+            do {
                 SELF(FishingState)->sub_index = 0;
-            FAKE_ORDER_LOCK_END;
+            } while (0);
             break;
         case PADL1:
             g_SpawnedActors[3].header.mode = 7;

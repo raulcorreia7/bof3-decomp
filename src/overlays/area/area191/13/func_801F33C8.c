@@ -30,7 +30,9 @@ MATCH void func_801F33C8(void) {
 
                 SYS_SetFlag(g_SceneEventFlags, 0x82);
                 /* FAKE: statement boundary holds the step store above the counter loads. */
-                FAKE_ORDER_LOCK(g_SceneEventState.step = 0xA);
+                do {
+                    g_SceneEventState.step = 0xA;
+                } while (0);
                 counter    = D_80144F56;
                 flag       = &g_ScenarioState.flags_01;
                 D_80144F54 = 0;

@@ -33,7 +33,7 @@
  *   4. correct casts and expression grouping;
  *   5. match compiler/version/flags per translation unit (build description);
  *   6. FAKE_VOLATILE and FAKE_VOLATILE_PTR when it affects required codegen;
- *   7. FAKE_BARRIER, FAKE_ORDER_*, FAKE_STACK_PADS, FAKE_HOLD;
+ *   7. FAKE_BARRIER, FAKE_ORDER_FENCE, FAKE_STACK_PADS, FAKE_HOLD;
  *   8. FAKE_REG, FAKE_OPAQUE, FAKE_USE, FAKE_CLOBBER;
  *   9. inline ASM as the final escape hatch.
  *
@@ -100,37 +100,6 @@
 #define FAKE_CLOBBER(reg) __asm__ __volatile__("" : : : reg)
 #else
 #define FAKE_CLOBBER(reg)
-#endif
-
-/*
- * The same boundary around a run of statements. Write FAKE_ORDER_LOCK_BEGIN on its
- * own line and close it with `FAKE_ORDER_LOCK_END;`. The pair opens and closes one
- * block, so it must sit inside a single block of its own. Moving statements
- * into or out of the pair moves the boundary; byte-check every change.
- */
-#if defined(MATCHING)
-#define FAKE_ORDER_LOCK_BEGIN do {
-#define FAKE_ORDER_LOCK_END \
-    }                       \
-    while (0)
-#else
-#define FAKE_ORDER_LOCK_BEGIN {
-#define FAKE_ORDER_LOCK_END   }
-#endif
-
-/*
- * Basic-block boundary that holds one statement (the pair below around a single statement) in place in the instruction
- * schedule. Use ONLY when the byte diff proves the scheduler reorders that
- * statement against a neighbor without it. Pure textual expansion, identical
- * to the literal do/while spelling; every use must still pass the byte check.
- */
-#if defined(MATCHING)
-#define FAKE_ORDER_LOCK(stmt) \
-    FAKE_ORDER_LOCK_BEGIN     \
-        stmt;                 \
-    FAKE_ORDER_LOCK_END
-#else
-#define FAKE_ORDER_LOCK(stmt) stmt
 #endif
 
 /* An empty boundary: splits the schedule at this point without holding any statement. */

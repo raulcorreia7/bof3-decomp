@@ -13,8 +13,8 @@ MATCH void UI_CursorDrawName(s32 line_x, s32 line_y, s32 line_length, s32 line_m
     line = (LINE_F2*)g_GfxPrimCursor;
     x    = line_x;
     y    = line_y;
-    /* FAKE: the order lock holds this run in place; without it the match is 97.44%. */
-    FAKE_ORDER_LOCK_BEGIN
+    /* FAKE: the block holds this run in place; without it the match is 97.44%. */
+    do {
         delta = line_length;
         SetLineF2(line);
         mode  = line_mode;
@@ -24,7 +24,7 @@ MATCH void UI_CursorDrawName(s32 line_x, s32 line_y, s32 line_length, s32 line_m
         }
         line->r0 = color;
         line->g0 = color;
-    FAKE_ORDER_LOCK_END;
+    } while (0);
     line->b0 = color;
     line->x0 = x;
     line->x1 = (x + delta);
