@@ -17,23 +17,33 @@ NON_MATCHING void func_801F369C(s32 level) {
     s32       y_lo;
     s32       y_hi;
     s32       band_y;
+    s32       center_x;
+    s32       half;
+    s32       top_z;
+    s32       glow_z;
+    s32       inner;
 
+    inner = 0x18;
     /* three bands of eight quads: the pillar steps down a band and back a row at a time */
-    for (i = 0, band_y = -0x2120; i < 3; i++, band_y += 0x60) {
-        phase = g_FrameCount & 7;
-        row   = phase;
-        z     = -0x190 - phase * 8;
+    for (i = 0; i < 3; i++) {
+        center_x = -0x1F40;
+        top_z    = -0x190;
+        glow_z   = -0x1C0;
+        band_y   = i * 0x60 - 0x2120;
+        phase    = g_FrameCount & 7;
         for (j = 0; j < 8; j++) {
+            z    = top_z - phase * 8 - j * 0x40;
+            row  = phase + j * 8;
             prim = (POLY_FT4*)g_GfxPrimCursor;
             SetPolyFT4(prim);
             SetShadeTex(prim, 0);
             SetSemiTrans(prim, 1);
 
             /* the row's quad widens as the phase advances and leans with the band */
-            size = phase * 2 + j * 16 + 0x18;
+            size = phase * 2 + (j * 16 + inner);
             tilt = rsin(row * 16) >> 5;
-            x_lo = -0x1F40 - size + tilt;
-            x_hi = -0x1F40 + size + tilt;
+            x_lo = center_x - size + tilt;
+            x_hi = center_x + size + tilt;
             y_lo = band_y - size + tilt * (i - 1);
             y_hi = band_y + size + tilt * (i - 1);
             setVector(&g_ScratchPadVectors[0], x_lo, y_lo, z);
@@ -47,25 +57,20 @@ NON_MATCHING void func_801F369C(s32 level) {
             prim->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 704, 256);
             prim->clut  = getClut(160, 483);
             /* the band fades from its bottom row toward the top of the pillar */
-            setRGB0(prim, (0x3F - row) * (level * 2) / 0x80, (0x3F - row) * level / 0x80, (0x3F - row) * (level * 2) / 0x80);
+            setRGB0(prim, (0x3F - row) * (level << 1) / 0x80, (0x3F - row) * level / 0x80, (0x3F - row) * (level << 1) / 0x80);
             GFX_AddPrim(4, sizeof(POLY_FT4));
-
-            row += 8;
-            z -= 0x40;
         }
 
         /* the band's own sprite, projected from one point behind the pillar */
-        g_ScratchPadVectors[0].vx = -0x1F40;
-        D_1F800016                = band_y;
-        D_1F800018                = -0x1C0;
+        setVector(&g_ScratchPadVectors[0], center_x, band_y, glow_z);
         RotTransPers(g_ScratchPadVectors, (long*)D_1F800034, &depth, &flag);
 
-        size = abs(3 - ((g_FrameCount / 3 + i) & 7)) + 0x10;
+        half = abs(3 - ((g_FrameCount / 3 + i) & 7)) + 0x10;
         prim = (POLY_FT4*)g_GfxPrimCursor;
         SetPolyFT4(prim);
         SetShadeTex(prim, 0);
-        setXY4(prim, (u16)D_1F800034[0] - size, (u16)D_1F800034[1] - size, (u16)D_1F800034[0] + size, (u16)D_1F800034[1] - size, (u16)D_1F800034[0] - size, (u16)D_1F800034[1] + size,
-               (u16)D_1F800034[0] + size, (u16)D_1F800034[1] + size);
+        setXY4(prim, (u16)D_1F800034[0] - half, (u16)D_1F800034[1] - half, (u16)D_1F800034[0] + half, (u16)D_1F800034[1] - half, (u16)D_1F800034[0] - half, (u16)D_1F800034[1] + half,
+               (u16)D_1F800034[0] + half, (u16)D_1F800034[1] + half);
         SetSemiTrans(prim, 1);
         setUV4(prim, 0xE0, 0x30, 0xFF, 0x30, 0xE0, 0x4F, 0xFF, 0x4F);
         prim->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 704, 256);

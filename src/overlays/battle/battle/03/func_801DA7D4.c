@@ -2,30 +2,30 @@
 
 /* Orders the live party members by agility and rebuilds the command row list
  * from the surviving ones, after sizing the enemy side. */
-#ifdef NON_MATCHING
-NON_MATCHING void func_801DA7D4(void) {
+MATCH void func_801DA7D4(void) {
     BattleRank entries[BATTLE_PARTY_CHARACTERS_COUNT];
     BattleRank temp;
     u8         n;
+    u16        total;
     u8         i;
     u8         count;
     u16        agility;
     u16        maximum;
 
-    n       = 0;
+    total   = 0;
     maximum = 0;
     for (i = BATTLE_PARTY_CHARACTERS_COUNT; i < COMBATANT_COUNT; i++) {
         if (D_801463BA == 0 || (ENEMY_COMBATANT(i).turn.action_flags.value & BATTLER_ACTION_PREEMPTIVE_TURN)) {
             if (func_801DB9E4(i)) {
                 agility = ENEMY_COMBATANT(i).stats.agility;
-                n += agility;
+                total += agility;
                 if (maximum < agility) {
                     maximum = agility;
                 }
             }
         }
     }
-    for (n = 0, i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
+    for (n = (u8)total >> 8, i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
         if (D_801463BA == 0 || (g_Game.members[i].u.turn.action_flags.value & BATTLER_ACTION_PREEMPTIVE_TURN)) {
             if (func_801DB844(i)) {
                 entries[n].value = g_Game.members[i].chr.stats.agility;
@@ -57,6 +57,3 @@ NON_MATCHING void func_801DA7D4(void) {
         }
     }
 }
-#else
-INCLUDE_ASM(func_801DA7D4);
-#endif

@@ -4,7 +4,7 @@
 #ifdef NON_MATCHING
 NON_MATCHING void Battle_BuildTurnOrder(void) {
     BattleRank temp;
-    s32        total;
+    u16        total;
     u16        maximum;
     u16        agility;
     u8         index;
@@ -17,7 +17,6 @@ NON_MATCHING void Battle_BuildTurnOrder(void) {
 
     total   = 0;
     maximum = 0;
-    count   = 0;
     for (index = 0; index < 3; index++) {
         if (D_801463BA == 0 || (g_Game.members[index].u.turn.action_flags.volatile_value & BATTLER_ACTION_PREEMPTIVE_TURN)) {
             if (func_801DB9E4(index)) {
@@ -30,6 +29,7 @@ NON_MATCHING void Battle_BuildTurnOrder(void) {
         }
     }
 
+    count = (u8)total >> 8;
     for (index = 0; index < 3; index++) {
         if (D_801463BA == 0 || (g_Game.members[index].u.turn.action_flags.volatile_value & BATTLER_ACTION_PREEMPTIVE_TURN)) {
             if (func_801DB9E4(index)) {

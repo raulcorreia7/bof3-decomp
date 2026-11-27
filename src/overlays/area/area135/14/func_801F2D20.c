@@ -9,9 +9,8 @@ NON_MATCHING void func_801F2D20(void) {
     SVECTOR   projection;
     long      depth;
     long      flag;
-    u16       x;
-    u16       x2;
-    s32       y;
+    s16       left;
+    s16       v;
     s16       shade;
 
     work    = g_Self;
@@ -39,21 +38,25 @@ NON_MATCHING void func_801F2D20(void) {
 
     work->unk_60 = RotTransPers(&projection, (long*)&poly->x3, &depth, &flag);
 
-    x2       = poly->x3;
+    left     = poly->x3;
     poly->y0 = 0;
-    x        = poly->x3;
+    v        = poly->x3;
     poly->y1 = 0;
-    poly->x1 = x + 8;
-    poly->x3 = x + 8;
-    y        = poly->y3;
-    poly->x0 = x2 - 8;
-    poly->x2 = x2 - 8;
-    if (y >= 240) {
-        poly->y3 = y = 240;
+    left -= 8;
+    v += 8;
+    poly->x1 = v;
+    poly->x3 = v;
+    poly->x0 = left;
+    poly->x2 = left;
+    v        = poly->y3;
+    if (v >= 240) {
+        v        = 240;
+        poly->y3 = v;
     }
-    poly->y2 = y;
-    g_Self   = work;
-    setClut(poly, 0, STAGE_PALETTE_Y + 3);
+    poly->y2    = v;
+    g_Self      = work;
+    v           = GetClut(0, STAGE_PALETTE_Y + 3);
+    poly->clut  = v;
     poly->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 704, 256);
 
     setUV4(poly, 0, SELF(Actor)->timer & 0x15, 16, SELF(Actor)->timer & 0x15, 0, (SELF(Actor)->timer & 0x15) + poly->y2, 16, (SELF(Actor)->timer & 0x15) + poly->y2);
