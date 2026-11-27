@@ -29,7 +29,6 @@ as `+`. Run each Python tool with `.venv/bin/python tools/<name>.py` or directly
 | Rank the values that live across a call  | `tools/alloc_priority.py <file.c> <func>`                                | same                                                      |
 | Try several full bodies, stop at a match | `tools/try_variants.py <target>@0x<ADDR> <file.c> variants.py`           | same                                                      |
 | Try every single small edit on drafts    | `tools/sweep_edits.py --worklist FILE --jobs N --pairs --out FILE`       | same                                                      |
-| Score drafts under other compilers, flags| `tools/compiler_scan.py --rows FILE --out FILE`                          | [compiler chain](../docs/toolchain.md#compiler-chain)     |
 | Print assembly, attempts and C file      | `tools/match_context.sh <target>@0x<ADDR>`                               | same                                                      |
 | Append an attempts row                   | `tools/attempts.py add --function <target>@0x<ADDR> --tried TEXT`        | `--help`                                                  |
 | Try one C body for an assembly function  | `tools/try_body.py <target>@<func> body.c`                               | [try body](#try-body)                                     |
