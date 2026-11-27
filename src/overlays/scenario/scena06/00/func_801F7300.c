@@ -5,8 +5,6 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801F7300(void) {
-    /* FAKE: retail materializes the argument as li a0,2 in the dispatch delay slot; the a0 pin keeps a fresh constant instead of a copy of the switch value. */
-    FAKE_REG(s32, arg, "a0");
     if (g_GameAreaId == AREA_ID_WYNDIA_CASTLE) {
         if (!SYS_TestFlag(g_SceneFlags, 3)) {
             g_ScriptVars[0] = 0;
@@ -14,25 +12,18 @@ MATCH void func_801F7300(void) {
             switch (g_EmiLoadedCharacterIndex & 0x7F) {
                 case 0:
                     g_Characters[g_CharSlot[5]].party_flags &= 0xFE;
-                    /* FAKE: pins the g_CharSlot[6] load behind the first store (retail keeps the nop). */
-                    FAKE_BARRIER();
                     g_Characters[g_CharSlot[6]].party_flags &= 0xFE;
                     func_801C1E3C(0);
                     break;
                 case 1:
                     g_Characters[g_CharSlot[6]].party_flags &= 0xFE;
-                    /* FAKE: same pin as case 0. */
-                    FAKE_BARRIER();
                     g_Characters[g_CharSlot[2]].party_flags &= 0xFE;
                     func_801C1E3C(1);
                     break;
                 case 2:
-                    arg = 2;
                     g_Characters[g_CharSlot[2]].party_flags &= 0xFE;
-                    /* FAKE: same pin as case 0. */
-                    FAKE_BARRIER();
                     g_Characters[g_CharSlot[5]].party_flags &= 0xFE;
-                    func_801C1E3C(arg);
+                    func_801C1E3C(2);
                     break;
             }
         }

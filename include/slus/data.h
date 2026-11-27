@@ -177,7 +177,7 @@ extern void* const g_AreaLoads[200]; /* 0x8017F974 */
 extern u8          D_8014933C;
 /* D_80181B10 */
 extern const u8    D_80149C78[0x18]; /* clut row per icon cell */
-extern const u8    g_CharSlot[12];
+extern u8          g_CharSlot[12];
 /* D_80181B88 */
 extern const u8    g_AreaClimbRiseSteps[12];
 /* D_80181BD4 */
