@@ -77,7 +77,6 @@ WEAK_WORDS = frozenset(
 )
 KEPT_REMOVED = re.compile(r"^Kept-Removed:\s*(\S+)", re.M)
 REMOVED = re.compile(r"^Removed:\s*(\S+)\s+\S", re.M)
-RENAMED = re.compile(r"^Renamed:\s*(\w+)\s*->\s*\w", re.M)
 DEFINE = re.compile(r"^[ \t]*#[ \t]*define[ \t]+(\w+)(\([^)]*\))?(.*)$")
 INCLUDE = re.compile(r'^\s*#\s*include\s+"([^"]+)"', re.M)
 IDENT = re.compile(r"[A-Za-z_]\w*")
@@ -604,7 +603,7 @@ def compare(
 def removals(base: str, head: str) -> tuple[set[str], set[str]]:
     """The `Kept-Removed:` and `Renamed:` old names, and the `Removed:` names of the commits in BASE..HEAD."""
     log = git("log", "--format=%B", f"{base}..{head}", root=ROOT)
-    return set(KEPT_REMOVED.findall(log)) | set(RENAMED.findall(log)), set(
+    return set(KEPT_REMOVED.findall(log)) | set(renaming.pairs(log)), set(
         REMOVED.findall(log)
     )
 

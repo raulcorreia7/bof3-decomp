@@ -119,7 +119,6 @@
  * of the FAKE_ family, so a new one is added here and in the header that tests it.
  *
  *   FAKE_DECL_SELF_VOLATILE                     psx/mem.h        g_Self read after every store
- *   FAKE_DECL_GAME_SCRATCH_BASE_WORD            game/spawn.h     g_ScratchPad as a word
  *   FAKE_DECL_GRAPHICS_PALETTE_PENDING_VOLATILE slus/data.h      the pending palette flag read as volatile
  *   FAKE_DECL_AREA_SCROLL_TARGET_VOLATILE       slus/data.h      the scroll target read as volatile
  *   FAKE_DECL_GAME_REQUEST_FLAGS_VOLATILE       menu/gameui.h    the request flags read as volatile
