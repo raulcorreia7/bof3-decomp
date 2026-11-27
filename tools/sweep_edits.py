@@ -18,7 +18,7 @@ sets it first, `c ? M : 0` for `-(c) & M`. Each variant is compiled with `MATCH_
 `tools/match.sh --diff` listing: the two instruction streams are aligned on their opcodes by a
 longest common subsequence (branch targets as labels, call targets by name), and the score is the
 instructions missing plus extra plus the aligned ones whose operands differ; 0 is a byte match.
-`--classes a-type,j-move` limits the classes. The tree is never written. One JSON line per variant
+The tree is never written. One JSON line per variant
 that matches or scores lower than the draft goes to `--out`, with its class and diff; a summary
 line per function (`"class": "summary"`) counts the variants tried and failed and lists the
 `needs_type` sites (a global read as `G[i * N + k]` or `*(... G + off)`, which a typed table would
@@ -1834,7 +1834,7 @@ CLASSES = {
 }
 
 
-def variants(text: str, classes=None):
+def variants(text: str):
     """(class, label, edit) for every single edit the classes propose on one definition.
 
     An edit that makes a local read before it is set is dropped; a label that ends
@@ -1845,8 +1845,6 @@ def variants(text: str, classes=None):
     except (IndexError, KeyError, RuntimeError, StopIteration, ValueError):
         return
     for cls, gen in CLASSES.items():
-        if classes and cls not in classes:
-            continue
         seen = set()
         try:
             for label, edit in gen(f):
@@ -2039,7 +2037,6 @@ def sweep(
     pairs: bool,
     judge=measure,
     workdir=None,
-    classes=None,
 ):
     """Score every variant of one draft on private copies; return the result records."""
     base = source.read_text()
@@ -2066,7 +2063,7 @@ def sweep(
             ]
         tried = failed = 0
         better = []
-        for cls, label, edit in variants(text, classes):
+        for cls, label, edit in variants(text):
             rows = score(edit)
             tried += 1
             if rows is None:
@@ -2135,7 +2132,7 @@ def _header_safe(ref, name, header, changed, users, own, workdir, judge) -> bool
     return True
 
 
-def climb(ref, name, source, judge=measure, workdir=None, classes=None, steps=12):
+def climb(ref, name, source, judge=measure, workdir=None, steps=12):
     """Apply the best improving edit, generate edits again from the new text, repeat.
 
     Class r-header retypes an s8/u8/s16/u16 global or member of the image's own header and is
@@ -2164,7 +2161,7 @@ def climb(ref, name, source, judge=measure, workdir=None, classes=None, steps=12
         rows = base_rows = score(text)
         while rows and len(path) < steps:
             best = None
-            for cls, label, edit in variants(text, classes):
+            for cls, label, edit in variants(text):
                 new = apply(text, edit)
                 got = score(new)
                 tried += 1
@@ -2174,7 +2171,7 @@ def climb(ref, name, source, judge=measure, workdir=None, classes=None, steps=12
                     best = (got, cls, label, new, None)
                     if got == 0:
                         break
-            if (not classes or "r-header" in classes) and (best is None or best[0]):
+            if best is None or best[0]:
                 for label, header, changed, users in header_variants(source, text):
                     if header in headers:
                         continue
@@ -2248,7 +2245,7 @@ def _record(ref, base_rows, cls, label, text, edit, rows):
     }
 
 
-def _job(ref: str, name: str | None, pairs: bool, classes=None, steps=0):
+def _job(ref: str, name: str | None, pairs: bool, steps=0):
     name = name or symbol_name(ref)
     source = find_source(name) if name else None
     if source is None:
@@ -2256,9 +2253,9 @@ def _job(ref: str, name: str | None, pairs: bool, classes=None, steps=0):
     before = resource.getrusage(resource.RUSAGE_CHILDREN)
     try:
         if steps:
-            records = [climb(ref, name, source, classes=classes, steps=steps)]
+            records = [climb(ref, name, source, steps=steps)]
         else:
-            records = sweep(ref, name, source, pairs, classes=classes)
+            records = sweep(ref, name, source, pairs)
     except Exception as error:  # one bad draft must not stop the sweep
         records = [{"ref": ref, "class": "summary", "error": repr(error)[:200]}]
     after = resource.getrusage(resource.RUSAGE_CHILDREN)
@@ -2285,9 +2282,6 @@ def main() -> int:
         "--pairs", action="store_true", help="also try pairs of improving edits"
     )
     parser.add_argument(
-        "--classes", type=lambda v: v.split(","), help="comma list of CLASSES keys"
-    )
-    parser.add_argument(
         "--climb",
         type=int,
         default=0,
@@ -2309,7 +2303,7 @@ def main() -> int:
     ):
         out = sys.stdout if args.out == "-" else sink
         futures = {
-            pool.submit(_job, ref, name, args.pairs, args.classes, args.climb): ref
+            pool.submit(_job, ref, name, args.pairs, args.climb): ref
             for ref, name in rows
         }
         try:

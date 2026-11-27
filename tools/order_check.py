@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check declaration and symbol ordering, and fix the moves that cannot change meaning.
+"""Check declaration and symbol ordering.
 
 Headers follow docs/layout.md#header-layout: constants and enums first, one block per record in
 table order, an ID enum in value order, ASSERT_OFFSETs in offset order then ASSERT_SIZE, and
@@ -7,12 +7,12 @@ prototypes in address order. config/symbols/<image>.toml rows are in address ord
 functions in address order. docs/conventions.md#values adds #define runs by topic, ids and flags by
 value, offsets in layout order and arguments in natural order.
 
---fix moves only prototypes, asserts, symbols.toml rows, enum values and extern blocks: none of
-those moves changes a value or a definition. The other rules are reported for a person: a move would
-change an implicit value, depends on table order only the owner knows, or crosses source files.
+A finding marked fixable is a move of prototypes, asserts, symbols.toml rows, enum values or extern
+blocks, which changes no value or definition. The other rules are reported as `[manual]`: a move
+would change an implicit value, depends on table order only the owner knows, or crosses source files.
 
 Usage:
-    python3 tools/order_check.py [--fix] [PATH ...]
+    python3 tools/order_check.py [PATH ...]
     python3 tools/order_check.py --diff REF
 """
 
@@ -22,7 +22,6 @@ import argparse
 import re
 import sys
 from dataclasses import dataclass, field
-from pathlib import Path
 
 from bof3.adapters.git import changed_files, ls_files, merge_base
 from bof3.core.paths import ROOT
@@ -489,20 +488,6 @@ def changed(ref: str) -> tuple[list[str], list[str]]:
     )
 
 
-def write_fixes(target: Path, lines: list[str], findings: list[Finding]) -> None:
-    """Apply non-overlapping line-range edits; untouched lines stay verbatim."""
-    out: list[str] = []
-    pos = 0
-    for edit in sorted((f for f in findings if f.fixable), key=lambda f: f.start):
-        if edit.start < pos:
-            continue
-        out.extend(lines[pos : edit.start])
-        out.extend(edit.new)
-        pos = edit.end
-    out.extend(lines[pos:])
-    target.write_text("".join(out))
-
-
 def duplicate_prototype_names(headers: list[str]) -> set[str]:
     """Functions declared in more than one header; check-tree reads a moved one as a new duplicate."""
     owners: dict[str, set[str]] = {}
@@ -521,7 +506,7 @@ def duplicate_prototype_names(headers: list[str]) -> set[str]:
     return {name for name, files in owners.items() if len(files) > 1}
 
 
-def inspect(headers: list[str], data: list[str], fix: bool) -> list[Finding]:
+def inspect(headers: list[str], data: list[str]) -> list[Finding]:
     all_headers, _ = tracked()
     dupes = duplicate_prototype_names(all_headers)
     findings: list[Finding] = []
@@ -539,17 +524,12 @@ def inspect(headers: list[str], data: list[str], fix: bool) -> list[Finding]:
                 else check(path, lines)
             )
             findings.extend(hits)
-            if fix and any(h.fixable for h in hits):
-                write_fixes(target, lines, hits)
-                lines = target.read_text(errors="replace").splitlines(keepends=True)
     for target in sorted((ROOT / SPLIT).glob("*.toml")):
         if target.is_file():
             name = target.relative_to(ROOT).as_posix()
             lines = target.read_text(errors="replace").splitlines(keepends=True)
             hits = check_symbols(name, lines)
             findings.extend(hits)
-            if fix and hits:
-                write_fixes(target, lines, hits)
     for path in data:
         target = ROOT / path
         if target.is_file():
@@ -565,9 +545,6 @@ def main() -> int:
     parser = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
     )
-    parser.add_argument(
-        "--fix", action="store_true", help="reorder moves that cannot change meaning"
-    )
     parser.add_argument("--diff", metavar="REF", help="check files changed against REF")
     parser.add_argument(
         "paths", nargs="*", help="check these files instead of the whole tree"
@@ -580,7 +557,7 @@ def main() -> int:
         headers, data = changed(args.diff)
     else:
         headers, data = tracked()
-    findings = inspect(headers, data, args.fix)
+    findings = inspect(headers, data)
     for finding in findings:
         print(finding.render())
     fixable = [f for f in findings if f.fixable]

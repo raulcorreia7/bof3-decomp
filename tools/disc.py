@@ -107,11 +107,11 @@ def verify(args: argparse.Namespace) -> int:
         print("disc: no cue/bin set; skipped the tracks")
     else:
         problems += disc.verify_tracks(data, found[1])
-    folder = ROOT / args.extracted
+    folder = ROOT / disc.EXTRACTED
     if (folder / "SYSTEM.CNF").is_file():
         problems += disc.verify_files(data, folder)
     else:
-        print(f"disc: {args.extracted} is not extracted; skipped the files")
+        print(f"disc: {disc.EXTRACTED} is not extracted; skipped the files")
     if not args.no_images:
         problems += disc.verify_images(ROOT)
     for line in problems:
@@ -221,9 +221,6 @@ def main(argv: list[str] | None = None) -> int:
     make.add_argument("--output", default=str(ROOT / disc.MANIFEST))
     make.set_defaults(run=manifest)
     check = sub.add_parser("verify", help="check the dump, extracted files and images")
-    check.add_argument(
-        "--extracted", default=disc.EXTRACTED, help="extracted folder, repo-relative"
-    )
     check.add_argument("--no-images", action="store_true", help="skip the code images")
     check.set_defaults(run=verify)
     again = sub.add_parser("rebuild", help="rebuild the disc from the built images")

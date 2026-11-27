@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Add, rename and inspect symbols everywhere they live.
 
-    tools/symbol.py add IMAGE NAME 0xADDR --source TEXT [--type T] [--size N] [--alias]
+    tools/symbol.py add IMAGE NAME 0xADDR --source TEXT [--type T] [--size N]
     tools/symbol.py rename OLD NEW [--image IMAGE...] [--local | --scope PATH...] [--source TEXT]
                            [--type T] [--size N] [--dry-run]
     tools/symbol.py params FUNC OLD=NEW...
@@ -200,7 +200,6 @@ def _add(ctx: Context, args: argparse.Namespace) -> int:
                 args.source,
                 args.type,
                 args.size,
-                args.alias,
             ),
         )
     except UnknownImageError as error:
@@ -321,7 +320,6 @@ def main(argv: list[str] | None = None, ctx: Context | None = None) -> int:
     sub.add_argument("--source", help="a description of the symbol")
     sub.add_argument("--type")
     sub.add_argument("--size")
-    sub.add_argument("--alias", action="store_true")
     sub.set_defaults(run=_add)
     sub = verb("rename", "rename a function or global")
     sub.add_argument("old")
@@ -457,8 +455,8 @@ def main(argv: list[str] | None = None, ctx: Context | None = None) -> int:
     jsonl(sub)
     sub.set_defaults(run=_table_verb(lambda ctx, a: homes(ctx)))
     args = parser.parse_args(argv)
-    if args.verb == "add" and not args.source and not args.alias:
-        parser.error("add needs --source (a description) or --alias")
+    if args.verb == "add" and not args.source:
+        parser.error("add needs --source (a description)")
     try:
         return args.run(ctx or Context(), args)
     except (symtab.SymtabError, OSError) as error:

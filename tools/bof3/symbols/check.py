@@ -27,7 +27,6 @@ class AddRequest:
     source: str | None
     type: str | None
     size: str | None
-    alias: bool
 
 
 def add(ctx: Context, req: AddRequest) -> None:
@@ -40,7 +39,7 @@ def add(ctx: Context, req: AddRequest) -> None:
     addr = int(req.addr, 16)
     row = symtab.format_row(
         req.name, addr, type=req.type, size=int(req.size, 0) if req.size else None,
-        source=req.source, alias=req.alias,
+        source=req.source,
     )  # fmt: skip
     text = symbols_text(ctx.root)
     write_symbols(ctx.root, symtab.add_row(text, req.image, req.name, row, addr))

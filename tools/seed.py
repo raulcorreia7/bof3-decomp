@@ -12,7 +12,7 @@ The bundle is `work/<image>/<ADDR>/`:
     hints.md     the facts in the assembly, each with the tactic row it maps to
                  (bof3/source/hints.py)
     callees.txt  the prototype of each function the assembly calls
-    callers.txt  the lines of src/ and the split assembly that call the function (`--callers`, 30 by default)
+    callers.txt  the lines of src/ and the split assembly that call the function (30 at most)
 
 The trial runs `tools/try_body.py` on each m2c draft (tools/m2c_sweep.py); an exact draft stays
 in the tree, so polish it and run `meson compile -C build/meson check-<image>`. The bundle is
@@ -92,12 +92,6 @@ def main(argv: list[str] | None = None) -> int:
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
     )
     parser.add_argument("target", help="TARGET@NAME or TARGET@0xADDRESS")
-    parser.add_argument(
-        "--callers",
-        type=int,
-        default=CALLERS,
-        help="caller lines to keep (default %(default)s)",
-    )
     args = parser.parse_args(argv)
     funcs = load_index(ROOT)
     func = find(funcs, args.target)
@@ -116,9 +110,7 @@ def main(argv: list[str] | None = None) -> int:
         hints.build(ROOT, func, asm.read_text(encoding="utf-8")), encoding="utf-8"
     )
     (folder / "callees.txt").write_text("\n".join(callees(ROOT, func)) + "\n", "utf-8")
-    (folder / "callers.txt").write_text(
-        "\n".join(callers(ROOT, func, args.callers)) + "\n", "utf-8"
-    )
+    (folder / "callers.txt").write_text("\n".join(callers(ROOT, func)) + "\n", "utf-8")
     print(folder.relative_to(ROOT))
     print(result.rstrip())
     return 0

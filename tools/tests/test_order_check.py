@@ -1,4 +1,4 @@
-"""Ordering checks and the moves --fix is allowed to make."""
+"""Ordering checks and the moves they mark fixable."""
 
 from __future__ import annotations
 

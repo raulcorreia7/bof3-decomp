@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """List the functions that are still assembly, shortest first.
 
-    tools/worklist.py [-n 30] [--image GLOB ...] [--tsv | --jsonl]
+    tools/worklist.py [-n 30] [--image GLOB ...] [--jsonl]
     tools/worklist.py --image GLOB [--image GLOB ...] [--except NAME ...] --order strategy
                       [--measure] [-n N] [--jsonl]
 
@@ -288,13 +288,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--measure", action="store_true", help="measure the drafts again; with --order"
     )
-    output = parser.add_mutually_exclusive_group()
-    output.add_argument(
-        "--tsv", action="store_true", help="tab-separated, with the full attempts"
-    )
-    output.add_argument(
-        "--jsonl", action="store_true", help="one JSON object per row, keys as --tsv"
-    )
+    parser.add_argument("--jsonl", action="store_true", help="one JSON object per row")
     args = parser.parse_args(argv)
     if args.order:
         picks = strategy(args.image, args.skip, args.measure)
@@ -325,9 +319,6 @@ def main(argv: list[str] | None = None) -> int:
                     ensure_ascii=False,
                 )
             )
-            continue
-        if args.tsv:
-            print(f"{r.ref}\t{r.words}\t{r.route}\t{r.how}\t{r.hint}")
             continue
         note = f"  tried: {r.hint[:HINT_WIDTH]}" if r.hint else ""
         print(f"{r.ref:<44} {r.words:>5}  {r.how}{note}")
