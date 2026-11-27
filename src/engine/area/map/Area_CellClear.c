@@ -16,7 +16,7 @@ MATCH void Area_CellClear(s32 x, s32 y) {
     s32            one;
     u16            cell;
 
-    map                                                         = (AreaMapBundle*)MAP_BUNDLE_BASE;
+    map                                                         = AREA_MAP_BUNDLE;
     *(u8*)((u8*)g_AreaCellCodes + (s16)y * map->width + (s16)x) = 0;
     dx                                                          = (x - ((u16)g_AreaMap.tile_origin_x - 1));
     dy                                                          = (y - g_AreaMap.tile_origin_y);

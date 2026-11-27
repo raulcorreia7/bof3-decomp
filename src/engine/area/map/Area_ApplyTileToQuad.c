@@ -37,7 +37,7 @@ MATCH s32 Area_ApplyTileToQuad(u32 part_word, POLY_FT4* prim, s32 mode) {
     sel  = ((s32)part_word >> 28) & 3;
     if (part_word & 0xF00) {
         if (part_word & 0x800) {
-            bundle     = (AreaMapBundle*)MAP_BUNDLE_BASE;
+            bundle     = AREA_MAP_BUNDLE;
             rect       = (s32*)(bundle->tile_offsets[sel][1] * 4 + ((part_word & 0x7FF) * 8 + (u32)bundle));
             uv[1].at.u = *rect >> 24;
             uv[1].at.v = (*rect >> 16) & 0xFF;
@@ -49,7 +49,7 @@ MATCH s32 Area_ApplyTileToQuad(u32 part_word, POLY_FT4* prim, s32 mode) {
             uv[4].at.u = (*rect >> 8) & 0xFF;
             uv[4].at.v = *rect & 0xFF;
         } else {
-            bundle     = (AreaMapBundle*)MAP_BUNDLE_BASE;
+            bundle     = AREA_MAP_BUNDLE;
             rect       = (s32*)(bundle->tile_offsets[sel][0] * 4 + ((part_word & 0xFF) * 4 + (u32)bundle));
             uv[1].at.u = uv[3].at.u = *rect >> 24;
             uv[1].at.v = uv[2].at.v = (*rect >> 16) & 0xFF;

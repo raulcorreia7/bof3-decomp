@@ -28,5 +28,5 @@ MATCH void func_801F2DB0(void) {
         SELF(Actor)->param.unk_0B = 0;
     }
 
-    ((void (**)(void))(D_801F4C3C + 0x11C))[SELF(Actor)->header.mode]();
+    ((void (**)(void))(D_801F4C48 + 0x110))[SELF(Actor)->header.mode]();
 }

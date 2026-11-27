@@ -117,17 +117,17 @@ ASSERT_OFFSET(DragonFormStats, resistances, 0x05);
 ASSERT_SIZE(DragonFormStats, DRAGON_FORM_STATS_SIZE);
 
 /* 0x800B4C7C: per-gene AP cost, 8-bit entries. */
-extern const u8 D_800B4C7C[GENE_ID_COUNT];
+extern u8 D_800B4C7C[GENE_ID_COUNT];
 /* 0x800B4D4C / 0x800B4D58: 11 predetermined forms; 0xFF is a wildcard gene and
  * the dragon id is `row + 4`. D_800B4D58 is read as [selection id][slot]. */
-extern const u8 D_800B4D4C[11];
-extern const u8 D_800B4D58[11][3];
+extern u8 D_800B4D4C[11];
+extern u8 D_800B4D58[11][3];
 /* 0x800B4E8C: affinity-level bonus in ten-point steps, indexed by
  * `clamp(affinity_level + 2, 0, 4)`. */
-extern const s8 D_800B4E8C[5];
+extern s8 D_800B4E8C[5];
 /* 0x800B4EA4: base ability ids for the four non-predetermined forms. */
-extern const u8 D_800B4EA4[4][3];
+extern u8 D_800B4EA4[4][3];
 /* 0x800B4EB0: ability ids per affinity combination, 15 rows of three. */
-extern const u8 D_800B4EB0[15][3];
+extern u8 D_800B4EB0[15][3];
 
 #endif

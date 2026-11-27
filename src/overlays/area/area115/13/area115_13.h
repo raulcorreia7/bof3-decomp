@@ -9,7 +9,8 @@
 #include "overlays/area/worlds/world03.h"
 #include <rand.h>
 
-extern u8                 D_801F4D7C[]; /* key rows: u16 key + byte mode, stride 4 */
+/* The world-map entry keys WORLD_MAP_SELECT_KEY_SCRIPT scans. */
+extern WorldMapKey        D_801F4D7C[5];
 extern WorldMapPoint      D_801F4D90[];
 extern u16                D_801F4E90[5][16];
 extern FishingLocationRow D_801F4F30[2];

@@ -1,17 +1,15 @@
 #include "game_00.h"
 
 MATCH void func_8019C794(void) {
-    Actor*         work;
-    AreaMapBundle* map;
-    u8             code;
-    u8             index;
+    Actor* work;
+    u8     code;
+    u8     index;
 
     work = SELF(Actor);
     work->pos.x.fixed += work->vx;
     work->unk_0A -= 1;
     work->pos.y.fixed += work->vy;
-    if (SELF(Actor)->unk_0A == 0 ||
-        (map = (AreaMapBundle*)MAP_BUNDLE_BASE, *(u16*)(COORD_INT(SELF(Actor)->pos.x) * 2 + (COORD_INT(SELF(Actor)->pos.y) * map->width * 2 + map->grid_offset * 4) + (u32)map) == 0)) {
+    if (SELF(Actor)->unk_0A == 0 || AREA_MAP_GRID_ROW(COORD_INT(SELF(Actor)->pos.y))[COORD_INT(SELF(Actor)->pos.x)] == 0) {
         code = 0x4E;
         /* Both reports share one call block. */
         goto report;
