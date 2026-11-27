@@ -231,13 +231,11 @@ MATCH void func_801EFBE4(void) {
 /* Draws the Last Resort trail: every tick of the effect timer joins the rim point it turns to to the rim point the
  * previous tick left, four semi-transparent Gouraud quads around the join in two area cell packets. */
 /* func_801EFC44 */
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EFC44(void) {
+MATCH void func_801EFC44(void) {
     POLY_G4* poly;
     long     depth;
     long     flag;
     SVECTOR  rim;
-    s32      fade;
     s32      i;
     s32      join;
     s32      shade;
@@ -249,10 +247,11 @@ NON_MATCHING void func_801EFC44(void) {
     g_ScratchPad.cells.words[3] = (SELF(PartyMember)->param.unk_0B & 0x1F) << 7;
     g_ScratchPad.cells.words[0] = 0xC0 - SELF(PartyMember)->unk_09 * 2;
     g_ScratchPad.cells.words[2] = -(SELF(PartyMember)->unk_09 * 12);
-    join                        = SELF(PartyMember)->timer * 2;
+    span                        = SELF(PartyMember)->timer * 2;
     rim.vx                      = FIXED_MUL(rsin(g_ScratchPad.cells.words[3]), g_ScratchPad.cells.words[0]);
     rim.vy                      = FIXED_MUL(rcos(g_ScratchPad.cells.words[3]), g_ScratchPad.cells.words[0]);
     rim.vz                      = g_ScratchPad.cells.words[2];
+    join                        = span;
     for (i = 1; i < SELF(PartyMember)->timer; i++) {
         g_ScratchPad.cells.words[3] = ((SELF(PartyMember)->param.unk_0B - i) & 0x1F) << 7;
         g_ScratchPad.cells.words[0] = 0xC0 - (SELF(PartyMember)->unk_09 - i) * 2;
@@ -262,9 +261,9 @@ NON_MATCHING void func_801EFC44(void) {
         /* The join face: this tick's rim against the rim point the previous tick left. */
         g_ScratchPadVectors[1].vx = rim.vx;
         g_ScratchPadVectors[1].vy = rim.vy;
+        g_ScratchPadVectors[1].vz = rim.vz - join;
         g_ScratchPadVectors[3].vx = rim.vx;
         g_ScratchPadVectors[3].vy = rim.vy;
-        g_ScratchPadVectors[1].vz = rim.vz - join;
         g_ScratchPadVectors[3].vz = rim.vz - join / 2;
         g_ScratchPadVectors[0].vx = FIXED_MUL(rsin(g_ScratchPad.cells.words[3]), g_ScratchPad.cells.words[0]);
         g_ScratchPadVectors[0].vy = FIXED_MUL(rcos(g_ScratchPad.cells.words[3]), g_ScratchPad.cells.words[0]);
@@ -284,13 +283,13 @@ NON_MATCHING void func_801EFC44(void) {
                       &depth, &flag);
         if (SELF(PartyMember)->header.step == 2) {
             /* The last tick darkens the join with the depth it has covered. */
-            fade                        = SELF(PartyMember)->unk_09 + i - 24;
-            g_ScratchPad.cells.words[1] = fade;
-            if (fade >= 17) {
-                fade                        = 15;
-                g_ScratchPad.cells.words[1] = fade;
+            shade                       = i - (24 - SELF(PartyMember)->unk_09);
+            g_ScratchPad.cells.words[1] = shade;
+            if (shade >= 17) {
+                shade                       = 15;
+                g_ScratchPad.cells.words[1] = shade;
             }
-            shade                       = 0xC0 - fade * 12;
+            shade                       = 0xC0 - shade * 12;
             g_ScratchPad.cells.words[1] = 0x30 - g_ScratchPad.cells.words[1] * 3;
         } else {
             g_ScratchPad.cells.words[1] = 0x30 - i * 3;
@@ -309,9 +308,9 @@ NON_MATCHING void func_801EFC44(void) {
         /* The near side of the join. */
         g_ScratchPadVectors[1].vx = rim.vx;
         g_ScratchPadVectors[1].vy = rim.vy;
+        g_ScratchPadVectors[1].vz = rim.vz - join / 2;
         g_ScratchPadVectors[3].vx = rim.vx;
         g_ScratchPadVectors[3].vy = rim.vy;
-        g_ScratchPadVectors[1].vz = rim.vz - join / 2;
         g_ScratchPadVectors[3].vz = rim.vz;
         g_ScratchPadVectors[0].vx = FIXED_MUL(rsin(g_ScratchPad.cells.words[3]), g_ScratchPad.cells.words[0]);
         g_ScratchPadVectors[0].vy = FIXED_MUL(rcos(g_ScratchPad.cells.words[3]), g_ScratchPad.cells.words[0]);
@@ -333,9 +332,9 @@ NON_MATCHING void func_801EFC44(void) {
         /* The far side of the join. */
         g_ScratchPadVectors[1].vx = rim.vx;
         g_ScratchPadVectors[1].vy = rim.vy;
+        g_ScratchPadVectors[1].vz = rim.vz;
         g_ScratchPadVectors[3].vx = rim.vx;
         g_ScratchPadVectors[3].vy = rim.vy;
-        g_ScratchPadVectors[1].vz = rim.vz;
         g_ScratchPadVectors[3].vz = rim.vz + join / 2;
         g_ScratchPadVectors[0].vx = FIXED_MUL(rsin(g_ScratchPad.cells.words[3]), g_ScratchPad.cells.words[0]);
         g_ScratchPadVectors[0].vy = FIXED_MUL(rcos(g_ScratchPad.cells.words[3]), g_ScratchPad.cells.words[0]);
@@ -357,15 +356,16 @@ NON_MATCHING void func_801EFC44(void) {
         /* The outer face of the join, in a second packet, which leaves this tick's rim for the next tick. */
         g_ScratchPadVectors[1].vx = rim.vx;
         g_ScratchPadVectors[1].vy = rim.vy;
+        g_ScratchPadVectors[1].vz = rim.vz + join / 2;
         g_ScratchPadVectors[3].vx = rim.vx;
         g_ScratchPadVectors[3].vy = rim.vy;
-        g_ScratchPadVectors[1].vz = rim.vz + join / 2;
         g_ScratchPadVectors[3].vz = rim.vz + join;
         g_ScratchPadVectors[0].vx = FIXED_MUL(rsin(g_ScratchPad.cells.words[3]), g_ScratchPad.cells.words[0]);
         g_ScratchPadVectors[0].vy = FIXED_MUL(rcos(g_ScratchPad.cells.words[3]), g_ScratchPad.cells.words[0]);
         g_ScratchPadVectors[0].vz = g_ScratchPad.cells.words[2] + span / 2;
         g_ScratchPadVectors[2].vx = g_ScratchPadVectors[0].vx;
         g_ScratchPadVectors[2].vy = g_ScratchPadVectors[0].vy;
+        join                      = span;
         g_ScratchPadVectors[2].vz = g_ScratchPad.cells.words[2] + span;
         rim.vx                    = g_ScratchPadVectors[0].vx;
         rim.vy                    = g_ScratchPadVectors[0].vy;
@@ -378,21 +378,17 @@ NON_MATCHING void func_801EFC44(void) {
         SetSemiTrans(poly, 1);
         RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&poly->x0, (long*)&poly->x1, (long*)&poly->x2, (long*)&poly->x3,
                       &depth, &flag);
-        setRGB0(poly, shade, g_ScratchPad.cells.words[1], g_ScratchPad.cells.words[1]);
         if (i == 1) {
             setRGB1(poly, i, i, i);
         } else {
             setRGB1(poly, shade, g_ScratchPad.cells.words[1], g_ScratchPad.cells.words[1]);
         }
+        setRGB0(poly, shade, g_ScratchPad.cells.words[1], g_ScratchPad.cells.words[1]);
         setRGB2(poly, 1, 1, 1);
         setRGB3(poly, 1, 1, 1);
         Area_CellAddPrim(x, y, 0, sizeof(POLY_G4));
-        join = span;
     }
 }
-#else
-INCLUDE_ASM(func_801EFC44);
-#endif
 
 MATCH void func_801F05C8(s32 step) {
     TILE_1*      primitive;
