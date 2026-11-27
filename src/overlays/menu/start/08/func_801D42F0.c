@@ -16,11 +16,21 @@ MATCH void func_801D42F0(void) {
     items  = &g_ItemCategoryIds[g_UIPanelTasks[13].unk_0A][g_UIPanelTasks[13].unk_0C];
     counts = &g_ItemCategoryCounts[g_UIPanelTasks[13].unk_0A][g_UIPanelTasks[13].unk_0C];
     UI_MessageSetVariable(0, 0xC, (const u8*)&g_Items[*items]);
+<<<<<<< HEAD
     g_UIPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0x19;
     D_801485DC                                                = 1;
     D_801485E0                                                = 0xB6;
+||||||| 072714357
+    g_UIPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0x19;
+    D_801485DC                                                = 1;
+    D_801485E0                                                = 0xB6;
+=======
+    g_UIPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0x19;
+    g_UIPanelTasks[19].active                                 = 1;
+    g_UIPanelTasks[19].pos.vx                                 = 0xB6;
+>>>>>>> public/main
     sel                                                       = &D_80148656;
-    D_801485E2                                                = *sel * 0x36 + 0x3E;
+    g_UIPanelTasks[19].pos.vy                                 = *sel * 0x36 + 0x3E;
     count                                                     = Party_CountOrder(PARTY_ORDER_FIELD);
     input                                                     = INPUT_REPEATED(g_PadStates[0].pressed, (PADLup | PADLdown));
     old                                                       = *sel;
@@ -58,7 +68,7 @@ MATCH void func_801D42F0(void) {
     } else {
         return;
     }
-    D_801485DC        = 0;
-    *(u8*)&D_80148511 = 0xFF;
+    g_UIPanelTasks[19].active = 0;
+    *(u8*)&D_80148511         = 0xFF;
     D_80148651 -= 4;
 }

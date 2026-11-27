@@ -15,10 +15,10 @@ MATCH void func_801D78FC(void) {
     Menu_DrawClutStrip(g_WindowClut);
     panel = &g_UIPanelTasks[MENU_START_PANEL_CURSOR_FRAME];
     if (g_BattleMessageState == 0) {
-        panel->active = 1;
-        D_801485E7    = 0;
-        D_801485E0    = D_801483C4;
-        D_801485E2    = D_801483C6 + D_8014857A * 54;
+        panel->active             = 1;
+        D_801485E7                = 0;
+        g_UIPanelTasks[19].pos.vx = D_801483C4;
+        g_UIPanelTasks[19].pos.vy = D_801483C6 + D_8014857A * 54;
     } else {
         panel->active = 0;
     }
@@ -98,11 +98,11 @@ MATCH void func_801D78FC(void) {
                 panel->pos.vy               = i * 54 + 62;
                 g_UIPanelTasks[i + 4].state = 7;
             }
-            g_BattleChoicePhase = 4;
-            D_80148624          = 1;
-            D_801485DC          = 0;
-            D_80148658[0]       = 0;
-            D_8014857D          = D_8014857C;
+            g_BattleChoicePhase       = 4;
+            D_80148624                = 1;
+            g_UIPanelTasks[19].active = 0;
+            D_80148658[0]             = 0;
+            D_8014857D                = D_8014857C;
             D_80148651++;
         } else if (func_801AF5B0(panel->unk_08, panel->unk_0A, ability_id) != 0) {
             D_8014865B = 0;

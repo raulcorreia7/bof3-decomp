@@ -6,13 +6,13 @@ MATCH void func_800A602C(void) {
 
     g_BattlePanelMode = 3;
     UI_PanelOpenTask(0x13, 5);
-    D_801485DE = 4;
-    D_801485DF = 0;
-    D_801485E0 = 0x15B;
-    counter    = (u8*)&g_Battle.ui_mode;
-    count      = *counter;
-    D_801485E2 = 0x3F;
-    D_801485EC = 0;
-    D_801485EE = 0;
-    *counter   = (count + 1);
+    g_UiPanelTasks[19].mode              = 4;
+    g_UiPanelTasks[19].state             = 0;
+    g_UiPanelTasks[19].pos.vx            = 0x15B;
+    counter                              = (u8*)&g_Battle.ui_mode;
+    count                                = *counter;
+    g_UiPanelTasks[19].pos.vy            = 0x3F;
+    g_UiPanelTasks[19].u.battle.cursor   = 0;
+    g_UiPanelTasks[19].u.battle.row_base = 0;
+    *counter                             = (count + 1);
 }

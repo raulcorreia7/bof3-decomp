@@ -1,25 +1,5 @@
 #include "battle_15.h"
 
-/* Semantic view of the shared battle-selection scratch band
- * (g_BattleChoicePanel, 0x80148570): word-sized cursor coordinates and
- * ring state sit beside byte-sized panel fields. */
-typedef struct BattleSelectionInit {
-    volatile u8  selection_type;  /* +0x00 */
-    volatile u8  panel_rows;      /* +0x01 */
-    volatile u8  primary_type;    /* +0x02 */
-    volatile u8  primary_state;   /* +0x03 */
-    volatile u16 scroll_base_x;   /* +0x04 */
-    volatile u16 scroll_base_y;   /* +0x06 */
-    volatile u8  panel_type;      /* +0x08 */
-    volatile u8  panel_row_count; /* +0x09 */
-    volatile u8  group_index;     /* +0x0A */
-    volatile u8  page_base;       /* +0x0B */
-    volatile u8  cursor_index;    /* +0x0C */
-    volatile u8  cursor_limit;    /* +0x0D */
-    volatile u16 ring_cursor;     /* +0x0E */
-    volatile u16 ring_handle;     /* +0x10 */
-} BattleSelectionInit;
-
 /* func_80097EC0 */
 MATCH void Battle_InitAbilityPanel(void) {
     BattleAbilityPanel* panel;
