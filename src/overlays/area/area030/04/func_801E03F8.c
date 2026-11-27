@@ -34,7 +34,7 @@ NON_MATCHING void func_801E03F8(void) {
     face_offset = D_801E2AD3[SELF(FishingState)->cue_index * sizeof(FishingSceneCue)] * TO_COORD(15);
     upper_limit = TO_COORD(62) - row_offset;
     upper_limit += face_offset;
-    lower_limit = TO_COORD(50) - row_offset - face_offset;
+    lower_limit = TO_COORD(50) - face_offset - row_offset;
     upper_limit = upper_limit >= TO_COORD(26) ? (upper_limit > TO_COORD(62) ? TO_COORD(62) : upper_limit) : TO_COORD(26);
     lower_limit = lower_limit >= TO_COORD(17) ? (lower_limit > TO_COORD(50) ? TO_COORD(50) : lower_limit) : TO_COORD(17);
     pos_y       = SELF(FishingState)->y_38.pos_y;

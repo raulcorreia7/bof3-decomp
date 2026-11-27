@@ -2,7 +2,6 @@
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F656C(void) {
-    RECT rect;
     u8*  base;
     s32  col;
     s32  row;
@@ -31,7 +30,7 @@ NON_MATCHING void func_801F656C(void) {
     next                 = index + 1;
     pending              = g_GfxPalettePending + 1;
     D_80145A54[index]    = 0x380;
-    (&D_80145A7C)[index] = 0x100;
+    D_80145A54[index + 20] = 0x100;
     (&D_80145A04)[index] = AREA_CODE_BASE;
     D_800396C0[0]        = 0xFE10;
     D_800396C0[1]        = 0xDC00;
