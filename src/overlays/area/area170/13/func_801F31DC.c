@@ -26,8 +26,10 @@ MATCH void func_801F31DC(s32 x, s32 y) {
     top    = (s16)(y + 0x29);
     middle = (s16)(y + 0x2D);
     bottom = (s16)(y + 0x31);
-    func_801F3698((s16)(panel_x + SELF(Actor)->unk_06 * 100 + 7), top, (s16)(panel_x + SELF(Actor)->unk_06 * 100 + 3), middle, (s16)(panel_x + SELF(Actor)->unk_06 * 100 + 7), bottom, 0xC8, 0xC8, 0xC8, 0);
-    func_801F3698((s16)(panel_x + (s16)(SELF(Actor)->unk_06 * 100 + 100) + 4), top, (s16)(panel_x + (s16)(SELF(Actor)->unk_06 * 100 + 100) + 8), middle, (s16)(panel_x + (s16)(SELF(Actor)->unk_06 * 100 + 100) + 4), bottom, 0xC8, 0xC8, 0xC8, 0);
+    func_801F3698((s16)(panel_x + SELF(Actor)->unk_06 * 100 + 7), top, (s16)(panel_x + SELF(Actor)->unk_06 * 100 + 3), middle, (s16)(panel_x + SELF(Actor)->unk_06 * 100 + 7), bottom, 0xC8, 0xC8, 0xC8,
+                  0);
+    func_801F3698((s16)(panel_x + (s16)(SELF(Actor)->unk_06 * 100 + 100) + 4), top, (s16)(panel_x + (s16)(SELF(Actor)->unk_06 * 100 + 100) + 8), middle,
+                  (s16)(panel_x + (s16)(SELF(Actor)->unk_06 * 100 + 100) + 4), bottom, 0xC8, 0xC8, 0xC8, 0);
     offset = SELF(Actor)->unk_06 * 100 + 0xA;
     left   = (s16)(panel_x + offset);
     right  = (s16)(panel_x + offset + 0x5A);
