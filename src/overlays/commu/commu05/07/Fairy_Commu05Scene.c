@@ -156,13 +156,7 @@ MATCH void func_801D129C(s16 x, s16 y, u8 group) {
     }
 }
 
-// clang-format off
-MATCH void func_801D14C8(x, y, group)
-s16 x;
-s16 y;
-u8 group;
-// clang-format on
-{
+MATCH void func_801D14C8(s16 x, s16 y, u8 group) {
     s32 i;
     s32 j;
     s32 k;
