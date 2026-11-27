@@ -2,6 +2,6 @@
 
 /* func_801E9224 */
 MATCH void Menu_PlayTimePanel(void) {
-    g_MenuStartPlayTimeSteps[g_UiPanelCurrent->state]();
-    Menu_DrawPlayTimeWindow(g_UiPanelCurrent->pos.vx, g_UiPanelCurrent->pos.vy);
+    g_MenuStartPlayTimeSteps[g_UIPanelCurrent->state]();
+    Menu_DrawPlayTimeWindow(g_UIPanelCurrent->pos.vx, g_UIPanelCurrent->pos.vy);
 }

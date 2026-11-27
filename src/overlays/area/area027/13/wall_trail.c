@@ -412,16 +412,16 @@ MATCH POLY_FT4* func_801F3480(const Pos3s* point, s32 angle, u32 texture) {
 }
 
 MATCH void func_801F35E0(void) {
-    g_UiMessageRequest = RESET_SENTINEL;
-    if ((g_UiMessageChoice & 0x1) == 0) {
+    g_UIMessageRequest = RESET_SENTINEL;
+    if ((g_UIMessageChoice & 0x1) == 0) {
         g_SceneEventState.mode = 1;
         g_SceneEventState.step = 0;
     }
 }
 
 MATCH void func_801F3618(void) {
-    g_UiMessageRequest = RESET_SENTINEL;
-    if ((g_UiMessageChoice & 0x1) == 0) {
+    g_UIMessageRequest = RESET_SENTINEL;
+    if ((g_UIMessageChoice & 0x1) == 0) {
         g_SceneEventState.mode = 2;
         g_SceneEventState.step = 0;
     }
@@ -430,8 +430,8 @@ MATCH void func_801F3618(void) {
 MATCH void func_801F3650(void) {
     u8 value;
 
-    g_UiMessageRequest = RESET_SENTINEL;
-    switch (g_UiMessageChoice) {
+    g_UIMessageRequest = RESET_SENTINEL;
+    switch (g_UIMessageChoice) {
         case 0:
             value = 5;
             break;
@@ -447,8 +447,8 @@ MATCH void func_801F3650(void) {
 MATCH void func_801F3690(void) {
     u8 value;
 
-    g_UiMessageRequest = RESET_SENTINEL;
-    switch (g_UiMessageChoice) {
+    g_UIMessageRequest = RESET_SENTINEL;
+    switch (g_UIMessageChoice) {
         case 0:
             value = 0x5B;
             break;
@@ -464,8 +464,8 @@ MATCH void func_801F3690(void) {
 MATCH void func_801F36D0(void) {
     u8 value;
 
-    g_UiMessageRequest = RESET_SENTINEL;
-    switch (g_UiMessageChoice) {
+    g_UIMessageRequest = RESET_SENTINEL;
+    switch (g_UIMessageChoice) {
         case 0:
             value = 92;
             break;

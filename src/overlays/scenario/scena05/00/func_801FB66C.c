@@ -12,7 +12,7 @@ MATCH void func_801FB66C(void) {
 
     switch (g_ScenarioState.step) {
         case 0:
-            if ((g_UiWindowChannel & 2) == 0) {
+            if ((g_UIWindowChannel & 2) == 0) {
                 break;
             }
             if (g_ScriptVars[0] == 1) {

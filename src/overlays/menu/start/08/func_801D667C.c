@@ -3,15 +3,15 @@
 MATCH void func_801D667C(void) {
     MenuPanelTask* panel;
 
-    panel         = &g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION];
+    panel         = &g_UIPanelTasks[MENU_START_PANEL_DESCRIPTION];
     panel->panel  = 6;
     panel->mode   = MENU_START_MODE_MESSAGE;
     panel->state  = 2;
     panel->active = 1;
     panel++;
-    g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.vx       = 20;
+    g_UIPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.vx       = 20;
     D_801484C2                                                = -0x14;
-    g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0;
+    g_UIPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0;
     panel->panel                                              = 6;
     panel->mode                                               = MENU_START_MODE_COMMANDS;
     panel->state                                              = 2;

@@ -2,7 +2,7 @@
 
 MATCH void func_801F4790(void) {
     MESSAGE_REQUEST_CLEAR();
-    if (!(g_UiMessageChoice & 0x1)) {
+    if (!(g_UIMessageChoice & 0x1)) {
         g_ScriptVars[0] = 0xB;
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0x05));
     } else {

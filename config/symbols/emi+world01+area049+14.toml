@@ -1,6 +1,6 @@
 ["emi/world01/area049/14"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
-UI_MessageAnswerSet = { addr = 0x801F2C54, type = "func", source = "Stores the message id D_801F5CD8 holds for the menu choice g_UiMessageChoice in g_UiMessageRequest." }
+UI_MessageAnswerSet = { addr = 0x801F2C54, type = "func", source = "Stores the message id D_801F5CD8 holds for the menu choice g_UIMessageChoice in g_UIMessageRequest." }
 Area_AddCameraOffsetY20 = { addr = 0x801F33E8, type = "func", source = "Adds 0x14 to g_AreaCameraOffsetY, the Y shift Camera_SetMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
 Area_SubCameraOffsetY20 = { addr = 0x801F3410, type = "func", source = "Subtracts 0x14 from g_AreaCameraOffsetY, the Y shift Camera_SetMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
 Area_ResetCameraOffsetY = { addr = 0x801F3438, type = "func", source = "Zeroes g_AreaCameraOffsetY, the Y shift of the camera, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }

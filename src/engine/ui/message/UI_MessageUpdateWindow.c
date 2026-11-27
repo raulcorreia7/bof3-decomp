@@ -7,6 +7,6 @@
 MATCH void UI_MessageUpdateWindow(void) {
     struct MenuPanelSteps table;
 
-    table = g_UiMessageWindowSteps;
-    table.steps[g_UiPanelCurrent->state]();
+    table = g_UIMessageWindowSteps;
+    table.steps[g_UIPanelCurrent->state]();
 }

@@ -19,9 +19,9 @@ MATCH void func_801F4874(void) {
         tens = D_801F58CA / 100;
         ones = D_801F58CA % 100;
         UI_WindowDrawPanel(0x18, 0x20, 0x54, 0x11, 0);
-        buffer = g_UiTextFormatBuffer;
+        buffer = g_UITextFormatBuffer;
         sprintf((char*)buffer, (char*)D_801F2C94, (u8)tens, (u8)ones);
-        separator  = &g_UiTextFormatBuffer[2];
+        separator  = &g_UITextFormatBuffer[2];
         *separator = 0x3E;
         if (shown) {
             UI_TextDraw(0x2A, 0x22, blink, 6, buffer);
@@ -30,7 +30,7 @@ MATCH void func_801F4874(void) {
         ones = D_801F58CC % 100;
         UI_WindowDrawPanel(0x90, 0x20, 0x54, 0x11, 0);
         sprintf((char*)buffer, (char*)D_801F2C94, (u8)tens, (u8)ones);
-        separator  = &g_UiTextFormatBuffer[2];
+        separator  = &g_UITextFormatBuffer[2];
         *separator = 0x3E;
         if (shown) {
             UI_TextDraw(0xA2, 0x22, blink, 6, buffer);

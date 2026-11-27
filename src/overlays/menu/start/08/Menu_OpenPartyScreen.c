@@ -7,8 +7,8 @@ NON_MATCHING void Menu_OpenPartyScreen(void) {
     MenuPanelTask* panels;
     u8             i;
 
-    record               = &g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION];
-    panels               = &g_UiPanelTasks[19];
+    record               = &g_UIPanelTasks[MENU_START_PANEL_DESCRIPTION];
+    panels               = &g_UIPanelTasks[19];
     record->panel        = 6;
     record->mode         = MENU_START_MODE_MESSAGE;
     record->state        = 2;
@@ -22,17 +22,17 @@ NON_MATCHING void Menu_OpenPartyScreen(void) {
         panels[i].active = 0;
         panels[i].unk_0A = 0;
     }
-    g_UiPanelTasks[18].panel                       = 6;
-    g_UiPanelTasks[18].mode                        = MENU_START_MODE_COMMANDS;
+    g_UIPanelTasks[18].panel                       = 6;
+    g_UIPanelTasks[18].mode                        = MENU_START_MODE_COMMANDS;
     g_BattlePanelMode                              = 2;
     D_801485B8                                     = 1;
     g_BattleEquipSlot                              = 7;
-    g_UiPanelTasks[18].unk_0B                      = 0xFF;
-    g_UiPanelTasks[18].pos.vx                      = 0x70;
-    g_UiPanelTasks[18].pos.vy                      = -0x14;
-    g_UiPanelTasks[MENU_START_PANEL_CURSOR].panel  = 6;
-    g_UiPanelTasks[MENU_START_PANEL_CURSOR].mode   = MENU_START_MODE_CURSOR;
-    g_UiPanelTasks[MENU_START_PANEL_CURSOR].active = 0;
+    g_UIPanelTasks[18].unk_0B                      = 0xFF;
+    g_UIPanelTasks[18].pos.vx                      = 0x70;
+    g_UIPanelTasks[18].pos.vy                      = -0x14;
+    g_UIPanelTasks[MENU_START_PANEL_CURSOR].panel  = 6;
+    g_UIPanelTasks[MENU_START_PANEL_CURSOR].mode   = MENU_START_MODE_CURSOR;
+    g_UIPanelTasks[MENU_START_PANEL_CURSOR].active = 0;
     Menu_DrawClutStrip(g_WindowClut);
     g_MenuPartyCommand = 0;
     SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));

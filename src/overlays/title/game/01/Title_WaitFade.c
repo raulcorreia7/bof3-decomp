@@ -4,15 +4,15 @@
  * frontend state.
  */
 MATCH void Title_WaitFade(void) {
-    if (LOBU(g_UiTitleFadePhase) == 2u) {
+    if (LOBU(g_UITitleFadePhase) == 2u) {
         u16 state;
         u16 timer;
         timer = 360u;
         /* FAKE: block boundary keeps the 360 load ahead of the state read for the delay slot. */
         do {
-            state = g_UiTitleState;
+            state = g_UITitleState;
         } while (0);
-        g_UiTitleTimer = timer;
-        g_UiTitleState = state + 1u;
+        g_UITitleTimer = timer;
+        g_UITitleState = state + 1u;
     }
 }

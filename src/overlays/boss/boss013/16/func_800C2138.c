@@ -12,7 +12,7 @@ MATCH u8 func_800C2138(u32 mode) {
         case BOSS_EVENT_ACTION_START:
             if ((g_Battle.active_battler == 0) && (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) && !(g_Battle.boss_flags & 0x1)) {
                 g_Battle.action_type = BATTLE_ACTION_NONE;
-                g_UiPanelMode        = 2;
+                g_UIPanelMode        = 2;
                 UI_MessageStartArea(MSG_BOSS013_039);
             }
             break;

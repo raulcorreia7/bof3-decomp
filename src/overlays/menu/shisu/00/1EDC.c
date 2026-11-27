@@ -144,24 +144,24 @@ MATCH void func_801D2F68(void) {
 }
 
 MATCH void func_801D2F9C(void) {
-    SYS_DISPATCH_TASK(g_ShisuTaskSteps, 2, g_UiPanelCurrent);
+    SYS_DISPATCH_TASK(g_ShisuTaskSteps, 2, g_UIPanelCurrent);
 }
 
 MATCH void func_801D2FE0(void) {
 }
 
 MATCH void UI_CursorDrawPanel(void) {
-    UI_CursorDraw(g_UiPanelCurrent->pos.vx, g_UiPanelCurrent->pos.vy, 0);
+    UI_CursorDraw(g_UIPanelCurrent->pos.vx, g_UIPanelCurrent->pos.vy, 0);
 }
 
 MATCH void func_801D3018(void) {
     s16 id;
 
-    g_ShisuTask1Steps[g_UiPanelCurrent->state]();
-    Menu_DrawHeaderBar((u16)g_UiPanelCurrent->pos.vx, (u16)g_UiPanelCurrent->pos.vy, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
-    id = (s16)g_UiPanelCurrent->u.message.id;
+    g_ShisuTask1Steps[g_UIPanelCurrent->state]();
+    Menu_DrawHeaderBar((u16)g_UIPanelCurrent->pos.vx, (u16)g_UIPanelCurrent->pos.vy, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
+    id = (s16)g_UIPanelCurrent->u.message.id;
     if (id != 0) {
-        UI_TextDraw((s16)(g_UiPanelCurrent->pos.vx + 7), (s16)(g_UiPanelCurrent->pos.vy + 3), 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, id));
+        UI_TextDraw((s16)(g_UIPanelCurrent->pos.vx + 7), (s16)(g_UIPanelCurrent->pos.vy + 3), 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, id));
     }
 }
 
@@ -174,18 +174,18 @@ MATCH void UI_PanelSlideOutTask_801D30E4(void) {
 MATCH void UI_PanelSlideInTaskTop_801D3124(void) {
     u16 next_pos;
 
-    next_pos                 = g_UiPanelCurrent->pos.vy + 0x10;
-    g_UiPanelCurrent->pos.vy = next_pos;
+    next_pos                 = g_UIPanelCurrent->pos.vy + 0x10;
+    g_UIPanelCurrent->pos.vy = next_pos;
     if ((s16)next_pos >= 0x11) {
-        g_UiPanelCurrent->pos.vy = 16U;
-        g_UiPanelCurrent->state  = 0;
+        g_UIPanelCurrent->pos.vy = 16U;
+        g_UIPanelCurrent->state  = 0;
     }
 }
 
 /* func_801D3164 */
 MATCH void Shisu_UpdateCommandPanel(void) {
-    g_ShisuTask2Steps[g_UiPanelCurrent->state]();
-    Menu_DrawCommandRow(g_UiPanelCurrent->pos.vx, g_UiPanelCurrent->pos.vy, g_UiPanelCurrent->unk_0A, g_UiPanelCurrent->unk_0B, 0);
+    g_ShisuTask2Steps[g_UIPanelCurrent->state]();
+    Menu_DrawCommandRow(g_UIPanelCurrent->pos.vx, g_UIPanelCurrent->pos.vy, g_UIPanelCurrent->unk_0A, g_UIPanelCurrent->unk_0B, 0);
 }
 
 /* func_801D31CC */
@@ -197,27 +197,27 @@ MATCH void UI_PanelSlideOutTask_801D31CC(void) {
 MATCH void Menu_AdvancePanelY(void) {
     u16 next_pos;
 
-    next_pos                 = g_UiPanelCurrent->pos.vy + 0x10;
-    g_UiPanelCurrent->pos.vy = next_pos;
+    next_pos                 = g_UIPanelCurrent->pos.vy + 0x10;
+    g_UIPanelCurrent->pos.vy = next_pos;
     if ((s16)next_pos >= 0x27) {
-        g_UiPanelCurrent->pos.vy = 38U;
-        g_UiPanelCurrent->state  = 0;
+        g_UIPanelCurrent->pos.vy = 38U;
+        g_UIPanelCurrent->state  = 0;
     }
 }
 
 MATCH void func_801D324C(void) {
-    g_ShisuTask3Steps[g_UiPanelCurrent->state]();
-    func_801D3320(g_UiPanelCurrent);
+    g_ShisuTask3Steps[g_UIPanelCurrent->state]();
+    func_801D3320(g_UIPanelCurrent);
 }
 
 MATCH void func_801D32A0(void) {
     u16 x;
 
-    x                        = g_UiPanelCurrent->pos.vx - 0x20;
-    g_UiPanelCurrent->pos.vx = x;
+    x                        = g_UIPanelCurrent->pos.vx - 0x20;
+    g_UIPanelCurrent->pos.vx = x;
     if ((s16)x < -200) {
-        g_UiPanelCurrent->pos.vx = -0xC8;
-        g_UiPanelCurrent->state  = 0;
+        g_UIPanelCurrent->pos.vx = -0xC8;
+        g_UIPanelCurrent->state  = 0;
     }
 }
 
@@ -225,11 +225,11 @@ MATCH void func_801D32A0(void) {
 MATCH void UI_PanelSetPosX_801D32E0(void) {
     u16 next_pos;
 
-    next_pos                 = g_UiPanelCurrent->pos.vx + 0x20;
-    g_UiPanelCurrent->pos.vx = next_pos;
+    next_pos                 = g_UIPanelCurrent->pos.vx + 0x20;
+    g_UIPanelCurrent->pos.vx = next_pos;
     if ((s16)next_pos >= 0x12) {
-        g_UiPanelCurrent->pos.vx = 17U;
-        g_UiPanelCurrent->state  = 0;
+        g_UIPanelCurrent->pos.vx = 17U;
+        g_UIPanelCurrent->state  = 0;
     }
 }
 
@@ -312,9 +312,9 @@ MATCH void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_index, s32 shad
         text_clut = clut & BYTE_MASK;
         UI_TextDraw(x + 20, y + 3, text_clut, CHARACTER_NAME_LENGTH, stats);
     } while (0);
-    TEXT_Format(g_UiTextFormatBuffer, g_MenuStatFormat, stats->level);
+    TEXT_Format(g_UITextFormatBuffer, g_MenuStatFormat, stats->level);
     text_y = (s16)(y + 0x17);
-    UI_TextDrawGlyphString(x + 22, text_y, text_clut, g_UiTextFormatBuffer);
+    UI_TextDrawGlyphString(x + 22, text_y, text_clut, g_UITextFormatBuffer);
     if ((LOWU(stats->status) & (STATUS_CONFUSED | STATUS_POISONED)) == (STATUS_CONFUSED | STATUS_POISONED)) {
         if (g_FrameCount & 0x20) {
             UI_TextDrawString(x + 46, text_y, text_clut != 0 ? text_clut : 1, MENU_LABEL_LENGTH, D_801D9B3C);
@@ -341,15 +341,15 @@ MATCH void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_index, s32 shad
     } else {
         clut = 7;
     }
-    TEXT_Format(g_UiTextFormatBuffer, g_MenuCurrentValueFormat, stats->hp);
-    UI_TextDrawGlyphString(x + 22, y + 31, clut, g_UiTextFormatBuffer);
+    TEXT_Format(g_UITextFormatBuffer, g_MenuCurrentValueFormat, stats->hp);
+    UI_TextDrawGlyphString(x + 22, y + 31, clut, g_UITextFormatBuffer);
     if ((u8)shaded == 0) {
         clut = (stats->fatigue != 0) * 4;
     } else {
         clut = 7;
     }
-    TEXT_Format(g_UiTextFormatBuffer, g_MenuMaxValueFormat, stats->stats.max_hp);
-    UI_TextDrawGlyphString(x + 22, y + 31, clut, g_UiTextFormatBuffer);
+    TEXT_Format(g_UITextFormatBuffer, g_MenuMaxValueFormat, stats->stats.max_hp);
+    UI_TextDrawGlyphString(x + 22, y + 31, clut, g_UITextFormatBuffer);
     clut = (u8)shaded ? 7 : 0;
     if ((u8)shaded == 0) {
         if (stats->ap < (u32)(stats->stats.max_ap >> 2)) {
@@ -361,11 +361,11 @@ MATCH void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_index, s32 shad
     } else {
         clut = 7;
     }
-    TEXT_Format(g_UiTextFormatBuffer, g_MenuCurrentValueFormat, stats->ap);
-    UI_TextDrawGlyphString(x + 22, y + 39, clut, g_UiTextFormatBuffer);
+    TEXT_Format(g_UITextFormatBuffer, g_MenuCurrentValueFormat, stats->ap);
+    UI_TextDrawGlyphString(x + 22, y + 39, clut, g_UITextFormatBuffer);
     clut = (u8)shaded ? 7 : 0;
-    TEXT_Format(g_UiTextFormatBuffer, g_MenuMaxValueFormat, stats->stats.max_ap);
-    UI_TextDrawGlyphString(x + 22, y + 39, clut, g_UiTextFormatBuffer);
+    TEXT_Format(g_UITextFormatBuffer, g_MenuMaxValueFormat, stats->stats.max_ap);
+    UI_TextDrawGlyphString(x + 22, y + 39, clut, g_UITextFormatBuffer);
     UI_SpriteDrawRun(x, y, D_801D97A4, 0);
     Menu_DrawExperienceLine(x + 0x14, y + 0x12, character_index, stats->level, stats->exp);
     /* FAKE: dead stores keep px and py the CSE heads of their x and y copies. */
@@ -397,11 +397,11 @@ MATCH void func_801D4158(s16 x, s16 y, u8 index, u8 flag) {
         exp_value = Char_GetExpForLevel(index, (character->level + 1) & 0xFF);
     }
     if (exp_value != -1) {
-        sprintf(g_UiTextFormatBuffer, &g_MenuStatFormat[0x14], exp_value);
+        sprintf(g_UITextFormatBuffer, &g_MenuStatFormat[0x14], exp_value);
     } else {
-        sprintf(g_UiTextFormatBuffer, &g_MenuStatFormat[0x18]);
+        sprintf(g_UITextFormatBuffer, &g_MenuStatFormat[0x18]);
     }
-    UI_TextDrawAscii((s16)(x + 0x15), (s16)(y + 0x1A), 0, g_UiTextFormatBuffer);
+    UI_TextDrawAscii((s16)(x + 0x15), (s16)(y + 0x1A), 0, g_UITextFormatBuffer);
     UI_SpriteDrawRun(x, y, &g_MenuInventoryTab1OnSprites[0x24], UI_SPRITE_ALT_PAGE);
 }
 

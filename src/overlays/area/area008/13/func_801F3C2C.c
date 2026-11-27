@@ -7,7 +7,7 @@ MATCH void func_801F3C2C(void) {
     Menu_DrawHeaderBar(120, 56, 70, 20, 1u);
 
     scratch = (Actor*)WORLD00_AREA008_SCRATCH_PTR;
-    buf     = (char*)g_UiTextFormatBuffer;
+    buf     = (char*)g_UITextFormatBuffer;
     TEXT_Format(buf, WORLD00_AREA008_D_801F2C04, scratch->tint.steps.delta.g, (scratch->tint.steps.delta.r * 100) / 30);
 
     UI_TextDrawAscii(0x86, 0x3B, 0, buf);

@@ -53,8 +53,8 @@ MATCH void Battle_InitAbilityPanel(void) {
     panel->pos.vx             = 0x140;
     panel->pos.vy             = 0x3F;
     tail                      = g_BattleMessageSlot[5];
-    g_UiPanelTasks[19].active = 0;
-    g_UiPanelTasks[19].panel  = 8;
-    g_UiPanelTasks[19].mode   = 0;
+    g_UIPanelTasks[19].active = 0;
+    g_UIPanelTasks[19].panel  = 8;
+    g_UIPanelTasks[19].mode   = 0;
     D_80148656                = tail;
 }

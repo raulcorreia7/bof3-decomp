@@ -210,8 +210,8 @@ MATCH void Title_UpdateBannerFade(void) { /* func_801D18F8 */
     u8*                         primitive;
 
     /* Anchor the banner state on the fade-phase byte: the original derives the
-     * scroll base (-15) and alpha cell (-13) from &g_UiTitleFadePhase. */
-    phase_addr = &g_UiTitleFadePhase;
+     * scroll base (-15) and alpha cell (-13) from &g_UITitleFadePhase. */
+    phase_addr = &g_UITitleFadePhase;
     if (*phase_addr == 0) {
         return;
     }
@@ -234,9 +234,9 @@ MATCH void Title_UpdateBannerFade(void) { /* func_801D18F8 */
      * register across the loop's calls. */
     one                   = 1;
     alpha                 = &state->alpha;
-    sc                    = g_UiTitleBannerScroll + 2;
+    sc                    = g_UITitleBannerScroll + 2;
     x                     = 320 - sc;
-    g_UiTitleBannerScroll = sc;
+    g_UITitleBannerScroll = sc;
     marker                = 320;
 
     for (; i < 4; x += 255, i++, marker += 128) {

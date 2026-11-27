@@ -22,12 +22,12 @@ MATCH void func_801D2564(void) {
     do {
         D_801485DC = 1;
     } while (0);
-    D_801485E0 = g_UiPanelTasks[selection_index + 4].pos.vx;
+    D_801485E0 = g_UIPanelTasks[selection_index + 4].pos.vx;
     /* FAKE: preserve first table store order. */
     FAKE_BARRIER();
-    D_801485E2 = g_UiPanelTasks[selection_index + 4].pos.vy;
+    D_801485E2 = g_UIPanelTasks[selection_index + 4].pos.vy;
     UI_MessageSetVariable(0U, 5U, g_CharSlot[g_PartyFieldOrder[selection_index]] * 0xA4 + panel_data);
-    g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0x12;
+    g_UIPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0x12;
     input                                                     = INPUT_REPEATED(g_PadStates[0].pressed, (PADLup | PADLdown));
     count                                                     = Party_CountOrder(PARTY_ORDER_FIELD);
     old_selection                                             = *selection;
@@ -67,10 +67,10 @@ MATCH void func_801D2564(void) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
         i = 0;
         while (i < Party_CountOrder(PARTY_ORDER_FIELD)) {
-            g_UiPanelTasks[i + 12].state = 1;
+            g_UIPanelTasks[i + 12].state = 1;
             i++;
         }
-        g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].state = 1;
+        g_UIPanelTasks[MENU_START_PANEL_DESCRIPTION].state = 1;
         D_801485DC                                         = 0;
         D_80148654                                         = 8;
         D_80148651 += 2;

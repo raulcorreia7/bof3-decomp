@@ -4,7 +4,7 @@ MATCH s32 func_801F2C04(void) {
     s32  message;
     u32* zenny;
 
-    if (g_UiMessageChoice != 0) {
+    if (g_UIMessageChoice != 0) {
         message = 4;
     } else {
         zenny = &g_Zenny;
@@ -12,10 +12,10 @@ MATCH s32 func_801F2C04(void) {
             message = 3;
         } else {
             *zenny -= 10000;
-            g_UiMessageRequest = MSG_AREA116_MASTER_ACCEPT_PAYMENT;
+            g_UIMessageRequest = MSG_AREA116_MASTER_ACCEPT_PAYMENT;
             return;
         }
     }
-    g_UiMessageRequest = message;
+    g_UIMessageRequest = message;
     g_MenuMasterStep   = 6;
 }

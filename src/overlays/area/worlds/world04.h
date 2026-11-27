@@ -50,7 +50,7 @@ void Area_Update();
  * image's byte. */
 static inline void World04_StoreAnswerChoice(u8* target) {
     MESSAGE_REQUEST_CLEAR();
-    *target = g_UiMessageChoice;
+    *target = g_UIMessageChoice;
 }
 
 /* A trigger rectangle in tile units. */

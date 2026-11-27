@@ -9,8 +9,8 @@
 #include "sys/exe.h"
 #include "battle/functions.h"
 
-/* Reloads g_UiPanelCurrent on every use, like the panel functions do. */
-#define BATTLE_PANEL_TASK ((BattlePanelTask*)g_UiPanelCurrent)
+/* Reloads g_UIPanelCurrent on every use, like the panel functions do. */
+#define BATTLE_PANEL_TASK ((BattlePanelTask*)g_UIPanelCurrent)
 
 /* The battle system as the two battle overlays implement it. A battle keeps a
  * 0x140-byte work record per party member and a 0x118-byte enemy record

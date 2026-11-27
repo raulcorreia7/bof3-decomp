@@ -34,8 +34,8 @@ MATCH void func_801D8DF8(s16 x, s16 y, u8 index) {
     func_801DA078((u16)(x + 2), (u16)(y + 0xA), 0);
     func_801D94D4((s16)(x + 0x14), (s16)(y + 0xC), mode, g_Game.members[index].chr.hp);
     mode = (g_Game.members[index].chr.status >> 0xD) & 2;
-    TEXT_FormatLiteral(g_UiTextFormatBuffer, D_801D0C6C);
-    UI_TextDrawGlyphString((s16)(x + 0x28), (s16)(y + 0xA), mode, g_UiTextFormatBuffer);
+    TEXT_FormatLiteral(g_UITextFormatBuffer, D_801D0C6C);
+    UI_TextDrawGlyphString((s16)(x + 0x28), (s16)(y + 0xA), mode, g_UITextFormatBuffer);
     func_801D94D4((s16)(x + 0x30), (s16)(y + 0xC), mode, g_Game.members[index].chr.stats.max_hp);
     Battle_DrawPanelLine((s16)(x + 2), (s16)(y + 2), (s16)(x + 0x49), (s16)(y + 2), r, g, b);
     Battle_DrawPanelLine((s16)(x + 2), (s16)(y + 3), (s16)(x + 2), (s16)(y + 0x12), r, g, b);

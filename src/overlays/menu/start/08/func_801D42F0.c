@@ -13,10 +13,10 @@ MATCH void func_801D42F0(void) {
     u8  result;
 
     Menu_DrawClutStrip(g_WindowClut);
-    items  = &g_ItemCategoryIds[g_UiPanelTasks[13].unk_0A][g_UiPanelTasks[13].unk_0C];
-    counts = &g_ItemCategoryCounts[g_UiPanelTasks[13].unk_0A][g_UiPanelTasks[13].unk_0C];
+    items  = &g_ItemCategoryIds[g_UIPanelTasks[13].unk_0A][g_UIPanelTasks[13].unk_0C];
+    counts = &g_ItemCategoryCounts[g_UIPanelTasks[13].unk_0A][g_UIPanelTasks[13].unk_0C];
     UI_MessageSetVariable(0, 0xC, (const u8*)&g_Items[*items]);
-    g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0x19;
+    g_UIPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0x19;
     D_801485DC                                                = 1;
     D_801485E0                                                = 0xB6;
     sel                                                       = &D_80148656;

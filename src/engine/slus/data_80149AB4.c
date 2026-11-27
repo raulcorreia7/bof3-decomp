@@ -1,6 +1,6 @@
 #include "slus.h"
 
-const MessageChoiceSteps g_UiMessageChoiceModes = {{
+const MessageChoiceSteps g_UIMessageChoiceModes = {{
     UI_MessageChoiceIdle,
     UI_MessageUpdateChoice,
     UI_MessageChoiceRampRun,

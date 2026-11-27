@@ -126,7 +126,7 @@ MATCH void func_801F9498(void) {
             }
             break;
         case 32:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_UIWindowEffectBusy == 0) {
                 g_AreaDrawFlags      = 0;
                 g_ScenarioState.step = 0x21;
                 Game_RequestAreaChange(0x76, 0x70000, 0x118000, 0x83);
@@ -155,7 +155,7 @@ MATCH void func_801F9498(void) {
             }
             break;
         case 35:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_UIWindowEffectBusy == 0) {
                 g_AreaSceneMode = 2;
                 SYS_SetFlag(g_SceneFlags, 0xD);
                 g_ScenarioState.step = 0x24;
@@ -190,7 +190,7 @@ MATCH void func_801F9498(void) {
             }
             break;
         case 42:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_UIWindowEffectBusy == 0) {
                 g_AreaDrawFlags      = 0;
                 g_ScenarioState.step = 0x2B;
                 Game_RequestAreaChange(0x76, 0x88000, 0x78000, 0x83);
@@ -219,7 +219,7 @@ MATCH void func_801F9498(void) {
             }
             break;
         case 45:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_UIWindowEffectBusy == 0) {
                 g_AreaSceneMode = 3;
                 SYS_SetFlag(g_SceneFlags, 0xF);
                 g_ScenarioState.step = 0x2E;
@@ -269,7 +269,7 @@ MATCH void func_801F9498(void) {
             g_ScenarioState.step = 0x36;
             break;
         case 54:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_UIWindowEffectBusy == 0) {
                 g_ScriptVars[0]      = 1;
                 g_AreaDrawFlags      = 0;
                 g_ScenarioState.step = 0x37;
@@ -282,7 +282,7 @@ MATCH void func_801F9498(void) {
             g_ScenarioState.step = 0x38;
             break;
         case 56:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_UIWindowEffectBusy == 0) {
                 g_AreaSceneMode = 4;
                 SYS_SetFlag(g_SceneFlags, 0x11);
                 SYS_SetFlag(g_SceneFlags, 0x1D);
@@ -334,7 +334,7 @@ MATCH void func_801F9498(void) {
             g_ScenarioState.step = 0x67;
             break;
         case 103:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_UIWindowEffectBusy == 0) {
                 g_AreaDrawFlags = 0;
                 if (SND_XAIsIdle()) {
                     g_ScenarioState.step = 0x68;
@@ -347,7 +347,7 @@ MATCH void func_801F9498(void) {
             g_ScenarioState.step = 0x69;
             break;
         case 105:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_UIWindowEffectBusy == 0) {
                 SND_BGMPlay(0x61, 0x64, 8);
                 Game_ClearScriptActive();
                 g_ScenarioState.step     = 0;

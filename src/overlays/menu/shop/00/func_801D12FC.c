@@ -25,7 +25,7 @@ MATCH void func_801D12FC(void) {
         D_80148652 = 0;
     } else if (*pad & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
-        g_UiPanelTasks[0].state = 1;
+        g_UIPanelTasks[0].state = 1;
         D_8014837B              = 1;
         D_80148357              = 1;
         D_80148624              = 0;

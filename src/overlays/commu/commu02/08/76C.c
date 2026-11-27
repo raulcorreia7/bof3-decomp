@@ -659,9 +659,9 @@ MATCH void func_801D3184(s32 x, s32 y) {
     UI_WindowDraw(x + 1, y + 1, 0x6A, 0x28, UI_WINDOW_OPEN_TOP_LEFT, g_WindowStyle);
     FairyCasino_DrawFrame(x, y);
     UI_TextDraw(x + 0x24, y + 7, 0, 4, D_801DACA8);
-    sprintf(g_UiTextFormatBuffer, D_801D0C04, g_Zenny);
+    sprintf(g_UITextFormatBuffer, D_801D0C04, g_Zenny);
     y = (s16)(y + 0x18);
-    UI_TextDrawAscii(x + 0x16, y, 0, g_UiTextFormatBuffer);
+    UI_TextDrawAscii(x + 0x16, y, 0, g_UITextFormatBuffer);
     UI_TextDraw(x + 0x4E, y, 0, 1, D_801DACAC);
 }
 
@@ -678,34 +678,34 @@ MATCH void func_801D32A0(s32 x, s32 y, u8 mode) {
     switch (mode) {
         case 2:
             if (D_801DB07C < 10) {
-                sprintf(g_UiTextFormatBuffer, D_801D0C08, D_801DB07C);
-                UI_TextDrawAscii(x + 0x3E, y + 0x18, 0, g_UiTextFormatBuffer);
+                sprintf(g_UITextFormatBuffer, D_801D0C08, D_801DB07C);
+                UI_TextDrawAscii(x + 0x3E, y + 0x18, 0, g_UITextFormatBuffer);
             } else {
-                sprintf(g_UiTextFormatBuffer, D_801D0C04, D_801DB07C);
-                UI_TextDrawAscii(x + 0x16, y + 0x18, 0, g_UiTextFormatBuffer);
+                sprintf(g_UITextFormatBuffer, D_801D0C04, D_801DB07C);
+                UI_TextDrawAscii(x + 0x16, y + 0x18, 0, g_UITextFormatBuffer);
             }
             break;
         case 3:
             if (D_801DB07C < 100) {
-                sprintf(g_UiTextFormatBuffer, D_801D0C10, D_801DB07C);
-                UI_TextDrawAscii(x + 0x36, y + 0x18, 0, g_UiTextFormatBuffer);
+                sprintf(g_UITextFormatBuffer, D_801D0C10, D_801DB07C);
+                UI_TextDrawAscii(x + 0x36, y + 0x18, 0, g_UITextFormatBuffer);
             } else {
-                sprintf(g_UiTextFormatBuffer, D_801D0C04, D_801DB07C);
-                UI_TextDrawAscii(x + 0x16, y + 0x18, 0, g_UiTextFormatBuffer);
+                sprintf(g_UITextFormatBuffer, D_801D0C04, D_801DB07C);
+                UI_TextDrawAscii(x + 0x16, y + 0x18, 0, g_UITextFormatBuffer);
             }
             break;
         case 4:
             if (D_801DB07C < 1000) {
-                sprintf(g_UiTextFormatBuffer, D_801D0C18, D_801DB07C);
-                UI_TextDrawAscii(x + 0x2E, y + 0x18, 0, g_UiTextFormatBuffer);
+                sprintf(g_UITextFormatBuffer, D_801D0C18, D_801DB07C);
+                UI_TextDrawAscii(x + 0x2E, y + 0x18, 0, g_UITextFormatBuffer);
             } else {
-                sprintf(g_UiTextFormatBuffer, D_801D0C04, D_801DB07C);
-                UI_TextDrawAscii(x + 0x16, y + 0x18, 0, g_UiTextFormatBuffer);
+                sprintf(g_UITextFormatBuffer, D_801D0C04, D_801DB07C);
+                UI_TextDrawAscii(x + 0x16, y + 0x18, 0, g_UITextFormatBuffer);
             }
             break;
         default:
-            sprintf(g_UiTextFormatBuffer, D_801D0C04, D_801DB07C);
-            UI_TextDrawAscii(x2 + 0x16, y2 + 0x18, 0, g_UiTextFormatBuffer);
+            sprintf(g_UITextFormatBuffer, D_801D0C04, D_801DB07C);
+            UI_TextDrawAscii(x2 + 0x16, y2 + 0x18, 0, g_UITextFormatBuffer);
             break;
     }
     UI_TextDraw(x2 + 0x4E, y2 + 0x18, 0, 1, D_801DACB4);
@@ -1162,38 +1162,38 @@ MATCH void func_801D4AE0(s16 x, s16 y, u8 flag) {
         sel = D_801DB0B4;
         if (i == sel) {
             if (flag == 0) {
-                sprintf(g_UiTextFormatBuffer, D_801DAD60);
+                sprintf(g_UITextFormatBuffer, D_801DAD60);
                 ry = (s16)(y + dy);
-                UI_TextDrawAscii(x + 6, ry, 0, g_UiTextFormatBuffer);
-                sprintf(g_UiTextFormatBuffer, D_801DAD64);
-                UI_TextDrawAscii(x + 0x2F, ry, UI_TEXT_HIGHLIGHT, g_UiTextFormatBuffer);
-                UI_TextDrawAscii(x + 0x43, ry, 1, g_UiTextFormatBuffer);
+                UI_TextDrawAscii(x + 6, ry, 0, g_UITextFormatBuffer);
+                sprintf(g_UITextFormatBuffer, D_801DAD64);
+                UI_TextDrawAscii(x + 0x2F, ry, UI_TEXT_HIGHLIGHT, g_UITextFormatBuffer);
+                UI_TextDrawAscii(x + 0x43, ry, 1, g_UITextFormatBuffer);
             } else {
-                sprintf(g_UiTextFormatBuffer, D_801D0C24, D_801DB080.bytes[k], D_801DB080.bytes[k + 1], D_801DB080.bytes[k + 2]);
+                sprintf(g_UITextFormatBuffer, D_801D0C24, D_801DB080.bytes[k], D_801DB080.bytes[k + 1], D_801DB080.bytes[k + 2]);
                 ry = (s16)(y + dy);
-                UI_TextDrawAscii(x + 6, ry, 0, g_UiTextFormatBuffer);
-                sprintf(g_UiTextFormatBuffer, D_801D0C20, D_801DB080.bytes[k + 3]);
-                UI_TextDrawAscii(x + 0x2F, ry, UI_TEXT_HIGHLIGHT, g_UiTextFormatBuffer);
-                sprintf(g_UiTextFormatBuffer, D_801D0C20, D_801DB080.bytes[k + 4]);
-                UI_TextDrawAscii(x + 0x43, ry, 1, g_UiTextFormatBuffer);
+                UI_TextDrawAscii(x + 6, ry, 0, g_UITextFormatBuffer);
+                sprintf(g_UITextFormatBuffer, D_801D0C20, D_801DB080.bytes[k + 3]);
+                UI_TextDrawAscii(x + 0x2F, ry, UI_TEXT_HIGHLIGHT, g_UITextFormatBuffer);
+                sprintf(g_UITextFormatBuffer, D_801D0C20, D_801DB080.bytes[k + 4]);
+                UI_TextDrawAscii(x + 0x43, ry, 1, g_UITextFormatBuffer);
             }
             UI_TextDrawGlyphString(x + 0x39, y + gy, 0, D_801D0C2C);
         } else if (i < sel) {
-            sprintf(g_UiTextFormatBuffer, D_801D0C24, D_801DB080.bytes[k], D_801DB080.bytes[k + 1], D_801DB080.bytes[k + 2]);
+            sprintf(g_UITextFormatBuffer, D_801D0C24, D_801DB080.bytes[k], D_801DB080.bytes[k + 1], D_801DB080.bytes[k + 2]);
             ry = (s16)(y + dy);
-            UI_TextDrawAscii(x + 6, ry, 0, g_UiTextFormatBuffer);
-            sprintf(g_UiTextFormatBuffer, D_801D0C20, D_801DB080.bytes[k + 3]);
-            UI_TextDrawAscii(x + 0x2F, ry, UI_TEXT_HIGHLIGHT, g_UiTextFormatBuffer);
-            sprintf(g_UiTextFormatBuffer, D_801D0C20, D_801DB080.bytes[k + 4]);
-            UI_TextDrawAscii(x + 0x43, ry, 1, g_UiTextFormatBuffer);
+            UI_TextDrawAscii(x + 6, ry, 0, g_UITextFormatBuffer);
+            sprintf(g_UITextFormatBuffer, D_801D0C20, D_801DB080.bytes[k + 3]);
+            UI_TextDrawAscii(x + 0x2F, ry, UI_TEXT_HIGHLIGHT, g_UITextFormatBuffer);
+            sprintf(g_UITextFormatBuffer, D_801D0C20, D_801DB080.bytes[k + 4]);
+            UI_TextDrawAscii(x + 0x43, ry, 1, g_UITextFormatBuffer);
             UI_TextDrawGlyphString(x + 0x39, y + gy, 0, D_801D0C2C);
         } else {
-            sprintf(g_UiTextFormatBuffer, D_801DAD60);
+            sprintf(g_UITextFormatBuffer, D_801DAD60);
             ry = (s16)(y + dy);
-            UI_TextDrawAscii(x + 6, ry, UI_TEXT_DIM, g_UiTextFormatBuffer);
-            sprintf(g_UiTextFormatBuffer, D_801DAD64);
-            UI_TextDrawAscii(x + 0x2F, ry, UI_TEXT_DIM, g_UiTextFormatBuffer);
-            UI_TextDrawAscii(x + 0x43, ry, UI_TEXT_DIM, g_UiTextFormatBuffer);
+            UI_TextDrawAscii(x + 6, ry, UI_TEXT_DIM, g_UITextFormatBuffer);
+            sprintf(g_UITextFormatBuffer, D_801DAD64);
+            UI_TextDrawAscii(x + 0x2F, ry, UI_TEXT_DIM, g_UITextFormatBuffer);
+            UI_TextDrawAscii(x + 0x43, ry, UI_TEXT_DIM, g_UITextFormatBuffer);
             UI_TextDrawGlyphString(x + 0x39, y + gy, UI_TEXT_DIM, D_801D0C2C);
         }
     }
@@ -1493,15 +1493,15 @@ MATCH void func_801D5B2C(void) {
     u8  i;
     s32 j;
 
-    g_UiTextFormatBuffer[0] = 0x2A;
+    g_UITextFormatBuffer[0] = 0x2A;
     i                       = 1;
     src                     = (u8*)AREA_MESSAGE_TABLE + MEM(u16, (u32)AREA_MESSAGE_TABLE + (256 + D_801DB0AD) * 2);
     while (*src != STRING_END) {
-        g_UiTextFormatBuffer[i] = *src;
+        g_UITextFormatBuffer[i] = *src;
         i++;
         if ((u8)(*src - STRING_SKIP) < 2) {
             src++;
-            g_UiTextFormatBuffer[i] = *src;
+            g_UITextFormatBuffer[i] = *src;
             i++;
         }
         src++;
@@ -1509,26 +1509,26 @@ MATCH void func_801D5B2C(void) {
     if (D_801DB0AE != 0xFF) {
         src = (u8*)AREA_MESSAGE_TABLE + MEM(u16, (u32)AREA_MESSAGE_TABLE + (256 + D_801DB0AE) * 2);
         while (*src != STRING_END) {
-            g_UiTextFormatBuffer[i] = *src;
+            g_UITextFormatBuffer[i] = *src;
             i++;
             if ((u8)(*src - STRING_SKIP) < 2) {
                 src++;
-                g_UiTextFormatBuffer[i] = *src;
+                g_UITextFormatBuffer[i] = *src;
                 i++;
             }
             src++;
         }
     }
-    g_UiTextFormatBuffer[i] = 0x2B;
+    g_UITextFormatBuffer[i] = 0x2B;
     i++;
-    g_UiTextFormatBuffer[i] = STRING_SPACE;
+    g_UITextFormatBuffer[i] = STRING_SPACE;
     i++;
     for (j = 0; j < 5; j++) {
-        g_UiTextFormatBuffer[i] = D_801457E8[D_801F2948[5]][j];
+        g_UITextFormatBuffer[i] = D_801457E8[D_801F2948[5]][j];
         i++;
     }
-    g_UiTextFormatBuffer[i] = STRING_END;
-    UI_TextDraw(0x32, 0x1E, 0, TEXT_LENGTH_MAX, g_UiTextFormatBuffer);
+    g_UITextFormatBuffer[i] = STRING_END;
+    UI_TextDraw(0x32, 0x1E, 0, TEXT_LENGTH_MAX, g_UITextFormatBuffer);
     UI_TextDraw(0x32, 0x42, 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, 227 + (s8)D_801DB0B4));
 }
 

@@ -4,7 +4,7 @@ g_MenuMasterSubStep = { addr = 0x801D4286, source = "Current sub-step of the mas
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Area_FindFreeSpriteRow = { addr = 0x801F2D7C, type = "func", source = "Finds the first empty 0x18 record in the 256-entry sprite work table at 0x800E4800, or NULL." }
 Area_StepSparkEmitters = { addr = 0x801F30A0, type = "func", source = "Counts down every active spark emitter and spawns two sprite sparks near it as its timer runs out; returns whether any is active; one body shared by sce15ef3 and area143." }
-UI_MessageAnswerSelect = { addr = 0x801F3ACC, type = "func", source = "Sets g_UiMessageRequest to 0x4A when g_UiMessageChoice is nonzero, otherwise to 0x49." }
+UI_MessageAnswerSelect = { addr = 0x801F3ACC, type = "func", source = "Sets g_UIMessageRequest to 0x4A when g_UIMessageChoice is nonzero, otherwise to 0x49." }
 UI_MessageClearRequest = { addr = 0x801F3B8C, type = "func", source = "Clears the message request; when the menu selection is idle sets g_SceneEventMode to SCENE_EVENT_INN, g_SceneEventStep to 0 and g_SceneEventSelection to AREA_RESET_VARIANT." }
 UI_MessageClear = { addr = 0x801F3BCC, type = "func", source = "Clears the message request; when the menu selection is idle sets g_SceneEventMode to SCENE_EVENT_INN, g_SceneEventStep to 5 and g_SceneEventSelection to 0xFF." }
 Actor_RunAreaStep = { addr = 0x801F3C40, type = "func", source = "Clears the work byte 0x48 and frees the palette fade target of the current g_Self." }

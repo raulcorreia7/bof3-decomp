@@ -29,13 +29,13 @@ MATCH void func_801EF140(void) {
         height += 0x10;
     }
     UI_PanelOpenTask(1, 4);
-    g_UiPanelTasks[1].mode   = 0;
-    g_UiPanelTasks[1].state  = 0;
-    g_UiPanelTasks[1].unk_09 = height + 4;
+    g_UIPanelTasks[1].mode   = 0;
+    g_UIPanelTasks[1].state  = 0;
+    g_UIPanelTasks[1].unk_09 = height + 4;
     /* FAKE: retail writes the three fields above before loading the two below. */
     FAKE_BARRIER();
     step                     = g_Battle.ui_mode;
-    g_UiPanelTasks[1].unk_0A = g_Battle.cursor.gene.column;
-    g_UiPanelTasks[1].unk_0B = g_Battle.level;
+    g_UIPanelTasks[1].unk_0A = g_Battle.cursor.gene.column;
+    g_UIPanelTasks[1].unk_0B = g_Battle.level;
     g_Battle.ui_mode         = step - 1;
 }

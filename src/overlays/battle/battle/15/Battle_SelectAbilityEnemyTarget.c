@@ -20,8 +20,8 @@ MATCH void Battle_SelectAbilityEnemyTarget(void) {
      * makes the scheduler fill the branch delay slot and shifts the call. */
     message = (u8*)&D_80148656;
     trigger = INPUT_REPEATED(held, INPUT_DIRECTIONAL);
-    entry   = Party_GetAbilities(message[0], g_UiPanelTasks[16].unk_0B, 1);
-    if ((g_Abilities[entry[g_UiPanelTasks[16].unk_0C]].targeting_flags & ABILITY_TARGET_FLAG_BOTH_SIDES) != 0u && (trigger & (PADLup | PADLdown)) != 0) {
+    entry   = Party_GetAbilities(message[0], g_UIPanelTasks[16].unk_0B, 1);
+    if ((g_Abilities[entry[g_UIPanelTasks[16].unk_0C]].targeting_flags & ABILITY_TARGET_FLAG_BOTH_SIDES) != 0u && (trigger & (PADLup | PADLdown)) != 0) {
         g_BattleActorTurn->command.target = Battle_TargetNext(0);
         g_Battle.ui_mode += 1u;
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));

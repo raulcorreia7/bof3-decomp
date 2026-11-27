@@ -74,10 +74,10 @@ MATCH void func_801F719C(void) {
         Area_AddActor();
     }
     if (((SELF(Actor)->option_flags >> 1) & 1) == 0) {
-        sprintf((char*)g_UiTextFormatBuffer, D_801F6C04, Item_GetRecord(ITEM_CATEGORY_ITEM, SELF(Actor)->unk_06));
-        UI_TextDraw((s16)((u16)D_801FE7CC[1].signed_box.x + 4), (s16)((u16)D_801FE7CC[1].signed_box.y + 2), 0, 8, g_UiTextFormatBuffer);
-        sprintf((char*)g_UiTextFormatBuffer, D_801F6C08, (u16)Item_Count(ITEM_CATEGORY_ITEM, SELF(Actor)->unk_06, 0));
-        UI_TextDraw((s16)((u16)D_801FE7CC[1].signed_box.x + 0x48), (s16)((u16)D_801FE7CC[1].signed_box.y + 2), 0, 2, g_UiTextFormatBuffer);
+        sprintf((char*)g_UITextFormatBuffer, D_801F6C04, Item_GetRecord(ITEM_CATEGORY_ITEM, SELF(Actor)->unk_06));
+        UI_TextDraw((s16)((u16)D_801FE7CC[1].signed_box.x + 4), (s16)((u16)D_801FE7CC[1].signed_box.y + 2), 0, 8, g_UITextFormatBuffer);
+        sprintf((char*)g_UITextFormatBuffer, D_801F6C08, (u16)Item_Count(ITEM_CATEGORY_ITEM, SELF(Actor)->unk_06, 0));
+        UI_TextDraw((s16)((u16)D_801FE7CC[1].signed_box.x + 0x48), (s16)((u16)D_801FE7CC[1].signed_box.y + 2), 0, 2, g_UITextFormatBuffer);
     }
     func_801F781C((u16)D_801FE7CC[2].signed_box.x + 1, (u16)D_801FE7CC[2].signed_box.y + 1, 0x80, 0x68);
     if (SELF(Actor)->unk_0A != 0) {
@@ -243,8 +243,8 @@ MATCH void func_801F7AD4(void) {
         count  = (u8)Item_Count(ITEM_CATEGORY_ITEM, (u8)(i + ITEM_PART_A), 0);
         color  = -(count == 0) & 7;
         UI_TextDraw(x, y, color, (u8)Game_ReadCommand(record), record);
-        sprintf((char*)g_UiTextFormatBuffer, D_801F6C10, count);
-        UI_TextDrawGlyphString(x + 0x5A, y + 3, color, g_UiTextFormatBuffer);
+        sprintf((char*)g_UITextFormatBuffer, D_801F6C10, count);
+        UI_TextDrawGlyphString(x + 0x5A, y + 3, color, g_UITextFormatBuffer);
         i++;
         y += 0xF;
     } while (i < 8);
@@ -271,8 +271,8 @@ MATCH void func_801F7C34(void) {
 /* Draw the "Choose parts" window with its item list and cursor, then place and step the cursor actor. */
 MATCH void func_801F7DDC(void) {
     UI_WindowDraw(D_801FE7CC[3].box.x, D_801FE7CC[3].box.y, D_801FE7CC[3].box.w, D_801FE7CC[3].box.h, UI_WINDOW_STYLE_TRANSLUCENT, g_WindowStyle);
-    sprintf(g_UiTextFormatBuffer, D_801F6C04, D_801FE874);
-    UI_TextDraw((u16)D_801FE7CC[3].box.x + 8, D_801FE7CC[3].box.y + 2, 0, ITEM_NAME_LENGTH, g_UiTextFormatBuffer);
+    sprintf(g_UITextFormatBuffer, D_801F6C04, D_801FE874);
+    UI_TextDraw((u16)D_801FE7CC[3].box.x + 8, D_801FE7CC[3].box.y + 2, 0, ITEM_NAME_LENGTH, g_UITextFormatBuffer);
     func_801F7AD4();
     UI_CursorDraw(D_801FE808[0], (u16)(D_801FE808[1] + (SELF(Actor)->header.step & 7) * 15), 0);
     func_801F7C34();

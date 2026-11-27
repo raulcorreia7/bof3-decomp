@@ -5,7 +5,7 @@ MATCH void func_801E2D5C(void) {
     u8*            bytes;
     u16            next;
 
-    panel         = g_UiPanelCurrent;
+    panel         = g_UIPanelCurrent;
     bytes         = (u8*)panel;
     next          = panel->pos.vy + 0x10;
     panel->pos.vy = next;

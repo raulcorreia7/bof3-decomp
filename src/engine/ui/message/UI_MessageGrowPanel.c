@@ -11,7 +11,7 @@ MATCH void UI_MessageGrowPanel(void) {
     u16            next_y;
     u8             advanced;
 
-    panel = g_UiPanelCurrent;
+    panel = g_UIPanelCurrent;
 
     panel->u.grow.w = panel->u.grow.w + panel->u.grow.width_delta;
     panel->pos.vx -= (s16)panel->u.grow.width_delta / 2;
@@ -21,9 +21,9 @@ MATCH void UI_MessageGrowPanel(void) {
         switch (panel->mode) {
             case 0:
                 if (panel->flags & 0x2) {
-                    next_x = g_UiPanelOrigins[1][g_UiPanelPlacement].x * 0x10;
+                    next_x = g_UIPanelOrigins[1][g_UIPanelPlacement].x * 0x10;
                 } else {
-                    next_x = g_UiPanelOrigins[0][g_UiPanelPlacement].x * 0x10;
+                    next_x = g_UIPanelOrigins[0][g_UIPanelPlacement].x * 0x10;
                 }
                 panel->pos.vx = next_x;
                 break;
@@ -31,14 +31,14 @@ MATCH void UI_MessageGrowPanel(void) {
                 panel->pos.vx = panel->u.grow.target_x * 16;
                 break;
             default:
-                g_UiPanelCurrent->pos.vx = D_8017F944[g_UiPanelPlacement][0] * 16;
+                g_UIPanelCurrent->pos.vx = D_8017F944[g_UIPanelPlacement][0] * 16;
                 break;
         }
         advanced++;
-        g_UiPanelCurrent->u.grow.w = (g_UiPanelCurrent->unk_0A * 0x10);
+        g_UIPanelCurrent->u.grow.w = (g_UIPanelCurrent->unk_0A * 0x10);
     }
 
-    panel = g_UiPanelCurrent;
+    panel = g_UIPanelCurrent;
 
     panel->u.grow.h = panel->u.grow.h + panel->u.grow.height_delta;
     panel->pos.vy -= (s16)panel->u.grow.height_delta / 2;
@@ -47,9 +47,9 @@ MATCH void UI_MessageGrowPanel(void) {
         switch (panel->mode) {
             case 0:
                 if (panel->flags & 0x2) {
-                    next_y = g_UiPanelOrigins[1][g_UiPanelPlacement].y * 0x10;
+                    next_y = g_UIPanelOrigins[1][g_UIPanelPlacement].y * 0x10;
                 } else {
-                    next_y = g_UiPanelOrigins[0][g_UiPanelPlacement].y * 0x10;
+                    next_y = g_UIPanelOrigins[0][g_UIPanelPlacement].y * 0x10;
                 }
                 panel->pos.vy = next_y;
                 break;
@@ -57,21 +57,21 @@ MATCH void UI_MessageGrowPanel(void) {
                 panel->pos.vy = panel->u.grow.target_y * 16;
                 break;
             default:
-                g_UiPanelCurrent->pos.vy = D_8017F944[g_UiPanelPlacement][1] * 16;
+                g_UIPanelCurrent->pos.vy = D_8017F944[g_UIPanelPlacement][1] * 16;
                 break;
         }
         advanced++;
-        g_UiPanelCurrent->u.grow.h = (g_UiPanelCurrent->unk_0B * 0x10);
+        g_UIPanelCurrent->u.grow.h = (g_UIPanelCurrent->unk_0B * 0x10);
     }
 
-    if ((g_UiPanelCurrent->flags & 0x1) == 0) {
-        u32 width  = (g_UiPanelCurrent->u.grow.w >> 4) & BYTE_MASK;
-        u32 height = (g_UiPanelCurrent->u.grow.h >> 4) & BYTE_MASK;
+    if ((g_UIPanelCurrent->flags & 0x1) == 0) {
+        u32 width  = (g_UIPanelCurrent->u.grow.w >> 4) & BYTE_MASK;
+        u32 height = (g_UIPanelCurrent->u.grow.h >> 4) & BYTE_MASK;
 
-        UI_WindowDrawBoxOutline(g_UiPanelCurrent->pos.vx >> 4, g_UiPanelCurrent->pos.vy >> 4, width, height);
+        UI_WindowDrawBoxOutline(g_UIPanelCurrent->pos.vx >> 4, g_UIPanelCurrent->pos.vy >> 4, width, height);
     }
 
     if ((advanced & BYTE_MASK) == 2) {
-        g_UiPanelCurrent->state += 1;
+        g_UIPanelCurrent->state += 1;
     }
 }

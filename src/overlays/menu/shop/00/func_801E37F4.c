@@ -44,7 +44,7 @@ MATCH void func_801E37F4(MenuPanelTask* task) {
     UI_WindowDraw((task->pos.vx + SHOP_DESC_SHADOW_OFFSET) & HALF_MASK, (task->pos.vy + SHOP_DESC_SHADOW_OFFSET) & HALF_MASK, SHOP_DESC_PANEL_WIDTH, SHOP_DESC_PANEL_HEIGHT, 0, g_WindowStyle);
     UI_IconDraw(((u16)task->pos.vx + SHOP_DESC_ICON_X) & HALF_MASK, ((u16)task->pos.vy + SHOP_DESC_ICON_Y) & HALF_MASK, D_801E5E38[Item_GetIcon(category, item_id) & BYTE_MASK], 0);
     UI_TextDraw(task->pos.vx + SHOP_DESC_NAME_X, task->pos.vy + SHOP_DESC_NAME_Y, 0, Game_ReadCommand(record) & BYTE_MASK, record);
-    buffer = (char*)g_UiTextFormatBuffer;
+    buffer = (char*)g_UITextFormatBuffer;
     TEXT_Format(buffer, D_801D0E88, price);
     UI_TextDrawGlyphString(task->pos.vx + SHOP_DESC_PRICE_X, task->pos.vy + SHOP_DESC_PRICE_Y, 0, buffer);
     TEXT_Format(buffer, D_801D0E90, price * task->unk_0C);

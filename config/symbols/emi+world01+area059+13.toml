@@ -2,7 +2,7 @@
 g_MenuMasterStep = { addr = 0x801D4285, source = "Current step of the master menu (retail text Master), indexing the step handlers." }
 g_MenuMasterSubStep = { addr = 0x801D4286, source = "Current sub-step of the master menu that the step handlers advance." }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
-UI_MessageAnswerOpen = { addr = 0x801F2C04, type = "func", source = "Sets g_UiMessageRequest to 0x42 when g_UiMessageChoice is 0, otherwise to 0x44 and g_MenuMasterStep to 6." }
+UI_MessageAnswerOpen = { addr = 0x801F2C04, type = "func", source = "Sets g_UIMessageRequest to 0x42 when g_UIMessageChoice is 0, otherwise to 0x44 and g_MenuMasterStep to 6." }
 Area_EnterWyndiaTeleporter = { addr = 0x801F2D30, type = "func", source = "same body as Area_EnterWyndiaTeleporter (emi/world00/area036/13@0x801F2C04)" }
 Actor_RunAreaStep = { addr = 0x801F2D5C, type = "func", source = "Clears the work byte 0x48 and frees the palette fade target of the current g_Self." }
 Area_TestStepTrigger = { addr = 0x801F2E80, type = "func", source = "Returns 1 and runs script entry 0 when the party leader steps into the trigger band: x tile 70 to 72, y tile from AREA_STEP_TRIGGER_ROW for 3 rows, facing up-left or direction 6 or 7, with scene flag 0x33 set and g_GameCellType equal to 2; clears g_ScriptVars[0] first." }

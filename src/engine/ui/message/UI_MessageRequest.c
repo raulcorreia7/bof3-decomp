@@ -9,8 +9,8 @@ MATCH void UI_MessageRequest(s32 request_id) {
     u8* handle;
 
     handle             = UI_MessageGetText(request_id & HALF_MASK);
-    g_UiMessageScript  = handle;
+    g_UIMessageScript  = handle;
     D_801490B0         = handle;
-    g_UiMessageRequest = request_id;
+    g_UIMessageRequest = request_id;
     UI_MessageReset();
 }

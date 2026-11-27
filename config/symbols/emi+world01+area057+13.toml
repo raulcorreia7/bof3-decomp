@@ -1,5 +1,5 @@
 ["emi/world01/area057/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
-UI_MessageAnswerSet = { addr = 0x801F2C04, type = "func", source = "Stores the message id the answer table D_801F4AFC holds for the menu choice g_UiMessageChoice in g_UiMessageRequest." }
+UI_MessageAnswerSet = { addr = 0x801F2C04, type = "func", source = "Stores the message id the answer table D_801F4AFC holds for the menu choice g_UIMessageChoice in g_UIMessageRequest." }
 Area_PauseBGM = { addr = 0x801F2D30, type = "func", source = "Pauses the BGM of g_SndBGMId through SND_BGMPause; the same body is Area_PauseBGM in area039, area108 and area145." }
 Area_ResumeBGM = { addr = 0x801F2D58, type = "func", source = "Resumes the BGM of g_SndBGMId through SND_BGMResume; the same body is Area_ResumeBGM in area108 and area145." }

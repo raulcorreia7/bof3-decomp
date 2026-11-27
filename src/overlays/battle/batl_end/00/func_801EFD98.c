@@ -11,5 +11,5 @@ extern BattleEndPanelModes D_801EEC28;
 MATCH void func_801EFD98(void) {
     BattleEndPanelModes handlers = D_801EEC28;
 
-    handlers.modes[g_UiPanelCurrent->mode]();
+    handlers.modes[g_UIPanelCurrent->mode]();
 }

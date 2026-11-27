@@ -11,13 +11,13 @@ MATCH void func_801D51B8(void) {
     SAVE_DrawSlots(SAVE_SLOTS_X, SAVE_SLOTS_Y, 0);
     SAVE_AccessFile(0, 0, 0, 0, 0);
     if (g_SaveCardStatus == CARD_EVENT_OK) {
-        TEXT_Format(g_UiTextFormatBuffer, D_801D0C20, g_SaveSlotFirst);
-        if (((SaveAccessCallback)SAVE_AccessFile)(1, g_UiTextFormatBuffer, 1, 1, 0) != -1) {
-            TEXT_Format(g_UiTextFormatBuffer, D_801D0C20, g_SaveSlotFirst);
+        TEXT_Format(g_UITextFormatBuffer, D_801D0C20, g_SaveSlotFirst);
+        if (((SaveAccessCallback)SAVE_AccessFile)(1, g_UITextFormatBuffer, 1, 1, 0) != -1) {
+            TEXT_Format(g_UITextFormatBuffer, D_801D0C20, g_SaveSlotFirst);
             D_801E6108 = D_80145AE5 + 0xD1;
             SAVE_BuildSlotImage();
-            TEXT_Format(g_UiTextFormatBuffer, D_801D0C20, g_SaveSlotFirst);
-            if (((SaveAccessCallback)SAVE_AccessFile)(1, g_UiTextFormatBuffer, 2, SAVE_FILE_SIZE, 0) != -1) {
+            TEXT_Format(g_UITextFormatBuffer, D_801D0C20, g_SaveSlotFirst);
+            if (((SaveAccessCallback)SAVE_AccessFile)(1, g_UITextFormatBuffer, 2, SAVE_FILE_SIZE, 0) != -1) {
                 func_801D6CE4(g_SaveSlotFirst, name - 0x7A);
                 g_SaveCardStatus = SAVE_WRITE_STATUS_SAVED;
                 g_MenuStep.state = 0xC;

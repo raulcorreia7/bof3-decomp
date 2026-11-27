@@ -7,9 +7,9 @@ MATCH void Battle_PreviewEquipment(void) {
     u8  saveBuf;
     u32 selectBit;
 
-    saveBuf   = g_UiPanelTasks[17].flags;
-    selectBit = g_CharSlot[g_PartyBattleOrder[g_UiPanelTasks[18].unk_0C]];
-    if (((Item_GetEquipability(g_UiPanelTasks[17].unk_08, saveBuf) & BYTE_MASK) >> selectBit) & 0x1) {
+    saveBuf   = g_UIPanelTasks[17].flags;
+    selectBit = g_CharSlot[g_PartyBattleOrder[g_UIPanelTasks[18].unk_0C]];
+    if (((Item_GetEquipability(g_UIPanelTasks[17].unk_08, saveBuf) & BYTE_MASK) >> selectBit) & 0x1) {
         D_801485C5 = 0;
         bitIndex   = selectBit & BYTE_MASK;
     } else {

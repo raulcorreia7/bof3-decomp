@@ -40,9 +40,9 @@ MATCH void Menu_DrawInoculationWindow(u8 slot, s32 x, s32 y, s32 style, u8 curso
         } else {
             UI_TextDraw(gx, row_y, sel & BYTE_MASK, TEXT_LENGTH_MAX, UI_MessageGetText((i & BYTE_MASK) + 0xDE));
         }
-        TEXT_Format(g_UiTextFormatBuffer, D_801D0CDC, value & HALF_MASK);
-        g_UiTextFormatBuffer[3] = 0x60;
-        UI_TextDrawAscii((xpos + 112), row_y, sel & BYTE_MASK, g_UiTextFormatBuffer);
+        TEXT_Format(g_UITextFormatBuffer, D_801D0CDC, value & HALF_MASK);
+        g_UITextFormatBuffer[3] = 0x60;
+        UI_TextDrawAscii((xpos + 112), row_y, sel & BYTE_MASK, g_UITextFormatBuffer);
         i++;
         row_y += 0xD;
     } while ((u8)i < 8);

@@ -12,8 +12,8 @@ MATCH void func_801D277C(void) {
     if ((g_Battle.flags & BATTLE_STATE_COMMAND_ARMED) == 0) {
         g_BattleMessageState = 2;
     }
-    g_UiPanelTasks[3].state      = 2;
-    g_UiPanelTasks[2].state      = 2;
+    g_UIPanelTasks[3].state      = 2;
+    g_UIPanelTasks[2].state      = 2;
     g_BattleEventSlots[0].active = 0;
     for (; (index & BYTE_MASK) < BATTLE_PARTY_CHARACTERS_COUNT; index++) {
         slot = index;

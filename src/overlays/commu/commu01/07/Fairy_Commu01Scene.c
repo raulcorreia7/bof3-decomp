@@ -796,7 +796,7 @@ MATCH void Fairy_DrawOverview(void) {
     }
 
     Fairy_DrawPiece(0x30, 0x4C, 2);
-    buffer = g_UiTextFormatBuffer;
+    buffer = g_UITextFormatBuffer;
     sprintf((char*)buffer, D_801D0C10, D_801455C2);
     UI_TextDrawAscii(0x50, 0x4C, 0, buffer);
     UI_TextDraw(0x78, 0x4C, 0, 7, D_801D4C30);

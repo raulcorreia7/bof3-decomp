@@ -80,8 +80,8 @@ MATCH void Menu_DrawEquipChoiceWindow(MenuPanelTask* task) {
     length  = Game_ReadCommand(*title);
     title_x = length * 4 - 78;
     UI_TextDraw(task->pos.vx - title_x, task->pos.vy + 7, UI_TEXT_NORMAL, MENU_LABEL_LENGTH, *title);
-    sprintf(g_UiTextFormatBuffer, g_MenuInventoryCountFormat, choices, INV_SLOTS_PER_CATEGORY);
-    UI_TextDrawGlyphString(task->pos.vx + 85, task->pos.vy + 122, UI_TEXT_NORMAL, g_UiTextFormatBuffer);
+    sprintf(g_UITextFormatBuffer, g_MenuInventoryCountFormat, choices, INV_SLOTS_PER_CATEGORY);
+    UI_TextDrawGlyphString(task->pos.vx + 85, task->pos.vy + 122, UI_TEXT_NORMAL, g_UITextFormatBuffer);
 
     UI_SpriteDrawRun(task->pos.vx, task->pos.vy, s_BattleAbilityLine1Run, UI_SPRITE_ALT_PAGE);
     UI_SpriteDrawRun(task->pos.vx, task->pos.vy, s_BattleAbilityLine2Run, UI_SPRITE_ALT_PAGE);

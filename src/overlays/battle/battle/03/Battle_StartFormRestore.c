@@ -35,10 +35,10 @@ MATCH void Battle_StartFormRestore(void) {
         func_801E0B64();
     }
     Battle_RescaleStats(SELF(PartyMember)->slot);
-    g_UiPanelTasks[SELF(PartyMember)->slot + 13].u.battle.hp = g_Game.members[SELF(PartyMember)->slot].chr.hp;
-    g_UiPanelTasks[SELF(PartyMember)->slot + 13].u.battle.ap = g_Game.members[SELF(PartyMember)->slot].chr.ap;
-    g_UiPanelTasks[SELF(PartyMember)->slot + 13].unk_0B      = g_Game.members[SELF(PartyMember)->slot].chr.hp * 55 / g_Game.members[SELF(PartyMember)->slot].chr.stats.max_hp;
-    g_UiPanelTasks[SELF(PartyMember)->slot + 13].unk_0C      = g_Game.members[SELF(PartyMember)->slot].chr.ap * 55 / g_Game.members[SELF(PartyMember)->slot].chr.stats.max_ap;
+    g_UIPanelTasks[SELF(PartyMember)->slot + 13].u.battle.hp = g_Game.members[SELF(PartyMember)->slot].chr.hp;
+    g_UIPanelTasks[SELF(PartyMember)->slot + 13].u.battle.ap = g_Game.members[SELF(PartyMember)->slot].chr.ap;
+    g_UIPanelTasks[SELF(PartyMember)->slot + 13].unk_0B      = g_Game.members[SELF(PartyMember)->slot].chr.hp * 55 / g_Game.members[SELF(PartyMember)->slot].chr.stats.max_hp;
+    g_UIPanelTasks[SELF(PartyMember)->slot + 13].unk_0C      = g_Game.members[SELF(PartyMember)->slot].chr.ap * 55 / g_Game.members[SELF(PartyMember)->slot].chr.stats.max_ap;
     Script_Select(SELF(PartyMember)->facing + 4);
     GFX_PaletteLoad((u8*)(BATTLE_ACTION_BLOCK_TABLE + (SELF(PartyMember)->slot << 6)), 0);
     func_801DDAB4(g_Game.members[SELF(PartyMember)->slot].chr.status);

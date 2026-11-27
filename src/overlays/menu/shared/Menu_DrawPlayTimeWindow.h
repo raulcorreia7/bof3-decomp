@@ -13,10 +13,10 @@ MATCH void Menu_DrawPlayTimeWindow(u16 panel_x, u16 panel_y) {
     window_y = y + 3;
     text_y   = y + 4;
     UI_WindowDraw((u16)(x + 3), (u16)window_y, MENU_PLAY_TIME_WINDOW_WIDTH, MENU_PLAY_TIME_WINDOW_HEIGHT, 0, g_WindowStyle);
-    TEXT_Format(g_UiTextFormatBuffer, g_MenuClockFormat, g_PlayClock.hours);
-    UI_TextDrawAscii(x + 33, text_y, 0, g_UiTextFormatBuffer);
-    TEXT_Format(g_UiTextFormatBuffer, g_MenuClockFormat, g_PlayClock.minutes);
-    UI_TextDrawAscii(x + 60, text_y, 0, g_UiTextFormatBuffer);
+    TEXT_Format(g_UITextFormatBuffer, g_MenuClockFormat, g_PlayClock.hours);
+    UI_TextDrawAscii(x + 33, text_y, 0, g_UITextFormatBuffer);
+    TEXT_Format(g_UITextFormatBuffer, g_MenuClockFormat, g_PlayClock.minutes);
+    UI_TextDrawAscii(x + 60, text_y, 0, g_UITextFormatBuffer);
     if (g_PlayClock.thirtieths < 0xF) {
         UI_TextDrawString(x + 52, window_y, 0, TEXT_LENGTH_MAX, g_MenuClockColon);
         UI_TextDrawString(x + 52, y + 7, 0, TEXT_LENGTH_MAX, g_MenuClockColon);

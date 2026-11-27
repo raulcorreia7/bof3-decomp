@@ -49,7 +49,7 @@ MATCH void func_801E3284(MenuPanelTask* task) {
     UI_IconDraw(((u16)task->pos.vx + SHOP_COUNTS_ICON_X) & HALF_MASK, ((u16)task->pos.vy + SHOP_COUNTS_ICON_Y) & HALF_MASK, D_801E5E1C[Item_GetIcon(group, key) & BYTE_MASK], 0);
     UI_TextDraw((task->pos.vx + SHOP_COUNTS_NAME_X), (task->pos.vy + SHOP_COUNTS_NAME_Y), 0, Game_ReadCommand(icon) & BYTE_MASK, icon);
 
-    text = g_UiTextFormatBuffer;
+    text = g_UITextFormatBuffer;
     TEXT_Format(text, D_801D0E90, price * task->unk_0C);
     UI_TextDrawGlyphString((task->pos.vx + SHOP_COUNTS_TOTAL_X), (task->pos.vy + SHOP_COUNTS_TOTAL_Y), 0U, text);
 

@@ -3,8 +3,8 @@
 MATCH void func_801F381C(void) {
     s8 state;
 
-    state              = g_UiMessageChoice;
-    g_UiMessageRequest = D_801F4D64[state];
+    state              = g_UIMessageChoice;
+    g_UIMessageRequest = D_801F4D64[state];
     switch (state) {
         case 0:
             g_ScriptVars[0] = 0x14;

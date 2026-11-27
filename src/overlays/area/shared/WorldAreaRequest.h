@@ -8,9 +8,9 @@
 #define WORLD_SELECT_ANSWER_MESSAGE(selected, idle) \
     do {                                            \
         if (MENU_SELECTION_ARMED()) {               \
-            g_UiMessageRequest = (selected);        \
+            g_UIMessageRequest = (selected);        \
         } else {                                    \
-            g_UiMessageRequest = (idle);            \
+            g_UIMessageRequest = (idle);            \
         }                                           \
     } while (0)
 
@@ -18,8 +18,8 @@
  * reset sentinel. */
 #define WORLD_SELECT_ANSWER_MESSAGE_ON_VALUE(selection, value) \
     do {                                                       \
-        if (g_UiMessageChoice == (selection)) {                \
-            g_UiMessageRequest = (value);                      \
+        if (g_UIMessageChoice == (selection)) {                \
+            g_UIMessageRequest = (value);                      \
         } else {                                               \
             MESSAGE_REQUEST_CLEAR();                           \
         }                                                      \
@@ -30,7 +30,7 @@
 #define WORLD_ARM_ANSWER_MESSAGE(request)   \
     do {                                    \
         if (MENU_SELECTION_ARMED()) {       \
-            g_UiMessageRequest = (request); \
+            g_UIMessageRequest = (request); \
             g_MenuMasterStep   = 6;         \
         } else {                            \
             MESSAGE_REQUEST_CLEAR();        \
@@ -42,9 +42,9 @@
 #define WORLD_ARM_ANSWER_MESSAGE_IDLE(idle, selected) \
     do {                                              \
         if (MENU_SELECTION_IDLE()) {                  \
-            g_UiMessageRequest = (idle);              \
+            g_UIMessageRequest = (idle);              \
         } else {                                      \
-            g_UiMessageRequest = (selected);          \
+            g_UIMessageRequest = (selected);          \
             g_MenuMasterStep   = 6;                   \
         }                                             \
     } while (0)

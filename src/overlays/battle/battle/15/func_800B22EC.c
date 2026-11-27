@@ -3,7 +3,7 @@
 MATCH void func_800B22EC(void) {
     MenuPanelTask* panel;
 
-    panel = g_UiPanelCurrent;
+    panel = g_UIPanelCurrent;
     panel->pos.vx -= 32;
     if (panel->pos.vx < 83) {
         panel->pos.vx = 83;

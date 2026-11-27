@@ -4,7 +4,7 @@ MATCH void func_801F3AA0(void) {
     s8 value;
 
     MESSAGE_REQUEST_CLEAR();
-    if (g_UiMessageChoice == 0) {
+    if (g_UIMessageChoice == 0) {
         Scene_SetupParty(3U);
         value = 0x1E;
     } else {

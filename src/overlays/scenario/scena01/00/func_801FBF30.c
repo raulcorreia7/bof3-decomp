@@ -140,7 +140,7 @@ MATCH void func_801FBF30(void) {
 
             step = &g_ScriptVars[3];
             if (*step == 0x14) {
-                if ((g_UiWindowChannel & FRONTEND_FLAG_CONFIRM) != 0u) {
+                if ((g_UIWindowChannel & FRONTEND_FLAG_CONFIRM) != 0u) {
                     g_ScriptVars[1] = 0;
                     g_ScriptVars[2] = 0;
                     *step           = 0;
@@ -150,7 +150,7 @@ MATCH void func_801FBF30(void) {
                 }
             }
             if (g_ScriptVars[3] == 0x19) {
-                if ((g_UiWindowChannel & FRONTEND_FLAG_CONFIRM) != 0u) {
+                if ((g_UIWindowChannel & FRONTEND_FLAG_CONFIRM) != 0u) {
                     g_ScriptVars[1] = 0;
                     g_ScriptVars[2] = 0;
                     g_ScriptVars[3] = 0;
@@ -183,7 +183,7 @@ MATCH void func_801FBF30(void) {
 
             step = &g_ScriptVars[3];
             if (*step == 0x14) {
-                if ((g_UiWindowChannel & FRONTEND_FLAG_CONFIRM) != 0u) {
+                if ((g_UIWindowChannel & FRONTEND_FLAG_CONFIRM) != 0u) {
                     g_ScriptVars[0] = 0;
                     g_ScriptVars[1] = 0;
                     g_ScriptVars[2] = 0;
@@ -194,7 +194,7 @@ MATCH void func_801FBF30(void) {
                 }
             }
             if (g_ScriptVars[3] == 0x19) {
-                if ((g_UiWindowChannel & FRONTEND_FLAG_CONFIRM) != 0u) {
+                if ((g_UIWindowChannel & FRONTEND_FLAG_CONFIRM) != 0u) {
                     g_ScriptVars[0] = 0;
                     g_ScriptVars[1] = 0;
                     g_ScriptVars[2] = 0;

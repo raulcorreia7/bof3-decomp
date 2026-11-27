@@ -4,7 +4,7 @@
 MATCH void Battle_LoadRe2Archive(void) {
     u8* lock;
 
-    lock = &g_UiPanelTasks[21].active;
+    lock = &g_UIPanelTasks[21].active;
     if ((*lock & 0x1) == 0) {
         func_80097FE8();
         D_80148594 = 0;

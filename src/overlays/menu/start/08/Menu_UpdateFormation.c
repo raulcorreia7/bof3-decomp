@@ -29,20 +29,20 @@ NON_MATCHING void Menu_UpdateFormation(void) {
         y2                                                   = D_801EC4D0[pick].unk_02;
         *frame                                               = 1;
         D_801485E2                                           = y2;
-        g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0A = D_801EC4D0[pick].unk_04 + 1;
-        g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0B = 0;
+        g_UIPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0A = D_801EC4D0[pick].unk_04 + 1;
+        g_UIPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0B = 0;
     }
     index                     = g_FormationCursorRow * 3 + g_FormationCursorColumn;
-    g_UiPanelTasks[20].pos.vx = D_801EC4D0[index].unk_00;
+    g_UIPanelTasks[20].pos.vx = D_801EC4D0[index].unk_00;
     y                         = D_801EC4D0[index].unk_02;
     frame[0x24]               = 1;
-    g_UiPanelTasks[20].pos.vy = y;
-    g_UiPanelTasks[20].unk_0A = D_801EC4D0[index].unk_04 + 1;
-    g_UiPanelTasks[20].unk_0B = 1;
+    g_UIPanelTasks[20].pos.vy = y;
+    g_UIPanelTasks[20].unk_0A = D_801EC4D0[index].unk_04 + 1;
+    g_UIPanelTasks[20].unk_0B = 1;
     for (i = 0; i < 6; i++) {
-        g_UiPanelTasks[MENU_PANEL_CARD_FIRST + i].unk_0C = 0;
+        g_UIPanelTasks[MENU_PANEL_CARD_FIRST + i].unk_0C = 0;
     }
-    g_UiPanelTasks[g_FormationRow * 2 + (g_FormationColumn + 0xB)].unk_0C = g_FormationCursorColumn == 0 ? 1 << g_FormationCursorRow : 7;
+    g_UIPanelTasks[g_FormationRow * 2 + (g_FormationColumn + 0xB)].unk_0C = g_FormationCursorColumn == 0 ? 1 << g_FormationCursorRow : 7;
     if (g_FormationCursorColumn != 0) {
         message = g_FormationCursorRow * 2 + (g_FormationCursorColumn + 0x76);
     } else {

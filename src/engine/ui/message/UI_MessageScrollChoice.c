@@ -12,27 +12,27 @@ MATCH void UI_MessageScrollChoice(void) {
     if ((*pad & g_InputMasks[MENU_INPUT_CONFIRM]) != 0) {
         u8* step;
 
-        step  = &g_UiMessageStep;
+        step  = &g_UIMessageStep;
         *step = *step + 1;
     }
     action = INPUT_REPEATED(*pad, (PADLup | PADLdown));
     if ((action & PADLup) != 0) {
         s8* index;
 
-        index  = &g_UiMessageWindow.selection_index;
+        index  = &g_UIMessageWindow.selection_index;
         cursor = *index - 1;
         *index = cursor;
         if (cursor < 0) {
-            *index = g_UiMessageWindow.last_row;
+            *index = g_UIMessageWindow.last_row;
         }
     }
     if ((action & PADLdown) != 0) {
         s8* index;
 
-        index  = &g_UiMessageWindow.selection_index;
+        index  = &g_UIMessageWindow.selection_index;
         cursor = *index + 1;
         *index = cursor;
-        if (g_UiMessageWindow.last_row < cursor) {
+        if (g_UIMessageWindow.last_row < cursor) {
             *index = 0;
         }
     }

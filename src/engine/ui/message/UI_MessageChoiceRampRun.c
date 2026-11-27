@@ -7,8 +7,8 @@
 MATCH void UI_MessageChoiceRampRun(void) {
     ChoiceSteps table = {{UI_MessageChoiceRampBegin, UI_MessageChoiceRampStep}};
 
-    table.steps[g_UiMessageChoiceStep]();
-    if (g_UiMessageChoiceTimer != 0xFFFFu) {
-        g_UiMessageChoiceTimer -= 1;
+    table.steps[g_UIMessageChoiceStep]();
+    if (g_UIMessageChoiceTimer != 0xFFFFu) {
+        g_UIMessageChoiceTimer -= 1;
     }
 }

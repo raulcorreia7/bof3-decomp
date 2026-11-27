@@ -8,9 +8,9 @@ MATCH void UI_MessageChoiceShiftBegin(void) {
     u8   next;
 
     counter               = (u16*)&D_801490C8;
-    next                  = g_UiMessageChoiceStep + 1;
+    next                  = g_UIMessageChoiceStep + 1;
     value                 = *counter << 4;
     *counter              = value;
-    D_801490CA            = g_UiMessageChoiceTimer;
-    g_UiMessageChoiceStep = next;
+    D_801490CA            = g_UIMessageChoiceTimer;
+    g_UIMessageChoiceStep = next;
 }

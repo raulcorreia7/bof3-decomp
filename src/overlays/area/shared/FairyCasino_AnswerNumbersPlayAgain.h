@@ -9,10 +9,10 @@ MATCH void FairyCasino_AnswerNumbersPlayAgain(void) {
     } else if (g_Zenny < 500u) {
         value = MSG_AREA175_NOT_ENOUGH_ZENNY;
     } else {
-        g_UiMessageRequest = MSG_AREA175_NUMBERS_START;
+        g_UIMessageRequest = MSG_AREA175_NUMBERS_START;
         D_801F294F         = 0;
         return;
     }
-    g_UiMessageRequest = value;
+    g_UIMessageRequest = value;
     D_801F294F         = 1;
 }

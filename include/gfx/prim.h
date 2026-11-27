@@ -109,7 +109,7 @@ ASSERT_SIZE(RectU16, 0x08);
 /* D_8014598C */
 extern u8* g_GfxPrimCursor;
 /* D_80145AD4 */
-extern u8  g_UiTextFormatBuffer[];
+extern u8  g_UITextFormatBuffer[];
 
 /* Queue a draw-mode primitive for the texture page at order-table slot 1: the default texture window. */
 static inline void GFX_AddDrawMode(s32 tpage) {

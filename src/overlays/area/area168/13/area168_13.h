@@ -58,9 +58,9 @@ extern u8 D_801F4B30[];
 /* Request the card-key door's message for the current menu choice: passed opens the door, failed or
  * none is the message request. A statement macro: the member declares u16 message. */
 #define AREA168_TEST_KEY_CARD()                                   \
-    if (g_UiMessageChoice == 0) {                                 \
+    if (g_UIMessageChoice == 0) {                                 \
         if (Item_VitalHas(VITAL_ITEM_CARD_KEY_A) != 0) {          \
-            g_UiMessageRequest = AREA168_MESSAGE_ID_CHECK_PASSED; \
+            g_UIMessageRequest = AREA168_MESSAGE_ID_CHECK_PASSED; \
             g_AreaSceneMode |= 1;                                 \
             return;                                               \
         }                                                         \
@@ -68,6 +68,6 @@ extern u8 D_801F4B30[];
     } else {                                                      \
         message = MESSAGE_NONE;                                   \
     }                                                             \
-    g_UiMessageRequest = message
+    g_UIMessageRequest = message
 
 #endif

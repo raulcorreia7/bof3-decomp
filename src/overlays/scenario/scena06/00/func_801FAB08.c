@@ -57,7 +57,7 @@ MATCH void func_801FAB08(void) {
             }
             break;
         case 8:
-            if (g_UiWindowChannel & 2) {
+            if (g_UIWindowChannel & 2) {
                 Party_MemberAdd(2);
                 g_GameStateIndex     = 6;
                 D_8014865F           = 0;

@@ -4,7 +4,7 @@ MATCH s32 func_801F2C04(void) {
     s32 bit;
 
     MESSAGE_REQUEST_CLEAR();
-    switch (g_UiMessageChoice) {
+    switch (g_UIMessageChoice) {
         case 0:
             bit = 0x16;
             break;

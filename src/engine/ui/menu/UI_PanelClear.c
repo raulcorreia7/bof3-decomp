@@ -4,7 +4,7 @@
  */
 /* func_80158E20 */
 MATCH void UI_PanelClear(void) {
-    g_UiPanelCurrent->active = 0;
-    g_UiPanelCurrent->mode   = 0;
-    g_UiPanelCurrent->state  = 0;
+    g_UIPanelCurrent->active = 0;
+    g_UIPanelCurrent->mode   = 0;
+    g_UIPanelCurrent->state  = 0;
 }

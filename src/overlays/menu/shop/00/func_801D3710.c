@@ -6,7 +6,7 @@ MATCH void func_801D3710(void) {
     u8* panel;
     s32 offset;
 
-    panel    = (u8*)g_UiPanelTasks;
+    panel    = (u8*)g_UIPanelTasks;
     panel[1] = 7;
     panel[2] = 0;
     panel[3] = 2;

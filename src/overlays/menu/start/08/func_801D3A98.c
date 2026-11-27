@@ -7,14 +7,14 @@ MATCH void func_801D3A98(void) {
     u8*            rows;
 
     Menu_DrawClutStrip(g_WindowClut);
-    g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0C             = 0xFF;
-    g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0x18;
-    g_UiPanelTasks[MENU_START_PANEL_CURSOR].active            = 1;
-    g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0C             = 0xFF;
-    task                                                      = &g_UiPanelTasks[14];
+    g_UIPanelTasks[MENU_START_PANEL_ITEMS].unk_0C             = 0xFF;
+    g_UIPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0x18;
+    g_UIPanelTasks[MENU_START_PANEL_CURSOR].active            = 1;
+    g_UIPanelTasks[MENU_START_PANEL_ITEMS].unk_0C             = 0xFF;
+    task                                                      = &g_UIPanelTasks[14];
     task->unk_0C                                              = 0xFF;
-    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.vx            = task->pos.vx + 5;
-    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.vy            = (u16)(task->pos.vy + (task->unk_0B * 16 + 26));
+    g_UIPanelTasks[MENU_START_PANEL_CURSOR].pos.vx            = task->pos.vx + 5;
+    g_UIPanelTasks[MENU_START_PANEL_CURSOR].pos.vy            = (u16)(task->pos.vy + (task->unk_0B * 16 + 26));
 
     input = INPUT_REPEATED(g_PadStates[0].pressed, (PADLup | PADLdown));
     if (input & PADLup) {
@@ -38,8 +38,8 @@ MATCH void func_801D3A98(void) {
             func_801D49F8(entry);
             return;
         }
-        g_UiPanelTasks[MENU_START_PANEL_ITEMS].flags  = 0xFF;
-        g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0C = s_ChoiceMenuCursors[g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0A];
+        g_UIPanelTasks[MENU_START_PANEL_ITEMS].flags  = 0xFF;
+        g_UIPanelTasks[MENU_START_PANEL_ITEMS].unk_0C = s_ChoiceMenuCursors[g_UIPanelTasks[MENU_START_PANEL_ITEMS].unk_0A];
         /* g_MenuStep.state through g_MenuStep.sub_step: retail keeps the symbol-relative
          * address in a register for the read-modify-write. */
         (&g_MenuStep.sub_step)[1]++;

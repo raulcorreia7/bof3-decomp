@@ -1,7 +1,7 @@
 #include "engine/slus/slus.h"
 
 /* sets the menu panel's position from the D_8017F944/D_8017F946
- * lookup keyed by the g_UiPanelPlacement byte, packs the panel's window fields and
+ * lookup keyed by the g_UIPanelPlacement byte, packs the panel's window fields and
  * advances its state byte.
  */
 /* func_80159A90 */
@@ -12,8 +12,8 @@ MATCH void UI_MessageOpenPresetPanel(void) {
     u16 x;
     u16 y;
 
-    mode  = &g_UiPanelPlacement;
-    panel = g_UiPanelCurrent;
+    mode  = &g_UIPanelPlacement;
+    panel = g_UIPanelCurrent;
 
     x             = *(u16*)((u8*)&D_8017F944 + (*mode * 4));
     panel->pos.vx = ((x + 35) << 4);
@@ -26,9 +26,9 @@ MATCH void UI_MessageOpenPresetPanel(void) {
     panel->unk_0A              = 0x47;
     panel->pos.vy              = ((y + 16) << 4);
 
-    panel         = g_UiPanelCurrent;
+    panel         = g_UIPanelCurrent;
     panel->unk_0B = 0x20;
 
-    panel = g_UiPanelCurrent;
+    panel = g_UIPanelCurrent;
     panel->state++;
 }

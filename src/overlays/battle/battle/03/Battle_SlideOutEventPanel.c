@@ -2,7 +2,7 @@
 
 /* func_801EA774 */
 MATCH void Battle_SlideOutEventPanel(void) {
-    MenuPanelTask* panel = g_UiPanelCurrent;
+    MenuPanelTask* panel = g_UIPanelCurrent;
     s16            state = panel->pos.vy;
 
     if (state == -0x16) {

@@ -22,12 +22,12 @@ MATCH void Battle_DrawPartyPanel(s16 x, s16 y) {
     for (i = 0; i < g_Battle.party_count; i++) {
         column_x = x + 0x14;
         func_801D9DBC(column_x, (s16)(y + 0xE), 9, 0, 0);
-        func_801D9E9C(column_x, (s16)(y + 0xE), g_UiPanelTasks[i + MENU_PANEL_BATTLER_FIRST].unk_0B, g_UiPanelTasks[i + MENU_PANEL_BATTLER_FIRST].flags, 0);
+        func_801D9E9C(column_x, (s16)(y + 0xE), g_UIPanelTasks[i + MENU_PANEL_BATTLER_FIRST].unk_0B, g_UIPanelTasks[i + MENU_PANEL_BATTLER_FIRST].flags, 0);
         if (g_Game.members[i].chr.stats.max_ap != 0) {
-            Battle_DrawPanelLine(column_x, (s16)(y + 0xE), (s16)(x + (g_UiPanelTasks[i + MENU_PANEL_BATTLER_FIRST].unk_0C + 0x14)), (s16)(y + 0xE), 100, 0, 200);
-            if (g_UiPanelTasks[i + MENU_PANEL_BATTLER_FIRST].unk_0E != 0) {
-                Battle_DrawPanelLine((s16)(x + (g_UiPanelTasks[i + MENU_PANEL_BATTLER_FIRST].unk_0C + 0x14)), (s16)(y + 0xE),
-                                     (s16)(g_UiPanelTasks[i + MENU_PANEL_BATTLER_FIRST].unk_0E + (g_UiPanelTasks[i + MENU_PANEL_BATTLER_FIRST].unk_0C + column_x)), (s16)(y + 0xE), 200, 0, 0);
+            Battle_DrawPanelLine(column_x, (s16)(y + 0xE), (s16)(x + (g_UIPanelTasks[i + MENU_PANEL_BATTLER_FIRST].unk_0C + 0x14)), (s16)(y + 0xE), 100, 0, 200);
+            if (g_UIPanelTasks[i + MENU_PANEL_BATTLER_FIRST].unk_0E != 0) {
+                Battle_DrawPanelLine((s16)(x + (g_UIPanelTasks[i + MENU_PANEL_BATTLER_FIRST].unk_0C + 0x14)), (s16)(y + 0xE),
+                                     (s16)(g_UIPanelTasks[i + MENU_PANEL_BATTLER_FIRST].unk_0E + (g_UIPanelTasks[i + MENU_PANEL_BATTLER_FIRST].unk_0C + column_x)), (s16)(y + 0xE), 200, 0, 0);
             }
         }
         if (g_Game.members[i].chr.status & 0x4000) {

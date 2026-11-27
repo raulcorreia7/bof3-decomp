@@ -32,12 +32,12 @@ MATCH void func_801F60C0(void) {
     }
     digit += (u8)(SELF(Actor)->unk_0A % 3) * 3;
     digit = digit < 0 ? 0 : digit < 10 ? digit : 9;
-    sprintf(g_UiTextFormatBuffer, D_801F2C08, SELF(Actor)->timer, (u8)(SELF(Actor)->unk_0A / 3), digit);
-    g_UiTextFormatBuffer[2] = 0x8F;
+    sprintf(g_UITextFormatBuffer, D_801F2C08, SELF(Actor)->timer, (u8)(SELF(Actor)->unk_0A / 3), digit);
+    g_UITextFormatBuffer[2] = 0x8F;
     if (SELF(Actor)->timer < 10 && (g_FrameCount & 4)) {
-        UI_TextDrawAscii(0x8E, 0x30, 2, g_UiTextFormatBuffer);
+        UI_TextDrawAscii(0x8E, 0x30, 2, g_UITextFormatBuffer);
     } else {
-        UI_TextDrawAscii(0x8E, 0x30, 0, g_UiTextFormatBuffer);
+        UI_TextDrawAscii(0x8E, 0x30, 0, g_UITextFormatBuffer);
     }
     func_801F6774();
     func_801F6368();

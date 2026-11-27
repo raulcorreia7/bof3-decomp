@@ -5,5 +5,5 @@
 MATCH void UI_MessageChoiceShiftRun(void) {
     void (*table[2])(void) = {UI_MessageChoiceShiftBegin, UI_MessageChoiceShiftStep};
 
-    table[g_UiMessageChoiceStep]();
+    table[g_UIMessageChoiceStep]();
 }

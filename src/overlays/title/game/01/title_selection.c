@@ -69,7 +69,7 @@ MATCH void Title_StartSelectedGame(void) { /* func_801D0E54 */
 /* func_801D0F00 */
 MATCH void Title_WaitInput(void) { /* func_801D0F00 */
     if (g_SysThreads[0].state == 0u) {
-        g_UiTitleState = 0u;
+        g_UITitleState = 0u;
         return;
     }
 
@@ -81,7 +81,7 @@ MATCH void Title_WaitInput(void) { /* func_801D0F00 */
         sel  = g_SndBGMId;
         bank = D_80143F20;
         SND_BGMFadeOut(sel, bank, 8);
-        g_UiTitleState = g_UiTitleState + 1u;
+        g_UITitleState = g_UITitleState + 1u;
     }
     Title_DrawChoicePrompt();
 }

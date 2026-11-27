@@ -162,7 +162,7 @@ MATCH void func_801F363C(void) {
     u8* previous;
 
     MESSAGE_REQUEST_CLEAR();
-    if (g_UiMessageChoice == 1) {
+    if (g_UIMessageChoice == 1) {
         previous = SELF(u8);
         g_Self   = g_Game.members;
         Script_Select(0x80);

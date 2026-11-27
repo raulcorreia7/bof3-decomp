@@ -40,8 +40,8 @@ MATCH void func_801EAA14(MenuPanelTask* task) {
         text_color = color;
         UI_TextDraw((s16)(x + 20), (s16)(y + 1), text_color, CHARACTER_NAME_LENGTH, (u8*)character);
         Menu_DrawIcon((x + 2) & HALF_MASK, (y + 0x15) & HALF_MASK, 3, shaded);
-        TEXT_Format(g_UiTextFormatBuffer, D_801D0F18, character->level);
-        UI_TextDrawGlyphString(stat_x, (s16)(y + 0x15), text_color, g_UiTextFormatBuffer);
+        TEXT_Format(g_UITextFormatBuffer, D_801D0F18, character->level);
+        UI_TextDrawGlyphString(stat_x, (s16)(y + 0x15), text_color, g_UITextFormatBuffer);
         if ((LOWU(character->status) & (STATUS_CONFUSED | STATUS_POISONED)) == (STATUS_CONFUSED | STATUS_POISONED)) {
             if (g_FrameCount & 0x20) {
                 UI_TextDrawString(label_x, (s16)(y + 0x15), text_color != 0 ? text_color : 1, MENU_LABEL_LENGTH, D_801ED5D4);
@@ -64,15 +64,15 @@ MATCH void func_801EAA14(MenuPanelTask* task) {
         } else {
             color = UI_TEXT_DIM;
         }
-        TEXT_Format(g_UiTextFormatBuffer, D_801D0F1C, character->hp);
-        UI_TextDrawGlyphString(stat_x, (s16)(y + 0x1D), color, g_UiTextFormatBuffer);
+        TEXT_Format(g_UITextFormatBuffer, D_801D0F1C, character->hp);
+        UI_TextDrawGlyphString(stat_x, (s16)(y + 0x1D), color, g_UITextFormatBuffer);
         if (shaded == 0) {
             color = (character->fatigue != 0) * 4;
         } else {
             color = UI_TEXT_DIM;
         }
-        TEXT_Format(g_UiTextFormatBuffer, D_801D0F24, character->stats.max_hp);
-        UI_TextDrawGlyphString(stat_x, (s16)(y + 0x1D), color, g_UiTextFormatBuffer);
+        TEXT_Format(g_UITextFormatBuffer, D_801D0F24, character->stats.max_hp);
+        UI_TextDrawGlyphString(stat_x, (s16)(y + 0x1D), color, g_UITextFormatBuffer);
         Menu_DrawIcon((x + 2) & HALF_MASK, (y + 0x25) & HALF_MASK, 1, shaded);
         color = shaded ? UI_TEXT_DIM : 0;
         if (shaded == 0) {
@@ -86,12 +86,12 @@ MATCH void func_801EAA14(MenuPanelTask* task) {
             color = UI_TEXT_DIM;
         }
         item++;
-        TEXT_Format(g_UiTextFormatBuffer, D_801D0F1C, character->ap);
+        TEXT_Format(g_UITextFormatBuffer, D_801D0F1C, character->ap);
         count++;
-        UI_TextDrawGlyphString(stat_x, (s16)(y + 0x25), color, g_UiTextFormatBuffer);
+        UI_TextDrawGlyphString(stat_x, (s16)(y + 0x25), color, g_UITextFormatBuffer);
         color = shaded ? UI_TEXT_DIM : 0;
-        TEXT_Format(g_UiTextFormatBuffer, D_801D0F24, character->stats.max_ap);
-        UI_TextDrawGlyphString(stat_x, (s16)(y + 0x25), color, g_UiTextFormatBuffer);
+        TEXT_Format(g_UITextFormatBuffer, D_801D0F24, character->stats.max_ap);
+        UI_TextDrawGlyphString(stat_x, (s16)(y + 0x25), color, g_UITextFormatBuffer);
         y += 0x34;
     } while (count < task->unk_0A);
 }

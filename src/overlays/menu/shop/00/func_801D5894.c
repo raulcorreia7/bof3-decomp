@@ -12,11 +12,11 @@ MATCH void func_801D5894(void) {
     SAVE_DrawSlots(SAVE_SLOTS_X, SAVE_SLOTS_Y, 0);
     SAVE_AccessFile(0, 0, 0, 0, 0);
     if (g_SaveCardStatus == CARD_EVENT_OK) {
-        TEXT_Format(g_UiTextFormatBuffer, D_801D0C20, g_SaveSlotFirst);
-        TEXT_Format(g_UiTextFormatBuffer, D_801D0C68, g_PlayClock.hours, g_PlayClock.minutes, g_PlayClock.seconds);
-        strcpy(save_name, (char*)g_UiTextFormatBuffer);
-        TEXT_Format(g_UiTextFormatBuffer, D_801D0C20, g_SaveSlotFirst);
-        strcpy(date_label, (char*)g_UiTextFormatBuffer);
+        TEXT_Format(g_UITextFormatBuffer, D_801D0C20, g_SaveSlotFirst);
+        TEXT_Format(g_UITextFormatBuffer, D_801D0C68, g_PlayClock.hours, g_PlayClock.minutes, g_PlayClock.seconds);
+        strcpy(save_name, (char*)g_UITextFormatBuffer);
+        TEXT_Format(g_UITextFormatBuffer, D_801D0C20, g_SaveSlotFirst);
+        strcpy(date_label, (char*)g_UITextFormatBuffer);
         if (((SaveAccessCallback)SAVE_AccessFile)(1, date_label, 0x200, 0, 0) != -1) {
             D_801E6108 = g_SaveSlotFirst + 1;
             SAVE_BuildSlotImage();

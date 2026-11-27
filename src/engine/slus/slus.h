@@ -74,8 +74,8 @@
     do {                                                                                  \
         u16 value;                                                                        \
                                                                                           \
-        g_UiMessageRequest = g_AnswerMessages[(row) + g_UiMessageWindow.selection_index]; \
-        switch (g_UiMessageWindow.selection_index) {                                      \
+        g_UIMessageRequest = g_AnswerMessages[(row) + g_UIMessageWindow.selection_index]; \
+        switch (g_UIMessageWindow.selection_index) {                                      \
             case 0:                                                                       \
                 value = (delay0);                                                         \
                 break;                                                                    \
@@ -256,7 +256,7 @@ typedef struct SoundVoice {
     u8  pad_84[0x28]; /* +0x84 */
 } SoundVoice;
 
-/* Stack snapshots of the fixed dispatch tables the step handlers copy to the frame and index: UI_MessageDispatchState/UI_MessageRunChoice copy the eight-entry tables at g_UiMessageStateSteps/g_UiMessageChoiceStateSteps, UI_MessageRunScrollChoice/UI_MessageDispatchChoiceMode the six-entry tables at g_UiMessageScrollStateSteps/g_UiMessageChoiceModes, func_8015196C/UI_MessageChoiceRampRun build the two-entry tables on the stack, and g_UiMessageSteps is the sixteen-entry handler table UI_MessageDispatchStep copies. */
+/* Stack snapshots of the fixed dispatch tables the step handlers copy to the frame and index: UI_MessageDispatchState/UI_MessageRunChoice copy the eight-entry tables at g_UIMessageStateSteps/g_UIMessageChoiceStateSteps, UI_MessageRunScrollChoice/UI_MessageDispatchChoiceMode the six-entry tables at g_UIMessageScrollStateSteps/g_UIMessageChoiceModes, func_8015196C/UI_MessageChoiceRampRun build the two-entry tables on the stack, and g_UIMessageSteps is the sixteen-entry handler table UI_MessageDispatchStep copies. */
 typedef struct {
     Callback steps[8];
 } MessageStateSteps;
@@ -614,16 +614,16 @@ extern u16                   g_SndVoiceTargetPan[];
 /* D_80149070 */
 extern u16                   g_SndVoicePanPosition[];
 /* D_801490A3 */
-extern u8                    g_UiMessageChoiceStep;
+extern u8                    g_UIMessageChoiceStep;
 /* D_801490AC */
-extern u32                   g_UiMessageScript;
+extern u32                   g_UIMessageScript;
 extern u8*                   D_801490B0;
 
 /* The message window with the byte ahead of it: UI_TextDrawGlyph reads both through this one block. */
 typedef struct MessageWindowBlock {
     u8        row_offset_index; /* 0x00 - row of g_TextRowOffsets the glyph height uses */
     u8        pad_01[3];        /* 0x01-0x03 */
-    MenuState window;           /* 0x04 - g_UiMessageWindow */
+    MenuState window;           /* 0x04 - g_UIMessageWindow */
 } MessageWindowBlock;
 
 extern u8                          D_801490B8[]; /* base form: UI_TextDrawGlyph takes its address and reads [0] */
@@ -631,11 +631,11 @@ extern u8                          D_801490B9;
 extern s8                          D_801490BA[];
 extern u8                          D_801490BB[];
 /* D_801490BC */
-extern MenuState                   g_UiMessageWindow;
+extern MenuState                   g_UIMessageWindow;
 extern s16                         D_801490C8; /* cue counter; reads sign at the < 9 test and zero-extends elsewhere */
 extern s16                         D_801490CA;
 /* D_801490CE */
-extern u8                          g_UiPanelPlacement;
+extern u8                          g_UIPanelPlacement;
 extern s32                         D_801490D7;
 extern s32                         D_801492FC;
 extern s32                         D_80149300;
@@ -646,26 +646,26 @@ extern u8                          g_AreaCellPacketCount;
 /* D_80149340 */
 extern u8                          D_80149341;
 extern const char                  g_ExceptionHexFormat[];
-extern const u32                   g_UiModeLocals[];
+extern const u32                   g_UIModeLocals[];
 /* D_80149A5C */
-extern const MessageStateSteps     g_UiMessageStateSteps;
-extern const MessageStateSteps     g_UiMessageChoiceStateSteps;
-extern const MessageChoiceSteps    g_UiMessageScrollStateSteps;
+extern const MessageStateSteps     g_UIMessageStateSteps;
+extern const MessageStateSteps     g_UIMessageChoiceStateSteps;
+extern const MessageChoiceSteps    g_UIMessageScrollStateSteps;
 /* D_80149AB4 */
-extern const MessageChoiceSteps    g_UiMessageChoiceModes;
+extern const MessageChoiceSteps    g_UIMessageChoiceModes;
 /* The 16-entry handler table (code addresses 0x80152370..0x801526C8, the step
  * handlers that follow UI_MessageDispatchStep): the shared step byte's indices at and
  * above 0x80 dispatch through it. */
 /* D_80149ACC */
-extern const MessageSteps          g_UiMessageSteps;
+extern const MessageSteps          g_UIMessageSteps;
 /* D_80149B30 */
-extern const struct MenuPanelModes g_UiMessagePanelModes;
+extern const struct MenuPanelModes g_UIMessagePanelModes;
 /* D_80149B3C */
-extern const struct MenuPanelSteps g_UiMessageWindowSteps;
+extern const struct MenuPanelSteps g_UIMessageWindowSteps;
 /* D_80149B50 */
-extern const struct MenuPanelSteps g_UiMessageChoiceSteps;
+extern const struct MenuPanelSteps g_UIMessageChoiceSteps;
 /* D_80149B64 */
-extern const struct MenuPanelSteps g_UiMessagePresetSteps;
+extern const struct MenuPanelSteps g_UIMessagePresetSteps;
 extern const VECTOR                D_80149BF0;
 extern const Callback              g_CdStateHandlers[CD_STATE_COUNT];
 extern const EmiRingSteps          g_EmiRingSteps;
@@ -1065,7 +1065,7 @@ extern u8                   D_801F6870;
 extern u8                   D_801F6A20;
 extern u8                   D_801F6A68;
 extern u8                   D_801F6AD0;
-extern const MenuPanelFuncs g_UiPanels;
+extern const MenuPanelFuncs g_UIPanels;
 
 /* Retail function prototypes (one declaration each). */
 s8                                func_8014DE78(void);
@@ -1180,7 +1180,7 @@ static inline void Snd_ToggleSequencePlayer(void (*action)(short, short), s32 cu
 static inline void Slus_DrawPanelBox(void) {
     MenuPanelTask* panel;
 
-    panel = g_UiPanelCurrent;
+    panel = g_UIPanelCurrent;
     UI_WindowDrawPanelBox((s16)panel->pos.vx >> 4, (s16)panel->pos.vy >> 4, (u8)(panel->u.grow.w >> 4), (u8)(panel->u.grow.h >> 4));
 }
 

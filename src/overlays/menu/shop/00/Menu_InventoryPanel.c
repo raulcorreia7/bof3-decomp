@@ -2,6 +2,6 @@
 
 /* func_801E3720 */
 MATCH void Menu_InventoryPanel(void) {
-    g_ShopInventorySteps[g_UiPanelCurrent->state]();
-    Menu_DrawInventoryWindow(g_UiPanelCurrent);
+    g_ShopInventorySteps[g_UIPanelCurrent->state]();
+    Menu_DrawInventoryWindow(g_UIPanelCurrent);
 }

@@ -9,14 +9,14 @@ NON_MATCHING void func_801DF9EC(void) {
     u16* pressed;
 
     selected                        = D_801E6260;
-    g_UiPanelTasks[1].unk_0B        = 0xFF;
-    g_UiPanelTasks[0].u.addr.unk_10 = selected + 0x73;
-    if (g_UiPanelTasks[1].state == 0) {
-        g_UiPanelTasks[21].active = 1;
-        g_UiPanelTasks[21].pos.vx = g_UiPanelTasks[1].pos.vx + selected * 0x30;
-        g_UiPanelTasks[21].pos.vy = g_UiPanelTasks[1].pos.vy + 4;
+    g_UIPanelTasks[1].unk_0B        = 0xFF;
+    g_UIPanelTasks[0].u.addr.unk_10 = selected + 0x73;
+    if (g_UIPanelTasks[1].state == 0) {
+        g_UIPanelTasks[21].active = 1;
+        g_UIPanelTasks[21].pos.vx = g_UIPanelTasks[1].pos.vx + selected * 0x30;
+        g_UIPanelTasks[21].pos.vy = g_UIPanelTasks[1].pos.vy + 4;
     } else {
-        g_UiPanelTasks[21].active = 0;
+        g_UIPanelTasks[21].active = 0;
     }
 
     pressed = &g_PadStates[0].pressed;
@@ -41,58 +41,58 @@ NON_MATCHING void func_801DF9EC(void) {
                 D_8014865B = 1;
             } else {
                 SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
-                g_UiPanelTasks[2].mode   = 13;
-                g_UiPanelTasks[2].pos.vx = -150;
-                g_UiPanelTasks[2].pos.vy = 116;
-                g_UiPanelTasks[3].mode   = 12;
-                g_UiPanelTasks[3].unk_0C = 0xFF;
-                g_UiPanelTasks[2].panel  = 7;
-                g_UiPanelTasks[3].panel  = 7;
+                g_UIPanelTasks[2].mode   = 13;
+                g_UIPanelTasks[2].pos.vx = -150;
+                g_UIPanelTasks[2].pos.vy = 116;
+                g_UIPanelTasks[3].mode   = 12;
+                g_UIPanelTasks[3].unk_0C = 0xFF;
+                g_UIPanelTasks[2].panel  = 7;
+                g_UIPanelTasks[3].panel  = 7;
                 D_801E625C               = 0;
-                g_UiPanelTasks[2].state  = 2;
-                g_UiPanelTasks[2].active = 1;
-                g_UiPanelTasks[3].state  = 2;
-                g_UiPanelTasks[3].active = 1;
-                g_UiPanelTasks[3].unk_0B = 0;
-                g_UiPanelTasks[3].flags  = 0;
-                g_UiPanelTasks[3].pos.vx = 320;
-                g_UiPanelTasks[3].pos.vy = 62;
+                g_UIPanelTasks[2].state  = 2;
+                g_UIPanelTasks[2].active = 1;
+                g_UIPanelTasks[3].state  = 2;
+                g_UIPanelTasks[3].active = 1;
+                g_UIPanelTasks[3].unk_0B = 0;
+                g_UIPanelTasks[3].flags  = 0;
+                g_UIPanelTasks[3].pos.vx = 320;
+                g_UIPanelTasks[3].pos.vy = 62;
                 D_80148652               = 1;
-                g_UiPanelTasks[2].unk_0A = D_801E6264[0];
-                g_UiPanelTasks[3].unk_0A = D_801E6264[0];
+                g_UIPanelTasks[2].unk_0A = D_801E6264[0];
+                g_UIPanelTasks[3].unk_0A = D_801E6264[0];
                 g_MenuStep.sub_step++;
                 SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
-                g_UiPanelTasks[1].unk_0B = D_801E6260;
+                g_UIPanelTasks[1].unk_0B = D_801E6260;
                 D_80148654               = 5;
                 return;
             }
         } else {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 4));
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
-            g_UiPanelTasks[4].panel  = 7;
-            g_UiPanelTasks[4].mode   = 11;
+            g_UIPanelTasks[4].panel  = 7;
+            g_UIPanelTasks[4].mode   = 11;
             g_BattleMessageState     = 3;
-            g_UiPanelTasks[4].active = 1;
-            g_UiPanelTasks[4].unk_0C = 0xFF;
-            g_UiPanelTasks[4].unk_0A = 0;
-            g_UiPanelTasks[4].unk_0B = 0;
-            g_UiPanelTasks[4].flags  = 0;
-            g_UiPanelTasks[4].pos.vx = -170;
-            g_UiPanelTasks[4].pos.vy = 62;
+            g_UIPanelTasks[4].active = 1;
+            g_UIPanelTasks[4].unk_0C = 0xFF;
+            g_UIPanelTasks[4].unk_0A = 0;
+            g_UIPanelTasks[4].unk_0B = 0;
+            g_UIPanelTasks[4].flags  = 0;
+            g_UIPanelTasks[4].pos.vx = -170;
+            g_UIPanelTasks[4].pos.vy = 62;
             g_MenuStep.sub_step += 2;
         }
-        g_UiPanelTasks[1].unk_0B = D_801E6260;
+        g_UIPanelTasks[1].unk_0B = D_801E6260;
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
         D_80148654 = 5;
         D_80148652 = 0;
     } else if (*pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
-        g_UiPanelTasks[0].state   = 1;
-        g_UiPanelTasks[1].state   = 1;
-        g_UiPanelTasks[21].active = 0;
+        g_UIPanelTasks[0].state   = 1;
+        g_UIPanelTasks[1].state   = 1;
+        g_UIPanelTasks[21].active = 0;
         has_item                  = Item_VitalHas(VITAL_ITEM_FOUNTAIN_PEN);
         if (has_item == 0) {
-            g_UiPanelTasks[6].state = 1;
+            g_UIPanelTasks[6].state = 1;
         }
         D_80148654 = 5;
         D_80148651 = 4;

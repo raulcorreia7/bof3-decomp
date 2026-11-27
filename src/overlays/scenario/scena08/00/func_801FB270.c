@@ -93,7 +93,7 @@ MATCH void func_801FB270(void) {
             g_ScenarioState.step = 9;
             break;
         case 9:
-            if (g_UiWindowEffectBusy != 0) {
+            if (g_UIWindowEffectBusy != 0) {
                 break;
             }
             g_ScriptVars[0]++;

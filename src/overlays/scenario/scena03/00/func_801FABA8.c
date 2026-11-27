@@ -38,7 +38,7 @@ MATCH void func_801FABA8(void) {
             }
             break;
         case 4:
-            if (g_GameStateIndex == GAME_REQUEST_MESSAGE && g_UiMessageRequest == 0xC) {
+            if (g_GameStateIndex == GAME_REQUEST_MESSAGE && g_UIMessageRequest == 0xC) {
                 g_ScenarioState.step = 5;
             }
             break;
@@ -108,7 +108,7 @@ MATCH void func_801FABA8(void) {
             }
             break;
         case 13:
-            if (g_GameStateIndex == GAME_REQUEST_MESSAGE && g_UiMessageRequest == 0x11) {
+            if (g_GameStateIndex == GAME_REQUEST_MESSAGE && g_UIMessageRequest == 0x11) {
                 g_ScenarioState.step = 14;
             }
             break;

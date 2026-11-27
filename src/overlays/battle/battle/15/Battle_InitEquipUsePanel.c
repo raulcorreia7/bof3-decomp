@@ -22,14 +22,14 @@ MATCH void Battle_InitEquipUsePanel(void) {
     D_801485BA                = three;
     g_BattlePanelMode         = three;
     g_BattleEquipSlot         = 0;
-    g_UiPanelTasks[18].unk_0B = 0xFF;
+    g_UIPanelTasks[18].unk_0B = 0xFF;
     entry_index               = slot[5];
     D_801485D8                = &s_BattleEquipment[0];
     D_801485BC                = -0xAA;
     D_801485BE                = 0x3F;
     D_801485C5                = one;
     g_BattleChoicePhase       = 4;
-    g_UiPanelTasks[18].unk_0C = entry_index;
+    g_UIPanelTasks[18].unk_0C = entry_index;
     tail_index                = slot[5];
     D_801485C5                = three;
     D_80148656                = tail_index;

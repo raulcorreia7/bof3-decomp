@@ -4,10 +4,10 @@ MATCH void func_801D334C(void) {
     u8* p;
     u8* counter;
 
-    p                       = (u8*)g_UiPanelTasks;
-    g_UiPanelTasks[0].panel = 7;
-    g_UiPanelTasks[0].mode  = 0;
-    g_UiPanelTasks[0].state = 2;
+    p                       = (u8*)g_UIPanelTasks;
+    g_UIPanelTasks[0].panel = 7;
+    g_UIPanelTasks[0].mode  = 0;
+    g_UIPanelTasks[0].state = 2;
     *p                      = 1;
     p += 0x24;
     D_80148334           = 0x14;

@@ -3,11 +3,11 @@
 MATCH void func_801F3F90(void) {
     u8 answer;
 
-    if (g_UiMessageChoice != 0) {
-        if (g_UiMessageChoice == 1) {
+    if (g_UIMessageChoice != 0) {
+        if (g_UIMessageChoice == 1) {
             answer = 1;
         } else {
-            g_UiMessageRequest = MESSAGE_NONE;
+            g_UIMessageRequest = MESSAGE_NONE;
             return;
         }
     } else {
@@ -23,5 +23,5 @@ MATCH void func_801F3F90(void) {
         g_SpawnedActors[g_SceneActorSlot].type         = 0x66;
         g_SpawnedActors[g_SceneActorSlot].unk_06       = answer;
     }
-    g_UiMessageRequest = MESSAGE_NONE;
+    g_UIMessageRequest = MESSAGE_NONE;
 }

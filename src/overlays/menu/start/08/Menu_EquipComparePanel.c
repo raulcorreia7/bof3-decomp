@@ -2,8 +2,8 @@
 
 /* func_801EA50C */
 MATCH void Menu_EquipComparePanel(void) {
-    g_MenuStartEquipCompareSteps[g_UiPanelCurrent->state]();
+    g_MenuStartEquipCompareSteps[g_UIPanelCurrent->state]();
     /* FAKE: retail reads g_CharSlot as u8[]. */
-    Menu_DrawEquipCompareWindow(((u8*)g_CharSlot)[g_PartyFieldOrder[g_UiPanelCurrent->unk_0C]], (u16)g_UiPanelCurrent->pos.vx, (u16)g_UiPanelCurrent->pos.vy, (u8*)g_UiPanelCurrent->item_table,
-                                g_UiPanelCurrent->flags, g_UiPanelCurrent);
+    Menu_DrawEquipCompareWindow(((u8*)g_CharSlot)[g_PartyFieldOrder[g_UIPanelCurrent->unk_0C]], (u16)g_UIPanelCurrent->pos.vx, (u16)g_UIPanelCurrent->pos.vy, (u8*)g_UIPanelCurrent->item_table,
+                                g_UIPanelCurrent->flags, g_UIPanelCurrent);
 }

@@ -12,6 +12,6 @@ MATCH void func_800B15BC(void) {
             g_BattleEffects[offset].arg.unk_09 = row;
         }
     }
-    g_UiPanelCurrent->u.addr.unk_14 = 0xC;
-    g_UiPanelCurrent->state         = (g_UiPanelCurrent->state + 1);
+    g_UIPanelCurrent->u.addr.unk_14 = 0xC;
+    g_UIPanelCurrent->state         = (g_UIPanelCurrent->state + 1);
 }

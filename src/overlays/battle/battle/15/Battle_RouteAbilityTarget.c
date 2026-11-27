@@ -5,8 +5,8 @@ MATCH void Battle_RouteAbilityTarget(void) {
     u8* entry;
     u8  flags;
 
-    entry = Party_GetAbilities(D_80148656, g_UiPanelTasks[16].unk_0B, 1);
-    flags = g_Abilities[entry[g_UiPanelTasks[16].unk_0C]].targeting_flags;
+    entry = Party_GetAbilities(D_80148656, g_UIPanelTasks[16].unk_0B, 1);
+    flags = g_Abilities[entry[g_UIPanelTasks[16].unk_0C]].targeting_flags;
     if ((flags & ABILITY_TARGET_FLAG_SELECT) != 0u) {
         if ((flags & ABILITY_TARGET_FLAG_ALL) != 0u) {
             g_Battle.ui_step = 5u;

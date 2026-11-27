@@ -1,5 +1,5 @@
 #include "start_08.h"
 
 MATCH void func_801E8D14(void) {
-    g_MenuStartPanelModes[g_UiPanelCurrent->mode]();
+    g_MenuStartPanelModes[g_UIPanelCurrent->mode]();
 }

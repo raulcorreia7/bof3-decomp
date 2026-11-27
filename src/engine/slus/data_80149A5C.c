@@ -1,6 +1,6 @@
 #include "slus.h"
 
-const MessageStateSteps g_UiMessageStateSteps = {{
+const MessageStateSteps g_UIMessageStateSteps = {{
     UI_MessageRunScript,
     UI_MessageTickChoiceTimer,
     UI_MessageRunEnd,
@@ -11,7 +11,7 @@ const MessageStateSteps g_UiMessageStateSteps = {{
     UI_MessageRunBoxEnd,
 }};
 
-const MessageStateSteps g_UiMessageChoiceStateSteps = {{
+const MessageStateSteps g_UIMessageChoiceStateSteps = {{
     UI_MessageWaitInput,
     UI_MessageOpenChoice,
     UI_MessageWaitChoiceReady,
@@ -22,7 +22,7 @@ const MessageStateSteps g_UiMessageChoiceStateSteps = {{
     UI_MessageEndAfterChoice,
 }};
 
-const MessageChoiceSteps g_UiMessageScrollStateSteps = {{
+const MessageChoiceSteps g_UIMessageScrollStateSteps = {{
     UI_MessageClosePanel,
     UI_MessageWaitChoiceOpen,
     UI_MessageScrollChoice,

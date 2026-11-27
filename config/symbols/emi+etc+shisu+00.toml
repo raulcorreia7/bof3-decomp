@@ -23,8 +23,8 @@ UI_PanelSlideOutTask_801D30E4 = { addr = 0x801D30E4, type = "func", source = "sa
 UI_PanelSlideInTaskTop_801D3124 = { addr = 0x801D3124, type = "func", source = "same body as emi/etc/game/00@0x80199978 UI_PanelSlideInTaskTop" }
 Shisu_UpdateCommandPanel = { addr = 0x801D3164, type = "func", source = "Entry at 0x801D9754 of the shisu step table: runs the g_ShisuTask2Steps handler of the panel state and draws the command row, like Menu_CommandsPanel in the start menu." }
 UI_PanelSlideOutTask_801D31CC = { addr = 0x801D31CC, type = "func", source = "same body as emi/etc/game/00@0x80199938 UI_PanelSlideOutTask" }
-Menu_AdvancePanelY = { addr = 0x801D320C, type = "func", source = "the body stores into g_UiPanelCurrent->pos.y" }
-UI_PanelSetPosX_801D32E0 = { addr = 0x801D32E0, type = "func", source = "the body stores into g_UiPanelCurrent->pos.x. Same body as emi/etc/game/00@0x8019982C UI_PanelSetPosX." }
+Menu_AdvancePanelY = { addr = 0x801D320C, type = "func", source = "the body stores into g_UIPanelCurrent->pos.y" }
+UI_PanelSetPosX_801D32E0 = { addr = 0x801D32E0, type = "func", source = "the body stores into g_UIPanelCurrent->pos.x. Same body as emi/etc/game/00@0x8019982C UI_PanelSetPosX." }
 Menu_DrawCharacterWindow = { addr = 0x801D376C, type = "func", source = "Draws the window of one party member of the Bate menu from g_Characters: portrait, name, level, poison and confusion labels, HP and AP values and the experience bar." }
 Menu_DrawStatPanel = { addr = 0x801D3BD4, type = "func", source = "Draws the stat panel of party member palette_index at panel_x, panel_y: the power, defense, intelligence and agility labels with their u16 values from the character record, the status text when the status byte is not GAME_NONE, and the panel border sprite runs." }
 Menu_DrawEquipmentPanel = { addr = 0x801D3F0C, type = "func", source = "Draws the equipment panel of character record_index: the filled panel, the EQUIP caption, the emblem and six rows with the weapon, shield, helmet, armor and two accessories, each with its row icon." }

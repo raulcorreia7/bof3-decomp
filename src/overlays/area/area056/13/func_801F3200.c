@@ -7,7 +7,7 @@ MATCH void func_801F3200(void) {
 
     MESSAGE_REQUEST_CLEAR();
     type = D_80145E92;
-    if (g_UiMessageChoice != 0) {
+    if (g_UIMessageChoice != 0) {
         return;
     }
 

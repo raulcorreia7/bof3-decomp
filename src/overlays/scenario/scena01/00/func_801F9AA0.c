@@ -13,7 +13,7 @@ MATCH void func_801F9AA0(void) {
 
     switch (g_ScenarioState.step) {
         case 0:
-            if (g_UiMessageRequest == 2 && (g_UiWindowChannel & 2) && SYS_TestFlag(D_80145004, 4)) {
+            if (g_UIMessageRequest == 2 && (g_UIWindowChannel & 2) && SYS_TestFlag(D_80145004, 4)) {
                 Game_SetScriptActive();
                 g_ScriptVars[0]          = 5;
                 g_ScenarioState.step     = 1;

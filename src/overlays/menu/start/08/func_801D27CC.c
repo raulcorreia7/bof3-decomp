@@ -9,7 +9,7 @@ MATCH void func_801D27CC(void) {
     Menu_DrawClutStrip(*panel_data);
     records = panel_data + 0x15;
     UI_MessageSetVariable(0, 5, g_CharSlot[g_PartyFieldOrder[D_80148656]] * 0xA4 + records);
-    g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0x12;
+    g_UIPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0x12;
     if (D_80148654 == 0) {
         if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));

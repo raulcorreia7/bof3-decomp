@@ -66,8 +66,8 @@ MATCH void Menu_DrawInventoryWindow(MenuPanelTask* task) {
     length  = Game_ReadCommand(*title);
     title_x = length * 4 - 78;
     UI_TextDraw(task->pos.vx - title_x, task->pos.vy + 7, -(task->unk_09 != 0) & UI_TEXT_DIM, MENU_LABEL_LENGTH, *title);
-    sprintf(g_UiTextFormatBuffer, g_MenuInventoryCountFormat, Item_CountHeld(task->unk_0A) & BYTE_MASK, task->unk_0A != ITEM_CATEGORY_VITAL ? INV_SLOTS_PER_CATEGORY : INV_VITAL_ITEM_SLOTS);
-    UI_TextDrawGlyphString(task->pos.vx + 85, task->pos.vy + 122, -(task->unk_09 != 0) & UI_TEXT_DIM, g_UiTextFormatBuffer);
+    sprintf(g_UITextFormatBuffer, g_MenuInventoryCountFormat, Item_CountHeld(task->unk_0A) & BYTE_MASK, task->unk_0A != ITEM_CATEGORY_VITAL ? INV_SLOTS_PER_CATEGORY : INV_VITAL_ITEM_SLOTS);
+    UI_TextDrawGlyphString(task->pos.vx + 85, task->pos.vy + 122, -(task->unk_09 != 0) & UI_TEXT_DIM, g_UITextFormatBuffer);
 
     UI_SpriteDrawRun(task->pos.vx, task->pos.vy, (task->u.list.tabs & MENU_LIST_FLAG_TAB_2) ? s_BattleAbilityLine1FlagRun : s_BattleAbilityLine1Run, UI_SPRITE_ALT_PAGE);
     UI_SpriteDrawRun(task->pos.vx, task->pos.vy, (task->u.list.tabs & MENU_LIST_FLAG_TAB_1) ? s_BattleAbilityLine2FlagRun : s_BattleAbilityLine2Run, UI_SPRITE_ALT_PAGE);

@@ -4,5 +4,5 @@ MATCH void func_800B0180(void) {
     BattleMenuPanelModes handlers;
 
     handlers = D_800969E4;
-    handlers.modes[g_UiPanelCurrent->mode]();
+    handlers.modes[g_UIPanelCurrent->mode]();
 }

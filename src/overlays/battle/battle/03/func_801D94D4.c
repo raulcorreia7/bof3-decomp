@@ -9,22 +9,22 @@ MATCH void func_801D94D4(s32 x, u32 y, s32 clut_index, s32 text_value) {
 
     index = 0;
     if ((u16)text_value == 0xFFFFu) {
-        TEXT_FormatLiteral(g_UiTextFormatBuffer, D_801D0C70);
+        TEXT_FormatLiteral(g_UITextFormatBuffer, D_801D0C70);
     } else {
-        TEXT_Format(g_UiTextFormatBuffer, D_801D0C74, (u16)text_value);
+        TEXT_Format(g_UITextFormatBuffer, D_801D0C74, (u16)text_value);
     }
     GFX_AddDrawMode(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y));
 
     do {
-        temp = g_UiTextFormatBuffer[index];
+        temp = g_UITextFormatBuffer[index];
         if (temp != ' ') {
-            g_UiTextFormatBuffer[index] = temp - '0';
+            g_UITextFormatBuffer[index] = temp - '0';
             packet                      = (SPRT*)g_GfxPrimCursor;
             clut                        = GetClut((clut_index & BYTE_MASK) << 4, STAGE_PALETTE_Y);
             packet->clut                = clut;
             setRGB0(packet, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
             setXY0(packet, x, y);
-            digit      = g_UiTextFormatBuffer[index];
+            digit      = g_UITextFormatBuffer[index];
             packet->v0 = 216;
             setWH(packet, 6, 5);
             packet->u0 = digit * 6u - 80u;
@@ -33,5 +33,5 @@ MATCH void func_801D94D4(s32 x, u32 y, s32 clut_index, s32 text_value) {
         }
 
         x += 5;
-    } while (g_UiTextFormatBuffer[++index] != 0);
+    } while (g_UITextFormatBuffer[++index] != 0);
 }

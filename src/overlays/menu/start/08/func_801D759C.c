@@ -35,7 +35,7 @@ NON_MATCHING void func_801D759C(void) {
     input      = INPUT_GetRepeatedButtons(g_PadStates[0].pressed & INPUT_DIRECTIONAL);
     D_8014857C = 0xFF;
     D_8014857D = 0xFF;
-    task       = &g_UiPanelTasks[16];
+    task       = &g_UIPanelTasks[16];
     /* FAKE: retail keeps the whole return word; the u8 prototype extends it. */
     count      = ((s32 (*)(s32))Party_CountOrder)(PARTY_ORDER_FIELD);
     previous   = D_8014857A;

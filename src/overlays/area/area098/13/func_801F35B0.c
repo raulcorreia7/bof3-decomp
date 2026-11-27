@@ -15,7 +15,7 @@ MATCH void func_801F35B0(void) {
         SELF(Actor)->unk_0A = count + 1;
     }
     func_801F42E8();
-    if (g_GameStateIndex != GAME_REQUEST_MESSAGE && g_UiMessageRequest == 0x12 && g_ScenarioState.step == 0xC) {
+    if (g_GameStateIndex != GAME_REQUEST_MESSAGE && g_UIMessageRequest == 0x12 && g_ScenarioState.step == 0xC) {
         task         = SELF(Actor);
         task->timer  = 0;
         task->vx     = 40960;

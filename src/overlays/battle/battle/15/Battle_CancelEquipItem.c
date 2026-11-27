@@ -9,7 +9,7 @@ MATCH void Battle_CancelEquipItem(void) {
     mode                     = 2;
     g_Battle.selection_latch = 0;
     g_BattleChoicePhase      = mode;
-    /* D_80148574 stays an address symbol here: a g_UiPanelTasks[16] view changes the code. */
+    /* D_80148574 stays an address symbol here: a g_UIPanelTasks[16] view changes the code. */
     D_80148574               = -200;
     g_Battle.phase.step      = 4;
     g_Battle.phase.sub_step  = mode;

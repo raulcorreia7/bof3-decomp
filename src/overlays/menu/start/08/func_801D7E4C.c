@@ -15,17 +15,17 @@ MATCH void func_801D7E4C(void) {
 
     u8* flag;
     Menu_DrawClutStrip(g_WindowClut);
-    state = g_UiPanelTasks[MENU_START_PANEL_ITEMS].state;
+    state = g_UIPanelTasks[MENU_START_PANEL_ITEMS].state;
     flag  = &D_80148624;
     latch = flag - 0x48;
     *flag = 0;
     if (state == 0) {
-        x                                                    = g_UiPanelTasks[MENU_START_PANEL_ITEMS].pos.vx;
+        x                                                    = g_UIPanelTasks[MENU_START_PANEL_ITEMS].pos.vx;
         y                                                    = D_80148658[0] * 0x36;
         *latch                                               = 1;
-        g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0B = 1;
+        g_UIPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0B = 1;
         D_801485E0                                           = x;
-        D_801485E2                                           = g_UiPanelTasks[MENU_START_PANEL_ITEMS].pos.vy + y;
+        D_801485E2                                           = g_UIPanelTasks[MENU_START_PANEL_ITEMS].pos.vy + y;
     } else {
         *latch = 0;
     }
@@ -48,12 +48,12 @@ MATCH void func_801D7E4C(void) {
     if ((s8)old != *sel) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
     }
-    UI_MessageSetVariable(0, 0xC, (const u8*)&g_Abilities[Party_GetAbilities(g_UiPanelTasks[16].unk_0A, g_UiPanelTasks[16].unk_0B, 0)[g_UiPanelTasks[16].unk_0C]]);
-    g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0x30;
+    UI_MessageSetVariable(0, 0xC, (const u8*)&g_Abilities[Party_GetAbilities(g_UIPanelTasks[16].unk_0A, g_UIPanelTasks[16].unk_0B, 0)[g_UIPanelTasks[16].unk_0C]]);
+    g_UIPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0x30;
     if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
-        /* D_8014857A stays its own symbol: a g_UiPanelTasks[16] view shifts the base registers */
+        /* D_8014857A stays its own symbol: a g_UIPanelTasks[16] view shifts the base registers */
         result =
-            func_801E7D20(g_CharSlot[g_PartyFieldOrder[D_8014857A]], g_CharSlot[g_PartyFieldOrder[*sel]], Party_GetAbilities(D_8014857A, g_UiPanelTasks[16].unk_0B, 0)[g_UiPanelTasks[16].unk_0C], 0);
+            func_801E7D20(g_CharSlot[g_PartyFieldOrder[D_8014857A]], g_CharSlot[g_PartyFieldOrder[*sel]], Party_GetAbilities(D_8014857A, g_UIPanelTasks[16].unk_0B, 0)[g_UIPanelTasks[16].unk_0C], 0);
         D_801ED654 = result;
         if (result == 1 || result == 5) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 9));
@@ -67,11 +67,11 @@ MATCH void func_801D7E4C(void) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
         D_801485DC = 0;
         for (i = 0; i < Party_CountOrder(PARTY_ORDER_FIELD); i++) {
-            g_UiPanelTasks[i + MENU_PANEL_MEMBER_ROW_FIRST].state = 9;
-            g_UiPanelTasks[i + 4].state                           = 8;
+            g_UIPanelTasks[i + MENU_PANEL_MEMBER_ROW_FIRST].state = 9;
+            g_UIPanelTasks[i + 4].state                           = 8;
         }
         g_BattleChoicePhase      = 3;
-        g_UiPanelTasks[16].flags = 0xFF;
+        g_UIPanelTasks[16].flags = 0xFF;
         latch                    = &g_MenuStep.sub_step;
         (*latch)--;
     }

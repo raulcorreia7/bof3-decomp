@@ -1,8 +1,8 @@
 #include "area130_13.h"
 
 MATCH void func_801F35B0(void) {
-    g_UiMessageRequest = D_801F5058[g_UiMessageChoice];
-    switch (g_UiMessageChoice) {
+    g_UIMessageRequest = D_801F5058[g_UIMessageChoice];
+    switch (g_UIMessageChoice) {
         case 0:
             g_ScenarioState.step = 0xA;
             *g_ScriptVars        = 0;

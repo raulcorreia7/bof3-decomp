@@ -92,7 +92,7 @@ MATCH void func_801F75EC(void) {
     char* fmt;
     u8    value;
 
-    buffer = (char*)g_UiTextFormatBuffer;
+    buffer = (char*)g_UITextFormatBuffer;
     Menu_DrawHeaderBar(138, 30, 45, 20, 1u);
     value = D_801FD288.bytes[0];
     fmt   = D_801F6C04;

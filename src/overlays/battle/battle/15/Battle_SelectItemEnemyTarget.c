@@ -16,7 +16,7 @@ MATCH void Battle_SelectItemEnemyTarget(void) {
     }
     trigger = INPUT_REPEATED(held, INPUT_DIRECTIONAL);
     if ((trigger & (PADLup | PADLdown)) != 0) {
-        if ((Item_GetFlags(g_UiPanelTasks[16].unk_0A, g_ItemCategoryIds[g_UiPanelTasks[16].unk_0A][g_UiPanelTasks[16].unk_0C]) & ITEM_USABLE_MENU) != 0u) {
+        if ((Item_GetFlags(g_UIPanelTasks[16].unk_0A, g_ItemCategoryIds[g_UIPanelTasks[16].unk_0A][g_UIPanelTasks[16].unk_0C]) & ITEM_USABLE_MENU) != 0u) {
             if (func_8009AF7C() != 0u) {
                 g_BattleActorTurn->command.target = 0u;
             } else {

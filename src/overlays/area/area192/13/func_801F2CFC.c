@@ -5,9 +5,9 @@ MATCH void func_801F2CFC(void) {
 
     record = g_ScriptWorkRecord;
     MESSAGE_REQUEST_CLEAR();
-    record->unk_18 = D_801F380C[g_UiMessageChoice * 2];
+    record->unk_18 = D_801F380C[g_UIMessageChoice * 2];
     /* FAKE: retail reloads the selection byte after the 0x18 store; the
      * compiler keeps the first load without a barrier (pure-C best 0x48/0x58). */
     FAKE_BARRIER();
-    record->unk_1C = D_801F380D[g_UiMessageChoice * 2];
+    record->unk_1C = D_801F380D[g_UIMessageChoice * 2];
 }

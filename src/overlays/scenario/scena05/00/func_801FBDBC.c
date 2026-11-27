@@ -9,7 +9,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801FBDBC(void) {
     switch (g_ScenarioState.step) {
         case 0:
-            if ((g_UiWindowChannel & 2) == 0) {
+            if ((g_UIWindowChannel & 2) == 0) {
                 break;
             }
             if (g_ScriptVars[0] == 1) {

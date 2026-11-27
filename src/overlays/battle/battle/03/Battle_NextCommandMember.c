@@ -26,9 +26,9 @@ MATCH void Battle_NextCommandMember(void) {
                         g_BattleActorTurn   = &g_Game.members[index].u.turn.command;
                         Battle_ShowMessage((s32)&g_Game.members[index]);
                         slot[-0x22] += 1;
-                        g_UiPanelTasks[4].state = 1;
-                        g_UiPanelTasks[3].state = 1;
-                        g_UiPanelTasks[2].state = 1;
+                        g_UIPanelTasks[4].state = 1;
+                        g_UIPanelTasks[3].state = 1;
+                        g_UIPanelTasks[2].state = 1;
                         return;
                     }
                 }

@@ -8,7 +8,7 @@ scan recognises the id argument of every call, macro and write that carries one:
     MESSAGE_START_WAIT, SCENARIO_MESSAGE_WAIT, SCENA14_START_AREA_MESSAGE,
     WORLD_ARM_ANSWER_MESSAGE, WORLD_ARM_ANSWER_MESSAGE_IDLE,
     MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, ...),
-    func_801D0DD4, func_801D10AC, and `g_UiMessageRequest = <id>`.
+    func_801D0DD4, func_801D10AC, and `g_UIMessageRequest = <id>`.
 
 Comments and string literals are ignored. The distinct values become one numbered
 define each, in decimal, sorted; uses of the names are collected too, so a value
@@ -68,7 +68,7 @@ IDLE_RE = re.compile(
 TEXT_RE = re.compile(
     r"\bMESSAGE_TABLE_TEXT\s*\(\s*AREA_MESSAGE_TABLE\s*,\s*(" + NUMBER + r")\s*\)"
 )
-WRITE_RE = re.compile(r"\bg_UiMessageRequest\s*=\s*(" + NUMBER + r")\s*;")
+WRITE_RE = re.compile(r"\bg_UIMessageRequest\s*=\s*(" + NUMBER + r")\s*;")
 NAME_RE = re.compile(r"\bMSG_(\d+)\b")
 MASK_RE = re.compile(
     r"/\*.*?\*/|//[^\n]*|\"(?:\\.|[^\"\\\n])*\"|'(?:\\.|[^'\\\n])*'", re.DOTALL

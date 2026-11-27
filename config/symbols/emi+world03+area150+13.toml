@@ -1,3 +1,3 @@
 ["emi/world03/area150/13"]
 jtbl_801F2C04 = { addr = 0x801F2C04, type = "Callback", size = 0x34, source = "The switch table of func_801F2D0C: 13 jump targets of its jr dispatch." }
-UI_MessageAnswerSet = { addr = 0x801F2CB0, type = "func", source = "Stores the message id the answer table D_801F3808 holds for the menu choice g_UiMessageChoice in g_UiMessageRequest." }
+UI_MessageAnswerSet = { addr = 0x801F2CB0, type = "func", source = "Stores the message id the answer table D_801F3808 holds for the menu choice g_UIMessageChoice in g_UIMessageRequest." }

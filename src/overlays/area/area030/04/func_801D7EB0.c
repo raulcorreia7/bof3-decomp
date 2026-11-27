@@ -30,7 +30,7 @@ u16 y;
     UI_WindowDraw(x, (y + 1) & HALF_MASK, 139, 158, UI_WINDOW_OPEN_ALL, *style);
     slot       = 0;
     row        = 0;
-    buffer     = g_UiTextFormatBuffer;
+    buffer     = g_UITextFormatBuffer;
     slot_list  = style + FISHING_ACCESSORY_SLOT_OFFSET;
     /* the accessory rows step down from the panel's first icon row */
     row_offset = 0;

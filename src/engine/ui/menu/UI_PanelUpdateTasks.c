@@ -12,18 +12,18 @@ MATCH void UI_PanelUpdateTasks(void) {
     s32            i;
     s32            offset;
 
-    handlers = g_UiPanels;
-    mode     = g_UiPanelMode;
+    handlers = g_UIPanels;
+    mode     = g_UIPanelMode;
     if (mode < 3) {
         funcs    = handlers.handlers;
-        taskBase = (u8*)g_UiPanelTasks;
+        taskBase = (u8*)g_UIPanelTasks;
         i        = 0;
         do {
             task   = taskBase;
             offset = 0;
             do {
-                if ((((u8*)g_UiPanelTasks)[offset] != 0) && (*((u8*)&g_UiPanelTasks[0].layer + offset) == mode)) {
-                    g_UiPanelCurrent = (MenuPanelTask*)task;
+                if ((((u8*)g_UIPanelTasks)[offset] != 0) && (*((u8*)&g_UIPanelTasks[0].layer + offset) == mode)) {
+                    g_UIPanelCurrent = (MenuPanelTask*)task;
                     funcs[task[1]]();
                 }
                 task += sizeof(MenuPanelTask);

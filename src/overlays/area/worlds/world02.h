@@ -14,7 +14,7 @@
  * A statement macro; the two arguments are the case 0 and case 1 results. */
 #define AREA_SET_MESSAGE_CHOICE_RESULT(choice_zero, choice_one) \
     MESSAGE_REQUEST_CLEAR();                                    \
-    switch (g_UiMessageChoice) {                                \
+    switch (g_UIMessageChoice) {                                \
         case 0:                                                 \
             g_ScriptVars[0] = (choice_zero);                    \
             break;                                              \

@@ -4,13 +4,13 @@ MATCH void func_801F3674(void) {
     Actor* record;
 
     MESSAGE_REQUEST_CLEAR();
-    if (g_UiMessageChoice == 3) {
+    if (g_UIMessageChoice == 3) {
         Scene_StartEvent(SCENE_EVENT_INN, 0x5);
         g_SceneEventState.selection = 0xFF;
     }
     record         = (u8*)g_ScriptWorkRecord;
-    record->unk_18 = D_801F3940[g_UiMessageChoice * 2];
+    record->unk_18 = D_801F3940[g_UIMessageChoice * 2];
     /* FAKE: retail reloads the selection byte after the 0x18 store. */
     FAKE_BARRIER();
-    record->unk_1C = D_801F3941[g_UiMessageChoice * 2];
+    record->unk_1C = D_801F3941[g_UIMessageChoice * 2];
 }

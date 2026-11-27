@@ -28,14 +28,14 @@ MATCH void Menu_DrawEquipCompareWindow(u8 index, s32 x, s32 y, u8* patch, u8 hid
     for (i = 0, label_y = y + 26; i < MENU_EQUIP_COMPARE_STATS; i++) {
         UI_TextDraw(x + 5, label_y + i * 13, 0, 4, &g_MenuEquipCompareLabels[i * MENU_EQUIP_STAT_LABEL_SIZE]);
     }
-    TEXT_Format(g_UiTextFormatBuffer, g_MenuStatFormat, stats->power);
-    UI_TextDrawGlyphString(left + 49, top + 28, 0, g_UiTextFormatBuffer);
-    TEXT_Format(g_UiTextFormatBuffer, g_MenuStatFormat, stats->defense);
-    UI_TextDrawGlyphString(left + 49, top + 41, 0, g_UiTextFormatBuffer);
-    TEXT_Format(g_UiTextFormatBuffer, g_MenuStatFormat, stats->intelligence);
-    UI_TextDrawGlyphString(left + 49, top + 54, 0, g_UiTextFormatBuffer);
-    TEXT_Format(g_UiTextFormatBuffer, g_MenuStatFormat, stats->agility);
-    UI_TextDrawGlyphString(left + 49, top + 67, 0, g_UiTextFormatBuffer);
+    TEXT_Format(g_UITextFormatBuffer, g_MenuStatFormat, stats->power);
+    UI_TextDrawGlyphString(left + 49, top + 28, 0, g_UITextFormatBuffer);
+    TEXT_Format(g_UITextFormatBuffer, g_MenuStatFormat, stats->defense);
+    UI_TextDrawGlyphString(left + 49, top + 41, 0, g_UITextFormatBuffer);
+    TEXT_Format(g_UITextFormatBuffer, g_MenuStatFormat, stats->intelligence);
+    UI_TextDrawGlyphString(left + 49, top + 54, 0, g_UITextFormatBuffer);
+    TEXT_Format(g_UITextFormatBuffer, g_MenuStatFormat, stats->agility);
+    UI_TextDrawGlyphString(left + 49, top + 67, 0, g_UITextFormatBuffer);
 
     if (hide_changes == 0) {
         func_80164EF8(index, patch, compare.flags, compare.values);
@@ -49,8 +49,8 @@ MATCH void Menu_DrawEquipCompareWindow(u8 index, s32 x, s32 y, u8* patch, u8 hid
             }
             GFX_AddDrawMode(getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y));
             Menu_DrawPanelIcon(left + 81, top + 26 + i * 13 + 2, icon, 0x1C, GetClut(0, STAGE_PALETTE_Y), GFX_COLOR_NEUTRAL);
-            TEXT_Format(g_UiTextFormatBuffer, g_MenuStatFormat, compare.values[i]);
-            UI_TextDrawGlyphString(left + 89, top + 26 + i * 13 + 2, compare.flags[i], g_UiTextFormatBuffer);
+            TEXT_Format(g_UITextFormatBuffer, g_MenuStatFormat, compare.values[i]);
+            UI_TextDrawGlyphString(left + 89, top + 26 + i * 13 + 2, compare.flags[i], g_UITextFormatBuffer);
         }
     }
 

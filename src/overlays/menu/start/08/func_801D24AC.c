@@ -6,7 +6,7 @@ MATCH void func_801D24AC(void) {
     u8 count;
 
     UI_MessageSetVariable(0, 5, g_Characters[g_CharSlot[g_PartyFieldOrder[D_80148656]]].name);
-    g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0x12;
+    g_UIPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0x12;
     Menu_DrawClutStrip(g_WindowClut);
     count      = D_80148654;
     D_80148654 = count + 0xFF;

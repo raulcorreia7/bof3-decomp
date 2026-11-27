@@ -28,6 +28,6 @@ MATCH void Battle_AnimatePanels(void) {
         }
         i += 1;
     } while ((i & BYTE_MASK) < 7u);
-    task = g_UiPanelCurrent;
+    task = g_UIPanelCurrent;
     Battle_DrawPanels(task->pos.vx, task->pos.vy);
 }

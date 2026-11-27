@@ -15,8 +15,8 @@ MATCH void Menu_DrawMasterPartyRow(u16 x, u16 y, u8 entry, u8 icon) {
     record = (Character*)(&g_WindowStyle + 0x16) + entry;
     Menu_DrawPortrait((x + 86), (y + 0x2), record->character_id, ((record->status >> 6) & 2));
     UI_TextDraw((x + 20), (y + 3), 0, CHARACTER_NAME_LENGTH, (u8*)record);
-    TEXT_Format(g_UiTextFormatBuffer, D_801D0C04, record->level);
-    UI_TextDrawGlyphString((x + 22), (y + 23), 0, g_UiTextFormatBuffer);
+    TEXT_Format(g_UITextFormatBuffer, D_801D0C04, record->level);
+    UI_TextDrawGlyphString((x + 22), (y + 23), 0, g_UITextFormatBuffer);
 
     /* Retail reads the status halfword and the next one as a word. */
     if ((LOWU(record->status) & (STATUS_CONFUSED | STATUS_POISONED)) == (STATUS_CONFUSED | STATUS_POISONED)) {
@@ -36,22 +36,22 @@ MATCH void Menu_DrawMasterPartyRow(u16 x, u16 y, u8 entry, u8 icon) {
     if (value < 2U) {
         align = 2;
     }
-    TEXT_Format(g_UiTextFormatBuffer, g_MenuCurrentValueFormat, value);
+    TEXT_Format(g_UITextFormatBuffer, g_MenuCurrentValueFormat, value);
     text_x = (x + 22);
     text_y = (y + 31);
-    UI_TextDrawGlyphString(text_x, text_y, align, g_UiTextFormatBuffer);
-    TEXT_Format(g_UiTextFormatBuffer, g_MenuMaxValueFormat, record->stats.max_hp);
-    UI_TextDrawGlyphString(text_x, text_y, 0, g_UiTextFormatBuffer);
+    UI_TextDrawGlyphString(text_x, text_y, align, g_UITextFormatBuffer);
+    TEXT_Format(g_UITextFormatBuffer, g_MenuMaxValueFormat, record->stats.max_hp);
+    UI_TextDrawGlyphString(text_x, text_y, 0, g_UITextFormatBuffer);
 
     align = ((record->stats.max_ap >> 2) >= record->ap) ? 4 : 0;
     if (record->ap == 0) {
         align = 2;
     }
-    TEXT_Format(g_UiTextFormatBuffer, g_MenuCurrentValueFormat, record->ap);
+    TEXT_Format(g_UITextFormatBuffer, g_MenuCurrentValueFormat, record->ap);
     text_y = (y + 39);
-    UI_TextDrawGlyphString(text_x, text_y, align, g_UiTextFormatBuffer);
-    TEXT_Format(g_UiTextFormatBuffer, g_MenuMaxValueFormat, record->stats.max_ap);
-    UI_TextDrawGlyphString(text_x, text_y, 0, g_UiTextFormatBuffer);
+    UI_TextDrawGlyphString(text_x, text_y, align, g_UITextFormatBuffer);
+    TEXT_Format(g_UITextFormatBuffer, g_MenuMaxValueFormat, record->stats.max_ap);
+    UI_TextDrawGlyphString(text_x, text_y, 0, g_UITextFormatBuffer);
 
     UI_SpriteDrawRun(x, y, D_801D3F58, 0);
     Menu_DrawExperienceLine((x + 20), (y + 18), entry, record->level, record->exp);

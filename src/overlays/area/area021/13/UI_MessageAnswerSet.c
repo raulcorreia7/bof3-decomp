@@ -2,5 +2,5 @@
 
 /* func_801F2C6C */
 MATCH void UI_MessageAnswerSet(void) {
-    g_UiMessageRequest = D_801F33B4[g_UiMessageChoice];
+    g_UIMessageRequest = D_801F33B4[g_UIMessageChoice];
 }

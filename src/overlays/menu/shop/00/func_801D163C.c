@@ -15,20 +15,20 @@ MATCH void func_801D163C(void) {
     g_ShopItemCategory       = entry[1];
     i                        = 0;
     choice                   = entry[2];
-    g_UiPanelTasks[8].unk_0A = 0;
+    g_UIPanelTasks[8].unk_0A = 0;
     g_ShopItemId             = choice;
-    panels                   = &g_UiPanelTasks[3];
+    panels                   = &g_UIPanelTasks[3];
     for (; i < (u8)Party_CountOrder(PARTY_ORDER_FIELD); i++) {
         panel         = (MenuPanelTask*)(i * sizeof(MenuPanelTask) + (u32)panels);
         panel->unk_0B = Item_GetIcon(g_ShopItemCategory, g_ShopItemId);
         panel->unk_0C = g_ShopItemId;
     }
-    g_UiPanelTasks[0].u.message.id = Item_GetDescription(g_ShopItemCategory, g_ShopItemId);
-    g_UiPanelTasks[9].active       = 0;
-    if (g_UiPanelTasks[8].state == 0) {
+    g_UIPanelTasks[0].u.message.id = Item_GetDescription(g_ShopItemCategory, g_ShopItemId);
+    g_UIPanelTasks[9].active       = 0;
+    if (g_UIPanelTasks[8].state == 0) {
         /* FAKE: block boundary keeps the panel-task stores base-relative off one la. */
         FAKE_ORDER_FENCE();
-        g_UiPanelTasks[21].active = 1;
+        g_UIPanelTasks[21].active = 1;
         D_80148628                = (u16)D_80148454 + 4;
         D_8014862A                = (u16)D_80148456 + g_ShopStockIndex * 0xD + 0xA;
         D_80148644                = D_8018E7CC;
@@ -47,7 +47,7 @@ MATCH void func_801D163C(void) {
     if ((s8)old != g_ShopStockIndex) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
     }
-    g_UiPanelTasks[8].unk_0C = g_ShopStockIndex;
+    g_UIPanelTasks[8].unk_0C = g_ShopStockIndex;
     if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         pick               = D_8018E7CC + g_ShopStockIndex * 2;
         g_ShopItemCategory = pick[1];
@@ -77,9 +77,9 @@ MATCH void func_801D163C(void) {
     } else if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
         for (i = 0; i < (u8)Party_CountOrder(PARTY_ORDER_FIELD); i++) {
-            g_UiPanelTasks[i + 3].state = 1;
+            g_UIPanelTasks[i + 3].state = 1;
         }
-        g_UiPanelTasks[8].state = 1;
+        g_UIPanelTasks[8].state = 1;
         D_80148651              = 1;
         D_80148652              = 0;
     }

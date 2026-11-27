@@ -7,6 +7,6 @@
 MATCH void UI_MessageUpdateChoicePanel(void) {
     struct MenuPanelSteps table;
 
-    table = g_UiMessageChoiceSteps;
-    table.steps[g_UiPanelCurrent->state]();
+    table = g_UIMessageChoiceSteps;
+    table.steps[g_UIPanelCurrent->state]();
 }

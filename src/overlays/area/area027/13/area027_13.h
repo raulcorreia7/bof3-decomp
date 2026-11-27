@@ -7,7 +7,7 @@
 
 #include "overlays/area/worlds/world00.h"
 
-/* Reset sentinel stored to g_UiMessageRequest by the request handlers. */
+/* Reset sentinel stored to g_UIMessageRequest by the request handlers. */
 #define RESET_SENTINEL 0xFFFF
 
 extern Callback D_801F3ABC[];

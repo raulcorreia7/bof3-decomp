@@ -5,7 +5,7 @@ MATCH void func_801F3D18(void) {
     char* fmt;
     u8    value;
 
-    buffer = (char*)g_UiTextFormatBuffer;
+    buffer = (char*)g_UITextFormatBuffer;
     Menu_DrawHeaderBar(200, 160, 34, 20, 1u);
     value = g_ScriptVars[3];
     fmt   = WORLD00_AREA008_D_801F2C10;

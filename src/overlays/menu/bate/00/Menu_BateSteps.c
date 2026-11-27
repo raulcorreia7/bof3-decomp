@@ -80,18 +80,18 @@ MATCH void func_801D1044(void) {
     u8* step;
     s32 category;
 
-    g_UiPanelTasks[4].active = 1;
-    g_UiPanelTasks[4].pos.vx = D_80148358 + 6;
-    g_UiPanelTasks[4].pos.vy = (u16)(D_8014835A + (g_UiPanelTasks[1].unk_0A * 13 + 0x57));
+    g_UIPanelTasks[4].active = 1;
+    g_UIPanelTasks[4].pos.vx = D_80148358 + 6;
+    g_UIPanelTasks[4].pos.vy = (u16)(D_8014835A + (g_UIPanelTasks[1].unk_0A * 13 + 0x57));
     pressed                  = INPUT_GetRepeatedButtons(g_PadStates[0].pressed & INPUT_DIRECTIONAL) & (PADLup | PADLdown);
-    g_UiPanelTasks[1].unk_0B = 0xFF;
-    g_UiPanelTasks[1].flags  = 1;
+    g_UIPanelTasks[1].unk_0B = 0xFF;
+    g_UIPanelTasks[1].flags  = 1;
     if (pressed != 0) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0x01));
-        g_UiPanelTasks[1].unk_0A ^= 3;
+        g_UIPanelTasks[1].unk_0A ^= 3;
     }
-    g_UiPanelTasks[0].unk_09 = g_UiPanelTasks[1].unk_0A;
-    if (g_UiPanelTasks[1].unk_0A == 0 || g_UiPanelTasks[1].unk_0A != 3) {
+    g_UIPanelTasks[0].unk_09 = g_UIPanelTasks[1].unk_0A;
+    if (g_UIPanelTasks[1].unk_0A == 0 || g_UIPanelTasks[1].unk_0A != 3) {
         item     = &g_Characters[7].equip.weapon;
         category = 1;
     } else {
@@ -103,18 +103,18 @@ MATCH void func_801D1044(void) {
     if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0x03));
         step                     = &g_MenuStep.state;
-        g_UiPanelTasks[0].unk_0B = D_8014833A->type;
-        g_UiPanelTasks[1].unk_0B = g_UiPanelTasks[1].unk_0A;
+        g_UIPanelTasks[0].unk_0B = D_8014833A->type;
+        g_UIPanelTasks[1].unk_0B = g_UIPanelTasks[1].unk_0A;
         (*step)++;
     } else if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0x06));
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0x02));
-        g_UiPanelTasks[0].state   = 1;
-        g_UiPanelTasks[1].state   = 1;
-        g_UiPanelTasks[2].state   = 1;
-        g_UiPanelTasks[3].state   = 1;
-        g_UiPanelTasks[4].active  = 0;
-        g_UiPanelTasks[21].active = 0;
+        g_UIPanelTasks[0].state   = 1;
+        g_UIPanelTasks[1].state   = 1;
+        g_UIPanelTasks[2].state   = 1;
+        g_UIPanelTasks[3].state   = 1;
+        g_UIPanelTasks[4].active  = 0;
+        g_UIPanelTasks[21].active = 0;
         D_80148654                = 5;
         g_MenuStep.state          = 0;
         g_MenuStep.sub_step += 1;

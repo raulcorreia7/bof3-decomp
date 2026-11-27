@@ -2,7 +2,7 @@
 
 MATCH void func_801F2CE0(void) {
     MESSAGE_REQUEST_CLEAR();
-    if (g_UiMessageChoice == 0) {
+    if (g_UIMessageChoice == 0) {
         Game_SetScriptActive();
         g_ScenarioState.state_04        = 7;
         g_ScriptVars[0]                 = 0;

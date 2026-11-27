@@ -494,11 +494,11 @@ US English in prose and in names, as the US game text spells it: `color`, `behav
 for "Faerie". Retail text keeps its spelling (`ITEM_FAERIE_TIARA`, "Faerie Tiara"). SDK names keep
 theirs (`CdlPause`, `SpuSetKey`).
 
-Acronyms follow the SDK library their value belongs to, and are capitals otherwise. The drive is
-`Cd` (libcd: `SYS_ReadCd`, `g_CdStateHandlers`), the sound library is `Snd` in a type (`SndBank`,
-libsnd's `SndVolume`), and `XA`, `HP`, `AP`, `BGM` and `SE` are capitals (`SND_XAIsIdle`,
-`SND_XAStateIdle`). `SE` is the disc's word for a sound effect, as `BGM` is for music
-(`BIN/BATTLE/BATL_SE`, `COMN_SE`): `SND_SEPlay(u16 se_id)`.
+`UI` is written in capitals in every name, global and type alike (`g_UIPanelTasks`, `UIMode`,
+`UI_MessageOpen`). The casing of other acronyms is not decided; existing names keep their spelling
+(`Cd` in `SYS_ReadCd`, `Snd` in `SndBank`, `XA`, `HP`, `AP`, `BGM`, `SE` in `SND_XAIsIdle`).
+`SE` is the disc's word for a sound effect, as `BGM` is for music (`BIN/BATTLE/BATL_SE`, `COMN_SE`):
+`SND_SEPlay(u16 se_id)`.
 
 ## Renames
 

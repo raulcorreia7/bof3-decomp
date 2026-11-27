@@ -12,9 +12,9 @@ MATCH void Menu_DrawZennyWindow(s32 panel_x, s32 panel_y, s32 panel_type, s32 ca
     base_y   = y;
     scaled_y = y << 16;
     UI_WindowDraw(panel_x + 3, y + 3, MENU_ZENNY_WINDOW_WIDTH, MENU_ZENNY_WINDOW_HEIGHT, 0, g_WindowStyle);
-    TEXT_Format(g_UiTextFormatBuffer, g_MenuZennyFormat, caption_value);
+    TEXT_Format(g_UITextFormatBuffer, g_MenuZennyFormat, caption_value);
     y += 4;
-    UI_TextDrawAscii((s16)(panel_x + 20), y, 0, g_UiTextFormatBuffer);
+    UI_TextDrawAscii((s16)(panel_x + 20), y, 0, g_UITextFormatBuffer);
     UI_TextDraw(panel_x + 76, y, 0, TEXT_LENGTH_MAX, g_MenuCaptionIcon);
     UI_SpriteDrawRun((s16)panel_x, (s16)(scaled_y >> 16), g_MenuCaptionLeft, 0);
     for (i = 0; i < 11; i++) {

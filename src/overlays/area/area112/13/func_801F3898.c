@@ -2,7 +2,7 @@
 
 MATCH void func_801F3898(void) {
     MESSAGE_REQUEST_CLEAR();
-    if (g_UiMessageChoice == 0) {
+    if (g_UIMessageChoice == 0) {
         SYS_ClearFlag(g_SceneEventFlags, 60U);
         SYS_ClearFlag(g_SceneEventFlags, 61U);
         SYS_ClearFlag(g_SceneEventFlags, 62U);

@@ -1,6 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* The window state block whose flags word sits at g_UiWindowChannel; the palette and
+/* The window state block whose flags word sits at g_UIWindowChannel; the palette and
  * glyph deltas follow, then the x/y cursor the script advances. */
 typedef struct GameUITextState {
     volatile u16 flags; /* 0x00 */
@@ -13,7 +13,7 @@ typedef struct GameUITextState {
     u16          y;       /* 0x1A */
 } GameUITextState;
 
-/* walks the message script at g_UiMessageScript, drawing each glyph
+/* walks the message script at g_UIMessageScript, drawing each glyph
  * through func_8014F800 until D_801490B9 characters were drawn.
  */
 MATCH void UI_MessageDrawScript(void) {
@@ -31,12 +31,12 @@ MATCH void UI_MessageDrawScript(void) {
     saved                    = NULL;
     count                    = 0;
     drawn                    = 0;
-    base                     = (u8*)&g_UiMessageScript;
+    base                     = (u8*)&g_UIMessageScript;
     p                        = *(u8**)base;
-    g_UiMessageWindow.text.x = g_UiMessageWindow.origin.x;
-    g_UiMessageWindow.text.y = g_UiMessageWindow.origin.y;
+    g_UIMessageWindow.text.x = g_UIMessageWindow.origin.x;
+    g_UIMessageWindow.text.y = g_UIMessageWindow.origin.y;
     color                    = 0;
-    if (g_UiMessageState.index != 0) {
+    if (g_UIMessageState.index != 0) {
         cursor = (u16*)(base + 0x10);
         state  = (GameUITextState*)(base - 8);
         do {
@@ -140,6 +140,6 @@ MATCH void UI_MessageDrawScript(void) {
                     break;
             }
             p++;
-        } while (g_UiMessageState.index != (drawn & BYTE_MASK));
+        } while (g_UIMessageState.index != (drawn & BYTE_MASK));
     }
 }

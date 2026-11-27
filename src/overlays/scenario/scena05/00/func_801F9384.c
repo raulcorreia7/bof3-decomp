@@ -9,7 +9,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801F9384(void) {
     switch (g_ScenarioState.step) {
         case 0:
-            if (g_UiWindowChannel & 2) {
+            if (g_UIWindowChannel & 2) {
                 switch (g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK) {
                     case 1:
                         g_ScenarioState.step = 0xF;
@@ -22,7 +22,7 @@ MATCH void func_801F9384(void) {
             break;
 
         case 1:
-            if (g_UiWindowChannel & 2) {
+            if (g_UIWindowChannel & 2) {
                 UI_MessageStartArea(MSG_SCENA05_032);
                 g_GameStateIndex     = 2;
                 g_ScenarioState.step = 2;
@@ -82,7 +82,7 @@ MATCH void func_801F9384(void) {
             break;
 
         case 15:
-            if (g_UiWindowChannel & 2) {
+            if (g_UIWindowChannel & 2) {
                 UI_MessageStartArea(MSG_SCENA05_031);
                 g_GameStateIndex     = 2;
                 g_ScenarioState.step = 0x11;

@@ -10,7 +10,7 @@ MATCH void func_800AD808(void) {
     if (!(((PartyMember*)work)->header.flags & 0x1)) {
         return;
     }
-    if (!(g_UiPanelTasks[21].active & 0x1)) {
+    if (!(g_UIPanelTasks[21].active & 0x1)) {
         ((PartyMember*)work)->header.mode = 2;
         SELF(PartyMember)->header.step    = 0;
         return;

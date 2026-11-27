@@ -18,7 +18,7 @@ NON_MATCHING void UI_MessageLayoutChoicePanel(void) {
     count  = 0;
     cursor = D_801490B0;
     row    = 0;
-    if (g_UiMessageWindow.last_row >= 0) {
+    if (g_UIMessageWindow.last_row >= 0) {
         do {
             D_801490CF[row & BYTE_MASK] = count;
             flag                        = 1;
@@ -43,22 +43,22 @@ NON_MATCHING void UI_MessageLayoutChoicePanel(void) {
                 cursor++;
             } while (flag);
             row++;
-        } while (g_UiMessageWindow.last_row >= (row & BYTE_MASK));
+        } while (g_UIMessageWindow.last_row >= (row & BYTE_MASK));
     }
 
-    g_UiPanelCurrent->unk_0A        = 220;
+    g_UIPanelCurrent->unk_0A        = 220;
     height                          = count * 13;
-    g_UiPanelCurrent->unk_0B        = (s32)height + 8 + g_UiMessageWindow.last_row * 2;
-    g_UiPanelCurrent->u.addr.unk_18 = 48;
-    g_UiPanelCurrent->pos.vx        = ((g_UiPanelCurrent->unk_0A >> 1) + 48) * 16;
-    g_UiPanelCurrent->pos.vy        = ((((u32)g_UiPanelCurrent->unk_0B >> 1) + 120) - (height >> 1)) * 16;
-    g_UiPanelCurrent->u.addr.unk_1A = 120 - ((s32)height + g_UiMessageWindow.last_row) / 2;
-    g_UiPanelCurrent->u.addr.unk_10 = 0;
-    g_UiPanelCurrent->u.addr.unk_12 = 0;
-    g_UiPanelCurrent->u.addr.unk_14 = (g_UiPanelCurrent->unk_0A * 16) / 5;
-    g_UiPanelCurrent->u.addr.unk_16 = (g_UiPanelCurrent->unk_0B * 16) / 5;
-    base                            = 124 - ((s32)height + g_UiMessageWindow.last_row) / 2;
-    for (i = 0; g_UiMessageWindow.last_row >= i; i++) {
+    g_UIPanelCurrent->unk_0B        = (s32)height + 8 + g_UIMessageWindow.last_row * 2;
+    g_UIPanelCurrent->u.addr.unk_18 = 48;
+    g_UIPanelCurrent->pos.vx        = ((g_UIPanelCurrent->unk_0A >> 1) + 48) * 16;
+    g_UIPanelCurrent->pos.vy        = ((((u32)g_UIPanelCurrent->unk_0B >> 1) + 120) - (height >> 1)) * 16;
+    g_UIPanelCurrent->u.addr.unk_1A = 120 - ((s32)height + g_UIMessageWindow.last_row) / 2;
+    g_UIPanelCurrent->u.addr.unk_10 = 0;
+    g_UIPanelCurrent->u.addr.unk_12 = 0;
+    g_UIPanelCurrent->u.addr.unk_14 = (g_UIPanelCurrent->unk_0A * 16) / 5;
+    g_UIPanelCurrent->u.addr.unk_16 = (g_UIPanelCurrent->unk_0B * 16) / 5;
+    base                            = 124 - ((s32)height + g_UIMessageWindow.last_row) / 2;
+    for (i = 0; g_UIMessageWindow.last_row >= i; i++) {
         D_801490CF[i] = base + D_801490CF[i] * 13 + i * 2;
     }
 }

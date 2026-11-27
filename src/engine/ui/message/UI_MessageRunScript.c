@@ -1,6 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* The channel record at g_UiWindowChannel is addressed by byte offsets from its flag halfword: +0 flags, +2 a result
+/* The channel record at g_UIWindowChannel is addressed by byte offsets from its flag halfword: +0 flags, +2 a result
  * byte, +3 a repeat count, +0xC the script cursor, +0x10 the return cursor. */
 #define CHAN_CURSOR(base) (*(u8**)((base) + 0xC))
 #define CHAN_RETURN(base) (*(u8**)((base) + 0x10))
@@ -26,7 +26,7 @@ NON_MATCHING void UI_MessageRunScript(void) {
     u16  flags;
 
     loop = 1;
-    chan = (u8*)&g_UiWindowChannel;
+    chan = (u8*)&g_UIWindowChannel;
     s5   = (u8**)(chan + 0xC);
     s4   = chan + 2;
     s2   = chan + 0x20;
@@ -75,7 +75,7 @@ NON_MATCHING void UI_MessageRunScript(void) {
                 chan[2] += 8;
                 break;
             case 2:
-                g_UiMessageState.state = 3;
+                g_UIMessageState.state = 3;
                 loop                   = 0;
                 break;
             case 0x14:
@@ -168,7 +168,7 @@ NON_MATCHING void UI_MessageRunScript(void) {
                     }
                     loop = 0;
                 }
-                g_UiMessageState.index += 1;
+                g_UIMessageState.index += 1;
                 break;
         }
         if (CHAN_FLAGS(chan) & FRONTEND_FLAG_NO_INPUT_WAIT) {

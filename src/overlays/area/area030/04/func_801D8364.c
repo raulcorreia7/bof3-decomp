@@ -45,7 +45,7 @@ NON_MATCHING void func_801D8364(s16 panel_x, s16 panel_y) {
     slot       = 0;
     row        = 0;
     index      = 0;
-    text       = g_UiTextFormatBuffer;
+    text       = g_UITextFormatBuffer;
     cursor     = g_InventoryIds[3];
     x          = panel_x + 5;
     row_offset = 0;

@@ -3,9 +3,9 @@
 MATCH void func_801EEE4C(void) {
     UI_PanelOpenTask(1, 4);
 
-    g_UiPanelTasks[1].mode   = 4;
-    g_UiPanelTasks[1].state  = 0;
-    g_UiPanelTasks[1].unk_09 = g_Battle.party_count * 16 + 4;
+    g_UIPanelTasks[1].mode   = 4;
+    g_UIPanelTasks[1].state  = 0;
+    g_UIPanelTasks[1].unk_09 = g_Battle.party_count * 16 + 4;
     if (g_Battle.outcome.reward_exp < 30) {
         D_801463B0 = 1;
     } else {

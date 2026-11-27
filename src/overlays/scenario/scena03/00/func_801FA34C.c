@@ -13,7 +13,7 @@ MATCH void func_801FA34C(void) {
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 break;
             }
-            if (g_UiMessageRequest != 0x12) {
+            if (g_UIMessageRequest != 0x12) {
                 break;
             }
             g_ScenarioState.step = 1;
@@ -178,7 +178,7 @@ MATCH void func_801FA34C(void) {
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 break;
             }
-            if (g_UiMessageRequest != 0x1F) {
+            if (g_UIMessageRequest != 0x1F) {
                 break;
             }
             g_ScenarioState.step = 17;

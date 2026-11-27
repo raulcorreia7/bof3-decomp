@@ -5,5 +5,5 @@
 /* func_80159964 */
 MATCH void UI_MessageOpenChoicePanel(void) {
     UI_MessageLayoutChoicePanel();
-    g_UiPanelCurrent->state += 1;
+    g_UIPanelCurrent->state += 1;
 }

@@ -13,7 +13,7 @@ MATCH void Battle_ApplyEquipment(void) {
     u32 member_offset;
     u32 party_slot;
 
-    record   = (u8*)&g_Characters[g_CharSlot[g_PartyBattleOrder[g_UiPanelTasks[18].unk_0C]]];
+    record   = (u8*)&g_Characters[g_CharSlot[g_PartyBattleOrder[g_UIPanelTasks[18].unk_0C]]];
     slots[0] = record + 0xE;
     slots[1] = record + 0xF;
     slots[2] = record + 0x10;

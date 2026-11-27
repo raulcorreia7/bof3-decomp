@@ -5,7 +5,7 @@ MATCH void func_800B1504(void) {
     s16            x;
 
     Battle_DrawCommandList();
-    task = g_UiPanelCurrent;
+    task = g_UIPanelCurrent;
     x    = task->pos.vx;
     if (x >= 347) {
         UI_PanelClear();

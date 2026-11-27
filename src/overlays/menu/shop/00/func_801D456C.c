@@ -5,7 +5,7 @@ MATCH void func_801D456C(void) {
 
     MENU_DRAW_HEADER();
     if (D_8014865C != -1) {
-        confirm = g_UiWindowChannel & FRONTEND_FLAG_CONFIRM;
+        confirm = g_UIWindowChannel & FRONTEND_FLAG_CONFIRM;
     } else {
         WinDrawCueText(MENU_PROMPT_X, MENU_PROMPT_Y, 0x1D);
         confirm = Menu_ChooseYesNo() & BYTE_MASK;

@@ -7,8 +7,8 @@ NON_MATCHING void func_801D1A90(void) {
     volatile MenuPanelTask* panel;
     MenuPanelTask*          prev;
 
-    panel         = &g_UiPanelTasks[9];
-    prev          = &g_UiPanelTasks[8];
+    panel         = &g_UIPanelTasks[9];
+    prev          = &g_UIPanelTasks[8];
     panel->active = 1;
     D_80148475    = 7;
     D_80148476    = 8;

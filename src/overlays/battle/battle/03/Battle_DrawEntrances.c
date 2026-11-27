@@ -14,9 +14,9 @@ MATCH void Battle_DrawEntrances(void) {
         u8* count;
 
         count                   = &g_Battle.phase.sub_step;
-        g_UiPanelTasks[2].state = 1;
-        g_UiPanelTasks[1].state = 1;
-        g_UiPanelTasks[3].state = 1;
+        g_UIPanelTasks[2].state = 1;
+        g_UIPanelTasks[1].state = 1;
+        g_UIPanelTasks[3].state = 1;
         (*count)++;
     }
     Battle_DrawPartyPanel(D_80148358, D_8014835A);

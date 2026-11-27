@@ -7,7 +7,7 @@ MATCH void func_800A5A18(void) {
     volatile u8* state;
     u8           count;
 
-    flag = &g_UiPanelTasks[21].active;
+    flag = &g_UIPanelTasks[21].active;
     if ((*flag & 0x1) == 0) {
         *flag = 0;
         UI_PanelOpenTask(0x13, 5);

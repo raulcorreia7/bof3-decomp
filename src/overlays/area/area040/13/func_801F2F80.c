@@ -4,7 +4,7 @@ MATCH void func_801F2F80(void) {
     u16* request;
     s8*  mode;
 
-    request  = &g_UiMessageRequest;
+    request  = &g_UIMessageRequest;
     *request = MESSAGE_NONE;
     if (MENU_SELECTION_IDLE()) {
         if (g_Game.members[0].chr.character_id != 2) {

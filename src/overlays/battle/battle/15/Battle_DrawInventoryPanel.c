@@ -2,6 +2,6 @@
 
 /* func_800B2104 */
 MATCH void Battle_DrawInventoryPanel(void) {
-    D_800B6E20[g_UiPanelCurrent->state]();
-    Menu_DrawInventoryWindow(g_UiPanelCurrent);
+    D_800B6E20[g_UIPanelCurrent->state]();
+    Menu_DrawInventoryWindow(g_UIPanelCurrent);
 }

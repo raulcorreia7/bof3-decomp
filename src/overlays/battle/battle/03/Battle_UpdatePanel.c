@@ -5,5 +5,5 @@ MATCH void Battle_UpdatePanel(void) {
     BattlePanelModes handlers;
 
     handlers = g_BattlePanelModes;
-    handlers.modes[g_UiPanelCurrent->mode]();
+    handlers.modes[g_UIPanelCurrent->mode]();
 }

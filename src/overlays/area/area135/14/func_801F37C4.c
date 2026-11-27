@@ -4,7 +4,7 @@
 MATCH void func_801F37C4(void) {
     u8* message;
 
-    message = (u8*)&g_UiMessageRequest;
+    message = (u8*)&g_UIMessageRequest;
     /* FAKE: opaque base keeps one register for the state bytes across the layout call. */
     FAKE_OPAQUE(message);
     if (*(u16*)message != MESSAGE_NONE) {

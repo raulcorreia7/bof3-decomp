@@ -121,7 +121,7 @@ MATCH void func_801F45EC(void) {
             g_SceneEventState.step = 0x1F;
             break;
         case 31:
-            if (g_UiWindowEffectBusy != 0) {
+            if (g_UIWindowEffectBusy != 0) {
                 break;
             }
             UI_ModeSet(9);
@@ -153,7 +153,7 @@ MATCH void func_801F45EC(void) {
             g_SceneEventState.step = 0x23;
             break;
         case 35:
-            if (g_UiWindowEffectBusy != 0) {
+            if (g_UIWindowEffectBusy != 0) {
                 break;
             }
             g_SaveData.scene_event_timer = 0x5A;

@@ -131,7 +131,7 @@ MATCH void func_801F8DFC(void) {
             }
             break;
         case 21:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_UIWindowEffectBusy == 0) {
                 g_ScenarioState.timer_06 = 0x3C;
                 g_ScenarioState.step     = 22;
             }
@@ -159,7 +159,7 @@ MATCH void func_801F8DFC(void) {
             }
             break;
         case 24:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_UIWindowEffectBusy == 0) {
                 Game_ClearScriptActive();
                 SYS_SetFlag(g_SceneFlags, 0xB);
                 g_ScenarioState.state_04 = 0;

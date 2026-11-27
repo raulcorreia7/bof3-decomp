@@ -44,7 +44,7 @@ MATCH void Menu_OpenFormation(void) {
             if (col != 0) {
                 if ((bit & g_PartyMenuFlags) != 0 && panel_index < limit) {
                     table[col]           = 1;
-                    panel                = &g_UiPanelTasks[MENU_PANEL_CARD_FIRST] + panel_index;
+                    panel                = &g_UIPanelTasks[MENU_PANEL_CARD_FIRST] + panel_index;
                     panel->panel         = 6;
                     panel->mode          = 0xB;
                     panel->state         = 2;

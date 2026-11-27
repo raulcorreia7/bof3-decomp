@@ -33,13 +33,13 @@ MATCH void Battle_SelectEquipSlot(void) {
         g_BattleChoicePhase              = 3;
         g_BattleChoicePanel.items.active = 1;
         D_80148594                       = 0;
-        g_UiPanelTasks[21].active        = 0;
-        g_UiPanelTasks[4].active         = 1;
+        g_UIPanelTasks[21].active        = 0;
+        g_UIPanelTasks[4].active         = 1;
         D_801485DC                       = 0;
         g_Battle.ui_step                 = 1;
         g_Battle.ui_mode                 = 0;
-        g_UiPanelTasks[16].pos.vx        = D_80148598;
-        g_UiPanelTasks[16].pos.vy        = D_8014859A;
+        g_UIPanelTasks[16].pos.vx        = D_80148598;
+        g_UIPanelTasks[16].pos.vy        = D_8014859A;
         return;
     }
     if ((held & PADRleft) != 0u) {
@@ -52,15 +52,15 @@ MATCH void Battle_SelectEquipSlot(void) {
     }
     if ((held & g_InputMasks[BATTLE_INPUT_CONFIRM]) != 0u) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
-        cursor_value              = g_UiPanelTasks[17].unk_0A;
-        g_UiPanelTasks[17].unk_08 = 0;
-        g_UiPanelTasks[17].flags  = 0;
+        cursor_value              = g_UIPanelTasks[17].unk_0A;
+        g_UIPanelTasks[17].unk_08 = 0;
+        g_UIPanelTasks[17].flags  = 0;
         D_80148654                = 0;
         counter                   = (u8*)&g_Battle.ui_mode;
         counter_value             = *counter + 1;
         selection_value           = g_BattleEquipSlot;
         g_BattleListCursor        = cursor_value;
-        g_UiPanelTasks[18].unk_0B = selection_value;
+        g_UIPanelTasks[18].unk_0B = selection_value;
         *counter                  = counter_value;
         return;
     }
@@ -78,5 +78,5 @@ MATCH void Battle_SelectEquipSlot(void) {
             MEM(u8, (u32)&g_BattleEquipSlot) = 0;
         }
     }
-    g_UiPanelTasks[17].unk_09 = g_BattleEquipSlot;
+    g_UIPanelTasks[17].unk_09 = g_BattleEquipSlot;
 }

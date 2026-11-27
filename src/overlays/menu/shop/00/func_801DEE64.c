@@ -14,9 +14,9 @@ MATCH void func_801DEE64(void) {
         row_y   = slot * 0x36;
         id      = g_CharSlot[g_PartyFieldOrder[slot]];
         Menu_DrawCharacterWindow((0x11 - (*counter * 0x28)) & HALF_MASK, (row_y + 0x3E) & 0xFFFE, id, g_Characters[id].party_flags & 0x2, 0);
-        TEXT_Format(g_UiTextFormatBuffer, D_801D0E60, slot + 1);
+        TEXT_Format(g_UITextFormatBuffer, D_801D0E60, slot + 1);
         row_y += 0x43;
-        UI_TextDrawGlyphString(26 - (*counter * 40), row_y, 0U, g_UiTextFormatBuffer);
+        UI_TextDrawGlyphString(26 - (*counter * 40), row_y, 0U, g_UITextFormatBuffer);
     }
     /* FAKE: second pointer local for the post-loop use, pure-C best 85.85%. */
     counter_end = &D_80148654;

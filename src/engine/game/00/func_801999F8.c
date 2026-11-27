@@ -62,8 +62,8 @@ MATCH void func_801999F8(MenuPanelTask* task) {
     value  = Game_ReadCommand(*slotp) & BYTE_MASK;
     offset = (value * 4) - 0x4E;
     UI_TextDraw((task->pos.vx - offset), (task->pos.vy + 0x7), -(task->unk_09 != 0) & 7, MENU_LABEL_LENGTH, *slotp);
-    TEXT_Format(g_UiTextFormatBuffer, D_80195858, Item_CountHeld(task->unk_0A) & BYTE_MASK, (task->unk_0A != 4) ? 0x80 : 0x20);
-    UI_TextDrawGlyphString((task->pos.vx + 85), (task->pos.vy + 146), -(task->unk_09 != 0) & 0x7, g_UiTextFormatBuffer);
+    TEXT_Format(g_UITextFormatBuffer, D_80195858, Item_CountHeld(task->unk_0A) & BYTE_MASK, (task->unk_0A != 4) ? 0x80 : 0x20);
+    UI_TextDrawGlyphString((task->pos.vx + 85), (task->pos.vy + 146), -(task->unk_09 != 0) & 0x7, g_UITextFormatBuffer);
     UI_SpriteDrawRun(task->pos.vx, task->pos.vy, (task->u.list.tabs & 0x2) != 0 ? s_MenuLine1FlagRun : s_MenuLine1Run, UI_SPRITE_ALT_PAGE);
     UI_SpriteDrawRun(task->pos.vx, task->pos.vy, (task->u.list.tabs & 0x1) != 0 ? s_MenuLine2FlagRun : s_MenuLine2Run, UI_SPRITE_ALT_PAGE);
     field = task->u.list.tabs;

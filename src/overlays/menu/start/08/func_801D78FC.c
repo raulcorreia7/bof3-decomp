@@ -13,7 +13,7 @@ MATCH void func_801D78FC(void) {
     s8             result;
 
     Menu_DrawClutStrip(g_WindowClut);
-    panel = &g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME];
+    panel = &g_UIPanelTasks[MENU_START_PANEL_CURSOR_FRAME];
     if (g_BattleMessageState == 0) {
         panel->active = 1;
         D_801485E7    = 0;
@@ -24,7 +24,7 @@ MATCH void func_801D78FC(void) {
     }
     abilities  = Party_GetAbilities(D_8014857A, D_8014857B, 0);
     ability_id = abilities[D_8014857C];
-    panel      = &g_UiPanelTasks[16];
+    panel      = &g_UIPanelTasks[16];
     D_801484CC = g_Abilities[ability_id].description;
     if (g_BattleChoicePhase == 0) {
         D_80148624 = 1;
@@ -86,7 +86,7 @@ MATCH void func_801D78FC(void) {
             }
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
             for (i = 0; i < Party_CountOrder(PARTY_ORDER_FIELD); i++) {
-                panel                       = &g_UiPanelTasks[MENU_START_PANEL_ITEMS + i];
+                panel                       = &g_UIPanelTasks[MENU_START_PANEL_ITEMS + i];
                 panel->unk_0A               = i;
                 panel->panel                = 6;
                 panel->active               = 1;
@@ -96,7 +96,7 @@ MATCH void func_801D78FC(void) {
                 panel->unk_0B               = 0;
                 panel->unk_0C               = 0;
                 panel->pos.vy               = i * 54 + 62;
-                g_UiPanelTasks[i + 4].state = 7;
+                g_UIPanelTasks[i + 4].state = 7;
             }
             g_BattleChoicePhase = 4;
             D_80148624          = 1;

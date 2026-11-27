@@ -213,7 +213,7 @@ MATCH void func_801FC45C(void) {
             }
             break;
         case 26:
-            if (g_UiMessageRequest == 0xE && g_GameStateIndex == 2) {
+            if (g_UIMessageRequest == 0xE && g_GameStateIndex == 2) {
                 D_801FEA70 = g_ScriptWorkRecord - g_Actors;
                 D_801FEA74 = g_ScriptWorkRecord->pos.x.fixed;
                 D_801FEA78 = g_ScriptWorkRecord->pos.y.fixed;

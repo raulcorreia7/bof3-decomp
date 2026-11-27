@@ -60,7 +60,7 @@
         MenuPanelTask* panel;                              \
         u16            next;                               \
                                                            \
-        panel         = g_UiPanelCurrent;                  \
+        panel         = g_UIPanelCurrent;                  \
         next          = panel->pos.vx + MENU_PANEL_STEP_X; \
         panel->pos.vx = next;                              \
         if ((s16)next >= 17) {                             \
@@ -227,7 +227,7 @@ extern s8              D_801484E3;
 extern s16             D_801484E4;
 extern s16             D_801484E6;
 extern u8              D_801484EB;
-/* The start-menu panel: slot 13 of g_UiPanelTasks (0x80148504), the shared
+/* The start-menu panel: slot 13 of g_UIPanelTasks (0x80148504), the shared
  * choice-list view. The retail addresses the cells one by one, so they keep
  * their own symbols below; each is the cell the shared record names. */
 extern u8*             D_80148500;
@@ -263,7 +263,7 @@ extern s16             D_80148598;
 extern s16             D_8014859A;
 extern u16             D_801485BC;
 extern u16             D_801485BE;
-extern MenuPanelTask   g_CursorFramePanel; /* slot 19 of g_UiPanelTasks, the cursor frame */
+extern MenuPanelTask   g_CursorFramePanel; /* slot 19 of g_UIPanelTasks, the cursor frame */
 extern u8              D_801485DD;
 extern u8              D_801485DE;
 extern u8              D_801485E7;
@@ -784,7 +784,7 @@ extern s32  func_801EFCA8(char* prefix, u8 length);
 static inline void Menu_SlidePanelIn(void) {
     MenuPanelTask* task;
 
-    task = g_UiPanelCurrent;
+    task = g_UIPanelCurrent;
     task->pos.vx += MENU_PANEL_STEP_X;
     if (task->pos.vx >= 321) {
         task->pos.vx = 320;
@@ -796,7 +796,7 @@ static inline void Menu_SlidePanelIn(void) {
 static inline void MenuRetreatPanelXToMinus200(void) {
     MenuPanelTask* task;
 
-    task = g_UiPanelCurrent;
+    task = g_UIPanelCurrent;
     task->pos.vx -= MENU_PANEL_STEP_X;
     if (task->pos.vx < -200) {
         task->pos.vx = -200;
@@ -810,7 +810,7 @@ static inline void MenuAdvancePanelYField6(void) {
     u8*            bytes;
     u16            next;
 
-    panel         = g_UiPanelCurrent;
+    panel         = g_UIPanelCurrent;
     bytes         = (u8*)panel;
     next          = panel->pos.vy + MENU_PANEL_STEP_Y;
     panel->pos.vy = next;
@@ -956,7 +956,7 @@ void func_801E7720(s16 tile_x, s8 tile_type);
 
 /* Step the master panel up 16 pixels and stop it at y 62. The member declares task. */
 #define MENU_STEP_PANEL_UP()           \
-    task = g_UiPanelCurrent;           \
+    task = g_UIPanelCurrent;           \
     task->pos.vy -= MENU_PANEL_STEP_Y; \
     if (task->pos.vy < 63) {           \
         task->pos.vy = 62;             \
@@ -965,7 +965,7 @@ void func_801E7720(s16 tile_x, s8 tile_type);
 
 /* Step the master panel right 32 pixels and stop it at x 45. The member declares task. */
 #define MENU_STEP_PANEL_RIGHT()        \
-    task = g_UiPanelCurrent;           \
+    task = g_UIPanelCurrent;           \
     task->pos.vx += MENU_PANEL_STEP_X; \
     if (task->pos.vx >= 46) {          \
         task->pos.vx = 45;             \
@@ -974,7 +974,7 @@ void func_801E7720(s16 tile_x, s8 tile_type);
 
 /* Return the master panel left to x 150. The member declares task. */
 #define MENU_STEP_PANEL_LEFT()         \
-    task = g_UiPanelCurrent;           \
+    task = g_UIPanelCurrent;           \
     task->pos.vx -= MENU_PANEL_STEP_X; \
     if (task->pos.vx < 150) {          \
         task->pos.vx = 150;            \

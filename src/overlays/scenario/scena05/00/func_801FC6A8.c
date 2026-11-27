@@ -13,7 +13,7 @@ MATCH void func_801FC6A8(void) {
     state = &g_ScenarioState.step;
     switch (*state) {
         case 0:
-            if (!(g_UiWindowChannel & FRONTEND_FLAG_CONFIRM)) {
+            if (!(g_UIWindowChannel & FRONTEND_FLAG_CONFIRM)) {
                 break;
             }
             next            = 1;

@@ -10,7 +10,7 @@ MATCH void UI_MessageDrawTextRows(void) {
     s32 i;
 
     cursor = D_801490B0;
-    for (i = 0; i <= g_UiMessageWindow.last_row; i++) {
+    for (i = 0; i <= g_UIMessageWindow.last_row; i++) {
         cursor = UI_TextDrawAt(0x3A, D_801490CF[i], cursor);
     }
 }

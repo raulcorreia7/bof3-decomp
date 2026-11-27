@@ -10,7 +10,7 @@ MATCH void func_801EEC7C(void) {
         return;
     }
     count                    = &g_BattlePartyCount;
-    g_UiPanelTasks[0].active = 0;
+    g_UIPanelTasks[0].active = 0;
     if (*count != 0) {
         SELF_SET(&g_Game.members[0]);
         Script_Request(g_Game.members[0].facing + 0x1C);

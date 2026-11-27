@@ -14,7 +14,7 @@ MATCH void func_801FAFA0(s32 message, u8 frames) {
     cell                         = (u16*)g_ScratchPad.cells.bytes + 1;
     total                        = frames * 0x1E - 1;
     *cell                        = total;
-    g_UiMessageRequest           = message;
+    g_UIMessageRequest           = message;
     g_ScratchPad.cells.halves[0] = total - g_ScenarioState.timer_06;
     elapsed                      = total - g_ScenarioState.timer_06;
     limit                        = total;

@@ -19,7 +19,7 @@ MATCH void Battle_SelectItemPartyTarget(void) {
     }
     trigger = INPUT_REPEATED(held, INPUT_DIRECTIONAL);
     if ((trigger & (PADLup | PADLdown)) != 0) {
-        if ((Item_GetFlags(g_UiPanelTasks[16].unk_0A, g_ItemCategoryIds[g_UiPanelTasks[16].unk_0A][g_UiPanelTasks[16].unk_0C]) & ITEM_USABLE_MENU) != 0u) {
+        if ((Item_GetFlags(g_UIPanelTasks[16].unk_0A, g_ItemCategoryIds[g_UIPanelTasks[16].unk_0A][g_UIPanelTasks[16].unk_0C]) & ITEM_USABLE_MENU) != 0u) {
             g_BattleActorTurn->command.target = Battle_TargetNext(3);
             g_Battle.ui_mode -= 1u;
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));

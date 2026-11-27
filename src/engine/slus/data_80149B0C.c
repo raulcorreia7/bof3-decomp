@@ -1,6 +1,6 @@
 #include "slus.h"
 
-const MenuPanelFuncs g_UiPanels = {{
+const MenuPanelFuncs g_UIPanels = {{
     UI_MessageUpdatePanel,
     (Callback)0x801D2F9Cu,
     (Callback)0x80199558u,

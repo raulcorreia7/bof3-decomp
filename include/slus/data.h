@@ -17,7 +17,7 @@ extern u16         D_80033A08[];
 /* retail addresses */
 extern u16         D_800C1A70;
 extern volatile u8 D_80140000[];
-extern u32         g_UiPopupRequest;
+extern u32         g_UIPopupRequest;
 extern u16         g_GameAreaId;
 /* The party's field position, 16.16; g_ScrollHeight is the integer half of z. */
 /* D_80143F7C */

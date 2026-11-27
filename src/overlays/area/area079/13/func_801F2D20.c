@@ -1,9 +1,9 @@
 #include "area079_13.h"
 
 MATCH void func_801F2D20(void) {
-    s8 choice = g_UiMessageChoice;
+    s8 choice = g_UIMessageChoice;
 
-    g_UiMessageRequest = D_801F4C70[choice];
+    g_UIMessageRequest = D_801F4C70[choice];
     switch (choice) {
         case 0:
             g_ScriptVars[3] = 11;

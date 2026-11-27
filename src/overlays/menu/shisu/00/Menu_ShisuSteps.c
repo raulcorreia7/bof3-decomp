@@ -74,9 +74,9 @@ MATCH void func_801D0FAC(void) {
         u8* step = &g_MenuStep.step;
 
         g_MenuStep.sub_step      = 0;
-        g_UiPanelTasks[1].active = 0;
+        g_UIPanelTasks[1].active = 0;
         *D_80148378              = 0;
-        g_UiPanelTasks[3].active = 0;
+        g_UIPanelTasks[3].active = 0;
         *step += 1;
         return;
     }
@@ -174,14 +174,14 @@ MATCH void func_801D11F4(void) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
         step                     = &g_MenuStep.step;
         cur                      = *step;
-        g_UiPanelTasks[0].active = 0;
+        g_UIPanelTasks[0].active = 0;
         g_MenuStep.sub_step      = 0;
         *step                    = cur + 1;
     }
 
-    g_UiPanelTasks[0].active = 1;
+    g_UIPanelTasks[0].active = 1;
     D_80148334               = D_8014837C + g_ShisuIngredients.command * 48;
-    g_UiPanelTasks[0].pos.vy = D_8014837E + 4;
+    g_UIPanelTasks[0].pos.vy = D_8014837E + 4;
     if (g_ShisuIngredients.rounds != 0) {
         D_801DA0FC = D_801DA084 + g_ShisuBaseScale * 0xA00;
     }
@@ -290,11 +290,11 @@ MATCH void func_801D14C0(void) {
         }
     }
     cursor                   = g_ShisuIngredients.cursor;
-    g_UiPanelTasks[0].active = 1;
-    g_UiPanelTasks[0].unk_0A = cursor;
-    g_UiPanelTasks[0].pos.vx = g_UiPanelTasks[3].pos.vx + 7;
-    g_UiPanelTasks[0].pos.vy = g_UiPanelTasks[3].pos.vy + cursor * 13 + 26;
-    g_UiPanelTasks[3].unk_0A = cursor;
+    g_UIPanelTasks[0].active = 1;
+    g_UIPanelTasks[0].unk_0A = cursor;
+    g_UIPanelTasks[0].pos.vx = g_UIPanelTasks[3].pos.vx + 7;
+    g_UIPanelTasks[0].pos.vy = g_UIPanelTasks[3].pos.vy + cursor * 13 + 26;
+    g_UIPanelTasks[3].unk_0A = cursor;
     if (g_ShisuIngredients.rounds != 0) {
         D_801DA0FC = D_801DA084 + g_ShisuBaseScale * 0xA00;
     }
@@ -442,41 +442,41 @@ MATCH void func_801D1CA4(void) {
 
 /* Places the four shisu panels and points the ingredient list at the item counts. */
 MATCH void func_801D1D1C(void) {
-    g_UiPanelTasks[0].active     = 0;
-    g_UiPanelTasks[0].panel      = 1;
-    g_UiPanelTasks[0].mode       = 0;
-    g_UiPanelTasks[0].state      = 2;
-    g_UiPanelTasks[0].pos.vx     = 0;
-    g_UiPanelTasks[0].pos.vy     = 0;
-    g_UiPanelTasks[1].active     = 1;
-    g_UiPanelTasks[1].panel      = 1;
-    g_UiPanelTasks[1].mode       = 1;
-    g_UiPanelTasks[1].state      = 2;
-    g_UiPanelTasks[1].pos.vx     = 0x14;
-    g_UiPanelTasks[1].pos.vy     = -0x64;
-    g_UiPanelTasks[2].active     = 1;
-    g_UiPanelTasks[2].panel      = 1;
-    g_UiPanelTasks[2].mode       = 2;
-    g_UiPanelTasks[2].state      = 2;
-    g_UiPanelTasks[2].pos.vx     = 0x70;
-    g_UiPanelTasks[2].pos.vy     = -0x64;
-    g_UiPanelTasks[2].unk_0A     = 8;
-    g_UiPanelTasks[2].unk_0B     = 0xFF;
-    g_UiPanelTasks[3].active     = 1;
-    g_UiPanelTasks[3].panel      = 1;
-    g_UiPanelTasks[3].mode       = 3;
-    g_UiPanelTasks[3].state      = 2;
-    g_UiPanelTasks[3].pos.vx     = -0x78;
-    g_UiPanelTasks[3].pos.vy     = 0x3F;
-    g_UiPanelTasks[3].unk_0A     = 0xFF;
-    g_UiPanelTasks[3].item_table = (s32)&g_ShisuIngredients;
+    g_UIPanelTasks[0].active     = 0;
+    g_UIPanelTasks[0].panel      = 1;
+    g_UIPanelTasks[0].mode       = 0;
+    g_UIPanelTasks[0].state      = 2;
+    g_UIPanelTasks[0].pos.vx     = 0;
+    g_UIPanelTasks[0].pos.vy     = 0;
+    g_UIPanelTasks[1].active     = 1;
+    g_UIPanelTasks[1].panel      = 1;
+    g_UIPanelTasks[1].mode       = 1;
+    g_UIPanelTasks[1].state      = 2;
+    g_UIPanelTasks[1].pos.vx     = 0x14;
+    g_UIPanelTasks[1].pos.vy     = -0x64;
+    g_UIPanelTasks[2].active     = 1;
+    g_UIPanelTasks[2].panel      = 1;
+    g_UIPanelTasks[2].mode       = 2;
+    g_UIPanelTasks[2].state      = 2;
+    g_UIPanelTasks[2].pos.vx     = 0x70;
+    g_UIPanelTasks[2].pos.vy     = -0x64;
+    g_UIPanelTasks[2].unk_0A     = 8;
+    g_UIPanelTasks[2].unk_0B     = 0xFF;
+    g_UIPanelTasks[3].active     = 1;
+    g_UIPanelTasks[3].panel      = 1;
+    g_UIPanelTasks[3].mode       = 3;
+    g_UIPanelTasks[3].state      = 2;
+    g_UIPanelTasks[3].pos.vx     = -0x78;
+    g_UIPanelTasks[3].pos.vy     = 0x3F;
+    g_UIPanelTasks[3].unk_0A     = 0xFF;
+    g_UIPanelTasks[3].item_table = (s32)&g_ShisuIngredients;
 }
 
 MATCH void func_801D1E34(void) {
-    FIELD(u8, g_UiPanelTasks, 0x0) = 0;
-    g_UiPanelTasks[1].state        = 1;
-    g_UiPanelTasks[2].state        = 1;
-    g_UiPanelTasks[3].state        = 1;
+    FIELD(u8, g_UIPanelTasks, 0x0) = 0;
+    g_UIPanelTasks[1].state        = 1;
+    g_UIPanelTasks[2].state        = 1;
+    g_UIPanelTasks[3].state        = 1;
 }
 
 MATCH s32 func_801D1E60(void) {

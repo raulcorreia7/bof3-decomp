@@ -10,16 +10,16 @@ MATCH void UI_MessageReset(void) {
     u8  value;
     u8* stream;
 
-    base = (u8*)&g_UiWindowChannel;
+    base = (u8*)&g_UIWindowChannel;
     /* FAKE: opaque base keeps one register for the -4..0x2A record accesses (match.h operand fake-match helper). */
     FAKE_OPAQUE(base);
     base[-4]               = 0;
-    g_UiMessageStep        = 0;
-    g_UiMessageChoiceMode  = 0;
-    g_UiMessageChoiceStep  = 0;
+    g_UIMessageStep        = 0;
+    g_UIMessageChoiceMode  = 0;
+    g_UIMessageChoiceStep  = 0;
     *D_801490BA            = 0;
     *D_801490BB            = 0;
-    g_UiMessageChoiceTimer = 0;
+    g_UIMessageChoiceTimer = 0;
     stream                 = D_801490B0;
     *(u16*)base &= 0x40;
     if (*stream == 0xC) {
@@ -29,12 +29,12 @@ MATCH void UI_MessageReset(void) {
         *(u8**)(base + 0xC) = cursor + 2;
         base[0x2A]          = value;
     } else {
-        g_UiPanelPlacement = 0;
+        g_UIPanelPlacement = 0;
     }
-    g_UiMessageStateTimer[0] = 0;
-    g_UiMessageState.index   = 0;
+    g_UIMessageStateTimer[0] = 0;
+    g_UIMessageState.index   = 0;
     D_801490C8               = 0;
     D_801490B8[0]            = 0;
     UI_PanelOpenTask(0U, 0U);
-    g_UiPanelTasks[0].layer = 2;
+    g_UIPanelTasks[0].layer = 2;
 }

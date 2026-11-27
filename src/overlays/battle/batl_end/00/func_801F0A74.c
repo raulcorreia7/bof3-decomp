@@ -15,6 +15,6 @@ MATCH void func_801F0A74(s16 x, s16 y, u8 clut, u8 category, u8 item, u8 amount,
     if (amount < 2) {
         return;
     }
-    TEXT_Format(g_UiTextFormatBuffer, D_801EEC50, amount);
-    UI_TextDrawGlyphString(x + 109, y + 2, clut, g_UiTextFormatBuffer);
+    TEXT_Format(g_UITextFormatBuffer, D_801EEC50, amount);
+    UI_TextDrawGlyphString(x + 109, y + 2, clut, g_UITextFormatBuffer);
 }

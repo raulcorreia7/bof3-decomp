@@ -2,7 +2,7 @@
 
 MATCH s32 func_801F2C04(void) {
     MESSAGE_REQUEST_CLEAR();
-    switch (g_UiMessageChoice) {
+    switch (g_UIMessageChoice) {
         case 0:
             g_ScriptVars[0] = 1;
             break;

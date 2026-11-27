@@ -48,7 +48,7 @@ MATCH void func_801FA0A4(void) {
             break;
 
         case 5:
-            if (g_GameStateIndex == 2 && g_UiMessageRequest == 0x33) {
+            if (g_GameStateIndex == 2 && g_UIMessageRequest == 0x33) {
                 g_ScenarioState.step = 10;
             }
             break;

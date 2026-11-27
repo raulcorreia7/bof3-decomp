@@ -17,7 +17,7 @@ MATCH void func_801F98A4(void) {
 
     switch (g_ScenarioState.step) {
         case 0:
-            if ((g_UiWindowChannel & FRONTEND_FLAG_CONFIRM) == 0) {
+            if ((g_UIWindowChannel & FRONTEND_FLAG_CONFIRM) == 0) {
                 break;
             }
             if (g_ScriptVars[0] == 0x14) {
@@ -385,7 +385,7 @@ MATCH void func_801F98A4(void) {
             break;
 
         case 70:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_UIWindowEffectBusy == 0) {
                 g_AreaDrawFlags      = 0;
                 g_ScenarioState.step = 71;
             }
@@ -867,7 +867,7 @@ MATCH void func_801F98A4(void) {
             break;
 
         case 100:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_UIWindowEffectBusy == 0) {
                 g_AreaDrawFlags      = 0;
                 g_ScenarioState.step = 101;
             }
@@ -1218,7 +1218,7 @@ MATCH void func_801F98A4(void) {
             break;
 
         case 92:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_UIWindowEffectBusy == 0) {
                 g_AreaDrawFlags      = 0;
                 g_ScenarioState.step = 93;
             }

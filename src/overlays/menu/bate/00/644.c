@@ -18,65 +18,65 @@ MATCH void func_801D1244(void) {
     u8  next;
     u8* cursor;
 
-    category                       = g_UiPanelTasks[0].unk_08;
+    category                       = g_UIPanelTasks[0].unk_08;
     cursor_x                       = (u16)D_80148334;
-    row                            = g_UiPanelTasks[0].unk_0B;
+    row                            = g_UIPanelTasks[0].unk_0B;
     first                          = LOBU(D_8014833A);
-    g_UiPanelTasks[1].flags        = 0;
-    g_UiPanelTasks[4].pos.vx       = cursor_x + 7;
+    g_UIPanelTasks[1].flags        = 0;
+    g_UIPanelTasks[4].pos.vx       = cursor_x + 7;
     row_offset                     = row - first;
-    g_UiPanelTasks[4].pos.vy       = (u16)(g_UiPanelTasks[0].pos.vy + (row_offset * 13 + 26));
-    g_UiPanelTasks[2].u.message.id = Item_GetDescription(category, g_UiPanelTasks[0].flags);
-    g_UiPanelTasks[3].u.message.id = 221;
+    g_UIPanelTasks[4].pos.vy       = (u16)(g_UIPanelTasks[0].pos.vy + (row_offset * 13 + 26));
+    g_UIPanelTasks[2].u.message.id = Item_GetDescription(category, g_UIPanelTasks[0].flags);
+    g_UIPanelTasks[3].u.message.id = 221;
     buttons                        = INPUT_REPEATED(g_PadStates[0].pressed, (INPUT_DIRECTIONAL | PADL1 | PADR1));
     func_801D1FA0();
-    old_cursor = g_UiPanelTasks[0].unk_0B;
+    old_cursor = g_UIPanelTasks[0].unk_0B;
     if (buttons & PADLup) {
         if (old_cursor != 0) {
-            g_UiPanelTasks[0].unk_0B = old_cursor - 1;
+            g_UIPanelTasks[0].unk_0B = old_cursor - 1;
         }
-        if (g_UiPanelTasks[0].unk_0B < g_UiPanelTasks[0].unk_0A) {
-            g_UiPanelTasks[0].u.addr.unk_10 = 240;
+        if (g_UIPanelTasks[0].unk_0B < g_UIPanelTasks[0].unk_0A) {
+            g_UIPanelTasks[0].u.addr.unk_10 = 240;
         }
     } else if (buttons & PADLdown) {
         if (old_cursor < 127) {
-            g_UiPanelTasks[0].unk_0B = old_cursor + 1;
+            g_UIPanelTasks[0].unk_0B = old_cursor + 1;
         }
-        if (g_UiPanelTasks[0].unk_0B >= g_UiPanelTasks[0].unk_0A + 9) {
-            g_UiPanelTasks[0].u.addr.unk_10 = 16;
+        if (g_UIPanelTasks[0].unk_0B >= g_UIPanelTasks[0].unk_0A + 9) {
+            g_UIPanelTasks[0].u.addr.unk_10 = 16;
         }
     } else if (buttons & PADL1) {
-        first_row = g_UiPanelTasks[0].unk_0A;
+        first_row = g_UIPanelTasks[0].unk_0A;
         if (first_row == 0) {
-            g_UiPanelTasks[0].unk_0B = 0;
+            g_UIPanelTasks[0].unk_0B = 0;
         } else if (first_row < 9) {
-            g_UiPanelTasks[0].unk_0B = old_cursor - first_row;
-            g_UiPanelTasks[0].unk_0A = 0;
+            g_UIPanelTasks[0].unk_0B = old_cursor - first_row;
+            g_UIPanelTasks[0].unk_0A = 0;
         } else {
-            g_UiPanelTasks[0].unk_0B = old_cursor - 9;
-            g_UiPanelTasks[0].unk_0A = first_row - 9;
+            g_UIPanelTasks[0].unk_0B = old_cursor - 9;
+            g_UIPanelTasks[0].unk_0A = first_row - 9;
         }
     } else if (buttons & PADR1) {
-        last_row = g_UiPanelTasks[0].unk_0A;
+        last_row = g_UIPanelTasks[0].unk_0A;
         if (last_row == 119) {
-            g_UiPanelTasks[0].unk_0B = 127;
+            g_UIPanelTasks[0].unk_0B = 127;
         } else if (old_cursor >= 111) {
             next                     = old_cursor + 119;
-            g_UiPanelTasks[0].unk_0B = next - last_row;
-            g_UiPanelTasks[0].unk_0A = 119;
+            g_UIPanelTasks[0].unk_0B = next - last_row;
+            g_UIPanelTasks[0].unk_0A = 119;
         } else {
-            g_UiPanelTasks[0].unk_0B = old_cursor + 9;
-            g_UiPanelTasks[0].unk_0A = last_row + 9;
+            g_UIPanelTasks[0].unk_0B = old_cursor + 9;
+            g_UIPanelTasks[0].unk_0A = last_row + 9;
         }
     }
-    cursor = &g_UiPanelTasks[0].unk_0B;
+    cursor = &g_UIPanelTasks[0].unk_0B;
     if (old_cursor != *cursor) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
     }
-    if ((s16)g_UiPanelTasks[0].u.addr.unk_10 == 0) {
+    if ((s16)g_UIPanelTasks[0].u.addr.unk_10 == 0) {
         pad = g_PadStates[0].pressed;
         if (pad & g_InputMasks[MENU_INPUT_CONFIRM]) {
-            if (g_UiPanelTasks[0].flags != 0) {
+            if (g_UIPanelTasks[0].flags != 0) {
                 SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 4));
                 Menu_ApplyEquipment();
                 *cursor = GAME_NONE;
@@ -158,25 +158,25 @@ MATCH void func_801D165C(s32 panel_x, s32 panel_y, u8 category, u8 item_id) {
         row     = i * 13 + 0x13;
         value_y = top + row;
         UI_TextDraw((s16)(panel_x + 5), value_y, UI_TEXT_NORMAL, TEXT_LENGTH_MAX, D_801D8744[i]);
-        sprintf(g_UiTextFormatBuffer, D_801D0C04, current[i]);
+        sprintf(g_UITextFormatBuffer, D_801D0C04, current[i]);
         row     = i * 13 + 0x15;
         trial_y = top + row;
-        UI_TextDrawGlyphString((s16)(left + 0x29), trial_y, UI_TEXT_NORMAL, g_UiTextFormatBuffer);
+        UI_TextDrawGlyphString((s16)(left + 0x29), trial_y, UI_TEXT_NORMAL, g_UITextFormatBuffer);
         if ((u8)Item_CanEquip(0, (category == 1) ? EQUIP_SLOT_WEAPON : EQUIP_SLOT_ARMOR, category, item_id)) {
-            sprintf(g_UiTextFormatBuffer, D_801D0C04, D_801D8ECC[i]);
-            UI_TextDrawGlyphString((s16)(panel_x + 0x59), trial_y, change[i], g_UiTextFormatBuffer);
+            sprintf(g_UITextFormatBuffer, D_801D0C04, D_801D8ECC[i]);
+            UI_TextDrawGlyphString((s16)(panel_x + 0x59), trial_y, change[i], g_UITextFormatBuffer);
         } else {
-            sprintf(g_UiTextFormatBuffer, D_801D0C0C);
-            UI_TextDrawGlyphString((s16)(panel_x + 0x59), trial_y, UI_TEXT_NORMAL, g_UiTextFormatBuffer);
+            sprintf(g_UITextFormatBuffer, D_801D0C0C);
+            UI_TextDrawGlyphString((s16)(panel_x + 0x59), trial_y, UI_TEXT_NORMAL, g_UITextFormatBuffer);
         }
     }
     UI_WindowDrawOutline((s16)(left + 1), (s16)(top + 0x49), 0x88, 0x52, UI_WINDOW_OUTLINE_OPEN_ALL | UI_WINDOW_OUTLINE_BLEND);
-    sprintf(g_UiTextFormatBuffer, D_801D0C14);
+    sprintf(g_UITextFormatBuffer, D_801D0C14);
     for (i = 0, icon_y = top + 0x51; i < EQUIP_SLOT_COUNT; i++) {
         UI_IconDraw((u16)(left + 6), (u16)(icon_y + i * 13), D_801D8754[i], 0);
         if (i != EQUIP_SLOT_WEAPON && i != EQUIP_SLOT_ARMOR) {
             row = i * 13 + 0x4F;
-            UI_TextDrawAscii((s16)(left + 0x11), (s16)(top + row), UI_TEXT_NORMAL, g_UiTextFormatBuffer);
+            UI_TextDrawAscii((s16)(left + 0x11), (s16)(top + row), UI_TEXT_NORMAL, g_UITextFormatBuffer);
         }
     }
     name = (u8*)&g_Weapons[character->equip.weapon];
@@ -236,14 +236,14 @@ NON_MATCHING void func_801D1C90(void) {
 
     i                        = 0;
     terminator               = 7;
-    task                     = (u8*)&g_UiPanelTasks[0].panel;
+    task                     = (u8*)&g_UIPanelTasks[0].panel;
     selected                 = task + 0xB;
     *task                    = 2;
-    g_UiPanelTasks[0].mode   = 2;
-    g_UiPanelTasks[0].state  = 2;
-    g_UiPanelTasks[0].active = 1;
-    g_UiPanelTasks[0].pos.vx = 0x140;
-    g_UiPanelTasks[0].pos.vy = 0x3E;
+    g_UIPanelTasks[0].mode   = 2;
+    g_UIPanelTasks[0].state  = 2;
+    g_UIPanelTasks[0].active = 1;
+    g_UIPanelTasks[0].pos.vx = 0x140;
+    g_UIPanelTasks[0].pos.vy = 0x3E;
     do {
         value = g_PartyFieldOrder[i];
         if (value == 0 || value == terminator) {
@@ -252,43 +252,43 @@ NON_MATCHING void func_801D1C90(void) {
         }
         i++;
     } while (i < 3);
-    g_UiPanelTasks[0].item_table    = (s32)D_801D8EE0;
-    g_UiPanelTasks[1].unk_0B        = 0xFF;
-    g_UiPanelTasks[1].pos.vx        = -0xAA;
-    g_UiPanelTasks[1].pos.vy        = 0x3E;
-    g_UiPanelTasks[1].unk_0C        = 7;
-    g_UiPanelTasks[0].unk_09        = 0;
-    g_UiPanelTasks[0].unk_0B        = 0;
-    g_UiPanelTasks[0].unk_0A        = 0;
-    g_UiPanelTasks[0].unk_08        = 0;
-    g_UiPanelTasks[0].flags         = 0;
-    g_UiPanelTasks[0].u.addr.unk_10 = 0;
-    g_UiPanelTasks[1].panel         = 2;
-    g_UiPanelTasks[1].mode          = 3;
-    g_UiPanelTasks[1].state         = 2;
-    g_UiPanelTasks[1].active        = 1;
-    g_UiPanelTasks[1].item_table    = (s32)D_801D8EE0;
-    g_UiPanelTasks[1].unk_0A        = 0;
-    g_UiPanelTasks[1].flags         = 1;
-    g_UiPanelTasks[2].panel         = 2;
-    g_UiPanelTasks[2].mode          = 4;
-    g_UiPanelTasks[2].state         = 2;
-    g_UiPanelTasks[2].active        = 1;
-    g_UiPanelTasks[2].pos.vx        = 0x14;
-    g_UiPanelTasks[2].pos.vy        = -0x14;
-    g_UiPanelTasks[2].u.addr.unk_12 = 0x118;
-    g_UiPanelTasks[2].u.addr.unk_10 = 0;
-    g_UiPanelTasks[3].panel         = 2;
-    g_UiPanelTasks[3].mode          = 4;
-    g_UiPanelTasks[3].state         = 3;
-    g_UiPanelTasks[3].active        = 1;
-    g_UiPanelTasks[3].pos.vy        = -0x14;
-    g_UiPanelTasks[3].pos.vx        = 0xA4;
-    g_UiPanelTasks[3].u.addr.unk_10 = 0;
-    g_UiPanelTasks[3].u.addr.unk_12 = 0x80;
-    g_UiPanelTasks[4].panel         = 2;
-    g_UiPanelTasks[4].mode          = 1;
-    g_UiPanelTasks[4].active        = 0;
+    g_UIPanelTasks[0].item_table    = (s32)D_801D8EE0;
+    g_UIPanelTasks[1].unk_0B        = 0xFF;
+    g_UIPanelTasks[1].pos.vx        = -0xAA;
+    g_UIPanelTasks[1].pos.vy        = 0x3E;
+    g_UIPanelTasks[1].unk_0C        = 7;
+    g_UIPanelTasks[0].unk_09        = 0;
+    g_UIPanelTasks[0].unk_0B        = 0;
+    g_UIPanelTasks[0].unk_0A        = 0;
+    g_UIPanelTasks[0].unk_08        = 0;
+    g_UIPanelTasks[0].flags         = 0;
+    g_UIPanelTasks[0].u.addr.unk_10 = 0;
+    g_UIPanelTasks[1].panel         = 2;
+    g_UIPanelTasks[1].mode          = 3;
+    g_UIPanelTasks[1].state         = 2;
+    g_UIPanelTasks[1].active        = 1;
+    g_UIPanelTasks[1].item_table    = (s32)D_801D8EE0;
+    g_UIPanelTasks[1].unk_0A        = 0;
+    g_UIPanelTasks[1].flags         = 1;
+    g_UIPanelTasks[2].panel         = 2;
+    g_UIPanelTasks[2].mode          = 4;
+    g_UIPanelTasks[2].state         = 2;
+    g_UIPanelTasks[2].active        = 1;
+    g_UIPanelTasks[2].pos.vx        = 0x14;
+    g_UIPanelTasks[2].pos.vy        = -0x14;
+    g_UIPanelTasks[2].u.addr.unk_12 = 0x118;
+    g_UIPanelTasks[2].u.addr.unk_10 = 0;
+    g_UIPanelTasks[3].panel         = 2;
+    g_UIPanelTasks[3].mode          = 4;
+    g_UIPanelTasks[3].state         = 3;
+    g_UIPanelTasks[3].active        = 1;
+    g_UIPanelTasks[3].pos.vy        = -0x14;
+    g_UIPanelTasks[3].pos.vx        = 0xA4;
+    g_UIPanelTasks[3].u.addr.unk_10 = 0;
+    g_UIPanelTasks[3].u.addr.unk_12 = 0x80;
+    g_UIPanelTasks[4].panel         = 2;
+    g_UIPanelTasks[4].mode          = 1;
+    g_UIPanelTasks[4].active        = 0;
 }
 #else
 INCLUDE_ASM(func_801D1C90);
@@ -326,8 +326,8 @@ MATCH void Menu_ApplyEquipment(void) {
 MATCH void func_801D1FA0(void) {
     u8 slot;
 
-    slot = g_UiPanelTasks[0].flags;
-    if (Item_GetEquipability(g_UiPanelTasks[0].unk_08, slot) & 0x1) {
+    slot = g_UIPanelTasks[0].flags;
+    if (Item_GetEquipability(g_UIPanelTasks[0].unk_08, slot) & 0x1) {
         D_80148511 = 0;
     } else {
         D_80148511 = 1;
@@ -339,7 +339,7 @@ MATCH void func_801D1FA0(void) {
     D_801D8ED4.equipped_items[4]                        = g_Characters[7].equip.accessories[0];
     /* @bug The trial set stores both accessories to the first accessory slot, so the second keeps its old value. */
     D_801D8ED4.equipped_items[4]                        = g_Characters[7].equip.accessories[1];
-    D_801D8ED4.equipped_items[g_UiPanelTasks[1].unk_0A] = slot;
+    D_801D8ED4.equipped_items[g_UIPanelTasks[1].unk_0A] = slot;
 }
 
 MATCH void func_801D2070(void) {
@@ -422,10 +422,10 @@ NON_MATCHING void func_801D2304(s32 x, s32 y) {
     do {
         UI_TextDraw((s16)(left + 6), (s16)(top + ((i << 5) + 0x1E)), 0, TEXT_LENGTH_MAX, UI_MessageGetText(0xE8 + i));
         UI_TextDraw((s16)(left + 0x94), (s16)(top + ((i << 5) + 0x1E)), 0, TEXT_LENGTH_MAX, UI_MessageGetText(0xEB + i));
-        sprintf(g_UiTextFormatBuffer, D_801D0C18, D_801D8F00[i]);
-        UI_TextDrawAscii((s16)(left + 0x1E), (s16)(top + ((i << 5) + 0x2B)), 0, g_UiTextFormatBuffer);
-        sprintf(g_UiTextFormatBuffer, D_801D0C1C, D_801D8F00[i + 3]);
-        UI_TextDrawAscii((s16)(left + 0x94), (s16)(top + ((i << 5) + 0x2B)), 0, g_UiTextFormatBuffer);
+        sprintf(g_UITextFormatBuffer, D_801D0C18, D_801D8F00[i]);
+        UI_TextDrawAscii((s16)(left + 0x1E), (s16)(top + ((i << 5) + 0x2B)), 0, g_UITextFormatBuffer);
+        sprintf(g_UITextFormatBuffer, D_801D0C1C, D_801D8F00[i + 3]);
+        UI_TextDrawAscii((s16)(left + 0x94), (s16)(top + ((i << 5) + 0x2B)), 0, g_UITextFormatBuffer);
         func_801D26E0((s16)(left + 0x94), (s16)(top + ((i << 5) + 0x2B)));
         i += 1;
     } while (i < 3);
@@ -511,9 +511,9 @@ MATCH void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_index, s32 shad
         text_clut = clut & BYTE_MASK;
         UI_TextDraw(x + 20, y + 3, text_clut, CHARACTER_NAME_LENGTH, stats);
     } while (0);
-    TEXT_Format(g_UiTextFormatBuffer, g_MenuStatFormat, stats->level);
+    TEXT_Format(g_UITextFormatBuffer, g_MenuStatFormat, stats->level);
     text_y = (s16)(y + 0x17);
-    UI_TextDrawGlyphString(x + 22, text_y, text_clut, g_UiTextFormatBuffer);
+    UI_TextDrawGlyphString(x + 22, text_y, text_clut, g_UITextFormatBuffer);
     if ((LOWU(stats->status) & (STATUS_CONFUSED | STATUS_POISONED)) == (STATUS_CONFUSED | STATUS_POISONED)) {
         if (g_FrameCount & 0x20) {
             UI_TextDrawString(x + 46, text_y, text_clut != 0 ? text_clut : 1, MENU_LABEL_LENGTH, D_801D8B18);
@@ -540,15 +540,15 @@ MATCH void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_index, s32 shad
     } else {
         clut = 7;
     }
-    TEXT_Format(g_UiTextFormatBuffer, D_801D0C24, stats->hp);
-    UI_TextDrawGlyphString(x + 22, y + 31, clut, g_UiTextFormatBuffer);
+    TEXT_Format(g_UITextFormatBuffer, D_801D0C24, stats->hp);
+    UI_TextDrawGlyphString(x + 22, y + 31, clut, g_UITextFormatBuffer);
     if ((u8)shaded == 0) {
         clut = (stats->fatigue != 0) * 4;
     } else {
         clut = 7;
     }
-    TEXT_Format(g_UiTextFormatBuffer, D_801D0C2C, stats->stats.max_hp);
-    UI_TextDrawGlyphString(x + 22, y + 31, clut, g_UiTextFormatBuffer);
+    TEXT_Format(g_UITextFormatBuffer, D_801D0C2C, stats->stats.max_hp);
+    UI_TextDrawGlyphString(x + 22, y + 31, clut, g_UITextFormatBuffer);
     clut = (u8)shaded ? 7 : 0;
     if ((u8)shaded == 0) {
         if (stats->ap < (u32)(stats->stats.max_ap >> 2)) {
@@ -560,11 +560,11 @@ MATCH void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_index, s32 shad
     } else {
         clut = 7;
     }
-    TEXT_Format(g_UiTextFormatBuffer, D_801D0C24, stats->ap);
-    UI_TextDrawGlyphString(x + 22, y + 39, clut, g_UiTextFormatBuffer);
+    TEXT_Format(g_UITextFormatBuffer, D_801D0C24, stats->ap);
+    UI_TextDrawGlyphString(x + 22, y + 39, clut, g_UITextFormatBuffer);
     clut = (u8)shaded ? 7 : 0;
-    TEXT_Format(g_UiTextFormatBuffer, D_801D0C2C, stats->stats.max_ap);
-    UI_TextDrawGlyphString(x + 22, y + 39, clut, g_UiTextFormatBuffer);
+    TEXT_Format(g_UITextFormatBuffer, D_801D0C2C, stats->stats.max_ap);
+    UI_TextDrawGlyphString(x + 22, y + 39, clut, g_UITextFormatBuffer);
     func_801AF390(x, y, D_801D8780, 0);
     Menu_DrawExperienceLine(x + 0x14, y + 0x12, character_index, stats->level, stats->exp);
     /* FAKE: dead stores keep px and py the CSE heads of their x and y copies. */

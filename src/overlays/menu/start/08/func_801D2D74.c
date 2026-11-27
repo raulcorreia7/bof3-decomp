@@ -4,10 +4,10 @@
 extern volatile u8 D_80148594; /* local: volatile access; the shared copy is plain */
 
 MATCH void func_801D2D74(void) {
-    g_UiPanelTasks[MENU_START_PANEL_COMMANDS].active = 0;
+    g_UIPanelTasks[MENU_START_PANEL_COMMANDS].active = 0;
     D_80148504.active                                = 0;
-    g_UiPanelTasks[14].active                        = 0;
+    g_UIPanelTasks[14].active                        = 0;
     D_8014854C                                       = 0;
-    g_UiPanelTasks[16].active                        = 0;
-    g_UiPanelTasks[17].active                        = 0;
+    g_UIPanelTasks[16].active                        = 0;
+    g_UIPanelTasks[17].active                        = 0;
 }

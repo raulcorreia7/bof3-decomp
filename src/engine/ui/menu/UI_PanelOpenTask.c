@@ -9,15 +9,15 @@ MATCH u8 UI_PanelOpenTask(u8 panel_index, u8 panel) {
     FAKE_REG(s32, status, "v0");
 
     index = panel_index & BYTE_MASK;
-    if (g_UiPanelTasks[index].active != 0) {
+    if (g_UIPanelTasks[index].active != 0) {
         return 0xFF;
     }
     status = panel_index;
     /* FAKE: keep the success status live across the slot stores. */
     FAKE_USE(status);
-    g_UiPanelTasks[index].active = 1;
-    g_UiPanelTasks[index].panel  = panel;
-    g_UiPanelTasks[index].mode   = 0;
-    g_UiPanelTasks[index].state  = 0;
+    g_UIPanelTasks[index].active = 1;
+    g_UIPanelTasks[index].panel  = panel;
+    g_UIPanelTasks[index].mode   = 0;
+    g_UIPanelTasks[index].state  = 0;
     return status;
 }

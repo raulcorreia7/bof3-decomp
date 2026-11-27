@@ -2,10 +2,10 @@
 
 MATCH void func_800B1664(void) {
     Battle_DrawCommandList();
-    if (g_UiPanelCurrent->pos.vx >= 164) {
-        g_UiPanelCurrent->pos.vx = g_UiPanelCurrent->pos.vx - 32;
+    if (g_UIPanelCurrent->pos.vx >= 164) {
+        g_UIPanelCurrent->pos.vx = g_UIPanelCurrent->pos.vx - 32;
     }
-    if (g_UiPanelCurrent->pos.vx < 163) {
-        g_UiPanelCurrent->pos.vx = 163;
+    if (g_UIPanelCurrent->pos.vx < 163) {
+        g_UIPanelCurrent->pos.vx = 163;
     }
 }

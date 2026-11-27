@@ -5,7 +5,7 @@ void Menu_DrawBackdrop(void);
 MATCH void func_801E441C(void) {
     Menu_DrawBackdrop();
     func_801E6D88(0);
-    if (g_UiWindowChannel & FRONTEND_FLAG_CONFIRM) {
+    if (g_UIWindowChannel & FRONTEND_FLAG_CONFIRM) {
         if ((D_801ED86C != 0) && (g_PadStates[0].pressed & (PADLup | PADLdown))) {
             D_801ED7EC ^= 1;
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));

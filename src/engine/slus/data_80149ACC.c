@@ -1,6 +1,6 @@
 #include "slus.h"
 
-const MessageSteps g_UiMessageSteps = {{
+const MessageSteps g_UIMessageSteps = {{
     UI_MessageAnswerSet0,
     UI_MessageAnswerSet1,
     UI_MessageAnswerSet2,

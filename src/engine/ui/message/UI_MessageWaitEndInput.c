@@ -6,16 +6,16 @@ MATCH void UI_MessageWaitEndInput(void) {
     u8  step;
     u16 window_flags;
 
-    if ((g_PadStates[0].pressed != 0) || ((*(s32*)&g_UiWindowChannel & (FRONTEND_FLAG_ADVANCE_REQUEST | FRONTEND_FLAG_MODE_LATCH)) != 0)) {
-        panel_state  = g_UiPanelTasks[0].state;
-        /* FAKE: g_UiMessageStep is a one-byte scalar elsewhere; this unit reads it as an array element. */
-        step         = MEM(u8, (u32)&g_UiMessageStep);
-        window_flags = g_UiWindowChannel;
+    if ((g_PadStates[0].pressed != 0) || ((*(s32*)&g_UIWindowChannel & (FRONTEND_FLAG_ADVANCE_REQUEST | FRONTEND_FLAG_MODE_LATCH)) != 0)) {
+        panel_state  = g_UIPanelTasks[0].state;
+        /* FAKE: g_UIMessageStep is a one-byte scalar elsewhere; this unit reads it as an array element. */
+        step         = MEM(u8, (u32)&g_UIMessageStep);
+        window_flags = g_UIWindowChannel;
         panel_state += 1;
         step += 1;
         window_flags |= FRONTEND_FLAG_SELECTION;
-        g_UiPanelTasks[0].state        = panel_state;
-        MEM(u8, (u32)&g_UiMessageStep) = step;
-        g_UiWindowChannel              = window_flags;
+        g_UIPanelTasks[0].state        = panel_state;
+        MEM(u8, (u32)&g_UIMessageStep) = step;
+        g_UIWindowChannel              = window_flags;
     }
 }

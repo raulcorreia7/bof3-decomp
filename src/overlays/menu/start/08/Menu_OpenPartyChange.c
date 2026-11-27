@@ -9,7 +9,7 @@ MATCH void Menu_OpenPartyChange(u16 buttons) {
 
     count                                            = Party_CountOrder(PARTY_ORDER_FIELD);
     n                                                = count;
-    g_UiPanelTasks[MENU_START_PANEL_COMMANDS].unk_0A = 0;
+    g_UIPanelTasks[MENU_START_PANEL_COMMANDS].unk_0A = 0;
     for (i = 0; i < CHAR_INDEX_COUNT; i++) {
         if (g_Characters[i].party_flags & PARTY_FLAG_JOINED) {
             for (j = 0; j < n; j++) {
@@ -18,17 +18,17 @@ MATCH void Menu_OpenPartyChange(u16 buttons) {
                 }
             }
             if (j == n) {
-                D_801ED690[g_UiPanelTasks[MENU_START_PANEL_COMMANDS].unk_0A++] = g_Characters[i].character_id;
+                D_801ED690[g_UIPanelTasks[MENU_START_PANEL_COMMANDS].unk_0A++] = g_Characters[i].character_id;
             }
         }
     }
 
-    g_UiPanelTasks[MENU_START_PANEL_COMMANDS].active = 1;
-    g_UiPanelTasks[MENU_START_PANEL_COMMANDS].panel  = 6;
-    g_UiPanelTasks[MENU_START_PANEL_COMMANDS].mode   = 0x13;
-    g_UiPanelTasks[MENU_START_PANEL_COMMANDS].state  = 2;
-    g_UiPanelTasks[MENU_START_PANEL_COMMANDS].pos.vx = SCREEN_WIDTH;
-    g_UiPanelTasks[MENU_START_PANEL_COMMANDS].pos.vy = 0x3B;
+    g_UIPanelTasks[MENU_START_PANEL_COMMANDS].active = 1;
+    g_UIPanelTasks[MENU_START_PANEL_COMMANDS].panel  = 6;
+    g_UIPanelTasks[MENU_START_PANEL_COMMANDS].mode   = 0x13;
+    g_UIPanelTasks[MENU_START_PANEL_COMMANDS].state  = 2;
+    g_UIPanelTasks[MENU_START_PANEL_COMMANDS].pos.vx = SCREEN_WIDTH;
+    g_UIPanelTasks[MENU_START_PANEL_COMMANDS].pos.vy = 0x3B;
     D_80148500                                       = D_801ED690;
 
     for (i = 0; i < n; i++) {
@@ -38,11 +38,11 @@ MATCH void Menu_OpenPartyChange(u16 buttons) {
         D_801ED694[i][0] = 0;
     }
 
-    for (i = 0; i < g_UiPanelTasks[MENU_START_PANEL_COMMANDS].unk_0A; i++) {
+    for (i = 0; i < g_UIPanelTasks[MENU_START_PANEL_COMMANDS].unk_0A; i++) {
         D_801ED695[i][0] = 1;
     }
     /* Retail tests the same count again, which the loop above has already reached. */
-    for (; i < g_UiPanelTasks[MENU_START_PANEL_COMMANDS].unk_0A; i++) {
+    for (; i < g_UIPanelTasks[MENU_START_PANEL_COMMANDS].unk_0A; i++) {
         D_801ED695[i][0] = 0;
     }
 

@@ -41,5 +41,5 @@ MATCH void UI_TextDrawGlyph(s32 color, u8* text) {
         PSX_SET_SEMI_TRANSPARENT(g_GfxPrimCursor);
         GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
     }
-    g_UiMessageWindow.text.x += (u16)WINDOW->window.cue_counter;
+    g_UIMessageWindow.text.x += (u16)WINDOW->window.cue_counter;
 }

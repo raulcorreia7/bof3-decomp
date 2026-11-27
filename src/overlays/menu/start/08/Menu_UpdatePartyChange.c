@@ -19,22 +19,22 @@ NON_MATCHING void Menu_UpdatePartyChange(void) {
     Menu_DrawClutStrip(*clut);
     frame                                                = &D_801485DC;
     *frame                                               = 0;
-    g_UiPanelTasks[20].active                            = 0;
-    g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME].pos.vx = D_801EC548[D_80148659][D_80148658[0]].x;
+    g_UIPanelTasks[20].active                            = 0;
+    g_UIPanelTasks[MENU_START_PANEL_CURSOR_FRAME].pos.vx = D_801EC548[D_80148659][D_80148658[0]].x;
     y                                                    = D_801EC548[D_80148659][D_80148658[0]].y;
     *frame                                               = 1;
-    g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME].pos.vy = y;
-    g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0A = D_801EC548[D_80148659][D_80148658[0]].value;
-    g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0B = 1;
+    g_UIPanelTasks[MENU_START_PANEL_CURSOR_FRAME].pos.vy = y;
+    g_UIPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0A = D_801EC548[D_80148659][D_80148658[0]].value;
+    g_UIPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0B = 1;
     if ((s8)D_8014865D != 0x7F) {
         u16 y2;
 
-        g_UiPanelTasks[20].pos.vx = D_801EC548[(s8)D_8014865D][(s8)D_8014865A].x;
+        g_UIPanelTasks[20].pos.vx = D_801EC548[(s8)D_8014865D][(s8)D_8014865A].x;
         y2                        = D_801EC548[(s8)D_8014865D][(s8)D_8014865A].y;
         D_80148600                = 1;
-        g_UiPanelTasks[20].pos.vy = y2;
-        g_UiPanelTasks[20].unk_0B = 0;
-        g_UiPanelTasks[20].unk_0A = D_801EC548[(s8)D_8014865D][(s8)D_8014865A].value;
+        g_UIPanelTasks[20].pos.vy = y2;
+        g_UIPanelTasks[20].unk_0B = 0;
+        g_UIPanelTasks[20].unk_0A = D_801EC548[(s8)D_8014865D][(s8)D_8014865A].value;
     }
     if (D_801ED69C == GAME_NONE) {
         D_801484CC = 0x60;
@@ -52,27 +52,27 @@ NON_MATCHING void Menu_UpdatePartyChange(void) {
     side     = (u8*)D_80148658;
     old_side = *side;
     old_row  = D_80148659;
-    if ((input & (PADLright | PADLleft)) && g_UiPanelTasks[MENU_START_PANEL_COMMANDS].unk_0A != 0) {
+    if ((input & (PADLright | PADLleft)) && g_UIPanelTasks[MENU_START_PANEL_COMMANDS].unk_0A != 0) {
         *side = old_side ^ 1;
     }
     if (D_80148658[0] == 0) {
         if (count - 1 < D_80148659) {
             D_80148659 = count - 1;
         }
-    } else if (g_UiPanelTasks[MENU_START_PANEL_COMMANDS].unk_0A - 1 < D_80148659) {
-        D_80148659 = g_UiPanelTasks[MENU_START_PANEL_COMMANDS].unk_0A - 1;
+    } else if (g_UIPanelTasks[MENU_START_PANEL_COMMANDS].unk_0A - 1 < D_80148659) {
+        D_80148659 = g_UIPanelTasks[MENU_START_PANEL_COMMANDS].unk_0A - 1;
     }
     if (input & PADLup) {
         row = &D_80148659;
         *row -= 1;
         if (*row < 0) {
-            *row = D_80148658[0] == 0 ? count - 1 : g_UiPanelTasks[MENU_START_PANEL_COMMANDS].unk_0A - 1;
+            *row = D_80148658[0] == 0 ? count - 1 : g_UIPanelTasks[MENU_START_PANEL_COMMANDS].unk_0A - 1;
         }
     } else if (input & PADLdown) {
         s8* down = &D_80148659;
 
         next = ++*down;
-        if ((D_80148658[0] == 0 && count - 1 < next) || (D_80148658[0] != 0 && g_UiPanelTasks[MENU_START_PANEL_COMMANDS].unk_0A - 1 < next)) {
+        if ((D_80148658[0] == 0 && count - 1 < next) || (D_80148658[0] != 0 && g_UIPanelTasks[MENU_START_PANEL_COMMANDS].unk_0A - 1 < next)) {
             D_80148659 = 0;
         }
     }

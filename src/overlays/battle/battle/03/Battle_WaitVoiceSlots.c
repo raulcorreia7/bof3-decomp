@@ -17,17 +17,17 @@ MATCH void Battle_WaitVoiceSlots(void) {
         return;
     }
     if (g_Battle.outcome.result != 0) {
-        g_UiPanelTasks[1].active  = 0;
-        g_UiPanelTasks[4].active  = 0;
+        g_UIPanelTasks[1].active  = 0;
+        g_UIPanelTasks[4].active  = 0;
         D_80148378[0]             = 0;
-        g_UiPanelTasks[12].active = 0;
-        g_UiPanelTasks[11].active = 0;
-        g_UiPanelTasks[10].active = 0;
-        g_UiPanelTasks[9].active  = 0;
-        g_UiPanelTasks[8].active  = 0;
-        g_UiPanelTasks[7].active  = 0;
-        g_UiPanelTasks[6].active  = 0;
-        g_UiPanelTasks[5].active  = 0;
+        g_UIPanelTasks[12].active = 0;
+        g_UIPanelTasks[11].active = 0;
+        g_UIPanelTasks[10].active = 0;
+        g_UIPanelTasks[9].active  = 0;
+        g_UIPanelTasks[8].active  = 0;
+        g_UIPanelTasks[7].active  = 0;
+        g_UIPanelTasks[6].active  = 0;
+        g_UIPanelTasks[5].active  = 0;
         g_Battle.phase.mode       = BATTLE_MODE_RESULT;
         g_Battle.phase.step       = 0;
         g_Battle.flags &= ~BATTLE_STATE_COMMAND_ARMED;

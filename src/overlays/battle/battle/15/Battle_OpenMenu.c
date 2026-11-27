@@ -16,7 +16,7 @@ MATCH void Battle_OpenMenu(void) {
     UI_PanelOpenTask(0x15, 5);
     menu_id                 = 0x11;
     D_80148628              = 0x142;
-    g_UiPanelTasks[21].mode = 0;
+    g_UIPanelTasks[21].mode = 0;
     D_80148627              = 0;
     D_8014862A              = 0x3F;
     D_8014862E              = 0;

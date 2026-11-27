@@ -98,7 +98,7 @@ NON_MATCHING void func_801D72E4(s16 panel_x, s16 panel_y) {
     UI_WindowDraw(panel_x & HALF_MASK, (panel_y + 148) & HALF_MASK, 242, 11, UI_WINDOW_OPEN_BOTTOM_LEFT | UI_WINDOW_OPEN_BOTTOM_RIGHT, CHARACTER_BLOCK->window_style);
     UI_TextDraw((s16)(panel_x + 61), (s16)(panel_y + 6), 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, D_801E2114[SELF(FishingState)->bounce.half.unk_3C]));
     func_801D7784(panel_x, panel_y);
-    text = (u8*)g_UiTextFormatBuffer;
+    text = (u8*)g_UITextFormatBuffer;
     TEXT_Format(text, D_801D0C08, SELF(FishingState)->bounce.half.unk_3C + 1);
     UI_TextDrawGlyphString((s16)(panel_x + 202), (s16)(panel_y + 146), 0U, text);
 }

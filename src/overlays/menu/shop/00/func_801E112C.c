@@ -41,8 +41,8 @@ MATCH void func_801E112C(MenuPanelTask* task) {
     UI_WindowDraw((task->pos.vx + 3) & HALF_MASK, (task->pos.vy + 146) & HALF_MASK, MENU_INVENTORY_WINDOW_WIDTH, MENU_INVENTORY_BOTTOM_HEIGHT, task->unk_09, CHARACTER_BLOCK->window_style);
     title_x = (Game_ReadCommand(D_801E5D1C) & BYTE_MASK) * 4 - 0x4E;
     UI_TextDraw((task->pos.vx - title_x), (task->pos.vy + 7), 0, MENU_LABEL_LENGTH, D_801E5D1C);
-    TEXT_Format(g_UiTextFormatBuffer, D_801D0E7C, Party_CountAbilities(CHAR_INDEX_RYU, 0xFF, 0) & BYTE_MASK, 0x80);
-    UI_TextDrawGlyphString((task->pos.vx + 85), (task->pos.vy + 146), 0, g_UiTextFormatBuffer);
+    TEXT_Format(g_UITextFormatBuffer, D_801D0E7C, Party_CountAbilities(CHAR_INDEX_RYU, 0xFF, 0) & BYTE_MASK, 0x80);
+    UI_TextDrawGlyphString((task->pos.vx + 85), (task->pos.vy + 146), 0, g_UITextFormatBuffer);
     UI_SpriteDrawRun(task->pos.vx, task->pos.vy, D_801E5C78, UI_SPRITE_ALT_PAGE);
     UI_SpriteDrawRun(task->pos.vx, task->pos.vy, D_801E5C84, UI_SPRITE_ALT_PAGE);
     for (i = 0; i < 10; i++) {

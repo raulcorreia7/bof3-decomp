@@ -14,7 +14,7 @@ MATCH void func_801D1FDC(void) {
         if (index >= count) {
             break;
         }
-        panel = &g_UiPanelTasks[4 + index];
+        panel = &g_UIPanelTasks[4 + index];
 
         panel->unk_0A = i;
         i += 1;
@@ -27,14 +27,14 @@ MATCH void func_801D1FDC(void) {
         panel->unk_0B = 0;
         panel->unk_0C = 0;
     }
-    panel         = &g_UiPanelTasks[7];
+    panel         = &g_UIPanelTasks[7];
     panel->panel  = 6;
     panel->mode   = MENU_START_MODE_ZENNY;
     panel->state  = 0;
     panel->active = 1;
     panel++;
-    g_UiPanelTasks[7].pos.vx = 200;
-    g_UiPanelTasks[7].pos.vy = 16;
+    g_UIPanelTasks[7].pos.vx = 200;
+    g_UIPanelTasks[7].pos.vy = 16;
     panel->panel             = 6;
     panel->mode              = MENU_START_MODE_PLAY_TIME;
     panel->state             = 0;

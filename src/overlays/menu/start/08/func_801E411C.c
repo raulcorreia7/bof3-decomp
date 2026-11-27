@@ -7,7 +7,7 @@ MATCH void func_801E411C(void) {
 
     Menu_DrawBackdrop();
     UI_TextDraw(70, 190, 0, TEXT_LENGTH_MAX, UI_MessageGetText(0xA8));
-    flag_word = (u16*)&g_UiWindowChannel;
+    flag_word = (u16*)&g_UIWindowChannel;
     *flag_word |= 2;
     packed = func_801E7348();
 

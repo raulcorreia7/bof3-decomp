@@ -28,7 +28,7 @@ ASSERT_OFFSET(ScriptState, message_id, 0x08);
 ASSERT_OFFSET(ScriptState, cursor, 0x0A);
 ASSERT_SIZE(ScriptState, 0x0C);
 
-/* The front-end step record behind g_UiMessageState: func_8015102C walks the timer,
+/* The front-end step record behind g_UIMessageState: func_8015102C walks the timer,
  * phase, cursor and flag fields; the other units read only its first byte. */
 typedef struct MessageState {
     u8  state;        /* 0x00 */
@@ -142,14 +142,14 @@ typedef struct MessageTable {
 
 /* The requested message id: 0xFFFF means no message. */
 #define MESSAGE_NONE                  0xFFFF
-#define MESSAGE_REQUEST_CLEAR()       (g_UiMessageRequest = MESSAGE_NONE)
+#define MESSAGE_REQUEST_CLEAR()       (g_UIMessageRequest = MESSAGE_NONE)
 
 /* The player's menu choice at 0x801490C7 (MenuState.selection_index): zero while no answer is selected, nonzero once the player picks one. */
-/* An alias byte of g_UiMessageWindow.selection_index: the area overlays read it as a plain byte, and the member access changes their code. */
+/* An alias byte of g_UIMessageWindow.selection_index: the area overlays read it as a plain byte, and the member access changes their code. */
 /* D_801490C7 */
-extern s8 g_UiMessageChoice;
-#define MENU_SELECTION_IDLE()  (g_UiMessageChoice == 0)
-#define MENU_SELECTION_ARMED() (g_UiMessageChoice != 0)
+extern s8 g_UIMessageChoice;
+#define MENU_SELECTION_IDLE()  (g_UIMessageChoice == 0)
+#define MENU_SELECTION_ARMED() (g_UIMessageChoice != 0)
 
 /* The window effect has finished (idle) or is still running (busy): thread 2's state word. */
 #define WINDOW_EFFECT_IDLE()   (g_SysThreads[2].state == 0)
@@ -177,7 +177,7 @@ typedef enum AreaDrawFlags {
     AREA_DRAW_ALL_FLAGS               = AREA_DRAW_SORTED_RECORDS | AREA_DRAW_NEGATIVE_DEPTH | AREA_DRAW_CELL_LAYERS | AREA_DRAW_APPEND_ACTOR_PRIMITIVES | AREA_DRAW_APPEND_AREA_PRIMITIVES,
 } AreaDrawFlags;
 
-/* The frontend channel word g_UiWindowChannel: the window script machine, the selection passes and the shop/start overlays share it. */
+/* The frontend channel word g_UIWindowChannel: the window script machine, the selection passes and the shop/start overlays share it. */
 typedef enum FrontendFlags {
     FRONTEND_FLAG_TIMER_ACTIVE    = 1 << 0,
     FRONTEND_FLAG_CONFIRM         = 1 << 1,
@@ -244,13 +244,13 @@ extern u8 g_GameRequestFlags;
 
 /* Not volatile: the qualifier changes the generated order in the scena00 drawer. */
 /* D_80143C40 */
-extern u16 g_UiWindowEffectBusy;
+extern u16 g_UIWindowEffectBusy;
 
-/* The screen effects UI_ModeSet starts, by index into g_UiModeLocals. Each
+/* The screen effects UI_ModeSet starts, by index into g_UIModeLocals. Each
  * effect comes as an out/in pair: out takes the screen to black or white, in
  * brings it back. The indexes not named here run camera spins and distance
  * resets. */
-typedef enum UiMode {
+typedef enum UIMode {
     UI_MODE_FADE_OUT       = 0,
     UI_MODE_FADE_IN        = 1,
     UI_MODE_FAST_FADE_OUT  = 2,
@@ -265,10 +265,10 @@ typedef enum UiMode {
     UI_MODE_LONG_FADE_IN   = 14,
     UI_MODE_LONG_WHITE_OUT = 15,
     UI_MODE_LONG_WHITE_IN  = 16,
-} UiMode;
+} UIMode;
 
 /* D_80143C90 */
-extern u16 g_UiModeLocal;
+extern u16 g_UIModeLocal;
 /* D_80143F1E */
 extern u8  g_GameEntryMode;
 /* D_80145024 */
@@ -336,19 +336,19 @@ extern u8           D_80148FE0[SND_VOICE_COUNT];
 /* D_80148FF8 */
 extern u8           g_SndVoiceTargetVolume[SND_VOICE_COUNT];
 /* D_801490A0 */
-extern MessageState g_UiMessageState;
+extern MessageState g_UIMessageState;
 /* D_801490A2 */
-extern u8           g_UiMessageChoiceMode;
+extern u8           g_UIMessageChoiceMode;
 /* Shared selection counter read by etc/game/00 and etc/shop/00. */
 /* D_801490A4 */
-extern volatile u16 g_UiWindowChannel;
+extern volatile u16 g_UIWindowChannel;
 /* D_801490A6 */
-extern u8           g_UiMessageStateTimer[];
+extern u8           g_UIMessageStateTimer[];
 
 /* D_801490A8 */
-extern u16      g_UiMessageRequest;
+extern u16      g_UIMessageRequest;
 /* D_801490AA */
-extern u16      g_UiMessageChoiceTimer;
+extern u16      g_UIMessageChoiceTimer;
 extern u8       D_801490CF[];
 /* D_80181D98 */
 extern const u8 s_LoaderRecordBytes[168];

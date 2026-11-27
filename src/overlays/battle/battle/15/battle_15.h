@@ -509,7 +509,7 @@ extern volatile u8               g_BattleTarget;
 extern u8                        g_BattleTarget_nv;
 extern u16                       D_801463B4;
 /* D_801463D8 */
-/* D_80148570: g_UiPanelTasks[16] under its own symbol, in the item mode or the ability mode. */
+/* D_80148570: g_UIPanelTasks[16] under its own symbol, in the item mode or the ability mode. */
 extern BattleChoicePanel         g_BattleChoicePanel;
 extern u8                        D_80148594;
 extern u8                        D_80148596;
@@ -1243,10 +1243,10 @@ static inline void BattleRunHandlerQuad(s32 offset) {
 
 /* Seed the panel task after the queued slot grid is filled. */
 static inline void Battle_SeedQueuedSlotPanel(u8 unk14, u8 unk08) {
-    g_UiPanelCurrent->u.addr.unk_14 = unk14;
-    g_UiPanelCurrent->unk_08        = unk08;
-    g_UiPanelCurrent->unk_09        = 0x11;
-    g_UiPanelCurrent->state         = (u8)(g_UiPanelCurrent->state + 1);
+    g_UIPanelCurrent->u.addr.unk_14 = unk14;
+    g_UIPanelCurrent->unk_08        = unk08;
+    g_UIPanelCurrent->unk_09        = 0x11;
+    g_UIPanelCurrent->state         = (u8)(g_UIPanelCurrent->state + 1);
 }
 
 u8 func_800A40D0(u8 battler_index);

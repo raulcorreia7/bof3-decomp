@@ -19,11 +19,11 @@ MATCH void SAVE_DrawSlot(u8 index, s32 left, s32 top, SaveSlotRow* slot) {
             }
         }
         UI_TextDraw((x + 21), (y + 3), 0, CHARACTER_NAME_LENGTH, (u8*)slot);
-        TEXT_Format(g_UiTextFormatBuffer, g_SaveSlotLevelFormat, slot->bytes.unk_00[8]);
-        UI_TextDrawGlyphString((x + 31), (y + 24), 0, g_UiTextFormatBuffer);
-        TEXT_Format(g_UiTextFormatBuffer, g_SaveSlotTimeFormat, slot->bytes.unk_00[0xC], slot->bytes.unk_00[0xD]);
+        TEXT_Format(g_UITextFormatBuffer, g_SaveSlotLevelFormat, slot->bytes.unk_00[8]);
+        UI_TextDrawGlyphString((x + 31), (y + 24), 0, g_UITextFormatBuffer);
+        TEXT_Format(g_UITextFormatBuffer, g_SaveSlotTimeFormat, slot->bytes.unk_00[0xC], slot->bytes.unk_00[0xD]);
         label_x = x + 0x27;
-        UI_TextDrawGlyphString(label_x, (y + 37), 0, g_UiTextFormatBuffer);
+        UI_TextDrawGlyphString(label_x, (y + 37), 0, g_UITextFormatBuffer);
         UI_TextDrawGlyphString(label_x, (y + 36), 0, (u8*)&g_SaveSlotTimeColon);
         UI_TextDrawGlyphString(label_x, (y + 39), 0, (u8*)&g_SaveSlotTimeColon);
         Menu_DrawExperienceLine((x + 0x14), (y + 0x12), 0, slot->bytes.unk_00[8], slot->words[4]);

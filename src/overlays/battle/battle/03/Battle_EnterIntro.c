@@ -9,7 +9,7 @@ MATCH void Battle_EnterIntro(void) {
     /* Retail materialises &g_Battle.outcome.surprise once and reloads the group byte where the
      * source reads it twice; a scalar read repeats lui. */
     value = &g_BattleOutcome.surprise;
-    if (((*value >= 2) || (g_UiPanelTasks[2].state == 1)) && ((func_801DE92C() & BYTE_MASK) == 0) && (EMI_IsReady() != 0)) {
+    if (((*value >= 2) || (g_UIPanelTasks[2].state == 1)) && ((func_801DE92C() & BYTE_MASK) == 0) && (EMI_IsReady() != 0)) {
         mode = 2;
         if (*value < 2) {
             mode = 1;

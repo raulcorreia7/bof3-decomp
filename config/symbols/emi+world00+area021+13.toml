@@ -1,2 +1,2 @@
 ["emi/world00/area021/13"]
-UI_MessageAnswerSet = { addr = 0x801F2C6C, type = "func", source = "Stores the message id the answer table D_801F33B4 holds for the menu choice g_UiMessageChoice in g_UiMessageRequest." }
+UI_MessageAnswerSet = { addr = 0x801F2C6C, type = "func", source = "Stores the message id the answer table D_801F33B4 holds for the menu choice g_UIMessageChoice in g_UIMessageRequest." }

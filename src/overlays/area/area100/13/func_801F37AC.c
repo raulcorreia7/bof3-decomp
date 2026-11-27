@@ -3,8 +3,8 @@
 MATCH void func_801F37AC(void) {
     s8 choice;
 
-    choice             = g_UiMessageChoice;
-    g_UiMessageRequest = D_801F4F5C[choice];
+    choice             = g_UIMessageChoice;
+    g_UIMessageRequest = D_801F4F5C[choice];
     switch (choice) {
         case 0:
         default:
@@ -28,7 +28,7 @@ MATCH void func_801F37AC(void) {
                 SYS_SetFlag(g_SceneEventFlags, 0x94);
                 SYS_SetFlag(g_SceneEventFlags, 0x33);
             } else {
-                g_UiMessageRequest = MSG_AREA100_PORTAL_CODE_FAILED;
+                g_UIMessageRequest = MSG_AREA100_PORTAL_CODE_FAILED;
                 SYS_ClearFlag(g_SceneEventFlags, 0x33);
             }
             break;

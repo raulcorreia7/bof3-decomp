@@ -1,5 +1,5 @@
 #include "battle_15.h"
 
 MATCH void func_800B2088(void) {
-    D_800B6E08[g_UiPanelCurrent->mode]();
+    D_800B6E08[g_UIPanelCurrent->mode]();
 }

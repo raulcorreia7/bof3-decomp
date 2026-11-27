@@ -3,7 +3,7 @@ g_AreaMapHeightOffset = { addr = 0x8010402A, type = "u16", source = "Height-tabl
 jtbl_801F2C04 = { addr = 0x801F2C04, type = "Callback", size = 0x14, source = "The switch table of func_801F3730: 5 jump targets of its jr dispatch." }
 Actor_RunAreaStep = { addr = 0x801F3638, type = "func", source = "Clears the work byte 0x48 and frees the palette fade target of the current g_Self." }
 UI_MessageShowParty = { addr = 0x801F366C, type = "func", source = "Looks through the tags of g_PartyMemberMessages[0] for the first one matching a party member's tag byte (D_80145F09[j][0]), starts its area message and sets g_GameStateIndex to GAME_REQUEST_MESSAGE." }
-UI_MessageAnswerSelect = { addr = 0x801F3870, type = "func", source = "Sets g_UiMessageRequest to 0x14 when g_UiMessageChoice is nonzero, otherwise to 0x13." }
+UI_MessageAnswerSelect = { addr = 0x801F3870, type = "func", source = "Sets g_UIMessageRequest to 0x14 when g_UIMessageChoice is nonzero, otherwise to 0x13." }
 Area_FindMemberAt = { addr = 0x801F3BE4, type = "func", source = "Returns the first party member (g_Game.members, header.flags set) whose position plus unk_0C/unk_10 times unk_09 lies within (speed + 2) << 15 of (x << 16, y << 16), or -1." }
 Actor_SnapToGround = { addr = 0x801F3E58, type = "func", source = "Stores the ground height Area_HeightSample returns at the actor position, shifted left 16, at byte 0x3C and adds 1 to header.mode (byte 0x01)." }
 Area_DrawActorLightPillar = { addr = 0x801F3EA4, type = "func", source = "draws a light pillar at the actor's position" }

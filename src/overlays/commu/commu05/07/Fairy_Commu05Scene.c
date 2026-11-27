@@ -70,8 +70,8 @@ MATCH void func_801D0D4C(void) {
             D_801D19F4 = remaining - 1;
         }
     }
-    TEXT_Format(g_UiTextFormatBuffer, D_801D0C04, D_801D19F4 + 1, remaining);
-    UI_TextDrawGlyphString(0xEE, 0x2C, 0, g_UiTextFormatBuffer);
+    TEXT_Format(g_UITextFormatBuffer, D_801D0C04, D_801D19F4 + 1, remaining);
+    UI_TextDrawGlyphString(0xEE, 0x2C, 0, g_UITextFormatBuffer);
     if (g_PadStates[0].pressed & (g_InputMasks[INPUT_SLOT_CANCEL] | g_InputMasks[INPUT_SLOT_CONFIRM])) {
         D_801F294C += 1;
     }
@@ -107,7 +107,7 @@ MATCH void func_801D1048(s16 x, s16 y, u8 group) {
     row_y = y + 0x14;
     func_801D0F50(x + 8, row_y, 1);
     UI_TextDraw(x + 0x18, row_y, 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, MSG_AREA175_DEATH));
-    buffer = g_UiTextFormatBuffer;
+    buffer = g_UITextFormatBuffer;
     TEXT_Format(buffer, D_801D0C0C, D_80145E44);
     UI_TextDrawAscii(x + 0x6C, row_y, 0, buffer);
     if (D_80145E44 == 1) {
@@ -139,7 +139,7 @@ MATCH void func_801D129C(s16 x, s16 y, u8 group) {
     row_y = y + 0x14;
     func_801D0F50(x + 8, row_y, 0);
     UI_TextDraw(x + 0x18, row_y, 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, MSG_AREA175_BIRTH));
-    buffer = g_UiTextFormatBuffer;
+    buffer = g_UITextFormatBuffer;
     /* The row-count format and its two captions sit in the unit's data. */
     TEXT_Format(buffer, D_801D0C0C, g_FairyVillagePendingQueueCount);
     UI_TextDrawAscii(x + 0x6C, row_y, 0, buffer);

@@ -4,5 +4,5 @@
  */
 
 MATCH void func_801E3B7C(void) {
-    func_801E37F4(g_UiPanelCurrent);
+    func_801E37F4(g_UIPanelCurrent);
 }

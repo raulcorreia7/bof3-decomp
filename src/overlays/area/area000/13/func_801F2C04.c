@@ -5,7 +5,7 @@ MATCH s32 func_801F2C04(void) {
     s32 value;
 
     MESSAGE_REQUEST_CLEAR();
-    sel = g_UiMessageChoice;
+    sel = g_UIMessageChoice;
     switch (sel) {
         case 0:
             value = 0x14;

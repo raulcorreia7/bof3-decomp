@@ -81,7 +81,7 @@ MATCH void func_801F9EA4(void) {
             break;
         case 12:
             if (g_ScriptVars[0] == 5) {
-                if ((g_UiWindowChannel & 2) != 0) {
+                if ((g_UIWindowChannel & 2) != 0) {
                     SND_SeqFadeOut(0, 0, 4, 0x1E);
                     func_801C16B8();
                     g_ScenarioState.step = 0;

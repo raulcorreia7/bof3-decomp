@@ -8,7 +8,7 @@ MATCH void func_801F07E0(void) {
     u8* text;
 
     y = 0x2C;
-    func_801F039C(0x14, 0x28, 0x118, g_UiPanelCurrent->unk_09);
+    func_801F039C(0x14, 0x28, 0x118, g_UIPanelCurrent->unk_09);
     /* FAKE: keep the row coordinate live across the panel call. */
     FAKE_USE(y);
     if (g_Battle.party_count != 0) {

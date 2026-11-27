@@ -10,7 +10,7 @@ MATCH void func_801D7B64(void) {
     Fishing_DrawSprite(18, 1, 240, 66);
     UI_TextDrawAscii(284, 69, 0, D_801D0C10);
 
-    buffer = g_UiTextFormatBuffer;
+    buffer = g_UITextFormatBuffer;
     record = SELF(FishingState);
     TEXT_Format(buffer, D_801D0C04, record->bounce.half.key + 1);
 

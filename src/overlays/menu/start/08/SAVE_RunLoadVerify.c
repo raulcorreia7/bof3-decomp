@@ -20,8 +20,8 @@ MATCH void SAVE_RunLoadVerify(void) {
         for (i = 0; i < 1792; i++) {
             *clear++ = 0;
         }
-        TEXT_Format(g_UiTextFormatBuffer, g_SaveFileNameFormat, g_SaveSlotFirst);
-        if (SAVE_AccessFile(1, g_UiTextFormatBuffer, 1, SAVE_FILE_SIZE, 0) != -1) {
+        TEXT_Format(g_UITextFormatBuffer, g_SaveFileNameFormat, g_SaveSlotFirst);
+        if (SAVE_AccessFile(1, g_UITextFormatBuffer, 1, SAVE_FILE_SIZE, 0) != -1) {
             stored     = D_800C1A70;
             D_800C1A70 = 0;
             sum        = 0;

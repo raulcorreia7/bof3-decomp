@@ -1,7 +1,7 @@
 #include "area079_13.h"
 
 MATCH void func_801F2CB4(void) {
-    switch (g_UiMessageChoice) {
+    switch (g_UIMessageChoice) {
         case 0:
             g_ScriptVars[3] = 1;
             break;

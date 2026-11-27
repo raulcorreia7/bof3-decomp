@@ -1,5 +1,5 @@
 #include "batl_end_00.h"
 
 MATCH void func_801F09D4(void) {
-    g_UiPanelCurrent->state += 1;
+    g_UIPanelCurrent->state += 1;
 }

@@ -51,12 +51,12 @@ MATCH void func_801D0D4C(void) {
     }
     UI_WindowDraw(0x14, (0x12 - (D_801D1774 * 12)) & 0xFFFE, 0x118, 0x13, UI_WINDOW_OPEN_ALL | UI_WINDOW_STYLE_TRANSLUCENT, g_WindowStyle);
     UI_WindowDrawOutline(0x16, 0x14 - (D_801D1774 * 12), 0x113, 0xF, 0);
-    if (g_UiPanelTasks[0].state != 0) {
+    if (g_UIPanelTasks[0].state != 0) {
         return;
     }
-    g_UiPanelTasks[1].active = 1;
-    g_UiPanelTasks[1].pos.vx = g_UiPanelTasks[0].pos.vx + 7;
-    g_UiPanelTasks[1].pos.vy = (u16)(g_UiPanelTasks[0].pos.vy + ((g_Commu04ItemPanel.group_cursor - g_Commu04ItemPanel.group_first) * 0xD + 0x1A));
+    g_UIPanelTasks[1].active = 1;
+    g_UIPanelTasks[1].pos.vx = g_UIPanelTasks[0].pos.vx + 7;
+    g_UIPanelTasks[1].pos.vy = (u16)(g_UIPanelTasks[0].pos.vy + ((g_Commu04ItemPanel.group_cursor - g_Commu04ItemPanel.group_first) * 0xD + 0x1A));
     buttons                  = INPUT_REPEATED(g_PadStates[0].pressed, (INPUT_DIRECTIONAL | PADL1 | PADR1));
     if (buttons & PADLleft) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
@@ -117,8 +117,8 @@ MATCH void func_801D0D4C(void) {
     }
     if (g_Commu04ItemPanel.confirm_timer == 0) {
         if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
-            g_UiPanelTasks[1].active = 0;
-            g_UiPanelTasks[0].state  = 1;
+            g_UIPanelTasks[1].active = 0;
+            g_UIPanelTasks[0].state  = 1;
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
             D_801F294D += 1;
         } else if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
@@ -131,8 +131,8 @@ MATCH void func_801D0D4C(void) {
             selection                            = &g_SceneEventSelection;
             g_FairyJobs[*selection].record_state = item_entry;
             g_FairyJobs[*selection].unk_03       = g_Commu04ItemPanel.group;
-            g_UiPanelTasks[0].state              = 1;
-            g_UiPanelTasks[1].active             = 0;
+            g_UIPanelTasks[0].state              = 1;
+            g_UIPanelTasks[1].active             = 0;
             D_801F294D                           = 4;
         }
         item_entry = g_ItemCategoryIds[g_Commu04ItemPanel.group][g_Commu04ItemPanel.group_cursor];
@@ -148,7 +148,7 @@ MATCH void func_801D11DC(void) {
     }
     UI_WindowDraw(0x14, (0x12 - (D_801D1774 * 12)) & 0xFFFE, 0x118, 0x13, UI_WINDOW_OPEN_ALL | UI_WINDOW_STYLE_TRANSLUCENT, g_WindowStyle);
     UI_WindowDrawOutline(0x16, 0x14 - (D_801D1774 * 12), 0x113, 0xF, 0);
-    if (g_UiPanelTasks[0].state == 0) {
+    if (g_UIPanelTasks[0].state == 0) {
         UI_PanelResetTasks();
         MESSAGE_START_WAIT(MSG_AREA175_SEE_YOU_LATER);
         D_801F294C += 1;
@@ -165,7 +165,7 @@ MATCH void func_801D12C8(void) {
     }
     UI_WindowDraw(0x14, (0x12 - (D_801D1774 * 12)) & 0xFFFE, 0x118, 0x13, UI_WINDOW_OPEN_ALL | UI_WINDOW_STYLE_TRANSLUCENT, g_WindowStyle);
     UI_WindowDrawOutline(0x16, 0x14 - (D_801D1774 * 12), 0x113, 0xF, 0);
-    if (g_UiPanelTasks[0].state != 0) {
+    if (g_UIPanelTasks[0].state != 0) {
         return;
     }
 
@@ -232,23 +232,23 @@ MATCH void func_801D1628(void) {
 #include "overlays/commu/shared/Fairy_EndCommuScene.h"
 
 MATCH void func_801D16A4(void) {
-    g_UiPanelTasks[0].panel    = 2;
-    g_UiPanelTasks[0].mode     = 0;
-    g_UiPanelTasks[0].state    = 2;
-    g_UiPanelTasks[0].active   = 1;
-    g_UiPanelTasks[0].pos.vx   = -0xAA;
-    g_UiPanelTasks[0].pos.vy   = 0x3E;
-    g_UiPanelTasks[0].unk_0A   = 0;
-    g_UiPanelTasks[0].unk_0B   = 0;
-    g_UiPanelTasks[0].unk_0C   = 0;
-    g_UiPanelTasks[0].flags    = 0xFF;
-    g_UiPanelTasks[0].unk_08   = 0;
-    g_UiPanelTasks[0].unk_09   = 0;
-    g_UiPanelTasks[0].u.grow.w = 0;
-    g_UiPanelTasks[0].u.grow.h = 0;
+    g_UIPanelTasks[0].panel    = 2;
+    g_UIPanelTasks[0].mode     = 0;
+    g_UIPanelTasks[0].state    = 2;
+    g_UIPanelTasks[0].active   = 1;
+    g_UIPanelTasks[0].pos.vx   = -0xAA;
+    g_UIPanelTasks[0].pos.vy   = 0x3E;
+    g_UIPanelTasks[0].unk_0A   = 0;
+    g_UIPanelTasks[0].unk_0B   = 0;
+    g_UIPanelTasks[0].unk_0C   = 0;
+    g_UIPanelTasks[0].flags    = 0xFF;
+    g_UIPanelTasks[0].unk_08   = 0;
+    g_UIPanelTasks[0].unk_09   = 0;
+    g_UIPanelTasks[0].u.grow.w = 0;
+    g_UIPanelTasks[0].u.grow.h = 0;
 
-    g_UiPanelTasks[1].panel  = 2;
-    g_UiPanelTasks[1].mode   = 1;
-    g_UiPanelTasks[1].state  = 0;
-    g_UiPanelTasks[1].active = 0;
+    g_UIPanelTasks[1].panel  = 2;
+    g_UIPanelTasks[1].mode   = 1;
+    g_UIPanelTasks[1].state  = 0;
+    g_UIPanelTasks[1].active = 0;
 }

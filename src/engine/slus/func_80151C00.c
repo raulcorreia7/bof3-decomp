@@ -9,7 +9,7 @@
 MATCH void func_80151C00(void) {
     s8  pos;
     u16 timer;
-    u8* step = &g_UiMessageChoiceStep;
+    u8* step = &g_UIMessageChoiceStep;
 
     if (*step != 0) {
         if (BOB == 3) {
@@ -28,34 +28,34 @@ MATCH void func_80151C00(void) {
     do {
         BOB = pos;
     } while (0);
-    if (g_UiMessageWindow.cue_timer == 0) {
-        BLINK += (u8)g_UiMessageWindow.cue_counter;
+    if (g_UIMessageWindow.cue_timer == 0) {
+        BLINK += (u8)g_UIMessageWindow.cue_counter;
         switch ((s8)BLINK) {
             case 0:
-                g_UiMessageWindow.cue_timer = 15;
+                g_UIMessageWindow.cue_timer = 15;
                 /* FAKE: the barrier keeps the timer load below the cue_timer store. */
                 FAKE_BARRIER();
-                timer                         = g_UiMessageChoiceTimer;
-                g_UiMessageWindow.cue_counter = -1;
+                timer                         = g_UIMessageChoiceTimer;
+                g_UIMessageWindow.cue_counter = -1;
                 if (timer != 0xFFFF) {
                     /* FAKE: 0xFFFF keeps retail's addu; the u16 store wraps it to timer - 1. */
-                    g_UiMessageChoiceTimer = timer + 0xFFFF;
+                    g_UIMessageChoiceTimer = timer + 0xFFFF;
                     if (timer == 0) {
-                        g_UiMessageChoiceMode = 0;
+                        g_UIMessageChoiceMode = 0;
                         BLINK                 = 0;
                         BOB                   = 0;
                     }
                 }
                 break;
             case -10:
-                g_UiMessageWindow.cue_timer   = 15;
-                g_UiMessageWindow.cue_counter = 1;
+                g_UIMessageWindow.cue_timer   = 15;
+                g_UIMessageWindow.cue_counter = 1;
                 break;
             default:
-                g_UiMessageWindow.cue_timer = 3;
+                g_UIMessageWindow.cue_timer = 3;
                 break;
         }
     } else {
-        g_UiMessageWindow.cue_timer--;
+        g_UIMessageWindow.cue_timer--;
     }
 }

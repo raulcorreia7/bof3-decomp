@@ -26,7 +26,7 @@ MATCH void Battle_DrawEnemyNamePanel(s32 x, s32 y, s32 slot) {
     panel_x = x;
     panel_y = y;
     if (g_BattleEnemyBattlers[index].unk_7F == 1) {
-        func_801D9E9C((s16)(x + 6), (s16)(y + 0xA), (u16)FIELD(u8, (u8*)g_UiPanelCurrent, 0xBu), (u16)g_UiPanelCurrent->flags, 1);
+        func_801D9E9C((s16)(x + 6), (s16)(y + 0xA), (u16)FIELD(u8, (u8*)g_UIPanelCurrent, 0xBu), (u16)g_UIPanelCurrent->flags, 1);
     } else {
         func_801D94D4((s16)(x + 0x24), (s16)(y + 0xC), 0, 0xFFFF);
     }

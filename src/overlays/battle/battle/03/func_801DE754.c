@@ -18,7 +18,7 @@ MATCH void func_801DE754(void) {
     if (panel2->timer == 0u) {
         panel2->active = 0;
         if (func_801DE858(4) != 0u) {
-            g_UiPanelTasks[0].state = 2;
+            g_UIPanelTasks[0].state = 2;
         }
     } else {
         sp                 = SPAD(0u);

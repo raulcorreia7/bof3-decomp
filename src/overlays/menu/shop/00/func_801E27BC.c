@@ -4,5 +4,5 @@
  * byte 2 is owned by this translation unit. */
 
 MATCH void func_801E27BC(void) {
-    g_ShopPanelModes[g_UiPanelCurrent->mode]();
+    g_ShopPanelModes[g_UIPanelCurrent->mode]();
 }

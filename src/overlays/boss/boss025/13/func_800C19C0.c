@@ -10,7 +10,7 @@ MATCH void func_800C19C0(void) {
     SELF(PartyMember)->header.step = 0;
     SELF(PartyMember)->unk_03      = 0;
     if (g_Battle.encounter == 0x19) {
-        g_UiPanelMode = 2;
+        g_UIPanelMode = 2;
         UI_MessageStartArea(MSG_BOSS025_032);
     }
 }

@@ -44,14 +44,14 @@ NON_MATCHING void func_800B3324(u8 index, s32 x, s32 y, s32 patch, u8 hide_chang
     }
 
     Char_RebuildStats(chr);
-    sprintf(g_UiTextFormatBuffer, D_80096A54, stats->power);
-    UI_TextDrawGlyphString((s16)(left + 0x31), (s16)(top + 0x1C), UI_TEXT_NORMAL, g_UiTextFormatBuffer);
-    sprintf(g_UiTextFormatBuffer, D_80096A54, stats->defense);
-    UI_TextDrawGlyphString((s16)(left + 0x31), (s16)(top + 0x29), UI_TEXT_NORMAL, g_UiTextFormatBuffer);
-    sprintf(g_UiTextFormatBuffer, D_80096A54, stats->intelligence);
-    UI_TextDrawGlyphString((s16)(left + 0x31), (s16)(top + 0x36), UI_TEXT_NORMAL, g_UiTextFormatBuffer);
-    sprintf(g_UiTextFormatBuffer, D_80096A54, stats->agility);
-    UI_TextDrawGlyphString((s16)(left + 0x31), (s16)(top + 0x43), UI_TEXT_NORMAL, g_UiTextFormatBuffer);
+    sprintf(g_UITextFormatBuffer, D_80096A54, stats->power);
+    UI_TextDrawGlyphString((s16)(left + 0x31), (s16)(top + 0x1C), UI_TEXT_NORMAL, g_UITextFormatBuffer);
+    sprintf(g_UITextFormatBuffer, D_80096A54, stats->defense);
+    UI_TextDrawGlyphString((s16)(left + 0x31), (s16)(top + 0x29), UI_TEXT_NORMAL, g_UITextFormatBuffer);
+    sprintf(g_UITextFormatBuffer, D_80096A54, stats->intelligence);
+    UI_TextDrawGlyphString((s16)(left + 0x31), (s16)(top + 0x36), UI_TEXT_NORMAL, g_UITextFormatBuffer);
+    sprintf(g_UITextFormatBuffer, D_80096A54, stats->agility);
+    UI_TextDrawGlyphString((s16)(left + 0x31), (s16)(top + 0x43), UI_TEXT_NORMAL, g_UITextFormatBuffer);
 
     if ((hide_changes & 1) == 0) {
         func_80164EF8(index, (u8*)patch, compare.flags, compare.values);
@@ -65,8 +65,8 @@ NON_MATCHING void func_800B3324(u8 index, s32 x, s32 y, s32 patch, u8 hide_chang
             }
             GFX_AddDrawMode(getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y));
             Menu_DrawPanelIcon((u16)(left + 0x51), (u16)(top + (i * 13 + 0x1A) + 2), icon, 0x1C, GetClut(0, STAGE_PALETTE_Y), GFX_COLOR_NEUTRAL);
-            sprintf(g_UiTextFormatBuffer, D_80096A54, compare.values[i]);
-            UI_TextDrawGlyphString((s16)(left + 0x59), (s16)(top + (i * 13 + 0x1A) + 2), compare.flags[i], g_UiTextFormatBuffer);
+            sprintf(g_UITextFormatBuffer, D_80096A54, compare.values[i]);
+            UI_TextDrawGlyphString((s16)(left + 0x59), (s16)(top + (i * 13 + 0x1A) + 2), compare.flags[i], g_UITextFormatBuffer);
         }
     }
 

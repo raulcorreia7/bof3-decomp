@@ -5,7 +5,7 @@ MATCH void Battle_SlideInMessagePanel(void) {
     MenuPanelTask* panel;
     s16            state;
 
-    panel      = g_UiPanelCurrent;
+    panel      = g_UIPanelCurrent;
     D_801EC2E4 = 1u;
     state      = panel->pos.vy;
     if (state == 0x12) {

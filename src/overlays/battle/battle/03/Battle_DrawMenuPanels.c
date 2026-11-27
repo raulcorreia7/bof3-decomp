@@ -16,11 +16,11 @@ MATCH void Battle_DrawMenuPanels(void) {
         size = g_Battle.panel_widths[i];
         xoff = s_BattlePanelOffsets[i][0];
         yoff = s_BattlePanelOffsets[i][1];
-        UI_IconDrawCell(i, (u16)((size >> 1) + (g_UiPanelCurrent->pos.vx + xoff)), (u16)((size >> 1) + (g_UiPanelCurrent->pos.vy + yoff)), (u8)(0x10 - size), (u8)(0x10 - size), GFX_COLOR_NEUTRAL);
+        UI_IconDrawCell(i, (u16)((size >> 1) + (g_UIPanelCurrent->pos.vx + xoff)), (u16)((size >> 1) + (g_UIPanelCurrent->pos.vy + yoff)), (u8)(0x10 - size), (u8)(0x10 - size), GFX_COLOR_NEUTRAL);
     }
     i = 0;
     if (g_Battle.panel_widths[0] == 0) {
-        g_UiPanelCurrent->state++;
+        g_UIPanelCurrent->state++;
     } else {
         do {
             g_Battle.panel_widths[i]--;

@@ -20,5 +20,5 @@ MATCH void func_801DE698(void) {
             return;
         }
     }
-    g_UiPanelTasks[4].unk_0A = SP_REF(u8, 0);
+    g_UIPanelTasks[4].unk_0A = SP_REF(u8, 0);
 }

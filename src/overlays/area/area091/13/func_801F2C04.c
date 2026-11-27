@@ -4,12 +4,12 @@ MATCH s32 func_801F2C04(void) {
     if (MENU_SELECTION_IDLE()) {
         if (Item_Count(ITEM_CATEGORY_ITEM, ITEM_FLOWER_JEWEL, 0) != 0) {
             Item_Remove(ITEM_CATEGORY_ITEM, ITEM_FLOWER_JEWEL, 1, 0);
-            g_UiMessageRequest = MSG_AREA091_MASTER_ACCEPT_APPRENTICE;
+            g_UIMessageRequest = MSG_AREA091_MASTER_ACCEPT_APPRENTICE;
             return;
         }
-        g_UiMessageRequest = MSG_AREA091_MASTER_NO_ITEM;
+        g_UIMessageRequest = MSG_AREA091_MASTER_NO_ITEM;
     } else {
-        g_UiMessageRequest = MSG_AREA091_MASTER_FAREWELL;
+        g_UIMessageRequest = MSG_AREA091_MASTER_FAREWELL;
     }
     g_MenuMasterStep = 6;
 }

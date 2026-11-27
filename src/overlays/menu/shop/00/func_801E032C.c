@@ -10,18 +10,18 @@ MATCH void func_801E032C(void) {
     u8  previous;
     s8  next;
 
-    entry      = (u8*)&g_Characters[g_UiPanelTasks[3].unk_0A] + DECOMP_OFFSETOF(Character, abilities.skill) + g_UiPanelTasks[3].unk_0B;
+    entry      = (u8*)&g_Characters[g_UIPanelTasks[3].unk_0A] + DECOMP_OFFSETOF(Character, abilities.skill) + g_UIPanelTasks[3].unk_0B;
     D_80148340 = g_Abilities[*entry].description;
-    if (g_UiPanelTasks[3].state == 0) {
-        g_UiPanelTasks[21].active = 1;
-        D_80148628                = g_UiPanelTasks[3].pos.vx + 7;
-        row                       = g_UiPanelTasks[3].unk_0B * 0xD + 0x1A;
-        D_8014862A                = g_UiPanelTasks[3].pos.vy + row;
+    if (g_UIPanelTasks[3].state == 0) {
+        g_UIPanelTasks[21].active = 1;
+        D_80148628                = g_UIPanelTasks[3].pos.vx + 7;
+        row                       = g_UIPanelTasks[3].unk_0B * 0xD + 0x1A;
+        D_8014862A                = g_UIPanelTasks[3].pos.vy + row;
     } else {
-        g_UiPanelTasks[21].active = 0;
+        g_UIPanelTasks[21].active = 0;
     }
     input    = INPUT_REPEATED(g_PadStates[0].pressed, INPUT_DIRECTIONAL);
-    cursor   = &g_UiPanelTasks[3].unk_0B;
+    cursor   = &g_UIPanelTasks[3].unk_0B;
     previous = *cursor;
     if (input & PADLup) {
         next    = previous - 1;
@@ -36,17 +36,17 @@ MATCH void func_801E032C(void) {
             *cursor = 9;
         }
     }
-    index = &g_UiPanelTasks[3].unk_0B;
+    index = &g_UIPanelTasks[3].unk_0B;
     if (previous != *index) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
     }
-    g_UiPanelTasks[3].unk_0C = 0xFF;
-    cell                     = (u8*)&g_Characters[g_UiPanelTasks[3].unk_0A] + DECOMP_OFFSETOF(Character, abilities.skill) + *index;
+    g_UIPanelTasks[3].unk_0C = 0xFF;
+    cell                     = (u8*)&g_Characters[g_UIPanelTasks[3].unk_0A] + DECOMP_OFFSETOF(Character, abilities.skill) + *index;
     if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         u8* step;
 
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
-        g_UiPanelTasks[3].unk_0C = *index;
+        g_UIPanelTasks[3].unk_0C = *index;
         step                     = &D_80148652;
         (*step)++;
         return;
@@ -66,9 +66,9 @@ MATCH void func_801E032C(void) {
 
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
-        g_UiPanelTasks[2].state  = 2;
-        g_UiPanelTasks[3].state  = 4;
-        g_UiPanelTasks[3].unk_0C = 0xFF;
+        g_UIPanelTasks[2].state  = 2;
+        g_UIPanelTasks[3].state  = 4;
+        g_UIPanelTasks[3].unk_0C = 0xFF;
         g_BattleMessageState     = 1;
         step                     = &D_80148652;
         (*step)--;

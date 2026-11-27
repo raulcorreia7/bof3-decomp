@@ -7,7 +7,7 @@ MATCH void func_801D6E6C(void) {
     u8         want;
 
     i       = 0;
-    record  = &g_Characters[g_CharSlot[g_PartyFieldOrder[g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0C]]];
+    record  = &g_Characters[g_CharSlot[g_PartyFieldOrder[g_UIPanelTasks[MENU_START_PANEL_ITEMS].unk_0C]]];
     ptrs[0] = &record->equip.weapon;
     ptrs[1] = &record->equip.shield;
     ptrs[2] = &record->equip.helmet;

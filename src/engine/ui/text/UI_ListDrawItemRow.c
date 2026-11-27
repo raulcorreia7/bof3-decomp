@@ -31,7 +31,7 @@ MATCH void UI_ListDrawItemRow(s16 record_x, s32 record_y, u8 text_shade, u8 cate
     UI_TextDraw(x + 10, record_y, text_color, Game_ReadCommand(entry) & BYTE_MASK, entry);
     count = quantity_byte & BYTE_MASK;
     if (count >= 2U) {
-        buffer = (char*)g_UiTextFormatBuffer;
+        buffer = (char*)g_UITextFormatBuffer;
         TEXT_Format(buffer, D_80195F90, count);
         UI_TextDrawGlyphString((x + 109), row, text_color, (const u8*)buffer);
     }

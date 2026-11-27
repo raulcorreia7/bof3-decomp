@@ -11,7 +11,7 @@ MATCH void func_801D14EC(void) {
         FAKE_USE(panel);
         i = 0;
         while (i < (u8)Party_CountOrder(PARTY_ORDER_FIELD)) {
-            panel         = &g_UiPanelTasks[i + 3];
+            panel         = &g_UIPanelTasks[i + 3];
             panel->unk_0A = i;
             panel->pos.vx = MENU_PANEL_HIDDEN_X;
             panel->pos.vy = i * 54 + 62;
@@ -26,13 +26,13 @@ MATCH void func_801D14EC(void) {
     }
     D_80148454               = BATTLE_PARTY_STRIDE;
     D_80148456               = 0x3E;
-    g_UiPanelTasks[8].active = 1;
+    g_UIPanelTasks[8].active = 1;
     D_80148451               = 7;
     D_80148452               = 7;
-    g_UiPanelTasks[8].state  = D_801E6058 != 0 ? 2 : 3;
-    g_UiPanelTasks[8].unk_0A = 0;
+    g_UIPanelTasks[8].state  = D_801E6058 != 0 ? 2 : 3;
+    g_UIPanelTasks[8].unk_0A = 0;
     g_ShopStockIndex         = 0;
-    g_UiPanelTasks[8].unk_0B = g_ShopPricePercent;
+    g_UIPanelTasks[8].unk_0B = g_ShopPricePercent;
     D_80148470               = D_8018E7CC;
     step                     = &g_MenuStep.state;
     (*step)++;

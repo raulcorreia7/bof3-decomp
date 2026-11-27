@@ -5,16 +5,16 @@ MATCH void func_801D2D64(void) {
     u8  previous;
 
     D_80148340                = 0x51;
-    g_UiPanelTasks[7].unk_09  = 1;
-    g_UiPanelTasks[10].active = 1;
+    g_UIPanelTasks[7].unk_09  = 1;
+    g_UIPanelTasks[10].active = 1;
     D_80148499                = 7;
     D_8014849A                = 0xA;
-    D_8014849C                = g_UiPanelTasks[7].pos.vx;
-    D_8014849E                = (D_80148432 + (g_ShopStockIndex - g_UiPanelTasks[7].unk_0B) * 0xD) + 0x14;
-    g_UiPanelTasks[10].unk_0A = g_ShopItemCategory;
-    g_UiPanelTasks[10].unk_0B = g_ShopItemId;
-    g_UiPanelTasks[10].unk_0C = g_ShopItemCount;
-    g_UiPanelTasks[10].flags  = D_801E606C;
+    D_8014849C                = g_UIPanelTasks[7].pos.vx;
+    D_8014849E                = (D_80148432 + (g_ShopStockIndex - g_UIPanelTasks[7].unk_0B) * 0xD) + 0x14;
+    g_UIPanelTasks[10].unk_0A = g_ShopItemCategory;
+    g_UIPanelTasks[10].unk_0B = g_ShopItemId;
+    g_UIPanelTasks[10].unk_0C = g_ShopItemCount;
+    g_UIPanelTasks[10].flags  = D_801E606C;
     input                     = INPUT_REPEATED(g_PadStates[0].pressed, INPUT_DIRECTIONAL);
     previous                  = g_ShopItemCount;
     if (input & PADLleft) {

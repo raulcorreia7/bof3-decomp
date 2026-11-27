@@ -93,7 +93,7 @@ ASSERT_SIZE(ThreadTitleScreen, 0x38);
 /* Thread slot 2: the window effect's local mode; Thread.state is its busy flag. */
 typedef struct ThreadScreenEffect {
     u8             pad_00[0x08];
-    /* 0x08 */ u16 mode; /* UiMode */
+    /* 0x08 */ u16 mode; /* UIMode */
     u8             pad_0A[0x2E];
 } ThreadScreenEffect;
 

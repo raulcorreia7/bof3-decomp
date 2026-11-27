@@ -39,17 +39,17 @@ MATCH void Menu_DrawEquipStatWindow(u16 x, u16 y, u8 character_index, u8 item_ty
         values[EQUIP_STAT_ROW_AGILITY] = values[EQUIP_PREVIEW_AGILITY];
         flags[EQUIP_STAT_ROW_AGILITY]  = flags[EQUIP_PREVIEW_AGILITY];
         for (i = 0; i < MENU_EQUIP_STAT_ROWS; i++) {
-            TEXT_Format(g_UiTextFormatBuffer, g_MenuStatFormat, values[i]);
-            UI_TextDrawGlyphString(x + MENU_EQUIP_STAT_VALUE_X, y + i * MENU_EQUIP_STAT_ROW_HEIGHT + MENU_EQUIP_STAT_VALUE_Y, flags[i], g_UiTextFormatBuffer);
+            TEXT_Format(g_UITextFormatBuffer, g_MenuStatFormat, values[i]);
+            UI_TextDrawGlyphString(x + MENU_EQUIP_STAT_VALUE_X, y + i * MENU_EQUIP_STAT_ROW_HEIGHT + MENU_EQUIP_STAT_VALUE_Y, flags[i], g_UITextFormatBuffer);
         }
     } else {
         clut = UI_TEXT_DIM;
-        TEXT_Format(g_UiTextFormatBuffer, g_MenuStatFormat, character->stats.power);
-        UI_TextDrawGlyphString(x + MENU_EQUIP_STAT_VALUE_X, y + EQUIP_STAT_ROW_POWER * MENU_EQUIP_STAT_ROW_HEIGHT + MENU_EQUIP_STAT_VALUE_Y, UI_TEXT_DIM, g_UiTextFormatBuffer);
-        TEXT_Format(g_UiTextFormatBuffer, g_MenuStatFormat, character->stats.defense);
-        UI_TextDrawGlyphString(x + MENU_EQUIP_STAT_VALUE_X, y + EQUIP_STAT_ROW_DEFENSE * MENU_EQUIP_STAT_ROW_HEIGHT + MENU_EQUIP_STAT_VALUE_Y, UI_TEXT_DIM, g_UiTextFormatBuffer);
-        TEXT_Format(g_UiTextFormatBuffer, g_MenuStatFormat, character->stats.agility);
-        UI_TextDrawGlyphString(x + MENU_EQUIP_STAT_VALUE_X, y + EQUIP_STAT_ROW_AGILITY * MENU_EQUIP_STAT_ROW_HEIGHT + MENU_EQUIP_STAT_VALUE_Y, UI_TEXT_DIM, g_UiTextFormatBuffer);
+        TEXT_Format(g_UITextFormatBuffer, g_MenuStatFormat, character->stats.power);
+        UI_TextDrawGlyphString(x + MENU_EQUIP_STAT_VALUE_X, y + EQUIP_STAT_ROW_POWER * MENU_EQUIP_STAT_ROW_HEIGHT + MENU_EQUIP_STAT_VALUE_Y, UI_TEXT_DIM, g_UITextFormatBuffer);
+        TEXT_Format(g_UITextFormatBuffer, g_MenuStatFormat, character->stats.defense);
+        UI_TextDrawGlyphString(x + MENU_EQUIP_STAT_VALUE_X, y + EQUIP_STAT_ROW_DEFENSE * MENU_EQUIP_STAT_ROW_HEIGHT + MENU_EQUIP_STAT_VALUE_Y, UI_TEXT_DIM, g_UITextFormatBuffer);
+        TEXT_Format(g_UITextFormatBuffer, g_MenuStatFormat, character->stats.agility);
+        UI_TextDrawGlyphString(x + MENU_EQUIP_STAT_VALUE_X, y + EQUIP_STAT_ROW_AGILITY * MENU_EQUIP_STAT_ROW_HEIGHT + MENU_EQUIP_STAT_VALUE_Y, UI_TEXT_DIM, g_UITextFormatBuffer);
     }
     Menu_DrawCharacterPortrait((x + MENU_EQUIP_STAT_PORTRAIT_X) & HALF_MASK, (y + MENU_EQUIP_STAT_PORTRAIT_Y) & HALF_MASK, character->character_id, shaded);
     for (i = 0; i < MENU_EQUIP_STAT_ROWS; i++) {

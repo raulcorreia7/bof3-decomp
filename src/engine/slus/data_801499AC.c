@@ -1,6 +1,6 @@
 #include "slus.h"
 
-const u32 g_UiModeLocals[21] = {
+const u32 g_UIModeLocals[21] = {
     (u32)GFX_FadeToBlack,
     (u32)GFX_FadeFromBlack,
     (u32)GFX_FadeToBlackFast,

@@ -5,7 +5,7 @@ MATCH void FairyNickname_AnswerHelpNicknames(void) {
     if (MENU_SELECTION_IDLE()) {
         MESSAGE_REQUEST_CLEAR();
     } else {
-        g_UiMessageRequest                 = MSG_AREA175_BYE_SEE_YOU;
+        g_UIMessageRequest                 = MSG_AREA175_BYE_SEE_YOU;
         g_ScriptWorkRecord->callback_index = GAME_NONE;
     }
 }

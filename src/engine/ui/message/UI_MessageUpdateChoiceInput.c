@@ -10,16 +10,16 @@ MATCH void UI_MessageUpdateChoiceInput(void) {
     if ((g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) != 0) {
         u8* step;
 
-        g_UiPanelTasks[1].state = 3;
-        g_UiPanelTasks[0].state = 1;
-        step                    = &g_UiMessageStep;
+        g_UIPanelTasks[1].state = 3;
+        g_UIPanelTasks[0].state = 1;
+        step                    = &g_UIMessageStep;
         *step                   = *step + 1;
         return;
     }
     if ((g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) != 0) {
         u8* step;
 
-        step  = &g_UiMessageStep;
+        step  = &g_UIMessageStep;
         *step = *step + 2;
         return;
     }
@@ -27,18 +27,18 @@ MATCH void UI_MessageUpdateChoiceInput(void) {
     if ((action & PADLup) != 0) {
         u8* index;
 
-        index  = (u8*)&g_UiMessageWindow.selection_index;
+        index  = (u8*)&g_UIMessageWindow.selection_index;
         *index = *index - 1;
         if ((s8)*index < 0) {
-            *index = g_UiMessageWindow.last_row;
+            *index = g_UIMessageWindow.last_row;
         }
     }
     if ((action & PADLdown) != 0) {
         u8* index;
 
-        index  = (u8*)&g_UiMessageWindow.selection_index;
+        index  = (u8*)&g_UIMessageWindow.selection_index;
         *index = *index + 1;
-        if (g_UiMessageWindow.last_row < (s8)*index) {
+        if (g_UIMessageWindow.last_row < (s8)*index) {
             *index = 0;
         }
     }

@@ -50,7 +50,7 @@ MATCH void func_801D5D88(void) {
         work->cue_index = work->cue_index + 1;
     }
     Fishing_DrawGaugeFill(57, 151, SELF(FishingState)->pos_x, 1);
-    TEXT_Format(g_UiTextFormatBuffer, D_801D0C04, SELF(FishingState)->cue_index);
-    UI_TextDrawAscii(172, 148, 0, g_UiTextFormatBuffer);
+    TEXT_Format(g_UITextFormatBuffer, D_801D0C04, SELF(FishingState)->cue_index);
+    UI_TextDrawAscii(172, 148, 0, g_UITextFormatBuffer);
     Area_AddActor();
 }

@@ -4,7 +4,7 @@ MATCH void func_801D6018(void) {
     u8 count;
 
     MENU_DRAW_HEADER();
-    if (g_UiWindowChannel & FRONTEND_FLAG_CONFIRM) {
+    if (g_UIWindowChannel & FRONTEND_FLAG_CONFIRM) {
         if (D_8014865B == 0) {
             count      = D_80148651;
             D_80148654 = 0;

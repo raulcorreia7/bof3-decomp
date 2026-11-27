@@ -12,7 +12,7 @@ Title_Leave = { addr = 0x801D1000, type = "func", source = "Closes the selection
 Title_UpdateStartButton = { addr = 0x801D104C, type = "func", source = "Intercepts the Start button on the title: redirects to state 2 early, or to the popup close and state 7." }
 SND_StartSelectionEffect = { addr = 0x801D1134, type = "func", source = "Starts the g_SndBGMId decrescendo through SND_StartDecrescendo with g_SelectionSepSlots[selection]." }
 SND_StopSelectionEffect = { addr = 0x801D1184, type = "func", source = "Stops the g_SndBGMId effect and clears the selection byte." }
-Title_DrawChoicePrompt = { addr = 0x801D11E4, type = "func", source = "Clears g_UiPopupRequest once the EXE selection reaches idle, then draws the title prompt sprite." }
+Title_DrawChoicePrompt = { addr = 0x801D11E4, type = "func", source = "Clears g_UIPopupRequest once the EXE selection reaches idle, then draws the title prompt sprite." }
 Title_DrawChoicePanels = { addr = 0x801D12CC, type = "func", source = "Draws the New Game and Load panels with their labels and the pulsing selection marker." }
 Title_DrawLabelPair = { addr = 0x801D150C, type = "func", source = "Draws the pair of labels 4 and 5 at x, y, or 15 and 16 when selected." }
 Title_DrawIconPair = { addr = 0x801D16DC, type = "func", source = "Draws the icon pair 2 and 3 at x, y and x + 240, y + 112." }

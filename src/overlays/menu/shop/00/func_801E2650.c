@@ -4,10 +4,10 @@ MATCH void func_801E2650(void) {
     u8* panel;
     s32 offset;
 
-    panel                   = (u8*)g_UiPanelTasks;
-    g_UiPanelTasks[0].panel = 7;
-    g_UiPanelTasks[0].mode  = 0;
-    g_UiPanelTasks[0].state = 2;
+    panel                   = (u8*)g_UIPanelTasks;
+    g_UIPanelTasks[0].panel = 7;
+    g_UIPanelTasks[0].mode  = 0;
+    g_UIPanelTasks[0].state = 2;
     panel[0]                = 1;
     D_80148334              = 0x14;
     /* FAKE: retail reads D_80148336 as s16. */

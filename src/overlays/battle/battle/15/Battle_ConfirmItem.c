@@ -6,7 +6,7 @@ MATCH void Battle_ConfirmItem(void) {
     u8* group;
 
     SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 4));
-    cursor                          = &g_UiPanelTasks[16].unk_0C;
+    cursor                          = &g_UIPanelTasks[16].unk_0C;
     group                           = cursor - 2;
     g_Battle.selection_latch        = 0u;
     g_BattleActorTurn->command.type = BATTLE_COMMAND_ITEM;

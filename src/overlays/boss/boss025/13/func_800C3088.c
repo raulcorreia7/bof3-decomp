@@ -9,7 +9,7 @@ MATCH void func_800C3088(void) {
     UI_TextDrawAscii(0x70, 0x12, 4, buf);
     UI_TextDraw(128, 18, 0, 10, D_800C32A8);
 
-    if (g_UiPanelTasks[20].state != 0 || (g_Battle.outcome.event_flags & 0x2) != 0) {
+    if (g_UIPanelTasks[20].state != 0 || (g_Battle.outcome.event_flags & 0x2) != 0) {
         SELF(PartyMember)->header.mode -= 1;
     }
     if (g_Battle.phase.mode == BATTLE_MODE_RESULT) {

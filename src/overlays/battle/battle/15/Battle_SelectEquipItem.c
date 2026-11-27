@@ -11,12 +11,12 @@ MATCH void Battle_SelectEquipItem(void) {
     u16  choice;
     u8   unused[0x28]; /* 40 bytes of frame the function never touches */
 
-    if (g_UiPanelTasks[18].state == 0) {
-        g_UiPanelTasks[19].active = 1;
-        g_UiPanelTasks[19].pos.vx = g_UiPanelTasks[18].pos.vx + 6;
-        g_UiPanelTasks[19].pos.vy = (u16)(g_UiPanelTasks[18].pos.vy + ((g_UiPanelTasks[18].unk_0A * 0xD) + 0x57));
+    if (g_UIPanelTasks[18].state == 0) {
+        g_UIPanelTasks[19].active = 1;
+        g_UIPanelTasks[19].pos.vx = g_UIPanelTasks[18].pos.vx + 6;
+        g_UIPanelTasks[19].pos.vy = (u16)(g_UIPanelTasks[18].pos.vy + ((g_UIPanelTasks[18].unk_0A * 0xD) + 0x57));
     } else {
-        g_UiPanelTasks[19].active = 0;
+        g_UIPanelTasks[19].active = 0;
     }
     g_BattleMessages[((D_801EC328 - 1) & BATTLE_RING_SLOT_MASK)].text = UI_MessageGetText(D_8014862E == 0 ? 0x30 : 0x32);
     pad_state                                                         = &g_PadStates[0].pressed;
@@ -24,11 +24,11 @@ MATCH void Battle_SelectEquipItem(void) {
     pressed                                                           = *pad_state;
     if (pressed & g_InputMasks[BATTLE_INPUT_CANCEL]) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
-        g_UiPanelTasks[18].state  = 1;
-        g_UiPanelTasks[16].state  = 3;
-        g_UiPanelTasks[21].active = 0;
-        g_UiPanelTasks[4].active  = 1;
-        g_UiPanelTasks[19].active = 0;
+        g_UIPanelTasks[18].state  = 1;
+        g_UIPanelTasks[16].state  = 3;
+        g_UIPanelTasks[21].active = 0;
+        g_UIPanelTasks[4].active  = 1;
+        g_UIPanelTasks[19].active = 0;
         g_Battle.ui_step          = 1;
         g_Battle.ui_mode          = 0;
         return;
@@ -39,14 +39,14 @@ MATCH void Battle_SelectEquipItem(void) {
             g_Game.members[BATTLE_ACTIVE_MEMBER->slot].u.turn.damage_flags.value |= BATTLER_DAMAGE_UNK_14;
             g_Game.members[BATTLE_ACTIVE_MEMBER->slot].u.turn.command.id      = g_BattleTargetCursorCol;
             /* g_BattleTargetCursorCol is this panel cell. */
-            choice                                                            = g_UiPanelTasks[18].u.battle.cursor;
+            choice                                                            = g_UIPanelTasks[18].u.battle.cursor;
             g_BattleActorTurn->command.id                                     = choice;
             g_BattleMessages[((D_801EC328 - 1) & BATTLE_RING_SLOT_MASK)].text = UI_MessageGetText(Item_GetDescription(choice >> 8, choice & BYTE_MASK) & HALF_MASK);
-            g_UiPanelTasks[18].state                                          = 1;
-            g_UiPanelTasks[17].state                                          = 2;
-            g_UiPanelTasks[19].active                                         = 0;
-            g_UiPanelTasks[21].active                                         = 0;
-            g_UiPanelTasks[4].active                                          = 1;
+            g_UIPanelTasks[18].state                                          = 1;
+            g_UIPanelTasks[17].state                                          = 2;
+            g_UIPanelTasks[19].active                                         = 0;
+            g_UIPanelTasks[21].active                                         = 0;
+            g_UIPanelTasks[4].active                                          = 1;
             g_Battle.ui_step                                                  = 7;
         } else {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 7));
@@ -54,16 +54,16 @@ MATCH void Battle_SelectEquipItem(void) {
     }
     if (repeated & PADLup) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
-        g_UiPanelTasks[18].unk_0A--;
-        if ((s8)g_UiPanelTasks[18].unk_0A < 0) {
-            g_UiPanelTasks[18].unk_0A = 5;
+        g_UIPanelTasks[18].unk_0A--;
+        if ((s8)g_UIPanelTasks[18].unk_0A < 0) {
+            g_UIPanelTasks[18].unk_0A = 5;
         }
     }
     if (repeated & PADLdown) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
-        g_UiPanelTasks[18].unk_0A++;
-        if ((s8)g_UiPanelTasks[18].unk_0A >= 6) {
-            g_UiPanelTasks[18].unk_0A = 0;
+        g_UIPanelTasks[18].unk_0A++;
+        if ((s8)g_UIPanelTasks[18].unk_0A >= 6) {
+            g_UIPanelTasks[18].unk_0A = 0;
         }
     }
 }

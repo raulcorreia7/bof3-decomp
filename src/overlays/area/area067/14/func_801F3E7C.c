@@ -3,8 +3,8 @@
 MATCH void func_801F3E7C(void) {
     s8 sel;
 
-    sel                = g_UiMessageChoice;
-    g_UiMessageRequest = D_801F539C[sel];
+    sel                = g_UIMessageChoice;
+    g_UIMessageRequest = D_801F539C[sel];
     if (sel < 2) {
         if (sel >= 0) {
             g_ScriptVars[0] = 5;

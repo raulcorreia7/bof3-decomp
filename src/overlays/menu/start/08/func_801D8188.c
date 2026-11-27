@@ -1,7 +1,7 @@
 #include "start_08.h"
 
 MATCH void func_801D8188(void) {
-    u8* slot = &g_UiPanelTasks[21].active;
+    u8* slot = &g_UIPanelTasks[21].active;
     /* FAKE: branch-select byte pinned to s0; gcc swaps s0/s1 without it (94.78%). */
     FAKE_REG(s8*, toggle, "s0");
     u16* key;
@@ -14,11 +14,11 @@ MATCH void func_801D8188(void) {
     FAKE_OPAQUE(slot);
     bar                                                       = *(u16*)(slot - 0x164);
     *slot                                                     = 1;
-    g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0x31;
+    g_UIPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0x31;
     toggle                                                    = &D_8014865B;
     sel                                                       = 1 - *toggle;
-    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.vx            = bar + (sel << 5) + 0xDE;
-    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.vy            = g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.vy + 5;
+    g_UIPanelTasks[MENU_START_PANEL_CURSOR].pos.vx            = bar + (sel << 5) + 0xDE;
+    g_UIPanelTasks[MENU_START_PANEL_CURSOR].pos.vy            = g_UIPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.vy + 5;
     key                                                       = &g_PadStates[0].pressed;
     slot -= 180;
     if (*key & (PADLright | PADLleft)) {
@@ -28,8 +28,8 @@ MATCH void func_801D8188(void) {
     if (*key & g_InputMasks[MENU_INPUT_CONFIRM]) {
         if (*toggle != 0) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 4));
-            Char_AbilityAdd(*(Party_GetAbilities(g_UiPanelTasks[16].unk_0A, g_UiPanelTasks[16].unk_0B, CHAR_INDEX_RYU) + g_UiPanelTasks[16].unk_0C), CHAR_INDEX_RYU, 1, 0);
-            *(Party_GetAbilities(g_UiPanelTasks[16].unk_0A, g_UiPanelTasks[16].unk_0B, 0) + g_UiPanelTasks[16].unk_0C) = 0;
+            Char_AbilityAdd(*(Party_GetAbilities(g_UIPanelTasks[16].unk_0A, g_UIPanelTasks[16].unk_0B, CHAR_INDEX_RYU) + g_UIPanelTasks[16].unk_0C), CHAR_INDEX_RYU, 1, 0);
+            *(Party_GetAbilities(g_UIPanelTasks[16].unk_0A, g_UIPanelTasks[16].unk_0B, 0) + g_UIPanelTasks[16].unk_0C) = 0;
         } else {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
         }
@@ -39,7 +39,7 @@ MATCH void func_801D8188(void) {
         return;
     }
     if (*key & g_InputMasks[MENU_INPUT_CANCEL]) {
-        g_UiPanelTasks[16].flags = 0xFF;
+        g_UIPanelTasks[16].flags = 0xFF;
         D_80148651 -= 2;
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
     }

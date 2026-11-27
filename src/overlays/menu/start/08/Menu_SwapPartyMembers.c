@@ -12,9 +12,9 @@ MATCH u8 Menu_SwapPartyMembers(void) {
 
     if (D_80148658[0] == D_80148658[2]) {
         if (D_80148658[0] == 0) {
-            tmp                                      = g_UiPanelTasks[D_80148658[1] + 4].unk_0C;
-            g_UiPanelTasks[D_80148658[1] + 4].unk_0C = g_UiPanelTasks[D_80148658[5] + 4].unk_0C;
-            g_UiPanelTasks[D_80148658[5] + 4].unk_0C = tmp;
+            tmp                                      = g_UIPanelTasks[D_80148658[1] + 4].unk_0C;
+            g_UIPanelTasks[D_80148658[1] + 4].unk_0C = g_UIPanelTasks[D_80148658[5] + 4].unk_0C;
+            g_UIPanelTasks[D_80148658[5] + 4].unk_0C = tmp;
             Menu_SwapBytes4(&g_PartyFieldOrder[D_80148658[1]], &g_PartyFieldOrder[D_80148658[5]]);
             for (i = 0; i < 4; i++) {
                 tmp                                   = s_SkillOrderCursors[D_80148658[1]][i];
@@ -58,7 +58,7 @@ MATCH u8 Menu_SwapPartyMembers(void) {
             g_PartyBattleOrder[i] = reserve;
         }
     }
-    /* FAKE: retail reads g_UiPanelTasks[MENU_START_PANEL_COMMANDS].unk_0A as u8[]. */
+    /* FAKE: retail reads g_UIPanelTasks[MENU_START_PANEL_COMMANDS].unk_0A as u8[]. */
     for (i = 0; i < ((u8*)&D_801484EA)[0]; i++) {
         if (D_801ED690[i] == reserve) {
             D_801ED690[i] = member;

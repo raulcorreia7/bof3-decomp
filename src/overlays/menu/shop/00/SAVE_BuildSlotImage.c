@@ -39,7 +39,7 @@ MATCH void SAVE_BuildSlotImage(void) {
     Character*       leader;
 
     SAVE_FormatSlot();
-    func_801EF27C(1, 0x13, g_UiTextFormatBuffer);
+    func_801EF27C(1, 0x13, g_UITextFormatBuffer);
     g_SaveData.scene_state    = g_ScenarioState;
     g_SaveData.checksum       = 0;
     g_SaveData.script_vars[0] = g_ScriptVars[0];

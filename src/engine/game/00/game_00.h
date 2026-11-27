@@ -408,7 +408,7 @@ extern AreaActionFadeSteps g_AreaActionFadeSteps; /* 0x80195F44 */
 extern char                D_80195F90[];
 /* The format that prints an ability row's cost. */
 /* D_80195F98 */
-extern char                g_UiListAbilityRowFormat[]; /* 0x80195F98 */
+extern char                g_UIListAbilityRowFormat[]; /* 0x80195F98 */
 /* The format that prints the zenny reward. */
 /* D_80195FBC */
 extern char                g_GameRewardZennyFormat[]; /* 0x80195FBC */

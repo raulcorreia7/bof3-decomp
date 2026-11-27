@@ -37,21 +37,21 @@ NON_MATCHING void Battle_ChooseAbility(void) {
     }
     sel        = (BattleSelectionScratch*)((u8*)&g_BattleChoicePhase - 3);
     D_801485DC = 1u;
-    D_801485E0 = g_UiPanelTasks[16].pos.vx + 7u;
-    D_801485E2 = g_UiPanelTasks[16].pos.vy + ((g_UiPanelTasks[16].unk_0C - sel->scroll_base) * 13 + 0x1A);
+    D_801485E0 = g_UIPanelTasks[16].pos.vx + 7u;
+    D_801485E2 = g_UIPanelTasks[16].pos.vy + ((g_UIPanelTasks[16].unk_0C - sel->scroll_base) * 13 + 0x1A);
     trigger    = INPUT_REPEATED(g_PadStates[0].pressed, INPUT_DIRECTIONAL | PADL1 | PADR1);
     if ((g_BattleActorTurn->action_flags.value & (BATTLER_ACTION_DRAGON_FORM | BATTLER_ACTION_DRAGON_FORM_CONTROLLED)) != (u32)BATTLER_ACTION_DRAGON_FORM) {
         if ((trigger & PADLleft) != 0) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
-            g_UiPanelTasks[16].unk_09 = 0x32u;
-            if ((s8)--g_UiPanelTasks[16].unk_0B < 0) {
-                g_UiPanelTasks[16].unk_0B = 3u;
+            g_UIPanelTasks[16].unk_09 = 0x32u;
+            if ((s8)--g_UIPanelTasks[16].unk_0B < 0) {
+                g_UIPanelTasks[16].unk_0B = 3u;
             }
         } else if ((trigger & PADLright) != 0) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
-            g_UiPanelTasks[16].unk_09 = 0x31u;
-            if (++g_UiPanelTasks[16].unk_0B >= 4u) {
-                g_UiPanelTasks[16].unk_0B = 0u;
+            g_UIPanelTasks[16].unk_09 = 0x31u;
+            if (++g_UIPanelTasks[16].unk_0B >= 4u) {
+                g_UIPanelTasks[16].unk_0B = 0u;
             }
         }
     }
@@ -107,16 +107,16 @@ NON_MATCHING void Battle_ChooseAbility(void) {
     handle                            = UI_MessageGetText(*(u16*)(D_801CA71E + type * 0x14));
     ring_index                        = (D_801EC328 - 1) & 0xF;
     g_BattleMessages[ring_index].text = handle;
-    if ((s16)g_UiPanelTasks[16].u.addr.unk_12 != 0) {
+    if ((s16)g_UIPanelTasks[16].u.addr.unk_12 != 0) {
         return;
     }
     if ((g_PadStates[0].pressed & g_InputMasks[BATTLE_INPUT_CANCEL]) != 0u) {
         g_BattleChoicePhase                              = 1u;
         D_801485DC                                       = 0u;
         g_BattleMessages[ring_index].record_type         = 1u;
-        ((u8*)D_801454F4)[g_UiPanelTasks[16].unk_0A * 3] = group->index;
-        D_801454F5[g_UiPanelTasks[16].unk_0A * 3]        = g_UiPanelTasks[16].u.addr.unk_10;
-        D_801454F6[g_UiPanelTasks[16].unk_0A * 3]        = group->cursor;
+        ((u8*)D_801454F4)[g_UIPanelTasks[16].unk_0A * 3] = group->index;
+        D_801454F5[g_UIPanelTasks[16].unk_0A * 3]        = g_UIPanelTasks[16].u.addr.unk_10;
+        D_801454F6[g_UIPanelTasks[16].unk_0A * 3]        = group->cursor;
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
         g_Battle.ui_step += 1;
         return;
@@ -129,14 +129,14 @@ NON_MATCHING void Battle_ChooseAbility(void) {
             return;
         }
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
-        ((u8*)D_801454F4)[g_UiPanelTasks[16].unk_0A * 3] = group->index;
-        D_801454F5[g_UiPanelTasks[16].unk_0A * 3]        = g_UiPanelTasks[16].u.addr.unk_10;
-        D_801454F6[g_UiPanelTasks[16].unk_0A * 3]        = group->cursor;
+        ((u8*)D_801454F4)[g_UIPanelTasks[16].unk_0A * 3] = group->index;
+        D_801454F5[g_UIPanelTasks[16].unk_0A * 3]        = g_UIPanelTasks[16].u.addr.unk_10;
+        D_801454F6[g_UIPanelTasks[16].unk_0A * 3]        = group->cursor;
         entry                                            = Party_GetAbilities(message[0], group->index, 1);
         turn                                             = g_BattleActorTurn;
         turn->command.id                                 = entry[group->cursor];
         g_BattleChoicePanel.abilities.state              = 1u;
-        g_UiPanelTasks[19].active                        = 0u;
+        g_UIPanelTasks[19].active                        = 0u;
         if (turn->command.id == 0x97u) {
             g_BattleMessageState              = 2u;
             g_BattleActorTurn->command.target = g_BattleMessageSlot[5];

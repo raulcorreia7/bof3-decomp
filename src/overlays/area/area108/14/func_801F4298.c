@@ -5,10 +5,10 @@ MATCH void func_801F4298(void) {
     u8  flag;
 
     MESSAGE_REQUEST_CLEAR();
-    if (g_UiMessageChoice == 0) {
+    if (g_UIMessageChoice == 0) {
         goto block_3;
     }
-    if (g_UiMessageChoice == 1) {
+    if (g_UIMessageChoice == 1) {
         goto block_4;
     }
     return;

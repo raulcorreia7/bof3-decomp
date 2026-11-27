@@ -2,7 +2,7 @@
 /* The statements of UI_PanelSlideLeft. */
 #define MENU_SLIDE_PANEL_LEFT()                 \
     do {                                        \
-        MenuPanelTask* task = g_UiPanelCurrent; \
+        MenuPanelTask* task = g_UIPanelCurrent; \
         s16            val;                     \
                                                 \
         val          = task->pos.vx - 32;       \

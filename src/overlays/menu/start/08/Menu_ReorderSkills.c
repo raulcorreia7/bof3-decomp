@@ -17,30 +17,30 @@ MATCH void Menu_ReorderSkills(void) {
     u8*         flag;
 
     Menu_DrawClutStrip(g_WindowClut);
-    flag                                                      = &g_UiPanelTasks[18].unk_0C;
+    flag                                                      = &g_UIPanelTasks[18].unk_0C;
     *flag                                                     = 0;
-    g_UiPanelTasks[MENU_START_PANEL_CURSOR].active            = 1;
-    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.vx            = g_UiPanelTasks[16].pos.vx + 7;
-    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.vy            = (u16)(g_UiPanelTasks[16].pos.vy + ((g_UiPanelTasks[16].unk_0C * 0xD) + 0x1A));
+    g_UIPanelTasks[MENU_START_PANEL_CURSOR].active            = 1;
+    g_UIPanelTasks[MENU_START_PANEL_CURSOR].pos.vx            = g_UIPanelTasks[16].pos.vx + 7;
+    g_UIPanelTasks[MENU_START_PANEL_CURSOR].pos.vy            = (u16)(g_UIPanelTasks[16].pos.vy + ((g_UIPanelTasks[16].unk_0C * 0xD) + 0x1A));
     rec                                                       = (SkillOrder*)((u8*)flag - DECOMP_OFFSETOF(SkillOrder, unk_54));
-    index                                                     = Party_GetAbilities(g_UiPanelTasks[16].unk_0A, g_UiPanelTasks[16].unk_0B, 0);
-    pick                                                      = index + g_UiPanelTasks[16].unk_0C;
+    index                                                     = Party_GetAbilities(g_UIPanelTasks[16].unk_0A, g_UIPanelTasks[16].unk_0B, 0);
+    pick                                                      = index + g_UIPanelTasks[16].unk_0C;
     type                                                      = *pick;
-    g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = g_Abilities[type].description;
+    g_UIPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = g_Abilities[type].description;
     buttons                                                   = INPUT_GetRepeatedButtons(g_PadStates[0].pressed & (PADLup | PADLdown | PADL1 | PADR1));
-    value                                                     = g_UiPanelTasks[16].unk_0C;
+    value                                                     = g_UIPanelTasks[16].unk_0C;
     if (buttons & PADLup) {
         if (value != 0) {
             next                      = value - 1;
-            g_UiPanelTasks[16].unk_0C = next;
+            g_UIPanelTasks[16].unk_0C = next;
         }
     } else if ((buttons & PADLdown) && value < 9) {
         next                      = value + 1;
-        g_UiPanelTasks[16].unk_0C = next;
+        g_UIPanelTasks[16].unk_0C = next;
     }
     table  = s_SkillOrderCursors[D_80148656];
-    entry  = table + g_UiPanelTasks[16].unk_0B;
-    *entry = g_UiPanelTasks[16].unk_0C;
+    entry  = table + g_UIPanelTasks[16].unk_0B;
+    *entry = g_UIPanelTasks[16].unk_0C;
     if (value != rec->cursor) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
     }

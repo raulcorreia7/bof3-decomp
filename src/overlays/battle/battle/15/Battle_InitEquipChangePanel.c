@@ -8,7 +8,7 @@ MATCH void Battle_InitEquipChangePanel(void) {
     u16            saved_x;
     u16            saved_y;
 
-    panel         = &g_UiPanelTasks[18];
+    panel         = &g_UIPanelTasks[18];
     panel->active = 1;
     slot          = g_BattleMessageSlot;
     panel->panel  = 8;
@@ -23,9 +23,9 @@ MATCH void Battle_InitEquipChangePanel(void) {
     panel->pos.vy = 0x3F;
     panel--;
     panel->active                    = 1;
-    saved_x                          = g_UiPanelTasks[16].pos.vx;
+    saved_x                          = g_UIPanelTasks[16].pos.vx;
     panel->state                     = 1;
-    saved_y                          = g_UiPanelTasks[16].pos.vy;
+    saved_y                          = g_UIPanelTasks[16].pos.vy;
     panel->mode                      = 4;
     panel->panel                     = 8;
     panel->unk_0C                    = 0;

@@ -8,6 +8,6 @@ MATCH bool Battle_IsAbilityLocked(void) {
     u8* slot = (u8*)&D_80148656;
     u8* entry;
 
-    entry = Party_GetAbilities(*slot, g_UiPanelTasks[16].unk_0B, 1);
-    return (func_801AF5B0(2, *slot, entry[g_UiPanelTasks[16].unk_0C]) & BYTE_MASK) == 0;
+    entry = Party_GetAbilities(*slot, g_UIPanelTasks[16].unk_0B, 1);
+    return (func_801AF5B0(2, *slot, entry[g_UIPanelTasks[16].unk_0C]) & BYTE_MASK) == 0;
 }

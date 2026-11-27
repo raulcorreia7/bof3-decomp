@@ -4,7 +4,7 @@ MATCH void func_800A5874(void) {
     u8*          latch;
     volatile u8* counter;
 
-    latch = &g_UiPanelTasks[21].active;
+    latch = &g_UIPanelTasks[21].active;
     if ((*latch & 0x1) == 0) {
         func_80097FE8();
         D_80148594                       = 0;

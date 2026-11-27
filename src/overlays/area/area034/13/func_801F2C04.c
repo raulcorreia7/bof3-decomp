@@ -4,7 +4,7 @@ MATCH void func_801F2C04(void) {
     u8* step;
 
     MESSAGE_REQUEST_CLEAR();
-    switch (g_UiMessageChoice) {
+    switch (g_UIMessageChoice) {
         case 0:
             g_SceneEventState.selection = 5;
             break;
@@ -18,7 +18,7 @@ MATCH void func_801F2C04(void) {
     *step = 5;
     SYS_SetFlag(step + 0x63D, 30);
 resume:
-    if (g_UiMessageChoice != 2 && g_ScenarioState.scenario_id == 8 && SYS_TestFlag(g_SceneFlags, 3) == 0) {
+    if (g_UIMessageChoice != 2 && g_ScenarioState.scenario_id == 8 && SYS_TestFlag(g_SceneFlags, 3) == 0) {
         g_SceneEventState.mode = 0;
         Game_SetScriptActive();
         Scene_SetupParty(2);

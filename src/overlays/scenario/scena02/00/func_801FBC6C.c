@@ -28,7 +28,7 @@ MATCH void func_801FBC6C(void) {
             break;
 
         case 5:
-            if ((g_UiWindowChannel & 2) != 0) {
+            if ((g_UIWindowChannel & 2) != 0) {
                 if (g_ScriptVars[0] == 0x5A) {
                     g_ScriptVars[0] = 0;
                     goto reset;
@@ -76,7 +76,7 @@ MATCH void func_801FBC6C(void) {
             break;
 
         case 24:
-            if ((g_UiWindowChannel & 2) != 0) {
+            if ((g_UIWindowChannel & 2) != 0) {
                 if (g_ScriptVars[0] == 0x5C) {
                     D_8014865C           = -2;
                     D_80148698           = 1;

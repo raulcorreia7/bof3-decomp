@@ -7,7 +7,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801F96E0(void) {
     switch (g_ScenarioState.step) {
         case 0:
-            if (!(g_UiWindowChannel & FRONTEND_FLAG_CONFIRM)) {
+            if (!(g_UIWindowChannel & FRONTEND_FLAG_CONFIRM)) {
                 break;
             }
             switch (g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK) {

@@ -76,16 +76,16 @@ NON_MATCHING void func_800AC964(void) {
                     j               = j - 1;
                     UI_PanelOpenTask(0xC - panels, 3);
                     panel                               = 0xC - panels++;
-                    g_UiPanelTasks[panel].mode          = 4;
-                    g_UiPanelTasks[panel].state         = 0;
-                    g_UiPanelTasks[panel].u.addr.unk_10 = x;
-                    g_UiPanelTasks[panel].pos.vx        = x;
-                    g_UiPanelTasks[panel].u.addr.unk_12 = y;
-                    g_UiPanelTasks[panel].pos.vy        = y;
+                    g_UIPanelTasks[panel].mode          = 4;
+                    g_UIPanelTasks[panel].state         = 0;
+                    g_UIPanelTasks[panel].u.addr.unk_10 = x;
+                    g_UIPanelTasks[panel].pos.vx        = x;
+                    g_UIPanelTasks[panel].u.addr.unk_12 = y;
+                    g_UIPanelTasks[panel].pos.vy        = y;
                     y                                   = y + 8;
-                    g_UiPanelTasks[panel].unk_0A        = k + 3;
-                    g_UiPanelTasks[panel].unk_08        = 0;
-                    g_UiPanelTasks[panel].unk_09        = 0;
+                    g_UIPanelTasks[panel].unk_0A        = k + 3;
+                    g_UIPanelTasks[panel].unk_08        = 0;
+                    g_UIPanelTasks[panel].unk_09        = 0;
                 }
             }
             y = saved_y - 2;
@@ -116,16 +116,16 @@ NON_MATCHING void func_800AC964(void) {
                     j               = j - 1;
                     UI_PanelOpenTask(0xC - panels, 3);
                     panel                               = 0xC - panels++;
-                    g_UiPanelTasks[panel].mode          = 4;
-                    g_UiPanelTasks[panel].state         = 0;
-                    g_UiPanelTasks[panel].u.addr.unk_10 = x;
-                    g_UiPanelTasks[panel].pos.vx        = x;
-                    g_UiPanelTasks[panel].u.addr.unk_12 = y;
-                    g_UiPanelTasks[panel].pos.vy        = y;
+                    g_UIPanelTasks[panel].mode          = 4;
+                    g_UIPanelTasks[panel].state         = 0;
+                    g_UIPanelTasks[panel].u.addr.unk_10 = x;
+                    g_UIPanelTasks[panel].pos.vx        = x;
+                    g_UIPanelTasks[panel].u.addr.unk_12 = y;
+                    g_UIPanelTasks[panel].pos.vy        = y;
                     y                                   = y + 8;
-                    g_UiPanelTasks[panel].unk_0A        = k + 3;
-                    g_UiPanelTasks[panel].unk_08        = 0;
-                    g_UiPanelTasks[panel].unk_09        = 0;
+                    g_UIPanelTasks[panel].unk_0A        = k + 3;
+                    g_UIPanelTasks[panel].unk_08        = 0;
+                    g_UIPanelTasks[panel].unk_09        = 0;
                 }
             }
             y = saved_y - 2;

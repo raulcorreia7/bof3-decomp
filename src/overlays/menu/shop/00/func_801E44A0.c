@@ -4,7 +4,7 @@ MATCH void func_801E44A0(void) {
     MenuPanelTask* task_root;
     u16            next_val;
 
-    task_root         = g_UiPanelCurrent;
+    task_root         = g_UIPanelCurrent;
     next_val          = task_root->pos.vy - 0x10;
     task_root->pos.vy = next_val;
     if ((s16)next_val < 0x80) {

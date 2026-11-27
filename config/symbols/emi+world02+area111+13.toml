@@ -1,4 +1,4 @@
 ["emi/world02/area111/13"]
 g_SceneEventStep_u8 = { addr = 0x801448EC, type = "u8", alias = true, source = "The scene event step byte (0x801448EC) as a u8 array; Fishing_ShowLocation and func_801F3EE8 read and step it." }
 jtbl_801F2C04 = { addr = 0x801F2C04, type = "Callback", size = 0x60, source = "The switch table of func_801F3EE8: 24 jump targets of its jr dispatch." }
-UI_MessageAnswerSelect = { addr = 0x801F33D0, type = "func", source = "Sets g_UiMessageRequest to 3 when g_UiMessageChoice is nonzero, otherwise to 2." }
+UI_MessageAnswerSelect = { addr = 0x801F33D0, type = "func", source = "Sets g_UIMessageRequest to 3 when g_UIMessageChoice is nonzero, otherwise to 2." }

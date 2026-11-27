@@ -13,33 +13,33 @@ MATCH void UI_MessageOpenPanel(void) {
     u8  flag_byte;
     s32 next_y;
 
-    flags = &g_UiPanelPlacement;
+    flags = &g_UIPanelPlacement;
 
-    g_UiPanelCurrent->flags = 0;
+    g_UIPanelCurrent->flags = 0;
     flag_byte               = *flags;
     if ((flag_byte & 0x80) != 0) {
         *flags = flag_byte & 0x7F;
-        g_UiPanelCurrent->flags |= 1;
+        g_UIPanelCurrent->flags |= 1;
         flag_byte = *flags;
     }
     if ((flag_byte & 0x40) != 0) {
         *flags = flag_byte & 0xBF;
-        g_UiPanelCurrent->flags |= 2;
-        g_UiPanelCurrent->unk_0A = 0x78;
-        g_UiPanelCurrent->unk_0B = 0x36;
-        task                     = g_UiPanelCurrent;
+        g_UIPanelCurrent->flags |= 2;
+        g_UIPanelCurrent->unk_0A = 0x78;
+        g_UIPanelCurrent->unk_0B = 0x36;
+        task                     = g_UIPanelCurrent;
         task->pos.vx             = (((u8*)&D_8017F91C)[*flags * 2] + 60) * 16;
         next_y                   = ((u8*)&D_8017F91D)[*flags * 2] + 0x1B;
     } else {
-        g_UiPanelCurrent->unk_0A = 0xC8;
-        g_UiPanelCurrent->unk_0B = 0x36;
-        task                     = g_UiPanelCurrent;
-        task->pos.vx             = (((u8*)&g_UiPanelOrigins)[*flags * 2] + 100) * 16;
+        g_UIPanelCurrent->unk_0A = 0xC8;
+        g_UIPanelCurrent->unk_0B = 0x36;
+        task                     = g_UIPanelCurrent;
+        task->pos.vx             = (((u8*)&g_UIPanelOrigins)[*flags * 2] + 100) * 16;
         next_y                   = ((u8*)&D_8017F90D)[*flags * 2] + 0x1B;
     }
     task->pos.vy = next_y * 16;
 
-    task           = g_UiPanelCurrent;
+    task           = g_UIPanelCurrent;
     task->u.grow.w = 0;
     task->u.grow.h = 0;
     task->state += 1;

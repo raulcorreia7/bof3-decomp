@@ -96,7 +96,7 @@ MATCH void func_801F4B58(void) {
                 g_SpawnedActors[slot].screen_y     = 100;
                 /* FAKE: barrier keeps the message byte load after the slot stores. */
                 FAKE_BARRIER();
-                g_SpawnedActors[slot].unk_06 = LOBU(g_UiMessageRequest) - 0xB;
+                g_SpawnedActors[slot].unk_06 = LOBU(g_UIMessageRequest) - 0xB;
             }
             D_801448EE             = 0;
             g_SceneEventState.step = 0x29;

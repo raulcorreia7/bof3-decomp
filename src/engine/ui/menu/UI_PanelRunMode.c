@@ -5,6 +5,6 @@
 MATCH void UI_PanelRunMode(void) {
     u8 index;
 
-    index = g_UiPanelCurrent->mode;
-    g_UiPanelModes[index]();
+    index = g_UIPanelCurrent->mode;
+    g_UIPanelModes[index]();
 }

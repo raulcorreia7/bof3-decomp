@@ -3,8 +3,8 @@
 MATCH void func_801F2CB4(void) {
     u8 value;
 
-    g_UiMessageRequest = D_801F5358[g_UiMessageChoice];
-    switch (g_UiMessageChoice) {
+    g_UIMessageRequest = D_801F5358[g_UIMessageChoice];
+    switch (g_UIMessageChoice) {
         case 0:
             break;
 

@@ -5,24 +5,24 @@
 MATCH void UI_MessageChoiceRampStep(void) {
     u16 value;
 
-    if (g_UiMessageChoiceTimer == 0) {
-        if (g_UiMessageChoiceMode == 2) {
+    if (g_UIMessageChoiceTimer == 0) {
+        if (g_UIMessageChoiceMode == 2) {
             value      = D_801490C8 - 2;
             D_801490C8 = value;
             if ((value << 0x10) < 0) {
                 D_801490C8            = 0;
-                g_UiMessageChoiceMode = 0;
-                g_UiWindowChannel &= ~FRONTEND_FLAG_REQUEST_PENDING;
+                g_UIMessageChoiceMode = 0;
+                g_UIWindowChannel &= ~FRONTEND_FLAG_REQUEST_PENDING;
             }
         } else {
             value      = D_801490C8 + 2;
             D_801490C8 = value;
             if ((value << 0x10) > 0) {
                 D_801490C8            = 0;
-                g_UiMessageChoiceMode = 0;
-                g_UiWindowChannel &= ~FRONTEND_FLAG_REQUEST_PENDING;
+                g_UIMessageChoiceMode = 0;
+                g_UIWindowChannel &= ~FRONTEND_FLAG_REQUEST_PENDING;
             }
         }
-        g_UiMessageChoiceTimer = 1;
+        g_UIMessageChoiceTimer = 1;
     }
 }

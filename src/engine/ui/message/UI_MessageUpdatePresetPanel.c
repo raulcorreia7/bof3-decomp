@@ -7,6 +7,6 @@
 MATCH void UI_MessageUpdatePresetPanel(void) {
     struct MenuPanelSteps table;
 
-    table = g_UiMessagePresetSteps;
-    table.steps[g_UiPanelCurrent->state]();
+    table = g_UIMessagePresetSteps;
+    table.steps[g_UIPanelCurrent->state]();
 }

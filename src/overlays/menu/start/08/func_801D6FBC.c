@@ -6,13 +6,13 @@ MATCH void func_801D6FBC(void) {
     u8  index;
     s32 bit_index;
 
-    index     = g_UiPanelTasks[14].flags;
-    bit_index = g_CharSlot[g_PartyFieldOrder[g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0C]];
-    if (((s32)(Item_GetEquipability(g_UiPanelTasks[14].unk_08, index) & BYTE_MASK) >> bit_index) & 0x1) {
-        g_UiPanelTasks[MENU_START_PANEL_ITEMS].flags = 0;
+    index     = g_UIPanelTasks[14].flags;
+    bit_index = g_CharSlot[g_PartyFieldOrder[g_UIPanelTasks[MENU_START_PANEL_ITEMS].unk_0C]];
+    if (((s32)(Item_GetEquipability(g_UIPanelTasks[14].unk_08, index) & BYTE_MASK) >> bit_index) & 0x1) {
+        g_UIPanelTasks[MENU_START_PANEL_ITEMS].flags = 0;
         record_index                                 = bit_index & BYTE_MASK;
     } else {
-        g_UiPanelTasks[MENU_START_PANEL_ITEMS].flags = 1;
+        g_UIPanelTasks[MENU_START_PANEL_ITEMS].flags = 1;
         record_index                                 = bit_index & BYTE_MASK;
     }
     record                                                        = record_index;
@@ -22,5 +22,5 @@ MATCH void func_801D6FBC(void) {
     g_EquipPreview[EQUIP_SLOT_ARMOR]                              = g_Characters[record].equip.armor;
     g_EquipPreview[EQUIP_SLOT_ACCESSORY_1]                        = g_Characters[record].equip.accessories[0];
     g_EquipPreview[EQUIP_SLOT_ACCESSORY_2]                        = g_Characters[record].equip.accessories[1];
-    g_EquipPreview[g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0A] = index;
+    g_EquipPreview[g_UIPanelTasks[MENU_START_PANEL_ITEMS].unk_0A] = index;
 }

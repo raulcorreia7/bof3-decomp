@@ -328,8 +328,8 @@ MATCH void func_801F2E04(s32* center, s32 radius, u16 angle, s32 offset_x, s32 o
 MATCH void func_801F300C(void) {
     s8 state;
 
-    state              = g_UiMessageChoice;
-    g_UiMessageRequest = D_801F4CDC[state];
+    state              = g_UIMessageChoice;
+    g_UIMessageRequest = D_801F4CDC[state];
     switch (state) {
         case 0:
             g_ScriptVars[0] = 0xBE;

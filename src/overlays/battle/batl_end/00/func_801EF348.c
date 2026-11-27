@@ -22,10 +22,10 @@ MATCH void func_801EF348(void) {
     if ((u8)func_801EF6C0() != 0) {
         g_Battle.outcome.reward_zenny += (u32)g_Battle.outcome.reward_zenny >> 1;
     }
-    g_UiPanelTasks[1].active = 0;
+    g_UIPanelTasks[1].active = 0;
     UI_PanelOpenTask(1, 4);
-    g_UiPanelTasks[1].mode  = 5;
-    g_UiPanelTasks[1].state = 0;
+    g_UIPanelTasks[1].mode  = 5;
+    g_UIPanelTasks[1].state = 0;
     sprintf(g_TextVariables, D_801EEC04, g_Battle.outcome.reward_zenny);
     g_BattleEventSlots[0].payload = UI_MessageGetText(6);
     if ((u32)g_Battle.outcome.reward_zenny < 30) {
@@ -35,10 +35,10 @@ MATCH void func_801EF348(void) {
     }
     if (g_Battle.outcome.drop_count != 0) {
         UI_PanelOpenTask(0x15, 4);
-        g_UiPanelTasks[21].mode   = 1;
+        g_UIPanelTasks[21].mode   = 1;
         D_80148628                = 0x14;
         D_8014862A                = 0x46;
-        g_UiPanelTasks[21].unk_09 = ((g_Battle.outcome.drop_count - 1) / 2) * 13 + 18;
+        g_UIPanelTasks[21].unk_09 = ((g_Battle.outcome.drop_count - 1) / 2) * 13 + 18;
         if (g_Battle.outcome.drop_count >= 2) {
             for (i = 0; i < g_Battle.outcome.drop_count - 1; i++) {
                 for (j = i + 1; j < g_Battle.outcome.drop_count; j++) {

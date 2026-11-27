@@ -9,9 +9,9 @@ MATCH s32 func_801F2C04(void) {
         request = 0x83;
     } else {
         request            = 0x82;
-        g_UiMessageRequest = request;
+        g_UIMessageRequest = request;
         return;
     }
-    g_UiMessageRequest = request;
+    g_UIMessageRequest = request;
     g_MenuMasterStep   = 6;
 }

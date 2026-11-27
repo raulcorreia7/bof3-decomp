@@ -14,6 +14,6 @@ MATCH void UI_MessageChoiceShiftStep(void) {
     D_801490CA = D_801490CA + delta;
     if ((s8)value >= 0) {
         bb[0]                 = 0;
-        g_UiMessageChoiceMode = 0;
+        g_UIMessageChoiceMode = 0;
     }
 }

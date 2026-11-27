@@ -4,8 +4,8 @@ MATCH void func_801F2DD4(void) {
     s8 choice;
     u8 event;
 
-    choice             = g_UiMessageChoice;
-    g_UiMessageRequest = D_801F41C4[choice];
+    choice             = g_UIMessageChoice;
+    g_UIMessageRequest = D_801F41C4[choice];
     switch (choice) {
         case 0:
             Game_SetScriptActive();

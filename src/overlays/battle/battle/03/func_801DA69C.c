@@ -19,7 +19,7 @@ MATCH u8 func_801DA69C(u32 enemy_index) {
         u8 ui_mode;
         u8 ui_type;
 
-        ui_mode = g_UiPanelTasks[scan_index + 5].state;
+        ui_mode = g_UIPanelTasks[scan_index + 5].state;
         if (ui_mode == 2u) {
             continue;
         }

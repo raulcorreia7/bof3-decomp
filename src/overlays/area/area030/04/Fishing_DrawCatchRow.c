@@ -27,7 +27,7 @@ MATCH void Fishing_DrawCatchRow(s32 item, s32 count, s32 column) {
         Fishing_DrawSprite((i + 3) & BYTE_MASK, 1, x, y);
     }
 
-    dst = g_UiTextFormatBuffer;
+    dst = g_UITextFormatBuffer;
     if ((item & BYTE_MASK) == 0x16) {
         for (i = 0; i < 12; i++) {
             *dst++ = D_801E28C4[i];
@@ -51,22 +51,22 @@ MATCH void Fishing_DrawCatchRow(s32 item, s32 count, s32 column) {
         }
     }
     *dst = 0;
-    UI_TextDraw(112, 69 - ((u8)column * 20), 0, 15, g_UiTextFormatBuffer);
+    UI_TextDraw(112, 69 - ((u8)column * 20), 0, 15, g_UITextFormatBuffer);
 
     if ((item & BYTE_MASK) != GAME_NONE) {
-        TEXT_Format(g_UiTextFormatBuffer, g_FishingCatchRowFormat, count & BYTE_MASK);
+        TEXT_Format(g_UITextFormatBuffer, g_FishingCatchRowFormat, count & BYTE_MASK);
         for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
-            if (g_UiTextFormatBuffer[i] == ' ') {
-                g_UiTextFormatBuffer[i] = STRING_SPACE;
+            if (g_UITextFormatBuffer[i] == ' ') {
+                g_UITextFormatBuffer[i] = STRING_SPACE;
             }
         }
-        UI_TextDraw(47 - ((u8)column * 25), 115, 0, 3, g_UiTextFormatBuffer);
-        TEXT_Format(g_UiTextFormatBuffer, g_FishingCatchRowFormat, Fishing_CatchScore(item & BYTE_MASK, count & BYTE_MASK) & HALF_MASK);
+        UI_TextDraw(47 - ((u8)column * 25), 115, 0, 3, g_UITextFormatBuffer);
+        TEXT_Format(g_UITextFormatBuffer, g_FishingCatchRowFormat, Fishing_CatchScore(item & BYTE_MASK, count & BYTE_MASK) & HALF_MASK);
         for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
-            if (g_UiTextFormatBuffer[i] == ' ') {
-                g_UiTextFormatBuffer[i] = STRING_SPACE;
+            if (g_UITextFormatBuffer[i] == ' ') {
+                g_UITextFormatBuffer[i] = STRING_SPACE;
             }
         }
-        UI_TextDraw(((u8)column * 25) + 239, 115, 0, 3, g_UiTextFormatBuffer);
+        UI_TextDraw(((u8)column * 25) + 239, 115, 0, 3, g_UITextFormatBuffer);
     }
 }

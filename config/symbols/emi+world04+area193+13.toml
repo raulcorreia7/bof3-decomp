@@ -1,4 +1,4 @@
 ["emi/world04/area193/13"]
 jtbl_801F2C14 = { addr = 0x801F2C14, type = "Callback", size = 0x5C, source = "The switch table of func_801F2EA0: 23 jump targets of its jr dispatch." }
-UI_MessageAnswerSet = { addr = 0x801F2C70, type = "func", source = "Stores the message id the answer table D_801F39FC holds for the menu choice g_UiMessageChoice in g_UiMessageRequest." }
+UI_MessageAnswerSet = { addr = 0x801F2C70, type = "func", source = "Stores the message id the answer table D_801F39FC holds for the menu choice g_UIMessageChoice in g_UIMessageRequest." }
 Area_RefillWaterJugs = { addr = 0x801F2CFC, type = "func", source = "Refills the water jug to 16 on menu choice 1 and plays the item SE (area193 message choice handler)." }

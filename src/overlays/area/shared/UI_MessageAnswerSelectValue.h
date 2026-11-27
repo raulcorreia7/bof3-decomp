@@ -2,8 +2,8 @@
 static inline void WorldMap_SelectAnswerValue(u16 reset, u8 state0, u8 state1) {
     u8 value;
 
-    g_UiMessageRequest = reset;
-    switch (g_UiMessageChoice) {
+    g_UIMessageRequest = reset;
+    switch (g_UIMessageChoice) {
         case 0:
             value = state0;
             break;

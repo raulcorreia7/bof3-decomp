@@ -1,18 +1,18 @@
 #include "engine/slus/slus.h"
 
-/* dispatches the handler the pending step byte g_UiMessageChoiceStep selects
+/* dispatches the handler the pending step byte g_UIMessageChoiceStep selects
  * through the two-entry table stored on the stack, then counts the pending
- * halfword g_UiMessageChoiceTimer down unless it is 0xFFFF, and clears g_UiMessageChoiceMode when the
+ * halfword g_UIMessageChoiceTimer down unless it is 0xFFFF, and clears g_UIMessageChoiceMode when the
  * count reaches zero.
  */
 MATCH void UI_MessageUpdateChoice(void) {
     ChoiceSteps table = {{UI_MessageNextChoice, UI_MessagePrevChoice}};
 
-    table.steps[g_UiMessageChoiceStep]();
-    if (g_UiMessageChoiceTimer != 0xFFFFu) {
-        g_UiMessageChoiceTimer -= 1;
+    table.steps[g_UIMessageChoiceStep]();
+    if (g_UIMessageChoiceTimer != 0xFFFFu) {
+        g_UIMessageChoiceTimer -= 1;
     }
-    if (g_UiMessageChoiceTimer == 0) {
-        g_UiMessageChoiceMode = 0;
+    if (g_UIMessageChoiceTimer == 0) {
+        g_UIMessageChoiceMode = 0;
     }
 }

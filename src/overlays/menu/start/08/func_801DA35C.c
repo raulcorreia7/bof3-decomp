@@ -18,7 +18,7 @@ MATCH void func_801DA35C(void) {
         panel_data += 0x607;
     loop_2:
         if (index < Party_CountOrder(PARTY_ORDER_FIELD)) {
-            panel = (MenuPanelTask*)&g_UiPanelTasks[4].active + index;
+            panel = (MenuPanelTask*)&g_UIPanelTasks[4].active + index;
             if (g_Characters[g_CharSlot[*(panel_data + (panel->unk_0B * 3) + panel->unk_0A)]].party_flags & 0x2) {
                 panel->unk_0C = 1;
             }

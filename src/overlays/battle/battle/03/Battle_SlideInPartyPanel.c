@@ -5,7 +5,7 @@ MATCH void Battle_SlideInPartyPanel(void) {
     MenuPanelTask* panel;
     s16            value;
 
-    panel = g_UiPanelCurrent;
+    panel = g_UIPanelCurrent;
     value = panel->pos.vy;
     if (value < 0xC9) {
         panel->pos.vy = 200;
@@ -13,5 +13,5 @@ MATCH void Battle_SlideInPartyPanel(void) {
     } else {
         panel->pos.vy = (value - 4);
     }
-    Battle_DrawPartyPanel(g_UiPanelCurrent->pos.vx, g_UiPanelCurrent->pos.vy);
+    Battle_DrawPartyPanel(g_UIPanelCurrent->pos.vx, g_UIPanelCurrent->pos.vy);
 }

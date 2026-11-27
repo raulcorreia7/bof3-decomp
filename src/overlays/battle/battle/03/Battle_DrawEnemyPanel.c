@@ -23,7 +23,7 @@ MATCH void Battle_DrawEnemyPanel(s16 x, s16 y, s32 slot) {
     Battle_DrawPanelShape(x, y, 2, 0);
     Battle_DrawPanelShape(x, (s16)(y + 0x13), 3, 0);
     if (g_BattleEnemyBattlers[index].unk_7F == 1) {
-        func_801D9E9C((s16)(x + 6), (s16)(y + 0xA), g_UiPanelCurrent->unk_0B, g_UiPanelCurrent->flags, 1);
+        func_801D9E9C((s16)(x + 6), (s16)(y + 0xA), g_UIPanelCurrent->unk_0B, g_UIPanelCurrent->flags, 1);
     } else {
         func_801D94D4((s16)(x + 0x24), (s16)(y + 0xC), 0, 0xFFFF);
     }

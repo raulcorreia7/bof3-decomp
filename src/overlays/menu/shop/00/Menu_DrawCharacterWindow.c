@@ -21,9 +21,9 @@ MATCH void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_index, s32 shad
         text_clut = clut & BYTE_MASK;
         UI_TextDraw(x + 20, y + 3, text_clut, CHARACTER_NAME_LENGTH, stats);
     } while (0);
-    TEXT_Format(g_UiTextFormatBuffer, g_MenuStatFormat, stats->level);
+    TEXT_Format(g_UITextFormatBuffer, g_MenuStatFormat, stats->level);
     text_y = (s16)(y + 0x17);
-    UI_TextDrawGlyphString(x + 22, text_y, text_clut, g_UiTextFormatBuffer);
+    UI_TextDrawGlyphString(x + 22, text_y, text_clut, g_UITextFormatBuffer);
     if ((LOWU(stats->status) & (STATUS_CONFUSED | STATUS_POISONED)) == (STATUS_CONFUSED | STATUS_POISONED)) {
         if (g_FrameCount & 0x20) {
             UI_TextDrawString(x + 46, text_y, text_clut != 0 ? text_clut : 1, MENU_LABEL_LENGTH, D_801E5814);
@@ -50,15 +50,15 @@ MATCH void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_index, s32 shad
     } else {
         clut = 7;
     }
-    TEXT_Format(g_UiTextFormatBuffer, g_MenuCurrentValueFormat, stats->hp);
-    UI_TextDrawGlyphString(x + 22, y + 31, clut, g_UiTextFormatBuffer);
+    TEXT_Format(g_UITextFormatBuffer, g_MenuCurrentValueFormat, stats->hp);
+    UI_TextDrawGlyphString(x + 22, y + 31, clut, g_UITextFormatBuffer);
     if ((u8)shaded == 0) {
         clut = (stats->fatigue != 0) * 4;
     } else {
         clut = 7;
     }
-    TEXT_Format(g_UiTextFormatBuffer, g_MenuMaxValueFormat, stats->stats.max_hp);
-    UI_TextDrawGlyphString(x + 22, y + 31, clut, g_UiTextFormatBuffer);
+    TEXT_Format(g_UITextFormatBuffer, g_MenuMaxValueFormat, stats->stats.max_hp);
+    UI_TextDrawGlyphString(x + 22, y + 31, clut, g_UITextFormatBuffer);
     clut = (u8)shaded ? 7 : 0;
     if ((u8)shaded == 0) {
         if (stats->ap < (u32)(stats->stats.max_ap >> 2)) {
@@ -70,11 +70,11 @@ MATCH void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_index, s32 shad
     } else {
         clut = 7;
     }
-    TEXT_Format(g_UiTextFormatBuffer, g_MenuCurrentValueFormat, stats->ap);
-    UI_TextDrawGlyphString(x + 22, y + 39, clut, g_UiTextFormatBuffer);
+    TEXT_Format(g_UITextFormatBuffer, g_MenuCurrentValueFormat, stats->ap);
+    UI_TextDrawGlyphString(x + 22, y + 39, clut, g_UITextFormatBuffer);
     clut = (u8)shaded ? 7 : 0;
-    TEXT_Format(g_UiTextFormatBuffer, g_MenuMaxValueFormat, stats->stats.max_ap);
-    UI_TextDrawGlyphString(x + 22, y + 39, clut, g_UiTextFormatBuffer);
+    TEXT_Format(g_UITextFormatBuffer, g_MenuMaxValueFormat, stats->stats.max_ap);
+    UI_TextDrawGlyphString(x + 22, y + 39, clut, g_UITextFormatBuffer);
     UI_SpriteDrawRun(x, y, D_801E547C, 0);
     Menu_DrawExperienceLine(x + 0x14, y + 0x12, character_index, stats->level, stats->exp);
     /* FAKE: dead stores keep px and py the CSE heads of their x and y copies. */

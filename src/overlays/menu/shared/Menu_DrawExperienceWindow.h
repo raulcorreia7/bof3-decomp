@@ -28,10 +28,10 @@
             value = Char_GetExpForLevel(index, (character->level + 1) & BYTE_MASK);                                                                                            \
         }                                                                                                                                                                      \
         if (value != -1) {                                                                                                                                                     \
-            TEXT_Format(g_UiTextFormatBuffer, g_MenuExperienceFormat, value);                                                                                                  \
+            TEXT_Format(g_UITextFormatBuffer, g_MenuExperienceFormat, value);                                                                                                  \
         } else {                                                                                                                                                               \
-            TEXT_FormatLiteral(g_UiTextFormatBuffer, g_MenuExperienceBlank);                                                                                                   \
+            TEXT_FormatLiteral(g_UITextFormatBuffer, g_MenuExperienceBlank);                                                                                                   \
         }                                                                                                                                                                      \
-        UI_TextDrawAscii((s16)(x + MENU_EXPERIENCE_VALUE_X), (s16)(y + MENU_EXPERIENCE_VALUE_Y), 0, g_UiTextFormatBuffer);                                                     \
+        UI_TextDrawAscii((s16)(x + MENU_EXPERIENCE_VALUE_X), (s16)(y + MENU_EXPERIENCE_VALUE_Y), 0, g_UITextFormatBuffer);                                                     \
         UI_SpriteDrawRun(x, y, (sprites), UI_SPRITE_ALT_PAGE);                                                                                                                 \
     }

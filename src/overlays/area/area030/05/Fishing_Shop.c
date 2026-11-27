@@ -498,17 +498,17 @@ MATCH void Fishing_ShopDrawNeeded(void) {
         }
         value = Item_GetRecord(ITEM_CATEGORY_ITEM, (u8)((g_FishingTrades[g_FishingShopStock[g_GameEntryFacing][slot]].need[FISHING_TRADE_NEED_FISH][i] + ITEM_JELLYFISH) & BYTE_MASK));
         UI_TextDraw(173, (0x58 + i * 13), 0, Game_ReadCommand((u8*)value) & BYTE_MASK, (u8*)value);
-        TEXT_Format(g_UiTextFormatBuffer, D_800F5000.format, g_FishingTrades[g_FishingShopStock[g_GameEntryFacing][slot]].need[FISHING_TRADE_NEED_COUNT][i] * (s8)s_ListItemId);
-        UI_TextDrawGlyphString(272, (0x5C + i * 13), 0, g_UiTextFormatBuffer);
+        TEXT_Format(g_UITextFormatBuffer, D_800F5000.format, g_FishingTrades[g_FishingShopStock[g_GameEntryFacing][slot]].need[FISHING_TRADE_NEED_COUNT][i] * (s8)s_ListItemId);
+        UI_TextDrawGlyphString(272, (0x5C + i * 13), 0, g_UITextFormatBuffer);
         cost = Item_Count(ITEM_CATEGORY_ITEM, (g_FishingTrades[g_FishingShopStock[g_GameEntryFacing][slot]].need[FISHING_TRADE_NEED_FISH][i] + ITEM_JELLYFISH) & BYTE_MASK, 0);
         if (cost < g_FishingTrades[g_FishingShopStock[g_GameEntryFacing][slot]].need[FISHING_TRADE_NEED_COUNT][i]) {
             UI_TextDraw(173, (0xA4 + i * 13), UI_TEXT_DIM, Game_ReadCommand((u8*)value) & BYTE_MASK, (u8*)value);
-            TEXT_Format(g_UiTextFormatBuffer, D_800F5000.format, cost);
-            UI_TextDrawGlyphString(272, (0xA8 + i * 13), UI_TEXT_DIM, g_UiTextFormatBuffer);
+            TEXT_Format(g_UITextFormatBuffer, D_800F5000.format, cost);
+            UI_TextDrawGlyphString(272, (0xA8 + i * 13), UI_TEXT_DIM, g_UITextFormatBuffer);
         } else {
             UI_TextDraw(173, (0xA4 + i * 13), 0, Game_ReadCommand((u8*)value) & BYTE_MASK, (u8*)value);
-            TEXT_Format(g_UiTextFormatBuffer, D_800F5000.format, cost);
-            UI_TextDrawGlyphString(272, (0xA8 + i * 13), 0, g_UiTextFormatBuffer);
+            TEXT_Format(g_UITextFormatBuffer, D_800F5000.format, cost);
+            UI_TextDrawGlyphString(272, (0xA8 + i * 13), 0, g_UITextFormatBuffer);
         }
     }
 }
@@ -566,8 +566,8 @@ MATCH void Fishing_ShopDrawQuantity(void) {
     value = Item_GetRecord(g_FishingTrades[entry].give[FISHING_TRADE_GIVE_CATEGORY], g_FishingTrades[entry].give[FISHING_TRADE_GIVE_ID]);
     UI_TextDraw(33, 104, 0, Game_ReadCommand((u8*)value) & BYTE_MASK, (u8*)value);
 
-    TEXT_Format(g_UiTextFormatBuffer, D_800F5000.format, (s8)s_ListItemId);
-    UI_TextDrawGlyphString(132, 108, 0, g_UiTextFormatBuffer);
+    TEXT_Format(g_UITextFormatBuffer, D_800F5000.format, (s8)s_ListItemId);
+    UI_TextDrawGlyphString(132, 108, 0, g_UITextFormatBuffer);
 
     entry = g_FishingShopStock[g_GameEntryFacing][slot];
     Fishing_ShopDrawItemIcon(24, 108, g_FishingTrades[entry].give[FISHING_TRADE_GIVE_ID], g_FishingTrades[entry].give[FISHING_TRADE_GIVE_CATEGORY], 0);
@@ -575,14 +575,14 @@ MATCH void Fishing_ShopDrawQuantity(void) {
     UI_TextDraw(33, 124, 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_SHOP_MESSAGE_NONE_OWNED));
 
     entry = g_FishingShopStock[g_GameEntryFacing][slot];
-    TEXT_Format(g_UiTextFormatBuffer, D_800F5000.format, Item_Count(g_FishingTrades[entry].give[FISHING_TRADE_GIVE_CATEGORY], g_FishingTrades[entry].give[FISHING_TRADE_GIVE_ID], 0) & HALF_MASK);
-    UI_TextDrawGlyphString(132, 128, 0, g_UiTextFormatBuffer);
+    TEXT_Format(g_UITextFormatBuffer, D_800F5000.format, Item_Count(g_FishingTrades[entry].give[FISHING_TRADE_GIVE_CATEGORY], g_FishingTrades[entry].give[FISHING_TRADE_GIVE_ID], 0) & HALF_MASK);
+    UI_TextDrawGlyphString(132, 128, 0, g_UITextFormatBuffer);
 
     UI_TextDraw(33, 136, 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_SHOP_MESSAGE_NONE_EQUIPPED));
 
     entry = g_FishingShopStock[g_GameEntryFacing][slot];
-    TEXT_Format(g_UiTextFormatBuffer, D_800F5000.format, Item_Count(g_FishingTrades[entry].give[FISHING_TRADE_GIVE_CATEGORY], g_FishingTrades[entry].give[FISHING_TRADE_GIVE_ID], 1) & HALF_MASK);
-    UI_TextDrawGlyphString(132, 140, 0, g_UiTextFormatBuffer);
+    TEXT_Format(g_UITextFormatBuffer, D_800F5000.format, Item_Count(g_FishingTrades[entry].give[FISHING_TRADE_GIVE_CATEGORY], g_FishingTrades[entry].give[FISHING_TRADE_GIVE_ID], 1) & HALF_MASK);
+    UI_TextDrawGlyphString(132, 140, 0, g_UITextFormatBuffer);
 }
 
 /* func_800F6EE0 */

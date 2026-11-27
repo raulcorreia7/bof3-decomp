@@ -53,15 +53,15 @@ u8 s_MenuLine1FlagRun[12] = {0x00, 0x00, 0x0B, 0x01, 0x00, 0x2D, 0x02, 0x00, 0x0
 
 u8 s_MenuLine2FlagRun[12] = {0x0F, 0x00, 0x09, 0x11, 0x00, 0x0A, 0x12, 0x00, 0x2E, 0x00, 0x00, 0xFF};
 
-Callback g_UiPanelModes[5] = {UI_PanelRunMenu, UI_CursorDrawPanel, UI_PanelRunOption, UI_PanelRunAction, UI_PanelRunTask};
+Callback g_UIPanelModes[5] = {UI_PanelRunMenu, UI_CursorDrawPanel, UI_PanelRunOption, UI_PanelRunAction, UI_PanelRunTask};
 
-Callback g_UiPanelSteps[3] = {UI_PanelStepIdle, UI_PanelSlideOutMenu, UI_PanelSlideInMenu};
+Callback g_UIPanelSteps[3] = {UI_PanelStepIdle, UI_PanelSlideOutMenu, UI_PanelSlideInMenu};
 
 Callback g_MenuOptionSteps[3] = {UI_PanelStepIdle, UI_PanelSlideOutOption, UI_PanelSlideLeft};
 
 Callback g_MenuActionSteps[3] = {UI_PanelStepIdle, UI_PanelSlideOutAction, UI_PanelSetPosX};
 
-Callback g_UiPanelTaskSteps[4] = {UI_PanelStepIdle, UI_PanelSlideOutTask, UI_PanelSlideInTaskTop, UI_PanelSlideInTaskLow};
+Callback g_UIPanelTaskSteps[4] = {UI_PanelStepIdle, UI_PanelSlideOutTask, UI_PanelSlideInTaskTop, UI_PanelSlideInTaskLow};
 
 char g_ItemCategoryLabels[5][8] = {"ITEM" T_END T_END T_END T_END, "WEAPON" T_END T_END, "ARMOR" T_END3,
                                    "OPTION" T_END T_END, "VITAL" T_END3};

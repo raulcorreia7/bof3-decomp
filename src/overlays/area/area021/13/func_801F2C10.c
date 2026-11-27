@@ -4,7 +4,7 @@ MATCH void func_801F2C10(void) {
     s8  sel;
     u16 request;
 
-    sel = g_UiMessageChoice;
+    sel = g_UIMessageChoice;
     if (sel == 0) {
         if (g_Zenny < 20) {
             request = 0x17;
@@ -15,5 +15,5 @@ MATCH void func_801F2C10(void) {
     } else {
         request = 0x18;
     }
-    g_UiMessageRequest = request;
+    g_UIMessageRequest = request;
 }

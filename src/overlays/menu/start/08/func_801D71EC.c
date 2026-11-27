@@ -2,5 +2,5 @@
 
 MATCH void func_801D71EC(void) {
     D_80148504.active         = 0;
-    g_UiPanelTasks[14].active = 0;
+    g_UIPanelTasks[14].active = 0;
 }

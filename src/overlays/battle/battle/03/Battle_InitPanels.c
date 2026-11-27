@@ -9,7 +9,7 @@ MATCH void Battle_InitPanels(void) {
     func_801D9388(0);
     i = 0;
     if (g_Battle.outcome.surprise >= 2u) {
-        g_UiPanelTasks[2].state = 2u;
+        g_UIPanelTasks[2].state = 2u;
         do {
             index                        = i & BYTE_MASK;
             g_Battle.panel_widths[index] = 0;

@@ -12,15 +12,15 @@ MATCH void func_801D2C7C(void) {
     i = 0;
     while (i < (Party_CountOrder(PARTY_ORDER_FIELD))) {
         if (i == D_80148656) {
-            g_UiPanelTasks[i + 4].state                     = 6;
-            g_UiPanelTasks[i + MENU_PANEL_CARD_FIRST].state = 4;
+            g_UIPanelTasks[i + 4].state                     = 6;
+            g_UIPanelTasks[i + MENU_PANEL_CARD_FIRST].state = 4;
         } else {
-            g_UiPanelTasks[i + 4].state                     = 8;
-            g_UiPanelTasks[i + MENU_PANEL_CARD_FIRST].state = 6;
+            g_UIPanelTasks[i + 4].state                     = 8;
+            g_UIPanelTasks[i + MENU_PANEL_CARD_FIRST].state = 6;
         }
         i++;
     }
-    g_UiPanelTasks[15].state = 1;
+    g_UIPanelTasks[15].state = 1;
     g_BattleChoicePhase      = 1;
     D_80148597               = 1;
 }

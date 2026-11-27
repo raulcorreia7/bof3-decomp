@@ -10,14 +10,14 @@ MATCH void func_801D5A28(void) {
     MenuPanelTask* task;
     u8*            group;
 
-    task  = &g_UiPanelTasks[MENU_START_PANEL_CURSOR];
-    group = &g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0A;
+    task  = &g_UIPanelTasks[MENU_START_PANEL_CURSOR];
+    group = &g_UIPanelTasks[MENU_START_PANEL_ITEMS].unk_0A;
     Menu_DrawClutStrip(g_WindowClut);
     task->active = 1;
-    task->pos.vx = g_UiPanelTasks[MENU_START_PANEL_ITEMS].pos.vx + 6;
-    task->pos.vy = (u16)(g_UiPanelTasks[MENU_START_PANEL_ITEMS].pos.vy + (*group * 0xD + 0x57));
+    task->pos.vx = g_UIPanelTasks[MENU_START_PANEL_ITEMS].pos.vx + 6;
+    task->pos.vy = (u16)(g_UIPanelTasks[MENU_START_PANEL_ITEMS].pos.vy + (*group * 0xD + 0x57));
     buttons      = INPUT_REPEATED(g_PadStates[0].pressed, INPUT_DIRECTIONAL);
-    task         = &g_UiPanelTasks[MENU_START_PANEL_ITEMS];
+    task         = &g_UIPanelTasks[MENU_START_PANEL_ITEMS];
     task->flags  = 1;
     task->unk_0B = 0xFF;
     if (buttons & PADLdown) {
@@ -47,9 +47,9 @@ MATCH void func_801D5A28(void) {
             task->unk_0C = 0;
         }
     }
-    g_UiPanelTasks[14].unk_09 = task->unk_0A;
-    g_UiPanelTasks[14].unk_0C = task->unk_0C;
-    g_UiPanelTasks[14].unk_0A = s_SkillOrderGroups[g_UiPanelTasks[13].unk_0C][g_UiPanelTasks[13].unk_0A];
+    g_UIPanelTasks[14].unk_09 = task->unk_0A;
+    g_UIPanelTasks[14].unk_0C = task->unk_0C;
+    g_UIPanelTasks[14].unk_0A = s_SkillOrderGroups[g_UIPanelTasks[13].unk_0C][g_UIPanelTasks[13].unk_0A];
     record                    = &g_Characters[g_CharSlot[g_PartyFieldOrder[task->unk_0C]]];
     switch (task->unk_0A) {
         case EQUIP_SLOT_WEAPON:
@@ -78,14 +78,14 @@ MATCH void func_801D5A28(void) {
             choice      = &record->equip.accessories[1];
             break;
     }
-    g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = Item_GetDescription(group_index, *choice);
+    g_UIPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = Item_GetDescription(group_index, *choice);
     if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         u8* step;
 
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
-        g_UiPanelTasks[14].unk_0B = s_SkillOrderTypes[g_UiPanelTasks[13].unk_0C][g_UiPanelTasks[13].unk_0A];
+        g_UIPanelTasks[14].unk_0B = s_SkillOrderTypes[g_UIPanelTasks[13].unk_0C][g_UIPanelTasks[13].unk_0A];
         step                      = &D_80148651;
-        g_UiPanelTasks[13].unk_0B = g_UiPanelTasks[13].unk_0A;
+        g_UIPanelTasks[13].unk_0B = g_UIPanelTasks[13].unk_0A;
         (*step)++;
         return;
     }
@@ -103,18 +103,18 @@ MATCH void func_801D5A28(void) {
     if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
-        g_UiPanelTasks[14].state = 3;
+        g_UIPanelTasks[14].state = 3;
         /* Byte constraint: the three stores below use the absolute cells. */
-        task                     = &g_UiPanelTasks[MENU_START_PANEL_ITEMS];
+        task                     = &g_UIPanelTasks[MENU_START_PANEL_ITEMS];
         task->state              = 4;
         task->unk_0B             = 0xFF;
         task->unk_0A             = 0xFF;
         i                        = 0;
         while (i < Party_CountOrder(PARTY_ORDER_FIELD)) {
-            g_UiPanelTasks[i + 4].state = 8;
+            g_UIPanelTasks[i + 4].state = 8;
             i++;
         }
-        g_UiPanelTasks[MENU_START_PANEL_CURSOR].active = 0;
+        g_UIPanelTasks[MENU_START_PANEL_CURSOR].active = 0;
         D_80148654                                     = 0;
         D_80148651 -= 2;
     }

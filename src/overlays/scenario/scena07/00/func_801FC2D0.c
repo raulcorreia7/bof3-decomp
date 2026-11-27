@@ -32,7 +32,7 @@ MATCH void func_801FC2D0(void) {
             break;
         case 5: {
             s32 state = g_GameStateIndex;
-            if (state == 2 && g_UiMessageRequest == state) {
+            if (state == 2 && g_UIMessageRequest == state) {
                 g_ScenarioState.step = 6;
             }
             break;
