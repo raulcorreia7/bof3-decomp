@@ -35,7 +35,7 @@ MATCH void func_801F39BC(void) {
     }
 
     SELF(Actor)->pos.y.fixed += SELF(Actor)->vy;
-    if (COORD_INT(SELF(Actor)->pos.y) > (s16)SELF(Actor)->screen_y) {
+    if (COORD_INT(SELF(Actor)->pos.y) > SELF(Actor)->screen_y) {
         COORD_INT(SELF(Actor)->pos.y) = SELF(Actor)->screen_x;
     }
 

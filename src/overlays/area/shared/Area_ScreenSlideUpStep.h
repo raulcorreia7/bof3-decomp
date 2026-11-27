@@ -2,7 +2,7 @@
 /* AREA_SCREEN_SLIDE_UP_STEP (area117 0x801F2F00, area119 0x801F3114) */
 #define AREA_SCREEN_SLIDE_UP_STEP(DRAW)      \
     SELF(Actor)->screen_y -= 32;             \
-    if ((s16)SELF(Actor)->screen_y < -255) { \
+    if (SELF(Actor)->screen_y < -255) { \
         SELF(Actor)->header.step++;          \
     }                                        \
     DRAW();

@@ -93,7 +93,7 @@ void func_801F8108(s32 x, s32 y);
 
 /* The two screen-effect steps of 348.c: draw at the actor's screen position, turn it by `step`, and leave the scene when the countdown ends. They differ only in the sign of the turn. */
 #define SCENA08_SCREEN_EFFECT_STEP(work, step)                                                       \
-    func_801F85F0((s16)SELF(Actor)->screen_x, (s16)SELF(Actor)->screen_y, (s16)SELF(Actor)->unk_32); \
+    func_801F85F0((s16)SELF(Actor)->screen_x, SELF(Actor)->screen_y, (s16)SELF(Actor)->unk_32); \
     (work) = g_Self;                                                                                 \
     (work)->unk_32 += (step);                                                                        \
     if (--(work)->frame_cells == 0) {                                                                \

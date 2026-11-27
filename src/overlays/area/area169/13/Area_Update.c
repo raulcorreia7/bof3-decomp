@@ -8,8 +8,9 @@ MATCH void Area_Update(void) {
     long         depth;
     long         flag;
     s32          i;
-    s32          product;
-    s32          offset;
+    s16          product;
+    s16          offset;
+    s16          corner;
     s8           bias;
     volatile u8* scale;
 
@@ -33,20 +34,28 @@ MATCH void Area_Update(void) {
             bias                      = (s8)scale[i];
             product                   = SELF(Actor)->screen_y * bias;
             offset                    = product + 0x40;
-            g_ScratchPadVectors[0].vx = g_ScratchPadVectors[2].vx = ((FIX_INT(SELF(Actor)->pos.x.fixed) - 0x7F) << 7) + offset;
+            corner = ((FIX_INT(SELF(Actor)->pos.x.fixed) - 0x7F) << 7);
+            corner += offset;
+            g_ScratchPadVectors[0].vx = g_ScratchPadVectors[2].vx = corner;
             bias                                                  = (s8)scale[i];
             product                                               = SELF(Actor)->screen_y * bias;
             offset                                                = product - 0x40;
-            g_ScratchPadVectors[1].vx = g_ScratchPadVectors[3].vx = ((FIX_INT(SELF(Actor)->pos.x.fixed) - 0x80) << 7) + offset;
+            corner = ((FIX_INT(SELF(Actor)->pos.x.fixed) - 0x80) << 7);
+            corner += offset;
+            g_ScratchPadVectors[1].vx = g_ScratchPadVectors[3].vx = corner;
         } else {
             bias                      = (s8)scale[i];
             product                   = SELF(Actor)->screen_y * bias;
             offset                    = product + 0x40;
-            g_ScratchPadVectors[0].vy = g_ScratchPadVectors[2].vy = ((FIX_INT(SELF(Actor)->pos.y.fixed) - 0x7F) << 7) + offset;
+            corner = ((FIX_INT(SELF(Actor)->pos.y.fixed) - 0x7F) << 7);
+            corner += offset;
+            g_ScratchPadVectors[0].vy = g_ScratchPadVectors[2].vy = corner;
             bias                                                  = (s8)scale[i];
             product                                               = SELF(Actor)->screen_y * bias;
             offset                                                = product - 0x40;
-            g_ScratchPadVectors[1].vy = g_ScratchPadVectors[3].vy = ((FIX_INT(SELF(Actor)->pos.y.fixed) - 0x80) << 7) + offset;
+            corner = ((FIX_INT(SELF(Actor)->pos.y.fixed) - 0x80) << 7);
+            corner += offset;
+            g_ScratchPadVectors[1].vy = g_ScratchPadVectors[3].vy = corner;
         }
         RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3,
                       &depth, &flag);

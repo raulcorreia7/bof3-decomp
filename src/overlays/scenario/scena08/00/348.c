@@ -84,7 +84,7 @@ MATCH void func_801F7320(void) {
     u16 count;
     u16 timer;
 
-    func_801F85F0((s16)SELF(Actor)->screen_x, (s16)SELF(Actor)->screen_y, (s16)SELF(Actor)->unk_32);
+    func_801F85F0((s16)SELF(Actor)->screen_x, SELF(Actor)->screen_y, (s16)SELF(Actor)->unk_32);
     if ((SELF(Actor)->frame_cells & 3) == 0) {
         SELF(Actor)->unk_32--;
     }
@@ -131,7 +131,7 @@ MATCH void func_801F75E4(void) {
     u16 count;
     u16 timer;
 
-    func_801F85F0((s16)SELF(Actor)->screen_x, (s16)SELF(Actor)->screen_y, (s16)SELF(Actor)->unk_32);
+    func_801F85F0((s16)SELF(Actor)->screen_x, SELF(Actor)->screen_y, (s16)SELF(Actor)->unk_32);
     SELF(Actor)->script_pc += RANDOM_MASK(BYTE_MASK);
     if ((SELF(Actor)->frame_cells & 0x3) == 0) {
         SELF(Actor)->unk_2C -= 1;
@@ -162,8 +162,8 @@ MATCH void func_801F7688(void) {
     work->unk_32   = 0x140;
     work->header.mode += 1;
     work->frame_cells = 0x14;
-    func_801F8108((s16)SELF(Actor)->screen_x, (s16)SELF(Actor)->screen_y);
-    func_801F85F0((s16)SELF(Actor)->screen_x, (s16)SELF(Actor)->screen_y, (s16)SELF(Actor)->unk_32);
+    func_801F8108((s16)SELF(Actor)->screen_x, SELF(Actor)->screen_y);
+    func_801F85F0((s16)SELF(Actor)->screen_x, SELF(Actor)->screen_y, (s16)SELF(Actor)->unk_32);
 }
 
 MATCH void func_801F774C(void) {
@@ -550,7 +550,7 @@ MATCH void func_801F8534(void) {
     SELF(Actor)->screen_y = screen_y;
     func_801F8108((s16)SELF(Actor)->screen_x, (s16)screen_y);
     func_801F81F4(SELF(Actor)->script_pc);
-    func_801F823C((s16)SELF(Actor)->screen_x, (s16)SELF(Actor)->screen_y, (s16)SELF(Actor)->unk_32, (s16)SELF(Actor)->unk_2C);
+    func_801F823C((s16)SELF(Actor)->screen_x, SELF(Actor)->screen_y, (s16)SELF(Actor)->unk_32, (s16)SELF(Actor)->unk_2C);
 }
 
 /* Draw a 16-slice disc of blended quads around (x, y); the colours keep retail's store order, which setRGB0..3 change. */

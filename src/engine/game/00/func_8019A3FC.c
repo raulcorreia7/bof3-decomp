@@ -23,7 +23,7 @@ MATCH void func_8019A3FC(void) {
     delta              = work->vy;
     work->active_flags = 0;
     work->screen_x     = total;
-    total              = work->screen_y;
+    total              = (u16)work->screen_y;
     other              = SELF(Actor);
     work->screen_y     = (total - delta);
     other->mirror      = 0;

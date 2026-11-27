@@ -8,7 +8,7 @@ MATCH void func_801F4158_area168(s32 index, s32 row) {
     s32       x;
     s32       y1;
     s32       x1;
-    s32       h;
+    s16       h;
     s32       layer;
 
     layer                     = row; /* row arrives as the draw layer and is then reused */

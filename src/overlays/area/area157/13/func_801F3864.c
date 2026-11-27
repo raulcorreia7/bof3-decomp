@@ -5,7 +5,7 @@ MATCH void func_801F3864(void) {
 
     work = SELF(Actor);
     work->screen_y -= 0x20;
-    if ((s16)work->screen_y <= 0) {
+    if (work->screen_y <= 0) {
         if (g_GameStateIndex == GAME_REQUEST_IDLE) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 1));
         }

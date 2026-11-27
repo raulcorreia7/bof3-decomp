@@ -6,7 +6,7 @@ MATCH void func_800C1978(s32 mode) {
     GFX_ClearRect(832, 256, 128, 256);
     SND_SEQueueSelection(EMI_SE_ID(SND_BANK_ENEMY, 1));
     SELF(Actor)->unk_18   = (s16)SELF(Actor)->screen_x;
-    SELF(Actor)->unk_1C   = (s16)SELF(Actor)->screen_y;
+    SELF(Actor)->unk_1C   = SELF(Actor)->screen_y;
     SELF(Actor)->screen_x = 50;
     SELF(Actor)->screen_y = 65;
     SELF(Actor)->gravity  = 0;

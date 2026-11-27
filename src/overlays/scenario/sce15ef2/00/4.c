@@ -91,7 +91,7 @@ MATCH void func_801D0EC4(void) {
 MATCH void func_801D0EF8(void) {
     SYS_DISPATCH_TASK(D_801D1B38, 1, g_Self);
     if (SELF(Actor)->header.mode != 0) {
-        func_801D17A0((s16)SELF(Actor)->screen_x, (s16)SELF(Actor)->screen_y, 0x80);
+        func_801D17A0((s16)SELF(Actor)->screen_x, SELF(Actor)->screen_y, 0x80);
     }
 }
 

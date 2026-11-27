@@ -7,8 +7,9 @@ MATCH void Area_Update(void) {
     long      depth;
     long      flag;
     s8        bias;
-    s32       product;
-    s32       offset;
+    s16       product;
+    s16       offset;
+    s16       corner;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256), NULL);
     Area_CellAddPrim(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed, -2, sizeof(DR_MODE));
@@ -17,24 +18,28 @@ MATCH void Area_Update(void) {
     SetShadeTex(prim, 0);
     if (SELF(Actor)->direction != 0) {
         g_ScratchPadVectors[0].vy = g_ScratchPadVectors[1].vy = g_ScratchPadVectors[2].vy = g_ScratchPadVectors[3].vy = ((FIX_INT(SELF(Actor)->pos.y.fixed) - 0x80) << 7) | 0x40;
-        bias = FAKE_VOLATILE(u8, D_801F38CC[AREA_ROW_SCALE_OFFSET + SELF(Actor)->unk_0A]); /* FAKE: retail loads the scale unsigned and sign-extends it apart; the volatile read keeps the two steps. */
+        bias = D_801F38CC[AREA_ROW_SCALE_OFFSET + SELF(Actor)->unk_0A];
         product                   = SELF(Actor)->screen_y * bias;
         offset                    = product - 0x40;
         g_ScratchPadVectors[0].vx = g_ScratchPadVectors[2].vx = ((FIX_INT(SELF(Actor)->pos.x.fixed) - 0x7F) << 7) - offset;
-        bias = FAKE_VOLATILE(u8, D_801F38CC[AREA_ROW_SCALE_OFFSET + SELF(Actor)->unk_0A]); /* FAKE: retail loads the scale unsigned and sign-extends it apart; the volatile read keeps the two steps. */
+        bias = D_801F38CC[AREA_ROW_SCALE_OFFSET + SELF(Actor)->unk_0A];
         product                   = SELF(Actor)->screen_y * bias;
         offset                    = product + 0x40;
         g_ScratchPadVectors[1].vx = g_ScratchPadVectors[3].vx = ((FIX_INT(SELF(Actor)->pos.x.fixed) - 0x80) << 7) - offset;
     } else {
         g_ScratchPadVectors[0].vx = g_ScratchPadVectors[1].vx = g_ScratchPadVectors[2].vx = g_ScratchPadVectors[3].vx = ((FIX_INT(SELF(Actor)->pos.x.fixed) - 0x80) << 7) | 0x40;
-        bias = FAKE_VOLATILE(u8, D_801F38CC[AREA_ROW_SCALE_OFFSET + SELF(Actor)->unk_0A]); /* FAKE: retail loads the scale unsigned and sign-extends it apart; the volatile read keeps the two steps. */
+        bias = D_801F38CC[AREA_ROW_SCALE_OFFSET + SELF(Actor)->unk_0A];
         product                   = SELF(Actor)->screen_y * bias;
         offset                    = product + 0x40;
-        g_ScratchPadVectors[0].vy = g_ScratchPadVectors[2].vy = ((FIX_INT(SELF(Actor)->pos.y.fixed) - 0x7F) << 7) + offset;
-        bias = FAKE_VOLATILE(u8, D_801F38CC[AREA_ROW_SCALE_OFFSET + SELF(Actor)->unk_0A]); /* FAKE: retail loads the scale unsigned and sign-extends it apart; the volatile read keeps the two steps. */
+        corner = ((FIX_INT(SELF(Actor)->pos.y.fixed) - 0x7F) << 7);
+        corner += offset;
+        g_ScratchPadVectors[0].vy = g_ScratchPadVectors[2].vy = corner;
+        bias = D_801F38CC[AREA_ROW_SCALE_OFFSET + SELF(Actor)->unk_0A];
         product                   = SELF(Actor)->screen_y * bias;
         offset                    = product - 0x40;
-        g_ScratchPadVectors[1].vy = g_ScratchPadVectors[3].vy = ((FIX_INT(SELF(Actor)->pos.y.fixed) - 0x80) << 7) + offset;
+        corner = ((FIX_INT(SELF(Actor)->pos.y.fixed) - 0x80) << 7);
+        corner += offset;
+        g_ScratchPadVectors[1].vy = g_ScratchPadVectors[3].vy = corner;
     }
     g_ScratchPadVectors[0].vz = g_ScratchPadVectors[1].vz = (u16)SELF(Actor)->pos.z.part.integer - 0x140;
     g_ScratchPadVectors[2].vz = g_ScratchPadVectors[3].vz = (u16)SELF(Actor)->pos.z.part.integer;

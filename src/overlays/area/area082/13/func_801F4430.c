@@ -61,7 +61,7 @@ MATCH void func_801F4430(void) {
         screen_y = SELF(Actor)->screen_y;
         if (screen_y >= 0x41) {
             y = (rcos(SELF(Actor)->unk_32 + (i << 10)) >> 7) + 0x20;
-            y = (s16)SELF(Actor)->screen_y - y;
+            y = SELF(Actor)->screen_y - y;
         } else {
             y = screen_y;
         }

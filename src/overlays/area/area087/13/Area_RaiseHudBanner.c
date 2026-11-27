@@ -3,7 +3,7 @@
 /* func_801F3784 */
 MATCH void Area_RaiseHudBanner(void) {
     SELF(Actor)->screen_y -= 0xA;
-    if ((s16)SELF(Actor)->screen_y < 0xC9) {
+    if (SELF(Actor)->screen_y < 0xC9) {
         SELF(Actor)->unk_03++;
     }
 

@@ -10,6 +10,6 @@ MATCH void func_801F3DC0(void) {
     if ((s16)screen_y >= 0xC0) {
         SELF(Actor)->header.step += 1;
     }
-    func_801F3FBC(0, (s16)SELF(Actor)->screen_y >= 0x80 ? -2 : -1);
+    func_801F3FBC(0, SELF(Actor)->screen_y >= 0x80 ? -2 : -1);
     func_801F3FBC(1, 1);
 }

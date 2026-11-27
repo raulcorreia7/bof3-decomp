@@ -31,7 +31,7 @@ MATCH void func_80161454(u32 index) {
     val3 = 0;
     if (g_Game.walk_flags & AREA_WALK_TRANSITION) {
         work = SELF(Actor);
-        tmp0 = (s16)work->screen_y;
+        tmp0 = work->screen_y;
         val0 = (tmp0 + 0x40) * 0x2C;
         if (tmp0 < -0x40) {
             val0 = 0;

@@ -123,7 +123,7 @@ MATCH void func_801F7678(s32 shade_arg) {
     point[1] = SELF(Actor)->pos.y.fixed + (((s16)SELF(Actor)->screen_x * rsin(0)) >> 4);
     point[2] = SELF(Actor)->pos.z.fixed;
     Camera_ProjectPoint(point, &inner);
-    point[2] = SELF(Actor)->pos.z.fixed + ((s16)SELF(Actor)->screen_y << 16);
+    point[2] = SELF(Actor)->pos.z.fixed + (SELF(Actor)->screen_y << 16);
     Camera_ProjectPoint(point, &outer);
     shade = ((g_FrameCount & 1) << 2) | 0x40;
     for (i = 0; i < AREA_RING_POINTS; i++) {
@@ -134,7 +134,7 @@ MATCH void func_801F7678(s32 shade_arg) {
         point[1] = SELF(Actor)->pos.y.fixed + (((s16)SELF(Actor)->screen_x * rsin((u16)angle)) >> 4);
         point[2] = SELF(Actor)->pos.z.fixed;
         Camera_ProjectPoint(point, &inner);
-        point[2] = SELF(Actor)->pos.z.fixed + ((s16)SELF(Actor)->screen_y << 16);
+        point[2] = SELF(Actor)->pos.z.fixed + (SELF(Actor)->screen_y << 16);
         Camera_ProjectPoint(point, &outer);
 
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y), 0);

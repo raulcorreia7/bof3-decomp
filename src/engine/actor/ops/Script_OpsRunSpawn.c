@@ -21,7 +21,7 @@ MATCH s32 Script_OpsRunSpawn(ScriptState* state, u8* table, s32 value) {
         case 0x94:
         case 0x95:
             SELF(Actor)->param.unk_0B =
-                Actor_ClaimSlot(table[state->cursor] - 0x90, (s8)table[state->cursor + 1], (s8)table[state->cursor + 2], (s16)SELF(Actor)->screen_x, (s16)SELF(Actor)->screen_y);
+                Actor_ClaimSlot(table[state->cursor] - 0x90, (s8)table[state->cursor + 1], (s8)table[state->cursor + 2], (s16)SELF(Actor)->screen_x, SELF(Actor)->screen_y);
             state->cursor += 2;
             break;
         case ACTOR_SCRIPT_SPAWN_AT_ACTOR_FIRST:

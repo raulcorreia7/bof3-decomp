@@ -4,7 +4,7 @@ MATCH void func_801F3F50(void) {
     u16 level;
     s32 fade;
 
-    if ((s16)SELF(Actor)->screen_y == 90) {
+    if (SELF(Actor)->screen_y == 90) {
         SND_SEPlay(0x201);
     }
     level                 = SELF(Actor)->screen_y;
