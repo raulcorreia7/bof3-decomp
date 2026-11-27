@@ -424,7 +424,7 @@ MATCH void func_801F85FC(void) {
 #include "shared/Actor_TrackFocus.h"
 
 MATCH void func_801F8710(void) {
-    GFX_DrawShadedDisc((s16)SELF(Actor)->screen_x, (s16)SELF(Actor)->screen_y, SELF(Actor)->timer, 0x80, 0);
+    GFX_DrawShadedDisc((s16)SELF(Actor)->screen_x, SELF(Actor)->screen_y, SELF(Actor)->timer, 0x80, 0);
     SELF(Actor)->timer += 15;
     if (SELF(Actor)->timer >= 61) {
         SELF(Actor)->timer = 255;
@@ -435,7 +435,7 @@ MATCH void func_801F8710(void) {
 MATCH void func_801F87A4(void) {
     u8 count;
 
-    GFX_DrawShadedDisc((s16)SELF(Actor)->screen_x, (s16)SELF(Actor)->screen_y, (SELF(Actor)->timer & 0x1) | 0x3C, 0x80, 0);
+    GFX_DrawShadedDisc((s16)SELF(Actor)->screen_x, SELF(Actor)->screen_y, (SELF(Actor)->timer & 0x1) | 0x3C, 0x80, 0);
     if (SELF(Actor)->timer == 215) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 8));
     }
@@ -450,7 +450,7 @@ MATCH void func_801F87A4(void) {
 /* Shrinks the disc effect. */
 /* func_801F885C */
 MATCH void Area_ShrinkDisc(void) {
-    GFX_DrawShadedDisc((s16)SELF(Actor)->screen_x, (s16)SELF(Actor)->screen_y, SELF(Actor)->timer, 0x80, 0);
+    GFX_DrawShadedDisc((s16)SELF(Actor)->screen_x, SELF(Actor)->screen_y, SELF(Actor)->timer, 0x80, 0);
     SELF(Actor)->timer -= 1;
     if ((s8)SELF(Actor)->timer < 0) {
         SELF(Actor)->header.mode += 1;

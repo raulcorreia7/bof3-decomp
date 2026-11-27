@@ -5,7 +5,7 @@ MATCH void Actor_SlideScreenOffBottom(void) {
 
     work = SELF(Actor);
     work->screen_y -= 0x20;
-    if ((s16)work->screen_y < -0xFF) {
+    if (work->screen_y < -0xFF) {
         work->header.step++;
     }
     Area_Update();

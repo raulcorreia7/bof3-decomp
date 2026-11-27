@@ -92,12 +92,12 @@ void func_801F85F0(s16 x, s16 y, s16 radius);
 void func_801F8108(s32 x, s32 y);
 
 /* The two screen-effect steps of 348.c: draw at the actor's screen position, turn it by `step`, and leave the scene when the countdown ends. They differ only in the sign of the turn. */
-#define SCENA08_SCREEN_EFFECT_STEP(work, step)                                                       \
-    func_801F85F0((s16)SELF(Actor)->screen_x, (s16)SELF(Actor)->screen_y, (s16)SELF(Actor)->unk_32); \
-    (work) = g_Self;                                                                                 \
-    (work)->unk_32 += (step);                                                                        \
-    if (--(work)->frame_cells == 0) {                                                                \
-        func_80196070();                                                                             \
+#define SCENA08_SCREEN_EFFECT_STEP(work, step)                                                  \
+    func_801F85F0((s16)SELF(Actor)->screen_x, SELF(Actor)->screen_y, (s16)SELF(Actor)->unk_32); \
+    (work) = g_Self;                                                                            \
+    (work)->unk_32 += (step);                                                                   \
+    if (--(work)->frame_cells == 0) {                                                           \
+        func_80196070();                                                                        \
     }
 
 /* The two sparkle steps of 348.c: stir the seed, advance the frame counters and move to the next mode after `reset` frames. They differ only in `reset`. */

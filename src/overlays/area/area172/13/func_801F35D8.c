@@ -19,7 +19,7 @@ MATCH void func_801F35D8(void) {
     work->screen_y = screen.vy;
     work->vx -= 16;
     work->unk_32 -= 20;
-    func_801F4138((s16)work->screen_x, (s16)work->screen_y, (s16)work->unk_32, (s16)work->vx, (s16)work->vy);
+    func_801F4138((s16)work->screen_x, work->screen_y, (s16)work->unk_32, (s16)work->vx, (s16)work->vy);
     ACTOR_COUNT_DOWN(SELF(Actor), remaining, timer);
     if (!(remaining & BYTE_MASK)) {
         Actor_Clear();

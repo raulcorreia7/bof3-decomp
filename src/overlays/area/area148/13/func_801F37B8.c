@@ -19,7 +19,7 @@ NON_MATCHING void func_801F37B8(s32 mode, s32 value) {
         SetShadeTex(prim, 0);
         j = 0;
         do {
-            g_ScratchPadVectors[j].vx = D_801F5038[i][j][0] + lift - (s16)SELF(Actor)->screen_y * (s8)D_801F5034[half];
+            g_ScratchPadVectors[j].vx = D_801F5038[i][j][0] + lift - SELF(Actor)->screen_y * (s8)D_801F5034[half];
             g_ScratchPadVectors[j].vy = D_801F5038[i][j][1];
             g_ScratchPadVectors[j].vz = D_801F5038[i][j][2];
             j++;

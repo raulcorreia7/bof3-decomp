@@ -12,7 +12,7 @@ MATCH void func_801F4334(void) {
     SELF(Actor)->vy = rand() & 0x2000;
 
     if ((SELF(Actor)->screen_x & 0x800) != (SELF(Actor)->unk_32 & 0x800)) {
-        if ((s16)SELF(Actor)->screen_y >= 0x41) {
+        if (SELF(Actor)->screen_y >= 0x41) {
             SELF(Actor)->param.facing = ((s16)SELF(Actor)->unk_32 >> 11) + 1;
         }
     }

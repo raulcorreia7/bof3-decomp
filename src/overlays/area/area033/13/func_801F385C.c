@@ -6,7 +6,7 @@ MATCH void func_801F385C(void) {
 
     scratch = SELF(Actor);
     scratch->screen_y += 0xA;
-    if ((s16)scratch->screen_y >= 0xF0) {
+    if (scratch->screen_y >= 0xF0) {
         scratch->unk_03 = 0;
     }
     if (D_801454F2 == 0 && g_GameStateIndex != GAME_REQUEST_MESSAGE && (g_Game.flags & GAME_FLAG_SCRIPT_ACTIVE) == 0) {

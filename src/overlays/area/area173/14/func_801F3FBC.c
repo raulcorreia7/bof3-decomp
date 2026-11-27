@@ -11,7 +11,7 @@ MATCH void func_801F3FBC(s32 mode, s32 value) {
     long      flag;
 
     factor        = D_801F530C[mode];
-    D_1F800034[0] = (((FIX_INT(SELF(Actor)->pos.x.fixed) - 0x80) << 7) - 0x40) + mode * 0xC0 - (s16)SELF(Actor)->screen_y * factor;
+    D_1F800034[0] = (((FIX_INT(SELF(Actor)->pos.x.fixed) - 0x80) << 7) - 0x40) + mode * 0xC0 - SELF(Actor)->screen_y * factor;
     D_1F800034[1] = ((FIX_INT(SELF(Actor)->pos.y.fixed) - 0x80) << 7) - 0x40;
 
     i = 0;

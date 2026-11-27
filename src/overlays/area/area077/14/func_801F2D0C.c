@@ -16,7 +16,7 @@ MATCH void func_801F2D0C(void) {
         }
         if (SYS_TestFlag(g_SceneFlags, 0x25) != 0) {
             SELF(Actor)->screen_y -= 16;
-            if ((s16)SELF(Actor)->screen_y < 512) {
+            if (SELF(Actor)->screen_y < 512) {
                 SELF(Actor)->screen_y = 512;
             }
             SELF(Actor)->unk_32 = SELF(Actor)->unk_32 + ((g_FrameCount & 3) == 0);

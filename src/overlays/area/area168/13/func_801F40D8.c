@@ -5,7 +5,7 @@ MATCH void func_801F40D8(void) {
 
     scratch = SELF(Actor);
     scratch->screen_y -= 0x10;
-    if ((s16)scratch->screen_y <= 0) {
+    if (scratch->screen_y <= 0) {
         if (g_GameStateIndex == GAME_REQUEST_IDLE) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 3));
         }

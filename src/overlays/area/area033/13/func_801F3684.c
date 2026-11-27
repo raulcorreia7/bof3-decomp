@@ -5,7 +5,7 @@ MATCH void func_801F3684(void) {
 
     scratch = SELF(Actor);
     scratch->screen_y -= 0xA;
-    if ((s16)scratch->screen_y < 0xC9) {
+    if (scratch->screen_y < 0xC9) {
         scratch->unk_03++;
     }
 

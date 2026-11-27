@@ -10,8 +10,9 @@ MATCH void Area_Update(void) {
     s32          i;
     s32          edge_x;
     s32          edge_y;
-    s32          product;
-    s32          offset;
+    s16          product;
+    s16          offset;
+    s16          corner;
     s8           bias;
     volatile u8* scale;
 
@@ -42,15 +43,19 @@ MATCH void Area_Update(void) {
             offset                                                = product - 0x40;
             g_ScratchPadVectors[1].vx = g_ScratchPadVectors[3].vx = ((FIX_INT(SELF(Actor)->pos.x.fixed) + edge_x) << 7) - offset;
         } else {
-            bias                      = (s8)scale[i];
-            product                   = SELF(Actor)->screen_y * bias;
-            offset                    = product + 0x40;
-            edge_y                    = i + 0x7F;
-            g_ScratchPadVectors[0].vy = g_ScratchPadVectors[2].vy = ((FIX_INT(SELF(Actor)->pos.y.fixed) - edge_y) << 7) + offset;
+            bias    = (s8)scale[i];
+            product = SELF(Actor)->screen_y * bias;
+            offset  = product + 0x40;
+            edge_y  = i + 0x7F;
+            corner  = ((FIX_INT(SELF(Actor)->pos.y.fixed) - edge_y) << 7);
+            corner += offset;
+            g_ScratchPadVectors[0].vy = g_ScratchPadVectors[2].vy = corner;
             bias                                                  = (s8)scale[i];
             product                                               = SELF(Actor)->screen_y * bias;
             offset                                                = product - 0x40;
-            g_ScratchPadVectors[1].vy = g_ScratchPadVectors[3].vy = ((FIX_INT(SELF(Actor)->pos.y.fixed) - edge_y) << 7) + offset;
+            corner                                                = ((FIX_INT(SELF(Actor)->pos.y.fixed) - edge_y) << 7);
+            corner += offset;
+            g_ScratchPadVectors[1].vy = g_ScratchPadVectors[3].vy = corner;
         }
         RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3,
                       &depth, &flag);
