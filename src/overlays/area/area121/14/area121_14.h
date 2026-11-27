@@ -9,16 +9,17 @@
 #include "overlays/area/worlds/world03.h"
 #include <rand.h>
 
-extern u8       D_801F64D8[];
-extern u8       D_801F64E8[];
-extern u8       D_801F64E9[]; /* the y byte of each D_801F64E8 row */
+/* The world-map entry keys WORLD_MAP_SELECT_KEY_SCRIPT scans. */
+extern WorldMapKey D_801F64D8[4];
+extern u8          D_801F64E8[];
+extern u8          D_801F64E9[]; /* the y byte of each D_801F64E8 row */
 /* The area ids the message step looks the current area up in. */
-extern u16      D_801F67BC[4];
-extern Callback D_801F67C4[];
-extern Callback D_801F67D8[];
-extern Callback D_801F67E0[];
-extern Callback D_801F67F0[];
-extern u8       D_801F6800[]; /* one four-byte sprite cell per id: w, h, u0, v0 */
+extern u16         D_801F67BC[4];
+extern Callback    D_801F67C4[];
+extern Callback    D_801F67D8[];
+extern Callback    D_801F67E0[];
+extern Callback    D_801F67F0[];
+extern u8          D_801F6800[]; /* one four-byte sprite cell per id: w, h, u0, v0 */
 #define AREA_HUD_SPRITE_CELLS D_801F6800
 extern WorldMapMarker D_801F6858[6];
 #define AREA_HUD_MASK_TABLE D_801F6858

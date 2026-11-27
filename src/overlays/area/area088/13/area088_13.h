@@ -6,16 +6,16 @@
 
 #include "overlays/area/worlds/world02.h"
 
-extern u8       D_801F58DC[];
-extern u8       D_801F5900[];
-extern u8       D_801F5902[];
-extern u8       D_801F591C[];
-extern u8       D_801F591D[];
-extern Callback D_801F61A0[];
-extern Callback D_801F61B4[];
-extern Callback D_801F61BC[];
-extern Callback D_801F61CC[];
-extern u8       D_801F61DC[];
+extern u8          D_801F58DC[];
+/* The world-map entry keys WORLD_MAP_SELECT_KEY_SCRIPT scans. */
+extern WorldMapKey D_801F5900[7];
+extern u8          D_801F591C[];
+extern u8          D_801F591D[];
+extern Callback    D_801F61A0[];
+extern Callback    D_801F61B4[];
+extern Callback    D_801F61BC[];
+extern Callback    D_801F61CC[];
+extern u8          D_801F61DC[];
 #define AREA_HUD_SPRITE_CELLS D_801F61DC
 extern u8       D_801F61DD[];
 extern u8       D_801F61DE[];

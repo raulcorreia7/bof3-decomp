@@ -886,11 +886,11 @@ extern u8              D_801ECDAC[];
 extern u8              D_801ECDB4[];
 extern s32             D_801ECFB8;
 extern u8              D_801ED105;
-extern const u16       D_801ED1FC[];
-extern const u16       D_801ED1FE[];
-extern const u16       D_801ED200[];
-extern const u16       D_801ED202[];
-extern const u16       D_801ED204[];
+extern u16             D_801ED1FC[];
+extern u16             D_801ED1FE[];
+extern u16             D_801ED200[];
+extern u16             D_801ED202[];
+extern u16             D_801ED204[];
 /* The poison and confusion labels the character rows draw. */
 extern u8              D_801ED5D4[];
 extern u8              D_801ED5DC[];

@@ -58,7 +58,7 @@ MATCH void func_801D42F0(void) {
     } else {
         return;
     }
-    g_UIPanelTasks[19].active = 0;
-    *(u8*)&D_80148511         = 0xFF;
+    g_UIPanelTasks[19].active       = 0;
+    *(u8*)&g_UIPanelTasks[13].flags = 0xFF;
     D_80148651 -= 4;
 }

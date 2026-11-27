@@ -9,11 +9,11 @@ MATCH void func_801E09F4(void) {
     u8  count2;
     u8* flag2;
 
-    D_80148340 = 0x18;
-    D_80148628 = g_UIPanelTasks[5].pos.vx + 5;
-    sum        = (g_UIPanelTasks[5].unk_0A << 4) + 0x1A;
-    D_8014862A = g_UIPanelTasks[5].pos.vy + sum;
-    buttons    = INPUT_REPEATED(g_PadStates[0].pressed, (PADLup | PADLdown));
+    D_80148340                = 0x18;
+    g_UIPanelTasks[21].pos.vx = g_UIPanelTasks[5].pos.vx + 5;
+    sum                       = (g_UIPanelTasks[5].unk_0A << 4) + 0x1A;
+    g_UIPanelTasks[21].pos.vy = g_UIPanelTasks[5].pos.vy + sum;
+    buttons                   = INPUT_REPEATED(g_PadStates[0].pressed, (PADLup | PADLdown));
     if (buttons & PADLup) {
         u8 next;
 

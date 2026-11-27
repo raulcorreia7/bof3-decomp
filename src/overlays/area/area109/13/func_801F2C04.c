@@ -15,7 +15,7 @@ MATCH void func_801F2C04(void) {
         shade                         = ((s16)height != -0x80) << 4;
         for (row = 3; row < 7; row++) {
             for (col = 0x42; col < 0x45; col++) {
-                *(g_AreaCellCodes + row * ((AreaMapBundle*)MAP_BUNDLE_BASE)->width + col) = shade;
+                *(g_AreaCellCodes + row * AREA_MAP_BUNDLE->width + col) = shade;
             }
         }
     }

@@ -14,9 +14,9 @@ MATCH void func_801E032C(void) {
     D_80148340 = g_Abilities[*entry].description;
     if (g_UIPanelTasks[3].state == 0) {
         g_UIPanelTasks[21].active = 1;
-        D_80148628                = g_UIPanelTasks[3].pos.vx + 7;
+        g_UIPanelTasks[21].pos.vx = g_UIPanelTasks[3].pos.vx + 7;
         row                       = g_UIPanelTasks[3].unk_0B * 0xD + 0x1A;
-        D_8014862A                = g_UIPanelTasks[3].pos.vy + row;
+        g_UIPanelTasks[21].pos.vy = g_UIPanelTasks[3].pos.vy + row;
     } else {
         g_UIPanelTasks[21].active = 0;
     }

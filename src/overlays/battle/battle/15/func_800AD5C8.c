@@ -10,7 +10,7 @@ MATCH void func_800AD5C8(void) {
     if (g_Battle.gene_count != 0) {
         work  = SELF(PartyMember);
         count = work->param.unk_0B;
-        base  = (u16*)(&D_80148628);
+        base  = (u16*)(&g_UIPanelTasks[21].pos.vx);
         do {
             if (g_Battle.genes[i] == count) {
                 work->screen_x.value = base[0] + (i * 0x18 + 0x41);

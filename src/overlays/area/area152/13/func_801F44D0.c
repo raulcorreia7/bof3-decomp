@@ -19,9 +19,9 @@ MATCH void func_801F44D0(void) {
     SELF(Actor)->mirror       = 0;
     ACTOR_CLEAR_TINT();
 
-    row_offset                                                     = SELF(Actor)->param.unk_0B * 4;
-    map_offset                                                     = D_801F4C3C[0xD + row_offset] * MEM(u8, 0x80104000);
-    *(g_AreaCellCodes + map_offset + D_801F4C3C[0xC + row_offset]) = 0xA0;
+    row_offset                                               = SELF(Actor)->param.unk_0B * 4;
+    map_offset                                               = D_801F4C48[1 + row_offset] * MEM(u8, 0x80104000);
+    *(g_AreaCellCodes + map_offset + D_801F4C48[row_offset]) = 0xA0;
     Script_Select(0);
     SELF(Actor)->header.mode = 1;
 }

@@ -17,10 +17,10 @@ MATCH void func_801F4544(void) {
     SELF(Actor)->mirror       = 0;
     ACTOR_CLEAR_TINT();
 
-    scratch                                                         = SELF(u8);
-    row_offset                                                      = scratch[0x0B] * 4;
-    map_offset                                                      = D_801F4CB0[0x19 + row_offset] * g_AreaMapBundle.width;
-    *(g_AreaCellCodes + map_offset + D_801F4CB0[0x18 + row_offset]) = 0xA0;
+    scratch                                                  = SELF(u8);
+    row_offset                                               = scratch[0x0B] * 4;
+    map_offset                                               = D_801F4CC8[1 + row_offset] * g_AreaMapBundle.width;
+    *(g_AreaCellCodes + map_offset + D_801F4CC8[row_offset]) = 0xA0;
     Script_Select(0);
     SELF(Actor)->header.mode = 1;
 }

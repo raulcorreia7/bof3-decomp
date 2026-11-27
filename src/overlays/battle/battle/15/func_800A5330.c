@@ -43,10 +43,10 @@ MATCH void func_800A5330(void) {
             D_800B7070[gene / GENE_GRID_COLUMNS][gene % GENE_GRID_COLUMNS] = 1;
             Battle_SetGeneCount();
         } else {
-            D_80148597           = 1;
-            g_BattleMessageState = 2;
-            g_Battle.ui_step     = 2;
-            g_Battle.ui_mode     = 0;
+            g_UIPanelTasks[17].state = 1;
+            g_BattleMessageState     = 2;
+            g_Battle.ui_step         = 2;
+            g_Battle.ui_mode         = 0;
             g_Battle.selection &= 0x7F;
         }
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));

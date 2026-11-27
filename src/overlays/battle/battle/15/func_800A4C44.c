@@ -1,11 +1,11 @@
 #include "battle_15.h"
 
-/* Sets D_80148627 to 2, clears D_8014862E and increments g_Battle.ui_mode. */
+/* Sets g_UIPanelTasks[21].state to 2, clears g_UIPanelTasks[21].unk_0A and increments g_Battle.ui_mode. */
 MATCH void func_800A4C44(void) {
     u8* counter = (u8*)&g_Battle.ui_mode;
     u8  count   = *counter;
 
-    D_80148627 = 2;
-    D_8014862E = 0;
-    *counter   = (count + 1);
+    g_UIPanelTasks[21].state  = 2;
+    g_UIPanelTasks[21].unk_0A = 0;
+    *counter                  = (count + 1);
 }

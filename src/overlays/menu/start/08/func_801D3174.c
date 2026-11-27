@@ -21,7 +21,7 @@ MATCH void func_801D3174(void) {
     u16 pad;
 
     Menu_DrawClutStrip(g_WindowClut);
-    step = &D_8014850C;
+    step = &g_UIPanelTasks[13].unk_08;
     mode = 3;
     if (D_801ED618 == 0) {
         mode = 1;
@@ -29,17 +29,18 @@ MATCH void func_801D3174(void) {
     *step = mode;
     base  = step;
     base -= 8;
-    g_UIPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = Item_GetDescription(D_8014850E, g_ItemCategoryIds[D_8014850E][g_UIPanelTasks[MENU_START_PANEL_ITEMS].unk_0C]);
-    pad                                                       = g_PadStates[0].pressed;
-    g_UIPanelTasks[MENU_START_PANEL_CURSOR].active            = 1;
-    g_UIPanelTasks[MENU_START_PANEL_CURSOR].pos.vx            = (u16)g_UIPanelTasks[MENU_START_PANEL_ITEMS].pos.vx + 7;
-    offset                                                    = (D_80148510 - g_UIPanelTasks[MENU_START_PANEL_ITEMS].unk_0B) * 13 + 0x1A;
-    g_UIPanelTasks[MENU_START_PANEL_CURSOR].pos.vy            = (u16)g_UIPanelTasks[MENU_START_PANEL_ITEMS].pos.vy + offset;
-    trigger                                                   = INPUT_REPEATED(pad, (INPUT_DIRECTIONAL | PADL1 | PADR1));
+    g_UIPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id =
+        Item_GetDescription(g_UIPanelTasks[13].unk_0A, g_ItemCategoryIds[g_UIPanelTasks[13].unk_0A][g_UIPanelTasks[MENU_START_PANEL_ITEMS].unk_0C]);
+    pad                                            = g_PadStates[0].pressed;
+    g_UIPanelTasks[MENU_START_PANEL_CURSOR].active = 1;
+    g_UIPanelTasks[MENU_START_PANEL_CURSOR].pos.vx = (u16)g_UIPanelTasks[MENU_START_PANEL_ITEMS].pos.vx + 7;
+    offset                                         = (g_UIPanelTasks[13].unk_0C - g_UIPanelTasks[MENU_START_PANEL_ITEMS].unk_0B) * 13 + 0x1A;
+    g_UIPanelTasks[MENU_START_PANEL_CURSOR].pos.vy = (u16)g_UIPanelTasks[MENU_START_PANEL_ITEMS].pos.vy + offset;
+    trigger                                        = INPUT_REPEATED(pad, (INPUT_DIRECTIONAL | PADL1 | PADR1));
     if (trigger & PADLleft) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
         g_UIPanelTasks[MENU_START_PANEL_ITEMS].u.list.tabs                 = 0x32;
-        s_ChoiceMenuCursors[g_UIPanelTasks[MENU_START_PANEL_ITEMS].unk_0A] = D_80148510;
+        s_ChoiceMenuCursors[g_UIPanelTasks[MENU_START_PANEL_ITEMS].unk_0A] = g_UIPanelTasks[13].unk_0C;
         s_ChoiceMenuValues[g_UIPanelTasks[MENU_START_PANEL_ITEMS].unk_0A]  = g_UIPanelTasks[MENU_START_PANEL_ITEMS].unk_0B;
         step_down                                                          = g_UIPanelTasks[MENU_START_PANEL_ITEMS].unk_0A - 1;
         g_UIPanelTasks[MENU_START_PANEL_ITEMS].unk_0A                      = step_down;
@@ -52,7 +53,7 @@ MATCH void func_801D3174(void) {
     if (trigger & PADLright) {
         g_UIPanelTasks[MENU_START_PANEL_ITEMS].u.list.tabs = 0x31;
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
-        s_ChoiceMenuCursors[g_UIPanelTasks[MENU_START_PANEL_ITEMS].unk_0A] = D_80148510;
+        s_ChoiceMenuCursors[g_UIPanelTasks[MENU_START_PANEL_ITEMS].unk_0A] = g_UIPanelTasks[13].unk_0C;
         s_ChoiceMenuValues[g_UIPanelTasks[MENU_START_PANEL_ITEMS].unk_0A]  = g_UIPanelTasks[MENU_START_PANEL_ITEMS].unk_0B;
         step_up                                                            = g_UIPanelTasks[MENU_START_PANEL_ITEMS].unk_0A + 1;
         g_UIPanelTasks[MENU_START_PANEL_ITEMS].unk_0A                      = step_up;
@@ -61,46 +62,46 @@ MATCH void func_801D3174(void) {
         }
     /* Shared tail of both cursor-step directions. */
     store_selection:
-        g_UIPanelTasks[MENU_START_PANEL_ITEMS].unk_0C = s_ChoiceMenuCursors[D_8014850E];
-        g_UIPanelTasks[MENU_START_PANEL_ITEMS].unk_0B = s_ChoiceMenuValues[D_8014850E];
+        g_UIPanelTasks[MENU_START_PANEL_ITEMS].unk_0C = s_ChoiceMenuCursors[g_UIPanelTasks[13].unk_0A];
+        g_UIPanelTasks[MENU_START_PANEL_ITEMS].unk_0B = s_ChoiceMenuValues[g_UIPanelTasks[13].unk_0A];
         return;
     }
-    old_cursor = D_80148510;
+    old_cursor = g_UIPanelTasks[13].unk_0C;
     if (trigger & PADLup) {
         if (old_cursor != 0) {
-            D_80148510 = old_cursor - 1;
+            g_UIPanelTasks[13].unk_0C = old_cursor - 1;
         }
-        if (D_80148510 < g_UIPanelTasks[MENU_START_PANEL_ITEMS].unk_0B) {
+        if (g_UIPanelTasks[13].unk_0C < g_UIPanelTasks[MENU_START_PANEL_ITEMS].unk_0B) {
             g_UIPanelTasks[MENU_START_PANEL_ITEMS].u.list.scroll = 0xF0;
         }
     } else if (trigger & PADLdown) {
         if (old_cursor < 0x7F) {
-            D_80148510 = old_cursor + 1;
+            g_UIPanelTasks[13].unk_0C = old_cursor + 1;
         }
-        if (D_80148510 >= g_UIPanelTasks[MENU_START_PANEL_ITEMS].unk_0B + 9) {
+        if (g_UIPanelTasks[13].unk_0C >= g_UIPanelTasks[MENU_START_PANEL_ITEMS].unk_0B + 9) {
             g_UIPanelTasks[MENU_START_PANEL_ITEMS].u.list.scroll = 0x10;
         }
     } else if (trigger & PADL1) {
         u8 group = g_UIPanelTasks[MENU_START_PANEL_ITEMS].unk_0B;
         if (group == 0) {
-            D_80148510 = 0;
+            g_UIPanelTasks[13].unk_0C = 0;
         } else if (group < 9) {
-            D_80148510                                    = old_cursor - group;
+            g_UIPanelTasks[13].unk_0C                     = old_cursor - group;
             g_UIPanelTasks[MENU_START_PANEL_ITEMS].unk_0B = 0;
         } else {
-            D_80148510 = old_cursor - 9;
-            D_8014850F = group - 9;
+            g_UIPanelTasks[13].unk_0C = old_cursor - 9;
+            g_UIPanelTasks[13].unk_0B = group - 9;
         }
     } else if (trigger & PADR1) {
         u8 group = g_UIPanelTasks[MENU_START_PANEL_ITEMS].unk_0B;
         if (group == 0x77) {
-            D_80148510 = 0x7F;
+            g_UIPanelTasks[13].unk_0C = 0x7F;
         } else if (group >= 0x6F) {
-            D_80148510 = old_cursor + (0x77 - group);
-            D_8014850F = 0x77;
+            g_UIPanelTasks[13].unk_0C = old_cursor + (0x77 - group);
+            g_UIPanelTasks[13].unk_0B = 0x77;
         } else {
-            D_80148510 = old_cursor + 9;
-            D_8014850F = group + 9;
+            g_UIPanelTasks[13].unk_0C = old_cursor + 9;
+            g_UIPanelTasks[13].unk_0B = group + 9;
         }
     }
     s_ChoiceMenuCursors[base[0xA]] = base[0xC];

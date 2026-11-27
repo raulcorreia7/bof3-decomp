@@ -197,19 +197,19 @@ MATCH void func_801D12A8(void) {
     SELF(SceneBandEffect)->timer  = 0;
     SELF(SceneBandEffect)->band   = 0;
 
-    work                                    = SELF(SceneBandEffect);
-    counter                                 = work->orbit_seed << 5;
-    FAKE_VOLATILE(s32, work->orbit_counter) = counter;
-    angle                                   = SCE10EFF_ORBIT_ANGLE(counter);
-    angle_cell                              = &D_1F800004;
-    *angle_cell                             = angle;
-    g_ScratchPad                            = 0x20;
+    work                        = SELF(SceneBandEffect);
+    counter                     = work->orbit_seed << 5;
+    work->orbit_counter         = counter;
+    angle                       = SCE10EFF_ORBIT_ANGLE(counter);
+    angle_cell                  = &g_ScratchPad.cells.words[1];
+    *angle_cell                 = angle;
+    g_ScratchPad.cells.words[0] = 0x20;
 
-    velocity     = rcos(angle) * g_ScratchPad;
+    velocity     = rcos(angle) * g_ScratchPad.cells.words[0];
     work         = SELF(SceneBandEffect);
     work->proj.x = D_801D2744->proj.x + velocity;
 
-    velocity        = rsin(*angle_cell) * g_ScratchPad;
+    velocity        = rsin(*angle_cell) * g_ScratchPad.cells.words[0];
     source          = D_801D2744;
     scratch         = SELF(SceneBandEffect);
     scratch->proj.y = source->proj.y + velocity;
@@ -240,19 +240,19 @@ MATCH void func_801D1544(void) {
 
     SELF(SceneBandEffect)->ticker++;
 
-    work                                    = SELF(SceneBandEffect);
-    counter                                 = work->orbit_counter + 1;
-    FAKE_VOLATILE(s32, work->orbit_counter) = counter;
-    angle                                   = SCE10EFF_ORBIT_ANGLE(counter);
-    angle_cell                              = &D_1F800004;
-    *angle_cell                             = angle;
-    g_ScratchPad                            = 0x20;
+    work                        = SELF(SceneBandEffect);
+    counter                     = work->orbit_counter + 1;
+    work->orbit_counter         = counter;
+    angle                       = SCE10EFF_ORBIT_ANGLE(counter);
+    angle_cell                  = &g_ScratchPad.cells.words[1];
+    *angle_cell                 = angle;
+    g_ScratchPad.cells.words[0] = 0x20;
 
-    velocity     = rcos(angle) * g_ScratchPad;
+    velocity     = rcos(angle) * g_ScratchPad.cells.words[0];
     work         = SELF(SceneBandEffect);
     work->proj.x = D_801D2744->proj.x + velocity;
 
-    velocity                      = rsin(*angle_cell) * g_ScratchPad;
+    velocity                      = rsin(*angle_cell) * g_ScratchPad.cells.words[0];
     SELF(SceneBandEffect)->proj.y = D_801D2744->proj.y + velocity;
 
     if (TIMER_EXPIRED(SELF(SceneBandEffect)->band)) {
@@ -276,18 +276,18 @@ NON_MATCHING void Scene_DrawBands(s16 band_height, u16 radius, u16 jitter_mask) 
     s32      radius_base;
     s32      i;
 
-    radius_base               = (s16)radius;
-    radius_cell               = &g_ScratchPad;
-    *radius_cell              = 0x10;
-    D_1F800004                = (SELF(SceneBandEffect)->ticker & 0xF) << 8;
-    D_1F800008                = SELF(SceneBandEffect)->band * 7;
-    shade                     = SELF(SceneBandEffect)->band * 13;
-    g_ScratchPadVectors[0].vy = FIXED_MUL(rsin(D_1F800004), *radius_cell);
-    g_ScratchPadVectors[0].vz = 0;
-    tpage                     = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
-    prev                      = &g_ScratchPadVectors[2];
-    quad                      = prev - 2;
-    cell                      = &D_1F800004;
+    radius_base                 = (s16)radius;
+    radius_cell                 = &g_ScratchPad.cells.words[0];
+    *radius_cell                = 0x10;
+    g_ScratchPad.cells.words[1] = (SELF(SceneBandEffect)->ticker & 0xF) << 8;
+    g_ScratchPad.cells.words[2] = SELF(SceneBandEffect)->band * 7;
+    shade                       = SELF(SceneBandEffect)->band * 13;
+    g_ScratchPadVectors[0].vy   = FIXED_MUL(rsin(g_ScratchPad.cells.words[1]), *radius_cell);
+    g_ScratchPadVectors[0].vz   = 0;
+    tpage                       = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
+    prev                        = &g_ScratchPadVectors[2];
+    quad                        = prev - 2;
+    cell                        = &g_ScratchPad.cells.words[1];
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(DR_MODE));
     ramp = cell + 1;
@@ -409,18 +409,18 @@ MATCH void func_801D1DE0(void) {
     SELF(SceneBandEffect)->timer  = 0;
     SELF(SceneBandEffect)->band   = 0;
 
-    work                                    = SELF(SceneBandEffect);
-    counter                                 = (work->orbit_seed << 5) + 0x10;
-    angle                                   = SCE10EFF_ORBIT_ANGLE(counter);
-    FAKE_VOLATILE(s32, work->orbit_counter) = counter;
-    angle_cell                              = &D_1F800004;
-    *angle_cell                             = angle;
-    g_ScratchPad                            = 0x18;
+    work                        = SELF(SceneBandEffect);
+    counter                     = (work->orbit_seed << 5) + 0x10;
+    angle                       = SCE10EFF_ORBIT_ANGLE(counter);
+    work->orbit_counter         = counter;
+    angle_cell                  = &g_ScratchPad.cells.words[1];
+    *angle_cell                 = angle;
+    g_ScratchPad.cells.words[0] = 0x18;
 
-    velocity                      = rcos(angle) * g_ScratchPad;
+    velocity                      = rcos(angle) * g_ScratchPad.cells.words[0];
     SELF(SceneBandEffect)->proj.x = D_801D2744->proj.x + velocity;
 
-    velocity                      = rsin(*angle_cell) * g_ScratchPad;
+    velocity                      = rsin(*angle_cell) * g_ScratchPad.cells.words[0];
     SELF(SceneBandEffect)->proj.y = D_801D2744->proj.y + velocity;
 
     SELF(SceneBandEffect)->proj_z = D_801D2744->proj_z;

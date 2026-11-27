@@ -374,7 +374,7 @@ extern u8                       s_BattleStatusRecoveryPenalties[];
 extern u8                       s_BattleStatusRecoveryChances[];
 /* D_801EB000 */
 extern u8                       s_BattleActionNames[12][13];
-extern const u8                 D_801EB00D[];
+extern u8                       D_801EB00D[];
 extern s32                      D_801EB04E;
 extern u8                       D_801EB05B[];
 extern u8                       D_801EB068[];

@@ -28,7 +28,9 @@ A dead declaration, one that only the file defining it names, goes with a line t
 
     Removed: <name> <reason>
 
-A rename passes with `Renamed: <old> -> <new>` (`check_tree.sh` reads the same line).
+A rename passes with `Renamed: <old> -> <new>` (`check_tree.sh` reads the same line) when <new> is
+in HEAD as the same kind of thing as <old> (a symbol row, function, global, typedef, record,
+enumerator or `#define`); a `#define` keeps its value with the renamed names replaced.
 
 Usage: python3 tools/check_kept.py REF [HEAD]
 """
@@ -50,6 +52,7 @@ from pathlib import Path
 from bof3.adapters.config import symbols_text
 from bof3.adapters.git import changed_files, git, merge_base
 from bof3.core.paths import ROOT
+from bof3.source import renames as renaming
 from bof3.source.ctext import mask
 from bof3.symbols import parse
 
@@ -606,6 +609,48 @@ def removals(base: str, head: str) -> tuple[set[str], set[str]]:
     )
 
 
+def kinds(name: str, snap: Snapshot) -> set[str]:
+    """What NAME is in one snapshot: a symbol row, a declaration or a `#define`."""
+    return {
+        kind
+        for kind, table in (
+            ("function", snap.entities.functions),
+            ("static inline", snap.entities.inlines),
+            ("global", snap.entities.globals),
+            ("typedef", snap.entities.typedefs),
+            ("enumerator", snap.entities.enums),
+            ("record", snap.entities.records),
+            ("#define", snap.defines),
+            ("symbol row", snap.names),
+        )
+        if name in table
+    }
+
+
+def rename_problems(
+    renames: dict[str, str], before: Snapshot, after: Snapshot
+) -> dict[str, str]:
+    """Each `Renamed:` old name whose new name is absent from AFTER or is another kind of thing, and why."""
+    problems = {}
+    for old, new in sorted(renames.items()):
+        if new not in after.tokens and new not in after.names:
+            problems[old] = f"Renamed: {old} -> {new}, but {new} is not in the tree"
+            continue
+        was, now = kinds(old, before), kinds(new, after)
+        if was and not was & now:
+            problems[old] = (
+                f"Renamed: {old} -> {new}, but {old} is a {' and '.join(sorted(was))} and {new} is not"
+            )
+        elif (
+            "#define" in was & now
+            and renaming.apply(before.defines[old], renames) != after.defines[new]
+        ):
+            problems[old] = (
+                f"Renamed: {old} -> {new}, but the #define changes beyond the renamed names"
+            )
+    return problems
+
+
 def record_files(tree: Path, names: set[str]) -> set[str]:
     """Files at one revision that define one of the named records."""
     if not names:
@@ -667,7 +712,12 @@ def main(argv: list[str]) -> int:
             before_entities, *read_tree(trees["before"]), *addresses(base)
         )
         after = Snapshot(after_entities, after_uses, after_defines, *addresses(head))
-    problems = compare(before, after, *removals(base, head))
+    kept_removed, removed = removals(base, head)
+    renamed = rename_problems(renaming.since(base, head), before, after)
+    problems = sorted(
+        set(compare(before, after, kept_removed - set(renamed), removed))
+        | set(renamed.values())
+    )
     for problem in problems:
         print(problem)
     if problems:

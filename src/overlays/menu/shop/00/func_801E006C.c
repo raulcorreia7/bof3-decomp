@@ -9,9 +9,9 @@ MATCH void func_801E006C(void) {
     D_80148340 = 0x75;
     if (g_UIPanelTasks[3].state == 0) {
         g_UIPanelTasks[21].active = 1;
-        D_80148628                = g_UIPanelTasks[3].pos.vx;
-        D_80148628                = D_80148628 + 0x2A;
-        D_8014862A                = g_UIPanelTasks[3].pos.vy + 7;
+        g_UIPanelTasks[21].pos.vx = g_UIPanelTasks[3].pos.vx;
+        g_UIPanelTasks[21].pos.vx = g_UIPanelTasks[21].pos.vx + 0x2A;
+        g_UIPanelTasks[21].pos.vy = g_UIPanelTasks[3].pos.vy + 7;
     } else {
         g_UIPanelTasks[21].active = 0;
     }

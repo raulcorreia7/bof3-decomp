@@ -3,7 +3,7 @@
 MATCH void func_800A5120(void) {
     u8* state;
 
-    if (!(D_801485B8 & 0x1)) {
+    if (!(g_UIPanelTasks[18].active & 0x1)) {
         state            = &g_Battle.selection;
         g_Battle.ui_step = 2;
         g_Battle.ui_mode = 0;

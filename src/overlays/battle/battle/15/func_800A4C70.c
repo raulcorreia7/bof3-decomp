@@ -11,10 +11,10 @@ MATCH void func_800A4C70(void) {
     if ((*flag & 0x1) == 0) {
         *flag = 0;
         UI_PanelOpenTask(0x12, 5);
-        D_801485BA                                      = 2;
-        D_801485BC                                      = -0xA5;
+        g_UIPanelTasks[18].mode                         = 2;
+        g_UIPanelTasks[18].pos.vx                       = -0xA5;
         g_BattlePanelMode                               = 0;
-        D_801485BE                                      = 0x3F;
+        g_UIPanelTasks[18].pos.vy                       = 0x3F;
         g_BattleTargetCursorCol                         = 0;
         D_801485CA                                      = 0;
         g_BattleMessages[((D_801EC328 - 1) & 0xF)].text = UI_MessageGetText(0x59);

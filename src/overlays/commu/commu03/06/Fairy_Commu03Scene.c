@@ -218,17 +218,11 @@ NON_MATCHING void func_801D1250(s16 x, s16 y) {
 INCLUDE_ASM(func_801D1250);
 #endif
 
-#ifdef NON_MATCHING
-/* Draws one 8x8 glyph quad per byte of the string, eight pixels apart, skipping
- * spaces. */
-NON_MATCHING void func_801D1714(s16 x, s16 y, u32 clut, u8* text) {
+MATCH void func_801D1714(s16 x, s16 y, u32 clut, u8* text) {
     POLY_FT4* poly;
-    s32       t1;
-    s32       t2;
     u16       color;
     u8        c;
     u8        u;
-    u8        v;
 
     color = (clut & 0x3F) | STAGE_PALETTE_CLUT;
     c     = *text;
@@ -238,15 +232,17 @@ NON_MATCHING void func_801D1714(s16 x, s16 y, u32 clut, u8* text) {
             SetPolyFT4(poly);
             poly->x0 = x + 4;
             poly->x1 = x + 0xC;
-            poly->y1 = poly->y0 = y;
-            poly->y3 = poly->y2 = poly->y0 + 8;
-            poly->x2            = poly->x0 - 4;
-            poly->x3            = poly->x1 - 4;
-            u                   = ((*text - ' ') % 32) * 8;
-            poly->u0            = u;
-            poly->u1            = u + 7;
-            poly->u2            = poly->u0;
-            poly->u3            = poly->u1;
+            poly->y0 = y;
+            poly->y1 = y;
+            poly->x2 = poly->x0 - 4;
+            poly->x3 = poly->x1 - 4;
+            poly->y2 = poly->y0 + 8;
+            poly->y3 = poly->y2;
+            u        = ((*text - ' ') % 32) * 8;
+            poly->u0 = u;
+            poly->u1 = u + 7;
+            poly->u2 = poly->u0;
+            poly->u3 = poly->u1;
             poly->v1 = poly->v0 = ((*text - ' ') / 32) * 8;
             setRGB0(poly, 0x80, 0x80, 0x80);
             poly->clut = color;
@@ -259,9 +255,6 @@ NON_MATCHING void func_801D1714(s16 x, s16 y, u32 clut, u8* text) {
         c = *text;
     }
 }
-#else
-INCLUDE_ASM(func_801D1714);
-#endif
 
 MATCH void func_801D18AC(void) {
     u8* state;

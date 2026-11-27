@@ -59,7 +59,7 @@ MATCH u8 Menu_SwapPartyMembers(void) {
         }
     }
     /* FAKE: retail reads g_UIPanelTasks[MENU_START_PANEL_COMMANDS].unk_0A as u8[]. */
-    for (i = 0; i < ((u8*)&D_801484EA)[0]; i++) {
+    for (i = 0; i < ((u8*)&g_UIPanelTasks[12].unk_0A)[0]; i++) {
         if (D_801ED690[i] == reserve) {
             D_801ED690[i] = member;
         }

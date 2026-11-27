@@ -27,8 +27,19 @@ if [ -n "$relative" ]; then
 	echo "check-tree: include from the source root (\"overlays/area/X.h\") and import as bof3.<module>"
 	exit 1
 fi
-# A definition takes its parameter types in the parentheses; the old-style form `f(x, y)` with the types on the next lines is not written.
-oldstyle=$(git grep -nE '^[A-Za-z_][A-Za-z0-9_ *]*[ *][A-Za-z_][A-Za-z0-9_]*\([[:space:]]*[A-Za-z_][A-Za-z0-9_]*([[:space:]]*,[[:space:]]*[A-Za-z_][A-Za-z0-9_]*)*[[:space:]]*\)[[:space:]]*$' -- src include ':!include/psyq' | grep -vF '(void)') || true
+# A definition takes its parameter types in the parentheses: an old-style one names only identifiers there (`f(void)` is ANSI) and declares them before its brace.
+oldstyle=$(git grep -lzE '^[A-Za-z_].*[A-Za-z_][A-Za-z0-9_]*\([[:space:]]*[A-Za-z_][A-Za-z0-9_]*([[:space:]]*,[[:space:]]*[A-Za-z_][A-Za-z0-9_]*)*[[:space:]]*\)' -- src include ':!include/psyq' | xargs -0 -r awk '
+	FNR == 1 { head = "" }
+	head != "" {
+		if ($0 ~ /^[[:space:]]*\{/) { if (decls) print head; head = ""; next }
+		if ($0 ~ /^[[:space:]]*[A-Za-z_][A-Za-z0-9_ *]*[A-Za-z0-9_\]][[:space:]]*;[[:space:]]*$/) { decls = 1; next }
+		head = ""
+	}
+	/^[A-Za-z_]/ && $0 !~ /;[[:space:]]*$/ {
+		s = $0
+		gsub(/\([[:space:]]*void[[:space:]]*\)/, "", s)
+		if (s ~ /[A-Za-z_][A-Za-z0-9_]*\([[:space:]]*[A-Za-z_][A-Za-z0-9_]*([[:space:]]*,[[:space:]]*[A-Za-z_][A-Za-z0-9_]*)*[[:space:]]*\)/) { head = FILENAME ":" FNR ": " $0; decls = 0 }
+	}') || true
 if [ -n "$oldstyle" ]; then
 	echo "check-tree: old-style definitions:"
 	echo "$oldstyle"
@@ -64,9 +75,8 @@ if [ -n "$base" ]; then
 	words_file=$(mktemp)
 	git diff -w -U0 "$base...HEAD" -- src include >"$words_file"
 	# A `Renamed: <old> -> <new>` line in a commit message maps the removed lines to the new names.
-	renames=$(git log --format=%B "$base..HEAD" | sed -n 's/^Renamed:[[:space:]]*\([A-Za-z0-9_]*\)[[:space:]]*->[[:space:]]*\([A-Za-z0-9_]*\).*/\1 \2/p')
 	pool_file=$(mktemp)
-	RENAMES=$renames perl -pe 'BEGIN { %r = map { split " " } split /\n/, $ENV{RENAMES} } if (/^-[^-]/) { for my $k (keys %r) { s/\b\Q$k\E\b/$r{$k}/g } }' "$words_file" >"$pool_file"
+	(cd tools && python3 -m bof3.source.renames "$base") <"$words_file" >"$pool_file"
 	added=$(awk '
 		function key(s) { gsub(/[A-Za-z_][A-Za-z0-9_]*\(/, "(", s); gsub(/[ \t]+/, "", s); return s }
 		NR == FNR { if ($0 ~ /^-[^-]/) pool[key(substr($0, 2))]++; next }

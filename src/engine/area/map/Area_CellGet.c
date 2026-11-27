@@ -7,7 +7,6 @@
 MATCH void Area_CellGet(s32 px, s32 py, AreaCell* out) {
     AreaMapBundle* bundle;
     s32            width;
-    s32            x2;
     s32            x;
     s32            y;
     u16            value;
@@ -16,12 +15,12 @@ MATCH void Area_CellGet(s32 px, s32 py, AreaCell* out) {
     y = g_AreaMap.tile_origin_y + px / 2 - py;
 
     if (x > 0) {
-        bundle = (AreaMapBundle*)MAP_BUNDLE_BASE;
+        bundle = AREA_MAP_BUNDLE;
         width  = bundle->width;
         if (x < width - 1) {
             if (y > 0) {
                 if (y < g_AreaMapBundle.height - 1) {
-                    value = *(u16*)((u8*)bundle + ((g_AreaMapBundle.grid_offset * 4) + (x2 = x * 2) + (y * width * 2)));
+                    value = *(AREA_MAP_GRID + x + y * width);
                     if (value != 0) {
                         out->tile_x = x;
                         out->tile_y = y;

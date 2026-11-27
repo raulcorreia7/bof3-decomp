@@ -1,8 +1,6 @@
 #ifndef OVERLAY_SCENARIO_SCE10EFF_00_H
 #define OVERLAY_SCENARIO_SCE10EFF_00_H
 
-/* The scratchpad base here is the 32-bit depth word. */
-#define FAKE_DECL_GAME_SCRATCH_BASE_WORD
 #include "common/vector.h"
 #include "overlays/scenario/scenario.h"
 #include "menu/gameui.h"
@@ -18,26 +16,26 @@
  * bare statement macro: the member declares `work`, `counter`, `angle`,
  * `angle_cell` and `velocity`. Kept: as an inline the frame shrinks 4 bytes
  * (ra at 16(sp), retail 20(sp)); the do/while form moves bytes. */
-#define SCENE_PROJECT_ORBIT_STEP(depth)                                      \
-    SELF(SceneBandEffect)->ticker++;                                         \
-                                                                             \
-    work                                    = g_Self;                        \
-    counter                                 = work->orbit_counter + 1;       \
-    FAKE_VOLATILE(s32, work->orbit_counter) = counter;                       \
-    angle                                   = SCE10EFF_ORBIT_ANGLE(counter); \
-    angle_cell                              = &D_1F800004;                   \
-    *angle_cell                             = angle;                         \
-    g_ScratchPad                            = (depth);                       \
-                                                                             \
-    velocity     = rcos(angle) * g_ScratchPad;                               \
-    work         = g_Self;                                                   \
-    work->proj.x = D_801D2744->proj.x + velocity;                            \
-                                                                             \
-    velocity                      = rsin(*angle_cell) * g_ScratchPad;        \
-    SELF(SceneBandEffect)->proj.y = D_801D2744->proj.y + velocity;           \
-                                                                             \
-    if (TIMER_EXPIRED(SELF(SceneBandEffect)->timer)) {                       \
-        SELF(SceneBandEffect)->step_index++;                                 \
+#define SCENE_PROJECT_ORBIT_STEP(depth)                                              \
+    SELF(SceneBandEffect)->ticker++;                                                 \
+                                                                                     \
+    work                        = g_Self;                                            \
+    counter                     = work->orbit_counter + 1;                           \
+    work->orbit_counter         = counter;                                           \
+    angle                       = SCE10EFF_ORBIT_ANGLE(counter);                     \
+    angle_cell                  = &g_ScratchPad.cells.words[1];                      \
+    *angle_cell                 = angle;                                             \
+    g_ScratchPad.cells.words[0] = (depth);                                           \
+                                                                                     \
+    velocity     = rcos(angle) * g_ScratchPad.cells.words[0];                        \
+    work         = g_Self;                                                           \
+    work->proj.x = D_801D2744->proj.x + velocity;                                    \
+                                                                                     \
+    velocity                      = rsin(*angle_cell) * g_ScratchPad.cells.words[0]; \
+    SELF(SceneBandEffect)->proj.y = D_801D2744->proj.y + velocity;                   \
+                                                                                     \
+    if (TIMER_EXPIRED(SELF(SceneBandEffect)->timer)) {                               \
+        SELF(SceneBandEffect)->step_index++;                                         \
     }
 
 /* Projected scenario bands: func_801D0FAC draws at the source origin;

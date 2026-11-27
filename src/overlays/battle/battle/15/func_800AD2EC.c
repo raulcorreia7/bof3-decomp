@@ -30,9 +30,9 @@ MATCH void func_800AD2EC(void) {
     remainder                       = (u8)first % 6;
     *(volatile s32*)(record + 0x3C) = 0;
     second                          = record[0xB];
-    *(u16*)(record + 0x2E)          = D_80148628 + (remainder * 0x1E + 0x13);
+    *(u16*)(record + 0x2E)          = g_UIPanelTasks[21].pos.vx + (remainder * 0x1E + 0x13);
     count                           = record[1];
-    label                           = D_8014862A;
+    label                           = g_UIPanelTasks[21].pos.vy;
     record[1]                       = count + 1;
     ptr                             = SELF_BYTES;
     *(u16*)(record + 0x30)          = (second / 3 * 0x10 & 0x1FE0) + (0x30 + label);

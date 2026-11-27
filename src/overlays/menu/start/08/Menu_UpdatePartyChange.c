@@ -107,7 +107,7 @@ MATCH void Menu_UpdatePartyChange(void) {
         D_80148654                = 5;
         g_CursorFramePanel.active = 0;
         g_UIPanelTasks[20].active = 0;
-        D_801484E3                = 1;
+        g_UIPanelTasks[12].state  = 1;
         D_80148652 += 1;
     }
 }

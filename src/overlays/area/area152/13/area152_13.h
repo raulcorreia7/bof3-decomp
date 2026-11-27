@@ -20,8 +20,10 @@
  * distance halfword, indexed by the row stride the spawn pass allocates. */
 /* The payload's data after the last function; the per-state handler tables
  * start at 0x130. */
-extern u8 D_801F4C3C[];
-#define AREA_HUD_SPRITE_CELLS (D_801F4C3C + 0x158)
+/* The world-map entry keys WORLD_MAP_SELECT_KEY_SCRIPT scans. */
+extern WorldMapKey D_801F4C3C[3];
+extern u8          D_801F4C48[];
+#define AREA_HUD_SPRITE_CELLS (D_801F4C48 + 0x14C)
 
 #include "overlays/area/shared/WorldMapMessage.h"
 

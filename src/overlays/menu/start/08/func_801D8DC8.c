@@ -76,7 +76,7 @@ MATCH void func_801D8DC8(void) {
     }
     if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
-        D_80148597                                     = 1;
+        g_UIPanelTasks[17].state                       = 1;
         g_UIPanelTasks[MENU_START_PANEL_CURSOR].active = 0;
         D_80148654                                     = 7;
         D_80148652 += 1;

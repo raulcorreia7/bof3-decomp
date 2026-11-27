@@ -36,8 +36,8 @@ MATCH void func_801EF348(void) {
     if (g_Battle.outcome.drop_count != 0) {
         UI_PanelOpenTask(0x15, 4);
         g_UIPanelTasks[21].mode   = 1;
-        D_80148628                = 0x14;
-        D_8014862A                = 0x46;
+        g_UIPanelTasks[21].pos.vx = 0x14;
+        g_UIPanelTasks[21].pos.vy = 0x46;
         g_UIPanelTasks[21].unk_09 = ((g_Battle.outcome.drop_count - 1) / 2) * 13 + 18;
         if (g_Battle.outcome.drop_count >= 2) {
             for (i = 0; i < g_Battle.outcome.drop_count - 1; i++) {
