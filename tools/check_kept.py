@@ -24,6 +24,8 @@ A deliberate removal passes with a commit message line between the merge base an
 
     Kept-Removed: <name> <reason>
 
+A rename passes with `Renamed: <old> -> <new>` (the old name counts as removed; `check_tree.sh` reads the same line).
+
 Usage: python3 tools/check_kept.py REF [HEAD]
 """
 
@@ -66,7 +68,7 @@ DEFAULT_NAME = re.compile(
 WEAK_WORDS = frozenset(
     "u8 s8 u16 s16 u32 s32 u64 s64 int char short long unsigned signed void const volatile".split()
 )
-KEPT_REMOVED = re.compile(r"^Kept-Removed:\s*(\S+)", re.M)
+KEPT_REMOVED = re.compile(r"^(?:Kept-Removed:\s*|Renamed:\s*)(\w+)", re.M)
 DEFINE = re.compile(r"^[ \t]*#[ \t]*define[ \t]+(\w+)(\([^)]*\))?(.*)$")
 INCLUDE = re.compile(r'^\s*#\s*include\s+"([^"]+)"', re.M)
 IDENT = re.compile(r"[A-Za-z_]\w*")
