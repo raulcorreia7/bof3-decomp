@@ -9,7 +9,6 @@
 /* D_8014857A stays an address symbol at the cursor steps: a g_UiPanelTasks[16] view changes the code. */
 /* func_80098450 */
 MATCH void Battle_SelectItem(void) {
-    volatile u8*     phase;
     MenuChoicePanel* panel;
     s32              trigger;
     u8               old_cursor;
@@ -17,18 +16,17 @@ MATCH void Battle_SelectItem(void) {
     u8*              handle;
     u32              value;
 
-    phase = &g_BattleChoicePanel[3];
-    if (*phase != 0u) {
+    if (g_BattleChoicePanel.state != 0u) {
         return;
     }
     slot = g_BattleMessageSlot[5];
     g_Game.members[slot].u.turn.damage_flags.volatile_value &= 0xBFFFu;
-    if (*phase == 0u) {
+    if (g_BattleChoicePanel.state == 0u) {
         D_801485DC = 1u;
         D_801485E0 = (g_UiPanelTasks[16].pos.vx + 7);
         D_801485E2 = (g_UiPanelTasks[16].pos.vy + ((g_UiPanelTasks[16].unk_0C - g_UiPanelTasks[16].unk_0B) * 0xD + 0x1A));
     }
-    panel   = (MenuChoicePanel*)g_BattleChoicePanel;
+    panel   = &g_BattleChoicePanel;
     trigger = INPUT_REPEATED(g_PadStates[0].pressed, (INPUT_DIRECTIONAL | PADL1 | PADR1));
     if ((trigger & PADLleft) != 0) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
@@ -86,7 +84,7 @@ MATCH void Battle_SelectItem(void) {
     }
     handle = UI_MessageGetText(Item_GetDescription(g_UiPanelTasks[16].unk_0A, g_ItemCategoryIds[g_UiPanelTasks[16].unk_0A][g_UiPanelTasks[16].unk_0C]) & HALF_MASK);
     g_BattleMessages[((D_801EC328 - 1) & 0xF)].text = handle;
-    if (((MenuChoicePanel*)g_BattleChoicePanel)->confirm_timer != 0) {
+    if (g_BattleChoicePanel.confirm_timer != 0) {
         return;
     }
     if ((trigger & PADLup) != 0 && old_cursor == 0u) {
@@ -117,7 +115,7 @@ MATCH void Battle_SelectItem(void) {
     if ((g_PadStates[0].pressed & g_InputMasks[BATTLE_INPUT_CONFIRM]) != 0u) {
         value                         = g_ItemCategoryIds[g_UiPanelTasks[16].unk_0A][g_UiPanelTasks[16].unk_0C] + (g_UiPanelTasks[16].unk_0A << 8);
         g_BattleActorTurn->command.id = value;
-        if ((Item_PassesTest(g_UiPanelTasks[16].unk_08, CHAR_ID_RYU_YOUNG, ((MenuChoicePanel*)g_BattleChoicePanel)->group, value) & BYTE_MASK) == 0) {
+        if ((Item_PassesTest(g_UiPanelTasks[16].unk_08, CHAR_ID_RYU_YOUNG, g_BattleChoicePanel.group, value) & BYTE_MASK) == 0) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 7));
             return;
         }

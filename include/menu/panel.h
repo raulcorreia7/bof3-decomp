@@ -77,8 +77,10 @@
  * The x and y are the panel's screen position: the draw calls take x + 7 and
  * y + 7, and the panel animation slides x (MENU_ADVANCE_PANEL). */
 typedef struct MenuChoicePanel {
-    u8    active; /* 0x00: set while the panel is armed */
-    u8    pad_01[0x03];
+    u8    active;       /* 0x00: set while the panel is armed */
+    u8    panel;        /* 0x01: the panel handler, as MenuPanelTask.panel */
+    u8    mode;         /* 0x02 */
+    u8    state;        /* 0x03: the panel's step; non-zero while it opens or closes */
     Pos2u pos;          /* 0x04 */
     u8    type;         /* 0x08: the panel's type, the first argument of Item_PassesTest */
     u8    pad_09;       /* 0x09 */
@@ -91,6 +93,7 @@ typedef struct MenuChoicePanel {
     s16   confirm_timer; /* 0x12: non-zero closes the confirm step */
 } MenuChoicePanel;
 
+ASSERT_OFFSET(MenuChoicePanel, state, 0x03);
 ASSERT_OFFSET(MenuChoicePanel, pos, 0x04);
 ASSERT_OFFSET(MenuChoicePanel, group, 0x0A);
 ASSERT_OFFSET(MenuChoicePanel, group_first, 0x0B);

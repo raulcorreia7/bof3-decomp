@@ -477,25 +477,12 @@ extern volatile u8               g_BattleTarget;
 extern u8                        g_BattleTarget_nv;
 extern u16                       D_801463B4;
 /* D_801463D8 */
-/* D_80148570 */
-extern volatile u8               g_BattleChoicePanel[];
-/* First byte of g_BattleChoicePanel (0x80148570). The original stores it
- * through a scalar symbol, which emits the direct %lo store form; indexing the
- * array symbol would materialize its address in a register instead. */
-/* First byte of g_BattleChoicePanel (0x80148570); a scalar symbol emits the
- * direct %lo store form. */
-extern volatile u8               g_BattleSelectionHead;
-extern u8                        D_80148571;
-extern u8                        D_80148572;
-extern u16                       D_80148576;
-extern s16                       D_80148582;
+/* D_80148570: g_UiPanelTasks[16] under its own symbol, which the item list reads as a choice panel. */
+extern MenuChoicePanel           g_BattleChoicePanel;
 extern u8                        D_80148594;
-extern u8                        D_80148595;
 extern u8                        D_80148596;
 extern u16                       D_80148598;
 extern u16                       D_8014859A;
-extern u8                        D_8014859D;
-extern u8                        D_801485A1;
 extern volatile u8               D_801485B8;
 extern s8                        D_801485B9;
 extern s8                        D_801485BA;
@@ -504,7 +491,6 @@ extern s16                       D_801485BE;
 extern s8                        D_801485C5;
 extern s16                       D_801485CA;
 extern u8*                       D_801485D8;
-extern volatile u8               D_801485DD;
 extern volatile u8               D_801485DE;
 extern volatile u8               D_801485DF;
 extern volatile u16              D_801485EC;
