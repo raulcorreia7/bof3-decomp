@@ -7,9 +7,6 @@ MATCH s32 func_801F49A0(void) {
     u8              found;
     u8              i;
 
-    /* FAKE: retail reserves 16 bytes no local here uses. */
-    FAKE_STACK_PADS(u8, 16);
-
     Camera_SetMatrix(&matrix);
     found = 0;
     work  = (AreaQuadSprite*)AREA_WORK;
@@ -48,7 +45,12 @@ MATCH s32 func_801F49A0(void) {
         work->origin.x += work->unk_18;
         work->half_size += 8;
         work->origin.y += work->unk_1C;
-        work->unk_10 = Area_HeightSample(work->origin.x, work->origin.y) << 16;
+        {
+            Coord sample_x = {work->origin.x};
+            Coord sample_y = {work->origin.y};
+
+            work->unk_10 = Area_HeightSample(sample_x.fixed, sample_y.fixed) << 16;
+        }
         func_801F46EC(work);
     next:
         work++;

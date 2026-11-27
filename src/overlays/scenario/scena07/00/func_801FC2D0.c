@@ -11,8 +11,6 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801FC2D0(void) {
     SpawnedActor* func_801FD610(u8 mode);
     u8            slot;
-    /* FAKE: retail reserves 16 bytes of unused stack. */
-    FAKE_STACK_PADS(u8, 16);
 
     switch (g_ScenarioState.step) {
         case 0:
@@ -94,12 +92,17 @@ MATCH void func_801FC2D0(void) {
             if (g_ScenarioState.timer_06 != 0) {
                 g_ScenarioState.timer_06--;
             } else {
-                landed                   = func_801FD610(2);
-                landed->vx               = 0x270000;
-                landed->pos.x.fixed      = 0x390000;
-                landed->pos.y.fixed      = 0x410000;
-                landed->selection        = 0x410000;
-                landed->pos.z.fixed      = Area_HeightSample(landed->vx, 0x410000) << 16;
+                landed              = func_801FD610(2);
+                landed->vx          = 0x270000;
+                landed->pos.x.fixed = 0x390000;
+                landed->pos.y.fixed = 0x410000;
+                landed->selection   = 0x410000;
+                {
+                    Coord sample_x = {landed->vx};
+                    Coord sample_y = {0x410000};
+
+                    landed->pos.z.fixed = Area_HeightSample(sample_x.fixed, sample_y.fixed) << 16;
+                }
                 g_ScenarioState.timer_06 = 8;
                 g_ScenarioState.step     = 16;
             }

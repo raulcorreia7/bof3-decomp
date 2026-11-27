@@ -71,7 +71,12 @@ NON_MATCHING void func_801F369C(s32 level) {
         prim->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 704, 256);
         prim->clut  = getClut(160, 483);
         setRGB0(prim, level * 0x60 / 0x80, level * 0x30 / 0x80, level * 0x60 / 0x80);
-        Area_CellAddPrim(TO_COORD(0x3F), TO_COORD(0x3D), 1, sizeof(POLY_FT4));
+        {
+            Coord cell_x = {TO_COORD(0x3F)};
+            Coord cell_y = {TO_COORD(0x3D)};
+
+            Area_CellAddPrim(cell_x.fixed, cell_y.fixed, 1, sizeof(POLY_FT4));
+        }
     }
 }
 #else

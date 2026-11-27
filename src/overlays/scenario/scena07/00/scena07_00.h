@@ -131,7 +131,12 @@ void func_801F81D4(FallingSpark* spark);
 static inline void Scene_PlaceAtLead(void) {
     SELF(Actor)->pos.x.fixed = g_Game.members[0].pos.x.fixed;
     SELF(Actor)->pos.y.fixed = g_Game.members[0].pos.y.fixed;
-    SELF(Actor)->pos.z.fixed = Area_HeightSample(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed) << 16;
+    {
+        Coord sample_x = {SELF(Actor)->pos.x.fixed};
+        Coord sample_y = {SELF(Actor)->pos.y.fixed};
+
+        SELF(Actor)->pos.z.fixed = Area_HeightSample(sample_x.fixed, sample_y.fixed) << 16;
+    }
 }
 
 void Scene_InitSpark(FallingSpark* spark);
