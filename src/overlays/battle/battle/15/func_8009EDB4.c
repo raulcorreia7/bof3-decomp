@@ -25,7 +25,7 @@ MATCH void func_8009EDB4(void) {
         enemy_slot = slot - 3;
         action     = g_BattleEnemyBattlers[enemy_slot].base.power;
     }
-    raw = D_801EC310;
+    raw = g_BattleCalcStats[1].agility;
     if (((raw >> 1) + 0x1E) >= 0x65) {
         level                         = 0x64;
         g_BattleCalcStats[1].accuracy = level;
@@ -33,7 +33,7 @@ MATCH void func_8009EDB4(void) {
         level                         = ((raw >> 1) + 0x1E);
         g_BattleCalcStats[1].accuracy = level;
     }
-    counter  = &D_801EC30C;
+    counter  = &g_BattleCalcStats[1].power;
     *counter = 0;
     Char_AddStat(counter, action + (g_BattleCalcStats[1].defense));
     battler_index                     = g_Battle.active_battler;
