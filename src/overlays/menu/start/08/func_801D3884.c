@@ -10,8 +10,8 @@ MATCH void func_801D3884(void) {
     Menu_DrawClutStrip(g_WindowClut);
     g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0x17;
     g_UiPanelTasks[MENU_START_PANEL_CURSOR].active            = 1;
-    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.x             = (u16)g_UiPanelTasks[MENU_START_PANEL_ITEMS].pos.x + 0x2A;
-    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.y             = (u16)g_UiPanelTasks[MENU_START_PANEL_ITEMS].pos.y + 7;
+    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.vx            = (u16)g_UiPanelTasks[MENU_START_PANEL_ITEMS].pos.vx + 0x2A;
+    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.vy            = (u16)g_UiPanelTasks[MENU_START_PANEL_ITEMS].pos.vy + 7;
     trigger                                                   = INPUT_REPEATED(g_PadStates[0].pressed, (INPUT_DIRECTIONAL | PADL1 | PADR1));
     g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0C             = 0xFF;
     if (trigger & PADLleft) {
@@ -42,8 +42,8 @@ MATCH void func_801D3884(void) {
         g_UiPanelTasks[14].panel  = 6;
         g_UiPanelTasks[14].mode   = 0xF;
         g_UiPanelTasks[14].active = 1;
-        g_UiPanelTasks[14].pos.x  = 180;
-        g_UiPanelTasks[14].pos.y  = 60;
+        g_UiPanelTasks[14].pos.vx = 180;
+        g_UiPanelTasks[14].pos.vy = 60;
         g_UiPanelTasks[14].unk_0B = 0;
         g_UiPanelTasks[14].unk_0C = 0xFF;
         state                     = &g_MenuStep.state;

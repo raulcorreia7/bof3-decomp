@@ -32,8 +32,8 @@
  * members diverge (the limit moves to $a0 and a label is added).
  *
  * Usage:
- *   MATCH void func_800B2218(void) { MENU_ADVANCE_PANEL(pos.x, MENU_PANEL_STEP_X, 320); }
- *   MATCH void func_801E3CB8(void) { MENU_RETREAT_PANEL(pos.x, MENU_PANEL_STEP_X, MENU_PANEL_FLOOR_X); }
+ *   MATCH void func_800B2218(void) { MENU_ADVANCE_PANEL(pos.vx, MENU_PANEL_STEP_X, 320); }
+ *   MATCH void func_801E3CB8(void) { MENU_RETREAT_PANEL(pos.vx, MENU_PANEL_STEP_X, MENU_PANEL_FLOOR_X); }
  */
 #define MENU_ADVANCE_PANEL(member, step, limit) \
     do {                                        \
@@ -219,22 +219,21 @@ ASSERT_SIZE(UIPanelOrigin, 2);
  * item-table base. The battle overlays read the first 0x0C bytes through
  * BattlePanelTask (battle/records.h). */
 typedef struct MenuPanelTask {
-    u8    active; /* set to open the panel, cleared to close it */
-    u8    panel;  /* UI_PanelUpdateTasks calls g_UiPanels.handlers[panel] */
-    u8    mode;   /* the panel's own mode: g_UiPanelModes[mode], the slide target choice, and the battle mode_00 */
-    u8    state;
-    /* x and y are screen positions. Most readers load them with lhu; the slide
-     * code compares them as s16 and stores signed constants through LOH, so the
-     * field stays u16 and each slide keeps its s16 view. */
-    Pos2u pos;
-    u8    unk_08;
-    u8    unk_09;
-    u8    unk_0A; /* x 16 is the horizontal half-centre */
-    u8    unk_0B; /* x 16 is the vertical half-centre */
-    u8    unk_0C;
-    u8    flags; /* bit 0 tested before the box draw; battle reads it as its cursor */
-    u8    unk_0E;
-    u8    layer; /* panel layer, tested against the dispatch mode */
+    u8   active; /* set to open the panel, cleared to close it */
+    u8   panel;  /* UI_PanelUpdateTasks calls g_UiPanels.handlers[panel] */
+    u8   mode;   /* the panel's own mode: g_UiPanelModes[mode], the slide target choice, and the battle mode_00 */
+    u8   state;
+    /* vx and vy are screen positions. Signed so the slides write negatives plainly; a reader that
+     * loads them with lhu writes (u16) at the use. */
+    Pos2 pos;
+    u8   unk_08;
+    u8   unk_09;
+    u8   unk_0A; /* x 16 is the horizontal half-centre */
+    u8   unk_0B; /* x 16 is the vertical half-centre */
+    u8   unk_0C;
+    u8   flags; /* bit 0 tested before the box draw; battle reads it as its cursor */
+    u8   unk_0E;
+    u8   layer; /* panel layer, tested against the dispatch mode */
 
     /* The cells 0x10..0x1F mean different things to each panel mode; each user reads the view that names what the mode keeps there. */
     union {

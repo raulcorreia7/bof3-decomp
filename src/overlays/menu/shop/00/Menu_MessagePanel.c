@@ -7,11 +7,11 @@
 
 MATCH void Menu_MessagePanel(void) {
     g_ShopMessageSteps[g_UiPanelCurrent->state]();
-    Menu_DrawHeaderBar(g_UiPanelCurrent->pos.x, g_UiPanelCurrent->pos.y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
+    Menu_DrawHeaderBar((u16)g_UiPanelCurrent->pos.vx, (u16)g_UiPanelCurrent->pos.vy, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
     if (ICON_CURSOR != 0) {
-        WinDrawCueText((g_UiPanelCurrent->pos.x + 7), (g_UiPanelCurrent->pos.y + 3), (u16)ICON_CURSOR);
+        WinDrawCueText((g_UiPanelCurrent->pos.vx + 7), (g_UiPanelCurrent->pos.vy + 3), (u16)ICON_CURSOR);
         if (ICON_CURSOR == 0x36 || (u16)(ICON_CURSOR - 0x49) < 2 || ICON_CURSOR == 0x52) {
-            WinDrawCueText((g_UiPanelCurrent->pos.x + 7), (g_UiPanelCurrent->pos.y + 3), 0xF);
+            WinDrawCueText((g_UiPanelCurrent->pos.vx + 7), (g_UiPanelCurrent->pos.vy + 3), 0xF);
         }
     }
 }

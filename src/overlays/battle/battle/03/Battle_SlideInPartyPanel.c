@@ -6,12 +6,12 @@ MATCH void Battle_SlideInPartyPanel(void) {
     s16            value;
 
     panel = g_UiPanelCurrent;
-    value = panel->pos.y;
+    value = panel->pos.vy;
     if (value < 0xC9) {
-        panel->pos.y = 200;
+        panel->pos.vy = 200;
         panel->state += 1;
     } else {
-        panel->pos.y = (value - 4);
+        panel->pos.vy = (value - 4);
     }
-    Battle_DrawPartyPanel((s16)g_UiPanelCurrent->pos.x, (s16)g_UiPanelCurrent->pos.y);
+    Battle_DrawPartyPanel(g_UiPanelCurrent->pos.vx, g_UiPanelCurrent->pos.vy);
 }

@@ -20,8 +20,8 @@ MATCH void Menu_ReorderSkills(void) {
     flag                                                      = &g_UiPanelTasks[18].unk_0C;
     *flag                                                     = 0;
     g_UiPanelTasks[MENU_START_PANEL_CURSOR].active            = 1;
-    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.x             = g_UiPanelTasks[16].pos.x + 7;
-    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.y             = g_UiPanelTasks[16].pos.y + ((g_UiPanelTasks[16].unk_0C * 0xD) + 0x1A);
+    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.vx            = g_UiPanelTasks[16].pos.vx + 7;
+    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.vy            = (u16)(g_UiPanelTasks[16].pos.vy + ((g_UiPanelTasks[16].unk_0C * 0xD) + 0x1A));
     rec                                                       = (SkillOrder*)((u8*)flag - DECOMP_OFFSETOF(SkillOrder, unk_54));
     index                                                     = Party_GetAbilities(g_UiPanelTasks[16].unk_0A, g_UiPanelTasks[16].unk_0B, 0);
     pick                                                      = index + g_UiPanelTasks[16].unk_0C;

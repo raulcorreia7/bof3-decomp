@@ -9,7 +9,7 @@ MATCH void func_801D9110(void) {
     panel->state  = 2;
     panel->active = 1;
     panel++;
-    g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.x        = 20;
+    g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.vx       = 20;
     D_801484C2                                                = -0x14;
     g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0;
     panel->panel                                              = 6;

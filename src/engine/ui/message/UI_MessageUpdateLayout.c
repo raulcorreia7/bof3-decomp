@@ -9,7 +9,7 @@ MATCH s32 UI_MessageUpdateLayout(void) {
 
     /* D_80148334/D_80148336 stay address symbols: a g_UiPanelTasks[0].pos view changes the code. */
     g_UiMessageWindow.origin.x = (D_80148334 >> 4) + 10;
-    g_UiMessageWindow.origin.y = ((s16)g_UiPanelTasks[0].pos.y >> 4) + 6;
+    g_UiMessageWindow.origin.y = (g_UiPanelTasks[0].pos.vy >> 4) + 6;
     UI_MessageDispatchState();
     UI_MessageDispatchChoiceMode();
     if ((g_UiWindowChannel & FRONTEND_FLAG_SELECTION) == 0) {

@@ -5,8 +5,8 @@ MATCH void func_801D9664(void) {
     g_UiPanelTasks[17].mode   = 0x14;
     D_80148597                = 2;
     g_UiPanelTasks[17].active = 1;
-    g_UiPanelTasks[17].pos.x  = BATTLE_PARTY_STRIDE;
-    g_UiPanelTasks[17].pos.y  = 62;
+    g_UiPanelTasks[17].pos.vx = BATTLE_PARTY_STRIDE;
+    g_UiPanelTasks[17].pos.vy = 62;
     g_BattleListCursor        = 0;
     g_UiPanelTasks[17].unk_0A = 0;
     g_UiPanelTasks[17].unk_0C = 0;

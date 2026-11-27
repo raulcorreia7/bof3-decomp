@@ -11,5 +11,5 @@
 /* func_8015A264 */
 MATCH void UI_MessageDrawChoiceCursor(void) {
     /* FAKE: signed cursor-call prototype. */
-    ((void (*)(s16, u16, s32))UI_CursorDraw)(((s16)g_UiPanelCurrent->pos.x >> 4) + 4, D_801490CF[g_UiMessageWindow.selection_index], 0);
+    ((void (*)(s16, u16, s32))UI_CursorDraw)((g_UiPanelCurrent->pos.vx >> 4) + 4, D_801490CF[g_UiMessageWindow.selection_index], 0);
 }

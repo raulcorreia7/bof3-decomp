@@ -13,21 +13,21 @@ MATCH void UI_MessageShrinkPanel(void) {
     count          = 0;
     task           = (MenuPanelTask*)g_UiPanelCurrent;
     task->u.grow.w = (task->u.grow.w - task->u.grow.width_delta);
-    task->pos.x    = (task->pos.x + (s16)task->u.grow.width_delta / 2);
+    task->pos.vx   = (task->pos.vx + (s16)task->u.grow.width_delta / 2);
     if ((task->u.grow.w << 16) < 0) {
         switch (task->mode) {
             case 0:
                 if (task->flags & 0x2) {
-                    task->pos.x = ((g_UiPanelOrigins[1][g_UiPanelPlacement].x + (task->unk_0A >> 1)) << 4);
+                    task->pos.vx = ((g_UiPanelOrigins[1][g_UiPanelPlacement].x + (task->unk_0A >> 1)) << 4);
                 } else {
-                    task->pos.x = ((g_UiPanelOrigins[0][g_UiPanelPlacement].x + (task->unk_0A >> 1)) << 4);
+                    task->pos.vx = ((g_UiPanelOrigins[0][g_UiPanelPlacement].x + (task->unk_0A >> 1)) << 4);
                 }
                 break;
             case 1:
-                task->pos.x = ((D_8017F930[g_UiMessageWindow.panel_index * 4] + (task->unk_0A >> 1)) << 4);
+                task->pos.vx = ((D_8017F930[g_UiMessageWindow.panel_index * 4] + (task->unk_0A >> 1)) << 4);
                 break;
             default:
-                g_UiPanelCurrent->pos.x = ((D_8017F944[g_UiPanelPlacement][0] + (g_UiPanelCurrent->unk_0A >> 1)) << 4);
+                g_UiPanelCurrent->pos.vx = ((D_8017F944[g_UiPanelPlacement][0] + (g_UiPanelCurrent->unk_0A >> 1)) << 4);
                 break;
         }
         count++;
@@ -35,21 +35,21 @@ MATCH void UI_MessageShrinkPanel(void) {
     }
     task           = (MenuPanelTask*)g_UiPanelCurrent;
     task->u.grow.h = (task->u.grow.h - task->u.grow.height_delta);
-    task->pos.y    = (task->pos.y + (s16)task->u.grow.height_delta / 2);
+    task->pos.vy   = (task->pos.vy + (s16)task->u.grow.height_delta / 2);
     if ((task->u.grow.h << 16) < 0) {
         switch (task->mode) {
             case 0:
                 if (task->flags & 0x2) {
-                    task->pos.y = ((g_UiPanelOrigins[1][g_UiPanelPlacement].y + (task->unk_0B >> 1)) << 4);
+                    task->pos.vy = ((g_UiPanelOrigins[1][g_UiPanelPlacement].y + (task->unk_0B >> 1)) << 4);
                 } else {
-                    task->pos.y = ((g_UiPanelOrigins[0][g_UiPanelPlacement].y + (task->unk_0B >> 1)) << 4);
+                    task->pos.vy = ((g_UiPanelOrigins[0][g_UiPanelPlacement].y + (task->unk_0B >> 1)) << 4);
                 }
                 break;
             case 1:
-                task->pos.y = ((D_8017F930[1 + g_UiMessageWindow.panel_index * 4] + (task->unk_0B >> 1)) << 4);
+                task->pos.vy = ((D_8017F930[1 + g_UiMessageWindow.panel_index * 4] + (task->unk_0B >> 1)) << 4);
                 break;
             default:
-                g_UiPanelCurrent->pos.y = ((D_8017F944[g_UiPanelPlacement][1] + (g_UiPanelCurrent->unk_0B >> 1)) << 4);
+                g_UiPanelCurrent->pos.vy = ((D_8017F944[g_UiPanelPlacement][1] + (g_UiPanelCurrent->unk_0B >> 1)) << 4);
                 break;
         }
         count++;
@@ -60,7 +60,7 @@ MATCH void UI_MessageShrinkPanel(void) {
         return;
     }
     if (!(g_UiPanelCurrent->flags & 0x1)) {
-        UI_WindowDrawBoxOutline((s16)g_UiPanelCurrent->pos.x >> 4, (s16)g_UiPanelCurrent->pos.y >> 4, (g_UiPanelCurrent->u.grow.w >> 4), (g_UiPanelCurrent->u.grow.h >> 4));
+        UI_WindowDrawBoxOutline(g_UiPanelCurrent->pos.vx >> 4, g_UiPanelCurrent->pos.vy >> 4, (g_UiPanelCurrent->u.grow.w >> 4), (g_UiPanelCurrent->u.grow.h >> 4));
     }
     if (g_UiPanelCurrent->mode == 0) {
         UI_MessageUpdateLayout();

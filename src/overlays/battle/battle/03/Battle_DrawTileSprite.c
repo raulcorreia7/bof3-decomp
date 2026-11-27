@@ -2,16 +2,9 @@
 
 /* Queues a 4x4 tile sprite at the origin, textured from the tile table and tinted by the palette row. */
 /* func_801DA14C */
-MATCH void Battle_DrawTileSprite(s16 origin_x, s16 origin_y, s32 tile_offset, s32 clut_index) {
-    /* FAKE: retail keeps origin_x in $s2 and origin_y in
-     * $s3 (retail `move s2,a0` / `move s3,a1`); gcc 2.7.2 assigns the pair
-     * swapped and refuses the in-place `x += 4` (keeps originals in the
-     * s-regs, +4 in temps). Declaration order and all four profiles measured
-     * no better. */
-    FAKE_REG(s16, x, "s2");
-    /* FAKE: retail `move s3,a1` and in-place `addiu s3,s3,4`; gcc keeps the original in $s3
-     * uncremented and puts origin_y+4 in a temp. */
-    FAKE_REG(s16, y, "s3");
+MATCH void Battle_DrawTileSprite(s32 origin_x, s32 origin_y, s32 tile_offset, s32 clut_index) {
+    s32       x;
+    s32       y;
     s16       start_y;
     s16       start_x;
     s32       v_delta;

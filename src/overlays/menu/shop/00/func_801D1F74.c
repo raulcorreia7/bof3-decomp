@@ -14,7 +14,7 @@ MATCH void func_801D1F74(void) {
     D_80148340                = 0x4A;
     g_UiPanelTasks[21].active = 1;
     D_80148628                = D_80148334 + (1 - *mode) * 32 + 0xDE;
-    D_8014862A                = g_UiPanelTasks[0].pos.y + 5;
+    D_8014862A                = g_UiPanelTasks[0].pos.vy + 5;
     if (*pad & (PADLright | PADLleft)) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
         *mode = *mode ^ 0x1;

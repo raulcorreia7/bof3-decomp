@@ -3,11 +3,11 @@
 /* func_801EA728 */
 MATCH void Battle_SlideInEventPanel(void) {
     MenuPanelTask* panel = g_UiPanelCurrent;
-    s16            state = panel->pos.y;
+    s16            state = panel->pos.vy;
 
     if (state == 0x12) {
         panel->state++;
     } else {
-        panel->pos.y = state + 8;
+        panel->pos.vy = state + 8;
     }
 }

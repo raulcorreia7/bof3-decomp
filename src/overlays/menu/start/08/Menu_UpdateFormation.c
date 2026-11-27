@@ -33,10 +33,10 @@ NON_MATCHING void Menu_UpdateFormation(void) {
         g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0B = 0;
     }
     index                     = g_FormationCursorRow * 3 + g_FormationCursorColumn;
-    g_UiPanelTasks[20].pos.x  = D_801EC4D0[index].unk_00;
+    g_UiPanelTasks[20].pos.vx = D_801EC4D0[index].unk_00;
     y                         = D_801EC4D0[index].unk_02;
     frame[0x24]               = 1;
-    g_UiPanelTasks[20].pos.y  = y;
+    g_UiPanelTasks[20].pos.vy = y;
     g_UiPanelTasks[20].unk_0A = D_801EC4D0[index].unk_04 + 1;
     g_UiPanelTasks[20].unk_0B = 1;
     for (i = 0; i < 6; i++) {

@@ -32,9 +32,9 @@ MATCH void func_801D3174(void) {
     g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = Item_GetDescription(D_8014850E, g_ItemCategoryIds[D_8014850E][g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0C]);
     pad                                                       = g_PadStates[0].pressed;
     g_UiPanelTasks[MENU_START_PANEL_CURSOR].active            = 1;
-    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.x             = (u16)g_UiPanelTasks[MENU_START_PANEL_ITEMS].pos.x + 7;
+    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.vx            = (u16)g_UiPanelTasks[MENU_START_PANEL_ITEMS].pos.vx + 7;
     offset                                                    = (D_80148510 - g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0B) * 13 + 0x1A;
-    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.y             = (u16)g_UiPanelTasks[MENU_START_PANEL_ITEMS].pos.y + offset;
+    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.vy            = (u16)g_UiPanelTasks[MENU_START_PANEL_ITEMS].pos.vy + offset;
     trigger                                                   = INPUT_REPEATED(pad, (INPUT_DIRECTIONAL | PADL1 | PADR1));
     if (trigger & PADLleft) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));

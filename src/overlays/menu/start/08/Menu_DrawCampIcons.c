@@ -14,13 +14,13 @@ MATCH void Menu_DrawCampIcons(void) {
     }
     for (i = 0; (u8)i < 7; i++) {
         if ((u8)i != g_UiPanelCurrent->unk_0A) {
-            UI_IconDrawCell(s_CampMenuPanelIds[(u8)i], (g_UiPanelCurrent->pos.x + (u8)i * 16) & HALF_MASK, g_UiPanelCurrent->pos.y, UI_ICON_CELL_SIZE, UI_ICON_CELL_SIZE,
+            UI_IconDrawCell(s_CampMenuPanelIds[(u8)i], ((u16)g_UiPanelCurrent->pos.vx + (u8)i * 16) & HALF_MASK, (u16)g_UiPanelCurrent->pos.vy, UI_ICON_CELL_SIZE, UI_ICON_CELL_SIZE,
                             ((u8)i == 6 && g_UiPanelCurrent->unk_0C) ? 0x40 : 0x80);
         }
     }
     cur  = g_UiPanelCurrent->unk_0A;
     grow = g_UiPanelCurrent->u.icons.grow;
-    UI_IconDrawCell(s_CampMenuPanelIds[(u8)cur], (g_UiPanelCurrent->pos.x + cur * 0x10 - grow) & HALF_MASK, (g_UiPanelCurrent->pos.y - grow) & HALF_MASK, (grow * 2 + 0x10) & BYTE_MASK,
+    UI_IconDrawCell(s_CampMenuPanelIds[(u8)cur], ((u16)g_UiPanelCurrent->pos.vx + cur * 0x10 - grow) & HALF_MASK, ((u16)g_UiPanelCurrent->pos.vy - grow) & HALF_MASK, (grow * 2 + 0x10) & BYTE_MASK,
                     (grow * 2 + 0x10) & BYTE_MASK, (g_UiPanelCurrent->unk_0A == 6 && g_UiPanelCurrent->unk_0C) ? 0x40 : 0x80);
     g_UiPanelCurrent->unk_0B = g_UiPanelCurrent->unk_0A;
 }

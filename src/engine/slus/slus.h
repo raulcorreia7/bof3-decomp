@@ -1181,7 +1181,7 @@ static inline void Slus_DrawPanelBox(void) {
     MenuPanelTask* panel;
 
     panel = g_UiPanelCurrent;
-    UI_WindowDrawPanelBox((s16)panel->pos.x >> 4, (s16)panel->pos.y >> 4, (u8)(panel->u.grow.w >> 4), (u8)(panel->u.grow.h >> 4));
+    UI_WindowDrawPanelBox((s16)panel->pos.vx >> 4, (s16)panel->pos.vy >> 4, (u8)(panel->u.grow.w >> 4), (u8)(panel->u.grow.h >> 4));
 }
 
 s32 SYS_LoadExe(const char* path);

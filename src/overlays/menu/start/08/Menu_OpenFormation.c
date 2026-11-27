@@ -48,10 +48,10 @@ MATCH void Menu_OpenFormation(void) {
                     panel->panel         = 6;
                     panel->mode          = 0xB;
                     panel->state         = 2;
-                    panel->pos.x         = (col - 1) * 0x4B + 0x140;
+                    panel->pos.vx        = (col - 1) * 0x4B + 0x140;
                     panel->unk_0A        = group_base + panel_index;
                     panel->active        = 1;
-                    panel->pos.y         = row * 0x36 + 0x3E;
+                    panel->pos.vy        = row * 0x36 + 0x3E;
                     panel->unk_0B        = panel_index;
                     panel->unk_0C        = 0;
                     panel->u.addr.unk_10 = 0xE00;

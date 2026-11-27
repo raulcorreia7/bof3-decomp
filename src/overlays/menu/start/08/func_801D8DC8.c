@@ -28,8 +28,8 @@ MATCH void func_801D8DC8(void) {
         g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0;
     }
     g_UiPanelTasks[MENU_START_PANEL_CURSOR].active = 1;
-    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.x  = panel->pos.x + START_LIST_CURSOR_X;
-    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.y  = panel->pos.y + ((panel->unk_0B - panel->unk_0A) * START_LIST_ROW_HEIGHT + START_LIST_FIRST_ROW_Y);
+    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.vx = panel->pos.vx + START_LIST_CURSOR_X;
+    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.vy = (u16)(panel->pos.vy + ((panel->unk_0B - panel->unk_0A) * START_LIST_ROW_HEIGHT + START_LIST_FIRST_ROW_Y));
     buttons                                        = INPUT_REPEATED(g_PadStates[0].pressed, (PADLup | PADLdown | PADL1 | PADR1));
     old                                            = panel->unk_0B;
     if (buttons & PADLup) {

@@ -13,8 +13,8 @@ MATCH void Battle_SelectEquipChoice(void) {
 
     if (g_UiPanelTasks[17].state == 0) {
         g_UiPanelTasks[19].active = 1;
-        g_UiPanelTasks[19].pos.x  = g_UiPanelTasks[17].pos.x + 7;
-        g_UiPanelTasks[19].pos.y  = g_UiPanelTasks[17].pos.y + ((g_UiPanelTasks[17].unk_0B - g_UiPanelTasks[17].unk_0A) * 13 + 26);
+        g_UiPanelTasks[19].pos.vx = g_UiPanelTasks[17].pos.vx + 7;
+        g_UiPanelTasks[19].pos.vy = (u16)(g_UiPanelTasks[17].pos.vy + ((g_UiPanelTasks[17].unk_0B - g_UiPanelTasks[17].unk_0A) * 13 + 26));
     } else {
         g_UiPanelTasks[19].active = 0;
     }

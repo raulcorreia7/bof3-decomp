@@ -13,8 +13,8 @@ NON_MATCHING void func_801DF9EC(void) {
     g_UiPanelTasks[0].u.addr.unk_10 = selected + 0x73;
     if (g_UiPanelTasks[1].state == 0) {
         g_UiPanelTasks[21].active = 1;
-        g_UiPanelTasks[21].pos.x  = g_UiPanelTasks[1].pos.x + selected * 0x30;
-        g_UiPanelTasks[21].pos.y  = g_UiPanelTasks[1].pos.y + 4;
+        g_UiPanelTasks[21].pos.vx = g_UiPanelTasks[1].pos.vx + selected * 0x30;
+        g_UiPanelTasks[21].pos.vy = g_UiPanelTasks[1].pos.vy + 4;
     } else {
         g_UiPanelTasks[21].active = 0;
     }
@@ -41,25 +41,25 @@ NON_MATCHING void func_801DF9EC(void) {
                 D_8014865B = 1;
             } else {
                 SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
-                g_UiPanelTasks[2].mode          = 13;
-                *(s16*)&g_UiPanelTasks[2].pos.x = -150;
-                g_UiPanelTasks[2].pos.y         = 116;
-                g_UiPanelTasks[3].mode          = 12;
-                g_UiPanelTasks[3].unk_0C        = 0xFF;
-                g_UiPanelTasks[2].panel         = 7;
-                g_UiPanelTasks[3].panel         = 7;
-                D_801E625C                      = 0;
-                g_UiPanelTasks[2].state         = 2;
-                g_UiPanelTasks[2].active        = 1;
-                g_UiPanelTasks[3].state         = 2;
-                g_UiPanelTasks[3].active        = 1;
-                g_UiPanelTasks[3].unk_0B        = 0;
-                g_UiPanelTasks[3].flags         = 0;
-                g_UiPanelTasks[3].pos.x         = 320;
-                g_UiPanelTasks[3].pos.y         = 62;
-                D_80148652                      = 1;
-                g_UiPanelTasks[2].unk_0A        = D_801E6264[0];
-                g_UiPanelTasks[3].unk_0A        = D_801E6264[0];
+                g_UiPanelTasks[2].mode   = 13;
+                g_UiPanelTasks[2].pos.vx = -150;
+                g_UiPanelTasks[2].pos.vy = 116;
+                g_UiPanelTasks[3].mode   = 12;
+                g_UiPanelTasks[3].unk_0C = 0xFF;
+                g_UiPanelTasks[2].panel  = 7;
+                g_UiPanelTasks[3].panel  = 7;
+                D_801E625C               = 0;
+                g_UiPanelTasks[2].state  = 2;
+                g_UiPanelTasks[2].active = 1;
+                g_UiPanelTasks[3].state  = 2;
+                g_UiPanelTasks[3].active = 1;
+                g_UiPanelTasks[3].unk_0B = 0;
+                g_UiPanelTasks[3].flags  = 0;
+                g_UiPanelTasks[3].pos.vx = 320;
+                g_UiPanelTasks[3].pos.vy = 62;
+                D_80148652               = 1;
+                g_UiPanelTasks[2].unk_0A = D_801E6264[0];
+                g_UiPanelTasks[3].unk_0A = D_801E6264[0];
                 g_MenuStep.sub_step++;
                 SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
                 g_UiPanelTasks[1].unk_0B = D_801E6260;
@@ -69,16 +69,16 @@ NON_MATCHING void func_801DF9EC(void) {
         } else {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 4));
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
-            g_UiPanelTasks[4].panel         = 7;
-            g_UiPanelTasks[4].mode          = 11;
-            g_BattleMessageState            = 3;
-            g_UiPanelTasks[4].active        = 1;
-            g_UiPanelTasks[4].unk_0C        = 0xFF;
-            g_UiPanelTasks[4].unk_0A        = 0;
-            g_UiPanelTasks[4].unk_0B        = 0;
-            g_UiPanelTasks[4].flags         = 0;
-            *(s16*)&g_UiPanelTasks[4].pos.x = -170;
-            g_UiPanelTasks[4].pos.y         = 62;
+            g_UiPanelTasks[4].panel  = 7;
+            g_UiPanelTasks[4].mode   = 11;
+            g_BattleMessageState     = 3;
+            g_UiPanelTasks[4].active = 1;
+            g_UiPanelTasks[4].unk_0C = 0xFF;
+            g_UiPanelTasks[4].unk_0A = 0;
+            g_UiPanelTasks[4].unk_0B = 0;
+            g_UiPanelTasks[4].flags  = 0;
+            g_UiPanelTasks[4].pos.vx = -170;
+            g_UiPanelTasks[4].pos.vy = 62;
             g_MenuStep.sub_step += 2;
         }
         g_UiPanelTasks[1].unk_0B = D_801E6260;

@@ -15,11 +15,11 @@ MATCH void Battle_DrawCommandList(void) {
     u8  slot_c;
     u8  sum;
 
-    Battle_DrawTitledFrame(g_UiPanelCurrent->pos.x, g_UiPanelCurrent->pos.y, g_UiPanelCurrent->unk_08, g_UiPanelCurrent->unk_09, 1);
+    Battle_DrawTitledFrame(g_UiPanelCurrent->pos.vx, g_UiPanelCurrent->pos.vy, g_UiPanelCurrent->unk_08, g_UiPanelCurrent->unk_09, 1);
     for (i = 0; (i & BYTE_MASK) < 12U; i++) {
         D_800B70B8[i & BYTE_MASK] = D_80145518[i & BYTE_MASK].gate_03 + 1;
     }
-    UI_ListDrawScrollbar(D_800B70B8, ((BattlePanelByteCells*)(void*)g_UiPanelCurrent)->scale, (g_UiPanelCurrent->pos.x + 0x80), (g_UiPanelCurrent->pos.y + 0x18), 3,
+    UI_ListDrawScrollbar(D_800B70B8, ((BattlePanelByteCells*)(void*)g_UiPanelCurrent)->scale, (g_UiPanelCurrent->pos.vx + 0x80), (g_UiPanelCurrent->pos.vy + 0x18), 3,
                          ((BattlePanelByteCells*)(void*)g_UiPanelCurrent)->rows, 0x5C);
     for (i = 0; (i & BYTE_MASK) < 3U; i++) {
         line   = i & BYTE_MASK;
@@ -40,15 +40,15 @@ MATCH void Battle_DrawCommandList(void) {
             if (g_Game.members[BATTLE_ACTIVE_MEMBER->slot].chr.ap < sum) {
                 clut = 7;
             }
-            func_800B1DAC((g_UiPanelCurrent->pos.x + 0x10), (g_UiPanelCurrent->pos.y + (line_y + 0x18)), slot_a & 0x1F);
+            func_800B1DAC((g_UiPanelCurrent->pos.vx + 0x10), (g_UiPanelCurrent->pos.vy + (line_y + 0x18)), slot_a & 0x1F);
             line_y += 0x2D;
-            UI_TextDrawString((g_UiPanelCurrent->pos.x + 16), (g_UiPanelCurrent->pos.y + line_y), clut, TEXT_LENGTH_MAX,
+            UI_TextDrawString((g_UiPanelCurrent->pos.vx + 16), (g_UiPanelCurrent->pos.vy + line_y), clut, TEXT_LENGTH_MAX,
                               UI_MessageGetText(((u8*)&D_800B4C90)[D_80145518[(s16)g_UiPanelCurrent->u.battle.row_base + line].gate_03 & 0x1F]));
             TEXT_Format(g_UiTextFormatBuffer, D_80096A2C, sum & BYTE_MASK);
-            UI_TextDrawGlyphString((g_UiPanelCurrent->pos.x + 88), (g_UiPanelCurrent->pos.y + line_y), clut, g_UiTextFormatBuffer);
+            UI_TextDrawGlyphString((g_UiPanelCurrent->pos.vx + 88), (g_UiPanelCurrent->pos.vy + line_y), clut, g_UiTextFormatBuffer);
         }
     }
     if ((g_Battle.ui_step != 6) || (g_Battle.ui_mode != 5)) {
-        UI_CursorDraw((g_UiPanelCurrent->pos.x + 7) & HALF_MASK, (g_UiPanelCurrent->pos.y + 0x20 + *(s16*)&g_UiPanelCurrent->u.battle.cursor * 32) & HALF_MASK, 0);
+        UI_CursorDraw((g_UiPanelCurrent->pos.vx + 7) & HALF_MASK, ((u16)g_UiPanelCurrent->pos.vy + 0x20 + *(s16*)&g_UiPanelCurrent->u.battle.cursor * 32) & HALF_MASK, 0);
     }
 }

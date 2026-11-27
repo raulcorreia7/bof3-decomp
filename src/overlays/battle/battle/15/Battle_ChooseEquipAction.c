@@ -10,8 +10,8 @@ MATCH void Battle_ChooseEquipAction(void) {
     g_BattleMessages[(D_801EC328 - 1) & 0xF].text = UI_MessageGetText(*option == 0 ? 0x2F : 0x31);
     if (g_UiPanelTasks[21].state == 0) {
         g_UiPanelTasks[19].active = 1;
-        g_UiPanelTasks[19].pos.x  = g_UiPanelTasks[21].pos.x + *option * 48;
-        g_UiPanelTasks[19].pos.y  = g_UiPanelTasks[21].pos.y + 4;
+        g_UiPanelTasks[19].pos.vx = g_UiPanelTasks[21].pos.vx + *option * 48;
+        g_UiPanelTasks[19].pos.vy = g_UiPanelTasks[21].pos.vy + 4;
     } else {
         g_UiPanelTasks[19].active = 0;
     }

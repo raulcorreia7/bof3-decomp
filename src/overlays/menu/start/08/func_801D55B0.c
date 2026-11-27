@@ -12,14 +12,14 @@ MATCH void func_801D55B0(void) {
 
     task = &g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME];
     Menu_DrawClutStrip(g_WindowClut);
-    task->active                                        = 1;
-    sel                                                 = &g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0C;
-    g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME].pos.x = g_UiPanelTasks[4].pos.x;
-    g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME].pos.y = *sel * 0x36 + 0x3E;
-    pressed                                             = INPUT_REPEATED(g_PadStates[0].pressed, (PADLup | PADLdown));
-    task                                                = &g_UiPanelTasks[MENU_START_PANEL_ITEMS];
-    old                                                 = *sel;
-    count                                               = Party_CountOrder(PARTY_ORDER_FIELD);
+    task->active                                         = 1;
+    sel                                                  = &g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0C;
+    g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME].pos.vx = g_UiPanelTasks[4].pos.vx;
+    g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME].pos.vy = *sel * 0x36 + 0x3E;
+    pressed                                              = INPUT_REPEATED(g_PadStates[0].pressed, (PADLup | PADLdown));
+    task                                                 = &g_UiPanelTasks[MENU_START_PANEL_ITEMS];
+    old                                                  = *sel;
+    count                                                = Party_CountOrder(PARTY_ORDER_FIELD);
     if (pressed & PADLup) {
         *sel -= 1;
         if ((s8)*sel < 0) {
@@ -60,8 +60,8 @@ MATCH void func_801D55B0(void) {
             g_UiPanelTasks[14].state                      = 4;
             frame -= 5;
             frame->active                    = 1;
-            g_UiPanelTasks[14].pos.x         = 320;
-            g_UiPanelTasks[14].pos.y         = 62;
+            g_UiPanelTasks[14].pos.vx        = 320;
+            g_UiPanelTasks[14].pos.vy        = 62;
             g_UiPanelTasks[14].unk_0B        = 0xFF;
             g_UiPanelTasks[14].unk_0C        = g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0C;
             g_UiPanelTasks[14].unk_0A        = s_SkillOrderGroups[g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0C][0];

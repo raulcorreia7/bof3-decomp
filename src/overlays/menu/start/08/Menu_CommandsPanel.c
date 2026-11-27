@@ -7,7 +7,7 @@
 MATCH void Menu_CommandsPanel(void) {
     g_MenuStartCommandsSteps[g_UiPanelCurrent->state]();
     /* clang-format off */
-    Menu_DrawCommandRow(g_UiPanelCurrent->pos.x, g_UiPanelCurrent->pos.y,
+    Menu_DrawCommandRow(g_UiPanelCurrent->pos.vx, g_UiPanelCurrent->pos.vy,
                         g_UiPanelCurrent->unk_0A, g_UiPanelCurrent->unk_0B, 0);
     /* clang-format on */
 }

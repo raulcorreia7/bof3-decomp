@@ -30,8 +30,8 @@ MATCH void UI_MessageDrawPresetRows(void) {
             row          = rowp->row;
             table_offset = row * 6;
             panel        = g_UiPanelCurrent;
-            cursor       = UI_TextDrawAt((*(u16*)((u8*)&D_8017F960 + table_offset) + ((s16)panel->pos.x >> 4)) & HALF_MASK,
-                                         (*(u16*)((u8*)&D_8017F962 + table_offset) + ((s16)panel->pos.y >> 4) + *(s16*)((u8*)&D_8017F964 + table_offset) * i) & HALF_MASK, cursor);
+            cursor       = UI_TextDrawAt((*(u16*)((u8*)&D_8017F960 + table_offset) + (panel->pos.vx >> 4)) & HALF_MASK,
+                                         (*(u16*)((u8*)&D_8017F962 + table_offset) + (panel->pos.vy >> 4) + *(s16*)((u8*)&D_8017F964 + table_offset) * i) & HALF_MASK, cursor);
             i++;
         } while (rowp->count >= i);
     }

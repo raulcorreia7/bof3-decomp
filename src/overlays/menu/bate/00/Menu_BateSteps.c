@@ -81,8 +81,8 @@ MATCH void func_801D1044(void) {
     s32 category;
 
     g_UiPanelTasks[4].active = 1;
-    g_UiPanelTasks[4].pos.x  = D_80148358 + 6;
-    g_UiPanelTasks[4].pos.y  = D_8014835A + (g_UiPanelTasks[1].unk_0A * 13 + 0x57);
+    g_UiPanelTasks[4].pos.vx = D_80148358 + 6;
+    g_UiPanelTasks[4].pos.vy = (u16)(D_8014835A + (g_UiPanelTasks[1].unk_0A * 13 + 0x57));
     pressed                  = INPUT_GetRepeatedButtons(g_PadStates[0].pressed & INPUT_DIRECTIONAL) & (PADLup | PADLdown);
     g_UiPanelTasks[1].unk_0B = 0xFF;
     g_UiPanelTasks[1].flags  = 1;

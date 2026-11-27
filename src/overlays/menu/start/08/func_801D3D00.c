@@ -15,9 +15,9 @@ MATCH void func_801D3D00(void) {
         Item_GetDescription(g_UiPanelTasks[13].unk_0A, g_ItemCategoryIds[g_UiPanelTasks[13].unk_0A][g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0C]);
     g_UiPanelTasks[MENU_START_PANEL_CURSOR].active = 1;
     g_UiPanelTasks[14].unk_0C                      = 0;
-    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.x  = (u16)g_UiPanelTasks[MENU_START_PANEL_ITEMS].pos.x + 7;
+    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.vx = (u16)g_UiPanelTasks[MENU_START_PANEL_ITEMS].pos.vx + 7;
     span                                           = (g_UiPanelTasks[13].unk_0C - g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0B) * 0xD + 0x1A;
-    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.y  = (u16)g_UiPanelTasks[MENU_START_PANEL_ITEMS].pos.y + span;
+    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.vy = (u16)g_UiPanelTasks[MENU_START_PANEL_ITEMS].pos.vy + span;
     panel                                          = &D_80148504;
     pressed                                        = INPUT_GetRepeatedButtons(g_PadStates[0].pressed & (PADLup | PADLdown | PADL1 | PADR1));
     cursor                                         = g_UiPanelTasks[13].unk_0C;

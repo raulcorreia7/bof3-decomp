@@ -13,8 +13,8 @@ MATCH void func_801D3A98(void) {
     g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0C             = 0xFF;
     task                                                      = &g_UiPanelTasks[14];
     task->unk_0C                                              = 0xFF;
-    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.x             = task->pos.x + 5;
-    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.y             = task->pos.y + (task->unk_0B * 16 + 26);
+    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.vx            = task->pos.vx + 5;
+    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.vy            = (u16)(task->pos.vy + (task->unk_0B * 16 + 26));
 
     input = INPUT_REPEATED(g_PadStates[0].pressed, (PADLup | PADLdown));
     if (input & PADLup) {

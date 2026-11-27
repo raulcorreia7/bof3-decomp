@@ -19,29 +19,29 @@ MATCH void func_800B0498(void) {
     s32  entry_index;
     /* FAKE: pin shared fourth argument in a3. */
     FAKE_REG(s32, selection, "a3");
-    func_800B06F4(g_UiPanelCurrent->pos.x, g_UiPanelCurrent->pos.y, g_UiPanelCurrent->unk_08, g_UiPanelCurrent->unk_09);
+    func_800B06F4(g_UiPanelCurrent->pos.vx, g_UiPanelCurrent->pos.vy, g_UiPanelCurrent->unk_08, g_UiPanelCurrent->unk_09);
 
     style = &g_WindowStyle;
-    UI_WindowDraw((u16)(g_UiPanelCurrent->pos.x + 6u), (u16)(g_UiPanelCurrent->pos.y + 33u), (u16)(g_UiPanelCurrent->unk_08 * 8u - 15u), (u16)(g_UiPanelCurrent->unk_09 * 8u - 39u), 0, *style);
+    UI_WindowDraw((u16)(g_UiPanelCurrent->pos.vx + 6u), (u16)(g_UiPanelCurrent->pos.vy + 33u), (u16)(g_UiPanelCurrent->unk_08 * 8u - 15u), (u16)(g_UiPanelCurrent->unk_09 * 8u - 39u), 0, *style);
 
-    UI_WindowDraw((u16)(g_UiPanelCurrent->pos.x + 54u), (u16)(g_UiPanelCurrent->pos.y + 6u), 72, 24, 0, *style);
+    UI_WindowDraw((u16)(g_UiPanelCurrent->pos.vx + 54u), (u16)(g_UiPanelCurrent->pos.vy + 6u), 72, 24, 0, *style);
 
-    UI_WindowDraw((u16)(g_UiPanelCurrent->pos.x + 135u), (u16)(g_UiPanelCurrent->pos.y + 10u), 48, 16, 0, *style);
+    UI_WindowDraw((u16)(g_UiPanelCurrent->pos.vx + 135u), (u16)(g_UiPanelCurrent->pos.vy + 10u), 48, 16, 0, *style);
 
     panel_count = -(BATTLE_ACTIVE_MEMBER->chr.ap < D_801463B8[0]) & 0x7;
-    UI_TextDrawAscii((u16)(g_UiPanelCurrent->pos.x + 136u), (u16)(g_UiPanelCurrent->pos.y + 12u), panel_count, (const void*)(D_800B6D1C));
+    UI_TextDrawAscii((u16)(g_UiPanelCurrent->pos.vx + 136u), (u16)(g_UiPanelCurrent->pos.vy + 12u), panel_count, (const void*)(D_800B6D1C));
 
     TEXT_Format(g_UiTextFormatBuffer, D_80096A04, D_801463B8[0]);
 
-    UI_TextDrawAscii((u16)(g_UiPanelCurrent->pos.x + 160u), (u16)(g_UiPanelCurrent->pos.y + 12u), panel_count, (const void*)(g_UiTextFormatBuffer));
+    UI_TextDrawAscii((u16)(g_UiPanelCurrent->pos.vx + 160u), (u16)(g_UiPanelCurrent->pos.vy + 12u), panel_count, (const void*)(g_UiTextFormatBuffer));
 
     if (SEL_MODE == 4) {
         sel_substate = SEL_SUBSTATE;
         selection    = sel_substate;
         if (sel_substate == -1) {
-            ((void (*)(u16, u16, s32, s32))UI_CursorDraw)((g_UiPanelCurrent->pos.x + 14), (g_UiPanelCurrent->pos.y + 12), 0, selection);
+            ((void (*)(u16, u16, s32, s32))UI_CursorDraw)((g_UiPanelCurrent->pos.vx + 14), (g_UiPanelCurrent->pos.vy + 12), 0, selection);
         } else {
-            ((void (*)(u16, u16, s32, s32))UI_CursorDraw)(((u16)(g_UiPanelCurrent->pos.x + 14) + SEL_SLOT * 30), ((u16)(g_UiPanelCurrent->pos.y + 44) + ((entry_index = selection & BYTE_MASK) << 5)),
+            ((void (*)(u16, u16, s32, s32))UI_CursorDraw)(((u16)(g_UiPanelCurrent->pos.vx + 14) + SEL_SLOT * 30), ((u16)(g_UiPanelCurrent->pos.vy + 44) + ((entry_index = selection & BYTE_MASK) << 5)),
                                                           0, selection);
         }
     }

@@ -11,16 +11,16 @@ MATCH void func_801D14EC(void) {
         FAKE_USE(panel);
         i = 0;
         while (i < (u8)Party_CountOrder(PARTY_ORDER_FIELD)) {
-            panel             = &g_UiPanelTasks[i + 3];
-            panel->unk_0A     = i;
-            LOH(panel->pos.x) = MENU_PANEL_HIDDEN_X;
-            panel->pos.y      = i * 54 + 62;
-            panel->active     = 1;
-            panel->panel      = 7;
-            panel->mode       = 5;
-            panel->state      = 2;
-            panel->unk_0B     = 0;
-            panel->unk_0C     = 0;
+            panel         = &g_UiPanelTasks[i + 3];
+            panel->unk_0A = i;
+            panel->pos.vx = MENU_PANEL_HIDDEN_X;
+            panel->pos.vy = i * 54 + 62;
+            panel->active = 1;
+            panel->panel  = 7;
+            panel->mode   = 5;
+            panel->state  = 2;
+            panel->unk_0B = 0;
+            panel->unk_0C = 0;
             i++;
         }
     }

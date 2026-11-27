@@ -5,7 +5,7 @@
 MATCH void func_801D2828(void) {
     u8* state;
 
-    g_UiPanelTasks[7].pos.x    = BATTLE_PARTY_STRIDE;
+    g_UiPanelTasks[7].pos.vx   = BATTLE_PARTY_STRIDE;
     D_80148432                 = 0x3E;
     g_UiPanelTasks[7].active   = 1;
     g_UiPanelTasks[7].panel    = 7;

@@ -7,9 +7,9 @@ MATCH void Menu_TitlePanel(void) {
     u32 label_dx;
 
     g_MenuStartTitleSteps[g_UiPanelCurrent->state]();
-    Menu_DrawHeaderBar(g_UiPanelCurrent->pos.x, g_UiPanelCurrent->pos.y, MENU_HEADER_SHORT_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
+    Menu_DrawHeaderBar((u16)g_UiPanelCurrent->pos.vx, (u16)g_UiPanelCurrent->pos.vy, MENU_HEADER_SHORT_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
     resource = UI_MessageGetText(g_UiPanelCurrent->u.message.id);
     label_dx = (Game_ReadCommand(resource) & BYTE_MASK) * 4 - 0x25;
-    panel_x  = (s16)(g_UiPanelCurrent->pos.x - label_dx);
-    UI_TextDraw(panel_x, g_UiPanelCurrent->pos.y + 3, 0, Game_ReadCommand(resource) & BYTE_MASK, resource);
+    panel_x  = (s16)(g_UiPanelCurrent->pos.vx - label_dx);
+    UI_TextDraw(panel_x, g_UiPanelCurrent->pos.vy + 3, 0, Game_ReadCommand(resource) & BYTE_MASK, resource);
 }

@@ -20,12 +20,12 @@ MATCH void func_801D7E4C(void) {
     latch = flag - 0x48;
     *flag = 0;
     if (state == 0) {
-        x                                                    = g_UiPanelTasks[MENU_START_PANEL_ITEMS].pos.x;
+        x                                                    = g_UiPanelTasks[MENU_START_PANEL_ITEMS].pos.vx;
         y                                                    = D_80148658[0] * 0x36;
         *latch                                               = 1;
         g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0B = 1;
         D_801485E0                                           = x;
-        D_801485E2                                           = g_UiPanelTasks[MENU_START_PANEL_ITEMS].pos.y + y;
+        D_801485E2                                           = g_UiPanelTasks[MENU_START_PANEL_ITEMS].pos.vy + y;
     } else {
         *latch = 0;
     }

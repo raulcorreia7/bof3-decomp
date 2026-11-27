@@ -6,6 +6,7 @@ MATCH void func_801BFF9C(u32 work_type, u32 work_index, u32 work_mode) {
     s32        i;
     s32        id;
     s32        off;
+    s8*        flags;
     FAKE_REG(u8*, work, "s1"); /* FAKE: work pointer stays in s1. */
     u8* base;
     u8* order;
@@ -42,8 +43,8 @@ MATCH void func_801BFF9C(u32 work_type, u32 work_index, u32 work_mode) {
         g_Game.members[0].slot                         = 0;
         g_BattlePartyBattlers[0].chr                   = g_Characters[0];
         g_Game.members[CHAR_INDEX_RYU].character_index = CHAR_INDEX_RYU;
-        /* D_80145FBC stays an address symbol: FAKE_VOLATILE takes a plain lvalue and the member view changes the code. */
-        FAKE_VOLATILE(u8, D_80145FBC) &= 0xFE;
+        flags                                          = &D_80145FBC;
+        *flags &= 0xFE;
         SELF(Actor)->unk_48 = 0;
         if (LOBU(g_GameRequestFlags) & 0x1) {
             if (g_Characters[CHAR_INDEX_RYU].character_id == CHAR_ID_RYU_YOUNG) {

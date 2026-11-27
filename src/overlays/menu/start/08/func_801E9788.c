@@ -5,11 +5,11 @@ MATCH void func_801E9788(void) {
     u16            next;
 
     task = g_UiPanelCurrent;
-    next = task->pos.x - MENU_PANEL_STEP_X;
+    next = task->pos.vx - MENU_PANEL_STEP_X;
     /* FAKE: the do-while wall keeps the limit load after the x store. */
-    FAKE_ORDER_LOCK(task->pos.x = next);
-    if ((s16)next < LOH(g_UiPanelTasks[4].pos.x) + 120) {
-        task->pos.x = LOH(g_UiPanelTasks[4].pos.x) + 120;
-        task->state = 0;
+    FAKE_ORDER_LOCK(task->pos.vx = next);
+    if ((s16)next < g_UiPanelTasks[4].pos.vx + 120) {
+        task->pos.vx = g_UiPanelTasks[4].pos.vx + 120;
+        task->state  = 0;
     }
 }

@@ -41,9 +41,9 @@ MATCH void Battle_InitEquipChangePanel(void) {
     FAKE_ORDER_FENCE();
     *latch             = one;
     /* D_80148574 stays an address symbol here: a g_UiPanelTasks[16] view changes the code. */
-    saved_x            = g_UiPanelTasks[16].pos.x;
+    saved_x            = g_UiPanelTasks[16].pos.vx;
     D_80148597         = one;
-    saved_y            = g_UiPanelTasks[16].pos.y;
+    saved_y            = g_UiPanelTasks[16].pos.vy;
     D_80148596         = 4;
     D_80148595         = eight;
     D_801485A0         = 0;

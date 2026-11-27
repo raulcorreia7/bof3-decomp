@@ -5,10 +5,10 @@
         MenuPanelTask* task = g_UiPanelCurrent; \
         s16            val;                     \
                                                 \
-        val         = task->pos.x - 32;         \
-        task->pos.x = val;                      \
+        val          = task->pos.vx - 32;       \
+        task->pos.vx = val;                     \
         if (val < 152) {                        \
-            task->pos.x = 152;                  \
-            task->state = 0;                    \
+            task->pos.vx = 152;                 \
+            task->state  = 0;                   \
         }                                       \
     } while (0)

@@ -10,9 +10,9 @@ MATCH void func_801E09F4(void) {
     u8* flag2;
 
     D_80148340 = 0x18;
-    D_80148628 = g_UiPanelTasks[5].pos.x + 5;
+    D_80148628 = g_UiPanelTasks[5].pos.vx + 5;
     sum        = (g_UiPanelTasks[5].unk_0A << 4) + 0x1A;
-    D_8014862A = g_UiPanelTasks[5].pos.y + sum;
+    D_8014862A = g_UiPanelTasks[5].pos.vy + sum;
     buttons    = INPUT_REPEATED(g_PadStates[0].pressed, (PADLup | PADLdown));
     if (buttons & PADLup) {
         u8 next;
