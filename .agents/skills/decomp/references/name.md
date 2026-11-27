@@ -4,8 +4,7 @@ Input: the symbols. A name comes from what the thing means in the game, found th
 Rules: [names](../../../../docs/naming.md#names).
 
 1. Find every user across all images ([users of a symbol](../../../../docs/toolchain.md#every-user-of-a-symbol)).
-   `tools/symbol.py refs <dir>` ranks the address-named units by use; `tools/dups.py shared-names`
-   and `split-names` list names that cover several bodies.
+   `tools/symbol.py refs <dir>` ranks the address-named units by use.
 2. Read what the users do: loop bounds, strides, compares, copies, calls to functions that already
    have names. Search `rg -n 'NAME|0xADDR' config include src` for an existing name.
 3. Rank the evidence ([order](../../../../docs/conventions.md#evidence)): disc labels, retail text and

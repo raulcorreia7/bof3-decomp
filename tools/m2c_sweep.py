@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Draft every open function with m2c, try each draft, and keep the exact ones.
 
-    tools/m2c_sweep.py                        every INCLUDE_ASM function without a template
+    tools/m2c_sweep.py                        every INCLUDE_ASM function
     tools/m2c_sweep.py --sample 200           200 functions in a fixed random order
     tools/m2c_sweep.py --image emi/bmagic     one image or image prefix (repeatable)
     tools/m2c_sweep.py REF...                 TARGET@NAME or TARGET@0xADDRESS refs
@@ -16,9 +16,7 @@ did), and goes to `build/m2c_sweep/results.jsonl` (target, status, differing, va
 a function already in that file. `--jsonl` turns each printed line into an object. The drafts are
 in `build/m2c_sweep/`.
 
-Functions that `tools/dups.py near --full` pairs with a matched template are skipped: use
-`tools/template_try.py` for them. Needs `rapidfuzz`
-(`tools/setup.sh --matching`) and `third_party/m2c` (`tools/setup.sh --matching`).
+Needs `third_party/m2c` (`tools/setup.sh --matching`).
 """
 
 from __future__ import annotations
@@ -240,22 +238,6 @@ def read_results(root: Path) -> set[str]:
     }
 
 
-def templated(root: Path) -> set[str]:
-    """Return the refs that ``dups.py near --full`` pairs with a matched template."""
-    result = subprocess.run(
-        [sys.executable, str(root / "tools/dups.py"), "near", "--full", "--jsonl"],
-        cwd=root,
-        capture_output=True,
-        check=True,
-        text=True,
-    )
-    return {
-        json.loads(line)["target"]
-        for line in result.stdout.splitlines()
-        if line.strip()
-    }
-
-
 def select(args: argparse.Namespace, funcs: list[Func]) -> list[Func]:
     """Return the functions to sweep, smaller first."""
     if args.refs:
@@ -265,9 +247,6 @@ def select(args: argparse.Namespace, funcs: list[Func]) -> list[Func]:
     if args.image:
         chosen = [f for f in chosen if any(f.image.startswith(i) for i in args.image)]
     chosen = [f for f in chosen if asm_path(ROOT, f)]
-    if not args.refs:
-        skip = templated(ROOT)
-        chosen = [f for f in chosen if f.ref not in skip]
     done = read_results(ROOT)
     chosen = [f for f in chosen if f.ref not in done]
     if args.sample:

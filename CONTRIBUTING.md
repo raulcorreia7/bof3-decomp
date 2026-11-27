@@ -21,16 +21,16 @@ Keep the disc, the extracted data and the toolchain objects local: Git ignores t
 A function is `TARGET@0xADDRESS`; `<image>` is the target with `/` written as `+` (`exe/slus_004_22`
 is `exe+slus_004_22`). This walkthrough needs a built checkout ([check](README.md#commands)).
 
-1. **Find one.** `tools/worklist.py -n 10` ranks the open functions, cheapest route first. A real row:
+1. **Find one.** `tools/worklist.py -n 10` lists the open functions, shortest first. A real row:
 
    ```text
    emi/etc/commu01/07@0x801D3AA0                   27  m2c draft
    ```
 
-   Take the first row; the route column names the tool to start with ([route](docs/matching.md#route)).
+   Take the first row ([route](docs/matching.md#route)).
 
 2. **Read.** `tools/seed.py emi/etc/commu01/07@0x801D3AA0` writes the assembly, the best m2c draft,
-   the twins, callees and callers to `work/emi+etc+commu01+07/801D3AA0/`. A `.c` may hold several
+   the callees and callers to `work/emi+etc+commu01+07/801D3AA0/`. A `.c` may hold several
    `INCLUDE_ASM` lines; `git grep -n 'func_<ADDR>' -- src` finds the right one.
 
 3. **Draft.** Replace that `INCLUDE_ASM(func_<ADDR>);` line with a `NON_MATCHING` body
@@ -52,9 +52,6 @@ is `exe+slus_004_22`). This walkthrough needs a built checkout ([check](README.m
 7. **Gate and commit.** `meson compile -C build/meson format pre-push` must pass. The commit form is
    in [AGENTS: standing rules](AGENTS.md#standing-rules); fill the
    [pull request template](.github/PULL_REQUEST_TEMPLATE.md).
-
-A `template0` or `template` row starts with `tools/template_try.py`, a `generator` row with
-`tools/gen_body.py` ([route](docs/matching.md#route)).
 
 ## Before you open a pull request
 

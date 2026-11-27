@@ -5,22 +5,15 @@ verdict; a score, a marker or a disassembler opinion is a lead.
 
 ## Route
 
-Take the cheapest route first and move on after one real attempt. `tools/worklist.py` ranks the open
-functions by route, in the tool's order below ([find work](../CONTRIBUTING.md#your-first-match)); `--order strategy --image <glob>` lists one lane's functions by payoff: promote, twins, near misses, medium shapes, undrafted, hard.
+`tools/worklist.py --order strategy --image <glob>` lists one lane's open functions by payoff:
+promote, twins, near misses, medium shapes, undrafted, hard
+([find work](../CONTRIBUTING.md#your-first-match)). Every open function has a draft: start from it
+with `tools/seed.py`, `tools/match.sh`, [diagnose](#diagnose) and [permuter](#permuter). After three
+structurally different tries (a different instruction count, call sequence or branch sequence) keep
+the closest draft under `NON_MATCHING` and record the attempt
+([match](../.agents/skills/decomp/references/match.md)).
 
-| # | Row         | Route                                                                                          | Move on when                                      |
-| - | ----------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------- |
-| 1 | `template0` | `tools/template_try.py <target>@<func>`                                                        | the row is `FAIL`                                 |
-| 2 | `generator` | `tools/gen_body.py <shape>`, then without `--dry-run`                                          | the shape is `branch`, or the body is not `EXACT` |
-| 3 | `template`  | `tools/template_diff.py <target>@<func>`, then up to three edits                               | three edits leave a difference                    |
-| 4 | `plain`     | m2c draft from `tools/seed.py`, `tools/match.sh`, [diagnose](#diagnose), [permuter](#permuter) | three structurally different tries fail           |
-
-A `template0` row is a matched template with no differing instruction; `template` has up to three.
-A `generator` row names its shape in the last column. After three structurally different tries (a
-different instruction count, call sequence or branch sequence) keep the closest draft under
-`NON_MATCHING` and record the attempt ([match](../.agents/skills/decomp/references/match.md)).
-
-A route that gives `EXACT` still needs `check-<image>`, a name from evidence and the shared-body
+An `EXACT` draft still needs `check-<image>`, a name from evidence and the shared-body
 treatment ([shared bodies](../.agents/skills/decomp/references/refactor.md#shared-bodies)).
 
 ## Order of work

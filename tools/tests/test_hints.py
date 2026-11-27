@@ -16,8 +16,8 @@ FUNC = Func(
 )
 
 
-def context(table=None, splat="", ranked=()):
-    return hints.Context(Path("."), FUNC, table or {}, splat, tuple(ranked))
+def context(table=None, splat=""):
+    return hints.Context(Path("."), FUNC, table or {}, splat)
 
 
 def run(detector, text, **kwargs):

@@ -42,26 +42,6 @@ class Func:
         return f"{self.image}@0x{self.addr:08X}"
 
 
-def opcode_token(word: int) -> int:
-    """Return the instruction's opcode alone: registers, immediates and targets masked."""
-    if word == 0:
-        return 0
-    op = word >> 26
-    if op == 0:
-        return 64 + (word & 63)
-    if op == 1:
-        return 128 + ((word >> 16) & 31)
-    if op in (0x10, 0x12):
-        if word & (1 << 25):
-            return 256 + 64 * (op == 0x12) + (word & 63)
-        return 192 + 32 * (op == 0x12) + ((word >> 21) & 31)
-    return op + 1
-
-
-def opcode_string(words: tuple[int, ...]) -> str:
-    return "".join(chr(0x100 + opcode_token(w)) for w in words)
-
-
 def _objdump(root: Path, *args: str) -> list[str]:
     result = subprocess.run(
         [str(root / OBJDUMP), *args], capture_output=True, text=True, check=True

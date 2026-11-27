@@ -1,23 +1,14 @@
 #!/usr/bin/env python3
-"""Rank the functions that are still assembly, cheapest route first.
+"""List the functions that are still assembly, shortest first.
 
-    tools/worklist.py [-n 30] [--image GLOB ...] [--route ROUTE] [--tsv | --jsonl]
+    tools/worklist.py [-n 30] [--image GLOB ...] [--tsv | --jsonl]
     tools/worklist.py --image GLOB [--image GLOB ...] [--except NAME ...] --order strategy
                       [--measure] [-n N] [--jsonl]
 
-One row per `INCLUDE_ASM` function; a `HAND_ASM` unit is done and has no row. The route
-is the cheapest known way in, in the order docs/matching.md tries them:
-
-    template0   a matched template with no differing instruction: tools/template_try.py REF
-    generator   a mechanical shape that tools/gen_body.py can write a body for
-    template    a template with a few differing instructions: tools/template_try.py REF,
-                or tools/template_diff.py REF to see them
-    plain       no known route: m2c draft, diagnose loop, permuter
-
-A function recorded in `config/attempts.jsonl` sorts after the untried ones of
-its route and shows its attempts. Build first (`meson compile -C build/meson`): the function index
-comes from the built images. Templates need `rapidfuzz`; without it the command stops with exit 2
-and the install step (`tools/setup.sh --dev --matching`).
+One row per `INCLUDE_ASM` function; a `HAND_ASM` unit is done and has no row. The route column
+reads `plain` (an m2c draft, the diagnose loop, the permuter). A function recorded in
+`config/attempts.jsonl` sorts after the untried ones and shows its attempts. Build first
+(`meson compile -C build/meson`): the function index comes from the built images.
 
 `--order strategy` lists one lane's open functions in the order that pays most first: promote (the
 draft matches), twin (open functions with one body), near (sched, regalloc or frame, at most four
@@ -32,11 +23,9 @@ Each draft is measured with `tools/match.sh --diff` once per source hash and kep
 from __future__ import annotations
 
 import argparse
-import contextlib
 import difflib
 import fnmatch
 import hashlib
-import io
 import json
 import re
 import sys
@@ -44,18 +33,14 @@ import time
 from dataclasses import dataclass, replace
 from pathlib import Path
 
-import dups
-import gen_body
 from bof3.adapters.attempts import PATH as ROW_PATH
 from bof3.adapters.attempts import read_lines
 from bof3.adapters.match import run_match
 from bof3.attempts import parse
 from bof3.core.paths import ROOT
 from bof3.match import side_by_side
+from bof3.source.index import Func, load_index
 
-ROUTES = ("template0", "generator", "template", "plain")
-GENERATED = ("call-seq", "store-seq", "spad", "dispatch", "straight")
-EDITS = 3  # template_diff.py takes up to this many edits
 HINT_WIDTH = 150
 CACHE = ROOT / "build/worklist"
 SHORT = 150  # an undrafted function of this many words or fewer is cheap
@@ -65,7 +50,7 @@ UNIT_ORDER = ("begins at", "cannot isolate", "no function starts")
 
 @dataclass(frozen=True)
 class Row:
-    """One assembly function and its cheapest route."""
+    """One assembly function."""
 
     ref: str
     words: int
@@ -100,61 +85,21 @@ def is_hand_asm(src: str) -> bool:
     return "\nHAND_ASM " in (ROOT / src).read_text(encoding="utf-8")
 
 
-def templates() -> dict[str, tuple[str, int]]:
-    """Return the cheapest template of each assembly function: ref -> (template, diff_count)."""
-    out, err = io.StringIO(), io.StringIO()
-    try:
-        with contextlib.redirect_stdout(out), contextlib.redirect_stderr(err):
-            dups.main(["near", "--full", "--jsonl"])
-    except SystemExit as error:
-        message = str(error.code) if error.code else err.getvalue().strip()
-        if "rapidfuzz" in message:
-            print(
-                "worklist: needs rapidfuzz. Run: tools/setup.sh --dev --matching",
-                file=sys.stderr,
-            )
-            raise SystemExit(2) from None
-        print("worklist: no templates (" + message + ")", file=sys.stderr)
-        return {}
-    rows = (json.loads(line) for line in out.getvalue().splitlines())
-    return {r["target"]: (r["template"], r["diff_count"]) for r in rows}
+def asm_functions(root: Path = ROOT) -> list[Func]:
+    return [f for f in load_index(root) if f.status == "ASM"]
 
 
-def writable(f: gen_body.Func, tree: gen_body.Tree, names: gen_body.Names) -> bool:
-    """True when gen_body can write a body for ``f`` (a SKIP row would only waste the try)."""
-    try:
-        gen_body.body_for(f, tree, names)
-    except gen_body.Unsupported:
-        return False
-    return True
-
-
-def rank(images: list[str] | None = None, route: str = "") -> list[Row]:
-    """Return the worklist: cheapest route first, untried before tried, then by size."""
-    near = templates()
+def rank(images: list[str] | None = None) -> list[Row]:
+    """Return the worklist: untried before tried, then by size."""
     notes = attempts()
-    tree, names = gen_body.Tree(), gen_body.Names()
-    shapes = {
-        f.ref: shape for shape, f, _ in gen_body.measure(gen_body.asm_functions())
-    }
-    rows = []
-    for f in gen_body.asm_functions():
-        if f.src is None or not in_images(f.image, images or []) or is_hand_asm(f.src):
-            continue
-        tmpl = near.get(f.ref)
-        if tmpl and tmpl[1] == 0:
-            kind, how = "template0", f"template_try.py: {tmpl[0]}"
-        elif shapes[f.ref] in GENERATED and writable(f, tree, names):
-            kind, how = "generator", f"gen_body.py {shapes[f.ref]}"
-        elif tmpl and tmpl[1] <= EDITS:
-            kind, how = "template", f"template_diff.py: {tmpl[0]} ({tmpl[1]} diff)"
-        else:
-            kind, how = "plain", "m2c draft"
-        if not route or route == kind:
-            rows.append(Row(f.ref, len(f.words), kind, how, notes.get(f.ref, "")))
-    return sorted(
-        rows, key=lambda r: (ROUTES.index(r.route), bool(r.hint), r.words, r.ref)
-    )
+    rows = [
+        Row(f.ref, len(f.words), "plain", "m2c draft", notes.get(f.ref, ""))
+        for f in asm_functions()
+        if f.src is not None
+        and in_images(f.image, images or [])
+        and not is_hand_asm(f.src)
+    ]
+    return sorted(rows, key=lambda r: (bool(r.hint), r.words, r.ref))
 
 
 @dataclass(frozen=True)
@@ -171,7 +116,7 @@ class Pick:
     twin: str
 
 
-def is_draft(f: gen_body.Func) -> bool:
+def is_draft(f: Func) -> bool:
     text = (ROOT / f.src).read_text(encoding="utf-8")
     return re.search(rf"#else\s*\nINCLUDE_ASM\({f.name}\)", text) is not None
 
@@ -184,7 +129,7 @@ def normalize(words: tuple[int, ...]) -> tuple[int, ...]:
     )
 
 
-def twin_groups(funcs: list[gen_body.Func]) -> dict[str, str]:
+def twin_groups(funcs: list[Func]) -> dict[str, str]:
     """Return ref -> group id (the lowest ref) for open functions that share a normalized body."""
     groups: dict[tuple[int, ...], list[str]] = {}
     for f in funcs:
@@ -218,7 +163,7 @@ def classify(retail: list, cand: list) -> dict:
     return {"kind": kind, "hunks": hunks, "rows": rows, "far": far, "cand": len(cand)}
 
 
-def measure_draft(f: gen_body.Func) -> dict:
+def measure_draft(f: Func) -> dict:
     """Run ``match.sh --diff`` on one draft."""
     result = run_match(ROOT, "--diff", f.ref, merged=True)
     if result.exact:
@@ -230,7 +175,7 @@ def measure_draft(f: gen_body.Func) -> dict:
     return classify(*side_by_side(result))
 
 
-def measured(f: gen_body.Func, refresh: bool) -> dict | None:
+def measured(f: Func, refresh: bool) -> dict | None:
     """Return the cached measurement of a draft, measuring it when ``refresh``."""
     digest = hashlib.sha1((ROOT / f.src).read_bytes()).hexdigest()[:12]
     stem = f"{f.image.replace('/', '+')}@0x{f.addr:08X}.{digest}"
@@ -247,7 +192,7 @@ def measured(f: gen_body.Func, refresh: bool) -> dict | None:
     return row
 
 
-def place(f: gen_body.Func, m: dict | None, draft: bool, tries: int, twin: bool):
+def place(f: Func, m: dict | None, draft: bool, tries: int, twin: bool):
     """Return (tier, kind, sort key) of one function."""
     w = len(f.words)
     if twin and (m is None or m["kind"] not in ("match", "nocompile")):
@@ -280,12 +225,10 @@ def place(f: gen_body.Func, m: dict | None, draft: bool, tries: int, twin: bool)
 
 def strategy(images: list[str], skip: list[str], refresh: bool = False) -> list[Pick]:
     """Return one lane's open functions in strategy order."""
-    open_funcs = [
-        f for f in gen_body.asm_functions() if f.src and not is_hand_asm(f.src)
-    ]
+    open_funcs = [f for f in asm_functions() if f.src and not is_hand_asm(f.src)]
     groups = twin_groups(open_funcs)
     notes = attempt_notes()
-    first: dict[str, gen_body.Func] = {}
+    first: dict[str, Func] = {}
     for f in open_funcs:
         if f.src not in first or f.addr < first[f.src].addr:
             first[f.src] = f
@@ -345,7 +288,6 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--measure", action="store_true", help="measure the drafts again; with --order"
     )
-    parser.add_argument("--route", choices=ROUTES, default="", help="keep one route")
     output = parser.add_mutually_exclusive_group()
     output.add_argument(
         "--tsv", action="store_true", help="tab-separated, with the full attempts"
@@ -367,7 +309,7 @@ def main(argv: list[str] | None = None) -> int:
                 )
         print(f"{len(shown)} of {len(picks)} open functions", file=sys.stderr)
         return 0
-    rows = rank(args.image, args.route)
+    rows = rank(args.image)
     shown = rows[: args.n] if args.n else rows
     for r in shown:
         if args.jsonl:

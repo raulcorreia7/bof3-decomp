@@ -8,13 +8,9 @@ match itself; [matching](../../../../docs/matching.md) is the full reference.
    and callers. `work/` is ignored: it is scratch. Read `hints.md` first: it names each detected
    assembly fact and the `docs/matching.md#tactics-for-gcc-272` row it maps to.
 
-2. **Routes.** Build first (`meson compile -C build/meson`): the worklist reads the built images.
-   `tools/worklist.py -n 10` ranks the open functions by route. A `template0` row:
-   `tools/template_try.py <TARGET>@<func>` puts the closest matched body in place and measures it.
-   A `generator` row names its shape (`gen_body.py spad`); run it. A `template` row:
-   `tools/template_diff.py <TARGET>@<func>` shows its few differences. A `plain` row starts from
-   the m2c draft. `tools/dups.py near --full` lists every template pair, and
-   `bin/coddog match <target> <func>` the matched bodies close to it.
+2. **Queue.** Build first (`meson compile -C build/meson`): the worklist reads the built images.
+   `tools/worklist.py -n 10` lists the open functions; each starts from its m2c draft.
+   `bin/coddog match <target> <func>` lists the matched bodies close to it.
 
 3. **Look.** `git grep -l 'func_<ADDR>' -- src` finds the unit's `.c`: read its `INCLUDE_ASM`
    line, its neighbours and the prototypes in the image header. An unknown address or offset:

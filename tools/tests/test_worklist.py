@@ -7,7 +7,7 @@ def test_strategy_orders_the_lane_and_holds_unit_order_behind_its_culprit(
     monkeypatch, tmp_path
 ):
     def func(name, addr, words, image="emi/battle/a"):
-        return worklist.gen_body.Func(
+        return worklist.Func(
             image, name, addr, 4 * len(words), tuple(words), "", "ASM", "x.c"
         )
 
@@ -25,7 +25,7 @@ def test_strategy_orders_the_lane_and_holds_unit_order_behind_its_culprit(
         "shifted": {"kind": "unit-order", "cand": 30},
         "near": {"kind": "sched", "hunks": 1, "rows": 0, "far": False, "cand": 40},
     }
-    monkeypatch.setattr(worklist.gen_body, "asm_functions", lambda: funcs)
+    monkeypatch.setattr(worklist, "asm_functions", lambda: funcs)
     monkeypatch.setattr(worklist, "is_hand_asm", lambda src: False)
     monkeypatch.setattr(worklist, "is_draft", lambda f: f.name in measures)
     monkeypatch.setattr(worklist, "attempt_notes", lambda: {})

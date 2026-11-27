@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import re
 import subprocess
 from pathlib import Path
 
@@ -55,35 +54,6 @@ def mask(text: str) -> str:
                 out[k] = " "
         i = j
     return "".join(out)
-
-
-def find_definition(text: str, name: str) -> tuple[int, int] | None:
-    """Return the ``(start, end)`` offsets of the top-level definition of ``name``."""
-    masked = mask(text)
-    depth = 0
-    levels = []
-    for ch in masked:
-        if ch == "}":
-            depth -= 1
-        levels.append(depth)
-        if ch == "{":
-            depth += 1
-    for found in re.finditer(r"\b" + re.escape(name) + r"\s*\(", masked):
-        if levels[found.start()] != 0:
-            continue
-        i, parens = found.end(), 1
-        while i < len(masked) and parens:
-            parens += (masked[i] == "(") - (masked[i] == ")")
-            i += 1
-        while i < len(masked) and masked[i] in " \t\r\n":
-            i += 1
-        if i < len(masked) and masked[i] == "{":
-            braces, k = 1, i + 1
-            while k < len(masked) and braces:
-                braces += (masked[k] == "{") - (masked[k] == "}")
-                k += 1
-            return masked.rfind("\n", 0, found.start()) + 1, k
-    return None
 
 
 def split_args(params: str) -> list[str]:

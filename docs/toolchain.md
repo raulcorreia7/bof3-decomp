@@ -127,7 +127,7 @@ delete `build/meson` and run `meson setup build/meson`; the extracted disc stays
 | `bin/coddog <verb> ...`             | Twin search ([coddog](#coddog)).                                                     |
 | `tools/permuter_import.py <file.c>` | Import one unit into the permuter ([permuter](#permuter)).                           |
 | `tools/match.sh <target> <func>`    | Build one unit's object and compare the function with retail ([match.sh](#matchsh)). |
-| `tools/<name>.py`                   | Find templates, twins and type loss, rename and scan ([tools](../tools/README.md)).  |
+| `tools/<name>.py`                   | Find type loss, rename and scan ([tools](../tools/README.md)).                       |
 
 ### match.sh
 

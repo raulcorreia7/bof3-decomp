@@ -39,7 +39,6 @@ class Context:
     func: Func
     table: dict[str, list[symbols.Entry]]
     splat: str
-    ranked: tuple[tuple[float, Func], ...] = field(default_factory=tuple)
     at: dict[int, str] = field(default_factory=dict)
 
 
@@ -406,25 +405,6 @@ def addresses(insns: list[Insn], ctx: Context) -> list[str]:
     return lines
 
 
-def twin(ctx: Context) -> list[str]:
-    """The closest matched body and whether it lives in a shared header."""
-    if not ctx.ranked:
-        return []
-    score, closest = ctx.ranked[0]
-    path = closest.src or ""
-    headers = sorted(ctx.root.glob(f"src/**/{closest.name}.h"))
-    if headers:
-        body = f"shared body {headers[0].relative_to(ctx.root)}"
-    elif path.endswith(".h"):
-        body = f"shared body {path}"
-    else:
-        body = f"body in {path}, not shared"
-    return [
-        f"- closest twin {closest.ref} {closest.name} ({score:.3f}), {body}: "
-        "read the twin first; share its body if it matches."
-    ]
-
-
 def _saves(regs: list[str]) -> str:
     """Return ``s0-s2 ra``, or each saved register when the s range has a gap."""
     numbers = sorted({int(reg[1:]) for reg in regs if re.fullmatch(r"s\d", reg)})
@@ -513,16 +493,11 @@ def _at_strings(root: Path, image: str, addresses: set[int]) -> dict[int, str]:
     return found
 
 
-def build(
-    root: Path,
-    func: Func,
-    asm_text: str,
-    ranked: tuple[tuple[float, Func], ...] = (),
-) -> str:
+def build(root: Path, func: Func, asm_text: str) -> str:
     """Return ``hints.md`` for one function: each fact and the tactic row it maps to."""
     table = symbols.load(root)
     splat = (root / "config" / func.image / "splat.yaml").read_text(encoding="utf-8")
-    ctx = Context(root, func, table, splat, tuple(ranked))
+    ctx = Context(root, func, table, splat)
     insns = parse(asm_text)
     ctx.at = _at_strings(root, func.image, _addresses(insns, ctx))
     lines = [f"# Hints for {func.ref} {func.name}", ""]
@@ -537,7 +512,6 @@ def build(
         frame,
     ):
         lines += detector(insns, ctx)
-    lines += twin(ctx)
     if len(lines) == 2:
         lines.append("- no assembly pattern matched; draft from the tactics table.")
     return "\n".join(lines) + "\n"
