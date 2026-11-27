@@ -210,4 +210,19 @@ fi
 python3 tools/check_enum_members.py
 python3 tools/check_sources.py
 python3 tools/check_signatures.py
+# A bare do { } while (0) nests at most two deep, the depth of a statement macro used inside another.
+python3 - <<'EOF'
+import sys
+sys.path.insert(0, "tools")
+import quality
+EXCEPTIONS = {"src/overlays/area/area049/14/func_801F2DCC.c"}  # retail needs 4 levels; config/attempts has the numbers
+deep = []
+for path, text in quality.work_files().items():
+    clean = quality.mask(text)
+    for name, start, end in quality.spans(clean):
+        deep += [f"{path} {name} {depth}" for depth, _ in quality.nests(clean, text, start, end) if depth > 2 and path not in EXCEPTIONS]
+for row in deep:
+    print(f"check-tree: bare block nested more than two deep: {row}")
+sys.exit(1 if deep else 0)
+EOF
 echo "check-tree: ok"

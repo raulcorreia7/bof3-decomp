@@ -180,13 +180,15 @@ lifetimes and declaration order, casts and grouping, the unit's compiler profile
 | Group   | Helpers                                                                                                                                                            |
 | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | benign  | `FAKE_VOLATILE_PTR`, `FAKE_BARRIER`, `FAKE_ORDER_FENCE`, a bare `do { ... } while (0)` block, `FAKE_STACK_PADS` (retail frame bytes nothing explains), `FAKE_HOLD` |
-| harmful | `FAKE_REG` (register pin), `FAKE_CLOBBER_*`, `FAKE_OPAQUE`/`FAKE_USE`                                                                                              |
+| harmful | `FAKE_REG` (register pin), `FAKE_CLOBBER_*`, `FAKE_OPAQUE`/`FAKE_USE`, a weight block: a bare block two or more deep, or noted as steering allocation              |
 
 Each use carries an adjacent `/* FAKE: <reason>. */`; a dummy local counts as one, and its note
 carries the best pure-C score. `FAKE_ORDER_FENCE()` is the empty boundary. A statement or run the
 scheduler must hold in place is a plain `do { ... } while (0)` block in the body; a block that stands in
 three or more functions becomes one named statement macro (`SYS_DISPATCH_INDEX`, `COPY_TAIL_WORD`).
-`quality.py` counts the bare blocks (`blocks`), and `check-tree` rejects a `FAKE_ORDER_LOCK` spelling. Every
+`quality.py` counts the bare blocks by nest depth (`blocks`) and a weight block's depth in `harmful`: each level
+adds one to the loop weight of every use inside, a register pin in another form. `check-tree` rejects a nest deeper
+than two and a `FAKE_ORDER_LOCK` spelling. Every
 `FAKE_` helper compiles away without `MATCHING`, and `check-plain` proves the sources build that way. Prefer benign over harmful: a pointer local, a
 recomputed address or a statement reorder usually moves the allocator before a pin does. A raw
 `__asm__`, a bare `register ... asm("reg")` or a `.word` is not source.

@@ -16,9 +16,11 @@ Metrics, counted inside ``MATCH`` function bodies unless noted:
               per-function ratchet also counts raw width casts and constant indexes into a
               byte-pointer local (``panel[0x10]``) the same way
 - ``casts``   lines with a raw width cast: ``*(u8 *)p``, ``((u8 *)p)[n]``, ``(u8 *)p + 0x10``
-- ``harmful`` ``FAKE_REG``, ``FAKE_OPAQUE``, ``FAKE_USE``, ``FAKE_CLOBBER_*``
+- ``harmful`` ``FAKE_REG``, ``FAKE_OPAQUE``, ``FAKE_USE``, ``FAKE_CLOBBER_*``, and a bare block
+              that steers allocation: nested two or more deep, or under a ``FAKE:`` note that
+              names the loop weight, the allocator or a register; it counts its depth
 - ``blocks``  bare ``do { ... } while (0)`` statements written in a body (a named statement macro's
-              use is not one): a block the scheduler treats as a boundary, trended
+              use is not one), each nest counted by its depth: a boundary the scheduler keeps, trended
 - ``notes``   ``FAKE:`` notes (whole file)
 - ``pasted``  functions with two or more statements whose name and body also stand in a ``.c``
               file of another image: one ``Name.h`` is the rule (docs/conventions.md, Shared bodies)
@@ -118,8 +120,10 @@ HARMFUL = re.compile(
     r"\b(?:FAKE_REG|FAKE_OPAQUE|FAKE_USE|FAKE_CLOBBER_\w+"
     r"|MATCH_FAKE_PIN|MATCH_REG|MATCH_FAKE_OPAQUE|MATCH_FAKE_USE|CLOBBER_\w+)\b"
 )
-# The removed FAKE_ORDER_LOCK spellings stay in the pattern so a base revision counts the same blocks.
-BLOCK = re.compile(r"\}\s*while\s*\(\s*0\s*\)|\bFAKE_ORDER_LOCK(?:_BEGIN)?\b")
+# The removed FAKE_ORDER_LOCK spellings still count, so a base revision counts the same blocks.
+ORDER_LOCK = re.compile(r"\bFAKE_ORDER_LOCK(?:_BEGIN)?\b")
+BRACE = re.compile(r"\bdo\s*\{|\{|\}\s*while\s*\(\s*0\s*\)|\}")
+STEERS = re.compile(r"FAKE:.*?(?:loop weight|allocat(?:or|ion)|register)", re.I | re.S)
 NOTE = re.compile(r"FAKE:")
 # A local declaration (`u8 i`, `Actor* actor = g_CurrentActor`) and a statement-macro call.
 DECL = re.compile(
@@ -130,14 +134,49 @@ DECL = re.compile(
 MACRO_CALL = re.compile(r"[A-Z][A-Z0-9_]*\s*\(.*\)", re.S)
 
 
-def bodies(text: str) -> Iterator[tuple[str, str]]:
-    """Yield ``(name, body)`` for each ``MATCH`` definition in comment-free ``text``."""
+def spans(text: str) -> Iterator[tuple[str, int, int]]:
+    """Yield ``(name, start, end)`` of each ``MATCH`` body in comment-free ``text``."""
     for found in FUNC.finditer(text):
         depth, end = 1, found.end()
         while depth and end < len(text):
             depth += (text[end] == "{") - (text[end] == "}")
             end += 1
-        yield found.group(1), text[found.end() : end - 1]
+        yield found.group(1), found.end(), end - 1
+
+
+def bodies(text: str) -> Iterator[tuple[str, str]]:
+    """Yield ``(name, body)`` for each ``MATCH`` definition in comment-free ``text``."""
+    for name, start, end in spans(text):
+        yield name, text[start:end]
+
+
+def nests(clean: str, text: str, start: int, end: int) -> Iterator[tuple[int, bool]]:
+    """Yield ``(depth, steers)`` for each outermost bare ``do { } while (0)`` block in
+    ``clean[start:end]``; ``text`` is the same file with its comments, for the block's note.
+    """
+    stack: list[
+        tuple[bool, int, int]
+    ] = []  # (opened by do, start, deepest bare level inside)
+    found: list[tuple[int, int, int]] = []  # (start, end, level) of every bare block
+    for tok in BRACE.finditer(clean, start, end):
+        if not tok.group().startswith("}"):
+            stack.append((tok.group() != "{", tok.start(), 0))
+            continue
+        if not stack:
+            continue
+        is_do, at, inner = stack.pop()
+        bare = is_do and tok.group() != "}"
+        level = inner + bare
+        if stack:
+            stack[-1] = (*stack[-1][:2], max(stack[-1][2], level))
+        if bare:
+            found.append((at, tok.end(), level))
+    for at, close, level in found:
+        if any(a < at and close < c for a, c, _ in found):
+            continue
+        note = text[text.rfind("/*", 0, at) : at]
+        steers = note.rstrip().endswith("*/") and "*/" not in note[2:].rstrip()[:-2]
+        yield level, level >= 2 or bool(steers and STEERS.search(note))
 
 
 def macro_body(body: str) -> bool:
@@ -169,14 +208,18 @@ def _file_row(
     row["funcs"] = 0
     row["lines"] = 0
     row["notes"] = len(NOTE.findall(text))
-    for name, body in bodies(clean):
+    for name, start, end in spans(clean):
+        body = clean[start:end]
         row["funcs"] += 1
         row["lines"] += body.count("\n")
         row["addr"] += bool(ADDR_NAME.fullmatch(name))
         row["names"] += len(PLACEHOLDER.findall(body))
         row["casts"] += sum(bool(RAW_CAST.search(line)) for line in body.split("\n"))
         row["harmful"] += len(HARMFUL.findall(body))
-        row["blocks"] += len(BLOCK.findall(body))
+        row["blocks"] += len(ORDER_LOCK.findall(body))
+        for depth, steers in nests(clean, text, start, end):
+            row["blocks"] += depth
+            row["harmful"] += depth if steers else 0
         if path.endswith(".c") and body.count(";") >= 2 and not macro_body(body):
             seen[shape(name, body)].append((path, name))
     return row

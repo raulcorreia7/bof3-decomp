@@ -11,6 +11,7 @@ SCRIPT = ROOT / "tools/check_tree.sh"
 ENUM = ROOT / "tools/check_enum_members.py"
 SOURCES = ROOT / "tools/check_sources.py"
 SIGNATURES = ROOT / "tools/check_signatures.py"
+QUALITY = ROOT / "tools/quality.py"
 PACKAGE = ROOT / "tools/bof3"
 
 
@@ -26,6 +27,7 @@ def run_tree(
     (repo / "tools/check_enum_members.py").write_text(ENUM.read_text())
     (repo / "tools/check_sources.py").write_text(SOURCES.read_text())
     (repo / "tools/check_signatures.py").write_text(SIGNATURES.read_text())
+    (repo / "tools/quality.py").write_text(QUALITY.read_text())
     shutil.copytree(
         PACKAGE, repo / "tools/bof3", ignore=shutil.ignore_patterns("__pycache__")
     )
@@ -106,6 +108,14 @@ CASES = [
         {},
         {"src/overlays/test/arc/00/a.c": "FAKE_ORDER_LOCK(x = 1);\n"},
         "removed spelling",
+    ),
+    (
+        "bare block three deep",
+        {},
+        {
+            "src/overlays/test/arc/00/a.c": "MATCH void f(void) {\n    do { do { do { x = 1; } while (0); } while (0); } while (0);\n}\n"
+        },
+        "nested more than two deep",
     ),
     (
         "old-style definition",
@@ -259,4 +269,10 @@ def test_a_use_renamed_by_a_commit_line_passes(tmp_path: Path) -> None:
         {"src/overlays/test/arc/00/a.c": old.replace("TASK_BYTES", "SELF_BYTES")},
         message="rename\n\nRenamed: TASK_BYTES -> SELF_BYTES",
     )
+    assert result.returncode == 0, result.stdout + result.stderr
+
+
+def test_a_bare_block_two_deep_passes(tmp_path: Path) -> None:
+    body = "MATCH void f(void) {\n    do { do { x = 1; } while (0); } while (0);\n}\n"
+    result = run_tree(tmp_path, {}, {"src/overlays/test/arc/00/a.c": body})
     assert result.returncode == 0, result.stdout + result.stderr
