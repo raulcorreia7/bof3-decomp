@@ -15,7 +15,7 @@ MATCH void func_801EEC24(void) {
 MATCH void func_801EEC94(void) {
     BattleWorkImage* image;
     u32              effect_offset;
-    void*            effect_table;
+    void*            effect_slots;
     void*            effect_record;
     u8*              effects;
     PartyMember*     work;
@@ -58,8 +58,8 @@ MATCH void func_801EEC94(void) {
             slot          = Battle_AllocEffect(1, 0x13) & BYTE_MASK;
             effect_offset = slot * sizeof(g_BattleEffects[0]);
             enemy         = g_Battle.active_battler - BATTLE_PARTY_CHARACTERS_COUNT;
-            effect_table  = g_BattleEffects;
-            effects       = effect_table;
+            effect_slots  = g_BattleEffects;
+            effects       = effect_slots;
             effect_record = effects + effect_offset;
             image         = effect_record;
             memcpy(image, &g_BattleEnemyBattlers[enemy], sizeof(*image));
