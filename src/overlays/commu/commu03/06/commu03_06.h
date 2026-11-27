@@ -38,7 +38,7 @@ extern u8       D_801D1948;
 
 /* The overlay's state byte the guarded step advances. */
 
-void func_801D1250(s32 scene, s32 mode);
+void func_801D1250(s16 x, s16 y);
 void func_801D1714(s16 x, s16 y, u32 clut, u8* text);
 
 #endif
