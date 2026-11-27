@@ -21,7 +21,9 @@ MATCH s32 EMI_NextEntry(u8 slot) {
         g_EmiBytesLeft = EMI_SECTOR_SIZE;
         /* FAKE: statement boundary keeps the retail register order and schedule; the plain form without barriers is 12
            bytes short. */
-        FAKE_ORDER_LOCK(g_EmiEntryType = EMI_LOADER_STATE_ARCHIVE_HEADER);
+        do {
+            g_EmiEntryType = EMI_LOADER_STATE_ARCHIVE_HEADER;
+        } while (0);
         result           = 1;
         g_EmiStep        = result;
         g_EmiStartSector = first_sector;

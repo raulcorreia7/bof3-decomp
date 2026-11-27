@@ -19,7 +19,9 @@ MATCH void func_801D2564(void) {
     selection       = &D_80148656;
     selection_index = *selection;
     /* FAKE: preserve flag store after selection read. */
-    FAKE_ORDER_LOCK(D_801485DC = 1);
+    do {
+        D_801485DC = 1;
+    } while (0);
     D_801485E0 = g_UiPanelTasks[selection_index + 4].pos.vx;
     /* FAKE: preserve first table store order. */
     FAKE_BARRIER();

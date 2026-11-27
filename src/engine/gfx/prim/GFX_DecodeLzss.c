@@ -42,14 +42,14 @@ MATCH void GFX_DecodeLzss(u32* packed, RECT rect) {
             flags |= 0xFF00;
         }
         if (flags & 0x1) {
-            /* FAKE: the order lock steers regalloc */
-            FAKE_ORDER_LOCK_BEGIN
+            /* FAKE: the block steers regalloc */
+            do {
                 c = *src++;
                 written++;
                 *dst++    = c;
                 ring[r++] = c;
                 r &= LZSS_RING_MASK;
-            FAKE_ORDER_LOCK_END;
+            } while (0);
         } else {
             i   = *src++;
             len = *src++;

@@ -61,7 +61,10 @@ MATCH void func_801F4258(s32 mode) {
         prim->y1 = g_ScratchPadVectors[i].vy;
         prim->x2 = g_ScratchPadVectors[(i + 1) & 3].vx;
         /* FAKE: Keep the second corner y store before the color fields. */
-        FAKE_ORDER_LOCK(prim->y2 = g_ScratchPadVectors[(i + 1) & 3].vy;);
+        do {
+            prim->y2 = g_ScratchPadVectors[(i + 1) & 3].vy;
+            ;
+        } while (0);
         prim->r0 = (((D_8014686B << 4) + 0x10) * mode) | (mode == 0 ? 0x50 : 0);
         prim->g0 = ((D_8014686B << 4) + 0x10) * mode;
         prim->b0 = (mode == 0 ? 0x50 : 0);

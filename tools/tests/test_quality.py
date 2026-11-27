@@ -28,6 +28,23 @@ def test_address_names_placeholders_and_raw_casts_are_counted_in_bodies() -> Non
     assert found["casts"] == 3
 
 
+def test_a_bare_do_while_zero_block_counts_and_a_loop_or_macro_use_does_not() -> None:
+    text = (
+        "MATCH void A(void) {\n"
+        "    do {\n        x = 1;\n    } while (0);\n"
+        "    do { y = 2; } while (i < n);\n"
+        "    NAMED_BLOCK(x);\n"
+        "}\n"
+    )
+    assert row(text)["blocks"] == 1
+    assert (
+        row(
+            "MATCH void B(void) { FAKE_ORDER_LOCK(x = 1); FAKE_ORDER_LOCK_BEGIN x = 2; FAKE_ORDER_LOCK_END; }"
+        )["blocks"]
+        == 2
+    )
+
+
 def test_pasted_needs_two_images_and_a_shared_name() -> None:
     files = {
         "src/o/a/1/x.c": BODY.format(name="func_801EEE3C"),

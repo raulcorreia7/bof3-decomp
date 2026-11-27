@@ -28,8 +28,10 @@ MATCH u8 Actor_PickChaseFacing(Actor* entity) {
             }
             if ((route & 0x7) != (status & BYTE_MASK)) {
                 /* FAKE: basic-block boundary pins handler status. */
-                /* FAKE: FAKE_ORDER_LOCK keeps this statement in place; without it the match is 93.06%. */
-                FAKE_ORDER_LOCK(SELF(Actor)->direction = status);
+                /* FAKE: the block keeps this statement in place; without it the match is 93.06%. */
+                do {
+                    SELF(Actor)->direction = status;
+                } while (0);
                 entity->interaction_flags |= ACTOR_INTERACTION_MOVING;
             }
             return SELF(Actor)->direction;

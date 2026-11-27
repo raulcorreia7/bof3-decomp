@@ -31,7 +31,9 @@ MATCH void func_801EEC70(void) {
         g_BattleEffects[slot].arg.unk_09  = odd;
         counter                           = SELF(PartyMember);
         /* FAKE: the target link stays before the loop counter update. */
-        FAKE_ORDER_LOCK(g_BattleEffects[slot].target.party = work);
+        do {
+            g_BattleEffects[slot].target.party = work;
+        } while (0);
         count = counter->param.unk_0B;
         i += 1;
         counter->param.unk_0B = count + 1;

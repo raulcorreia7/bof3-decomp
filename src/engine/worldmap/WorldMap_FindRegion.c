@@ -7,7 +7,9 @@ MATCH u8 WorldMap_FindRegion(void) {
     u16 cur;
 
     /* FAKE: statement boundary keeps the retail register order and schedule. */
-    FAKE_ORDER_LOCK(count = 0);
+    do {
+        count = 0;
+    } while (0);
     cur    = g_GameAreaId;
     offset = 0;
 loop:

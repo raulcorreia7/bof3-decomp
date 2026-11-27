@@ -17,6 +17,8 @@ Metrics, counted inside ``MATCH`` function bodies unless noted:
               byte-pointer local (``panel[0x10]``) the same way
 - ``casts``   lines with a raw width cast: ``*(u8 *)p``, ``((u8 *)p)[n]``, ``(u8 *)p + 0x10``
 - ``harmful`` ``FAKE_REG``, ``FAKE_OPAQUE``, ``FAKE_USE``, ``FAKE_CLOBBER_*``
+- ``blocks``  bare ``do { ... } while (0)`` statements written in a body (a named statement macro's
+              use is not one): a block the scheduler treats as a boundary, trended
 - ``notes``   ``FAKE:`` notes (whole file)
 - ``pasted``  functions with two or more statements whose name and body also stand in a ``.c``
               file of another image: one ``Name.h`` is the rule (docs/conventions.md, Shared bodies)
@@ -53,7 +55,7 @@ from bof3.adapters.git import merge_base as branch_point
 from bof3.core.paths import ROOT
 from bof3.source.ctext import mask
 
-METRICS = ("addr", "names", "casts", "harmful", "notes", "twins", "pasted")
+METRICS = ("addr", "names", "casts", "harmful", "blocks", "notes", "twins", "pasted")
 GATED = ("casts", "harmful", "pasted", "addr", "names")
 PER_FUNCTION = ("addr", "names")
 TOTALS = ("casts", "harmful", "pasted")
@@ -93,6 +95,7 @@ WEIGHT = {
     "names": 1,
     "casts": 2,
     "harmful": 3,
+    "blocks": 1,
     "notes": 1,
     "twins": 1,
     "pasted": 4,
@@ -115,6 +118,8 @@ HARMFUL = re.compile(
     r"\b(?:FAKE_REG|FAKE_OPAQUE|FAKE_USE|FAKE_CLOBBER_\w+"
     r"|MATCH_FAKE_PIN|MATCH_REG|MATCH_FAKE_OPAQUE|MATCH_FAKE_USE|CLOBBER_\w+)\b"
 )
+# The removed FAKE_ORDER_LOCK spellings stay in the pattern so a base revision counts the same blocks.
+BLOCK = re.compile(r"\}\s*while\s*\(\s*0\s*\)|\bFAKE_ORDER_LOCK(?:_BEGIN)?\b")
 NOTE = re.compile(r"FAKE:")
 # A local declaration (`u8 i`, `Actor* actor = g_CurrentActor`) and a statement-macro call.
 DECL = re.compile(
@@ -171,6 +176,7 @@ def _file_row(
         row["names"] += len(PLACEHOLDER.findall(body))
         row["casts"] += sum(bool(RAW_CAST.search(line)) for line in body.split("\n"))
         row["harmful"] += len(HARMFUL.findall(body))
+        row["blocks"] += len(BLOCK.findall(body))
         if path.endswith(".c") and body.count(";") >= 2 and not macro_body(body):
             seen[shape(name, body)].append((path, name))
     return row

@@ -1551,7 +1551,9 @@ MATCH void func_801FA7D8(void) {
                 break;
             }
             /* FAKE: table load after the fade decrement. */
-            FAKE_ORDER_LOCK(value = D_801FCA4C[g_FrameCount & 0xFu]);
+            do {
+                value = D_801FCA4C[g_FrameCount & 0xFu];
+            } while (0);
             (*fade)--;
             accum = &g_AreaFocus.z.part.integer;
             goto accumulate;
@@ -1570,8 +1572,10 @@ MATCH void func_801FA7D8(void) {
             }
             /* FAKE: the index read gets its own statement and is locked, so the scheduler cannot hoist the accum
                address above it. */
-            /* FAKE: the lock holds the retail load order around the index read. */
-            FAKE_ORDER_LOCK(index_raw = g_FrameCount);
+            /* FAKE: the block holds the retail load order around the index read. */
+            do {
+                index_raw = g_FrameCount;
+            } while (0);
             accum      = &g_AreaFocus.z.part.integer;
             D_80146866 = (D_80146866 - 1u);
             /* FAKE: the barrier is the schedule wall after the fade store. */
@@ -1583,7 +1587,9 @@ MATCH void func_801FA7D8(void) {
                 u16 acc;
 
                 /* FAKE: accumulate load before the shift. */
-                FAKE_ORDER_LOCK(acc = *accum);
+                do {
+                    acc = *accum;
+                } while (0);
                 delta  = (value << 0x18);
                 *accum = (acc + (delta >> 0x16));
                 return;

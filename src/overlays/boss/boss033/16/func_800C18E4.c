@@ -19,7 +19,7 @@ MATCH void func_800C18E4(void) {
         dst += 1;
     } while (src != end);
     /* FAKE: hold the tail store before the slot offset is recomputed. */
-    FAKE_ORDER_LOCK(dst->w[0] = src->w[0]);
+    COPY_TAIL_WORD(dst, src);
     g_BattleEffects[slot & BYTE_MASK].unk_06       = 3;
     g_BattleEffects[slot & BYTE_MASK].effect_type  = 6;
     g_BattleEffects[slot & BYTE_MASK].header.mode  = 0;

@@ -1482,13 +1482,13 @@ MATCH s32 func_801D5AD0(s32 limit) {
     s32 roll;
 
     roll = RANDOM_MASK(0x7F);
-    FAKE_ORDER_LOCK_BEGIN
+    do {
     loop_1:
         if ((roll & BYTE_MASK) >= (u32)(limit & BYTE_MASK)) {
             roll -= RANDOM_MASK(0xF);
             goto loop_1;
         }
-    FAKE_ORDER_LOCK_END;
+    } while (0);
     return roll & BYTE_MASK;
 }
 

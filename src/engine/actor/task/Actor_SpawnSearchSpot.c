@@ -65,8 +65,10 @@ MATCH void Actor_SpawnSearchSpot(const volatile u8* data) {
 
     rec                                           = SELF(Actor);
     g_Actors[g_ScratchPad.cells.halves[0]].unk_7C = 0;
-    /* FAKE: lock keeps the packed store ahead of the record stores. */
-    FAKE_ORDER_LOCK(rec->unk_18 = (data[9] << 8) | ((const u8*)data)[0xA]);
+    /* FAKE: the block keeps the packed store ahead of the record stores. */
+    do {
+        rec->unk_18 = (data[9] << 8) | ((const u8*)data)[0xA];
+    } while (0);
     SELF(Actor)->unk_05       = data[8];
     SELF(Actor)->param.unk_0B = data[0xC];
     SELF(Actor)->mirror       = (SELF(Actor)->option_flags >> ACTOR_OPT_NO_SCRIPT_START) & 0x1;

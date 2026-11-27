@@ -118,7 +118,7 @@ MATCH void func_801EF0E0(void) {
         dst += 1;
     } while (src != end);
     /* FAKE: hold tail store before tail. */
-    FAKE_ORDER_LOCK(dst->w[0] = src->w[0]);
+    COPY_TAIL_WORD(dst, src);
     g_BattleEffects[effect_slot & BYTE_MASK].target.party = SELF(PartyMember);
     g_BattleEffects[effect_slot & BYTE_MASK].header.mode  = 0;
     g_BattleEffects[effect_slot & BYTE_MASK].header.step  = 0;

@@ -20,10 +20,10 @@ MATCH bool func_801C7608(s16 x0, s16 y0, s16 x1, s16 y1) {
         x1  = tmp;
         tmp = y0;
         y0  = y1;
-        /* FAKE: the order lock steers regalloc */
-        FAKE_ORDER_LOCK_BEGIN
+        /* FAKE: the block steers regalloc */
+        do {
             y1 = tmp;
-        FAKE_ORDER_LOCK_END;
+        } while (0);
     }
     if (x0 != x1) {
         if (y0 == y1) {

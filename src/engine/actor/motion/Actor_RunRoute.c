@@ -22,7 +22,9 @@ MATCH void Actor_RunRoute(void* entity) {
     mode = rec[0x78];
     rate = g_RouteSpeedScale[mode];
     if (rec[0x7B] == 0) {
-        FAKE_ORDER_LOCK(sub = rec + 0x74); /* FAKE: order lock holds the pointer setup. */
+        do {
+            sub = rec + 0x74;
+        } while (0); /* FAKE: the block holds the pointer setup. */
         if (mode != 0) {
             sel = Script_Run(sub, (*(s32**)((u8*)g_AreaLoads[g_GameAreaId] + 0x10))[rec[0x77]]);
             if (rec[0x75] != 0) {

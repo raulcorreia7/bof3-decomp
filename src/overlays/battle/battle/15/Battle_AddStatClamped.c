@@ -19,5 +19,7 @@ MATCH void Battle_AddStatClamped(s16 delta, u8 battler_index) {
         result = (delta + value);
     }
     /* FAKE: statement boundary keeps the retail register order and schedule. */
-    FAKE_ORDER_LOCK(record[0x14] = result);
+    do {
+        record[0x14] = result;
+    } while (0);
 }

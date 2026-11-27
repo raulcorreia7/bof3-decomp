@@ -9,13 +9,13 @@ MATCH void Battle_InitEquipUsePanel(void) {
     u8  entry_index;
     u8  tail_index;
 
-    /* FAKE: the order lock steers regalloc */
-    FAKE_ORDER_LOCK_BEGIN
+    /* FAKE: the block steers regalloc */
+    do {
         one   = 1;
         eight = 8;
         slot  = g_BattleMessageSlot;
         three = 3;
-    FAKE_ORDER_LOCK_END;
+    } while (0);
 
     D_801485B9                = eight;
     D_801485B8                = one;

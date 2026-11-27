@@ -19,9 +19,9 @@ MATCH void Camera_Update(void) {
         func_801F2C04();
         return;
     }
-    /* FAKE: the order lock around the x step and one local for the x position, then the y distance: together they give
+    /* FAKE: the block around the x step and one local for the x position, then the y distance: together they give
      * both steps the retail register homes. */
-    FAKE_ORDER_LOCK_BEGIN
+    do {
         value = g_AreaCameraX;
         dist  = 0x800000 - ((value + 1) << 8) - (g_AreaScrollTargetX & ~0x7FFF);
         if (dist != 0) {
@@ -35,7 +35,7 @@ MATCH void Camera_Update(void) {
             D_80149336 -= step_x;
             g_AreaTileRemainderY -= step_x;
         }
-    FAKE_ORDER_LOCK_END;
+    } while (0);
     value = 0x800000 - (g_AreaCameraY << 8) - (g_AreaScrollTargetY & ~0x7FFF);
     if (value != 0) {
         g_AreaCameraMoving = 1;
