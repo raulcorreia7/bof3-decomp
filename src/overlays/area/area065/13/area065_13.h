@@ -6,8 +6,9 @@
 
 #include "overlays/area/worlds/world01.h"
 
-extern u8 D_801F4DB4[];
-#define AREA_HUD_SPRITE_CELLS ((u8*)D_801F4DB4 + 0x4FC)
+/* The world-map entry keys WORLD_MAP_SELECT_KEY_SCRIPT scans. */
+extern WorldMapKey D_801F4DB4[11];
+#define AREA_HUD_SPRITE_CELLS (D_801F5268 + 0x48)
 /* The spawn step handler table indexed by the record's step byte. */
 extern Callback       D_801F5274[];
 extern u8             D_801F5288[];
@@ -26,7 +27,7 @@ extern u8 D_801F5344[];
 #define AREA_HUD_MASK_TABLE D_801F5308
 
 extern WorldMapPoint      D_801F4DE0[];
-extern u16                D_801F50FC[5][16];
+extern u16                D_801F50FC[11][16];
 extern FishingLocationRow D_801F525C[2];
 extern u8                 D_801F5268[]; /* the "Manillo" text at +0x10 */
 

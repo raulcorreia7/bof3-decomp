@@ -6,15 +6,16 @@
 
 #include "overlays/area/worlds/world03.h"
 
-#define D_801F4D04            (D_801F4CE8 + 0x1Cu)
-#define D_801F4D05            (D_801F4CE8 + 0x1Du)
-#define D_801F5468            (D_801F4CE8 + 0x780u)
+#define D_801F4D05            (D_801F4D04 + 1u)
+#define D_801F5468            (D_801F4D04 + 0x764u)
 #define AREA_HUD_SPRITE_CELLS D_801F5468
 
 /* The scratchpad work pointer; the dispatch entry bytes select a handler. */
 
 /* The world-area state byte tested by the work handlers. */
-extern u8 D_801F4CE8[];
+/* The world-map entry keys WORLD_MAP_SELECT_KEY_SCRIPT scans. */
+extern WorldMapKey D_801F4CE8[7];
+extern u8          D_801F4D04[];
 
 /* Seed rows matched against g_GameEntryAreaId; column 0 is the seed, the
  * g_ScenarioState.scenario_id column is the message id. */
