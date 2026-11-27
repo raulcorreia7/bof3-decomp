@@ -13,7 +13,7 @@ MATCH s32 func_801B95E0(void) {
     s16 y_arg;
     u8  dir;
     s16 height;
-    /* FAKE: retail's frame is 32 bytes larger than the statements need. */
+    /* FAKE: retail's frame leaves sp+16..47 unused, between the argument area and the saved registers. */
     FAKE_STACK_PADS(s32, 8);
 
     if (g_Game.flags & 0x400) {
