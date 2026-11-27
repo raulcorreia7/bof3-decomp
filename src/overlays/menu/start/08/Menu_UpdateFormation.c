@@ -1,8 +1,7 @@
 #include "start_08.h"
 
 /* Moves the formation cursor over the party slots and swaps the picked pair. */
-#ifdef NON_MATCHING
-NON_MATCHING void Menu_UpdateFormation(void) {
+MATCH void Menu_UpdateFormation(void) {
     MenuPanelTask* frame;
     s32            index;
     s8             dx;
@@ -46,9 +45,9 @@ NON_MATCHING void Menu_UpdateFormation(void) {
     for (i = 0; i < 6; i++) {
         g_UIPanelTasks[MENU_PANEL_CARD_FIRST + i].unk_0C = 0;
     }
-    g_UIPanelTasks[g_FormationRow * 2 + (g_FormationColumn + 0xB)].unk_0C = g_FormationCursorColumn == 0 ? 1 << g_FormationCursorRow : 7;
+    g_UIPanelTasks[MENU_PANEL_CARD_FIRST - 1 + g_FormationRow * 2 + g_FormationColumn].unk_0C = g_FormationCursorColumn == 0 ? 1 << g_FormationCursorRow : 7;
     if (g_FormationCursorColumn != 0) {
-        message = (s16)(g_FormationCursorColumn + 0x76) + (s16)(g_FormationCursorRow << 1);
+        message = (s16)(g_FormationCursorRow << 1) + (s16)(g_FormationCursorColumn + 0x76);
     } else {
         message = 0x3B;
     }
@@ -85,21 +84,18 @@ NON_MATCHING void Menu_UpdateFormation(void) {
         closed->active = 0;
         D_80148600     = 0;
         if (g_FormationPickColumn != 0x7F) {
-            s32 pick;
-            u16 y2;
-
             g_FormationPickColumn = 0x7F;
             g_FormationPickRow    = 0x7F;
         } else if (*(entry = &D_80148660) != 1) {
-            MenuPanelTask* card;
+            MenuPanelTask* cards;
 
             D_80148654       = 0;
             g_PartyFormation = (u8)g_FormationRow * 2 + (g_FormationColumn - 1);
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
-            for (i = 0; i < 6; i++) {
-                card = &closed[i - 7];
-                if (card->active != 0 && card->mode == 0xB) {
-                    card->state = 1;
+            /* The six party cards sit seven slots before the cursor frame. */
+            for (i = 0, cards = closed - 7; i < 6; i++) {
+                if (cards[i].active != 0 && cards[i].mode == 0xB) {
+                    cards[i].state = 1;
                 }
             }
             D_80148654 = 5;
@@ -153,6 +149,3 @@ NON_MATCHING void Menu_UpdateFormation(void) {
     }
     g_PartyFormation = (u8)g_FormationColumn + (u8)g_FormationRow * 2 - 1;
 }
-#else
-INCLUDE_ASM(Menu_UpdateFormation);
-#endif

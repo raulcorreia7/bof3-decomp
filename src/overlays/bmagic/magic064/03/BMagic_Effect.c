@@ -276,22 +276,28 @@ MATCH void func_801EF89C(void) {
 #ifdef NON_MATCHING
 /* Stages the effect's four sprite rows over the active battler's work image. */
 NON_MATCHING void func_801EF8F4(void) {
-    PartyMember* saved;
-    u8           slot;
-    u8           i;
+    PartyMember*     saved;
+    u8               slot;
+    u8               i;
+    BattleWorkImage* image;
+    u16*             stage;
+    u16*             mirror;
 
-    ((u16*)GAME_PALETTE_STAGE)[0xA0] = 0;
-    GAME_PALETTE_MIRROR_U16[0xA0]    = 0;
+    stage        = (u16*)GAME_PALETTE_STAGE;
+    mirror       = GAME_PALETTE_MIRROR_U16;
+    stage[0xA0]  = 0;
+    mirror[0xA0] = 0;
     for (i = 1; i < 0x20; i++) {
-        ((u16*)GAME_PALETTE_STAGE)[0xA0 + i] = 0xFFFF;
-        GAME_PALETTE_MIRROR_U16[0xA0 + i]    = 0xFFFF;
+        stage[0xA0 + i]  = 0xFFFF;
+        mirror[0xA0 + i] = 0xFFFF;
     }
     g_GfxPalettePending = 1;
     GFX_ClearRect(0x340, 0x100, 0xC0, 0x100);
 
-    slot                                      = Battle_AllocEffect(1, 0x3A);
-    *(BattleWorkImage*)&g_BattleEffects[slot] = *(BattleWorkImage*)&BATTLE_ACTIVE_PARTY;
-    g_BattleEffects[slot].target.party        = SELF(PartyMember);
+    slot                               = Battle_AllocEffect(1, 0x3A);
+    image                              = (BattleWorkImage*)&g_BattleEffects[slot];
+    *image                             = *(BattleWorkImage*)&BATTLE_ACTIVE_PARTY;
+    g_BattleEffects[slot].target.party = SELF(PartyMember);
     g_BattleEffects[slot].header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
     g_BattleEffects[slot].header.mode = 2;
     g_BattleEffects[slot].header.step = 0;
@@ -309,9 +315,10 @@ NON_MATCHING void func_801EF8F4(void) {
     GFX_PaletteUploadRows();
     SELF_SET(saved);
 
-    slot                                      = Battle_AllocEffect(1, 0x3A);
-    *(BattleWorkImage*)&g_BattleEffects[slot] = *(BattleWorkImage*)&BATTLE_ACTIVE_PARTY;
-    g_BattleEffects[slot].target.party        = SELF(PartyMember);
+    slot                               = Battle_AllocEffect(1, 0x3A);
+    image                              = (BattleWorkImage*)&g_BattleEffects[slot];
+    *image                             = *(BattleWorkImage*)&BATTLE_ACTIVE_PARTY;
+    g_BattleEffects[slot].target.party = SELF(PartyMember);
     g_BattleEffects[slot].header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
     g_BattleEffects[slot].header.mode = 2;
     g_BattleEffects[slot].header.step = 0;
@@ -323,9 +330,10 @@ NON_MATCHING void func_801EF8F4(void) {
     g_BattleEffects[slot].active_flags |= 0x88;
     g_BattleEffects[slot].unk_27 = 0x7D;
 
-    slot                                      = Battle_AllocEffect(1, 0x3A);
-    *(BattleWorkImage*)&g_BattleEffects[slot] = *(BattleWorkImage*)&BATTLE_ACTIVE_PARTY;
-    g_BattleEffects[slot].target.party        = SELF(PartyMember);
+    slot                               = Battle_AllocEffect(1, 0x3A);
+    image                              = (BattleWorkImage*)&g_BattleEffects[slot];
+    *image                             = *(BattleWorkImage*)&BATTLE_ACTIVE_PARTY;
+    g_BattleEffects[slot].target.party = SELF(PartyMember);
     g_BattleEffects[slot].header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
     g_BattleEffects[slot].header.mode = 2;
     g_BattleEffects[slot].header.step = 0;
@@ -343,9 +351,10 @@ NON_MATCHING void func_801EF8F4(void) {
     GFX_PaletteUploadRows();
     SELF_SET(saved);
 
-    slot                                      = Battle_AllocEffect(1, 0x3A);
-    *(BattleWorkImage*)&g_BattleEffects[slot] = *(BattleWorkImage*)&BATTLE_ACTIVE_PARTY;
-    g_BattleEffects[slot].target.party        = SELF(PartyMember);
+    slot                               = Battle_AllocEffect(1, 0x3A);
+    image                              = (BattleWorkImage*)&g_BattleEffects[slot];
+    *image                             = *(BattleWorkImage*)&BATTLE_ACTIVE_PARTY;
+    g_BattleEffects[slot].target.party = SELF(PartyMember);
     g_BattleEffects[slot].header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
     g_BattleEffects[slot].header.mode = 2;
     g_BattleEffects[slot].header.step = 0;
