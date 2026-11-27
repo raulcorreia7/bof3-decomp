@@ -1,5 +1,3 @@
-/* The dispatch dance keeps every work-cell write. */
-#define FAKE_DECL_SELF_VOLATILE
 #include "area134_13.h"
 
 MATCH void func_801F3138(void) {
