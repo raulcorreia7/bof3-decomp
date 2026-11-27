@@ -18,26 +18,26 @@ MATCH void Area_Update(void) {
     SetShadeTex(prim, 0);
     if (SELF(Actor)->direction != 0) {
         g_ScratchPadVectors[0].vy = g_ScratchPadVectors[1].vy = g_ScratchPadVectors[2].vy = g_ScratchPadVectors[3].vy = ((FIX_INT(SELF(Actor)->pos.y.fixed) - 0x80) << 7) | 0x40;
-        bias = D_801F38CC[AREA_ROW_SCALE_OFFSET + SELF(Actor)->unk_0A];
-        product                   = SELF(Actor)->screen_y * bias;
-        offset                    = product - 0x40;
+        bias                                                                                                          = D_801F38CC[AREA_ROW_SCALE_OFFSET + SELF(Actor)->unk_0A];
+        product                                                                                                       = SELF(Actor)->screen_y * bias;
+        offset                                                                                                        = product - 0x40;
         g_ScratchPadVectors[0].vx = g_ScratchPadVectors[2].vx = ((FIX_INT(SELF(Actor)->pos.x.fixed) - 0x7F) << 7) - offset;
-        bias = D_801F38CC[AREA_ROW_SCALE_OFFSET + SELF(Actor)->unk_0A];
-        product                   = SELF(Actor)->screen_y * bias;
-        offset                    = product + 0x40;
+        bias                                                  = D_801F38CC[AREA_ROW_SCALE_OFFSET + SELF(Actor)->unk_0A];
+        product                                               = SELF(Actor)->screen_y * bias;
+        offset                                                = product + 0x40;
         g_ScratchPadVectors[1].vx = g_ScratchPadVectors[3].vx = ((FIX_INT(SELF(Actor)->pos.x.fixed) - 0x80) << 7) - offset;
     } else {
         g_ScratchPadVectors[0].vx = g_ScratchPadVectors[1].vx = g_ScratchPadVectors[2].vx = g_ScratchPadVectors[3].vx = ((FIX_INT(SELF(Actor)->pos.x.fixed) - 0x80) << 7) | 0x40;
-        bias = D_801F38CC[AREA_ROW_SCALE_OFFSET + SELF(Actor)->unk_0A];
-        product                   = SELF(Actor)->screen_y * bias;
-        offset                    = product + 0x40;
-        corner = ((FIX_INT(SELF(Actor)->pos.y.fixed) - 0x7F) << 7);
+        bias                                                                                                          = D_801F38CC[AREA_ROW_SCALE_OFFSET + SELF(Actor)->unk_0A];
+        product                                                                                                       = SELF(Actor)->screen_y * bias;
+        offset                                                                                                        = product + 0x40;
+        corner                                                                                                        = ((FIX_INT(SELF(Actor)->pos.y.fixed) - 0x7F) << 7);
         corner += offset;
         g_ScratchPadVectors[0].vy = g_ScratchPadVectors[2].vy = corner;
-        bias = D_801F38CC[AREA_ROW_SCALE_OFFSET + SELF(Actor)->unk_0A];
-        product                   = SELF(Actor)->screen_y * bias;
-        offset                    = product - 0x40;
-        corner = ((FIX_INT(SELF(Actor)->pos.y.fixed) - 0x80) << 7);
+        bias                                                  = D_801F38CC[AREA_ROW_SCALE_OFFSET + SELF(Actor)->unk_0A];
+        product                                               = SELF(Actor)->screen_y * bias;
+        offset                                                = product - 0x40;
+        corner                                                = ((FIX_INT(SELF(Actor)->pos.y.fixed) - 0x80) << 7);
         corner += offset;
         g_ScratchPadVectors[1].vy = g_ScratchPadVectors[3].vy = corner;
     }

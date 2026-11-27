@@ -31,29 +31,29 @@ MATCH void Area_Update(void) {
         SetPolyFT4(prim);
         SetShadeTex(prim, 0);
         if (SELF(Actor)->direction != 0) {
-            bias                      = (s8)scale[i];
-            product                   = SELF(Actor)->screen_y * bias;
-            offset                    = product + 0x40;
-            corner = ((FIX_INT(SELF(Actor)->pos.x.fixed) - 0x7F) << 7);
+            bias    = (s8)scale[i];
+            product = SELF(Actor)->screen_y * bias;
+            offset  = product + 0x40;
+            corner  = ((FIX_INT(SELF(Actor)->pos.x.fixed) - 0x7F) << 7);
             corner += offset;
             g_ScratchPadVectors[0].vx = g_ScratchPadVectors[2].vx = corner;
             bias                                                  = (s8)scale[i];
             product                                               = SELF(Actor)->screen_y * bias;
             offset                                                = product - 0x40;
-            corner = ((FIX_INT(SELF(Actor)->pos.x.fixed) - 0x80) << 7);
+            corner                                                = ((FIX_INT(SELF(Actor)->pos.x.fixed) - 0x80) << 7);
             corner += offset;
             g_ScratchPadVectors[1].vx = g_ScratchPadVectors[3].vx = corner;
         } else {
-            bias                      = (s8)scale[i];
-            product                   = SELF(Actor)->screen_y * bias;
-            offset                    = product + 0x40;
-            corner = ((FIX_INT(SELF(Actor)->pos.y.fixed) - 0x7F) << 7);
+            bias    = (s8)scale[i];
+            product = SELF(Actor)->screen_y * bias;
+            offset  = product + 0x40;
+            corner  = ((FIX_INT(SELF(Actor)->pos.y.fixed) - 0x7F) << 7);
             corner += offset;
             g_ScratchPadVectors[0].vy = g_ScratchPadVectors[2].vy = corner;
             bias                                                  = (s8)scale[i];
             product                                               = SELF(Actor)->screen_y * bias;
             offset                                                = product - 0x40;
-            corner = ((FIX_INT(SELF(Actor)->pos.y.fixed) - 0x80) << 7);
+            corner                                                = ((FIX_INT(SELF(Actor)->pos.y.fixed) - 0x80) << 7);
             corner += offset;
             g_ScratchPadVectors[1].vy = g_ScratchPadVectors[3].vy = corner;
         }
