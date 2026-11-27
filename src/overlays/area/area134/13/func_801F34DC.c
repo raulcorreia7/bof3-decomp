@@ -5,15 +5,15 @@ MATCH void func_801F34DC(void) {
     Actor* work;
     s32    edge;
 
-    work              = TASK(Actor);
+    work              = SELF(Actor);
     edge              = g_Actors->pos.x.fixed;
-    g_Task            = g_Actors;
+    g_Self            = g_Actors;
     g_GameState       = g_Game.members;
     work->pos.x.fixed = g_Game.members[0].pos.x.fixed - edge;
-    g_Task            = work;
+    g_Self            = work;
     do {
-        *(void**)&g_Task = g_Game.members;
-        g_Task           = work;
+        *(void**)&g_Self = g_Game.members;
+        g_Self           = work;
     } while (0);
     g_ScenarioState.step = scene_step;
     Actor_Clear();
