@@ -276,6 +276,7 @@ NON_MATCHING void Scene_DrawBands(s16 band_height, u16 radius, u16 jitter_mask) 
     s32      radius_base;
     s32      i;
 
+    radius_base               = (s16)radius;
     radius_cell               = &g_ScratchPad;
     *radius_cell              = 0x10;
     D_1F800004                = (SELF(SceneBandEffect)->ticker & 0xF) << 8;
@@ -289,8 +290,7 @@ NON_MATCHING void Scene_DrawBands(s16 band_height, u16 radius, u16 jitter_mask) 
     cell                      = &D_1F800004;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(DR_MODE));
-    ramp        = cell + 1;
-    radius_base = (s16)radius;
+    ramp = cell + 1;
     for (i = 1; i < 18; i++) {
         cell[0] = ((SELF(SceneBandEffect)->ticker + i) & 0xF) << 8;
         if RANDOM_MASK (1) {
@@ -326,10 +326,10 @@ NON_MATCHING void Scene_DrawBands(s16 band_height, u16 radius, u16 jitter_mask) 
         if (primitive->y2 > 0) {
             GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_G4));
             primitive = (POLY_G4*)g_GfxPrimCursor;
-            g_ScratchPadVectors[0].vy -= band_height;
-            g_ScratchPadVectors[1].vy -= band_height;
-            g_ScratchPadVectors[2].vy -= band_height;
-            g_ScratchPadVectors[3].vy -= band_height;
+            SPAD(0u)->vectors[0].vy -= band_height;
+            SPAD(0u)->vectors[1].vy -= band_height;
+            SPAD(0u)->vectors[2].vy -= band_height;
+            SPAD(0u)->vectors[3].vy -= band_height;
             SetPolyG4(primitive);
             SetSemiTrans(primitive, 1);
             setRGB0(primitive, shade, *ramp, 1);
@@ -344,10 +344,10 @@ NON_MATCHING void Scene_DrawBands(s16 band_height, u16 radius, u16 jitter_mask) 
             RotTransPers4(quad, quad + 1, quad + 2, quad + 3, (long*)&primitive->x0, (long*)&primitive->x1, (long*)&primitive->x2, (long*)&primitive->x3, &depth, &flag);
             GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_G4));
             primitive = (POLY_G4*)g_GfxPrimCursor;
-            g_ScratchPadVectors[0].vy += band_height * 2;
-            g_ScratchPadVectors[1].vy += band_height * 2;
-            g_ScratchPadVectors[2].vy += band_height * 2;
-            g_ScratchPadVectors[3].vy += band_height * 2;
+            SPAD(0u)->vectors[0].vy += band_height * 2;
+            SPAD(0u)->vectors[1].vy += band_height * 2;
+            SPAD(0u)->vectors[2].vy += band_height * 2;
+            SPAD(0u)->vectors[3].vy += band_height * 2;
             SetPolyG4(primitive);
             SetSemiTrans(primitive, 1);
             setRGB0(primitive, shade, *ramp, 1);
@@ -362,10 +362,10 @@ NON_MATCHING void Scene_DrawBands(s16 band_height, u16 radius, u16 jitter_mask) 
             RotTransPers4(quad, quad + 1, quad + 2, quad + 3, (long*)&primitive->x0, (long*)&primitive->x1, (long*)&primitive->x2, (long*)&primitive->x3, &depth, &flag);
             GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_G4));
             primitive = (POLY_G4*)g_GfxPrimCursor;
-            g_ScratchPadVectors[0].vy += band_height;
-            g_ScratchPadVectors[1].vy += band_height;
-            g_ScratchPadVectors[2].vy += band_height;
-            g_ScratchPadVectors[3].vy += band_height;
+            SPAD(0u)->vectors[0].vy += band_height;
+            SPAD(0u)->vectors[1].vy += band_height;
+            SPAD(0u)->vectors[2].vy += band_height;
+            SPAD(0u)->vectors[3].vy += band_height;
             SetPolyG4(primitive);
             SetSemiTrans(primitive, 1);
             setRGB0(primitive, 1, 1, 1);
@@ -379,7 +379,7 @@ NON_MATCHING void Scene_DrawBands(s16 band_height, u16 radius, u16 jitter_mask) 
             }
             RotTransPers4(quad, quad + 1, quad + 2, quad + 3, (long*)&primitive->x0, (long*)&primitive->x1, (long*)&primitive->x2, (long*)&primitive->x3, &depth, &flag);
             GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_G4));
-            g_ScratchPadVectors[0].vy -= band_height * 2;
+            SPAD(0u)->vectors[0].vy -= band_height * 2;
         }
     }
 }

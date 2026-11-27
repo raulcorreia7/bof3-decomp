@@ -2,14 +2,18 @@
 
 #ifdef NON_MATCHING
 NON_MATCHING u8 func_801B0E44(void) {
-    u8   saved_dir;
-    s32  diff;
-    u8   divisor;
-    s32* pos2;
-    s32* pos3;
-    s32  x;
-    s32  y;
-    s32  result;
+    u8         saved_dir;
+    s32        diff;
+    u8         divisor;
+    GameState* game;
+    u32        walk_flags;
+    /* FAKE: Keep the case-2 flag word in the return register; six words otherwise swap v0 and v1. */
+    FAKE_REG(u32, entry_flags, "v0");
+    /* FAKE: Pin the scratch position; the unpinned draft swaps the result and pointer registers. */
+    FAKE_REG(s32*, pos2, "s1");
+    s32 x;
+    s32 y;
+    s32 result;
     /* FAKE: retail's frame is 16 bytes larger than the statements need. */
     FAKE_STACK_PADS(s32, 16);
 
@@ -39,8 +43,11 @@ NON_MATCHING u8 func_801B0E44(void) {
     }
     switch (result & BYTE_MASK) {
         case 2:
-            pos2   = (s32*)&g_ScratchPad.cells.halves[4];
-            result = ((s32 (*)(s32, s32, s32))Area_HeightReadStep)(*(s32*)&g_ScratchPad.cells.halves[4], SP_REF(s32, 0xC), SELF(Actor)->direction);
+            pos2 = (s32*)&g_ScratchPad.cells.halves[4];
+            /* FAKE: Keep the position address in a register for the route-byte reads. */
+            FAKE_OPAQUE(pos2);
+            /* FAKE: The caller truncates the height after the scratch flag test. */
+            result = ((s32 (*)(s32, s32, s32))Area_HeightReadStep)(pos2[0], SP_REF(s32, 0xC), SELF(Actor)->direction);
             func_801B13BC();
             if (((u8*)pos2)[-8] != 0) {
                 if ((s16)result >= 0x41) {
@@ -74,33 +81,45 @@ NON_MATCHING u8 func_801B0E44(void) {
             if (Area_RequestLinkAtCell(x, y) & BYTE_MASK) {
                 return 0;
             }
+            game             = &g_Game;
+            entry_flags      = game->walk_flags;
             g_GameStateIndex = GAME_REQUEST_AREA_CHANGE;
-            g_AreaWalkFlags |= 0x20 | AREA_WALK_ENTRY_PENDING;
+            entry_flags |= 0x20 | AREA_WALK_ENTRY_PENDING;
+            g_Game.walk_flags = entry_flags;
             return 0;
         case 3:
-            pos3   = (s32*)&g_ScratchPad.cells.halves[4];
-            result = ((s32 (*)(s32, s32, s32))Area_HeightReadStep)(pos3[0], pos3[1], SELF(Actor)->direction);
+            pos2 = (s32*)&g_ScratchPad.cells.halves[4];
+            /* FAKE: Keep the position address live across the first height read. */
+            FAKE_OPAQUE(pos2);
+            /* FAKE: The caller truncates the height after the scratch flag test. */
+            result = ((s32 (*)(s32, s32, s32))Area_HeightReadStep)(pos2[0], pos2[1], SELF(Actor)->direction);
             if (SP_REF(u8, 0x0) != 0) {
                 if ((s16)result >= 0x41) {
                     g_AreaCameraSpeed      = 0;
                     SELF(Actor)->direction = saved_dir;
                     return 1;
                 }
-                Area_HeightRead(pos3[0], pos3[1]);
+                Area_HeightRead(pos2[0], pos2[1]);
                 return 0;
             }
             return 0;
         case 4:
             func_801B13BC();
             if (!(Area_RequestLinkAtCell(SP_REF(s16, 0x4), SP_REF(s16, 0x6)) & BYTE_MASK)) {
-                g_AreaWalkFlags |= 0x80 | AREA_WALK_ENTRY_PENDING;
+                game       = &g_Game;
+                walk_flags = game->walk_flags;
+                walk_flags |= 0x80 | AREA_WALK_ENTRY_PENDING;
+                game->walk_flags = walk_flags;
                 return 2;
             }
             return 1;
         case 5:
             func_801B13BC();
             if (!(Area_RequestLinkAtCell(SP_REF(s16, 0x4), SP_REF(s16, 0x6)) & BYTE_MASK)) {
-                g_AreaWalkFlags |= 0x100 | AREA_WALK_ENTRY_PENDING;
+                game       = &g_Game;
+                walk_flags = game->walk_flags;
+                walk_flags |= 0x100 | AREA_WALK_ENTRY_PENDING;
+                game->walk_flags = walk_flags;
                 return 3;
             }
             return 1;
