@@ -634,7 +634,7 @@ void Fishing_DrawWindowFill(s16 x, s16 y, u8 height, u8 style);
 void func_801D7B64(void);
 void func_801D7C10(s32 x, s32 y, s32 flags);
 void func_801D7D68(s16 x, s16 y, u8 column_mode);
-void func_801D7EB0(s32 x, s32 y);
+void func_801D7EB0(s16 x, u16 y);
 void func_801D8248(s16 x, s16 y, u8 height);
 void func_801D8364(s16 panel_x, s16 panel_y);
 void func_801D88E0(s16 x, s16 y);
