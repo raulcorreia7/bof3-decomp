@@ -149,7 +149,7 @@ MATCH void func_801EF2B8(void) {
         }
         for (j = 0; j < 14; j++) {
             if (D_801F0CBC & 1) {
-                if (D_801F0CC8 + j < 0 || D_801F0CC8 + j >= g_AreaMapBundle.height || D_801F0CC4 + i < 0 || D_801F0CC4 + i >= MAP_BUNDLE_WIDTH) {
+                if (D_801F0CC8 + j < 0 || D_801F0CC8 + j >= g_AreaMapBundle.height || D_801F0CC4 + i < 0 || D_801F0CC4 + i >= AREA_MAP_BUNDLE->width) {
                     continue;
                 }
                 MAP_CELL_CORNER(D_801F0CC8 + j, D_801F0CC4 + i, 0) += rise / D_801F0C9C[D_801F0CBC >> 1][j];
@@ -157,7 +157,7 @@ MATCH void func_801EF2B8(void) {
                 MAP_CELL_CORNER(D_801F0CC8 + j, D_801F0CC4 + i, 1) += fall / D_801F0C9C[D_801F0CBC >> 1][j];
                 MAP_CELL_CORNER(D_801F0CC8 + j, D_801F0CC4 + i, 3) += fall / D_801F0C9C[D_801F0CBC >> 1][j + 1];
             } else {
-                if (D_801F0CC8 + i < 0 || D_801F0CC8 + i >= g_AreaMapBundle.height || D_801F0CC4 + j < 0 || D_801F0CC4 + j >= MAP_BUNDLE_WIDTH) {
+                if (D_801F0CC8 + i < 0 || D_801F0CC8 + i >= g_AreaMapBundle.height || D_801F0CC4 + j < 0 || D_801F0CC4 + j >= AREA_MAP_BUNDLE->width) {
                     continue;
                 }
                 MAP_CELL_CORNER(D_801F0CC8 + i, D_801F0CC4 + j, 0) += rise / D_801F0C9C[D_801F0CBC >> 1][j];

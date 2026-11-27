@@ -674,7 +674,6 @@ MATCH void func_801F103C(void) {
 MATCH void BMagic_ProjectCell(s32 px, s32 py, AreaCell* out) {
     u8* buffer;
     s32 width;
-    s32 x2;
     s32 x;
     s32 y;
     u16 value;
@@ -688,7 +687,7 @@ MATCH void BMagic_ProjectCell(s32 px, s32 py, AreaCell* out) {
         if (x < width - 1) {
             if (y > 0) {
                 if (y < g_AreaMapBundle.height - 1) {
-                    value = *(u16*)(buffer + ((g_AreaMapBundle.grid_offset * 4) + (x2 = x * 2) + (y * width * 2)));
+                    value = *(AREA_MAP_GRID + x + y * width);
                     if (value != 0) {
                         out->tile_x = x;
                         out->tile_y = y;

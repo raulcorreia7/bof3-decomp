@@ -5,20 +5,18 @@
  * returned mask and an empty pad1 link is released.
  */
 MATCH s32 Area_CellUpload(s32 column, s32 row, POLY_FT4* context, s32 slot) {
-    AreaMapBundle* map;
-    u8*            entry;
-    s32            value;
-    s32            result;
-    s32            cell;
-    s32            size;
-    u16            id;
+    u8* entry;
+    s32 value;
+    s32 result;
+    s32 cell;
+    s32 size;
+    u16 id;
 
-    map  = (AreaMapBundle*)MAP_BUNDLE_BASE;
-    cell = *(u16*)(column * 2 + (row * map->width * 2 + map->grid_offset * 4) + (u32)map);
+    cell = AREA_MAP_GRID_ROW(row)[column];
     if (cell == 0) {
         return 0;
     }
-    entry  = (u8*)(map->grid_offset * 4 + (((map->width * map->height + 1) / 2) * 4 + (u32)map) + cell * 4);
+    entry  = (u8*)&AREA_MAP_TILES[cell];
     value  = *(u32*)entry;
     result = ((value & 0x40000000) >> 15) | (value & 0x4000);
     Area_ApplyTileToQuad(value, &context[slot], 1);

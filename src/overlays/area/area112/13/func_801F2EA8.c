@@ -17,24 +17,24 @@ MATCH void func_801F2EA8(void) {
     if (COORD_INT(SELF(Actor)->pos.x) == 0) {
         for (x = D_801F4218[COORD_INT(SELF(Actor)->pos.x)].x0; x < D_801F4218[COORD_INT(SELF(Actor)->pos.x)].x_end; x++) {
             for (y = D_801F4218[COORD_INT(SELF(Actor)->pos.x)].y0; y < D_801F4218[COORD_INT(SELF(Actor)->pos.x)].y_end; y++) {
-                *(g_AreaCellCodes + y * ((AreaMapBundle*)MAP_BUNDLE_BASE)->width + x) = SELF(Actor)->header.step != 2 ? 0x11 : 0;
+                *(g_AreaCellCodes + y * AREA_MAP_BUNDLE->width + x) = SELF(Actor)->header.step != 2 ? 0x11 : 0;
             }
         }
     } else {
         for (x = D_801F4218[COORD_INT(SELF(Actor)->pos.x)].x0; x < D_801F4218[COORD_INT(SELF(Actor)->pos.x)].x_end; x++) {
             for (y = D_801F4218[COORD_INT(SELF(Actor)->pos.x)].y0; y < D_801F4218[COORD_INT(SELF(Actor)->pos.x)].y_end; y++) {
-                shade = D_801F4228[flag][n++];
-                value = (shade << 24) | (shade << 16) | (shade << 8) | shade;
+                shade                                                                                                               = D_801F4228[flag][n++];
+                value                                                                                                               = (shade << 24) | (shade << 16) | (shade << 8) | shade;
                 /* FAKE: integer cell address; cells[y * width + x] folds both terms into one shift. */
-                ((AreaCellCorners*)((MAP_BUNDLE_BASE + AREA_MAP_BUNDLE_SIZE) + (y * ((AreaMapBundle*)MAP_BUNDLE_BASE)->width << 2) + (x << 2)))->word = value;
+                ((AreaCellCorners*)((MAP_BUNDLE_BASE + AREA_MAP_BUNDLE_SIZE) + (y * AREA_MAP_BUNDLE->width << 2) + (x << 2)))->word = value;
             }
         }
     }
     for (x = D_801F4218[COORD_INT(SELF(Actor)->pos.x)].x0; x < D_801F4218[COORD_INT(SELF(Actor)->pos.x)].x_end; x++) {
         for (y = D_801F4218[COORD_INT(SELF(Actor)->pos.x)].y0; y < D_801F4218[COORD_INT(SELF(Actor)->pos.x)].y_end; y++) {
-            height                                                                                                                      = Area_HeightSample(x << 16, y << 16);
-            value                                                                                                                       = (-(COORD_INT(SELF(Actor)->pos.z) * 2) - height) / 32;
-            ((AreaMapBundleBytes*)MAP_BUNDLE_BASE)->bytes[g_AreaMapHeightOffset * 4 + x + y * ((AreaMapBundle*)MAP_BUNDLE_BASE)->width] = value;
+            height                                                                                                    = Area_HeightSample(x << 16, y << 16);
+            value                                                                                                     = (-(COORD_INT(SELF(Actor)->pos.z) * 2) - height) / 32;
+            ((AreaMapBundleBytes*)MAP_BUNDLE_BASE)->bytes[g_AreaMapHeightOffset * 4 + x + y * AREA_MAP_BUNDLE->width] = value;
         }
     }
 }

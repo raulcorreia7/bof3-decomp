@@ -2,24 +2,21 @@
 
 /* callers pass words and the function narrows them on entry; stale_a3 arrives as the packed probe word whose
  * high half takes the tile y. */
-/* FAKE: retail reads the row through a non-volatile pointer. */
 /* func_8019C4F0 */
 /* Returns whether one map cell stops the rock: off the map, a cliff, a drop or a solid cell code. */
 MATCH s32 Actor_RockIsCellBlocked(s32 raw_x, s32 raw_y, s32 stale_a2, s32 stale_a3) {
     s16   x = raw_x;
     s16   y = raw_y;
     Coord org;
-    u8*   map;
     s16   ix;
     s16   iy;
     s16   dist;
     s32   tile;
     s16   counter;
 
-    map = (u8*)MAP_BUNDLE_BASE;
-    iy  = y;
-    ix  = x;
-    if (MEM(u16, iy * map[0] * 2 + g_AreaMapBundle.grid_offset * 4 + ix * 2 + (u32)map) == 0) {
+    iy = y;
+    ix = x;
+    if (AREA_MAP_GRID_ROW(iy)[ix] == 0) {
         return 1;
     }
     stale_a3 &= HALF_MASK;

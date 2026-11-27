@@ -42,10 +42,8 @@ extern s16 D_801F0F18[20];
 extern s16 D_801F0F40[8];
 extern s16 D_801F0F50[8];
 
-/* The map bundle read through its base address as a number (the retail code loads the constant,
- * not the g_AreaMapBundle symbol): its width, and height byte k of the cell at (row, col). */
-#define MAP_BUNDLE_WIDTH                (((AreaMapBundle*)MAP_BUNDLE_BASE)->width)
-#define MAP_CELL_CORNER(row, col, k)    (((u8*)(MAP_BUNDLE_BASE + AREA_MAP_BUNDLE_SIZE))[((col) + (row) * MAP_BUNDLE_WIDTH) * 4 + (k)])
+/* Height byte k of the map cell at (row, col). */
+#define MAP_CELL_CORNER(row, col, k)    (((u8*)(MAP_BUNDLE_BASE + AREA_MAP_BUNDLE_SIZE))[((col) + (row) * AREA_MAP_BUNDLE->width) * 4 + (k)])
 
 /* The command byte of a scene part word picks the cell record's callback (D_8017F668[command]).
  * The four parts commands this effect raises run the module's own drawers. */
