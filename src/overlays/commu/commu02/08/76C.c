@@ -2233,10 +2233,10 @@ MATCH void func_801D81A4(s16 x, s16 y) {
     COMMU_DRAW_CELL_GRID(func_801D875C, 0x22, 7, 4, 6);
 }
 
-#ifdef NON_MATCHING
 void func_801D851C(s16 x, s16 y, s32 width, u8 index);
 
-NON_MATCHING void func_801D830C(s32 x, s32 y, u8 kind, u8 mode) {
+/* Draws the box of one fairy: its name, or a fixed label in the other mode, and four channel bars. */
+MATCH void func_801D830C(s32 x, s32 y, u8 kind, u8 mode) {
     TILE* tile;
     s16   tile_x;
     s16   tile_y;
@@ -2244,26 +2244,27 @@ NON_MATCHING void func_801D830C(s32 x, s32 y, u8 kind, u8 mode) {
     u8*   style;
     u16   left;
     u16   top;
-    u8*   text;
+    u32   offset;
+    u8*   names;
 
-    left = x;
-    top  = y;
-    UI_WindowDraw(left, top, 0x48, 0x26, 0x80, *(style = &g_WindowStyle));
+    left  = x;
+    top   = y;
+    style = &g_WindowStyle;
+    UI_WindowDraw(left, top, 0x48, 0x26, 0x80, style[0]);
     func_801D81A4(x, y);
     if (mode == 0) {
-        text = style + 0xE96 + kind * 5;
+        offset = kind * 5;
+        names  = style + 0xE96;
+        UI_TextDraw(x + 6, y + 4, 0, 5, &names[offset]);
     } else {
-        text = D_801DB080.bytes;
+        UI_TextDraw(x + 6, y + 4, 0, 5, D_801DB080.bytes);
     }
-    UI_TextDraw(x + 6, y + 4, 0, 5, text);
-    tile = (TILE*)g_GfxPrimCursor;
+    tile = GFX_CURSOR(TILE);
     SetTile(tile);
-    tile_x   = left + 6;
-    tile_y   = top + 0x12;
-    tile->x0 = tile_x;
-    tile->y0 = tile_y;
-    tile->w  = 0x3C;
-    tile->h  = 0x10;
+    tile_x = left + 6;
+    tile_y = top + 0x12;
+    setXY0(tile, tile_x, tile_y);
+    setWH(tile, 0x3C, 0x10);
     setRGB0(tile, 0, 0, 0);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(TILE));
     row = kind & BYTE_MASK;
@@ -2272,9 +2273,6 @@ NON_MATCHING void func_801D830C(s32 x, s32 y, u8 kind, u8 mode) {
     func_801D851C(tile_x, top + 0x1A, g_Fairies[row][7] * 12, 2);
     func_801D851C(tile_x, top + 0x1E, g_Fairies[row][8] * 12, 3);
 }
-#else
-INCLUDE_ASM(func_801D830C);
-#endif
 
 /* Draws one channel bar of a fairy box: two shaded bands in the channel colour. */
 MATCH void func_801D851C(s16 x, s16 y, s32 width, u8 index) {

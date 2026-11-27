@@ -238,9 +238,9 @@ NON_MATCHING void func_801DF334(void) {
         }
     } else if ((s8)(work = SELF(FishingState))->step_index < g_SpawnedActors[5].screen_y && g_SpawnedActors[5].selection < 0) {
         rise  = 0x3E - work->y_38.slot.slot;
-        drift = 0xF0000 - work->motion.unk_34;
+        drift = (0xF0000 - work->motion.unk_34) >> 4;
         if (rise != 0) {
-            rise        = (drift >> 4) / rise;
+            rise        = drift / rise;
             work->pos_x = rise;
             rise        = (rise < -0x1000) ? -0x1000 : ((rise > 0x1000) ? 0x1000 : rise);
             work->pos_x = rise;

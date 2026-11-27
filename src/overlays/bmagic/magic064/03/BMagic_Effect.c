@@ -599,13 +599,12 @@ MATCH void func_801F0EEC(u32 sprite, s32 blend, s32 color) {
     if ((sprite & BYTE_MASK) < 2) {
         task     = SELF(PartyMember);
         prim->x0 = task->screen_x.value - 32;
+        prim->y0 = task->screen_y.value - 64;
     } else {
         task     = SELF(PartyMember);
         prim->x0 = task->screen_x.value - 40;
+        prim->y0 = task->screen_y.value - 64;
     }
-    prim->y0 = task->screen_y.value - 64;
-    /* FAKE: the barrier keeps the prim copy out of the load delay, as retail. */
-    FAKE_BARRIER();
     setUV0(prim, D_801F13A4[sprite & BYTE_MASK].x, D_801F13A4[sprite & BYTE_MASK].y);
     setWH(prim, 80, 72);
     SetSemiTrans(prim, 1);

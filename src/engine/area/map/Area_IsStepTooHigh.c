@@ -7,14 +7,11 @@ MATCH s32 Area_IsStepTooHigh(s16 from_x0, s16 from_x1, s16 from_y0, s16 from_y1,
     /* 16-byte frame slot the body never reads; a smaller one changes the bytes. */
     s32 work[4];
     s32 value;
-    /* FAKE: result pinned to v0. */
-    FAKE_REG(s32, result, "v0");
 
     (void)work;
-    value  = ((s32 (*)(s32, s32, u8, s16))Area_HeightReadStep)(((from_x0 + from_x1) << 16) >> 1, ((from_y0 + from_y1) << 16) >> 1, probe_mode, from_y1);
-    result = 0;
-    if (SP_REF(u8, 0x0u) != 0) {
-        result = (value << 16) > 0x400000;
+    value = ((s32 (*)(s32, s32, u8, s16))Area_HeightReadStep)(((from_x0 + from_x1) << 16) >> 1, ((from_y0 + from_y1) << 16) >> 1, probe_mode, from_y1);
+    if (SP_REF(u8, 0x0u) != 0 && (value << 16) > 0x400000) {
+        return 1;
     }
-    return result;
+    return 0;
 }
