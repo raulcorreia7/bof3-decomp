@@ -4,16 +4,14 @@
 #define GLYPH_COL(c) ((u8)((c) % 21))
 #define GLYPH_ROW(c) ((u8)((c) / 21))
 
-NON_MATCHING u8* Menu_DrawGlyphAt(s16 x, s16 y, s32 color, u8* cursor, u8 glyph_left, u8 glyph_right) {
+NON_MATCHING u8* Menu_DrawGlyphAt(s16 x, s16 y, u8 color, u8* cursor, u8 glyph_left, u8 glyph_right) {
     POLY_FT4* poly;
     int       code;
-    u8        color8;
     u8        left8;
     u8        right8;
     s16       x1;
     s16       y1;
 
-    color8 = color;
     left8  = glyph_left;
     right8 = glyph_right;
     Menu_SetGlyphPage(0);
@@ -84,7 +82,7 @@ NON_MATCHING u8* Menu_DrawGlyphAt(s16 x, s16 y, s32 color, u8* cursor, u8 glyph_
                 poly->v3 = ((*cursor + 0x23) / 21) * 12 + 12;
             }
             setRGB0(poly, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
-            poly->clut  = GetClut((color8 & 0xF) * 16, STAGE_PALETTE_Y);
+            poly->clut  = GetClut((color & 0xF) * 16, STAGE_PALETTE_Y);
             poly->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 960, 0);
             break;
     }

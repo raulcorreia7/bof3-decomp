@@ -1,9 +1,8 @@
 #include "area103_13.h"
 
-#ifdef NON_MATCHING
 /* Draws the ribbon trail of one spin row: thirty-two quads from the projected centre point, each
  * edge turned from the segment direction by the accumulated length. */
-NON_MATCHING void func_801F2FB8(AreaSpinEffect* effect) {
+MATCH void func_801F2FB8(AreaSpinEffect* effect) {
     VECTOR   point;
     VECTOR   from;
     VECTOR   edge;
@@ -14,14 +13,15 @@ NON_MATCHING void func_801F2FB8(AreaSpinEffect* effect) {
     s16      scale;
     s16      shade;
     s32      length;
-    s32      turn;
     u8       i;
+    /* FAKE: retail reserves 8 frame bytes past the screen points that no statement uses; best pure C 28 rows. */
+    FAKE_STACK_PADS(u8, 8);
 
     angle    = effect->angle;
     scale    = effect->scale;
     shade    = effect->unk_14;
-    point.vx = effect->pos.x + ((rcos(angle) * scale) >> 4);
-    point.vy = effect->pos.y + ((rsin(angle) * scale) >> 4);
+    point.vx = effect->pos.x + ((scale * rcos(angle)) >> 4);
+    point.vy = effect->pos.y + ((scale * rsin(angle)) >> 4);
     point.vz = effect->pos.z;
     Camera_ProjectPoint((s32*)&point, &screen);
     screen2 = screen;
@@ -45,15 +45,17 @@ NON_MATCHING void func_801F2FB8(AreaSpinEffect* effect) {
         point.vz += 0x70000;
         from = point;
         scale += 0x18;
-        point.vx = effect->pos.x + ((rcos(angle) * scale) >> 4);
-        point.vy = effect->pos.y + ((rsin(angle) * scale) >> 4);
+        point.vx = effect->pos.x + ((scale * rcos(angle)) >> 4);
+        point.vy = effect->pos.y + ((scale * rsin(angle)) >> 4);
+        point.vz = effect->pos.z;
         from.vx  = point.vx - from.vx;
         from.vy  = point.vy - from.vy;
         from.vz  = 0;
         length += SquareRoot0(VectorNormal(&from, &from));
-        turn    = from.vx;
+        from.vz = from.vx;
         from.vx = -from.vy;
-        from.vy = turn;
+        from.vy = from.vz;
+        from.vz = 0;
         edge.vx = point.vx + (((length * rsin(0x40)) / rcos(0x80) * from.vx) >> 12);
         edge.vy = point.vy + (((length * rsin(0x40)) / rcos(0x80) * from.vy) >> 12);
         edge.vz = point.vz;
@@ -77,6 +79,3 @@ NON_MATCHING void func_801F2FB8(AreaSpinEffect* effect) {
         GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_G4));
     }
 }
-#else
-INCLUDE_ASM(func_801F2FB8);
-#endif

@@ -15,8 +15,9 @@ NON_MATCHING void func_801F2F38(s32 index, s32 height) {
 
     GFX_ADD_LAYER_DRAW_MODE(GFX_LAYER_SCENE_BACK, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256));
 
+    rot.vy = -height;
+    rot.vx = rot.vz = 0;
     setVector(&pos, -0x37C0, -0x2DC0, -0x480);
-    setVector(&rot, 0, -height, 0);
 
     PushMatrix();
     RotTransMatrix(&pos, matrix, &flag);

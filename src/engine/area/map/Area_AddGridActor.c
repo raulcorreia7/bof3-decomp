@@ -9,12 +9,12 @@
 /* func_8014D290 */
 #ifdef NON_MATCHING
 NON_MATCHING void Area_AddGridActor(void) {
-    SVECTOR   vec;
-    DVECTOR   sxy;
-    s32       p;
-    s32       flag;
-    s32       zero;
-    s32       row;
+    SVECTOR vec;
+    DVECTOR sxy;
+    s32     p;
+    s32     flag;
+    s32     zero;
+
     s32       col;
     s32       key;
     const s8* table;
@@ -23,18 +23,19 @@ NON_MATCHING void Area_AddGridActor(void) {
     Actor*    work;
     const s8* ptr;
     Actor*    task;
+    s32       sum;
 
     if (SP_REF(Actor*, 0x44)->active_flags & 0x80) {
         Area_AddActor();
         return;
     }
     work = SP_REF(Actor*, 0x44);
-    row  = COORD_INT(work->pos.x) - g_AreaTileOriginX;
+    key  = COORD_INT(work->pos.x) - g_AreaTileOriginX;
     col  = COORD_INT(work->pos.y) - g_AreaTileOriginY;
     if (COORD_FRAC(work->pos.x) != 0) {
         col++;
     }
-    key = row + col;
+    key += col;
 
     zero  = (COORD_FRAC(SELF(Actor)->pos.x) == 0);
     table = &g_SpriteCellRotations[SELF(Actor)->unk_2B * 3];
@@ -44,13 +45,12 @@ NON_MATCHING void Area_AddGridActor(void) {
         ptr = table + zero;
     }
     if (COORD_FRAC(SELF(Actor)->pos.y) != 0) {
-        key += *ptr + 1;
+        sum = key + (*ptr + 1);
     } else {
-        key += *ptr;
+        sum = key + *ptr;
     }
-    work->unk_32 = key;
-
-    task = SELF(Actor);
+    work->unk_32 = sum;
+    task         = SELF(Actor);
     if ((u16)task->unk_32 >= 0x37) {
         task->header.flags |= ACTOR_FLAG_OFFSCREEN;
         return;

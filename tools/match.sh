@@ -105,6 +105,7 @@ rel=$((0x$addr - 0x$base))
 
 src=$(printf %s "$obj" | sed 's/\.o$//; s/+/\//g')
 [ -f "$src" ] || die "no source $src for $obj"
+srcdir=$(dirname "$src")
 cand=$obj
 if [ -n "${MATCH_SRC:-}" ]; then
 	[ -f "$MATCH_SRC" ] || die "no file MATCH_SRC=$MATCH_SRC"
@@ -119,11 +120,35 @@ fi
 log=$(mktemp "${TMPDIR:-/tmp}/match.XXXXXX")
 tmp=$(mktemp -d "${TMPDIR:-/tmp}/match.XXXXXX")
 trap 'rm -rf "$log" "$tmp"' EXIT
-if [ -n "${MATCH_SRC:-}" ]; then
+# A row is scored as the matching build lays out its unit: this draft as C, every other draft
+# of the file as its INCLUDE_ASM branch, so their sizes cannot move this function.
+only=
+if [ -n "$draft" ] && [ "$(grep -cE '^NON_MATCHING[^(]*[ *][A-Za-z_][A-Za-z0-9_]*\(' "$src")" -gt 1 ]; then
+	only=$tmp/${src##*/}
+	awk -v keep="$fname" '
+		function flush(  i, own) {
+			own = 0
+			for (i = 1; i <= nd; i++) if (d[i] ~ ("^NON_MATCHING[^(]*[ *]" keep "\\(")) own = 1
+			other = 0
+			for (i = 1; i <= nd; i++) if (d[i] ~ /^NON_MATCHING[^(]*[ *][A-Za-z_][A-Za-z0-9_]*\(/) other = 1
+			if (own || !other) { for (i = 1; i <= nd; i++) print d[i]; for (i = 1; i <= ne; i++) print e[i]; return }
+			for (i = 1; i <= nd; i++) print ""
+			for (i = 1; i <= ne; i++) print (i == 1 || i == ne) ? "" : e[i]
+		}
+		blk == 0 && /^#ifdef NON_MATCHING[ \t]*$/ { blk = 1; depth = 0; nd = 1; ne = 0; d[1] = $0; next }
+		blk == 0 { print; next }
+		/^#[ \t]*if/ { depth++ }
+		depth == 0 && blk == 1 && /^#[ \t]*else/ { blk = 2; e[++ne] = $0; next }
+		depth == 0 && /^#[ \t]*endif/ { if (blk == 1) d[++nd] = $0; else e[++ne] = $0; flush(); blk = 0; next }
+		/^#[ \t]*endif/ { depth-- }
+		{ if (blk == 1) d[++nd] = $0; else e[++ne] = $0 }' "$src" >"$only"
+fi
+if [ -n "${MATCH_SRC:-}" ] || [ -n "$only" ]; then
+	[ -n "$only" ] || only=$(realpath "$src")
 	# The unit's recorded command on another source, into a private object: no tree file changes.
 	co=$tmp/cand.o
 	cmd=$(ninja -C "$B" -t commands "$cand" | tail -n 1 | sed 's/ -MMD -MP -MF [^ ]*//')
-	cmd="${cmd% -c *} -c $(realpath "$MATCH_SRC") -o $co"
+	cmd="${cmd% -c *} -I$(realpath "$srcdir") -c $only -o $co"
 	(cd "$B" && BOF3_CC_CACHE=0 sh -c "$cmd") >"$log" 2>&1 || :
 elif ! ninja -C "$B" "$cand" >"$log" 2>&1; then
 	sed -n '1,40p' "$log" >&2
@@ -133,7 +158,7 @@ else
 fi
 if [ ! -s "$co" ]; then
 	# A draft object is empty when the draft does not compile; run its command to show why.
-	[ -n "${MATCH_SRC:-}" ] || cmd=$(ninja -C "$B" -t commands "$cand" | tail -n 1)
+	[ -n "$only" ] || cmd=$(ninja -C "$B" -t commands "$cand" | tail -n 1)
 	(cd "$B" && sh -c "$(printf %s "$cmd" | sed 's/ --empty-on-failure//')") 2>&1 | sed -n '1,10p' >&2 || :
 	die "the draft in $src does not compile (error above). Fix it and run again."
 fi

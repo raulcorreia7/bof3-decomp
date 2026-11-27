@@ -29,11 +29,11 @@ NON_MATCHING void func_801D6684(void) {
     if (SELF(FishingState)->step_index == 0 && D_801E2050[SELF(FishingState)->saved_index][page] == 1 && (u8)(SELF(FishingState)->timer % 12) < 10) {
         Script_AnimStepLoop();
     }
-    glyphs = D_801E2070;
+    cells  = D_801E2050;
     y      = TO_COORD(158);
     y_page = TO_COORD(155);
-    cells  = D_801E2050;
     do {
+        glyphs   = D_801E2070;
         col      = 0;
         x        = TO_COORD(132);
         cell_ptr = *cells;

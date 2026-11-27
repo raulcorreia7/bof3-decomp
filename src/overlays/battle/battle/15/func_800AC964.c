@@ -15,8 +15,7 @@ NON_MATCHING void func_800AC964(void) {
     BattleEnemyGroup swap;
     u8               i;
     u8               j;
-    u8               slot;
-    u8               count;
+    u8               k;
     u8               total;
     u8               found;
     u8               panels;
@@ -29,11 +28,11 @@ NON_MATCHING void func_800AC964(void) {
     for (i = 0; i < 8; i++) {
         groups[i].id = -1;
     }
-    for (slot = 0; slot < g_Battle.enemy_count; slot++) {
-        if (g_BattleEnemyBattlers[slot].header.flags & 1) {
+    for (i = 0; i < g_Battle.enemy_count; i++) {
+        if (g_BattleEnemyBattlers[i].header.flags & 1) {
             found = 0;
             for (j = 0; j < total; j++) {
-                if (groups[j].id == g_BattleEnemyBattlers[slot].enemy_id.byte.type) {
+                if (groups[j].id == g_BattleEnemyBattlers[i].enemy_id.byte.type) {
                     found           = 1;
                     groups[j].count = groups[j].count + 1;
                     break;
@@ -41,18 +40,18 @@ NON_MATCHING void func_800AC964(void) {
             }
             if (!found) {
                 groups[total].count = 1;
-                groups[total].id    = g_BattleEnemyBattlers[slot].enemy_id.byte.type;
+                groups[total].id    = g_BattleEnemyBattlers[i].enemy_id.byte.type;
                 total               = total + 1;
             }
         }
     }
     if (g_Battle.enemy_count >= 2) {
-        for (i = 1; i < total; i++) {
-            for (slot = i - 1; slot < total - 1; slot++) {
-                if ((s16)groups[slot].count < (s16)groups[slot + 1].count) {
-                    swap             = groups[slot];
-                    groups[slot]     = groups[slot + 1];
-                    groups[slot + 1] = swap;
+        for (j = 1; j < total; j++) {
+            for (i = j - 1; i < total - 1; i++) {
+                if ((s16)groups[i].count < (s16)groups[i + 1].count) {
+                    swap          = groups[i];
+                    groups[i]     = groups[i + 1];
+                    groups[i + 1] = swap;
                 }
             }
         }
@@ -60,20 +59,21 @@ NON_MATCHING void func_800AC964(void) {
     x      = D_800B51E8[g_Battle.scroll_dir][0];
     y      = D_800B51E8[g_Battle.scroll_dir][1];
     panels = 0;
-    /* The enemy panels fill the slots below 0xC, one per enemy the side shows. */
+    /* The enemy panels fill the ks below 0xC, one per enemy the side shows. */
     if (g_Battle.scroll_dir >= 2) {
         for (i = 0; groups[i].id != -1; i++) {
-            j       = 0;
-            count   = groups[i].count;
-            y       = (y - 0x15) - ((count - 1) << 3);
+            k       = 0;
+            j       = groups[i].count;
+            y       = y - 0x15;
+            y       = y - ((j - 1) << 3);
             saved_y = y;
-            for (; j < g_Battle.enemy_count; j++) {
-                if (count == 0) {
+            for (; k < g_Battle.enemy_count; k++) {
+                if (j == 0) {
                     break;
                 }
-                if (groups[i].id == g_BattleEnemyBattlers[j].enemy_id.byte.type) {
+                if (groups[i].id == g_BattleEnemyBattlers[k].enemy_id.byte.type) {
                     groups[i].count = groups[i].count - 1;
-                    count           = count - 1;
+                    j               = j - 1;
                     UI_PanelOpenTask(0xC - panels, 3);
                     panel                               = 0xC - panels++;
                     g_UiPanelTasks[panel].mode          = 4;
@@ -83,7 +83,7 @@ NON_MATCHING void func_800AC964(void) {
                     g_UiPanelTasks[panel].u.addr.unk_12 = y;
                     g_UiPanelTasks[panel].pos.vy        = y;
                     y                                   = y + 8;
-                    g_UiPanelTasks[panel].unk_0A        = j + 3;
+                    g_UiPanelTasks[panel].unk_0A        = k + 3;
                     g_UiPanelTasks[panel].unk_08        = 0;
                     g_UiPanelTasks[panel].unk_09        = 0;
                 }
@@ -102,17 +102,18 @@ NON_MATCHING void func_800AC964(void) {
             y = y + 2;
         }
         for (i = 0; groups[i].id != -1; i++) {
-            j       = 0;
-            count   = groups[i].count;
-            y       = (y - 0x15) - ((count - 1) << 3);
+            k       = 0;
+            j       = groups[i].count;
+            y       = y - 0x15;
+            y       = y - ((j - 1) << 3);
             saved_y = y;
-            for (; j < g_Battle.enemy_count; j++) {
-                if (count == 0) {
+            for (; k < g_Battle.enemy_count; k++) {
+                if (j == 0) {
                     break;
                 }
-                if (groups[i].id == g_BattleEnemyBattlers[j].enemy_id.byte.type) {
+                if (groups[i].id == g_BattleEnemyBattlers[k].enemy_id.byte.type) {
                     groups[i].count = groups[i].count - 1;
-                    count           = count - 1;
+                    j               = j - 1;
                     UI_PanelOpenTask(0xC - panels, 3);
                     panel                               = 0xC - panels++;
                     g_UiPanelTasks[panel].mode          = 4;
@@ -122,7 +123,7 @@ NON_MATCHING void func_800AC964(void) {
                     g_UiPanelTasks[panel].u.addr.unk_12 = y;
                     g_UiPanelTasks[panel].pos.vy        = y;
                     y                                   = y + 8;
-                    g_UiPanelTasks[panel].unk_0A        = j + 3;
+                    g_UiPanelTasks[panel].unk_0A        = k + 3;
                     g_UiPanelTasks[panel].unk_08        = 0;
                     g_UiPanelTasks[panel].unk_09        = 0;
                 }

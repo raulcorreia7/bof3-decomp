@@ -2,15 +2,18 @@
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_8019B704(void) {
-    s32 saved;
-    s32 acc;
-    s32 gap;
-    s16 dist;
-    s16 temp;
+    s32    saved;
+    s32    acc;
+    s32    gap;
+    s16    dist;
+    s16    temp;
+    Actor* self;
 
     SELF(Actor)->unk_06       = 0;
     SELF(Actor)->option_flags = 0;
     if (SELF(Actor)->vx != 0) {
+        s32 sum;
+
         saved           = SELF(Actor)->vx;
         acc             = saved + SELF(Actor)->unk_18;
         SELF(Actor)->vx = acc;
@@ -19,9 +22,15 @@ NON_MATCHING void func_8019B704(void) {
             SELF(Actor)->vx     = saved;
             SELF(Actor)->unk_18 = 0;
         }
-        SELF(Actor)->pos.x.fixed += SELF(Actor)->vx;
-        gap = SELF(Actor)->pos.x.fixed - g_Game.members[0].pos.x.fixed;
+        self  = SELF(Actor);
+        sum   = self->pos.x.fixed;
+        saved = self->vx;
+        sum += saved;
+        self->pos.x.fixed = sum;
+        gap               = sum - g_Game.members[0].pos.x.fixed;
     } else {
+        s32 sum;
+
         saved           = SELF(Actor)->vy;
         acc             = saved + SELF(Actor)->unk_1C;
         SELF(Actor)->vy = acc;
@@ -30,8 +39,12 @@ NON_MATCHING void func_8019B704(void) {
             SELF(Actor)->vy     = saved;
             SELF(Actor)->unk_1C = 0;
         }
-        SELF(Actor)->pos.y.fixed += SELF(Actor)->vy;
-        gap = SELF(Actor)->pos.y.fixed - g_Game.members[0].pos.y.fixed;
+        self  = SELF(Actor);
+        sum   = self->pos.y.fixed;
+        saved = self->vy;
+        sum += saved;
+        self->pos.y.fixed = sum;
+        gap               = sum - g_Game.members[0].pos.y.fixed;
     }
     if (gap < 0) {
         gap = -gap;

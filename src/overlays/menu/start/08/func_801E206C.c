@@ -10,6 +10,7 @@ NON_MATCHING void func_801E206C(void) {
     u16 scan;    /* the pressed actions, scanned for the first one */
     s32 i;
     s32 keys;
+    u8* step;
 
     Menu_DrawClutStrip(g_WindowClut);
     Menu_DrawHeaderBar(MENU_HEADER_X, 16, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
@@ -78,8 +79,9 @@ NON_MATCHING void func_801E206C(void) {
         D_80148652 = D_80148652 - 1;
     } else if (g_PadStates[0].pressed & PADstart) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
+        step       = &D_80148652;
         D_80148655 = 0;
-        D_80148652 = D_80148652 - 2;
+        *step      = *step - 2;
     }
 }
 #else

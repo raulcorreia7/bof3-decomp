@@ -828,7 +828,7 @@ NON_MATCHING void func_801F97CC(WorldPos* pos, s32* arg) {
         point[1] = pos->y.fixed - arg[1];
     }
     point[2] = pos->z.fixed + arg[2];
-    asm __volatile__("" : : : "memory");
+    FAKE_BARRIER(); /* FAKE: keep the point stores before the call setup. */
     Camera_ProjectPoint(point, (DVECTOR*)(&poly->x1));
     point[0] = pos->x.fixed + arg[0];
     point[1] = pos->y.fixed + arg[1];
@@ -843,11 +843,11 @@ NON_MATCHING void func_801F97CC(WorldPos* pos, s32* arg) {
         point[1] = pos->y.fixed - arg[1];
     }
     point[2] = (pos->z.fixed + arg[2]) + lift;
-    asm __volatile__("" : : : "memory");
+    FAKE_BARRIER(); /* FAKE: keep the point stores before the call setup. */
     Camera_ProjectPoint(point, (DVECTOR*)(&poly->x3));
     poly->r0 = (SELF(Actor)->unk_06 & 2) != 0 ? 0x80 : 0;
-    poly->g0 = (SELF(Actor)->unk_06 & 2) == 0 ? 0x80 : 0;
     poly->b0 = 0;
+    poly->g0 = (SELF(Actor)->unk_06 & 2) == 0 ? 0x80 : 0;
     Area_CellAddPrim(pos->x.fixed, pos->y.fixed, 0, sizeof(POLY_F4));
 }
 #else

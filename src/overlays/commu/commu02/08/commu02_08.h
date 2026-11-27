@@ -163,7 +163,7 @@ u8   Fairy_FindActiveJob(u8);
 void func_801D8058(s32 left, s32 top);
 s8   func_801DA114();
 void func_801DA8E8(void);
-void func_801D830C(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
+void func_801D830C(s32 x, s32 y, u8 kind, u8 mode);
 /* The area text bank indexes of the tables the fairy name halves come from. */
 #define FAIRY_NAME_FIRST_HALF_INDEX  496
 #define FAIRY_NAME_SECOND_HALF_INDEX 560

@@ -22,7 +22,7 @@ and the install step (`tools/setup.sh --dev --matching`).
 `--order strategy` lists one lane's open functions in the order that pays most first: promote (the
 draft matches), twin (open functions with one body), near (sched, regalloc or frame, at most four
 hunks), medium (shape), undrafted (150 words or fewer), hard, stub (a draft under half of retail),
-blocked (nocompile). A unit-order function (an earlier draft in its file has another size) follows its
+blocked (nocompile). A unit-order function (code before it in its file has another size) follows its
 culprit, the lowest-address open function of the file, and names it in `after`. `--image` takes a
 directory glob (`emi/battle` covers `emi/battle/...`); `--except` drops functions by name.
 Each draft is measured with `tools/match.sh --diff` once per source hash and kept in `build/worklist/`;

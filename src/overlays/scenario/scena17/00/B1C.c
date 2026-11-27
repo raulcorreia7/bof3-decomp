@@ -566,8 +566,7 @@ MATCH void func_801F88CC(s32 semi, s32 color) {
     GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(SPRT));
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F8B10(s32 scale, s32 shade) {
+MATCH void func_801F8B10(s32 scale, s32 shade) {
     SVECTOR  rot;
     SVECTOR  axis;
     MATRIX   mtx;
@@ -589,7 +588,7 @@ NON_MATCHING void func_801F8B10(s32 scale, s32 shade) {
     setVector(&axis, 0, 0, 0);
     rot.vx = (g_AreaScrollTargetX >> 9) - 0x4000;
     rot.vy = (g_AreaScrollTargetCoordY.fixed >> 9) - 0x4000;
-    rot.vz = -Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY) / 2;
+    rot.vz = -Area_HeightSample(g_AreaScrollTargetCoordX.fixed, g_AreaScrollTargetY) / 2;
     RotTransMatrix(&rot, mtx, &flag);
     RotMatrix(&axis, &mtx);
     MulMatrix2(&g_CameraMatrix, &mtx);
@@ -629,9 +628,6 @@ NON_MATCHING void func_801F8B10(s32 scale, s32 shade) {
     }
     PopMatrix();
 }
-#else
-INCLUDE_ASM(func_801F8B10);
-#endif
 
 MATCH void func_801F8EF0(void) {
     TILE* prim;
@@ -675,21 +671,17 @@ MATCH void func_801F8FAC(s32 x, s32 y, s32 color, u8 semi_trans) {
     GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(SPRT));
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F90BC(s16 x, s16 y, u32 clut, u32 uv) {
+MATCH void func_801F90BC(s16 x, s16 y, u8 clut, u8 uv) {
     SPRT_16* prim;
 
     prim = (SPRT_16*)g_GfxPrimCursor;
     SetSprt16(prim);
     PSX_SET_NEUTRAL_RGB(prim);
     setXY0(prim, x, y);
-    prim->clut = (clut & 0x3F) | 0x7B80;
+    prim->clut = getClut(clut * 16, 494);
     setUV0(prim, (uv & 0xF) << 4, uv & 0xF0);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT_16));
 }
-#else
-INCLUDE_ASM(func_801F90BC);
-#endif
 
 MATCH void func_801F9160(s16 x, s16 y) {
     SPRT* prim;

@@ -13,10 +13,10 @@ NON_MATCHING void func_801EAF98(MenuPanelTask* task) {
     s32  title_x;
     u8*  title;
     u32* flags;
+    u8*  style;
 
-    flags = &g_SaveData.found_genes;
     count = 0;
-    for (i = 0; i < 0x12; i++) {
+    for (i = 0, flags = &g_SaveData.found_genes; i < 0x12; i++) {
         if (*flags & (1 << i)) {
             D_801ED878[count++] = i + 1;
         }
@@ -27,8 +27,9 @@ NON_MATCHING void func_801EAF98(MenuPanelTask* task) {
     }
     UI_WindowDraw(((u16)task->pos.vx + 3) & HALF_MASK, ((u16)task->pos.vy + 3) & HALF_MASK, MENU_INVENTORY_WINDOW_WIDTH, MENU_INVENTORY_WINDOW_HEIGHT, 0, g_WindowStyle);
     first = UI_ScrollList(&task->unk_0A, &scroll_y, &scroll_rows, &task->unk_08);
-    y     = (s8)scroll_y + ((u16)task->pos.vy + 0x1A);
-    for (i = first; i < first + (scroll_rows + 9); i++) {
+    /* FAKE: retail reads the scroll byte with lbu and sign-extends it by shifts; pure C best 6 hunks. */
+    y     = ((u16)task->pos.vy + 0x1A) + (s8)FAKE_VOLATILE(u8, scroll_y);
+    for (i = first; i < first + (s16)(scroll_rows + 9); i++) {
         if (D_801ED878[i] == 0) {
             break;
         }
@@ -45,8 +46,10 @@ NON_MATCHING void func_801EAF98(MenuPanelTask* task) {
         y += 0xD;
     }
     task->unk_0C = D_801ED878[task->unk_0B];
-    UI_WindowDraw(((u16)task->pos.vx + 3) & HALF_MASK, ((u16)task->pos.vy + 3) & HALF_MASK, MENU_INVENTORY_WINDOW_WIDTH, MENU_INVENTORY_TOP_HEIGHT, 0, g_WindowStyle);
-    UI_WindowDraw(((u16)task->pos.vx + 3) & HALF_MASK, ((u16)task->pos.vy + 146) & HALF_MASK, MENU_INVENTORY_WINDOW_WIDTH, MENU_INVENTORY_BOTTOM_HEIGHT, 0, g_WindowStyle);
+    /* FAKE: keeps the window-style address in a saved register for both draws, as retail; pure C best 6 hunks. */
+    style        = &g_WindowStyle;
+    UI_WindowDraw(((u16)task->pos.vx + 3) & HALF_MASK, ((u16)task->pos.vy + 3) & HALF_MASK, MENU_INVENTORY_WINDOW_WIDTH, MENU_INVENTORY_TOP_HEIGHT, 0, *FAKE_VOLATILE_PTR(u8, style));
+    UI_WindowDraw(((u16)task->pos.vx + 3) & HALF_MASK, ((u16)task->pos.vy + 146) & HALF_MASK, MENU_INVENTORY_WINDOW_WIDTH, MENU_INVENTORY_BOTTOM_HEIGHT, 0, *FAKE_VOLATILE_PTR(u8, style));
     title   = (u8*)&D_801ED608;
     title_x = (Game_ReadCommand(title) & BYTE_MASK) * 4 - 78;
     UI_TextDraw(((u16)task->pos.vx - title_x), ((u16)task->pos.vy + 7), 0, MENU_LABEL_LENGTH, title);

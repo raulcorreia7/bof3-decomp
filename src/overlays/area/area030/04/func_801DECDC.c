@@ -10,7 +10,6 @@ NON_MATCHING void func_801DECDC(void) {
     s32 roll;
     s8  size;
     s32 lure;
-    u8* row;
 
     if (SELF(FishingState)->timer == 0) {
         if (!(Fishing_LureInRange() & BYTE_MASK)) {
@@ -37,9 +36,7 @@ NON_MATCHING void func_801DECDC(void) {
                 SELF(FishingState)->counter_08 = 7;
             }
 
-            lure = g_FishingLureRow->unk_0E & 0xF;
-            row  = FISHING_ENTRY(SELF(FishingState)->cue_index)->pad_04;
-            size = g_SpawnedActors[0].unk_07 - row[lure];
+            size = g_SpawnedActors[0].unk_07 - D_801E2ACC[SELF(FishingState)->cue_index][lure = g_FishingLureRow->unk_0E & 0xF];
             size = (size < -1) ? -1 : (size < 4) ? size : 3;
 
             switch ((s8)(size + 1)) {

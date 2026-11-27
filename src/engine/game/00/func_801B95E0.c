@@ -14,7 +14,6 @@ NON_MATCHING s32 func_801B95E0(void) {
     s16 y_arg;
     u8  dir;
     s32 probe;
-    u8* pad;
     /* FAKE: retail's frame is 8 bytes larger than the statements need. */
     FAKE_STACK_PADS(s32, 8);
 
@@ -32,19 +31,18 @@ NON_MATCHING s32 func_801B95E0(void) {
     if (!(WDIR & AREA_LOAD_FLAG_WORLD_MAP)) {
         if (COORD_FRAC(SELF(Actor)->pos.x) == 0) {
             if (COORD_FRAC(SELF(Actor)->pos.y) == 0) {
-                pad    = (u8*)&D_1F800008;
-                pad[0] = func_801B9F08(1, 2, 3);
-                pad[1] = func_801B9F08(2, 0, 0);
-                PAD_C  = func_801B9F08(3, 0, 0);
-                if (pad[0] == 0xB0) {
+                ((u8*)&D_1F800008)[0] = func_801B9F08(1, 2, 3);
+                ((u8*)&D_1F800008)[1] = func_801B9F08(2, 0, 0);
+                PAD_C                 = func_801B9F08(3, 0, 0);
+                if (((u8*)&D_1F800008)[0] == 0xB0) {
                     return 6;
                 }
                 {
-                    if (pad[0] == 0x10 || pad[0] == 0x20) {
-                        if ((*(u32*)pad & 0xFFFF00) == 0x101000) {
+                    if (((u8*)&D_1F800008)[0] == 0x10 || ((u8*)&D_1F800008)[0] == 0x20) {
+                        if ((*(u32*)&D_1F800008 & 0xFFFF00) == 0x101000) {
                             return 0;
                         }
-                        if (pad[1] == 0x10) {
+                        if (((u8*)&D_1F800008)[1] == 0x10) {
                             Actor_SnapFacing(2, 4, 3);
                         } else if (PAD_C == 0x10) {
                             Actor_SnapFacing(4, 6, 5);

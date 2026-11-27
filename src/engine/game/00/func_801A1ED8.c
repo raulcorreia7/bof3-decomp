@@ -3,10 +3,8 @@
 #define AREA_CELL_BLOCKED(x, y) ((u8 (*)(s32, s32))Area_CellIsBlocked)((x), (y))
 
 /* Accumulates the blocked-cell probes around a 16.16 point for the route's facing. */
-#ifdef NON_MATCHING
-NON_MATCHING s32 func_801A1ED8(s32 x, s32 y, s32 route, s32 unused) {
-    u8  sum;
-    u16 column;
+MATCH s32 func_801A1ED8(s32 x, s32 y, s32 route, s32 unused) {
+    u8 sum;
 
     switch (route & BYTE_MASK) {
         case FACING_UP: {
@@ -44,16 +42,22 @@ NON_MATCHING s32 func_801A1ED8(s32 x, s32 y, s32 route, s32 unused) {
                 }
             }
             break;
+        case FACING_LEFT: {
+            u16 column = x >> 16;
+            s32 row    = y >> 16;
+
+            sum = AREA_CELL_BLOCKED(column, row & HALF_MASK);
+            if (y & HALF_MASK) {
+                sum += AREA_CELL_BLOCKED(column, (row + 1) & HALF_MASK);
+                sum += func_801A223C(x, y & ~HALF_MASK);
+                sum += func_801A223C(x, y + COORD_HALF);
+            }
+            break;
+        }
         case FACING_RIGHT:
             if (x & HALF_MASK) {
-                column = ((x >> 16) + 1) & HALF_MASK;
-                goto probe_x;
-            }
-        case FACING_LEFT:
-            column = (x >> 16) & HALF_MASK;
-        probe_x:
-            {
-                s32 row = y >> 16;
+                u16 column = ((x >> 16) + 1) & HALF_MASK;
+                s32 row    = y >> 16;
 
                 sum = AREA_CELL_BLOCKED(column, row & HALF_MASK);
                 if (y & HALF_MASK) {
@@ -61,8 +65,18 @@ NON_MATCHING s32 func_801A1ED8(s32 x, s32 y, s32 route, s32 unused) {
                     sum += func_801A223C(x, y & ~HALF_MASK);
                     sum += func_801A223C(x, y + COORD_HALF);
                 }
-                break;
+            } else {
+                u16 column = x >> 16;
+                s32 row    = y >> 16;
+
+                sum = AREA_CELL_BLOCKED(column, row & HALF_MASK);
+                if (y & HALF_MASK) {
+                    sum += AREA_CELL_BLOCKED(column, (row + 1) & HALF_MASK);
+                    sum += func_801A223C(x, y & ~HALF_MASK);
+                    sum += func_801A223C(x, y + COORD_HALF);
+                }
             }
+            break;
         default:
             sum = 1;
             goto done;
@@ -71,8 +85,5 @@ NON_MATCHING s32 func_801A1ED8(s32 x, s32 y, s32 route, s32 unused) {
 done:
     return sum != 0;
 }
-#else
-INCLUDE_ASM(func_801A1ED8);
-#endif
 
 #undef AREA_CELL_BLOCKED

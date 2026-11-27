@@ -21,21 +21,22 @@ static inline u8 Fishing_ClampDepth(s8 depth) {
 }
 
 NON_MATCHING void func_801DF334(void) {
-    u8  grade;
-    s32 span;
-    s32 value;
-    s32 height;
-    s32 gap;
-    s32 rise;
-    s32 drift;
-    s32 sway;
-    s32 sway_capped;
-    s32 speed;
-    s32 capped;
-    u8  center;
-    u8  lower;
-    u8  upper;
-    u8* odds;
+    u8            grade;
+    s32           span;
+    s32           value;
+    s32           height;
+    s32           gap;
+    s32           rise;
+    s32           drift;
+    FishingState* work;
+    s32           sway;
+    s32           sway_capped;
+    s32           speed;
+    s32           capped;
+    u8            center;
+    u8            lower;
+    u8            upper;
+    u8*           odds;
 
     center = g_SpawnedActors[5].screen_y;
     span   = g_FishingRodRow->reel_cursor_size * 4;
@@ -235,10 +236,9 @@ NON_MATCHING void func_801DF334(void) {
         } else {
             SELF(FishingState)->counter_08 = 1;
         }
-    } else if ((s8)SELF(FishingState)->step_index < g_SpawnedActors[5].screen_y && g_SpawnedActors[5].selection < 0) {
-        FishingState* work = SELF(FishingState);
-        rise               = 0x3E - work->y_38.slot.slot;
-        drift              = 0xF0000 - work->motion.unk_34;
+    } else if ((s8)(work = SELF(FishingState))->step_index < g_SpawnedActors[5].screen_y && g_SpawnedActors[5].selection < 0) {
+        rise  = 0x3E - work->y_38.slot.slot;
+        drift = 0xF0000 - work->motion.unk_34;
         if (rise != 0) {
             rise        = (drift >> 4) / rise;
             work->pos_x = rise;

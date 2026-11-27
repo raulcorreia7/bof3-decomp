@@ -39,10 +39,11 @@ NON_MATCHING void func_8015642C(u8* obj, s32 x, s32 y) {
     RotTransPers3(&g_ScratchPadVectors[2], &g_ScratchPadVectors[3], &g_ScratchPadVectors[0], (s32*)screen, (s32*)(screen + 2), (s32*)(screen + 4), &depth, &flag);
     if (((u16)(screen[0] + 0x50) < 0x1E1U) && (D_1F800034[3] >= -0x14) && (D_1F800034[1] < 0x105)) {
         for (part = 0; part < g_SpriteCellPartCounts[index]; part++) {
+            j      = 0;
             bottom = &((u8*)g_SpriteCellBottomV)[index * 2];
             prim   = (POLY_FT4*)g_GfxPrimCursor;
             top    = &((u8*)g_SpriteCellTopV)[index * 2];
-            for (j = 0; j < 2; j++) {
+            for (; j < 2; j++) {
                 p = &prim[j];
                 SetPolyFT4(p);
                 SetShadeTex(p, 0);

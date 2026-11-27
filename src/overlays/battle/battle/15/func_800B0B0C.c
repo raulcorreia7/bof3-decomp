@@ -1,51 +1,31 @@
 #include "battle_15.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_800B0B0C(s16 base_x, s16 base_y) {
-    volatile u16 y_value;
-    s16          cursor_y;
-    u8           slot;
-    u8           selection_byte;
-    u8           active_slot;
-    const u8*    palette;
-    s32          slot_offset;
-    s32          slot_times_3;
+/* Draws the three choice boxes 48 apart; bit 7 of the selection fixes one, else the hand marks it. */
+MATCH void func_800B0B0C(s16 base_x, s16 base_y) {
+    u8 slot;
+    u8 selection;
 
-    y_value  = base_y;
-    cursor_y = base_y + 3;
-    slot     = 0u;
+    slot = 0;
     do {
-        slot_offset  = (s32)slot * 0x30;
-        slot_times_3 = (s32)slot * 3;
-
-        UI_WindowDraw((u16)(base_x + slot_offset), y_value, 45u, 20u, 0u, (s32)g_WindowStyle);
-
-        selection_byte = g_Battle.selection;
-        if (selection_byte & 0x80u) {
-            active_slot = selection_byte & 0x7Fu;
-            if (slot == active_slot) {
-                UI_TextDraw((s16)(base_x + slot_offset + 4), cursor_y, 0u, MENU_LABEL_LENGTH, &D_800B6D30[slot_times_3]);
-                palette = D_800B6D28;
+        UI_WindowDraw(base_x + slot * 0x30, base_y, 45, 20, 0, g_WindowStyle);
+        selection = g_Battle.selection;
+        if (selection & 0x80) {
+            if (slot == (selection & 0x7F)) {
+                UI_TextDraw(base_x + 4 + slot * 0x30, base_y + 3, 0, MENU_LABEL_LENGTH, (u8*)&D_800B6D30[slot * 3]);
+                func_801AF390(base_x + slot * 0x30, base_y, (u8*)D_800B6D28, 1);
             } else {
-                UI_TextDraw((s16)(base_x + slot_offset + 4), cursor_y, UI_TEXT_DIM, MENU_LABEL_LENGTH, &D_800B6D30[slot_times_3]);
-                palette = D_800B6D20;
+                UI_TextDraw(base_x + 4 + slot * 0x30, base_y + 3, UI_TEXT_DIM, MENU_LABEL_LENGTH, (u8*)&D_800B6D30[slot * 3]);
+                func_801AF390(base_x + slot * 0x30, base_y, (u8*)D_800B6D20, 1);
             }
         } else {
-            UI_TextDraw((s16)(base_x + slot_offset + 4), cursor_y, 0u, MENU_LABEL_LENGTH, &D_800B6D30[slot_times_3]);
-            palette = D_800B6D20;
+            UI_TextDraw(base_x + 4 + slot * 0x30, base_y + 3, 0, MENU_LABEL_LENGTH, (u8*)&D_800B6D30[slot * 3]);
+            func_801AF390(base_x + slot * 0x30, base_y, (u8*)D_800B6D20, 1);
         }
-        func_801AF390((s16)(base_x + slot_offset), (s16)base_y, palette, 1);
+        slot++;
+    } while (slot < 3);
 
-        slot += 1u;
-    } while (BATTLER_IS_PLAYER(slot));
-
-    selection_byte = g_Battle.selection;
-
-    if (!(selection_byte & 0x80u)) {
-        active_slot = selection_byte & 0x7Fu;
-        UI_CursorDraw((u16)(base_x + (s32)active_slot * 0x30), (u16)(y_value + 4u), 0);
+    selection = g_Battle.selection;
+    if (!(selection & 0x80)) {
+        UI_CursorDraw(base_x + (selection & 0x7F) * 0x30, base_y + 4, 0);
     }
 }
-#else
-INCLUDE_ASM(func_800B0B0C);
-#endif

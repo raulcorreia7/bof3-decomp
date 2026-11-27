@@ -87,25 +87,24 @@ MATCH void func_801F719C(void) {
     }
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F73EC(void) {
-    u32 height;
-    u32 width;
+MATCH void func_801F73EC(void) {
+    s32 width;
+    s32 height;
     s32 limit;
     u8  i;
 
     i = 0;
     do {
-        width = D_801FE7CC[i].box.w;
-        /* FAKE: retail keeps the loaded width in a2 for the clamp; without this the load folds (0x108). */
-        FAKE_OPAQUE(width);
         limit = SELF(Actor)->timer << 4;
-        if (((u16)limit) < width) {
+        if ((u16)limit < D_801FE7CC[i].box.w) {
             width = limit;
+        } else {
+            width = D_801FE7CC[i].box.w;
         }
-        height = D_801FE7CC[i].box.h;
-        if (((u16)limit) < height) {
+        if ((u16)limit < D_801FE7CC[i].box.h) {
             height = limit;
+        } else {
+            height = D_801FE7CC[i].box.h;
         }
         if (((SELF(Actor)->option_flags >> i) & 1) == 0) {
             UI_WindowDrawBoxOutline(D_801FE7CC[i].signed_box.x, D_801FE7CC[i].signed_box.y, (u8)width, (u8)height);
@@ -117,9 +116,6 @@ NON_MATCHING void func_801F73EC(void) {
         SELF(Actor)->header.mode = 4;
     }
 }
-#else
-INCLUDE_ASM(func_801F73EC);
-#endif
 
 MATCH void func_801F74F8(void) {
     Actor_Clear();

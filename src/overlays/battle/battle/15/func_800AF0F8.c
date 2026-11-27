@@ -19,10 +19,9 @@ NON_MATCHING void func_800AF0F8(s32 pos_x, s32 pos_y, s32* values, u8* base, u8 
     u32    best;
     u32    cell;
     u32    total;
+    u32    buffer;
     s32    tile_x;
     s32    tile_y;
-    /* FAKE: retail frames 0x10 bytes; the callee base frame is 8, and no statement uses the other 8. */
-    FAKE_STACK_PADS(u8, 8);
 
     tile_x = (pos_x >> 16) - g_AreaTileOriginX;
     tile_y = (pos_y >> 16) - g_AreaTileOriginY;
@@ -41,33 +40,30 @@ NON_MATCHING void func_800AF0F8(s32 pos_x, s32 pos_y, s32* values, u8* base, u8 
     } else {
         total = cell + addend;
     }
-    stride = size & BYTE_MASK;
     if ((u32)total >= 0x38) {
-        g_GfxPrimCursor -= count * size;
+        g_GfxPrimCursor -= size * count;
     } else {
+        stride = size & BYTE_MASK;
         cursor = g_GfxPrimCursor;
-        limit  = g_GfxBufferIndex * 0x9000 + PRIM_ARENA_BASE;
+        buffer = g_GfxBufferIndex;
+        limit  = buffer * 0x9000 + PRIM_ARENA_BASE;
         next   = cursor + stride;
         if (next < limit) {
-            offset = (g_GfxBufferIndex + 4) * 8 + total * 0x30;
-            if ((count & BYTE_MASK) != 0) {
-                claim = 0;
-                do {
-                    best = 0;
-                    for (entry = 0; entry < (count & BYTE_MASK); entry++) {
-                        if (values[best] < values[entry]) {
-                            best = entry;
-                        }
+            for (claim = 0; claim < (count & BYTE_MASK); claim++) {
+                best = 0;
+                for (entry = 0; entry < (count & BYTE_MASK); entry++) {
+                    if (values[best] < values[entry]) {
+                        best = entry;
                     }
-                    if (values[best] != 0) {
-                        values[best] = 0;
-                        packet       = *(P_TAG**)(D_80142CC4 + offset);
-                        address      = base + best * stride;
-                        setaddr(packet, address);
-                        *(u8**)(D_80142CC4 + offset) = (u8*)address;
-                    }
-                    claim++;
-                } while (claim < (count & BYTE_MASK));
+                }
+                if (values[best] != 0) {
+                    values[best] = 0;
+                    address      = base + best * (size & BYTE_MASK);
+                    offset       = (buffer + 4) * 8 + total * 0x30;
+                    packet       = *(P_TAG**)(D_80142CC4 + offset);
+                    setaddr(packet, address);
+                    *(u8**)(D_80142CC4 + offset) = (u8*)address;
+                }
             }
         } else {
             g_GfxPrimCursor -= count * stride;

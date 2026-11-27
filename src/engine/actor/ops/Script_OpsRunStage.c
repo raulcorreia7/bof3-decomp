@@ -22,20 +22,19 @@ typedef enum ActorScriptStage {
 
 /* func_801AB458 */
 /* Runs one scene stage opcode. */
-#ifdef NON_MATCHING
-NON_MATCHING u8 Script_OpsRunStage(ScriptState* state, const u8* table, u8 value) {
-    u8    byte;
-    u8    flag;
-    u8    slot;
-    s32   delta_x;
-    s32   delta_y;
-    u32   sel;
-    u32   span_y;
-    s32   step;
-    s32   span;
-    s32   buf[3];
-    void* entry;
-    u32*  list;
+MATCH u8 Script_OpsRunStage(ScriptState* state, const u8* table, u8 value) {
+    u8        byte;
+    u8        flag;
+    u8        slot;
+    s32       delta_x;
+    s32       delta_y;
+    u32       sel;
+    u32       span_y;
+    s32       step;
+    s16       span;
+    s32       buf[3];
+    AreaLoad* entry;
+    u32*      list;
 
     byte = table[state->cursor];
     switch (byte) {
@@ -54,7 +53,7 @@ NON_MATCHING u8 Script_OpsRunStage(ScriptState* state, const u8* table, u8 value
             state->flags |= ACTOR_INTERACTION_FADE_BLACK;
             break;
         case ACTOR_SCRIPT_STAGE_SET_TARGET_POS: {
-            func_801ABF30(buf, table[state->cursor + 1], table[state->cursor + 2]);
+            func_801ABF30(buf, (table + state->cursor)[1], (table + state->cursor)[2]);
             SELF(Actor)->pos.x.fixed = buf[0];
             SELF(Actor)->pos.y.fixed = buf[1];
             SELF(Actor)->pos.z       = buf[2];
@@ -62,27 +61,24 @@ NON_MATCHING u8 Script_OpsRunStage(ScriptState* state, const u8* table, u8 value
             break;
         }
         case ACTOR_SCRIPT_STAGE_CAMERA_SCROLL: {
-            s32* base;
-
-            base = &g_Game.members[0].pos.x.fixed;
-            if ((g_AreaScrollTargetX != base[0]) || (g_AreaScrollTargetY != base[1])) {
-                delta_x = g_AreaScrollTargetX - base[0];
+            if ((g_AreaScrollTargetCoordX.fixed != g_Game.members[0].pos.x.fixed) || (g_AreaScrollTargetCoordY.fixed != g_Game.members[0].pos.y.fixed)) {
+                delta_x = g_AreaScrollTargetCoordX.fixed - g_Game.members[0].pos.x.fixed;
                 delta_x = ABS(delta_x);
                 sel     = (u32)delta_x >> 15;
-                delta_y = g_AreaScrollTargetY - base[1];
+                delta_y = g_AreaScrollTargetCoordY.fixed - g_Game.members[0].pos.y.fixed;
                 delta_y = ABS(delta_y);
                 span_y  = (u32)delta_y >> 15;
                 if ((sel & BYTE_MASK) < (span_y & BYTE_MASK)) {
                     sel = span_y;
                 }
                 Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY);
-                g_AreaScrollTargetX = base[0];
-                g_AreaScrollTargetY = base[1];
-                span                = Area_HeightSample(base[0], base[1]);
+                g_AreaScrollTargetX = g_Game.members[0].pos.x.fixed;
+                g_AreaScrollTargetY = g_Game.members[0].pos.y.fixed;
+                span                = Area_HeightSample(g_Game.members[0].pos.x.fixed, g_Game.members[0].pos.y.fixed);
                 g_AreaCameraSpeed   = 0x20;
                 step                = sel & BYTE_MASK;
                 if (step != 0) {
-                    g_AreaCameraHeightDelta = (s16)(((s16)span - (s32)g_AreaCameraHeight) / (step * 4));
+                    g_AreaCameraHeightDelta = (s16)((span - (s32)g_AreaCameraHeight) / (step * 4));
                 } else {
                     g_AreaCameraHeightDelta = 0;
                 }
@@ -94,17 +90,17 @@ NON_MATCHING u8 Script_OpsRunStage(ScriptState* state, const u8* table, u8 value
                 break;
             }
             span = Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY);
-            Area_ScrollAdvance((s16)span);
+            Area_ScrollAdvance(span);
             break;
         }
         case ACTOR_SCRIPT_STAGE_SET_RECORD_INDEX:
             if (Actor_GetOwner() == 1) {
                 entry                      = g_AreaLoads[g_GameAreaId];
-                byte                       = table[state->cursor + 1];
-                list                       = *(u32**)((u8*)entry + 0x18);
+                byte                       = (table + state->cursor)[1];
+                list                       = entry->unk_18;
                 g_GameState->u.field.index = list[byte];
             } else {
-                state->script_index = table[state->cursor + 1];
+                state->script_index = (table + state->cursor)[1];
             }
             state->cursor = 0xFFFF;
             break;
@@ -115,11 +111,11 @@ NON_MATCHING u8 Script_OpsRunStage(ScriptState* state, const u8* table, u8 value
             func_801AC9D0();
             break;
         case ACTOR_SCRIPT_STAGE_START_XA:
-            SND_XAStartStream((table[state->cursor + 1] << 8) | table[state->cursor + 2], 1);
+            SND_XAStartStream(((table + state->cursor)[1] << 8) | (table + state->cursor)[2], 1);
             state->cursor += 2;
             break;
         case ACTOR_SCRIPT_STAGE_SOUND_STUB:
-            func_80164020((table[state->cursor + 1] << 8) | table[state->cursor + 2], 1);
+            func_80164020(((table + state->cursor)[1] << 8) | (table + state->cursor)[2], 1);
             state->cursor += 2;
             break;
         case ACTOR_SCRIPT_STAGE_WAIT_XA_IDLE:
@@ -129,7 +125,7 @@ NON_MATCHING u8 Script_OpsRunStage(ScriptState* state, const u8* table, u8 value
             state->cursor--;
             break;
         case ACTOR_SCRIPT_STAGE_SPAWN_HELPER: {
-            flag = table[state->cursor + 1];
+            flag = (table + state->cursor)[1];
             slot = g_GameState->chr.character_id;
             SELF(Actor)->param.unk_0B =
                 Actor_SpawnHelper(flag - 0x90, -((flag ^ 0x94) == 0) & 0xA, D_80181B28[g_CharSlot[slot]], SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed, SELF(Actor)->pos.z.fixed);
@@ -141,6 +137,3 @@ NON_MATCHING u8 Script_OpsRunStage(ScriptState* state, const u8* table, u8 value
     }
     return value;
 }
-#else
-INCLUDE_ASM(Script_OpsRunStage);
-#endif

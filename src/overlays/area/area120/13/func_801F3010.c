@@ -1,7 +1,6 @@
 #include "area120_13.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F3010(void) {
+MATCH void func_801F3010(void) {
     s32             point[3];
     DVECTOR         screen;
     u8              scratch[32];
@@ -22,7 +21,7 @@ NON_MATCHING void func_801F3010(void) {
     pixels     = MEM_PTR(u16, AREA_WORK);
     tile       = MEM_PTR(AreaRiseTile, AREA_WORK + 0x2D00u);
     D_801F4FD4 = 0;
-    for (row = 0; row < (s16)AREA120_IMAGE_RECT->box.h; row++) {
+    for (row = 0; row < LOH(AREA120_IMAGE_RECT->box.h); row++) {
         rect = AREA120_IMAGE_RECT;
         for (col = 0; (s16)col < (s16)AREA120_IMAGE_RECT->box.w; col++) {
             if (*pixels != 0) {
@@ -43,6 +42,3 @@ NON_MATCHING void func_801F3010(void) {
     }
     SELF(Actor)->header.mode++;
 }
-#else
-INCLUDE_ASM(func_801F3010);
-#endif

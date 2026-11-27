@@ -26,9 +26,12 @@ NON_MATCHING void func_8015A9A4(void) {
     dx   = COORD_INT(task->pos.x) - g_AreaTileOriginX;
     dy   = COORD_INT(task->pos.y) - g_AreaTileOriginY;
     if (COORD_FRAC(task->pos.x) != 0) {
-        dy += 1;
+        dy++;
     }
-    sum = dx + dy;
+    /* FAKE: keeps dx in its own pseudo so the x delta loads first, as in Area_CellAddPrim; pure C best 18 rows. */
+    dx++;
+    dx--;
+    sum = dy + dx;
     key = sum + 1;
     if (COORD_FRAC(SELF(Actor)->pos.y) == 0) {
         key = sum;

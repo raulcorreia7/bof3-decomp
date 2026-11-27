@@ -97,18 +97,18 @@ MATCH void func_801EF030(s32 x, s32 y, u16 radius, s32 phase) {
 #ifdef NON_MATCHING
 NON_MATCHING void func_801EF1FC(s16 x0, s16 y0, s16 x1, s16 y1, s16 x2, s16 y2) {
     POLY_G4* prim;
-    VECTOR   vec;
+    s16      prev_x[12];
+    s16      prev_z[12];
+    s16      ring_x[12];
+    s16      ring_z[12];
+    u8       prev_light[16];
+    u8       ring_light[16];
+    u8       prev_mirror[16];
+    u8       ring_mirror[16];
     VECTOR   centre;
+    VECTOR   vec;
     SVECTOR  normal;
     SVECTOR  light = D_801EEC10;
-    s16      prev_x[10];
-    s16      prev_z[10];
-    s16      ring_x[10];
-    s16      ring_z[10];
-    u8       prev_light[10];
-    u8       ring_light[10];
-    u8       prev_mirror[10];
-    u8       ring_mirror[10];
     s16      quad_x[4];
     s16      quad_y[4];
     s32      avg_x;

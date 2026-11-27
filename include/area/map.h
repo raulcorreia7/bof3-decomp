@@ -229,7 +229,9 @@ typedef struct AreaLoad {
     /* 0x08 */ u8*       field_08;
     /* 0x0C */ u8*       unk_0C;
     /* 0x10 */ u8*       scripts;
-    /* 0x14 */ u8        pad_14[0x1E];
+    /* 0x14 */ u8        pad_14[0x04];
+    /* 0x18 */ u32*      unk_18;
+    /* 0x1C */ u8        pad_1C[0x16];
     /* 0x32 */ u8        flags;
     u8                   pad_33;
     /* 0x34 */ Callback* steps;

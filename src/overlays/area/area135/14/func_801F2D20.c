@@ -12,7 +12,7 @@ NON_MATCHING void func_801F2D20(void) {
     u16       x;
     u16       x2;
     s32       y;
-    s32       shade;
+    s16       shade;
 
     work    = g_Self;
     adopted = &g_PartyActors[work->unk_18];

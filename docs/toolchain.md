@@ -133,7 +133,8 @@ delete `build/meson` and run `meson setup build/meson`; the extracted disc stays
 
 `tools/match.sh exe/slus_004_22 Actor_ApplyVelocity` (or `exe/slus_004_22@0x8015C9CC`) answers
 "does this function match?" in about 0.1 s after the compile. Ninja builds the unit's object (the
-same edge `check-<image>` uses; a `NON_MATCHING` draft uses its draft object). A partial link then
+same edge `check-<image>` uses; a `NON_MATCHING` draft uses its draft object; the file's other drafts keep their `INCLUDE_ASM`
+branch, as the matching build lays them out, so their sizes do not move it). A partial link then
 places the object's `.text` at the unit's retail address and resolves the relocations against the
 symbol maps, so a wrong callee or global shows as a difference. A variable that a C file of the
 image defines is placed from the image's last link map (`build/meson/<image>.map`), so build the

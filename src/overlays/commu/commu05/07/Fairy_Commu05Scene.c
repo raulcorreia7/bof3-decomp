@@ -156,9 +156,8 @@ MATCH void func_801D129C(s16 x, s16 y, u8 group) {
     }
 }
 
-#ifdef NON_MATCHING
 // clang-format off
-NON_MATCHING void func_801D14C8(x, y, group)
+MATCH void func_801D14C8(x, y, group)
 s16 x;
 s16 y;
 u8 group;
@@ -177,7 +176,10 @@ next:
     if (i < g_FairyVillageUpdateCount) {
         if (D_801D197C[D_80145E60[i].type][1] != 0) {
             for (k = 0; k < 8; k++) {
-                g_TextVariables[0][k] = names[D_80145E60[i].fairy][k];
+                /* FAKE: the loop weight lifts the name table base over x and y in the allocator (s2 above s3/s4). */
+                do {
+                    g_TextVariables[0][k] = names[D_80145E60[i].fairy][k];
+                } while (0);
             }
             g_TextVariables[0][5] = 0;
         }
@@ -189,9 +191,6 @@ next:
         }
     }
 }
-#else
-INCLUDE_ASM(func_801D14C8);
-#endif
 
 MATCH void func_801D1670(s16 x, s16 y, u16 u, u16 v, u8 width) {
     SPRT* sprite;

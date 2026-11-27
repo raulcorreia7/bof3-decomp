@@ -10,6 +10,7 @@ NON_MATCHING void func_801F3F04(s32 steps) {
     s32       step;
     s32       spread;
     s32       shade;
+    s32       band;
     s32       x;
     s32       y;
 
@@ -27,8 +28,9 @@ NON_MATCHING void func_801F3F04(s32 steps) {
         D_1F800018                = -0x80 - (step + i * steps * 8);
         RotTransPers(g_ScratchPadVectors, (long*)D_1F800034, &depth, &flag);
         spread   = step / 16 + 4 + ((i < 4) ? i * steps / 2 : steps * 2);
+        band     = ((7 - i) * 8 + (7 - phase)) << 17;
         shade    = 8 - steps;
-        shade    = (((7 - i) * 8 + (7 - phase)) << 17) / shade;
+        shade    = band / shade;
         prim->x0 = prim->x2 = (u16)D_1F800034[0] - spread;
         prim->x1 = prim->x3 = (u16)D_1F800034[0] + spread;
         prim->y0 = prim->y1 = (u16)D_1F800034[1] - spread;
