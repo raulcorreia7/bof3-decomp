@@ -210,7 +210,7 @@ expands each `div`/`divu` with the zero-divisor (`bnez`/`break 7`) and overflow 
 wherever the source divides, and code without a division is unchanged, so the flag is global.
 
 Every object compiles with the same compiler and flags. A trial in November 2026
-(`tools/compiler_scan.py`) compiled the 137 open drafts under 22 old-gcc 0.17 builds (2.5.7 to
+compiled the 137 open drafts under 22 old-gcc 0.17 builds (2.5.7 to
 2.95.2, plain and `-psx`), PsyQ `CC1PSX` 4.0, 4.1 and 4.3 through wibo, 46 flag settings and 14
 maspsx settings, then 182 pairs on 103 of them, and 334 matches with their helpers removed. No
 setting matched an open draft or brought one within 3 instructions. Every flag that matched a
