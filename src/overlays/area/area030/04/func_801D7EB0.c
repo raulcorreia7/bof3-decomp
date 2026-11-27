@@ -10,12 +10,7 @@
 /* Draws the accessory slot list: two icon rows per accessory with
  * its quantity, then the footer and the selection cursor clamp. */
 #ifdef NON_MATCHING
-// clang-format off
-NON_MATCHING void func_801D7EB0(x, y)
-s16 x;
-u16 y;
-// clang-format on
-{
+NON_MATCHING void func_801D7EB0(s16 x, u16 y) {
     FishingState* work;
     u8*           buffer;
     u8*           slot_list;
