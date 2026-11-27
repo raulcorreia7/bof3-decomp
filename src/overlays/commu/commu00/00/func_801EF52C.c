@@ -12,7 +12,8 @@ NON_MATCHING void func_801EF52C(void) {
     s32  record_group_number;
     u32* battle_count_ptr;
     u32* timer_ptr;
-    s16  weighted_progress;
+    u16  weighted_progress;
+    s16  divisor;
     u32  battle_delta;
     u8   current_progress;
     u32  updated_progress;
@@ -25,7 +26,8 @@ NON_MATCHING void func_801EF52C(void) {
     timer_ptr         = (u32*)((u8*)battle_count_ptr + 0x780);
     group_byte_offset = 0;
     do {
-        weighted_progress = active_job_count = 0;
+        weighted_progress = 0;
+        active_job_count  = 0;
         if (g_FairyRooms[group_byte_offset] == 5) {
             current_progress = D_801457AB[group_byte_offset];
             if (current_progress == 0) {
@@ -40,12 +42,12 @@ NON_MATCHING void func_801EF52C(void) {
                     }
                 }
                 if ((u8)active_job_count != 0) {
-                    battle_delta      = *battle_count_ptr - *timer_ptr;
-                    weighted_progress = 6 * D_801457AA[group_byte_offset] - (s16)(weighted_progress - 12);
-                    if (weighted_progress < 5) {
-                        weighted_progress = 5;
+                    battle_delta = *battle_count_ptr - *timer_ptr;
+                    divisor      = D_801457AA[group_byte_offset] * 6 - (weighted_progress - 12);
+                    if (divisor < 5) {
+                        divisor = 5;
                     }
-                    battle_delta /= weighted_progress;
+                    battle_delta /= divisor;
                     progress_cap = FIELD(u8, battle_count_ptr, 0x598u) + 4;
                     if (battle_delta != 0 && D_801457AB[group_byte_offset] < progress_cap) {
                         updated_progress              = D_801457AB[group_byte_offset] + battle_delta;

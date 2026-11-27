@@ -16,6 +16,8 @@ NON_MATCHING void func_801F3800(void) {
     s32       phase;
     s32       i;
     s32       j;
+    s16*      cell_x;
+    s16*      cell_y;
 
     window          = GFX_CURSOR(RECT);
     g_GfxPrimCursor = (u8*)(window + 1);
@@ -117,11 +119,13 @@ NON_MATCHING void func_801F3800(void) {
         }
     }
 
-    dx = g_AreaTargetCellX - 0x1780;
+    cell_x = &g_AreaTargetCellX;
+    cell_y = &g_AreaTargetCellY;
+    dx     = *cell_x - 0x1780;
     if (dx < 0) {
         dx = -dx;
     }
-    dy = g_AreaTargetCellY - 0x1380;
+    dy = *cell_y - 0x1380;
     if (dy < 0) {
         dy = -dy;
     }
@@ -133,11 +137,11 @@ NON_MATCHING void func_801F3800(void) {
     }
 
     if (SYS_TestFlag(g_SceneFlagRows[SCENARIO_DESERT_OF_DEATH], 4) != 0) {
-        dx = g_AreaTargetCellX - 0x1780;
+        dx = *cell_x - 0x1780;
         if (dx < 0) {
             dx = -dx;
         }
-        dy = g_AreaTargetCellY - 0xE00;
+        dy = *cell_y - 0xE00;
         if (dy < 0) {
             dy = -dy;
         }
@@ -145,7 +149,7 @@ NON_MATCHING void func_801F3800(void) {
         shade = shade > 0x80 ? 0x80 : shade;
         shade = shade < 0 ? 0 : shade;
         if (shade != 0) {
-            func_801F4150(shade, ((((g_AreaCameraAngle.vz + ratan2(g_AreaTargetCellX - 0x1780, -g_AreaTargetCellY) - 0x400) & 0xFFF) - 0x200) * 10 >> 5) - 0x28);
+            func_801F4150(shade, ((((g_AreaCameraAngle.vz + ratan2(*cell_x - 0x1780, -*cell_y) - 0x400) & 0xFFF) - 0x200) * 10 >> 5) - 0x28);
         }
     }
 }

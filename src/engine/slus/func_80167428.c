@@ -10,22 +10,26 @@ NON_MATCHING void func_80167428(void) {
     s32*         py;
     u16*         substate;
     u8           steps;
+    s32          x;
+    s16          rise;
 
     if (g_PadStates[0].pressed & PADstart) {
-        player            = g_Game.current;
-        g_AreaCameraSpeed = 0x20;
         px                = &g_AreaScrollTargetX;
+        g_AreaCameraSpeed = 0x20;
+        player            = g_Game.current;
         py                = &g_AreaScrollTargetY;
-        dx                = abs(*px - player->pos.x.fixed);
+        x                 = player->pos.x.fixed;
+        dx                = abs(*px - x);
         dy                = abs(*py - player->pos.y.fixed);
-        *px               = player->pos.x.fixed;
+        *px               = x;
         *py               = player->pos.y.fixed;
         if (dx < dy) {
             dx = dy;
         }
         steps = dx >> 13;
+        rise  = player->pos.z.part.integer - g_AreaCameraHeight;
         if (steps != 0) {
-            g_AreaCameraHeightDelta = (s16)(player->pos.z.part.integer - g_AreaCameraHeight) / steps;
+            g_AreaCameraHeightDelta = rise / steps;
         } else {
             g_AreaCameraHeightDelta = 0;
         }

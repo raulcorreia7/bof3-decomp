@@ -9,7 +9,9 @@ NON_MATCHING void func_801B21E8(void) {
     s32          index;
     s32          dx;
     s32          dy;
-    s32          diff;
+    s32          leader_x;
+    s32          leader_y;
+    s16          rise;
     s32          divisor;
     u8           saved;
     s32*         px;
@@ -67,24 +69,19 @@ NON_MATCHING void func_801B21E8(void) {
     g_AreaCameraSpeed = 0x20;
     px                = &g_AreaScrollTargetX;
     py                = &g_AreaScrollTargetY;
-    diff              = *px - g_Game.members[0].pos.x.fixed;
-    dx                = diff;
-    if (diff < 0) {
-        dx = -dx;
-    }
-    diff = *py - g_Game.members[0].pos.y.fixed;
-    dy   = diff;
-    if (diff < 0) {
-        dy = -dy;
-    }
-    *px = g_Game.members[0].pos.x.fixed;
-    *py = g_Game.members[0].pos.y.fixed;
+    leader_x          = g_Game.members[0].pos.x.fixed;
+    leader_y          = g_Game.members[0].pos.y.fixed;
+    dx                = abs(*px - leader_x);
+    dy                = abs(*py - leader_y);
+    *px               = leader_x;
+    *py               = leader_y;
     if (dx < dy) {
         dx = dy;
     }
     divisor = ((u32)dx >> 13) & BYTE_MASK;
+    rise    = g_Game.members[0].pos.z.part.integer - g_AreaCameraHeight;
     if (divisor != 0) {
-        g_AreaCameraHeightDelta = (s16)((u16)g_Game.members[0].pos.z.part.integer - g_AreaCameraHeight) / divisor;
+        g_AreaCameraHeightDelta = rise / divisor;
     } else {
         g_AreaCameraHeightDelta = 0;
     }
