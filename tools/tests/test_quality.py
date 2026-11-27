@@ -45,29 +45,16 @@ def test_a_bare_do_while_zero_block_counts_and_a_loop_or_macro_use_does_not() ->
     )
 
 
-def test_a_nest_counts_its_depth_and_a_steering_block_is_harmful() -> None:
+def test_block_depth_is_advisory_even_with_a_steering_note() -> None:
     nest = "do {\n do {\n do {\n do { x = 1; } while (0);\n } while (0);\n } while (0);\n } while (0);\n"
     found = row(f"MATCH void A(void) {{\n do {{\n {nest} }} while (i < n);\n}}\n")
-    assert (found["blocks"], found["harmful"]) == (4, 4)
+    assert (found["blocks"], found["harmful"]) == (4, 0)
     noted = "/* FAKE: the loop weight lifts x over y in the allocator. */\n do { x = 1; } while (0);\n"
-    assert row(f"MATCH void B(void) {{\n {noted}}}\n")["harmful"] == 1
-    plain = "/* FAKE: statement boundary keeps the retail store order. */\n do { x = 1; } while (0);\n"
-    assert row(f"MATCH void C(void) {{\n {plain}}}\n")["harmful"] == 0
-    old = {"x.c": quality.scan({"x.c": f"MATCH void A(void) {{\n{nest}}}\n"})["x.c"]}
-    same = {
-        "x.c": quality.scan({"x.c": f"MATCH void A(void) {{\n{nest} y = 2;\n}}\n"})[
-            "x.c"
-        ]
-    }
-    added = {
-        "x.c": quality.scan(
-            {
-                "x.c": f"MATCH void A(void) {{\n{nest} do {{ do {{ y = 2; }} while (0); }} while (0);\n}}\n"
-            }
-        )["x.c"]
-    }
-    assert quality.worse(old, same, {"x.c"}) == []
-    assert quality.worse(old, added, {"x.c"}) == ["x.c: harmful 4 -> 6"]
+    assert row(f"MATCH void B(void) {{\n {noted}}}\n")["harmful"] == 0
+    old = {"x.c": row("MATCH void A(void) { x = 1; }\n")}
+    new = {"x.c": found}
+    assert quality.worse(old, new, {"x.c"}) == []
+    assert quality.worse(old, new, {"x.c"}, ("blocks",)) == ["x.c: blocks 0 -> 4"]
 
 
 def test_pasted_needs_two_images_and_a_shared_name() -> None:
