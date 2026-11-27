@@ -13,6 +13,8 @@ NON_MATCHING void Menu_UpdateFormation(void) {
     s32            input;
     s32            message;
     u16            y;
+    u16*           substate;
+    u8*            entry;
 
     dx         = 0;
     dy         = 0;
@@ -36,7 +38,8 @@ NON_MATCHING void Menu_UpdateFormation(void) {
     index                     = g_FormationCursorRow * 3 + g_FormationCursorColumn;
     g_UiPanelTasks[20].pos.vx = D_801EC4D0[index].unk_00;
     y                         = D_801EC4D0[index].unk_02;
-    frame[1].active           = 1;
+    frame++;
+    frame->active             = 1;
     g_UiPanelTasks[20].pos.vy = y;
     g_UiPanelTasks[20].unk_0A = D_801EC4D0[index].unk_04 + 1;
     g_UiPanelTasks[20].unk_0B = 1;
@@ -75,26 +78,26 @@ NON_MATCHING void Menu_UpdateFormation(void) {
             g_FormationPickRow    = 0x7F;
         }
     } else if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
-        volatile u8* closed;
+        MenuPanelTask* closed;
 
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
-        closed     = &D_801485DC;
-        *closed    = 0;
-        D_80148600 = 0;
+        closed         = &g_CursorFramePanel;
+        closed->active = 0;
+        D_80148600     = 0;
         if (g_FormationPickColumn != 0x7F) {
             s32 pick;
             u16 y2;
 
             g_FormationPickColumn = 0x7F;
             g_FormationPickRow    = 0x7F;
-        } else if (D_80148660 != 1) {
+        } else if (*(entry = &D_80148660) != 1) {
             MenuPanelTask* card;
 
             D_80148654       = 0;
             g_PartyFormation = (u8)g_FormationRow * 2 + ((u8)g_FormationColumn - 1);
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
             for (i = 0; i < 6; i++) {
-                card = &((MenuPanelTask*)(closed - 0xFC))[i];
+                card = &closed[i - 7];
                 if (card->active != 0 && card->mode == 0xB) {
                     card->state = 1;
                 }
@@ -104,8 +107,9 @@ NON_MATCHING void Menu_UpdateFormation(void) {
         } else {
             D_80148651 = 6;
             D_80148652 = 0;
-            D_80148660 = 0;
-            g_GameEntrySubstate += 1;
+            *entry     = 0;
+            substate   = &g_GameEntrySubstate;
+            *substate += 1;
         }
     }
     input = INPUT_GetRepeatedButtons(g_PadStates[0].pressed & (PADLup | PADLdown));
