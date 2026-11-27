@@ -601,7 +601,9 @@ def compare(
 def removals(base: str, head: str) -> tuple[set[str], set[str]]:
     """The `Kept-Removed:` and `Renamed:` old names, and the `Removed:` names of the commits in BASE..HEAD."""
     log = git("log", "--format=%B", f"{base}..{head}", root=ROOT)
-    return set(KEPT_REMOVED.findall(log)) | set(RENAMED.findall(log)), set(REMOVED.findall(log))
+    return set(KEPT_REMOVED.findall(log)) | set(RENAMED.findall(log)), set(
+        REMOVED.findall(log)
+    )
 
 
 def record_files(tree: Path, names: set[str]) -> set[str]:
