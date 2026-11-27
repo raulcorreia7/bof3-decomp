@@ -11,11 +11,11 @@ MATCH void func_801F2DE8(void) {
     value = COORD_INT(SELF(Actor)->pos.z) != -0x200 ? 0x21 : 0;
     for (x = D_801F364C[COORD_INT(SELF(Actor)->pos.x)].x0; x < D_801F364C[COORD_INT(SELF(Actor)->pos.x)].x_end; x++) {
         for (y = D_801F364C[COORD_INT(SELF(Actor)->pos.x)].y0; y < D_801F364C[COORD_INT(SELF(Actor)->pos.x)].y_end; y++) {
-            (g_AreaCellCodes + y * ((AreaMapBundle*)MAP_BUNDLE_BASE)->width)[x] = value;
+            (g_AreaCellCodes + y * AREA_MAP_BUNDLE->width)[x] = value;
         }
     }
     for (x = D_801F364C[COORD_INT(SELF(Actor)->pos.x)].x0; x < D_801F364C[COORD_INT(SELF(Actor)->pos.x)].x_end; x++) {
-        map = (AreaMapBundle*)MAP_BUNDLE_BASE;
+        map = AREA_MAP_BUNDLE;
         for (y = D_801F364C[COORD_INT(SELF(Actor)->pos.x)].y0; y < D_801F364C[COORD_INT(SELF(Actor)->pos.x)].y_end; y++) {
             height                                                                           = Area_HeightSample(x << 16, y << 16);
             value                                                                            = (-(COORD_INT(SELF(Actor)->pos.z) * 2) - height) / 32;

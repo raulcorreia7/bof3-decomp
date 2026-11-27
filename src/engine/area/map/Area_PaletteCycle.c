@@ -14,7 +14,7 @@ MATCH void Area_PaletteCycle(void) {
     u32  tag;
     u32  type;
 
-    record = (u32*)MAP_BUNDLE_BASE + g_AreaMapBundle.record_list_offset;
+    record = AREA_MAP_SECTION(g_AreaMapBundle.record_list_offset);
     while (*record != 0) {
         header = *record;
         type   = header >> 24;
