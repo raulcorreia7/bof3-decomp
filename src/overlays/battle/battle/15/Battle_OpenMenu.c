@@ -5,26 +5,23 @@
 /* Opens the gene menu and unpacks the found-genes mask into the 3x6 picker flags. */
 /* func_800A47AC */
 MATCH void Battle_OpenMenu(void) {
-    u8 row;
-    u8 col;
-    /* FAKE: retain early menu argument. */
-    FAKE_REG(s32, menu_id, "a0");
+    u8            row;
+    u8            col;
+    s32           menu_id;
     volatile u32* mask;
     u8(*flags)[6];
     u32 shifted_mask;
 
     UI_PanelOpenTask(0x15, 5);
-    menu_id                 = 0x11;
-    D_80148628              = 0x142;
-    g_UiPanelTasks[21].mode = 0;
-    D_80148627              = 0;
-    D_8014862A              = 0x3F;
-    D_8014862E              = 0;
-    /* FAKE: hold second argument. */
-    FAKE_BARRIER();
+    menu_id                   = 0x11;
+    g_UiPanelTasks[21].pos.vx = 0x142;
+    g_UiPanelTasks[21].mode   = 0;
+    g_UiPanelTasks[21].state  = 0;
+    g_UiPanelTasks[21].pos.vy = 0x3F;
+    g_UiPanelTasks[21].unk_0A = 0;
     UI_PanelOpenTask(menu_id, 5);
-    D_80148596 = 1;
-    D_80148597 = 0;
+    g_UiPanelTasks[17].mode  = 1;
+    g_UiPanelTasks[17].state = 0;
     SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
     row   = 0;
     flags = D_800B7070;

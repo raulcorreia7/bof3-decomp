@@ -206,6 +206,17 @@ ASSERT_OFFSET(AreaMapBundle, height_offset, 0x2A);
 
 extern AreaMapBundle g_AreaMapBundle;
 
+/* The bundle at its load address; a section address built from it adds the base last, a local copy adds it first. */
+#define AREA_MAP_BUNDLE          MEM_PTR(AreaMapBundle, MAP_BUNDLE_BASE)
+/* The bundle section `offset` 4-byte words past its start. */
+#define AREA_MAP_SECTION(offset) (MEM_PTR(u32, MAP_BUNDLE_BASE) + (offset))
+/* The cell grid: one u16 tile-descriptor index per cell, 0 for an empty cell. */
+#define AREA_MAP_GRID            ((u16*)AREA_MAP_SECTION(AREA_MAP_BUNDLE->grid_offset))
+/* Row y of the cell grid. */
+#define AREA_MAP_GRID_ROW(y)     (AREA_MAP_GRID + (y) * AREA_MAP_BUNDLE->width)
+/* The tile descriptors, one word each, after the grid's (width * height + 1) / 2 words. */
+#define AREA_MAP_TILES           (AREA_MAP_SECTION(AREA_MAP_BUNDLE->grid_offset) + (AREA_MAP_BUNDLE->width * AREA_MAP_BUNDLE->height + 1) / 2)
+
 /* Word bits of D_80146258, the world input/scheduler lock word. Bit 3 skips
  * Area_ScrollAdvance; bit 6 blocks the menu request; bit 8 is set while a
  * scenario script owns the field. */

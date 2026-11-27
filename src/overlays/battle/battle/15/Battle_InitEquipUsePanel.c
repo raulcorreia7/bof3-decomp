@@ -17,20 +17,20 @@ MATCH void Battle_InitEquipUsePanel(void) {
         three = 3;
     } while (0);
 
-    D_801485B9                = eight;
-    D_801485B8                = one;
-    D_801485BA                = three;
+    g_UiPanelTasks[18].panel  = eight;
+    g_UiPanelTasks[18].active = one;
+    g_UiPanelTasks[18].mode   = three;
     g_BattlePanelMode         = three;
     g_BattleEquipSlot         = 0;
     g_UiPanelTasks[18].unk_0B = 0xFF;
     entry_index               = slot[5];
     D_801485D8                = &s_BattleEquipment[0];
-    D_801485BC                = -0xAA;
-    D_801485BE                = 0x3F;
-    D_801485C5                = one;
+    g_UiPanelTasks[18].pos.vx = -0xAA;
+    g_UiPanelTasks[18].pos.vy = 0x3F;
+    g_UiPanelTasks[18].flags  = one;
     g_BattleChoicePhase       = 4;
     g_UiPanelTasks[18].unk_0C = entry_index;
     tail_index                = slot[5];
-    D_801485C5                = three;
+    g_UiPanelTasks[18].flags  = three;
     D_80148656                = tail_index;
 }

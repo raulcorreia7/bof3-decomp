@@ -18,7 +18,7 @@ MATCH void Battle_SelectEquipItem(void) {
     } else {
         g_UiPanelTasks[19].active = 0;
     }
-    g_BattleMessages[((D_801EC328 - 1) & BATTLE_RING_SLOT_MASK)].text = UI_MessageGetText(D_8014862E == 0 ? 0x30 : 0x32);
+    g_BattleMessages[((D_801EC328 - 1) & BATTLE_RING_SLOT_MASK)].text = UI_MessageGetText(g_UiPanelTasks[21].unk_0A == 0 ? 0x30 : 0x32);
     pad_state                                                         = &g_PadStates[0].pressed;
     repeated                                                          = INPUT_REPEATED(*pad_state, (PADLup | PADLdown));
     pressed                                                           = *pad_state;

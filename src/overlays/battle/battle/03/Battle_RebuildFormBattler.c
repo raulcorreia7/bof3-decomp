@@ -22,7 +22,7 @@ MATCH void Battle_RebuildFormBattler(void) {
             }
         }
         g_UiPanelTasks[1].unk_0A = g_Battle.party_count;
-        D_80148358               = s_BattleBattlerStepIds[g_Battle.party_count + 0x2B];
+        g_UiPanelTasks[1].pos.vx = s_BattleBattlerStepIds[g_Battle.party_count + 0x2B];
         for (i = 1; i < g_Battle.party_count; i++) {
             g_BattleEffects[(u8)Battle_AllocEffect(0, 0x11)].target.party = &g_Game.members[i];
         }

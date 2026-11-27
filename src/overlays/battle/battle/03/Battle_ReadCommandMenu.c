@@ -50,9 +50,9 @@ MATCH void Battle_ReadCommandMenu(void) {
         g_UiPanelTasks[2].state = 2;
         g_UiPanelTasks[1].state = 2;
         g_UiPanelTasks[3].state = 2;
-        Battle_DrawPanels(D_8014837C, D_8014837E);
+        Battle_DrawPanels(g_UiPanelTasks[2].pos.vx, g_UiPanelTasks[2].pos.vy);
         func_801D8450((u32)g_Battle.panel_slot);
-        Battle_DrawPartyPanel((s32)D_80148358, (s32)D_8014835A);
+        Battle_DrawPartyPanel((s32)g_UiPanelTasks[1].pos.vx, (s32)g_UiPanelTasks[1].pos.vy);
         g_Battle.phase.step += 1;
         return;
     }

@@ -27,8 +27,6 @@ MATCH void func_801576FC(u8* record) {
     u32*           dst;
     u32*           slot;
     u32*           cells;
-    AreaMapBundle* map;
-    u16*           grid;
     u32            word;
     s32            i;
     s32            cond;
@@ -37,11 +35,6 @@ MATCH void func_801576FC(u8* record) {
     s32            column;
     s32            type;
     s32            id;
-    s32            size;
-    s32            grid_off;
-    s32            image_off;
-    s32            index;
-    u16            cell;
     /* FAKE: unused frame, 16 bytes. */
     FAKE_STACK_PADS(u8, 16);
 
@@ -59,15 +52,7 @@ MATCH void func_801576FC(u8* record) {
         row    = word & 0xFF;
         switch (word >> 24) {
             case 0:
-                map       = (AreaMapBundle*)MAP_BUNDLE_BASE;
-                size      = map->width * g_AreaMapBundle.height;
-                grid_off  = g_AreaMapBundle.grid_offset * 4;
-                image_off = ((size + 1) >> 1) * 4;
-                dst       = (u32*)(grid_off + ((u32)map + image_off));
-                index     = row * map->width * 2 + (grid_off + column * 2);
-                grid      = (u16*)(index + (u32)map);
-                cell      = *grid;
-                dst += cell;
+                dst   = &AREA_MAP_TILES[*(AREA_MAP_GRID + column + row * AREA_MAP_BUNDLE->width)];
                 slot  = dst + ((word >> 16) & 0xF);
                 *slot = entry[cond + 1].word;
                 i++;

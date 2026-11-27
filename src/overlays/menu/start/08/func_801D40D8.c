@@ -1,9 +1,8 @@
 #include "start_08.h"
 
 MATCH void func_801D40D8(void) {
-    s32 sel;
-    /* FAKE: the merged pad read stays in v1; the best pure form (s32 local) puts it in s0 (2 rows). */
-    FAKE_REG(u16, pressed, "v1");
+    s32  sel;
+    u16  pressed;
     u8*  step;
     u8*  slot;
     u8** records;

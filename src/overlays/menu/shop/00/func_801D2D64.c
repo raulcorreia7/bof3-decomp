@@ -7,10 +7,10 @@ MATCH void func_801D2D64(void) {
     D_80148340                = 0x51;
     g_UiPanelTasks[7].unk_09  = 1;
     g_UiPanelTasks[10].active = 1;
-    D_80148499                = 7;
-    D_8014849A                = 0xA;
-    D_8014849C                = g_UiPanelTasks[7].pos.vx;
-    D_8014849E                = (D_80148432 + (g_ShopStockIndex - g_UiPanelTasks[7].unk_0B) * 0xD) + 0x14;
+    g_UiPanelTasks[10].panel  = 7;
+    g_UiPanelTasks[10].mode   = 0xA;
+    g_UiPanelTasks[10].pos.vx = g_UiPanelTasks[7].pos.vx;
+    g_UiPanelTasks[10].pos.vy = (g_UiPanelTasks[7].pos.vy + (g_ShopStockIndex - g_UiPanelTasks[7].unk_0B) * 0xD) + 0x14;
     g_UiPanelTasks[10].unk_0A = g_ShopItemCategory;
     g_UiPanelTasks[10].unk_0B = g_ShopItemId;
     g_UiPanelTasks[10].unk_0C = g_ShopItemCount;

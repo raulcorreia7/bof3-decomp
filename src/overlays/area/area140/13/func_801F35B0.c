@@ -1,17 +1,16 @@
 #include "area140_13.h"
 
 MATCH void func_801F35B0(void) {
-    AreaMapBundle* map;
-    s32            column;
-    s32            row;
-    s32            id;
-    s32            i;
-    s32            offset;
-    s32            row_adjustment;
-    s32            prim;
-    s32            row_id;
-    s32            y;
-    u8*            entry;
+    s32 column;
+    s32 row;
+    s32 id;
+    s32 i;
+    s32 offset;
+    s32 row_adjustment;
+    s32 prim;
+    s32 row_id;
+    s32 y;
+    u8* entry;
 
     i = 0;
     do {
@@ -23,8 +22,7 @@ MATCH void func_801F35B0(void) {
         y              = COORD_INT(SELF(Actor)->pos.y);
         offset         = i * SELF(Actor)->direction;
         row            = y + (SELF(Actor)->direction != 0 ? offset : offset + row_adjustment);
-        map            = (AreaMapBundle*)MAP_BUNDLE_BASE;
-        entry          = (u8*)(map->grid_offset * 4 + (((map->width * map->height + 1) / 2) * 4 + (u32)map) + *(u16*)(column * 2 + (row * map->width * 2 + map->grid_offset * 4) + (u32)map) * 4);
+        entry          = (u8*)&AREA_MAP_TILES[AREA_MAP_GRID_ROW(row)[column]];
         id             = Area_CellGetId(column, row);
         if (SELF(Actor)->direction != 0) {
             prim = g_AreaCellPrims[id][1].pad1;
