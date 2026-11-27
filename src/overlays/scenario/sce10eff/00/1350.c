@@ -29,19 +29,19 @@ MATCH void func_801D2064(void) {
 
     SELF(SceneBandEffect)->ticker++;
 
-    work                                    = SELF(SceneBandEffect);
-    counter                                 = work->orbit_counter + 1;
-    FAKE_VOLATILE(s32, work->orbit_counter) = counter;
-    angle                                   = SCE10EFF_ORBIT_ANGLE(counter);
-    angle_cell                              = &D_1F800004;
-    *angle_cell                             = angle;
-    g_ScratchPad                            = 0x18;
+    work                        = SELF(SceneBandEffect);
+    counter                     = work->orbit_counter + 1;
+    work->orbit_counter         = counter;
+    angle                       = SCE10EFF_ORBIT_ANGLE(counter);
+    angle_cell                  = &g_ScratchPad.cells.words[1];
+    *angle_cell                 = angle;
+    g_ScratchPad.cells.words[0] = 0x18;
 
-    velocity     = rcos(angle) * g_ScratchPad;
+    velocity     = rcos(angle) * g_ScratchPad.cells.words[0];
     work         = SELF(SceneBandEffect);
     work->proj.x = D_801D2744->proj.x + velocity;
 
-    velocity        = rsin(*angle_cell) * g_ScratchPad;
+    velocity        = rsin(*angle_cell) * g_ScratchPad.cells.words[0];
     scratch         = SELF(SceneBandEffect);
     scratch->proj.y = D_801D2744->proj.y + velocity;
     scratch->band -= 2;
@@ -62,7 +62,7 @@ MATCH void func_801D218C(void) {
     s32      page;
     s32      i;
 
-    d                         = &g_ScratchPad;
+    d                         = &g_ScratchPad.cells.words[0];
     vec                       = (s16*)g_ScratchPadVectors;
     d[0]                      = 0x40;
     D_1F800004                = ((SELF(SceneBandEffect)->ticker + 2) & 0xF) << 8;
@@ -81,9 +81,9 @@ MATCH void func_801D218C(void) {
             PSX_SET_SEMI_TRANSPARENT(primitive);
             RotTransPers((SVECTOR*)g_ScratchPadVectors, (long*)&primitive->x0, &p, &flag);
             if RANDOM_MASK (1) {
-                g_ScratchPad = RANDOM_MASK(0x3F) + 0x80;
+                g_ScratchPad.cells.words[0] = RANDOM_MASK(0x3F) + 0x80;
             } else {
-                g_ScratchPad = 0x80 - RANDOM_MASK(0x3F);
+                g_ScratchPad.cells.words[0] = 0x80 - RANDOM_MASK(0x3F);
             }
             page    = ((SELF(SceneBandEffect)->ticker + i + 2) & 0xF) << 8;
             vec[0]  = 0;
@@ -106,11 +106,11 @@ MATCH void func_801D240C(void) {
     s32      angle;
     s32      i;
 
-    g_ScratchPad = RANDOM_MASK(7) + SELF(SceneBandEffect)->band * 3;
+    g_ScratchPad.cells.words[0] = RANDOM_MASK(7) + SELF(SceneBandEffect)->band * 3;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256), 0);
     i         = 0;
-    angle_ptr = &g_ScratchPad;
+    angle_ptr = &g_ScratchPad.cells.words[0];
     GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(DR_MODE));
 
     do {
