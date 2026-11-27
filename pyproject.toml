@@ -29,7 +29,7 @@ dev = [
   "ruff==0.17.6",
   "shellcheck-py==0.11.0.1",
 ]
-matching = ["colorama>=0.4.6", "levenshtein>=0.27.0", "rapidfuzz>=3.14.0", "toml>=0.10.2", "watchdog>=6.0.0"]
+matching = ["colorama>=0.4.6", "levenshtein>=0.27.0", "toml>=0.10.2", "watchdog>=6.0.0"]
 
 [tool.uv]
 default-groups = []
