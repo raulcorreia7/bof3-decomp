@@ -19,7 +19,7 @@ MATCH void Battle_DrawEntrances(void) {
         g_UiPanelTasks[3].state = 1;
         (*count)++;
     }
-    Battle_DrawPartyPanel(D_80148358, D_8014835A);
+    Battle_DrawPartyPanel(g_UiPanelTasks[1].pos.vx, g_UiPanelTasks[1].pos.vy);
     Battle_DrawDimOverlay();
     for (panel_index = 0; panel_index < 7; panel_index++) {
         func_801D8450(panel_index);

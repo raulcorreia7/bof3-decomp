@@ -3,10 +3,10 @@
 MATCH void func_800A5244(void) {
     volatile u8* latch;
 
-    latch = &D_801485B8;
+    latch = &g_UiPanelTasks[18].active;
     if (!(*latch & 0x1)) {
         func_80097FE8();
-        D_80148594                       = 0;
+        g_UiPanelTasks[17].active        = 0;
         *latch                           = 0;
         g_BattleChoicePanel.items.active = 0;
         g_UiPanelTasks[19].active        = 0;

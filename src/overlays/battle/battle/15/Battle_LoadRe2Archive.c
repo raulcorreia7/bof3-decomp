@@ -7,8 +7,8 @@ MATCH void Battle_LoadRe2Archive(void) {
     lock = &g_UiPanelTasks[21].active;
     if ((*lock & 0x1) == 0) {
         func_80097FE8();
-        D_80148594 = 0;
-        *lock      = 0;
+        g_UiPanelTasks[17].active = 0;
+        *lock                     = 0;
         Battle_ShowMessage(g_BattleMessageSlot);
         /* FAKE: statement boundary keeps the retail register order and schedule. */
         do {

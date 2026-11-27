@@ -9,8 +9,8 @@ MATCH void Battle_OpenPartyPanel(u8 index) {
     g_UiPanelTasks[1].mode   = 0;
     g_UiPanelTasks[1].state  = index;
     g_UiPanelTasks[1].unk_0A = count;
-    D_80148358               = D_801EAF27[count & BYTE_MASK];
-    D_8014835A               = 0xF0;
+    g_UiPanelTasks[1].pos.vx = D_801EAF27[count & BYTE_MASK];
+    g_UiPanelTasks[1].pos.vy = 0xF0;
     g_UiPanelTasks[1].unk_08 = 0;
     g_UiPanelTasks[1].unk_09 = 0;
 }

@@ -3,7 +3,7 @@
 MATCH void func_801D9664(void) {
     g_UiPanelTasks[17].panel  = 6;
     g_UiPanelTasks[17].mode   = 0x14;
-    D_80148597                = 2;
+    g_UiPanelTasks[17].state  = 2;
     g_UiPanelTasks[17].active = 1;
     g_UiPanelTasks[17].pos.vx = BATTLE_PARTY_STRIDE;
     g_UiPanelTasks[17].pos.vy = 62;

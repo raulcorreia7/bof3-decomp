@@ -9,8 +9,8 @@ MATCH void func_801E2150(void) {
     D_80148340                = 0x32;
     g_UiPanelTasks[21].active = 1;
     g_UiPanelTasks[8].unk_0A  = 0;
-    D_80148628                = D_80148358 + 4;
-    D_8014862A                = D_8014835A + (g_UiPanelTasks[1].unk_0B - g_UiPanelTasks[1].unk_0A) * 0xD + 0x1A;
+    g_UiPanelTasks[21].pos.vx = g_UiPanelTasks[1].pos.vx + 4;
+    g_UiPanelTasks[21].pos.vy = g_UiPanelTasks[1].pos.vy + (g_UiPanelTasks[1].unk_0B - g_UiPanelTasks[1].unk_0A) * 0xD + 0x1A;
     buttons                   = INPUT_REPEATED(g_PadStates[0].pressed, (INPUT_DIRECTIONAL | PADL1 | PADR1));
     row                       = g_UiPanelTasks[1].unk_0B;
     if (buttons & PADLup) {
