@@ -151,11 +151,10 @@ MATCH void func_801EF348(void) {
 
 #include "overlays/bmagic/shared/Effect_SetActorMatrix.h"
 
-#ifdef NON_MATCHING
 /* Draws the effect's spiral: twenty-four rings of eight quads sweep from the effect's start angle,
  * each ring one shade darker and 0x28 deeper; the step 2 and 3 branches flicker the first ring
  * against the radius tables. */
-NON_MATCHING void func_801EF458(void) {
+MATCH void func_801EF458(void) {
     POLY_G4* prim;
     SVECTOR  sway;
     SVECTOR  sway2;
@@ -204,7 +203,8 @@ NON_MATCHING void func_801EF458(void) {
                 } else {
                     g_ScratchPad.cells.halves[0] = g_ScratchPad.cells.halves[7] + ((rsin(g_ScratchPad.cells.halves[6] << 8) << 2) >> 12);
                 }
-                hit = SELF(PartyMember)->header.mode != 0 ? ring < SELF(PartyMember)->unk_09 : SELF(PartyMember)->unk_09 < ring;
+                /* FAKE: a volatile read keeps this arm apart from case 3's equal arm, which cross-jumping merges; best pure C 2 opcode hunks. */
+                hit = SELF(PartyMember)->header.mode != 0 ? ring < FAKE_VOLATILE(u8, SELF(PartyMember)->unk_09) : SELF(PartyMember)->unk_09 < ring;
                 if (hit) {
                     g_ScratchPad.cells.halves[0] = g_ScratchPad.cells.halves[7];
                     g_ScratchPad.cells.halves[4] = D_801F031C[g_ScratchPad.cells.halves[6]];
@@ -259,9 +259,6 @@ NON_MATCHING void func_801EF458(void) {
         }
     }
 }
-#else
-INCLUDE_ASM(func_801EF458);
-#endif
 
 MATCH void func_801EFBEC(void) {
     BMAGIC_DISPATCH_AND_DRAW(D_801F035C, func_801F002C);
