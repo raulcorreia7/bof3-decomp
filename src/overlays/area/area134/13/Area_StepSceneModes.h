@@ -2,6 +2,8 @@
  * position and the scene's script bytes. The party record goes into the cell through its untyped view,
  * which keeps the write the next one overwrites. Both members of area134/13 use it: verify each after a
  * change. */
+#define AREA_TASK_PLAIN ((Actor*)*(struct Task**)&g_Task)
+
 #define AREA_STEP_SCENE_MODES(work)                                 \
     work             = TASK(Actor);                                 \
     g_Task           = (void*)g_Actors;                             \
@@ -13,19 +15,19 @@
         work->header.mode = 0x16;                                   \
     }                                                               \
     if (g_ScriptVars[2] == 0x80) {                                  \
-        TASK(Actor)->header.mode = 0x17;                            \
+        AREA_TASK_PLAIN->header.mode = 0x17;                        \
     }                                                               \
     switch (g_ScriptVars[1]) {                                      \
         case 0xFF:                                                  \
             Actor_Clear();                                          \
             break;                                                  \
         case 5:                                                     \
-            TASK(Actor)->header.mode = 2;                           \
+            AREA_TASK_PLAIN->header.mode = 2;                       \
             break;                                                  \
         case 4:                                                     \
-            TASK(Actor)->header.mode = 4;                           \
+            AREA_TASK_PLAIN->header.mode = 4;                       \
             break;                                                  \
         case 3:                                                     \
-            TASK(Actor)->header.mode = 6;                           \
+            AREA_TASK_PLAIN->header.mode = 6;                       \
             break;                                                  \
     }
