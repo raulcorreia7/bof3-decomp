@@ -1,4 +1,3 @@
-#define FAKE_DECL_SELF_VOLATILE
 #include "area042_13.h"
 
 /* Draws the two-quad ring segment between two circles in the task colour row. */

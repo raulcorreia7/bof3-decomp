@@ -1,5 +1,3 @@
-/* The direction store re-reads the scratchpad cell. */
-#define FAKE_DECL_SELF_VOLATILE
 #include "area128_13.h"
 
 MATCH void func_801F3030(void) {

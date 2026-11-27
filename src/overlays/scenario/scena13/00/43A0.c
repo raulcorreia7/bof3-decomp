@@ -11,16 +11,16 @@ MATCH void func_801FAFA0(s32 message, u8 frames) {
     s32  total;
     u16* cell;
 
-    cell                                            = (u16*)g_ScratchPad.cells.bytes + 1;
-    total                                           = frames * 0x1E - 1;
-    *cell                                           = total;
-    g_UiMessageRequest                              = message;
-    FAKE_VOLATILE(u16, g_ScratchPad.cells.bytes[0]) = total - g_ScenarioState.timer_06;
-    elapsed                                         = total - g_ScenarioState.timer_06;
-    limit                                           = total;
+    cell                         = (u16*)g_ScratchPad.cells.bytes + 1;
+    total                        = frames * 0x1E - 1;
+    *cell                        = total;
+    g_UiMessageRequest           = message;
+    g_ScratchPad.cells.halves[0] = total - g_ScenarioState.timer_06;
+    elapsed                      = total - g_ScenarioState.timer_06;
+    limit                        = total;
     if (elapsed < limit) {
         UI_TextDraw(0x50, 0x3C, 0, TEXT_LENGTH_MAX, (MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, (u16)message) + 2));
-        limit   = FAKE_VOLATILE(u16, g_ScratchPad.cells.bytes[0]);
+        limit   = g_ScratchPad.cells.halves[0];
         elapsed = limit;
         if (elapsed < 0x20) {
             GFX_PaletteCopyCapped(limit & 0xFF);
