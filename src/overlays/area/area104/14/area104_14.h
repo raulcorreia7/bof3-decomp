@@ -11,7 +11,9 @@ void func_801F358C(void);
 /* The arrow cell of each torch gauge state. */
 extern TorchGaugeCells D_801F2C04;
 extern u8              D_801F2C08[];
-extern u8              D_801F6980[];
+/* The world-map entry keys WORLD_MAP_SELECT_KEY_SCRIPT scans. */
+extern WorldMapKey     D_801F6980[1];
+extern u8              D_801F6984[];
 extern Callback        D_801F6A64[];
 extern u8              D_801F6A78[];
 extern u8              D_801F6A80[];

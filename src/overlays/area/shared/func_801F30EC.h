@@ -2,15 +2,11 @@
 
 MATCH void func_801F30EC(void) {
     Actor* scratch;
-    Actor* check;
-    s32    key;
-    /* FAKE: retail keeps the table offset in a1. */
-    FAKE_REG(u32, i, "a1");
-    u32 next;
-    u32 mode;
-    u8  state;
-    u32 window;
-    u32 window_span;
+    s32    i;
+    u32    key;
+    u8     state;
+    u8     next_step;
+    s32    full_scale;
 
     WORLD_MAP_SELECT_KEY_SCRIPT(D_801F4D7C);
 }

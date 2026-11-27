@@ -11,8 +11,10 @@
 /* The scratchpad quad vertices the map arrow draws through. */
 /* The map step: 9 runs the area entry instead of the reset. */
 /* The party focus point: the camera-scroll targets, x then y, in 16.16. */
+/* The world-map entry keys WORLD_MAP_SELECT_KEY_SCRIPT scans. */
+extern WorldMapKey D_801F4CB0[6];
 /* The tile map scan: four byte records per work row, the map offset and code. */
-extern u8 D_801F4CB0[];
+extern u8          D_801F4CC8[];
 
 #include "overlays/area/shared/WorldMapMessage.h"
 
