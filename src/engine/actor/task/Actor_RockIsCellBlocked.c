@@ -6,8 +6,8 @@
 /* func_8019C4F0 */
 /* Returns whether one map cell stops the rock: off the map, a cliff, a drop or a solid cell code. */
 MATCH s32 Actor_RockIsCellBlocked(s32 raw_x, s32 raw_y, s32 stale_a2, s32 stale_a3) {
-    s16 x = raw_x;
-    s16 y = raw_y;
+    s16   x = raw_x;
+    s16   y = raw_y;
     Coord org;
     u8*   map;
     s16   ix;
