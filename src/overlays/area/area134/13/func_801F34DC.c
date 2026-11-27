@@ -1,5 +1,3 @@
-/* The dispatch dance keeps every work-cell write. */
-#define FAKE_DECL_TASK_VOLATILE
 #include "area134_13.h"
 
 MATCH void func_801F34DC(void) {
@@ -14,8 +12,8 @@ MATCH void func_801F34DC(void) {
     work->pos.x.fixed = g_Game.members[0].pos.x.fixed - edge;
     g_Task            = work;
     do {
-        TASK_SET(g_Game.members);
-        g_Task = work;
+        *(void**)&g_Task = g_Game.members;
+        g_Task           = work;
     } while (0);
     g_ScenarioState.step = scene_step;
     Actor_Clear();

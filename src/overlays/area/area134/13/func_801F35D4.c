@@ -1,5 +1,3 @@
-/* The dispatch dance keeps every work-cell write. */
-#define FAKE_DECL_TASK_VOLATILE
 #include "area134_13.h"
 
 #include "Area_StepSceneModes.h"

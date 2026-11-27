@@ -92,14 +92,15 @@ static inline void Area_EnterMode1(void) {
 }
 
 /* Takes mode 0xD once the party leader's x has reached `bound`, else the given mode; `actor` is the task the
- * dispatch visits. A statement macro: the member declares Actor* work. */
+ * dispatch visits. The party record goes into the cell through its untyped view, which keeps the write the
+ * next one overwrites. A statement macro: the member declares Actor* work. */
 #define AREA_SET_MODE_OR_END(actor, bound, next_mode) \
-    work        = g_Task;                             \
-    g_Task      = (actor);                            \
-    g_GameState = g_Game.members;                     \
-    g_Task      = work;                               \
-    TASK_SET(g_Game.members);                         \
-    g_Task = work;                                    \
+    work             = g_Task;                        \
+    g_Task           = (actor);                       \
+    g_GameState      = g_Game.members;                \
+    g_Task           = work;                          \
+    *(void**)&g_Task = g_Game.members;                \
+    g_Task           = work;                          \
     if ((bound) >= g_Game.members[0].pos.x.fixed) {   \
         work->header.mode  = 0xD;                     \
         TASK(Actor)->timer = 0;                       \
@@ -110,16 +111,16 @@ static inline void Area_EnterMode1(void) {
 /* Claims an actor slot of the given kind for party member `member`, at its screen position, and stores the
  * claimed slot in the task's byte 0x0B unless none is free. A statement macro: the member declares u8* work,
  * u8 index, s16 y, s16 x, u8 selection and s32 result. */
-#define AREA_CLAIM_MEMBER_SLOT(member, kind)                  \
-    TASK_SET((u8*)&g_Game.members[member]);                   \
-    index     = g_PartyFieldOrder[member];                    \
-    y         = g_Game.members[member].screen_y.signed_value; \
-    x         = g_Game.members[member].screen_x.signed_value; \
-    selection = D_801F5724[0x144u + index];                   \
-    result    = Actor_ClaimSlot(kind, 0, selection, x, y);    \
-    if ((u8)result != 0xFF) {                                 \
-        work      = TASK(u8);                                 \
-        work[0xB] = result;                                   \
+#define AREA_CLAIM_MEMBER_SLOT(member, kind)                         \
+    *(void**)&g_Task = &g_Game.members[member];                      \
+    index            = g_PartyFieldOrder[member];                    \
+    y                = g_Game.members[member].screen_y.signed_value; \
+    x                = g_Game.members[member].screen_x.signed_value; \
+    selection        = D_801F5724[0x144u + index];                   \
+    result           = Actor_ClaimSlot(kind, 0, selection, x, y);    \
+    if ((u8)result != 0xFF) {                                        \
+        work      = TASK(u8);                                        \
+        work[0xB] = result;                                          \
     }
 
 /* Counts the work byte 0x09 down and takes the given mode when it reaches zero.
