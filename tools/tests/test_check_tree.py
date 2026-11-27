@@ -114,6 +114,12 @@ CASES = [
         "old-style definitions",
     ),
     (
+        "old-style definition returning a function pointer",
+        {},
+        {"src/overlays/test/arc/00/a.c": "MATCH void (*f(x))(void)\ns16 x;\n{\n}\n"},
+        "old-style definitions",
+    ),
+    (
         "task offset",
         {},
         {"src/overlays/test/arc/00/a.c": "u8 *p = ((u8 *)g_Self);\n"},
@@ -134,6 +140,17 @@ def test_source_rules_on_added_lines(
     output = result.stdout + result.stderr
     assert result.returncode == 1, output
     assert message in output, output
+
+
+def test_ansi_definitions_and_macro_lines_pass(tmp_path: Path) -> None:
+    body = (
+        "MATCH void f(void)\n{\n}\n"
+        "MATCH void g( void )\n{\n}\n"
+        "MATCH void (*h(void))(void)\n{\n}\n"
+        "ASSERT_SIZE(Task, size)\nextern s32 x;\n"
+    )
+    result = run_tree(tmp_path, {}, {"src/overlays/test/arc/00/a.c": body})
+    assert result.returncode == 0, result.stdout + result.stderr
 
 
 RENAMED_BODY = (

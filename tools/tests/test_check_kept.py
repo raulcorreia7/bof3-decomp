@@ -10,6 +10,7 @@ from check_kept import (
     Snapshot,
     compare,
     parse_layouts,
+    rename_problems,
     run_clang,
 )
 
@@ -89,6 +90,40 @@ def test_a_define_passes_when_its_users_use_one_of_the_same_value() -> None:
     assert compare(before, merged, set()) == []
     assert compare(before, inlined, set()) == ["#define PARTY_RECORD_COUNT is gone"]
     assert compare(before, inlined, {"PARTY_RECORD_COUNT"}) == []
+
+
+def test_a_rename_passes_only_to_a_new_name_of_the_same_kind() -> None:
+    before = snapshot(
+        Entities(functions={"Ui_Draw": "a.c"}),
+        {"a.c": {"Ui_Draw"}, "a.h": {"UI_SLOT", "UI_LAST"}},
+        defines={"UI_SLOT": "4", "UI_LAST": "(UI_SLOT-1)"},
+        names={"Ui_Draw": {("menu", 0x801D0000)}},
+    )
+    renames = {"Ui_Draw": "UI_Draw", "UI_SLOT": "UI_SLOTS", "UI_LAST": "UI_LAST_SLOT"}
+    renamed = snapshot(
+        Entities(functions={"UI_Draw": "a.c"}),
+        {"a.c": {"UI_Draw"}, "a.h": {"UI_SLOTS", "UI_LAST_SLOT"}},
+        defines={"UI_SLOTS": "4", "UI_LAST_SLOT": "(UI_SLOTS-1)"},
+        names={"UI_Draw": {("menu", 0x801D0000)}},
+    )
+    assert rename_problems(renames, before, renamed) == {}
+    changed = snapshot(
+        Entities(),
+        {"a.c": {"UI_Draw"}, "a.h": {"UI_SLOTS", "UI_LAST_SLOT"}},
+        defines={"UI_Draw": "0", "UI_SLOTS": "4", "UI_LAST_SLOT": "(UI_SLOTS-2)"},
+    )
+    assert rename_problems(renames, before, changed) == {
+        "UI_LAST": "Renamed: UI_LAST -> UI_LAST_SLOT, but the #define changes beyond the renamed names",
+        "Ui_Draw": "Renamed: Ui_Draw -> UI_Draw, but Ui_Draw is a function and symbol row and UI_Draw is not",
+    }
+
+
+def test_a_rename_to_an_absent_name_fails() -> None:
+    before = snapshot(Entities(globals={"g_UiFlags": "u8"}), {"a.c": {"g_UiFlags"}})
+    after = snapshot(Entities(), {"a.c": set()})
+    assert rename_problems({"g_UiFlags": "g_UIFlags"}, before, after) == {
+        "g_UiFlags": "Renamed: g_UiFlags -> g_UIFlags, but g_UIFlags is not in the tree"
+    }
 
 
 def test_a_removed_fake_helper_define_passes() -> None:
