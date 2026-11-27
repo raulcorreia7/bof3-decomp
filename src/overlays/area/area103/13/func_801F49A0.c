@@ -1,9 +1,7 @@
 #include "area103_13.h"
 
-#ifdef NON_MATCHING
-/* Draws the sixteen-cell light pillar around the actor: the corner heights come from the ground
- * sample and the cell's four depth scales. */
-NON_MATCHING void func_801F49A0(s32 phase) {
+/* Draws sixteen textured cells around the actor, with corner heights sampled from the ground. */
+MATCH void func_801F49A0(s32 phase) {
     POLY_FT4*        prim;
     s16              x;
     s16              y;
@@ -11,9 +9,10 @@ NON_MATCHING void func_801F49A0(s32 phase) {
     s32              i;
     s32              cell_x;
     s32              cell_y;
-    s32              part;
-    u8               tile;
+    s32              row_step;
     LightPillarQuad* quad;
+    u8               tile;
+    u8               page;
     long             depth;
     long             flag;
 
@@ -41,6 +40,7 @@ NON_MATCHING void func_801F49A0(s32 phase) {
 
         x                         = D_1F800034_U16[0] + cell_x * 128 + 0x40;
         y                         = D_1F800034_U16[1] + cell_y * 128 - 0x40;
+        row_step                  = cell_y * 128;
         g_ScratchPadVectors[1].vx = x;
         g_ScratchPadVectors[1].vy = y;
         height                    = Area_HeightSample((x + 0x4000) << 9, (y + 0x4000) << 9);
@@ -54,7 +54,7 @@ NON_MATCHING void func_801F49A0(s32 phase) {
         g_ScratchPadVectors[2].vz = (-height / 2) - (D_801F5994[i].shade[2] * SELF(Actor)->unk_32) / 128;
 
         x                         = D_1F800034_U16[0] + cell_x * 128 + 0x40;
-        y                         = D_1F800034_U16[1] + cell_y * 128 + 0x40;
+        y                         = D_1F800034_U16[1] + row_step + 0x40;
         g_ScratchPadVectors[3].vx = x;
         g_ScratchPadVectors[3].vy = y;
         height                    = Area_HeightSample((x + 0x4000) << 9, (y + 0x4000) << 9);
@@ -69,14 +69,8 @@ NON_MATCHING void func_801F49A0(s32 phase) {
         }
         quad = &D_801F5994[i];
         tile = quad->tile[phase];
-        part = D_801F5994[i].page | 0x2580;
-        if (phase == 0) {
-            part = D_801F5994[i].page | 0x2180;
-        }
-        Area_ApplyTileToQuad((part << 16) | tile, prim, 1);
+        page = D_801F5994[i].page;
+        Area_ApplyTileToQuad(((page | (phase ? 0x2580 : 0x2180)) << 16) | tile, prim, 1);
         Area_CellAddPrim(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed, (s8)((i >> 2) + (i & 3) - 1), 0x28);
     }
 }
-#else
-INCLUDE_ASM(func_801F49A0);
-#endif
