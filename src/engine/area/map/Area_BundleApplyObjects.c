@@ -4,13 +4,11 @@
  * bit is cleared, and its twelve-byte entries each write their payload word into the map row that the halfword table
  * and the entry's row and bits 14-19 select. */
 /* func_80154438 */
-#ifdef NON_MATCHING
-NON_MATCHING void Area_BundleApplyObjects(void) {
+MATCH void Area_BundleApplyObjects(void) {
     /* FAKE: unused frame, 16 bytes. */
     FAKE_STACK_PADS(u8, 16);
     u32* record;
     u32* entry;
-    s32  record_offset;
     s32  entry_index;
     s32  row_product;
     s32  lookup_product;
@@ -32,46 +30,50 @@ NON_MATCHING void Area_BundleApplyObjects(void) {
     u8   stride;
     u32  entry_row;
 
-    record_offset = g_AreaMapBundle.object_list_28 * 4;
-    record        = (u32*)(record_offset + MAP_BUNDLE_BASE);
-    payload       = *record != 0;
-    if (payload) {
+    record = AREA_MAP_SECTION(g_AreaMapBundle.object_list_28);
+    if (*record != 0) {
         do {
             header = *record;
             if ((header & HALF_MASK) == 0x8001) {
                 clean_header = header & ~1u;
                 *record      = clean_header;
-                if (((u8*)record)[7] < 2) {
+                if (MEM(u8, (u32)record + 7u) < 2) {
                     entry_index = 0;
                     if ((s32)(clean_header >> 16) > 0) {
                         do {
-                            entry              = record + entry_index;
-                            value              = entry[1];
-                            entry_row          = ((u8*)entry)[5];
-                            table              = *(u16*)(MAP_BUNDLE_BASE + 2);
-                            width              = *(u8*)MAP_BUNDLE_BASE;
-                            stride             = *(u8*)(MAP_BUNDLE_BASE + 1);
-                            row_product        = width * stride;
-                            lookup_product     = (value & BYTE_MASK) * width;
-                            table_offset       = table << 2;
-                            row_offset         = entry_row << 1;
-                            sum                = table_offset + row_offset;
-                            shifted            = (value >> 14) & 0x3C;
-                            half               = (row_product + 1) >> 1;
-                            base_offset        = MAP_BUNDLE_BASE + (half << 2);
-                            lookup             = (lookup_product << 1) + sum + MAP_BUNDLE_BASE;
-                            map_value          = *(u16*)lookup;
-                            destination        = table_offset + base_offset + (map_value << 2) + shifted;
-                            payload            = entry[2];
-                            *(u32*)destination = payload;
-                        } while ((entry_index += 3) < ((u16*)record)[1]);
+                            entry                 = record + entry_index;
+                            value                 = entry[1];
+                            entry_row             = MEM(u8, (u32)entry + 5u);
+                            table                 = *MEM_PTR(u16, &AREA_MAP_BUNDLE->grid_offset);
+                            width                 = *MEM_PTR(u8, &AREA_MAP_BUNDLE->width);
+                            stride                = *MEM_PTR(u8, &AREA_MAP_BUNDLE->height);
+                            row_product           = width * stride;
+                            lookup_product        = (value & BYTE_MASK) * width;
+                            table_offset          = table << 2;
+                            row_offset            = entry_row << 1;
+                            sum                   = table_offset + row_offset;
+                            shifted               = (value >> 14) & 0x3C;
+                            half                  = (row_product + 1) >> 1;
+                            base_offset           = MAP_BUNDLE_BASE + (half << 2);
+                            lookup                = (lookup_product << 1) + sum + MAP_BUNDLE_BASE;
+                            map_value             = MEM(u16, lookup);
+                            destination           = table_offset + base_offset + (map_value << 2) + shifted;
+                            payload               = entry[2];
+                            MEM(u32, destination) = payload;
+                        } while ((entry_index += 3) < MEM(u16, (u32)record + 2u));
                     }
                 }
             }
-            record += ((u16*)record)[1] + 1;
+            /* FAKE: the empty loops lift the record pointer over the entry pointer in the allocator; pure C best 6 rows. */
+            do {
+                do {
+                    do {
+                        do {
+                            record += MEM(u16, (u32)record + 2u) + 1;
+                        } while (0);
+                    } while (0);
+                } while (0);
+            } while (0);
         } while (*record != 0);
     }
 }
-#else
-INCLUDE_ASM(Area_BundleApplyObjects);
-#endif
