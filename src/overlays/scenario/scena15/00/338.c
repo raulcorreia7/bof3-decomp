@@ -822,10 +822,9 @@ MATCH void func_801F9500(WorldPos* pos, s32* vx) {
     }
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F97CC(WorldPos* pos, s32* arg) {
+MATCH void func_801F97CC(WorldPos* pos, s32* arg) {
     POLY_F4* poly;
-    s32      point[8];
+    s32      point[3];
     s32      lift;
     poly = (POLY_F4*)g_GfxPrimCursor;
     SetPolyF4(poly);
@@ -859,14 +858,14 @@ NON_MATCHING void func_801F97CC(WorldPos* pos, s32* arg) {
     point[2] = (pos->z.fixed + arg[2]) + lift;
     FAKE_BARRIER(); /* FAKE: keep the point stores before the call setup. */
     Camera_ProjectPoint(point, (DVECTOR*)(&poly->x3));
-    poly->r0 = (SELF(Actor)->unk_06 & 2) != 0 ? 0x80 : 0;
-    poly->b0 = 0;
-    poly->g0 = (SELF(Actor)->unk_06 & 2) == 0 ? 0x80 : 0;
-    Area_CellAddPrim(pos->x.fixed, pos->y.fixed, 0, sizeof(POLY_F4));
+    setRGB0(poly, (SELF(Actor)->unk_06 & 2) != 0 ? 0x80 : 0, (SELF(Actor)->unk_06 & 2) == 0 ? 0x80 : 0, 0);
+    {
+        Coord x = {pos->x.fixed};
+        Coord y = {pos->y.fixed};
+
+        Area_CellAddPrim(x.fixed, y.fixed, 0, sizeof(POLY_F4));
+    }
 }
-#else
-INCLUDE_ASM(func_801F97CC);
-#endif
 
 MATCH void func_801F9A20(WorldPos* pos, s32* vx) {
     POLY_F4* poly;
